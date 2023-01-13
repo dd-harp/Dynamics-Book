@@ -1,0 +1,43 @@
+---
+title: "Applied Malaria Dynamics"
+subtitle: "Dynamical Systems for Adaptive Malaria Control"
+author: "David L. Smith"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: yes
+    toc: true
+    toc_depth: 3
+documentclass: book
+bibliography: ../references.bib
+csl: ../plos.csl
+link-citations: true
+description: "The RAMP Model and Algorithm Library"
+---
+
+```{r include=FALSE}
+knitr::write_bib(c("knitr", "book"), "", width = 60)
+
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+# Foreword {-}
+
+A large fraction of my time over the past 20 years has been devoted to learning about malaria epidemiology, mosquito ecology, and vector control. All the time, I was building and analyzing models that described malaria, or some topic related to malaria. I was looking for a way of organizing and applying the rich body of theory that has been developed over more than a century of malaria research. I wanted a framework that was *extensible* with *plug-and-play* modularity. I wanted models that could scale down for fine-grained simulations, or to scale up to understand regional spatial patterns. To serve the needs of malaria programs, we needed a way of discussing malaria as a changing baseline that was modified by control, so we needed to understand exogenous forcing by weather and vector control. To get integrated malaria control right, we needed to go all in on mosquito ecology. We wanted the software to use the existing theory for malaria spatial and temporal dynamics. Sometime in the fall of 2022, the last few pieces came together, and it was time to write this book. 
+
+This book is about applying malaria models. The book fills the gap that comes after an introduction to mathematical epidemiology or infectious disease modeling. What are all the special topics that a student needs to know to be of use in malaria? There will probably never be enough graduate students who are interested in applied malaria dynamics to teach a class on the topic at any university, but if you add it up across the planet, there is a need.  
+
+We assume the reader has a solid background in infectious disease models. We assume they've seen the Ross-Macdonald model before. We also assume that the reader will have some technical gaps that they might need to fill. This book does not try to fill those gaps. Instead, we have written some vignettes and lessons to accompany the book.  
+
+
+**David L. Smith**

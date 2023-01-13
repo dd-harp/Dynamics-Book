@@ -1,0 +1,37 @@
+
+# The RAMP Model Library
+
+**RAMP** stands for Robust Analytics for Malaria Policy. It is comprised of a set of models and algorithms to support the process of advising national malaria programs and other agencies on malaria policy. The broader context for RAMP is explained in **Robust Analytics for Malaria Policy**, a book-length introduction to the topic. The purpose of this book is to more fully document the models and algorithms developed for RAMP. The chapters in this book introduce important classes of models. Each one provides an introduction, a detailed analysis and other information about the models and algorithms in the RAMP libraries. The models or algorithms themselves rely on these chapters for background and general introduction, but each model or algorithm is documented in a self-contained vignettes in the respective directories:
+
++ The `xDE-Model-Library` includes vignettes describing fully developed models developed as ordinary differential equation (ODE), partial differential equation (PDE), or delay differential equation (DDE) models for malaria infection dynamics for both human and mosquito hosts.
+
++ The `Tensor-Model-Library` includes vignettes describing fully developed discrete-time malaria models in the style of the RAMP - Operational Model Library. The ideas are described more fully in Chapter \@ref(tensors). The tensor model library includes models for malaria infection dynamics for both mosquito and human hosts. 
+
++ The `IBM-Library` includes vignettes describing some of the core algorithms for individual-based simulation in MASH.
+
++ The `Demography-Library` includes vignettes describing models and algorithms for simulating human demographic processes.
+
++ The `Spatial-Library` includes vignettes describing algorithms for dealing with spatial micro-simulation and landscape analysis.
+
++ The `Trace-Maker-Library` Library includes a set of algorithms for building *traces* for trace-based simulations.
+
++ The `Utilities-Library` includes a large set of other algorithms that are an integral part of RAMP. 
+
+
+
+## The `Operational Model Library`
+
+## The `xDE Model Library` 
+
+## The `IBM Library` 
+
+## Style Guide
+
+
+
+### Style for xDE Model Library
+
+### Style for the Operational Model Library
+
+### Style for the Trace Maker Library
+

@@ -1,0 +1,9 @@
+# Cohorts and Demography
+
+We need a way of incorporating age into our models. 
+
+## Boxcar Models
+
+## Delay  
+
+## Migration 

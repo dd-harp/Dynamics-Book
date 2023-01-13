@@ -1,0 +1,115 @@
+---
+title: "Sentinel Populations"
+author: "David L Smith"
+date: "3/11/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Sentinel Populations
+
+The outputs of the Malaria Atlas Project describe *Pf*PR in children between two and ten years of age. In a nutshell, we take as inputs a time series describing the *Pf*PR in older children ($\left\{x\right\}$) and a model (defined by a probability transition tensor $\cal P$ and an epidemiological state space tensor $X$), and we output a time series of attack rates ($\left\{\alpha\right\}$). This is generated from the relationship $x_t = {\cal D}\cdot X_t$) under the iterative algorithm for contextual fitting. We note that it is sometimes convenient to take the attack rates as a set of *exogenous* forcing parameters, and run the model as a trace-based simulation. 
+
+Under forward simulation, we get that 
+
+\begin{equation}
+X_{t+1} = {\cal P}(\alpha_t, \ldots) X_t 
+\end{equation}
+
+Under this same model, under a different class of operators ${\cal B}$, we get measures of burden, ${\cal B}_i \cdot X_t = \beta_{i,t}$ where $\beta_{i,t}$ represents the number of malaria cases, as defined by some particular operator. We interpret $\beta_i$ as a *rate* describing the sentinel population.
+
+To estimate the burden of malaria in a population, we must extrapolate from $\beta_i$ for the sentinel population to age-specific rates for the whole population, $\beta_i(a)$. The sentinel population approach constructs a time function of age and of a set of PIT variables $S_t(a,\vec I_t)$ such that 
+
+\begin{equation}
+\beta_i(a,t) = S_t(a, \vec I_t) \beta_{i,t}
+\end{equation}
+
+Note that we know there exists some $\hat a_t$ such that $\beta_i(\hat a_t,t) =  \beta_{i,t}$ or equivalently, $S_t(\hat a_t, \vec I_t) =1$, which may be of interest later.
+
+Given some estimate of the human population density by age ($H_a$) the number of malaria cases (as defined by ${\cal B}_i$) is: 
+
+\begin{equation}
+\sum_t \int_0^\infty H_a \beta_i(a,t) da = \sum_t \beta_{i,t} \int_0^\infty H_a S_t(a,\vec I_t) 
+\end{equation}
+
+## Age Structure
+
+```{r ageOperator}
+source ("./Operational-Model-Library/AgeOperators.R")
+calO = calO_1066()
+ages = ages_1066()
+```
+
+Let $I_{1,t}$ denote the value of a variable tracking cumulative exposure: 
+
+\begin{equation}
+I_{1,t+1} = I_{1,t} + \alpha_t
+\end{equation}
+
+Here, we track it by age, allowing for age-dependent exposure, $w$:
+
+\begin{equation}
+\vec I_{1,t+1} = \left(\vec I_{1,t} + \alpha_t*w\right) {\cal O}
+\end{equation}
+
+```{r ageExposure}
+w = 1.25*ages/(2+ages)
+plot(ages, w, type = "l", xlab = "Age (Years)", ylab = "Relative Exposure")
+```
+
+
+```{r cumulativeExposure_eg,}
+alpha = .1 
+vecI1 = matrix(0,1,66)
+for(i in 1:3000)
+ vecI1 = (vecI1 + alpha*w)%*%calO
+
+plot(ages, vecI1, type = "l", xlab = "Ages", ylab = "Cumulative Exposure")
+```
+
+
+
+
+Let $I_{2,t}$ denote the value of a second variable tracking recent exposure:
+
+\begin{equation}
+\vec I_{2,t+1} = \left( \left(1-T_\alpha + \alpha_t*w \right)*\vec I_{2,t}*\left(1-\vec I_{2,t} \right) \right)  
+\end{equation}
+
+**NOTE** we set 
+
+```{r recentExposure}
+dI2dt = function(alpha, vecI, w=1, Talpha=0.005, mn=0.0001){
+  mn + ((1 + w*alpha - Talpha)*vecI*(1-vecI))%*% calO
+} 
+
+vecI2 = rep(0,66)
+alpha = .01
+for(i in 1:400){
+  vecI2 = dI2dt(alpha, vecI2, w)  
+}
+
+plot(ages, vecI2, type = "l", xlab = "Ages", ylab = "Cumulative Exposure", xlim = c(0,10))
+```
+
+## Counters
+
+```{r}
+decayF = function(mu, MX=1095){
+  (1-mu)^c(0:MX)
+}
+decayF(.01,10) -> dk
+dk[10:1]
+```
+
+```{r}
+getV = function(t, a, alpha, dK){
+  sum(alpha[dK[(t-a):1]]) 
+}
+alpha = rbeta(100, 1+sin(2*pi*c(1:100)/36.5), 20)
+plot(alpha, type = "l")
+
+```
+
+

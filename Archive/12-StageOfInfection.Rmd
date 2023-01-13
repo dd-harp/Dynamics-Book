@@ -1,0 +1,259 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Stage of Infection Models
+
+This chapter introduces **Stage of Infection** models. 
+
+## SoI as an ODE Model
+
+### Simple SoI 
+
+One way to model infections is to break them up into "stages."
+
++ $U$ is the density of uninfected individuals.
+
++ $E$ is exposed but not yet infected; the duration of latency is $1/\nu$ days. 
+
++ $X_i$ is infected and infectious in stage $i=1 \ldots N$, and the duration in stage $i$ is $(\nu_i + r_i)^{-1}$, with a proportion $\nu_i /(\nu_i + r_i)$ proceeding onto the next stage, while the rest simply clear. (Obviously, $\nu_N = 0$). 
+
+\begin{equation}\begin{array}{rl}
+\dot U & = - h U + \sum_N r_N X_N \\ 
+\dot E &= h U - \nu_0 E \\ 
+\dot X_1 & = \nu_0 E - (\nu_1 + r_1) X_1 \\ 
+\dot X_i & = \nu_{i-1} X_{i-1} - (\nu_i + r_i) X_i \\ 
+\end{array}\end{equation}
+
++ The average duration of an infection (post latency) is the sum of exponentials (which is $\Gamma$-like) with an average duration 
+$$\sum_i \prod_{j<i} \frac{\nu_j}{\nu_j + r_j} (r_i + \nu_i)^{-1}$$
+
+### Stage of Infection, with Superinfection 
+
+We add the variable $E_i$, people who are infected in stage $i$ and exposed. 
+
+\begin{equation}\begin{array}{rl}
+\dot U & = - h U + \sum_N r_N X_N \\ 
+\dot E_0 &= h U - \nu_0 E_0 \\ 
+\dot E_i &= h X_i - \nu_0 E_i \\ 
+\dot X_1 & = \sum_i \nu_i E_i - (\nu_1 + r_1) X_1 \\ 
+\dot X_i & = \nu_{i-1} X_{i-1} - (\nu_i + r_i + h) X_i \\ 
+\end{array}\end{equation}
+
++ Note that the average duration of an infection is now implicitly related to $h$.   
+
+## SoI as a Tensor Model
+
+### 4SoI+S-PIT*
+
+The following document describes a model with the following properties:
+
++ It is a stage-structured model with 4 stages of infection (4SoI)
+
++ It allows for overwriting superinfection (+S)
+
++ It uses PIT variables for immunity (-PIT)
+
++ It also considers antimalarial drug use and chemoprotection (-Rx)
+
++ This is version 1.0
+
+## Stage Structured Infections with Overwriting Superinfection 
+
++ The time step is $10$ days ($\tau=10$). 
+
++ Infections are stage-structured, including a latent class $E_0$. The number of people in a population with active blood stage infection in stage $i$ is $X_1, X_2, \ldots X_N$. The clearance rate in the $i^{th}$ stage is denoted $r_i$; the rate of advancement to the $i^{th}$ stage is $\nu_i$.
+
++ Superinfection can occur at any stage; superinfected individuals enter an exposed class $E_i$ corresponding to their infection stage, and then re-enter stage 1, either $X_1$ or $E_1$. 
+
++ Fever occurs in a fraction $\eta$ of the population in stage 1. 
+
++ A fraction $\rho_t$ of febrile cases are treated. Case management is followed by a period of chemoprotection lasting two time periods, or 20 days. The model thus includes a variable describing a single period of chemoprotection, $P$, after which individuals are forced to re-enter the uninfected class.
+
++ The total population is constant $H = U + \sum_i E_i + \sum_i X_i + P$. 
+
+The discrete-time version of this model can be represented as a set of difference equations, with constants defined as follows (dropping the subscript for time): 
+
++ $D = 1-e^{-\delta \cdot10}$ and $D' = 1-D$
+
++ $T = \eta \rho + (1-\eta) (1-e^{-\delta \cdot10})$ and $T' = 1-T$  
+
++ $A_t' = 1-A_t$
+
++ $S_i = e^{-(r_i + \nu_i)10}$
+
++ $Q_i = r_i /(r_i + \nu_i) (1-S_i)$
+
++ $V_i = \nu_i /(r_i + \nu_i) (1-S_i)$
+
+\begin{equation}\begin{array}{rl}
+P_{1,t+1} &= D \left( U_{i,t} + \sum_i X_{i,t} \right) + T \sum_i E_i \\
+%
+P_{2,t+1} &= P_{1,t} \\ 
+%
+U_{t+1}   &= A_t' D' P_{2,t} + A_t' D' U_t + \sum_i Q_i X_{i,t} \\ 
+%
+X_{1,t+1} &= D' \left(A_t' P_{J,t} + A_t' S_1 X_{1,t} + T' A_t' E_1 + \sum_{i \neq 1} E_{i,t} \right) \\
+X_{4,t+1} &= A_t' D' \left( S_i X_{i,t} + V_{3} X_{4,t} \right) \\
+%
+E_{0,t+1} &= D' A_t \left( U_t + \sum_i Q_i X_{i,t} \right)  \\
+E_{1,t+1} &= D' A_t S_1 X_{1,t} + T' A_t E_1  \\ 
+E_{i,t+1} &= D' A_t X_{i,t} \\
+%
+\end{array}\end{equation}
+
+
+In vector and matrix notation, the state space is $\vec Y_t = \left<P_1,P_2,U,X_1,\ldots,X_N, E_0,\ldots,E_N \right>,$ and for $N=4$, and $J=1$ we get ${\cal P}=$
+
+\begin{equation*} \left[ 
+\begin{array}{c|cccccccccccc}
+& P_1 & P_2 & U & X_1 & X_2 & X_3 & X_4 & E_0 & E_1 & E_2 & E_3 & E_4\\ \hline 
+P_1 & 0 & 0 & D & D & D & D & D & T & T & T & T & T  \\
+P_2 & 1 & 0 & D & D & D & D & D & T & T & T & T & T  \\
+U & 0 & D' A' & D'A' & D'A'Q_1 & D'A'Q_2 & D'A'Q_3 & D'A'Q_4 & 0 & 0 & 0 & 0  & 0\\
+X_1 & 0 & 0 & 0 & D'A'S_1 & 0 & 0 & 0 & T' & T'A' & T' & T' & T'  \\
+X_2 & 0 & 0 & 0 & D'A'V_1 & D'A'S_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+X_3 & 0 & 0 & 0 & 0 & D'A'V_2 & D'A'S_3 & 0 & 0 & 0 & 0& 0 & 0   \\
+X_4 & 0 & 0 & 0 & 0 & 0 & D'A'V_3 & D'A'S_4 & 0 & 0 & 0 & 0 & 0 \\
+E_0 & 0 & 0 & D'A & D'A Q_1 & D'A Q_2 & D'A Q_3 & D'A Q_4 & 0 & 0 & 0 & 0 & 0 \\
+E_1 & 0 & 0 & 0 & D'A S_1 & 0 & 0 & 0 & 0 & T' A & 0 & 0 & 0 \\
+E_2 & 0 & 0 & 0 & D'A V_1 & D'A S_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_3 & 0 & 0 & 0 & 0 & D'A V_2 & D'A S_3 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_4 & 0 & 0 & 0 & 0 & 0 & D'A V_3 & D'A S_4 &  0 & 0 & 0 & 0  & 0\\
+\end{array}\right] 
+\end{equation*}
+
+which we can write as $B=AW+V$, where $V=$
+
+\begin{equation*} \left[ 
+\begin{array}{c|ccccccccccc}
+& P & U & X_1 & X_2 & X_3 & X_4 & E_0 & E_1 & E_2 & E_3 & E_4\\ \hline 
+P & 0 & D & D & D & D & D & T & T & T & T & T  \\
+U & 1 & D' & D'Q_1 & D'Q_2 & D'Q_3 & D'Q_4 & 0 & 0 & 0 & 0  & 0\\
+X_1 & 0 & 0 & D'S_1 & 0 & 0 & 0 & T' & T' & T' & T' & T'  \\
+X_2 & 0 & 0 & D'V_1 & D'S_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+X_3 & 0 & 0 & 0 & D'V_2 & D'S_3 & 0 & 0 & 0 & 0& 0 & 0   \\
+X_4 & 0 & 0 & 0 & 0 & D'V_3 & D'S_4 & 0 & 0 & 0 & 0 & 0 \\
+E_0 & 0 & 0 & 0  & 0  & 0  & 0  & 0 & 0 & 0 & 0 & 0 \\
+E_1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &  0 & 0 & 0 & 0 \\
+E_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_4 & 0 & 0 & 0 & 0 & 0 & 0 &  0 & 0 & 0 & 0  & 0\\
+\end{array}\right] 
+\end{equation*}
+
+and $W=$
+
+\begin{equation*} \left[ 
+\begin{array}{c|ccccccccccc}
+& P & U & X_1 & X_2 & X_3 & X_4 & E_0 & E_1 & E_2 & E_3 & E_4\\ \hline 
+P & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+U & 0 & -D' & -D'Q_1 & -D'Q_2 & -D'Q_3 & -D'Q_4 & 0 & 0 & 0 & 0  & 0\\
+X_1 & 0 & 0 & -D'S_1 & 0 & 0 & 0 & 0 & -T' & 0 & 0 & 0  \\
+X_2 & 0 & 0 & -D'V_1 & -D'S_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+X_3 & 0 & 0 & 0 & -D'V_2 & -D'S_3 & 0 & 0 & 0 & 0& 0 & 0   \\
+X_4 & 0 & 0 & 0 & 0 & -D'V_3 & -D'S_4 & 0 & 0 & 0 & 0 & 0 \\
+E_0 & 0 & D' & D' Q_1 & D' Q_2 & D' Q_3 & D' Q_4 & 0 & 0 & 0 & 0 & 0 \\
+E_1 & 0 & 0 & D' S_1 & 0 & 0 & 0 & 0 & T'  & 0 & 0 & 0 \\
+E_2 & 0 & 0 & D' V_1 & D' S_2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_3 & 0 & 0 & 0 & D' V_2 & D' S_3 & 0 & 0 & 0 & 0 & 0 & 0 \\
+E_4 & 0 & 0 & 0 & 0 & D' V_3 & D' S_4 &  0 & 0 & 0 & 0  & 0\\
+\end{array}\right] 
+\end{equation*}
+
+#### RAMP Implementation
+
+Since $W$ and $V$ depend on $\rho_t$ and $\delta_t$, we will need functions that generate these matrices for each time step: 
+
+```{r makeParams.stage}
+makeParams.stage = function(nu=1/80, r=1/200, eta=1/365, delta=1/730, N=4, T=10){
+  Xix = 1 + 1:(N+1)
+  Eix = 2 + N + 1:(N+1)
+  E1 = 4+N
+  X1 = 3
+  dd = exp(-delta*T)  
+  if(length(r) ==1) r=rep(r,N)
+  if(length(nu)==1) nu=c(rep(nu,N-1),0)
+  P = list(r=r,nu=nu,eta=eta,N=N,T=T,Xix=Xix,Eix=Eix,E1=E1,X1=X1,dd=dd)
+  class(P) <- "stage"
+  P
+}
+
+P = makeParams.stage(nu=c(1/20,1/80, 1/320,0))
+```
+
+```{r makeX.stage}
+makeX.stage = function(P){with(P,{
+  # stay
+  s = exp(-(r+nu)*10)
+  X = diag(s)
+  # clear
+  X = rbind(U=r/(r+nu)*(1-s), X)
+  # advance stage
+  xx = cbind(2:N+1, 2:N-1)
+  v = (nu/(r+nu)*(1-s))[-N]
+  X[xx] = v
+  # unexposed
+  X = cbind(U=0,X)
+  X[1,1]=1
+  #if(colSums(X)!=1) print("ERROR")
+  return(X)
+})}
+#X = makeX.stage(P)
+```
+
+```{r makeV.stage}
+makeV.stage = function(rho, delta, P){with(P,{
+  X = makeX.stage(P)
+  E=0*X
+  E[2,] = 1
+  
+  V=matrix(0,2*N+3, 2*N+3)
+  V[  1,Xix] = 1-dd
+  V[Xix,Xix] = dd*X
+  V[  1,Eix] = eta*rho
+  V[  3,Eix] = 1-eta*rho
+  V[2,1] = 1
+
+  V
+})}
+V = makeV.stage(.2, 1/730, P)
+```
+
+```{r makeW.stage}
+makeW.stage = function(rho, delta, P, V){with(P,{
+  X = makeX.stage(P)
+  E=0*X
+  
+  W=matrix(0,2*N+3, 2*N+3)
+  W[Xix,Xix] = -dd*X
+  W[Eix,Xix] = dd*X
+  W[X1,E1] = -(1-rho*eta)
+  W[E1,E1] = 1-rho*eta
+  W
+})}
+W = makeW.stage(.2, 1/730, P, V)
+```
+
+```{r makeB.stage}
+makeB.stage = function(A, rho, delta, P){with(P,{
+  X = makeX.stage(P)
+  E=0*X
+  E[2,] = 1
+  
+  V=matrix(0,2*N+3, 2*N+3)
+  V[  1,Xix] = 1-dd
+  V[Xix,Xix] = dd*X
+  V[  1,Eix] = eta*rho
+  V[  3,Eix] = 1-eta*rho
+  V[2,1] = 1
+
+  V
+})}
+B = makeB.stage(.1, .2, 1/730, P)
+```
+
+
+## Detection 

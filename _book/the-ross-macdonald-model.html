@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.1 The Ross-Macdonald Model | Malaria Epidemiology, Dynamics and Control</title>
+  <meta name="description" content="The RAMP Model and Algorithm Library" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.1 The Ross-Macdonald Model | Malaria Epidemiology, Dynamics and Control" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The RAMP Model and Algorithm Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.1 The Ross-Macdonald Model | Malaria Epidemiology, Dynamics and Control" />
+  
+  <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
+  
+
+<meta name="author" content="David L. Smith" />
+
+
+<meta name="date" content="2023-01-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="malaria-dynamics.html"/>
+<link rel="next" href="ross-macdonald-variants.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="1" data-path="malaria-dynamics.html"><a href="malaria-dynamics.html"><i class="fa fa-check"></i><b>1</b> Malaria Dynamics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="the-ross-macdonald-model.html"><a href="the-ross-macdonald-model.html"><i class="fa fa-check"></i><b>1.1</b> The Ross-Macdonald Model</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="the-ross-macdonald-model.html"><a href="the-ross-macdonald-model.html#exde"><i class="fa fa-check"></i><b>1.1.1</b> <code>exDE</code></a></li>
+<li class="chapter" data-level="1.1.2" data-path="the-ross-macdonald-model.html"><a href="the-ross-macdonald-model.html#solutions"><i class="fa fa-check"></i><b>1.1.2</b> Solutions</a></li>
+<li class="chapter" data-level="1.1.3" data-path="the-ross-macdonald-model.html"><a href="the-ross-macdonald-model.html#steady-states"><i class="fa fa-check"></i><b>1.1.3</b> Steady States</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="ross-macdonald-variants.html"><a href="ross-macdonald-variants.html"><i class="fa fa-check"></i><b>1.2</b> Ross-Macdonald Variants</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>2</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Malaria Epidemiology, Dynamics and Control</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-ross-macdonald-model" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> The Ross-Macdonald Model<a href="the-ross-macdonald-model.html#the-ross-macdonald-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following is one version of the Ross-Macdonald model, which is the simplest way to get started <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald" role="doc-biblioref">3</a>]</span>. This particular system of delay differential equations traces back to Joan Aron and Robert May <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics" role="doc-biblioref">4</a>]</span>.</p>
+<p>We need to get through a lot of material, so the following presentation is sparse. We assume the reader has the appropriate mathematical background. On occasion, there are links to vignettes that are designed to help fill in some of the gaps, if needed.</p>
+<hr />
+<p>The simplest quantitive description of malaria dynamics tracks the number of infected and infectious mosquitoes and the number of infected and infectious humans. To develop systems of equations, we assign names to variables that represent these quantities: the number of infected people is denoted <span class="math inline">\(X(t)\)</span> (out of <span class="math inline">\(H\)</span> total); the number of mosquitoes is <span class="math inline">\(M(t)\)</span>; the number of infected mosquitoes is <span class="math inline">\(Y(t)\)</span> (out of <span class="math inline">\(M(t)\)</span> total); and the number of infectious mosquitoes is denoted <span class="math inline">\(Z(t)\)</span> (out of <span class="math inline">\(M(t)\)</span> total).</p>
+<p>In dynamical systems, we ask how these variables change over time. For our first equation, we start with adult, female mosquito populations. (It is tiresome to repeat <em>adult, female</em> each time, and we’re ignoring male mosquitoes at this point anyway, so <em>mosquito</em> hereafter means <em>adult, female mosquito</em>, unless we say otherwise.) The number of mosquitoes is changing as new adults emerge from aquatic habitats or die. We assume the following:</p>
+<ul>
+<li><p>mosquitoes emerge at the rate of <span class="math inline">\(\Lambda(t)\)</span> adult, female mosquitoes, per day;</p></li>
+<li><p>mosquitoes die at a constant rate, <span class="math inline">\(g\)</span>. The fraction surviving one day is <span class="math inline">\(e^{-g}\)</span>; and the average lifespan is <span class="math inline">\(1/g\)</span>.</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\frac{dM}{dt} = \Lambda(t) - g M
+\end{equation}\]</span></p>
+<p>Mosquitoes become infected after blood feeding on an infectious human. Here, we describe blood feeding using a few simple parameters.</p>
+<p>We will assume the following:</p>
+<ul>
+<li><p>mosquitoes blood feed at the rate <span class="math inline">\(f\)</span>; in this model, this implies that the interval between blood meals is <span class="math inline">\(1/f\)</span>.</p></li>
+<li><p>a fraction of mosquito blood meals, <span class="math inline">\(q\)</span>, is taken on humans;</p></li>
+</ul>
+<p>The number of bites by vector mosquitoes, per person, per day is called the human biting rate (HBR):</p>
+<p><span class="math display">\[\mbox{HBR} = \frac{fqM}{H}\]</span></p>
+<p>In the mosquito population, we need to know what fraction of blood meals end up infecting a mosquito that has not already been infected. We assume the following:</p>
+<ul>
+<li><p>a fraction of human blood meals, infects mosquitoes. We call this quantity <em>net infectiousness</em> (NI) and (for reasons that will become clear later), we give it a name, <span class="math inline">\(\kappa\)</span>: <span class="math display">\[\kappa(t) = c \frac{X{t}}{H}\]</span></p></li>
+<li><p>infected mosquitoes die at the same rate as uninfected mosquitoes.</p></li>
+</ul>
+<p>We can now write down our second equation:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dY}{dt} = f q \kappa (M-Y) -g Y
+\end{equation}\]</span></p>
+<p>To become infectious, a mosquito has to become infected and then survive through the extrinsic incubation period (EIP). We assume:</p>
+<ul>
+<li><p>mosquitoes become infectious after a fixed delay, <span class="math inline">\(\tau\)</span>, called the EIP.</p></li>
+<li><p>infectious mosquitoes die at the same rate as other mosquitoes.</p></li>
+</ul>
+<p>For a mosquito to become infectious, it must have become infected <span class="math inline">\(\tau\)</span> days ago and survived through <span class="math inline">\(\tau\)</span> days with probability <span class="math inline">\(e^{-g\tau}\)</span>. To write this in equations, we use a subscripted <span class="math inline">\(\tau\)</span> to denote the value of a variable at time <span class="math inline">\(t-\tau\)</span>. For example <span class="math inline">\(X_\tau\)</span> is the number of people who were infected and infecious at time <span class="math inline">\(t-\tau\)</span>, and <span class="math inline">\(M_\tau\)</span> is the number of mosquitoes at time <span class="math inline">\(t-\tau\)</span>.</p>
+<p>The number of infectious mosquitoes that are added to the population at a point in time includes all the mosquitoes that became infected at time <span class="math inline">\(t-\tau\)</span> and survived the EIP. This is our third equation:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dZ}{dt} = f q  \kappa_\tau (M_\tau-Y_\tau) e^{-g\tau} -g Z
+\end{equation}\]</span></p>
+<p>Here, <span class="math inline">\(Z\)</span> represents the number of mosquitoes with <em>sporozoites</em> in their salivary glands. The <em>fraction</em> of mosquitoes with sporozoites in their salivary glands has been called the <em>sporozoite rate</em>, which in our notation is</p>
+<p><span class="math display">\[ z = \frac{Z}{M}\]</span></p>
+<p>The number of bites by vector mosquitoes, per person, per day is called the entomological inoculation rate (EIR). It is defined as the product of the HBR and the sporozoite rate. In our notation, the EIR is:</p>
+<p><span class="math display">\[\mbox{EIR} = z \frac{fqM}{H} = \frac{fqZ}{H}\]</span></p>
+<p>Humans become infected after being bitten by an infectious mosquito. We will assume the following:</p>
+<ul>
+<li><p>A fraction <span class="math inline">\(b\)</span> of all bites by infectious mosquitoes cause an infection</p></li>
+<li><p>The hazard rate for infection, also called the <em>force of infection</em> (FoI) and denoted <span class="math inline">\(h\)</span> is <span class="math inline">\(b \times\)</span> EIR: <span class="math display">\[h = fqb \frac{Z}{H}\]</span></p></li>
+<li><p>Infections clear at the rate <span class="math inline">\(r\)</span>, per infection, per day (the average time to clear is <span class="math inline">\(1/r\)</span> days), and after clearing an infection a person becomes susceptible to infection again.</p></li>
+</ul>
+<p>We can now write down our fourth equation:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dX}{dt} = h (H-X) - r X
+\end{equation}\]</span></p>
+<p>The four equations that we’ve written above describe three domains: adult mosquito population dynamics; parasite infection dynamics in mosquito populations; and parasite infection dynamics in human populations (Figure 2). The equations describing parasite infection dynamics of mosquito populations use the variable <span class="math inline">\(M\)</span>, so they’re not wholly independent. The way we’ve written the equations, each compartment has an input term (<em>i.e.</em>, <span class="math inline">\(\Lambda\)</span>, <span class="math inline">\(\kappa\)</span>, or <span class="math inline">\(h\)</span>) that depends on something else. For the infection dynamics, these terms couple two separate systems. For adult mosquito dynamics, emergence is passed to the model as a parameters. By writing the equations in this modularized form, we can start to understand how we might be able to write software that would allow us to represent mosquito infection dynamics with different systems of equations.</p>
+<hr />
+<center>
+<div class="figure">
+<img src="../Figures/AronMay.png" alt="" />
+<p class="caption"><strong>Figure 2</strong> A set of equations from Aron and May</p>
+</div>
+</center>
+<hr />
+<div id="exde" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> <code>exDE</code><a href="the-ross-macdonald-model.html#exde" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have written the software that solves these equations in a package called <a href="https://cran.r-project.org/web/packages/exDE/index.html"><code>exDE</code></a>.</p>
+</div>
+<div id="solutions" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Solutions<a href="the-ross-macdonald-model.html#solutions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To simulate malaria infections, we will need to specify:</p>
+<ul>
+<li><p>A function <span class="math inline">\(\Lambda(t)\)</span></p></li>
+<li><p>Parameter values <span class="math inline">\(g\)</span>, <span class="math inline">\(f\)</span>, <span class="math inline">\(q\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(\tau\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(H\)</span>, and <span class="math inline">\(r\)</span></p></li>
+<li><p>The initial values of <span class="math inline">\(M\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(Z\)</span>, and <span class="math inline">\(X\)</span></p></li>
+</ul>
+<p><strong>PARAMETER VALUES</strong> (defaults)</p>
+<p>The model has already provided some default values:</p>
+<ul>
+<li><p><span class="math inline">\(g=1/12\)</span>: mosquitoes live <span class="math inline">\(12\)</span> days, on average</p></li>
+<li><p><span class="math inline">\(f=1/2.5\)</span>: mosquitoes feed every 2.5 days, on average</p></li>
+<li><p><span class="math inline">\(q=0.95\)</span>: mosquitoes feed on humans 95% of the time</p></li>
+<li><p><span class="math inline">\(c=0.15\)</span>: about 15% of bites on infectious humans infect a mosquito</p></li>
+<li><p><span class="math inline">\(b=0.55\)</span>: about 55% of bites by infective mosquitoes cause an infection</p></li>
+<li><p><span class="math inline">\(r=1/200\)</span>: human infections last about <span class="math inline">\(200\)</span> days, on average</p></li>
+<li><p><span class="math inline">\(H=1000\)</span>: we’re simulating transmission in a population of a thousand humans</p></li>
+<li><p><span class="math inline">\(\tau=10\)</span>: the extrinsic incubation period is about 10 days</p></li>
+<li><p>For emergence, we let <span class="math display">\[\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)\]</span></p></li>
+<li><p>The parameter <span class="math inline">\(m\)</span> in the function above has been set to <span class="math inline">\(1\)</span> by default.</p></li>
+</ul>
+<p><strong>INITIAL VALUES</strong> (defaults)</p>
+<ul>
+<li><p><span class="math inline">\(X(0)=1\)</span></p></li>
+<li><p><span class="math inline">\(M(0)=12,000\)</span></p></li>
+<li><p><span class="math inline">\(Y(0)=0\)</span></p></li>
+<li><p><span class="math inline">\(Z(0)=0\)</span></p></li>
+</ul>
+<p><strong>SOLVING</strong></p>
+</div>
+<div id="steady-states" class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Steady States<a href="the-ross-macdonald-model.html#steady-states" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
+</div>
+<div id="ref-AronJL1982PopulationDynamics" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population Dynamics</span> of <span>Infectious Diseases</span>: <span>Theory</span> and <span>Applications</span>. <span>Boston, MA</span>: <span>Springer US</span>; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="malaria-dynamics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ross-macdonald-variants.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

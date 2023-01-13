@@ -1,0 +1,11 @@
+---
+title: "Dynamic Models and Computation"
+author: "Austin Carter, David L Smith"
+date: "4/6/2020"
+output: html_document
+---
+
+# Dynamic Models and Computation
+
+Three RAMP libraries, the `xDE Model Library`, the `Tensor Model Library` and the `IBM Library` describe mechanistic models of malaria developed using different species of mathematics: differential equations, difference equations, and stochastic processes. 
+

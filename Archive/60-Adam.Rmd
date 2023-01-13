@@ -1,0 +1,1271 @@
+
+# Adam 
+
+```{r}
+require(Matrix)
+source ("./Utilities/MetricConversions.R")
+source ("./Utilities/AgeWeights.R")
+source ("./Operational-Model-Library/AgeOperators.R")
+```
+
+## Overview 
+
+`Adam` is the first fully functional model in the `OML` library. This document describes the model, and it serves as a template for future models.
+
+### Basic Features 
+
+### Exogenous Variables 
+
++ What are the exogenous parameters? How are they handled? 
+
+    - Case management and anti-malarial drug use patterns
+    
+    - Mosquito populations 
+    
+    - IRS 
+    
+    - ITNs
+    
+### Endogenous Dynamics
+
++ What epidemiological model is used? 
+
+    - The base model / superinfection
+    
+    - Immunity and PIT variables 
+
+### `OML` Specs 
+
+\begin{equation}\begin{array}{rl}
+&\vec \kappa_t = {\cal K} \cdot \vec X_t\\
+\vec Y_{t+1} =& {\cal Y}\left(\kappa_t, \Lambda_t, \phi_t, \ldots \right) Y_t\\  
+&\zeta_t = {\cal Z} \cdot \vec Y_t  \\  
+&\alpha_t = F_\alpha (\zeta_t) \\
+\vec X_{t+1} =& {\cal P}\left( \alpha_t, \rho_t, \ldots \right) \vec X_t\\ 
+\\ \hline  \\ 
+&x_t = {\cal D} \cdot \vec X_t  \\ 
+&\beta_t = {\cal B} \cdot \vec X_t  \\ 
+\end{array}\end{equation}
+
+## Outline
+
++ Malaria Epidemiology
+    - Defining the Model
+    - Constructing the Model
++ Vector Dynamics 
+
+## Malaria Epidemiology
+
+The malaria model here covers infection, immunity, disease, and infectiousness. The base is a stage-structured model of malaria infections. The stages can be thought of as representing progressively older infections that on average have lower population densities, with the associated consequences of less fever, less severe fevers, lower probability of detection, and lower gametocyte production. Superinfection bumps up infections to a younger stage (*i.e.* higher population densities). Immunity is implemented with immune tracking variables; as immunity increases, each infection on initiation behaves as if it were older. The model also includes case-management and chemo-protection. 
+
+
+
+### Defining the Model
+
+The model is called `Adam` because it was the first model fully implemented in the `RAMP-OML` style. The long name for `Adam` is `SoI.SuS.CMChP.PIT.ten` because it has the following features:
+
++ It is a *Stage-of-Infection* model (`SoI`).
+
++ Super-infection is modeled with a *Stage-up* rule (`SuS`)
+
++ Additional compartments describe case management and chemoprotection. (`CMChP`)
+
++ Immunity is a function of a PIT variable. It works by redistributing the initial stage of new infections. (`PIT`)
+
++ It operates on a $10$-day time step. 
+
+The following code can be easily modified to build closely related models in the same class by changing various features, including the `PIT` variables. 
+
+```{r}
+tau=10
+par = list(N=9, tau=10)
+```
+#### The Epidemiological State Space 
+
+The epidemiological state space has 22 variables:
+
+\begin{equation}
+\vec X = \left[\begin{array}{cc}
+U \\ X_1 \\X_2 \\ \vdots \\ X_9 \\ E_0 \\ E_1 \\ E_2 \\ \vdots \\ E_9 \\ P_1 \\ P_2 
+\end{array}\right]
+\end{equation}
+
+The state variables in the model are defined as follows: 
+
++ $U$ is the uninfected state; 
+
++ The exposed state $E_0$ includes people who were uninfected in the previous ten days and who will become infected in the next time step. $E_0$ represents days 1-10 of an infection. It includes malaria infection in the liver and the first four days of blood-stage infection.
+
++ The model includes nine states describing active infection, $X_1, X_2, \ldots, X_9$ with fixed properties:  
+
+    - $X_1$ describes infections that are not modified by acquired immunity and that occur in days 11-20 after the infectious bite. The infections are growing geometrically. Most severe disease incidence occurs from this stage.
+    
+    - $X_2$ describes infections that are minimally affected by immunity just after the peak, in days 21-30 after the infectious bite. They have a high probability of fever. 
+
+    - $X_3, X_4, \ldots X_8$  and represent active infections of progressively lower densities, lower probabilities of detection, and lower gametocyte production.
+
+    - $X_9$ represents very old infections. They do not cause fever and are rarely detected by light microscopy.
+
++ There are 9 additional `exposed` states representing individuals who have an active infection, but who also get superinfection: 
+    
+    - $E_1, E_2, \ldots, E_9$ for being exposed while in one of the other states, which is how we model superinfection (or infected in stage $i$ but also having been exposed, with parasites emerging from the liver on the next time step). Each $E_i$ matches an $X_i$, reflecting their indentical severity of infection in the model.
+
++ And two states describing chemoprotection, $P_1$ and $P_2$:
+
+    - $P_1$ represents people who were treated the previous week. They are assumed to be uninfected and free from infection. 
+
+    - $P_2$ represents people who were treated two weeks ago. 
+
+```{r Adam varNames, echo=FALSE} 
+SoIVarNames = c("U","X1","X2","X3","X4","X5","X6","X7","X8","X9")
+
+SoIVarLabels = c(expression(E[0]), expression(X[1]), expression(X[2]),expression(X[3]),expression(X[4]),expression(X[5]),expression(X[6]),expression(X[7]),expression(X[8]),expression(X[9]))
+
+AdamVarNames = c("U","X1","X2","X3","X4","X5","X6","X7","X8","X9", "E0","E1","E2","E3","E4","E5","E6","E7","E8","E9", "P1", "P2")
+```
+
+#### Operators
+
+Operators translate the epidemiogical state into other revelant quantities, including the *Pf*PR and various measures of disease. In the following sections, we describe the operators for detection and burden, which describe the features of infections associated with each stage.  
+
++ ${\cal D}$ are detection and diagnostic operators.   
+
++ ${\cal B}$ are burden operators. 
+
++ ${\cal K}$ is the infectious reservoir operator. 
+
+##### Detection Operators
+
+Let $\cal D$ denote the class of "detection" or "diagnostic" operators. The ``true`` probability of infection includes everyone who has some parasites ${\cal D}_T$. Here, we also count $E_0$ as infected: 
+
+```{r calD Adam}
+calDtrue_SoI = c(0, rep(1, 9)) 
+par$calDtrue = c(calDtrue_SoI, rep(1,10), 0,0) 
+
+calDlm_SoI = c(0, 0.95, .9, 1-c(3:8)/10, .001)
+par$calDlm = c(calDlm_SoI, calDlm_SoI, 0,0) 
+
+calDimm_SoI = c(0, 0.95, .9, .5, .3, rep(0,5))
+par$calDimm = c(calDimm_SoI, calDimm_SoI, 0,0) 
+```
+
+Another relevant operator translates the state space vector into *PR* by light microscopy, ${\cal D}_{lm}$. An interesting operator that is relevant for immune tracking is the effect of infections of various stages on the immune system, which measures the immune relevance of various infections, ${\cal D}_{imm}$: 
+
+```{r, echo = F, fig=TRUE, fig.height=4, fig.width=6.5}
+plot(0:9, rep(1,10), type = "l", xlab="Stage of Infection", xaxt = "n", ylab= "Detection", ylim = c(0,1.1))
+text(7, .9, "True Prevalence") 
+text(7, 0.5, "Light Microscopy", col = "darkred", pos=3)
+lines(0:9, calDlm_SoI, col = "darkred")
+text(6, .05, "Immunogenicity", col = "darkblue", pos=3)
+lines(0:9, calDimm_SoI, col = "darkblue")
+
+axis(1, 0:9, SoIVarLabels)
+```
+
+##### Burden Operators
+
+Let $\cal B$ denote the class of malaria burden operators. These translate the epidemiological state space onto **malaria** which is an ambiguous concept. These operators disambiguate various definitions. 
+
+Severe malaria 
+```{r calB Adam}
+calBsevere_SoI = c(0,.3,rep(0,8))
+par$calBsevere= c(calBsevere_SoI, calBsevere_SoI, 0,0)
+
+calBfever_SoI = c(0,1,.7, exp(-c(1:6)),0)
+par$calBfever = c(calBfever_SoI, calBfever_SoI, 0,0)
+```
+
+```{r, echo = F, fig=TRUE, fig.height=4, fig.width=6.5}
+plot(0:9, rep(1,10), type = "n", xlab="Stage of Infection", xaxt = "n", ylab= "Burden", ylim = c(0,1.1))
+text(1.5, 0.35, "Severe Disease", col = "darkred")
+lines(0:9, calBsevere_SoI, col = "darkred")
+lines(0:9, calBfever_SoI, col = "darkblue")
+text(6, .05, "Fever", col = "darkblue", pos=3)
+
+axis(1, 0:9, SoIVarLabels)
+```
+
+##### The Infectious Reservoir Operator
+
+Let $\cal K$ map the epidemiological state vector onto *net infectiousness,* or $\kappa$, the probability a mosquito becomes infected after blood feeding on a human.  
+```{r calK Adam}
+calK_SoI = c(0,0,c(8:1)/10) 
+par$calK = c(calK_SoI, calK_SoI, 0, 0)
+par$calK[12] = .8
+```
+
+```{r, echo = F, fig=TRUE, fig.height=4, fig.width=6.5}
+plot(0:9, calK_SoI, type = "l", xlab="Stage of Infection", xaxt = "n", ylab= "Infectiousness", ylim = c(0,1.1))
+
+axis(1, 0:9, SoIVarLabels)
+```
+
+#### Immunity
+
++ There are two population immune tracking (PIT) variables. These are not epidemiologically states, but they track the immune status of the population as it changes over time or with age: 
+
+    - $V_1$, the number of days infected
+
+    - $V_2$, the cumulative number of attacks; 
+
+The fraction of new infections entering each stage is a function of PIT variables $\vec \xi f(\vec V)$.  
+
+\begin{equation}
+\frac{dV}{dt} = h - \delta V
+\end{equation}
+
+To model immunity, we introduce immune tracking variables. 
+\begin{equation}
+V_{t+1} = \alpha_t + (1-mu) V_t
+\end{equation}
+
+```{r}
+par$mu1 = 0.001
+par$mu2 = 0.01
+```
+
+
+#### Stage-up Superinfection 
+
+We modify the base model to allow for superinfection using a *stage-up* rule.  
+
+In a population with some degree of immunity, a fraction of those who have been exposed will develop infections that are at higher densities (*i.e.* lower stage indices). The infections behave as if the host had already been infected with those parasites before. The stage-up rule is that an infection that would have caused an infection at stage $i$ in an uninfected host would not change the status of a person infected at stage $j$ if $j>i$. For example, suppose a new infection would have started at $X_6$. A person is in $X_2$ would not change status, but a person in stage $X_8$ would go to $E_6$, and on the next step $X_6$. 
+
+Let $\xi_i$ denote a probability distribution function with a range $1, 2, \ldots, 9$ that determines the distribution of stages for new infections: the fraction of exposed individuals that would end up in the $i^{th}$ infected state. It is a function of an immune tracking variable, $I$. For someone in the $i^{th}$ state, the rate of superinfection is thus $\alpha \sum_{j \geq i} \xi_j$. In immunologically naive individuals, $\xi_1 = 1$, and $\xi_i = 0$ for $i \neq 1$. Otherwise, $\xi$ is a function of tracking variables. Since $\xi_1$ is a special state, some forms allow it to be calibrated separately. In addition to `xiF_0` above, the following three functions provide some useful examples: 
+
+
+As immunity increases, the fraction of infections in each stage also increases. In those with low immunity, most new infections emerge in stage 1, but as immunity increases, the fraction emerging at later stages of infection increases. Conceptually, it looks like this: 
+
+```{r, fig=TRUE, fig.height=5.5, fig.width=6.5, echo=FALSE}
+xiF.x = function(x, k1=3, k2=0.4, N=9){ 
+  diff(pbeta(c(0:8)/8, 1-exp(-k1*x) + k2*x*(1-x), exp(-k1*x)+ k2*x^2)) 
+}
+
+par(mfrow = c(2,2))
+xx = c(0,.15,.3,1)
+mainLab = c("No Immunity", "Low Immunity", "Moderate Immunity", "High Immunity")
+for(i in 1:4)
+  plot(xiF.x(xx[i]), type="l", xlab = "Stage", ylab = expression(xi[i]), main = mainLab[i])
+``` 
+
+
+```{r}
+xiF_0 = function(x, k1=.008, N=9){ 
+  diff(pbeta(c(0:8)/8, 1-exp(-k1*x), exp(-k1*x))) 
+}
+
+xiF_h = function(pit, k1=.1, k2=.1, p=2, N=9){
+  xi1 = exp(-k1*pit[2])
+  xi2 = xiF_0(pit[1], k2, N-1)  
+  xi = c(xi1, (1-xi1)*xi2)
+  return(xi)
+}
+par$xiF_0 = xiF_0
+par$xiF = xiF_h
+pit0 = c(V1=1, V2=1)
+xiF_h(pit0)
+```
+
+
+### Constructing the Model 
+
+#### The Stage of Infection Base Model 
+
+The basic model, which can be thought of as tracking a cohort of individuals with simple infections over time, is motivated by the following set of ODEs:  
+
+\begin{equation}\begin{array}{rrrrrr}
+\dot U  =& & & + r_1 X_1 & + \sum_i r_i X_i & + r_n X_n \\ 
+\dot E_0 =& &- \nu_0 E_0 \\ 
+\dot X_1 =&  & \nu_0 E_0 & - (\nu_1 + r_1) X_1  \\ 
+\dot X_i =&  && \nu_{i-1} X_{i-1} &- (\nu_i + r_i) X_i  \\ 
+\dot X_n  =&&&&   \nu_{n-1} X_{n-1} &- r_n X_n \\ 
+\end{array}\end{equation}
+
+This is presented only as a way of motivating the model. Adam was formulated with a 10-day time step. Over a single 10-day time step, a fraction of the infected population in each state can make a single transition to a *neighboring* state. We let $v_i$ be the fraction that progress to the next stage. Similarly, let $s_i$ denote the fraction in each stage that remains infected, and let $q_i$ be the fraction that clear. 
+
+The matrix describing the state transitions for the core SoI model, $P_{SoI}$, looks like this: 
+
+\begin{equation} 
+\left[\begin{array}{c|cccccccccc}
+& U & E_0 & X_1&X_2&X_3& \ldots &X_7&X_8&X_9\\ \hline 
+U& 1&. & q_1&q_2&q_3& \ldots&.& q_8& q_9\\ 
+E_0 & . & .  & . & . & . & \ldots & . & . & . \\ 
+X_1 &. & 1 &s_1& . & . & \ldots&.& . & . \\  
+X_2 & . & . &v_1& s_2& . & \ldots&.& . & .\\  
+X_3 & . & . & . &v_2&s_3& \ldots &.& . & . \\   
+\vdots &\vdots &\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\  
+X_7& . & . & . & . & .& \ldots & s_7 & .& .  \\ 
+X_8& .  &  & . & . & .& \ldots & v_7& s_8& .  \\ 
+X_9& .  &.  &.  & . & . & \ldots & .& v_8&s_9& \\ 
+\end{array}\right]
+\end{equation}  
+
+Noting the parallel structure and functions of $\left[U,X_1, X_2, \ldots X_9 \right]$ and $\left[E_0, E_1, E_2, \ldots, E_9 \right]$, we omit $E_0$ and construct the base matrix:
+
+\begin{equation} [P]_{SoI} = 
+\left[\begin{array}{ccccccccc}
+U &X_1&X_2&X_3& \ldots &X_7&X_8&X_9&\\ \hline 
+1&q_1&q_2&q_3& \ldots&.& q_8& q_9\\ 
+ . &s_1& . & . & \ldots&.& . & . \\  
+ . &v_1& s_2& . & \ldots&.& . & .\\  
+ . & . &v_2&s_3& \ldots &.& . & . \\   
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\  
+ . & . & . & & \ldots & s_7 & .& .  \\ 
+ . & . & . & & \ldots & v_7& s_8& .  \\ 
+ . & . & . & & \ldots & .& v_8&s_9& \\ 
+\end{array}\right]
+\end{equation}  
+
+
+```{r calP_SoI Adam}
+calP_SoI= function(par){with(par,{
+  s = r*(1-nu) 
+  v = r*nu
+  PSoI <- bandSparse(N,k=0)*s + t(bandSparse(N, k=1)*v) 
+  PSoI <- rbind(1-r, PSoI)
+  PSoI <- cbind(0, PSoI)
+  PSoI[1,1] <- 1
+  return(PSoI)
+})}
+```
+
+```{r}
+nuVals_0= c(.95, 1/3, rep(1/5, 5), rep(1/36.5),0)
+par$nu = nuVals_0
+```
+
+```{r}
+rVals_0=exp(-c(0, 1/800, rep(1/250, 6), 1/400)*par$tau)
+par$r = rVals_0
+```
+
+```{r}
+PSoI = as.matrix(calP_SoI(par)) 
+rownames(PSoI) <- SoIVarNames
+colnames(PSoI) <- SoIVarNames
+round(PSoI*1000)/1000
+```
+
+
+
+
+#### Stage-Up Superinfection
+
+A similar ODE Model is the following: 
+
+\begin{equation}\begin{array}{rl}
+\dot U & = \sigma P- h U + \sum_N r_N X_N \\ 
+\dot E_0 &= h U - \nu_0 E_0 \\ 
+\dot E_i &= h \sum_{j>i} \xi_j X_i - \nu_0 E_i - \eta_i \rho_i E_i \\ 
+\dot X_1 & = \sum_j \nu_j \xi_1 E_j - (\nu_1 + r_1 + \eta_1 \rho_1) X_1  \\ 
+\dot X_i & =  \sum_{j>i} \nu_j \xi_i E_j - h \sum_{j>i} \xi_j X_i  + \nu_{i-1} X_{i-1} - (\nu_i + r_i+ \eta_i \rho_i) X_i \\ 
+\dot X_N & =  \sum_i \nu_i \xi_N E_i + \nu_{n-1} X_{n-1} - (r_i + \eta_n \rho_n) X_i \\ 
+\dot P &=  \sum_i \eta_i \rho_i \left(E_i + X_i\right) + \delta \left( U + \sum_i X_i + \sum_i E_i \right) - \sigma P\\ 
+\end{array}\end{equation}
+
+#### Stage-of-Infection + Stage-up Superinfection Matrix
+
+Superinfection works on a bump-up rule -- if a new infection would raise the stage, then it occurs. Otherwise, it is ignored. Let $\chi_i = \sum_{i\geq j} \xi_j$ be the apparent attack rate for someone in the $i^{th}$ infection stage, and let $\vec \chi_i = \left< \chi_1, \chi_2, ...\chi_9 \right>$. Note that if $i>j$ then $\chi_i \geq \chi_j$. Note that for the $U$, all infections also occur. We do elementwise multiplication (denoted $*$) to get: 
+
+\begin{equation} [X]_{SoI} * \vec \chi = 
+\left[\begin{array}{ccccccccc}
+\chi_0&\chi_0q_1&\chi_0q_2&\chi_0q_3& \ldots & \chi_0 q_7 & \chi_0 q_8&\chi_0 q_9\\ 
+ . &\chi_1s_1& . & . & \ldots & . & . & . \\  
+ . &\chi_2v_1&\chi_2 s_2& . & \ldots & . & . & .\\  
+ . & . &\chi_3 v_2&\chi_3s_3& \ldots & . & . & . \\   
+ \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\  
+ . & . & . & & \ldots  &\chi_7 s_7& . & . \\ 
+ . & . & . & & \ldots & \chi_8 v_8 &\chi_8 s_8& .  \\ 
+ . & . & . & & \ldots & . &\chi_9 v_8&\chi_9 s_9& \\  
+\end{array}\right]
+\end{equation}
+
+#### Stage-Up Exposure 
+
+In the time step when exposure occurs, we note that individuals may either remain unexposed, $(1-\alpha) [X]_{SoI} * \vec \chi$ or they are exposed $(1-\alpha) [X]_{SoI} * \vec \chi.$
+
+Next, we make the matrix that describes where exposed individuals end up on the next time step. 
+
+If they are not infected they change states according to a matrix $[\hat \xi]$, where $\hat \xi_{i,j} = \xi_i / \chi_j$:
+\begin{equation} [\hat \xi] = 
+\left[\begin{array}{c|ccccccccc}
+& E_0&E_1&E_2&E_3& \ldots &E_8&E_9\\ \hline
+U & . & . & . & . & \ldots & . & . \\ 
+X_1 &\hat \xi_{1,0}&\hat \xi_{1,1}&\hat \xi_{1,2}&\hat \xi_{1,3}& \ldots &\hat \xi_{1,8}&\hat \xi_{1,9}\\  
+X_2 &\hat \xi_{2,0}& . &\hat \xi_{2,2}&\hat \xi_{2,3}& \ldots &\hat \xi_{2,8}&\hat \xi_{2,9}\\  
+X_3 &\hat \xi_{3,0}& . & . &\hat \xi_{3,3}& \ldots &\hat \xi_{3,8}&\hat \xi_{3,9}\\   
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots  \\  
+X_8 &\hat \xi_{8,0}& . & . & . & \ldots &\hat \xi_{8,8}&\hat \xi_{8,9} \\ 
+X_9 &\hat \xi_{9,0}& . & . & & \ldots & . &\hat \xi_{9,9} \\ 
+\end{array}\right]
+\end{equation}
+
+To implement this, we need to build a frame:
+
+```{r SuSblock Adam}
+SuSblock_Adam = function(par){with(par,{
+  SuS = bandSparse(N,k=((1:N)-1))
+  SuS = rbind(0,cbind(1,SuS))
+  return(SuS)
+})}
+round(SuSblock_Adam(par)*1000)/1000
+par$SuS = SuSblock_Adam(par)
+```
+
+We can now write a partial state transition matrix in block form: 
+
+\begin{equation} [E]_{os} = 
+\left[\begin{array}{c|ccccccccc}
+& \vec X = \left<U, X_1, \ldots, X_9 \right> & \vec E = \left< E_0, E_1, \ldots E_9 \right> \\ \hline
+\vec X & (1-\alpha) [X]_{SoI} * \vec \chi & (1-\alpha) E_{os} * [\hat \xi] \\ 
+\vec E & \alpha [X]_{SoI} * \vec \chi & \alpha E_{os} * [\hat \xi] \\ 
+\end{array}\right]
+\end{equation}
+
+#### Case Management and Chemoprotection
+
+We modify the base model to consider fever and treatment. We assume fever arises at the rate $\eta_i$ in stage $i$, and that it is treated with probability $\rho_i$ for a person in stage $i$.  
+
+\begin{equation}\begin{array}{rl}
+\dot U & = \sigma P - h U + \sum_n r_n X_n \\ 
+\dot E_0 &= h U - \nu_0 E_0 \\ 
+\dot X_1 & = \nu_0 E_0 - (\nu_1 + r_1 + \eta_1 \rho_1) X_1  \\ 
+\dot X_i & =  \nu_{i-1} X_{i-1} - (\nu_i + r_i + \eta_i \rho_i) X_i  \\ 
+\dot X_n & =    \nu_{n-1} X_{n-1} - (r_n  +\eta_n \rho_n) X_n \\ 
+\dot P &=  \sum_i (\delta + \eta_i \rho_i) X_i \\ 
+\end{array}\end{equation}
+
+
+We assume that if a person has a malaria fever, then they treat with probability $D_{i,\eta} = \eta_i \rho$, but if a person does not experience a fever, then they take drugs at a background rate, $D_\delta = 1 - e^{-\delta \tau}$. The proportion treated in stage $i$ is thus $D_i = D_{i,\eta} + (1-D_{i,\eta}) \vec D_\delta$. Let $\vec D$ denote the fraction treated and $\vec D' = \mbox{diag} \left( 1- \vec D \right)$ a diagonal matrix constructured from the vector $1- \vec D$ with the on-diagnoal elements describing the fraction not treated. We assume that all treated individuals enter the chemoprotected class $P_1$, and after one time step they all move to $P_2$. 
+
+```{r}
+par$delta = 1/730
+par$Dd = 1 - exp(-par$delta*tau)
+par$rho = 0.3
+etaXstage_0  <- c(0,1,.7,.37, .13, .05, .02, .01, .002, 0)
+par$etaXstage = etaXstage_0 
+rhoXstage_0  <- c(0,2,1,1,1,1,1,1,1,1) 
+par$rhoXstage = rhoXstage_0 
+```
+
+```{r, echo = F, fig=TRUE, fig.height=4, fig.width=6.5}
+plot(0:9, etaXstage_0*par$rho, type = "l", xlab="Stage of Infection", xaxt = "n", ylab= expression(eta), ylim = c(0,1.1))
+
+axis(1, 0:9, SoIVarLabels)
+```
+The probability transition matrix for this model would look like this, where $d_i$ is the fraction in stage $i$ that is treated and $d'_i$ is the fraction not treated. Note that $P_1$ state transitions to $P_2$ and then to $U$ in successive time steps. 
+
+\begin{equation} 
+\left[\begin{array}{c|cccccccccccc}
+& U & E_0& X_1&X_2&X_3& \ldots &X_7&X_8&X_9&P_1&P_2\\ \hline 
+U & d'_0 & .& q_1 d'_1&q_2 d'_2&q_3 d'_3& \ldots&.& q_8 d'_8& q_9 d'_9&.&1\\
+E_0 & . & .  &.& .&.& \ldots&.& .& .&.&\\
+X_1  & .& d'_0 &s_1 d'_1& . & . & \ldots&.& . & . &.&.\\  
+X_2  & .&  . &v_1 d'_1& s_2 d'_2& . & \ldots&.& . & .&.&.\\  
+X_3  & .&  . & . &v_2 d'_2&s_3 d'_3& \ldots &.& . & . &.&.\\   
+\vdots &\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\ 
+X_7 & .&  . & . & . & .& \ldots & s_7 d'_7 & .& .  &.&.\\ 
+X_8 & .&   & . & . & .& \ldots & v_7 d'_7& s_8 d'_8& .  &.&.\\ 
+X_9 & .& .  &.  & . & . & \ldots & .& v_8 d'_8&s_9 d'_9 &.&.\\ 
+P_1& d_0 &  d_0  & d_1  & d_2 & d_3 & \ldots & d_7 & d_8& d_9&. &.\\ 
+P_2& .& .  &.  & . & . & \ldots & .& .&.&1 &.\\ 
+\end{array}\right]
+\end{equation}  
+
+#### Constructor
+
+Finally, we add states representing treatment and chemoprotection. Let $\vec 1 = \left<1,0,0,\ldots,0 \right>$. The block matrix has this form. 
+
+\begin{equation} {\cal P} = 
+\left[\begin{array}{c|ccccccccc}
+& \vec X = \left<U, X_1, \ldots, X_9 \right> & \vec E = \left< E_0, E_1, \ldots E_9 \right> & P_1 & P_2\\ \hline
+\vec X & \left((1-\alpha) [X]_{SoI} * \vec  \chi \right) [D'] & (1-\alpha)  [\hat \xi ]\; [D'] & 0 & \vec 1\\ 
+\vec E & \left( \alpha [X]_{SoI} * \vec \chi \right) [D'] & \alpha [\hat \xi]\; [D'] & 0 & 0 \\ 
+P_1 & \vec D & \vec D & 0 & 0 \\   
+P_2 & 0 & 0 & 1 & 0 \\   
+\end{array}\right]
+\end{equation}
+
+Finally, this constructs the full matrix: 
+```{r calP Adam}
+calP_Adam = function(alpha, pit, par){with(par,{
+  if(!exists("SuS")) SuS <<- SuSblock_Adam(par)
+  if(!exists("PSoI")) PSoI <<- calP_SoI(par)
+  alpha = min(alpha,1)
+  
+  xi = xiF(pit)
+  chi = c(1,cumsum(xi))
+  E1 = SuS*c(0,xi)
+  e1 = colSums(E1)
+  e1[which(e1==0)] = 1
+  hatxi = E1 %*% diag(1/e1)
+  
+  #Deta = rho*etaF(V)*etaXstage*rhoXstage
+  
+  Deta = pmin(rho*etaXstage*rhoXstage, 1) 
+  vecD = Deta + (1-Deta)*Dd
+  notTreat = diag(1-vecD)
+  treat = c(vecD,vecD)
+  
+  #make the blocks
+  B1 = PSoI%*%notTreat 
+  B2 = hatxi%*%notTreat
+  calP = rbind( cbind( (1-alpha*chi)*B1 , (1-alpha)*B2), 
+                cbind(     alpha*chi*B1,      alpha*B2),
+                treat,
+                0*treat)
+  
+  calP = cbind(calP, 0)
+  calP = cbind(calP, 0) 
+  calP[22,21] = 1 
+  calP[1,22] = 1
+  
+  return(as.matrix(calP))
+})}
+```
+```{r}
+par$calP = calP_Adam
+calP = calP_Adam(.1, pit0, par)
+colSums(calP)
+```
+
+```{r}
+rownames(calP)<- AdamVarNames
+colnames(calP)<- AdamVarNames
+ixx = c(1,2,3,10)
+showIx = c(ixx, ixx+10, 21,22)
+calPtrim = round(calP*1000)/1000 
+calPtrim[showIx, showIx]
+```
+
+
+```{r PxX Adam}
+PxX_Adam = function(alpha, vecX, par){with(c(par,vecX),{
+  X = calP_Adam(alpha,c(V1, V2),par)%*%X 
+  V1 = V1*(1-mu1) + calDimm%*%X
+  V2 = V2*(1-mu2) + alpha2
+  alpha2=alpha1
+  alpha1=alpha
+  return(list(X=X, V1=V1, V2=V2, alpha2=alpha2, alpha1=alpha1)) 
+})}
+```
+
+### Age Structure
+
+The following sets up some objects we will need. 
+
+```{r}
+#' emptyX creates an empty epidemiological state vector
+emptyX_Adam = function(){
+ X=matrix(0,22,1)
+ X[1] = 1
+ return(list(X=X, V1=0, V2=0, alpha2=0, alpha1=0))
+}
+``` 
+
+```{r}
+#' emptyXX creates an empty array of 
+#' epidemiological state vectors 
+emptyXX_Adam = function(L=66){
+  X = matrix(0,22,L)
+  X[1,]=1
+  V1=V2=rep(0,L)
+  alpha2=0
+  alpha1=0
+  return(list(X=X, V1=V1, V2=V2, alpha2=alpha2, alpha1=alpha1)) 
+}
+```
+
+```{r calO, echo = FALSE}
+calO = calO_1066()
+par$calO = calO_1066() 
+ages = ages_1066()
+par$ages = ages
+par$demog = rep(1,66)*c(diff(ages), 15) 
+par$demog = par$demog/sum(par$demog)
+ix29 = which(ages >=2 & ages < 10)
+par$demog29 = ages >=2 & ages < 10
+par$demog29 = par$demog29 / sum(par$demog29)
+birthO = matrix(0,22,66)
+birthO[1,1] = 1
+par$birthO = birthO
+ageWeights = wXageF.0(ages)
+par$wF = wXageF.0
+par$w = ageWeights
+par$w29 = ageWeights/mean(ageWeights[ix29])
+```
+
+If we simulated the dynamics using `PxX`, we would be using the following coupled set of equations, and  we would be tracking a cohort of the population over time as it aged.  
+
+\begin{equation}
+\begin{array}{rl}
+\vec X_{t+1} &= {\cal P}(\alpha_t, \ldots) \vec X_t\\ 
+\vec V_{t+1} &= {\cal V}(\alpha_t, X_t, \ldots) \vec V_t\\ 
+\end{array}
+\end{equation}
+
+If we set a constant attack rate and track the cohort as it ages, we trace out the patterns: 
+
+```{r cohortXX Adam}
+#' cohortXX simulates a cohort from birth over mx 
+#' time steps and returns it as an XX object
+cohortXX_Adam = function(alpha, par, mx=2620){
+  vecX = emptyX_Adam()
+  XX = emptyXX_Adam(mx) 
+  
+  for(i in 1:mx){
+    XX$X[,i] = vecX$X 
+    XX$V1[i] = vecX$V1 
+    XX$V2[i] = vecX$V2 
+    w = par$wF(i*tau/365)
+    vecX = PxX_Adam(w*alpha,vecX,par)
+  }
+  XX$alpha2 = vecX$alpha2
+  XX$alpha1 = vecX$alpha1
+  return(XX)
+}
+```
+
+```{r, fig.height=5, fig.width=5, echo=FALSE}
+cXX = cohortXX_Adam(.1, par, 730)
+x = par$calDlm%*%cXX$X
+kappa = par$calK%*%cXX$X
+par(mfrow = c(2,2))
+tt = c(1:730)/36.5
+plot(tt,x, type = "l", col = "blue")
+plot(tt,cXX$V1, type = "l", col = "blue")
+plot(tt,cXX$V2, type = "l", col = "blue")
+plot(tt,kappa, type = "l", col = "blue")
+```
+
+Most good models of malaria require some sort of structure to make predictions about malaria epidemiology by age and exposure. We will, therefore, introduce age-structure into the population.
+
+Let $[X]$ denote an array of vectors, one for each age group: 
+
+$$[X]_t = [\vec X_1, \vec X_2, \ldots, \vec X_n]_t$$ 
+where $i = 1,2, \ldots, n$ index populations of different ages. 
+
+Similarly, we let $[V]$ denote an array of population immune tracking variable vectors, where $\vec V_i = \left[ V_{i,1}, V_{i,2}\right]$, and 
+$$[V]_t = [\vec V_1, \vec V_2, \ldots \vec V_n]_t$$ 
+
+In the model, it is possible that attack rates are age-dependent, so that the attack rate for the $i^{th}$ cohort is $\omega_i \alpha_t$. 
+
+```{r plot Age Weights, echo=FALSE}
+plot(ages, ageWeights, type = "l")
+```
+
+Similarly, let $[{\cal P}]$ denote an array of probability transition matrices:
+
+$$[{\cal P}_1(\omega_1 \alpha, \vec V_1), {\cal P}_2(\omega_2 \alpha, \vec V_2), ..., {\cal P}_n(\omega_n \alpha, \vec V_n)]$$
+The operation $[{\cal P}(\alpha_t, \vec V)][X]$ is defined to be the hypermatrix multiplication:
+
+$$[{\cal P}(\alpha_t, \vec V, \vec \omega)][X] = \left[{\cal P}_1(\omega_1 \alpha_t, \vec V_1)]\vec X_1,\; {\cal P}_2(\omega_2 \alpha_t, \vec V_2)]\vec X_2, \ldots, \; \omega_n {\cal P}_n(\alpha_t, \vec V_n)]\vec X_n)\right] $$ 
+
+After doing the hypermatrix multiplication, we apply age operator, ${\cal O}$, to both $[X]$ and $[V]$.
+
+```{r PtimesX Adam}
+PtimesX_Adam = function(alpha, XX, par){with(c(par,XX),{
+  for(a in 1:66){
+    X[,a] = calP_Adam(alpha*w[a], c(V1[a], V2[a]), par)%*%X[,a]
+  }
+  V1 = V1*(1-mu1) + calDimm%*%X
+  V2 = V2*(1-mu2) + w*alpha2
+  #X = X%*%calO + birthO
+  X = X%*%calO 
+  X[1,1] = 1
+  V1 = V1%*%calO 
+  V2 = V2%*%calO 
+  alpha2=alpha1
+  alpha1=alpha
+  
+  return(list(X=X, V1=V1, V2=V2, alpha2=alpha2, alpha1=alpha1)) 
+})}
+```
+
+After applying one of our operators, such as $\cal D$ to $[X]$ we get a vector of values representing (for example), the *PR* in each vector. Some other operator tells us how frequent each one of these groups is. We can thus compute the *Pf*PR~[2-9)~: 
+
+```{r}
+XX2pr29_Adam = function(XX,par){with(par,{
+  as.numeric(calDlm %*% XX$X %*% demog29)
+})}
+```
+
+Similarly, the infectiousness of each cohort is found by applying $\cal K$, but we need to know the average, which involves age-specific biting rates and the frequency: The function to compute $\kappa$ is the following:
+
+```{r kappaF Adam}
+kappaF_Adam = function(XX, par){with(par,{
+  as.numeric((calK %*% XX$X) %*% (w*demog))
+})}
+```
+
+```{r fastPfPR Adam}
+#` Compute PfPR quickly using the cohort utility
+fastPfPR_Adam = function(alpha, par){
+  XX = cohortXX_Adam(alpha, par, 365)
+  x = par$calDlm%*%XX$X
+  mean(x[74:365])
+}
+```
+
+```{r}
+cXX = cohortXX_Adam(0.1, par, 365)
+fastPfPR_Adam(.1, par)
+```
+
+```{r cohort2ages Adam}
+#' cohort2ages bins data from a chort matrix and bins it into ages
+cohort2ages_Adam = function(chrtXX, par){with(par,{
+  aa = par$tau*(1:dim(chrtXX$X)[2])/365
+  XX = emptyXX_Adam() 
+  
+  ix = which(aa <= ages[1])
+  if(length(ix)==1){
+    XX$X[,1] = chrtXX$X[,ix]
+    XX$V1[1] = chrtXX$V1[ix]
+    XX$V2[1] = chrtXX$V2[ix]
+  }
+  if(length(ix)>1){
+    XX$X[,1] = rowSums(chrtXX$X[,ix])/length(ix)
+    XX$V1[1] = mean(chrtXX$V1[ix])
+    XX$V2[1] = mean(chrtXX$V2[ix])
+  } 
+  for(i in 2:length(ages)){
+    ix = which(aa>ages[i-1] & aa <= ages[i])
+    if(length(ix)==1){
+      XX$X[,i] = chrtXX$X[,ix]
+      XX$V1[i] = chrtXX$V1[ix]
+      XX$V2[i] = chrtXX$V2[ix]
+    }
+    if(length(ix)>1){
+      XX$X[,i] = rowSums(chrtXX$X[,ix])/length(ix)
+      XX$V1[i] = mean(chrtXX$V1[ix])
+      XX$V2[i] = mean(chrtXX$V2[ix])
+    }
+  }
+  return(XX)
+})}
+```
+
+```{r}
+XX = cohort2ages_Adam(cXX,par)
+```
+
+```{r ar2stableWave}
+ar2stableWave_Adam = function(alpha, par, tol = 0.0001){
+  cXX = cohortXX_Adam(alpha,par,2920)  
+  XX = cohort2ages_Adam(cXX,par)
+  for(i in 1:100) XX = PtimesX_Adam(alpha, XX, par)
+  xl = XX2pr29_Adam(XX,par)
+  df = 1
+  while(df > tol){
+    XXl = XX
+    XX = PtimesX_Adam(alpha, XX, par)
+    x = XX2pr29_Adam(XX,par)
+    df=sum(abs(XXl$X - XX$X))
+  }
+  XX
+}
+```
+
+```{r ar2pr}
+ar2pr_Adam = function(alpha, par){with(par,{
+  XX = ar2stableWave_Adam(alpha, par)
+  XX2pr29_Adam(XX, par)
+})}
+```
+
+#### Numerics
+
+```{r}
+ar2stableDiagnostic = function(alpha, par, XX0=NULL){
+  if(is.null(XX0)){XX = emptyXX_Adam()}else{XX=XX0}
+  for(i in 1:365) 
+    XX = PtimesX_Adam(alpha,XX,par)
+  x = XX2pr29_Adam(XX,par)
+  list(x=x,XX=XX)
+}
+#XX0 = ar2stableDiagnostic(.1, par)
+#XX1 = ar2stableDiagnostic(.1, par, XX=XX0$XX)
+#XX2 = ar2stableDiagnostic(.1, par, XX=XX1$XX)
+```
+
+
+
+
+```{r  cohortTest}
+#XX0 = ar2stableWave_Adam(0.1, par, tol = 0.0001)
+XX0 = ar2stableWave_Adam(0.1, par, tol = 0.001)
+```
+
+```{r, fig.height=5, fig.width=5}
+par(mfrow = c(2,2))
+tt = c(1:365)*tau/365
+x = par$calDlm%*%cXX$X
+x1 = par$calDlm%*%XX0$X
+plot(ages,x1, type = "l", col = "blue")
+lines(tt,x)
+plot(ages,XX0$V1, type = "l", col = "blue", ylim = range(XX0$V1, cXX$V1))
+lines(tt, cXX$V1)
+lines(ages, XX$V1, col = "red")
+plot(ages,XX0$V2, type = "l", col = "blue", ylim = range(XX0$V2, cXX$V2))
+lines(tt, cXX$V2)
+lines(ages, XX$V2, col = "red")
+```
+
+
+
+
+```{r}
+ar2pr_Adam(.1, par)
+```
+
+## The Vector Model
+
+Until everything works, we're using the simple model that EIR = VC $\times$ \kappa. Ignore the following sections for the moment. 
+
+### Vectorial Capacity as an Exogenous Variable
+
+Let $V_t$ be vectorial capacity at time $t$. This is all the infectious bites that would ever arise from all the mosquitoes biting a single human on a single day.  The bites will not all occur at once. Let $\vec q$ describe how those bites will be distributed, where $\sum q=1$. We get that EIR, $E_t$ is: 
+
+\begin{equation}
+E_t = V_{t-1} q_1 + V_{t-2} q_2 + V_{t-3} q_3 + \ldots
+\end{equation}
+
+if conditions remain constant, then $q_i= q^i$ and the fraction of bites given on each time step is $q/(1-q)$. Because of the EIP, the fraction of bites given in the first step after becoming infecious might be different. 
+
+\begin{equation}
+E_t = p V_{t-1} + pq V_{t-2} + p q^2 V_{t-3} + \ldots
+\end{equation}
+
+Here, we introduce a slight bookkeeping change. Let $Z_t$ be the number of all infectious bites that will ever be delivered in the future, $p$ the fraction that occur in the first time step and $q$ the fraction in each time step thereafteg. We get the following recursive relationships: 
+
+\begin{equation}\begin{array}{rl}
+E_t &= q (1-q) Z_t + p V_{t-1} \kappa_{t-1} \\ 
+Z_t &= q Z_{t-1} + (1-p) V_{t-1} \kappa_{t-1}
+\end{array}\end{equation}
+
+```{r}
+calY = function(V,kappa,YY,par){with(YY,{
+  Et = q*(1-q)*Z + p*V*kappa
+  Zt = q*Z + (1-p)*V*kappa
+  list(E=T, Z=Zt) 
+})}
+
+zetaF = function(YY,par){
+  YY$E/par$totalH
+}
+```
+
+### Vector Control Effect Size Traces
+
+## Simulation
+
+
+
+## Synthetic History 
+
+### The `pr2ar` Algorithm 
+
+#### Peak Ahead, the Algebra 
+
+Since the *Pf*PR is not affected in one time step, we must peek two steps ahead. Note that: 
+
+\begin{equation*}
+\begin{array}{rl}
+[X]_{t+2} 
+=&  [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O}  \\
+=&  \left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O}  \\
+=&  [{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O} \\& 
+  + [{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O} \\&
+  +  \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\\&
+  + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}
+\end{array}
+\end{equation*}
+
+
+so 
+\begin{equation*}
+\begin{array}{rl}
+x_{t+2} =& {\cal D} [X]_{t+2} {\cal W} \\ 
+=&  {\cal D}\left( [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O} \right) {\cal W}  \\
+=&  {\cal D}\left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O} {\cal W}  \\
+=&  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\& 
+  + {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&
+  + {\cal D}\left( \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\right) {\cal W} \\&
+  + {\cal D}\left(\omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}\right) {\cal W} 
+\end{array}
+\end{equation*}
+
+\begin{equation*}
+\begin{array}{rl}
+x_{t+2} =& {\cal D} [X]_{t+2} {\cal W} \\ 
+=&  {\cal D}\left( [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O} \right) {\cal W}  \\
+=&  {\cal D}\left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O} {\cal W}  \\
+=&  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\& 
++ {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&
++ {\cal D}\left( \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\right) {\cal W} \\&
++ {\cal D}\left(\omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}\right) {\cal W} \\
+=&  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\& 
++ \alpha_t {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&
++ 0 \\ &
++ 0 \\ &
+\end{array}
+\end{equation*}
+
+so 
+\begin{equation}
+\alpha_t = \frac{x_{t+2} - {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}}{{\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W} }
+\end{equation}
+
+The`peekAhead` algorithm doesn't work as advertised. 
+```{r}
+peekAhead_Algebra = function(x2, XX, par){with(c(XX,par),{
+  X0 = X1 = X
+  dummy=0.1
+  for(a in 1:66){
+    calP = calP_Adam(alpha2,c(V1[a],V2[a]),par)
+    calP0 = calP_Adam(0,c(V1[a],V2[a]),par)
+    calPalpha = (calP - calP0)/dummy
+    X0[,a] = calP0%*%X[,a]
+    X1[,a] = w[a]*calPalpha%*%X[,a]
+  }
+  V1 = V1*(1-mu1) + calDimm%*%X0
+  V2 = V2*(1-mu2) + w*alpha2
+  X0 = X0%*%calO 
+  X1 = X1%*%calO 
+  X00 = X10 = X0*0 
+  V1 = V1%*%calO 
+  V2 = V2%*%calO 
+  
+  for(a in 1:66){
+    calP0 = calP_Adam(0,c(V1[a],V2[a]),par)
+    X00[,a] = calP0%*%X0[,a]
+    X10[,a] = calP0%*%X1[,a]
+  }
+  X00 = X00%*%calO 
+  X10 = X10%*%calO 
+  alpha = (x2 - calDlm %*% X00 %*% demog29)/(((calDlm %*% X10))  %*% demog29)
+  
+ return(as.numeric(alpha)) 
+})}
+
+```
+
+#### Peak Ahead, the Working Code
+
+```{r peekAhead Adam}
+peekAhead_Adam = function(x2, XX, par){with(c(XX,par),{
+ errF = function(alpha){
+   XX = PtimesX_Adam(alpha,XX,par)
+   XX = PtimesX_Adam(alpha,XX,par)
+   (x2 - XX2pr29_Adam(XX,par))^2
+ }
+ alpha0 = 2*alpha1 - alpha2
+ inits = pmax(0,pmin(c(alpha0/3, alpha0*3), 1))  
+ optimize(errF, inits)$min
+})}
+```
+
+If the `peekAhead` algorithm works, then given $X_t$ and $\alpha_t$ we should be able to compute $x_{t+2}$ 
+
+\begin{equation}
+x_{t+2} = {\cal P}(0, \ldots) \left( {\cal P}(\alpha_t, \ldots) X_t \right)
+\end{equation}
+
+and then pass $X_t$ and $x_{t+2}$ to the `peekAhead` algorithm and compute $\alpha_t$. The following tests the `peekAhead` algorithm: 
+```{r}
+XX1 = PtimesX_Adam(0.112, XX0, par)
+XX2 = PtimesX_Adam(0.123, XX1, par)
+XX3 = PtimesX_Adam(0.124, XX2, par)
+XX4 = PtimesX_Adam(0.131, XX3, par)
+XX5 = PtimesX_Adam(0.128, XX4, par)
+x0=XX2pr29_Adam(XX0, par)
+x1=XX2pr29_Adam(XX1, par)
+x2=XX2pr29_Adam(XX2, par)
+x3=XX2pr29_Adam(XX3, par)
+x4=XX2pr29_Adam(XX4, par)
+x5=XX2pr29_Adam(XX5, par)
+peekAhead_Adam(x2, XX0, par) 
+peekAhead_Adam(x3, XX1, par)
+peekAhead_Adam(x4, XX2, par)
+peekAhead_Adam(x5, XX3, par)
+```
+
+The `pr2ar` algorithm works by using the first *Pf*PR value to set initial conditions, which means we must treat the first step differently. We solve for $\alpha$ such that $X_{t+1} = {\cal P}(\alpha_t) X_t$. 
+
+```{r pr2arSS}
+#' Find ar such that the 
+pr2arSS_Adam = function(x,par){
+  errFgood = function(alpha){
+    (ar2pr_Adam(alpha,par)-x)^2
+  }
+  errFfast = function(alpha){
+    (fastPfPR_Adam(alpha,par)-x)^2
+  }
+  alpha0=optimize(errFfast,c(0,1))$min
+  optimize(errFgood,c(alpha0/2,alpha0*2))$min
+}
+```
+
+```{r pr2ar}
+pr2ar_Adam = function(xx, par, alpha0=NULL, XX0=NULL){
+  if(is.null(alpha0)) {
+    alpha = pr2arSS_Adam(xx[1],par)
+  } else {
+    alpha=alpha0
+  }
+  if(is.null(XX0)) {
+    XX = ar2stableWave_Adam(alpha,par)
+  } else {
+    XX=XX0
+  }
+  alphaT = alpha
+  for(t in 3:length(xx)){ 
+    alpha = peekAhead_Adam(xx[t],XX,par)
+    XX = PtimesX_Adam(alpha, XX, par)
+    alphaT = c(alphaT, alpha) 
+  } 
+  return(list(alpha=alphaT, XX=XX)) 
+}
+```
+
+```{r}
+tt = 1:20
+alphat = c(0.1, .1 +.01*(1 + sin(2*pi*tt/36.5)))
+XX0 = ar2stableWave_Adam(alphat[1], par)
+XX = XX0 
+xx= XX2pr29_Adam(XX0,par)
+for(i in 2:length(alphat)){
+  XX = PtimesX_Adam(alphat[i], XX, par) 
+  xx= c(xx,XX2pr29_Adam(XX,par)) 
+}
+alpha1 = pr2ar_Adam(xx, par, alphat[1],XX0)
+alpha2 = pr2ar_Adam(xx, par) 
+cbind(alphat, alpha1, alpha2)
+```
+
+### Metric Conversions
+
+```{r}
+ar2History = function(alpha, par, XX=NULL){
+  if(is.null(XX)){
+    XX = ar2stableWave(alpha,par)
+  }
+  eir = ar2eir(alpha)
+  kappa = kappaF_Adam(XX,par)
+  kappaT = kappa 
+  for(i in 1:length(alpha)){
+    XX = PtimesX_Adam(alpha[i], XX, par)
+    kappa = kappaF_Adam(XX,par) 
+    kappaT = c(kappaT, kappa)
+  }
+  V = eir/kappa 
+  history = list(x=x, alpha=alpha, eir=eir, kappa=kappaT, V=V, XX0=XX)
+  return(history)
+}
+```
+
+```{r}
+pr2History = function(x,par){
+  init = pr2ar_Adam(x,par)
+  XX = init$XX
+  alpha = init$alpha
+  eir = ar2eir(alpha)
+  kappa = kappaF_Adam(XX,par)
+  kappaT = kappa 
+  for(i in 1:length(alpha)){
+    XX = PtimesX_Adam(alpha[i], XX, par)
+    kappa = kappaF_Adam(XX,par) 
+    kappaT = c(kappaT, kappa)
+  }
+  V = eir/kappa 
+  history = list(x=x, alpha=alpha, eir=eir, kappa=kappaT, V=V, XX0=XX)
+  return(history)
+}
+```
+
+```{r}
+#history = pr2History(xx,par)
+```
+
+```{r}
+pr2SS_Adam = function(x, par, tol = 0.001){
+  alpha = pr2arSS_Adam(x,par)
+  XX = ar2stableWave_Adam(alpha,par)
+  xi = XX2pr29_Adam(XX,par)
+  df = 1
+  i=1
+  while(df>tol){
+    kappa = kappaF_Adam(XX,par)
+    eir   = ar2eir(alpha) 
+    VC    = eir/kappa 
+    XX    = PtimesX_Adam(alpha, XX, par)
+    xi     = XX2pr29_Adam(XX,par)
+    df    = (x-xi)^2 
+  }
+  return(list(XX=XX, kappa=kappa, eir=eir, alpha=alpha, x=x, V=VC))
+}
+```
+
+```{r}
+sseg = pr2SS_Adam(.1,par)
+```
+
+```{r}
+vc2SS_Adam = function(VC, par, XX0=NULL){
+  if(is.null(XX0)){
+    XX = emptyXX_Adam()
+    for(i in 1:10) XX = PtimesX_Adam(.1,XX,par)
+  } else {
+    XX = XX0 
+  }
+  
+  for (i in 1:2920){
+    kappa = kappaF_Adam(XX,par)
+    eir   = VC*kappa 
+    alpha = eir2ar(eir)
+    XX = PtimesX_Adam(alpha, XX, par)
+    x = XX2pr29_Adam(XX,par)
+  }
+  
+  df = 1
+  XXl = XX
+  xi = 1
+  while(df>.000001){
+    kappa = kappaF_Adam(XX,par)
+    eir   = VC*kappa 
+    alpha = eir2ar(eir)
+    XX = PtimesX_Adam(alpha, XX, par)
+    x = XX2pr29_Adam(XX,par)
+    print(c(x=x, xi=xi))
+    df = (x-xi)^2
+    xi=x
+  } 
+  return(list(XX=XX, kappa=kappa, eir=eir, alpha=alpha, x=x, V=VC))
+}
+```
+
+```{r}
+#ssvc = vc2SS_Adam(sseg$V, par, XX0 = sseg$XX)
+ssvc = vc2SS_Adam(sseg$V, par)
+```
+
+```{r}
+vcSim_Adam = function(VC, par, XX0=NULL){
+  if(is.null(XX0)){XX = vc2ss(VC[1])}
+  kT = eT = aT = xT = c() 
+  for(i in 1:length(VC)){
+    kappa = kappaF_Adam(XX,par)
+    eir   = VC[i]*kappa 
+    alpha = eir2ar(eir)
+    XX = PtimesX_Adam(alpha, XX, par)
+    x = XX2pr29_Adam(XX,par)
+    kT = c(kT, kappa)  
+    eT = c(eT, eir)  
+    xT = c(xT, x)  
+    aT = c(aT, alpha)  
+  }
+   return(list(x=xT, kappa=kT, eir=eT, alpha=aT, XX=XX))
+}
+```
+
+```{r}
+#sim = vcSim_Adam(history$V, history$XX0, par)
+```
+
+## Unit Testing
+
+## Benchmarking
+
+### Duration of an Untreated Infection 
+
+The first step is to fit the model to data describing the duration of an untreated infection. We note this relies only on the base model, so we can use the simple matrix `PSoI`:  
+
+```{r Model Tuning}
+nuVals_0= c(.95, 1/3, rep(1/5, 5), rep(1/36.5),0)
+nuVals_1= c(.9, 1/8, rep(1/10, 5), rep(1/36.5),0)
+rVals_0=exp(-c(0, 1/800, rep(1/250, 6), 1/400)*tau)
+rVals_1=exp(-c(0, 1/800, rep(1/400, 3), rep(1/200,3), 1/400)*tau) 
+```
+
+```{r}
+par  <- list(r=rVals_0, nu=nuVals_0, N=9)
+```
+
+```{r fitPRtime}
+PSoI <- calP_SoI(list(r=rVals_0, nu=nuVals_0, N=9))
+vecX = c(0,1,rep(0,8))
+Xt = vecX
+TT = 73
+for(i in 1:TT){
+  vecX = PSoI %*% vecX
+  Xt = cbind(Xt, vecX)
+} 
+pr_lm = calDlm_SoI%*%Xt
+pr_true = calDtrue_SoI%*%Xt
+tt = (0:TT)*10
+plot(tt, pr_lm, type ="l", ylim = c(0,1), xlab = "Time (Days)", xaxt = "n")
+lines(tt, pr_true, col = "red")
+lines(tt, 1-pr_lm/pr_true, col = "blue") 
+axis(1, c(0:6)*100, c(0:6)*100) 
+```
+
+```{r estD}
+sum(pr_lm)*10
+```
+
+
+
+ 
+
+
+### *Pf*PR by Age 
+
+For one particular set of values for $\vec \xi$, we get that $[\hat \xi]$ (rounded at three significant digits) looks like this: 
+```{r hatxi, purl=F, eval=F}
+E1 = SuS*c(0,xiF_1(0.3))
+round(1000*E1%*%diag(1/colSums(E1)))/1000
+```
+
+
+
+In the following, we have fit values for a high transmission setting, where $10$-day attack rates are $\alpha = 0.3$; monthly attack rates are around 65% ^[Fig 3a. in Rodriguez-Barraquer, I. et al. Quantifying heterogeneous malaria exposure and clinical protection in a cohort of Ugandan children. J. Infect. Dis. 214, 1072–1080 (2016)]. We would also, meanwhile, like to try and fit the gross epidemiological patterns across transmission intensities observed in Uganda^[Rodriguez-Barraquer, I. et al. Quantification of anti-parasite and anti-disease immunity to malaria as a function of age and exposure. Elife 7, e35832 (2018)].
+
+### EIR vs. PR
+
+### Clinical Disease
+
+### Mortality 
+
+
+
+
+
+
+
+### MISC
+
+Some stage-up functions
+```{r xiF}
+xiF_0 = function(x, k1=.008, N=9){ 
+  diff(pbeta(c(0:8)/8, 1-exp(-k1*x), exp(-k1*x))) 
+}
+
+xiF_1 = function(x, p=1, N=9){
+  diff(pbeta(c(0:N)/N, x, 1-x))
+}
+
+xiF.2 = function(V, k1=.2, k2=.2){
+  xi1 = exp(-k1*V[1])
+  xi2 = xiF_0(k1*V[2],k2,8)  
+  xi = c(xi1, (1-xi1)*xi2)
+  return(xi)
+}
+
+xiF.3 = function(V, k1=5, p=3, N=9){
+  xi1 = exp(-k1*V)
+  xi2 = xiF_1(V,p,N-1)  
+  xi = c(xi1, (1-xi1)*xi2)
+  return(xi)
+}
+```

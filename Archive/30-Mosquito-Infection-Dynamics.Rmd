@@ -1,0 +1,47 @@
+---
+title: "Mosquito Infection Dynamics"
+author: "DLS"
+date: "3/19/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+### A Vectorial-Capacity Model
+
+Let $V_t$ be vectorial capacity at time $t$ and $E_t$ is the EIR. (bites arising, bites received) This is all the infectious bites that would ever arise from all the mosquitoes biting a single human on a single day.  The bites will not all occur at once. Let $\vec q$ describe how those bites will be distributed over time, where $\sum q_i=1$. In other words: 
+
+\begin{equation}
+E_t = V_{t-1} q_1 \kappa_{t-1} + V_{t-2} q_2 \kappa_{t-2} + V_{t-3} q_3 \kappa_{t-3}+ \ldots
+\end{equation}
+
+if conditions remain constant, then $q_i= q^i$ and the fraction of bites given on each time step is $q/(1-q)$. Because of the EIP, the fraction of bites given in the first step after becoming infecious might be different. 
+
+\begin{equation}
+E_t = p V_{t-1}\kappa_{t-1} + pq V_{t-2}\kappa_{t-2} + p q^2 V_{t-3}\kappa_{t-3} + \ldots
+\end{equation}
+
+Here, we introduce a slight bookkeeping change. Let $Z_t$ be the number of all infectious bites that will ever be delivered in the future, $p$ the fraction that occur in the first time step and $q$ the fraction in each time step thereafter. We get the following recursive relationships: 
+
+\begin{equation}\begin{array}{rl}
+E_t &= (1-q) Z_t + p V_{t-1} \kappa_{t-1} \\ 
+Z_t &= q Z_{t-1} + (1-p) V_{t-1} \kappa_{t-1}
+\end{array}\end{equation}
+
+To get the peak ahead method to work, we assume we know the history of EIR (from knowing $\alpha$). 
+
+\begin{equation}
+V_t = \frac{E_{t+1} - (1-q) Z_t} {p \kappa_t} 
+\end{equation}
+
+but 
+
+\begin{equation}
+Z_t = \frac{E_t - p V_{t-1} \kappa_{t-1}}{1-q} 
+\end{equation}
+
+so 
+
+\begin{equation}
+V_t = \frac{E_{t+1} - E_t + p V_{t-1} \kappa_{t-1}} {p \kappa_t} 
+\end{equation}

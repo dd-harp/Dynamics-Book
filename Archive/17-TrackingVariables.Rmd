@@ -1,0 +1,211 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Tracking Variables
+
+Suppose we have a variable rate of exposure, and we want to formulate models in which recent exposure affects the epidemiology of disease. We construct the following two time series tracking exposure:
+
+```{r alpha, echo=FALSE}
+alphaT_f = function(tmax, a=2, b=50){ 
+  tt = 1:tmax
+  rbeta(tmax, a*(1+sin(2*pi*tt/36.5)), b)
+}
+TT = 200
+stepT = c(rep(1,TT), rep(0,TT))
+alphaT = alphaT_f(2*TT)
+ttTT = 0:(2*TT)*10/365
+plot(ttTT[-401], alphaT, type = "l", ylab = expression (alpha[t]), xlab = "Time (Years)")
+#lines(ttTT[-401],mean(alphaT)*stepT, col = "blue")
+```
+
+## Population Immune Tracking: Exposure Tracking
+
+In a population stratified by age, cumulative exposure will vary by age. Let $I_{a,t}$ denote an immune tracking variable that tracks exposure for people of age $a$ at time $t$. It is updated by the following recursive relationship:
+
+\begin{equation}
+I_{a,t+1} = \alpha_t + (1-\mu) I_{a,t}
+\end{equation}
+
+Note that for $\mu=0$, the equation simply tracks cumulative exposure. This version returns only the last value: 
+  
+```{r basePIT.0}
+basePIT.0 = function(alpha, mu=0, vecV = matrix(0,1,1), calO=matrix(1,1,1), N=1, w=1){
+  ###################################################################
+  # If alpha is a vector (a time series), then N is its length.
+  # If alpha is a scalar, then N is passed as an optional argument.
+  # Default values update one time step for alpha and mu.
+  ###################################################################
+  if(length(alpha)==1){
+    alpha = rep(alpha, N)
+  } else {
+    N = length(alpha) 
+  }
+  ####################################
+  # alpha is the "attack" rate
+  # mu describes the "decay"
+  # w describes biting weights by age
+  # calO is an age operator
+  ####################################
+  for(t in 1:N){
+    vecV = ((1-mu)*vecV + w*alpha[t])%*%calO
+  } 
+  return(vecV)
+}
+```
+
+This version returns the whole time series (including the initial value):
+```{r basePIT.TS}
+basePIT.TS = function(alpha, mu=0, vecV = matrix(0,1,1), calO=matrix(1,1,1), N=1, w=1){
+  ###################################################################
+  # If alpha is a vector (a time series), then N is its length.
+  # If alpha is a scalar, then N is passed as an optional argument.
+  # Default values update one time step for alpha and mu.
+  ###################################################################
+  if(length(alpha)==1){
+    alpha = rep(alpha, N)
+  } else {
+    N = length(alpha) 
+  }
+  ####################################
+  # alpha is the "attack" rate
+  # mu describes the "decay"
+  # w describes biting weights by age
+  # calO is an age operator
+  ####################################
+  matV = vecV
+  for(t in 1:N){
+    vecV = ((1-mu)*vecV + w*alpha[t])%*%calO
+    matV = cbind(matV, vecV)
+  } 
+  return(matV)
+}
+```
+
+We write a function `plotPITxAge` that plots PIT variables by age. 
+```{r plotPITxAge}
+plotPITxAge = function(ages, vecV, lines=FALSE, clr=NULL, d2y=F){
+  clr <- ifelse(is.null(clr),"black", clr)
+  if(d2y == TRUE) ages <- ages/365
+  if(lines==FALSE){
+    plot(ages, vecV, type = "l", xlab = "Age (Years)", ylab = "PIT", col = clr)
+  } else { 
+    lines(ages, vecV, col = clr)
+  }
+}
+```
+
+We use the age operator, ${\cal O$} and the `1066` age structure (from the `AgeOperators.R` in the the `Operational-Model-Library`). The following plots cumulative exposure by age. The age structure here tracks populations for 85 years. Black shows 85 years of exposure. Blue shows the results for 10,000 days ($\approx$27.4 years) and red for 1,000 days ($\approx$2.7 years). Starting from no exposure, we see the relationship saturate.  This is a cautionary tale to take care to set the initial conditions for tracking variables $V_0$ with great care. 
+```{r eg-baseXage}
+source ("./Operational-Model-Library/AgeOperators.R")
+calO = calO_1066()
+ages = ages_1066()
+vecV = matrix(0,1,66)
+
+plotPITxAge(ages, basePIT.0(0.1, mu=0, vecV, calO, N=3000))
+plotPITxAge(ages, basePIT.0(0.1, mu=0, vecV, calO, N=1000), T, "blue")
+plotPITxAge(ages, basePIT.0(0.1, mu=0, vecV, calO, N=100), T,"red")
+```
+
+
+We plot another function, `plotPITxTime` that plots PIT variables over time.
+
+```{r plotPITxTime}
+plotPITxTime = function(tm, vecV, lines=FALSE, clr=NULL, d2y=F){
+  clr <- ifelse(is.null(clr),"black", clr)
+  if(d2y == TRUE) tm <- tm/365
+  if(lines==FALSE){
+    plot(tm, vecV, type = "l", xlab = "Time (Years)", ylab = "PIT", col = clr)
+  } else { 
+    lines(tm, vecV, col = clr)
+  }
+}
+```
+
+The following shows how the PIT variables behave with respect to time. Exposure is plotted in red. Other colors track exposure with decay:
+```{r}
+vecV0 = 0
+plotPITxTime(ttTT, basePIT.TS(alphaT, mu=0.05, vecV0)->V05)
+plotPITxTime(ttTT, basePIT.TS(alphaT, mu=0.1, vecV0)->V10, T, "blue")
+plotPITxTime(ttTT, basePIT.TS(alphaT, mu=0.2, vecV0)->V20, T,"darkred")
+plotPITxTime(ttTT, basePIT.TS(alphaT, mu=0.3, vecV0)->V30, T,"darkgreen")
+plotPITxTime(ttTT, basePIT.TS(alphaT, mu=0.5, vecV0)->V50, T,"purple")
+lines(ttTT[-401], alphaT, col = "red")
+```
+
+This shows how the tracking variables work for constant exposure:
+```{r}
+vecV0 = 0
+plotPITxTime(ttTT, basePIT.TS(stepT, mu=0.05, vecV0)->V05)
+plotPITxTime(ttTT, basePIT.TS(stepT, mu=0.1, vecV0)->V10, T, "blue")
+plotPITxTime(ttTT, basePIT.TS(stepT, mu=0.2, vecV0)->V20, T,"darkred")
+plotPITxTime(ttTT, basePIT.TS(stepT, mu=0.3, vecV0)->V30, T,"darkgreen")
+plotPITxTime(ttTT, basePIT.TS(stepT, mu=0.5, vecV0)->V50, T,"purple")
+```
+Isolating the decay:
+```{r}
+ix = 200:300
+tix = c(ix-200)/36.5
+plot(tix, V05[ix]/max(V05), type = "l", xlab = "Time (Years)", ylab = "Relative to Max")
+lines(tix,V10[ix]/max(V10), col = "blue")
+lines(tix,V20[ix]/max(V20), col = "darkred")
+lines(tix,V30[ix]/max(V30), col = "green")
+lines(tix,V50[ix]/max(V50), col = "purple")
+```
+
+## Cumulative Exposure
+
+Let $W_t$ denote cumulative exposure, measured by the number of malaria attacks: 
+
+\begin{equation}
+W_{t+1} = W_{t} + \alpha_t
+\end{equation}
+
+Another measure is the cumulative number of infection days, weighted in the same way as detection. One application for this is that it is a measure of the total number of new  *var* genes that have been seen, where $c_\tau$ is the average number experienced per $\tau$-day time period. 
+
+\begin{equation}
+W_{t+1} = W_{t} + c_\tau x_t
+\end{equation}
+
+Alternatively, we can weight infection stages or ages in some other way, by their immunogenicity, $\cal I$: 
+
+\begin{equation}
+W_{t+1} = W_{t} + {\cal I}^T \vec X_t
+\end{equation}
+
+Two generic classes of counters are the following: 
+\begin{equation}
+W_{t+1} = p W_{t} + q {\cal I}^T \vec X_t
+\end{equation}
+
+and 
+
+\begin{equation}
+W_{t+1} = p W_{t} + q \alpha_t - s W_t^2
+\end{equation}
+
+```{r}
+tau = c(1:365)*10
+alpha = (1+sin(1+2*pi*tau/365))/4
+
+makeW = function(p,q,alpha,s=0){
+  Wl = W = 0
+  for (i in 1:length(alpha)){
+    W = p*W + q*alpha[i] - s*W^2
+    Wl = c(Wl, W)
+  }
+  Wl[-1]
+}
+
+W = makeW(1, .1, alpha, s=.01)
+plot(tau/365, W, type ="l")
+lines(tau/365, alpha*max(W), col = "red")
+
+```
+
+```{r}
+
+```
+

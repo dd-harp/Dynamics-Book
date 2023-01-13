@@ -1,0 +1,20 @@
+# Extending Ross-Macdonald
+
+In this chapter, we modify the Ross-Macdonald model by adding a
+fully defined model for mosquito ecology. The process is actually
+quite simple:
+
++ We define terms that describe egg-laying by adult mosquitoes; 
+
++ We write a basic equation that determines how eggs develop in
+aquatic habitats and then emerge as adults; 
+
++ We incorporate seasonality into the aquatic model; 
+
++ We replace the parameter $\Lambda(t)$ from the Aron-May model with a term that
+describes emergence of adults from aquatic habitats.
+
+## Aquatic Dynamics 
+
+## Understanding Mosquito Dynamics 
+ 

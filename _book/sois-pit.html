@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 4SoI+S-PIT* | RAMP Model Library</title>
+  <meta name="description" content="The RAMP Model Library" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 4SoI+S-PIT* | RAMP Model Library" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The RAMP Model Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 4SoI+S-PIT* | RAMP Model Library" />
+  
+  <meta name="twitter:description" content="The RAMP Model Library" />
+  
+
+<meta name="author" content="David Smith, Austin Carter, Daniel Citron, …" />
+
+
+<meta name="date" content="2020-02-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="soi-as-a-tensor-model.html"/>
+<link rel="next" href="stage-structured-infections-with-overwriting-superinfection.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreward</a></li>
+<li class="chapter" data-level="1" data-path="the-ramp-model-library.html"><a href="the-ramp-model-library.html"><i class="fa fa-check"></i><b>1</b> The RAMP Model Library</a><ul>
+<li class="chapter" data-level="1.1" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>1.1</b> Style Guide</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="style-guide.html"><a href="style-guide.html#style-for-de-models"><i class="fa fa-check"></i><b>1.1.1</b> Style for DE Models</a></li>
+<li class="chapter" data-level="1.1.2" data-path="style-guide.html"><a href="style-guide.html#style-for-tensor-models"><i class="fa fa-check"></i><b>1.1.2</b> Style for Tensor Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="an-introduction-to-tensors.html"><a href="an-introduction-to-tensors.html"><i class="fa fa-check"></i><b>2</b> An Introduction to Tensors</a></li>
+<li class="chapter" data-level="3" data-path="stage-of-infection-models.html"><a href="stage-of-infection-models.html"><i class="fa fa-check"></i><b>3</b> Stage of Infection Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="soi-as-differential-equations.html"><a href="soi-as-differential-equations.html"><i class="fa fa-check"></i><b>3.1</b> SoI as Differential Equations</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="soi-as-differential-equations.html"><a href="soi-as-differential-equations.html#simple-soi"><i class="fa fa-check"></i><b>3.1.1</b> Simple SoI</a></li>
+<li class="chapter" data-level="3.1.2" data-path="soi-as-differential-equations.html"><a href="soi-as-differential-equations.html#soi-with-overwriting-superinfection"><i class="fa fa-check"></i><b>3.1.2</b> SoI with Overwriting Superinfection</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html"><i class="fa fa-check"></i><b>3.2</b> SoI as a Tensor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sois-pit.html"><a href="sois-pit.html"><i class="fa fa-check"></i><b>4</b> 4SoI+S-PIT*</a><ul>
+<li class="chapter" data-level="4.1" data-path="stage-structured-infections-with-overwriting-superinfection.html"><a href="stage-structured-infections-with-overwriting-superinfection.html"><i class="fa fa-check"></i><b>4.1</b> Stage Structured Infections with Overwriting Superinfection</a></li>
+<li class="chapter" data-level="4.2" data-path="detection.html"><a href="detection.html"><i class="fa fa-check"></i><b>4.2</b> Detection</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="demography-and-age-structure.html"><a href="demography-and-age-structure.html"><i class="fa fa-check"></i><b>5</b> Demography and Age Structure</a></li>
+<li class="chapter" data-level="6" data-path="exposure-tracking-variables.html"><a href="exposure-tracking-variables.html"><i class="fa fa-check"></i><b>6</b> Exposure Tracking Variables</a><ul>
+<li class="chapter" data-level="6.1" data-path="cumulative-exposure.html"><a href="cumulative-exposure.html"><i class="fa fa-check"></i><b>6.1</b> Cumulative Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mosquito-behavioral-state-models.html"><a href="mosquito-behavioral-state-models.html"><i class="fa fa-check"></i><b>7</b> Mosquito Behavioral State Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="mbdetes.html"><a href="mbdetes.html"><i class="fa fa-check"></i><b>7.1</b> MBDETES</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RAMP Model Library</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sois-pit" class="section level1">
+<h1><span class="header-section-number">4</span> 4SoI+S-PIT*</h1>
+<p>The following document describes a model with the following properties:</p>
+<ul>
+<li><p>It is a stage-structured model with 4 stages of infection (4SoI)</p></li>
+<li><p>It allows for overwriting superinfection (+S)</p></li>
+<li><p>It uses PIT variables for immunity (-PIT)</p></li>
+<li><p>It also considers antimalarial drug use and chemoprotection (-Rx)</p></li>
+<li><p>This is version 1.0</p></li>
+</ul> 
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="soi-as-a-tensor-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stage-structured-infections-with-overwriting-superinfection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

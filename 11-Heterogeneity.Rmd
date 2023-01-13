@@ -1,0 +1,45 @@
+# Heterogeneous Exposure 
+
+For humans, exposure to malaria means exposure to the bites of infectious mosquitoes. A problem that we'll have to deal with sooner or later is that exposure risk differs among humans over space and time. While this might seem like an odd thing to introduce so early, we will have to tackle the topic sometime. The discussion of [Heterogeneous Biting], in the previous chapter, showed that heterogeneity plays an important in understanding transmission and thresholds. This discussion of heterogeneous exposure (*i.e.*, looking at heterogeneous biting from the human side) is a good way of introducing some of the core concepts that are built into the framework:   
+
++ [Heterogeneous Biting] is one way of getting around a conundrum. In models with homogeneous biting, the relationship between *average* mosquito density and the prevalence of infection would lead us to make quantitative predictions about the likely effects of vector control.
+
++ We discuss two different kinds of heterogeneous exposure: frailty, and environmental heterogeneity. In a nutshell, frailty multiplies the mean hazard rate for a sub-population by some amount $k$. Environmental heterogeneity does not affect the mean, but it changes the distribution of the mean. 
+
++ We introduce the idea that we can deal with frailties in human populations by segmenting the population into strata.
+
++ We set the stage for a new model of mosquito **blood feeding** that we introduce in the next chapter. 
+
++ In a chapter on [Approximation], we use these models to discuss the problem of model-based inference.  
+
+## Overview 
+
+Some reasons heterogeneous exposure to malaria have been documented in hundreds of studies. This is an overview. 
+
+### Age 
+
++ Port, Boreham
+
++ Carnevale 
+
+### Location
+
+### House Type 
+
+### Activities 
+
+## Frailty {#frailty}
+
+In general, we define frailty as a multiplicative factor on the FoI. If the average FoI in the population is $h$, then the FoI in a stratum is $hk$. The size of the stratum, $p_k$, is constrained such that:
+
+$$\int_0^\infty k \; p_k \; dk = 1$$ 
+
+With this constraint, the mean FoI in the population is $h$. 
+
+Continuous distributions are difficult to extend, but we can stratify a population to accomplish some of the same effects.
+
+
+## Environmental Heterogeneity {#environmentalHeterogeneity}
+
+
+

@@ -1,0 +1,223 @@
+---
+title: "Tensors"
+author: "David Smith, Austin Carter"
+date: "2/24/2020"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+# The Epidemiological State Space and Tensor Models {#tensors}
+
+```{r}
+require(tensor)
+```
+
+Let $\vec X$, a vector, describe the epidemiological state space, and let ${\cal P}(\alpha, \ldots)$ denote the associated probability transition matrix, which can be a function of the attack rate $\alpha$ and other parameters or variables. The dynamics for this simple state space model on a single population are described by a recursion relationship:  
+
+\begin{equation}
+\vec X_{t+1} = {\cal P}(\alpha_t, \ldots) \vec X_t.
+\end{equation}
+
+By `simple state space`, we mean that the epidemiological state space is a vector. For the class of models we consider in the tensor model library, it is always possible to write the epidemiological state space as a vector. In some cases, however, it is easier to write down complex models using **tensors**. Some enhanced models involve `orthogonal` extensions: they are derived by extending a base model by adding a new factor such that each epidemiological state space of the base model is replicated for each level of the new factor. When the epidemiological state space is written as a matrix or array, we say it has a `higher order state space`. Alternatively, we can easily adapt our model to `structured` populations where we have multiple interacting populations, each with its own probability transition matrix. The two constructs are very similar. In many cases, it is possible to build in the same factor using either an orthogonal extensions or as a population structure. The flexibility is useful. In both cases, the models are constructed using the same logic as the linear algebra we have already defined, but the probability transition matrix and operators are tensors. 
+
+
+Suppose, for example that we wanted to extend a model to a higher order using an orthognonal variable: $\vec X_i$ would represent the epidemiological states of the new factor, respectively, for $i \in \left\{1,2\right\}$ and $$\left[X\right] = \left[ \vec X_1, \vec X_2 \right].$$ Each vector would have associated with it a probability transition matrix ${\cal P}_i$ associated with the base model, each of which is a level in a tensor.  There is, however, an additional element of the probability transition matrix that connects the two levels (*i.e.* elements that would be in the off-diagonal blocks in the matrix representation). 
+
+For structured populations, let $\left[X\right]$ denote a matrix in which the $i^{th}$ column is an epidemiological state space vector $\vec X_i$. Without much effort, we can write 
+$$\left[X\right]_{t+1} = {\cal P}(\alpha_t) \left[X\right]_t.$$ 
+What makes tensors useful is that we can also let $\left[{\cal P} \right]$ denote an array in which the $i^{th}$ element ${\cal P}_i$ is a probability transition matrix that works on the $i^{th}$ element of $\left[X\right]$. This allows us to construct models on `structured` populations.
+
+Whether we deal with higher-order epidemiological state spaces or structured populations, the models are defined by the tensors $\left[X\right]$ and $\left[{\cal P}\right]$, and the dynamics are defined by the recursive tensor operation: 
+
+\begin{equation}
+\left[X\right]_{t+1} = \left[{\cal P}\right](\alpha_t, \ldots) \left[X\right]_t.
+\end{equation}
+
+
+The `Tensor Model Library` includes a set of base models, and utilities that transform this simple equation into a practical way of building new models
+
+Some relevant use cases for higher-order state spaces are: 
+
++ Fever and disease
+
++ Stage structured immunity  
+
++ Vaccination 
+
++ Multiplicity of infection
+
++ Infectious reservoir models 
+
+Some relevant use cases for structured populations are: 
+
++ Age structure and demography
+
++ Heterogeneous exposure 
+
++ Spatial dynamics and heterogeneous mixing
+
+
+Let $S = \mbox{dim}(\vec X)$ for a simple state space model. It follows that $\mbox{dim}({\cal P})=S\times S.$ If the dimension of the state space is $\mbox{dim}(\left[X\right])$, then $\mbox{dim}(\left[{\cal P} \right]) = \ldots$.
+
+
+## Nested Models with Tensors
+
+Let $\vec X = \left< u, x, c \right>$ denote a three state model: uninfected and susceptible; infected and infectious; and chemoprotected. Let $\eta$ denote the fraction of attacks that result in disease, and let $\rho$ denote the fraction of malaria attacks that are treated. Let $q$ denote the fraction that remains infected each time step for infections that are left untreated. Our probability transition matrix is: 
+
+\begin{equation}{\cal P} (\alpha_t, \eta \rho, q) =  
+\left[ \begin{array}{ccc}
+1- \alpha & 1-q  - \alpha (1-q) & 1 \\ 
+\alpha (1-\eta \rho) & q  + \alpha (1-q) - \alpha \eta \rho& 0 \\ 
+\alpha \eta \rho  & \alpha \eta \rho & 0 \\ 
+\end{array}\right]
+\end{equation}
+
+### Structured Population Model
+
+Here, we extend the base model above. 
+
+Let us further suppose we have sub-populations with distinct case manatement rates, $\eta \rho_1$ and $\eta \rho_2$. We thus have 
+
+\begin{equation}
+\left[ X \right]_t = \left[ \vec X_{1,t}, \vec X_{2,t} \right] = \left[ \begin{array}{cc} u_1 & u_2 \\ x_1 & x_2 \\ c_1 & c_2 \end{array}\right]
+\end{equation}
+
+The dynamics here are given by the same recursive relationships as before: we take $$\vec X_{1,t+1} = {\cal P}_{1,t} (\alpha_t, \rho_1, q) \vec X_{1,t}$$ and $$\vec X_{2,t+1} = {\cal P}_{2,t} (\alpha_t, \rho_2, q) \vec X_{2,t},$$ and $$\left[ X \right]_{t+1} = \left[ \vec X_{1,t+1}, \vec X_{2,t+1} \right].$$ 
+
+It is worth noting that we can apply operators to $\left[ X \right]$. For example, ${\cal D} \left[ X \right]$ returns a vector of prevalence values, $\vec x$, where $x_i = {\cal D} \vec X_i.$ To get a population average prevalence, we must also supply the weights, $\vec \omega$, of a population whose elements sum to one, and $$x = \vec \omega ^T \vec x.$$
+
+We would, however, prefer to have a more convenient way of writing down and computing these quantities. Let $\left[ \cal P \right]$ denote an array that we get from stacking matrices with different values of $\rho$ -- the $i^{th}$ level is a $3 \times 3$ matrix ${\cal P}\left(\alpha_t, \rho_i, q \right).$ Let $\vec \rho = \left[\rho_1, \rho_2 \right],$ so that we can write this stacked matrix as $\left[{\cal P}(\alpha_t, \vec \rho, q) \right]$, and the recursion relationship is now: 
+
+\begin{equation}
+\left[ X \right]_{t+1} = \left[{\cal P}(\alpha_t, \vec \rho, q) \right] \left[ X \right]_t
+\end{equation}
+
+where the multiplication implied by juxtaposing these to objects is the elementwise matrix multiplication -- the matrix elements of $\left[{\cal P}\right]$'s levels working on the elements of $\left[ X \right]$'s vectors. As it turns out, these are very natural operations to perform using tensors. 
+
+To show how this works, we can fully specify a model. We take $\vec \alpha$ to be a time series of attack rates, and we run a trace-based simulation, comparing the outcomes for two sub-populations with distinct treatment rates. 
+
+```{r defline_alpha}
+t = 1:100*36.5
+a = 1; b=60 
+sint = (1+sin(2*pi*t/365)) 
+alpha = rbeta(100, sint, 60)
+plot(t/365, alpha, type = "l", ylab = expression(alpha[t]), xlab = "Time (Years)")
+lines(t/365, sint*a/(a+b), type = "l", col = "red")
+```
+
+
+We can track cohorts of uninfected individuals over time by setting the initial conditions to 
+```{r constructX}
+X = matrix (c(1,0,0), 3,2)
+```
+
+To use the model, we will need to write function that  constructs ${\cal P (\alpha, \rho)}$ for each population stratum: 
+```{r constructP.eg}
+constructP.simple = function(alpha, rho, qq){
+calP = matrix(c(
+  c(1-alpha, 1-qq-alpha*(1-qq), 1),
+  c(alpha*(1-rho), qq + alpha*(1-qq)-alpha*rho,0), 
+  c(alpha*rho, alpha*rho, 0)), 3,3) 
+  t(calP)
+}
+
+constructP = function(alpha, rho, qq=.9){
+  calP1 = constructP.simple(alpha,rho[1],qq)
+  dd = dim(calP1)[1]
+  l = length(rho)
+  if(length(rho)>1)
+  calP2 = constructP.simple(alpha,rho[2],qq)
+  calP = array(c(calP1, calP2), c(dd,dd,l))
+  if(length(rho)>2)
+    for(i in 3:length(rho))
+      calP[,,i] = constructP.simple(alpha, rho[i], qq)
+  calP
+}
+
+calP = constructP(.1, rho = c(0,0.2),.9)
+```
+
+Note that we can use tensor-based functions to get the same answers as we would if we used the matrix operations. Here, we do the matrix operations separately and then bind the answers:
+
+```{r verify}
+cbind(c(calP[,,1] %*% X[,1]), c(calP[,,2] %*% X[,2])) 
+```
+Here, we use tensors: 
+```{r}
+cbind(c(calP[,,1] %*% calP[,,1] %*% X[,1]), c(calP[,,2] %*% calP[,,2] %*% X[,2])) 
+```
+
+```{r}
+X1 = tensor(calP, X, alongA = 2, alongB = 1)[,,1]
+X1
+```
+
+```{r}
+X21 = tensor(calP, X1, alongA=2, alongB=1)[,1,1]
+X22 = tensor(calP, X1, alongA=2, alongB=1)[,2,2]
+X2 = cbind(X21,X22)
+X2
+```
+
+```{r}
+Xi = as.vector(X)
+calPi = matrix(as.vector(calP), length(Xi), length(Xi)) 
+Xi%*% calPi
+
+```
+
+The following looks at changing prevalence in five population strata that all comprise 20\% of the population. We plot prevalence over time and the average (red): 
+
+```{r}
+rho = 2*c(0, 0.1, 0.2, 0.3, 0.4)
+calD = matrix(c(0,1,0), 3, 1)
+X = matrix (c(1,0,0), 3,5)
+x = t(calD)%*%X
+xt = x
+
+dXdt = function(X, alpha, rho, qq=0.95){
+  calP = constructP(alpha, rho, qq)
+  tensor(calP, X, alongA = 2, alongB = 1)[,,1]
+  
+}
+
+tt = 1:100
+for(t in tt){
+  X = dXdt(X, alpha[t], rho)
+  x = t(calD)%*%X
+  xt = rbind(xt,x)
+}
+xt = xt[-1,]
+plot(tt, xt[,1], type = "l")
+lines(tt, xt[,2])
+lines(tt, xt[,3])
+lines(tt, xt[,4])
+
+w = matrix (rep(0.2, 5), 5,1)
+lines(tt, xt%*%w, type = "l", col = "red", lwd=2)
+```
+
+## A Complex State Space Tensor Model
+
+We could also construct the same model with a `complex state space.` Now, we take the output of the last simulation as the set of starting conditions, but we normalize $\left[X\right]$. 
+```{r}
+X = X/sum(X)
+```
+
+```{r}
+PtimesX.vector = function(alpha, calP, vecX, options=NULL){
+  calP%*%vecX
+}
+```
+
+```{r}
+PtimesX.age = function(calP, matrixX, options=NULL){
+  for(i in 1:maxA){
+    constructP(i,)
+    matrixX[,i] 
+  }
+  (calP%*%matrixX)%*%calO + birthO 
+}
+```

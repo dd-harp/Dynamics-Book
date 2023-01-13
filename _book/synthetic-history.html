@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12.6 Synthetic History | RAMP Models and Algorithms</title>
+  <meta name="description" content="The RAMP Model and Algorithm Library" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12.6 Synthetic History | RAMP Models and Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The RAMP Model and Algorithm Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12.6 Synthetic History | RAMP Models and Algorithms" />
+  
+  <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
+  
+
+<meta name="author" content="David L. Smith, Austin Carter, John M. Henry, Daniel T. Citron, Andrew Dolgert, Sean L. Wu, Hector M. Sanchez C." />
+
+
+<meta name="date" content="2020-05-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="simulation.html"/>
+<link rel="next" href="unit-testing.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="chapter" data-level="1" data-path="the-ramp-model-library.html"><a href="the-ramp-model-library.html"><i class="fa fa-check"></i><b>1</b> The RAMP Model Library</a><ul>
+<li class="chapter" data-level="1.1" data-path="the-operational-model-library.html"><a href="the-operational-model-library.html"><i class="fa fa-check"></i><b>1.1</b> The <code>Operational Model Library</code></a></li>
+<li class="chapter" data-level="1.2" data-path="the-xde-model-library.html"><a href="the-xde-model-library.html"><i class="fa fa-check"></i><b>1.2</b> The <code>xDE Model Library</code></a></li>
+<li class="chapter" data-level="1.3" data-path="the-ibm-library.html"><a href="the-ibm-library.html"><i class="fa fa-check"></i><b>1.3</b> The <code>IBM Library</code></a></li>
+<li class="chapter" data-level="1.4" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>1.4</b> Style Guide</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="style-guide.html"><a href="style-guide.html#style-for-xde-model-library"><i class="fa fa-check"></i><b>1.4.1</b> Style for xDE Model Library</a></li>
+<li class="chapter" data-level="1.4.2" data-path="style-guide.html"><a href="style-guide.html#style-for-the-operational-model-library"><i class="fa fa-check"></i><b>1.4.2</b> Style for the Operational Model Library</a></li>
+<li class="chapter" data-level="1.4.3" data-path="style-guide.html"><a href="style-guide.html#style-for-the-trace-maker-library"><i class="fa fa-check"></i><b>1.4.3</b> Style for the Trace Maker Library</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dynamic-models-and-computation.html"><a href="dynamic-models-and-computation.html"><i class="fa fa-check"></i><b>2</b> Dynamic Models and Computation</a></li>
+<li class="chapter" data-level="3" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>3</b> The Epidemiological State Space and Tensor Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html"><i class="fa fa-check"></i><b>3.1</b> Nested Models with Tensors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html#structured-population-model"><i class="fa fa-check"></i><b>3.1.1</b> Structured Population Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="a-complex-state-space-tensor-model.html"><a href="a-complex-state-space-tensor-model.html"><i class="fa fa-check"></i><b>3.2</b> A Complex State Space Tensor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="stage-of-infection-models.html"><a href="stage-of-infection-models.html"><i class="fa fa-check"></i><b>4</b> Stage of Infection Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html"><i class="fa fa-check"></i><b>4.1</b> SoI as an ODE Model</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#simple-soi"><i class="fa fa-check"></i><b>4.1.1</b> Simple SoI</a></li>
+<li class="chapter" data-level="4.1.2" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#stage-of-infection-with-superinfection"><i class="fa fa-check"></i><b>4.1.2</b> Stage of Infection, with Superinfection</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html"><i class="fa fa-check"></i><b>4.2</b> SoI as a Tensor Model</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html#sois-pit"><i class="fa fa-check"></i><b>4.2.1</b> 4SoI+S-PIT*</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="stage-structured-infections-with-overwriting-superinfection.html"><a href="stage-structured-infections-with-overwriting-superinfection.html"><i class="fa fa-check"></i><b>4.3</b> Stage Structured Infections with Overwriting Superinfection</a></li>
+<li class="chapter" data-level="4.4" data-path="detection.html"><a href="detection.html"><i class="fa fa-check"></i><b>4.4</b> Detection</a></li>
+<li class="chapter" data-level="4.5" data-path="age-of-infection.html"><a href="age-of-infection.html"><i class="fa fa-check"></i><b>4.5</b> Age of Infection</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="age-structure-and-operators.html"><a href="age-structure-and-operators.html"><i class="fa fa-check"></i><b>5</b> Age Structure and Operators</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-shift-operator.html"><a href="the-shift-operator.html"><i class="fa fa-check"></i><b>5.1</b> The Shift Operator</a></li>
+<li class="chapter" data-level="5.2" data-path="age-classes.html"><a href="age-classes.html"><i class="fa fa-check"></i><b>5.2</b> Age Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tracking-variables.html"><a href="tracking-variables.html"><i class="fa fa-check"></i><b>6</b> Tracking Variables</a><ul>
+<li class="chapter" data-level="6.1" data-path="population-immune-tracking-exposure-tracking.html"><a href="population-immune-tracking-exposure-tracking.html"><i class="fa fa-check"></i><b>6.1</b> Population Immune Tracking: Exposure Tracking</a></li>
+<li class="chapter" data-level="6.2" data-path="cumulative-exposure.html"><a href="cumulative-exposure.html"><i class="fa fa-check"></i><b>6.2</b> Cumulative Exposure</a></li>
+<li class="chapter" data-level="6.3" data-path="sentinel-populations.html"><a href="sentinel-populations.html"><i class="fa fa-check"></i><b>6.3</b> Sentinel Populations</a></li>
+<li class="chapter" data-level="6.4" data-path="age-structure.html"><a href="age-structure.html"><i class="fa fa-check"></i><b>6.4</b> Age Structure</a></li>
+<li class="chapter" data-level="6.5" data-path="counters.html"><a href="counters.html"><i class="fa fa-check"></i><b>6.5</b> Counters</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="counters.html"><a href="counters.html#a-vectorial-capacity-model"><i class="fa fa-check"></i><b>6.5.1</b> A Vectorial-Capacity Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mosquito-behavioral-state-models.html"><a href="mosquito-behavioral-state-models.html"><i class="fa fa-check"></i><b>7</b> Mosquito Behavioral State Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="mbdetes.html"><a href="mbdetes.html"><i class="fa fa-check"></i><b>7.1</b> MBDETES</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lumping-days-in-mosquito-models.html"><a href="lumping-days-in-mosquito-models.html"><i class="fa fa-check"></i><b>8</b> Lumping Days in Mosquito Models</a></li>
+<li class="chapter" data-level="9" data-path="TraceBasedSimulations.html"><a href="TraceBasedSimulations.html"><i class="fa fa-check"></i><b>9</b> Trace-Based Simulations</a></li>
+<li class="chapter" data-level="10" data-path="vector-control.html"><a href="vector-control.html"><i class="fa fa-check"></i><b>10</b> Vector Control</a><ul>
+<li class="chapter" data-level="10.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html"><i class="fa fa-check"></i><b>10.1</b> Trace-Based Vector Control Simulations</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#irs-trace-objects"><i class="fa fa-check"></i><b>10.1.1</b> IRS Trace Objects</a></li>
+<li class="chapter" data-level="10.1.2" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#itn-trace-objects"><i class="fa fa-check"></i><b>10.1.2</b> ITN Trace Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="vector-control-traces.html"><a href="vector-control-traces.html"><i class="fa fa-check"></i><b>10.2</b> Vector Control Traces</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="benchmarking.html"><a href="benchmarking.html"><i class="fa fa-check"></i><b>11</b> Benchmarking</a></li>
+<li class="chapter" data-level="12" data-path="adam.html"><a href="adam.html"><i class="fa fa-check"></i><b>12</b> Adam</a><ul>
+<li class="chapter" data-level="12.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>12.1</b> Overview</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="overview.html"><a href="overview.html#basic-features"><i class="fa fa-check"></i><b>12.1.1</b> Basic Features</a></li>
+<li class="chapter" data-level="12.1.2" data-path="overview.html"><a href="overview.html#exogenous-variables"><i class="fa fa-check"></i><b>12.1.2</b> Exogenous Variables</a></li>
+<li class="chapter" data-level="12.1.3" data-path="overview.html"><a href="overview.html#endogenous-dynamics"><i class="fa fa-check"></i><b>12.1.3</b> Endogenous Dynamics</a></li>
+<li class="chapter" data-level="12.1.4" data-path="overview.html"><a href="overview.html#oml-specs"><i class="fa fa-check"></i><b>12.1.4</b> <code>OML</code> Specs</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="outline.html"><a href="outline.html"><i class="fa fa-check"></i><b>12.2</b> Outline</a></li>
+<li class="chapter" data-level="12.3" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html"><i class="fa fa-check"></i><b>12.3</b> Malaria Epidemiology</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#defining-the-model"><i class="fa fa-check"></i><b>12.3.1</b> Defining the Model</a></li>
+<li class="chapter" data-level="12.3.2" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#constructing-the-model"><i class="fa fa-check"></i><b>12.3.2</b> Constructing the Model</a></li>
+<li class="chapter" data-level="12.3.3" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#age-structure-1"><i class="fa fa-check"></i><b>12.3.3</b> Age Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="the-vector-model.html"><a href="the-vector-model.html"><i class="fa fa-check"></i><b>12.4</b> The Vector Model</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="the-vector-model.html"><a href="the-vector-model.html#vectorial-capacity-as-an-exogenous-variable"><i class="fa fa-check"></i><b>12.4.1</b> Vectorial Capacity as an Exogenous Variable</a></li>
+<li class="chapter" data-level="12.4.2" data-path="the-vector-model.html"><a href="the-vector-model.html#vector-control-effect-size-traces"><i class="fa fa-check"></i><b>12.4.2</b> Vector Control Effect Size Traces</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12.5</b> Simulation</a></li>
+<li class="chapter" data-level="12.6" data-path="synthetic-history.html"><a href="synthetic-history.html"><i class="fa fa-check"></i><b>12.6</b> Synthetic History</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="synthetic-history.html"><a href="synthetic-history.html#the-pr2ar-algorithm"><i class="fa fa-check"></i><b>12.6.1</b> The <code>pr2ar</code> Algorithm</a></li>
+<li class="chapter" data-level="12.6.2" data-path="synthetic-history.html"><a href="synthetic-history.html#metric-conversions"><i class="fa fa-check"></i><b>12.6.2</b> Metric Conversions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="unit-testing.html"><a href="unit-testing.html"><i class="fa fa-check"></i><b>12.7</b> Unit Testing</a></li>
+<li class="chapter" data-level="12.8" data-path="benchmarking-1.html"><a href="benchmarking-1.html"><i class="fa fa-check"></i><b>12.8</b> Benchmarking</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="benchmarking-1.html"><a href="benchmarking-1.html#duration-of-an-untreated-infection"><i class="fa fa-check"></i><b>12.8.1</b> Duration of an Untreated Infection</a></li>
+<li class="chapter" data-level="12.8.2" data-path="benchmarking-1.html"><a href="benchmarking-1.html#pfpr-by-age"><i class="fa fa-check"></i><b>12.8.2</b> <em>Pf</em>PR by Age</a></li>
+<li class="chapter" data-level="12.8.3" data-path="benchmarking-1.html"><a href="benchmarking-1.html#eir-vs.pr"><i class="fa fa-check"></i><b>12.8.3</b> EIR vs. PR</a></li>
+<li class="chapter" data-level="12.8.4" data-path="benchmarking-1.html"><a href="benchmarking-1.html#clinical-disease"><i class="fa fa-check"></i><b>12.8.4</b> Clinical Disease</a></li>
+<li class="chapter" data-level="12.8.5" data-path="benchmarking-1.html"><a href="benchmarking-1.html#mortality"><i class="fa fa-check"></i><b>12.8.5</b> Mortality</a></li>
+<li class="chapter" data-level="12.8.6" data-path="benchmarking-1.html"><a href="benchmarking-1.html#misc"><i class="fa fa-check"></i><b>12.8.6</b> MISC</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="new.html"><a href="new.html"><i class="fa fa-check"></i><b>12.9</b> New</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RAMP Models and Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="synthetic-history" class="section level2">
+<h2><span class="header-section-number">12.6</span> Synthetic History</h2>
+<div id="the-pr2ar-algorithm" class="section level3">
+<h3><span class="header-section-number">12.6.1</span> The <code>pr2ar</code> Algorithm</h3>
+<div id="peak-ahead-the-algebra" class="section level4">
+<h4><span class="header-section-number">12.6.1.1</span> Peak Ahead, the Algebra</h4>
+<p>Since the <em>Pf</em>PR is not affected in one time step, we must peek two steps ahead. Note that:</p>
+<p><span class="math display">\[\begin{equation*}
+\begin{array}{rl}
+[X]_{t+2} 
+=&amp;  [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O}  \\
+=&amp;  \left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O}  \\
+=&amp;  [{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O} \\&amp; 
+  + [{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O} \\&amp;
+  +  \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\\&amp;
+  + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}
+\end{array}
+\end{equation*}\]</span></p>
+<p>so
+<span class="math display">\[\begin{equation*}
+\begin{array}{rl}
+x_{t+2} =&amp; {\cal D} [X]_{t+2} {\cal W} \\ 
+=&amp;  {\cal D}\left( [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O} \right) {\cal W}  \\
+=&amp;  {\cal D}\left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O} {\cal W}  \\
+=&amp;  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\&amp; 
+  + {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&amp;
+  + {\cal D}\left( \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\right) {\cal W} \\&amp;
+  + {\cal D}\left(\omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}\right) {\cal W} 
+\end{array}
+\end{equation*}\]</span></p>
+<p><span class="math display">\[\begin{equation*}
+\begin{array}{rl}
+x_{t+2} =&amp; {\cal D} [X]_{t+2} {\cal W} \\ 
+=&amp;  {\cal D}\left( [{\cal P}(\alpha_{t+1},\vec \omega,v_t)]  \left( [{\cal P}(\alpha_t, \vec \omega, v_t)] [X]_t {\cal O} \right) {\cal O} \right) {\cal W}  \\
+=&amp;  {\cal D}\left( [{\cal P}(v_{t+1})]_0 + \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \right) \left(\left(\left( [{\cal P}(v_t)]_0 + \omega \alpha_t [{\cal P}(v_t)]_\alpha \right) [X]_t \right){\cal O} \right) {\cal O} {\cal W}  \\
+=&amp;  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\&amp; 
++ {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega \alpha_t [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&amp;
++ {\cal D}\left( \omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( [{\cal P}(v_{t})]_0  [X]_t{\cal O}\right) {\cal O}\right) {\cal W} \\&amp;
++ {\cal D}\left(\omega \alpha_{t+1} [{\cal P}(v_{t+1})]_\alpha \left( \omega \alpha_t [{\cal P}(v_{t})]_\alpha [X]_t {\cal O}\right) {\cal O}\right) {\cal W} \\
+=&amp;  {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}  \\&amp; 
++ \alpha_t {\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W}  \\&amp;
++ 0 \\ &amp;
++ 0 \\ &amp;
+\end{array}
+\end{equation*}\]</span></p>
+<p>so
+<span class="math display">\[\begin{equation}
+\alpha_t = \frac{x_{t+2} - {\cal D}\left([{\cal P}(v_{t+1})]_0  \left( [{\cal P}(v_t)]_0 [X]_t {\cal O} \right)  {\cal O}\right)  {\cal W}}{{\cal D}\left([{\cal P}(v_{t+1})]_0 \left(\left(\omega [{\cal P}(v_{t})]_\alpha \right) [X]_t {\cal O} \right) {\cal O}\right) {\cal W} }
+\end{equation}\]</span></p>
+<p>The<code>peekAhead</code> algorithm doesn’t work as advertised.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">peekAhead_Algebra =<span class="st"> </span><span class="cf">function</span>(x2, XX, par){<span class="kw">with</span>(<span class="kw">c</span>(XX,par),{</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2">  X0 =<span class="st"> </span>X1 =<span class="st"> </span>X</a>
+<a class="sourceLine" id="cb116-3" data-line-number="3">  dummy=<span class="fl">0.1</span></a>
+<a class="sourceLine" id="cb116-4" data-line-number="4">  <span class="cf">for</span>(a <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">66</span>){</a>
+<a class="sourceLine" id="cb116-5" data-line-number="5">    calP =<span class="st"> </span><span class="kw">calP_Adam</span>(alpha2,<span class="kw">c</span>(V1[a],V2[a]),par)</a>
+<a class="sourceLine" id="cb116-6" data-line-number="6">    calP0 =<span class="st"> </span><span class="kw">calP_Adam</span>(<span class="dv">0</span>,<span class="kw">c</span>(V1[a],V2[a]),par)</a>
+<a class="sourceLine" id="cb116-7" data-line-number="7">    calPalpha =<span class="st"> </span>(calP <span class="op">-</span><span class="st"> </span>calP0)<span class="op">/</span>dummy</a>
+<a class="sourceLine" id="cb116-8" data-line-number="8">    X0[,a] =<span class="st"> </span>calP0<span class="op">%*%</span>X[,a]</a>
+<a class="sourceLine" id="cb116-9" data-line-number="9">    X1[,a] =<span class="st"> </span>w[a]<span class="op">*</span>calPalpha<span class="op">%*%</span>X[,a]</a>
+<a class="sourceLine" id="cb116-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb116-11" data-line-number="11">  V1 =<span class="st"> </span>V1<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>mu1) <span class="op">+</span><span class="st"> </span>calDimm<span class="op">%*%</span>X0</a>
+<a class="sourceLine" id="cb116-12" data-line-number="12">  V2 =<span class="st"> </span>V2<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>mu2) <span class="op">+</span><span class="st"> </span>w<span class="op">*</span>alpha2</a>
+<a class="sourceLine" id="cb116-13" data-line-number="13">  X0 =<span class="st"> </span>X0<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-14" data-line-number="14">  X1 =<span class="st"> </span>X1<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-15" data-line-number="15">  X00 =<span class="st"> </span>X10 =<span class="st"> </span>X0<span class="op">*</span><span class="dv">0</span> </a>
+<a class="sourceLine" id="cb116-16" data-line-number="16">  V1 =<span class="st"> </span>V1<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-17" data-line-number="17">  V2 =<span class="st"> </span>V2<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-18" data-line-number="18">  </a>
+<a class="sourceLine" id="cb116-19" data-line-number="19">  <span class="cf">for</span>(a <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">66</span>){</a>
+<a class="sourceLine" id="cb116-20" data-line-number="20">    calP0 =<span class="st"> </span><span class="kw">calP_Adam</span>(<span class="dv">0</span>,<span class="kw">c</span>(V1[a],V2[a]),par)</a>
+<a class="sourceLine" id="cb116-21" data-line-number="21">    X00[,a] =<span class="st"> </span>calP0<span class="op">%*%</span>X0[,a]</a>
+<a class="sourceLine" id="cb116-22" data-line-number="22">    X10[,a] =<span class="st"> </span>calP0<span class="op">%*%</span>X1[,a]</a>
+<a class="sourceLine" id="cb116-23" data-line-number="23">  }</a>
+<a class="sourceLine" id="cb116-24" data-line-number="24">  X00 =<span class="st"> </span>X00<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-25" data-line-number="25">  X10 =<span class="st"> </span>X10<span class="op">%*%</span>calO </a>
+<a class="sourceLine" id="cb116-26" data-line-number="26">  alpha =<span class="st"> </span>(x2 <span class="op">-</span><span class="st"> </span>calDlm <span class="op">%*%</span><span class="st"> </span>X00 <span class="op">%*%</span><span class="st"> </span>demog29)<span class="op">/</span>(((calDlm <span class="op">%*%</span><span class="st"> </span>X10))  <span class="op">%*%</span><span class="st"> </span>demog29)</a>
+<a class="sourceLine" id="cb116-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb116-28" data-line-number="28"> <span class="kw">return</span>(<span class="kw">as.numeric</span>(alpha)) </a>
+<a class="sourceLine" id="cb116-29" data-line-number="29">})}</a></code></pre></div>
+</div>
+<div id="peak-ahead-the-working-code" class="section level4">
+<h4><span class="header-section-number">12.6.1.2</span> Peak Ahead, the Working Code</h4>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">peekAhead_Adam =<span class="st"> </span><span class="cf">function</span>(x2, XX, par){<span class="kw">with</span>(<span class="kw">c</span>(XX,par),{</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2"> errF =<span class="st"> </span><span class="cf">function</span>(alpha){</a>
+<a class="sourceLine" id="cb117-3" data-line-number="3">   XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha,XX,par)</a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">   XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha,XX,par)</a>
+<a class="sourceLine" id="cb117-5" data-line-number="5">   (x2 <span class="op">-</span><span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par))<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb117-6" data-line-number="6"> }</a>
+<a class="sourceLine" id="cb117-7" data-line-number="7"> alpha0 =<span class="st"> </span><span class="dv">2</span><span class="op">*</span>alpha1 <span class="op">-</span><span class="st"> </span>alpha2</a>
+<a class="sourceLine" id="cb117-8" data-line-number="8"> inits =<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>,<span class="kw">pmin</span>(<span class="kw">c</span>(alpha0<span class="op">/</span><span class="dv">3</span>, alpha0<span class="op">*</span><span class="dv">3</span>), <span class="dv">1</span>))  </a>
+<a class="sourceLine" id="cb117-9" data-line-number="9"> <span class="kw">optimize</span>(errF, inits)<span class="op">$</span>min</a>
+<a class="sourceLine" id="cb117-10" data-line-number="10">})}</a></code></pre></div>
+<p>If the <code>peekAhead</code> algorithm works, then given <span class="math inline">\(X_t\)</span> and <span class="math inline">\(\alpha_t\)</span> we should be able to compute <span class="math inline">\(x_{t+2}\)</span></p>
+<p><span class="math display">\[\begin{equation}
+x_{t+2} = {\cal P}(0, \ldots) \left( {\cal P}(\alpha_t, \ldots) X_t \right)
+\end{equation}\]</span></p>
+<p>and then pass <span class="math inline">\(X_t\)</span> and <span class="math inline">\(x_{t+2}\)</span> to the <code>peekAhead</code> algorithm and compute <span class="math inline">\(\alpha_t\)</span>. The following tests the <code>peekAhead</code> algorithm:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">XX1 =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(<span class="fl">0.112</span>, XX0, par)</a>
+<a class="sourceLine" id="cb118-2" data-line-number="2">XX2 =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(<span class="fl">0.123</span>, XX1, par)</a>
+<a class="sourceLine" id="cb118-3" data-line-number="3">XX3 =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(<span class="fl">0.124</span>, XX2, par)</a>
+<a class="sourceLine" id="cb118-4" data-line-number="4">XX4 =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(<span class="fl">0.131</span>, XX3, par)</a>
+<a class="sourceLine" id="cb118-5" data-line-number="5">XX5 =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(<span class="fl">0.128</span>, XX4, par)</a>
+<a class="sourceLine" id="cb118-6" data-line-number="6">x0=<span class="kw">XX2pr29_Adam</span>(XX0, par)</a>
+<a class="sourceLine" id="cb118-7" data-line-number="7">x1=<span class="kw">XX2pr29_Adam</span>(XX1, par)</a>
+<a class="sourceLine" id="cb118-8" data-line-number="8">x2=<span class="kw">XX2pr29_Adam</span>(XX2, par)</a>
+<a class="sourceLine" id="cb118-9" data-line-number="9">x3=<span class="kw">XX2pr29_Adam</span>(XX3, par)</a>
+<a class="sourceLine" id="cb118-10" data-line-number="10">x4=<span class="kw">XX2pr29_Adam</span>(XX4, par)</a>
+<a class="sourceLine" id="cb118-11" data-line-number="11">x5=<span class="kw">XX2pr29_Adam</span>(XX5, par)</a>
+<a class="sourceLine" id="cb118-12" data-line-number="12"><span class="kw">peekAhead_Adam</span>(x2, XX0, par) </a></code></pre></div>
+<pre><code>## [1] 0.112</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">peekAhead_Adam</span>(x3, XX1, par)</a></code></pre></div>
+<pre><code>## [1] 0.123</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">peekAhead_Adam</span>(x4, XX2, par)</a></code></pre></div>
+<pre><code>## [1] 0.124</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">peekAhead_Adam</span>(x5, XX3, par)</a></code></pre></div>
+<pre><code>## [1] 0.131</code></pre>
+<p>The <code>pr2ar</code> algorithm works by using the first <em>Pf</em>PR value to set initial conditions, which means we must treat the first step differently. We solve for <span class="math inline">\(\alpha\)</span> such that <span class="math inline">\(X_{t+1} = {\cal P}(\alpha_t) X_t\)</span>.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="co">#&#39; Find ar such that the </span></a>
+<a class="sourceLine" id="cb126-2" data-line-number="2">pr2arSS_Adam =<span class="st"> </span><span class="cf">function</span>(x,par){</a>
+<a class="sourceLine" id="cb126-3" data-line-number="3">  errFgood =<span class="st"> </span><span class="cf">function</span>(alpha){</a>
+<a class="sourceLine" id="cb126-4" data-line-number="4">    (<span class="kw">ar2pr_Adam</span>(alpha,par)<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb126-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb126-6" data-line-number="6">  errFfast =<span class="st"> </span><span class="cf">function</span>(alpha){</a>
+<a class="sourceLine" id="cb126-7" data-line-number="7">    (<span class="kw">fastPfPR_Adam</span>(alpha,par)<span class="op">-</span>x)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb126-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb126-9" data-line-number="9">  alpha0=<span class="kw">optimize</span>(errFfast,<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))<span class="op">$</span>min</a>
+<a class="sourceLine" id="cb126-10" data-line-number="10">  <span class="kw">optimize</span>(errFgood,<span class="kw">c</span>(alpha0<span class="op">/</span><span class="dv">2</span>,alpha0<span class="op">*</span><span class="dv">2</span>))<span class="op">$</span>min</a>
+<a class="sourceLine" id="cb126-11" data-line-number="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">pr2ar_Adam =<span class="st"> </span><span class="cf">function</span>(xx, par, <span class="dt">alpha0=</span><span class="ot">NULL</span>, <span class="dt">XX0=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.null</span>(alpha0)) {</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">    alpha =<span class="st"> </span><span class="kw">pr2arSS_Adam</span>(xx[<span class="dv">1</span>],par)</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb127-5" data-line-number="5">    alpha=alpha0</a>
+<a class="sourceLine" id="cb127-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb127-7" data-line-number="7">  <span class="cf">if</span>(<span class="kw">is.null</span>(XX0)) {</a>
+<a class="sourceLine" id="cb127-8" data-line-number="8">    XX =<span class="st"> </span><span class="kw">ar2stableWave_Adam</span>(alpha,par)</a>
+<a class="sourceLine" id="cb127-9" data-line-number="9">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb127-10" data-line-number="10">    XX=XX0</a>
+<a class="sourceLine" id="cb127-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb127-12" data-line-number="12">  alphaT =<span class="st"> </span>alpha</a>
+<a class="sourceLine" id="cb127-13" data-line-number="13">  <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">3</span><span class="op">:</span><span class="kw">length</span>(xx)){ </a>
+<a class="sourceLine" id="cb127-14" data-line-number="14">    alpha =<span class="st"> </span><span class="kw">peekAhead_Adam</span>(xx[t],XX,par)</a>
+<a class="sourceLine" id="cb127-15" data-line-number="15">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha, XX, par)</a>
+<a class="sourceLine" id="cb127-16" data-line-number="16">    alphaT =<span class="st"> </span><span class="kw">c</span>(alphaT, alpha) </a>
+<a class="sourceLine" id="cb127-17" data-line-number="17">  } </a>
+<a class="sourceLine" id="cb127-18" data-line-number="18">  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">alpha=</span>alphaT, <span class="dt">XX=</span>XX)) </a>
+<a class="sourceLine" id="cb127-19" data-line-number="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">tt =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">20</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">alphat =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">.1</span> <span class="fl">+.01</span><span class="op">*</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span>tt<span class="op">/</span><span class="fl">36.5</span>)))</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">XX0 =<span class="st"> </span><span class="kw">ar2stableWave_Adam</span>(alphat[<span class="dv">1</span>], par)</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">XX =<span class="st"> </span>XX0 </a>
+<a class="sourceLine" id="cb128-5" data-line-number="5">xx=<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX0,par)</a>
+<a class="sourceLine" id="cb128-6" data-line-number="6"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(alphat)){</a>
+<a class="sourceLine" id="cb128-7" data-line-number="7">  XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alphat[i], XX, par) </a>
+<a class="sourceLine" id="cb128-8" data-line-number="8">  xx=<span class="st"> </span><span class="kw">c</span>(xx,<span class="kw">XX2pr29_Adam</span>(XX,par)) </a>
+<a class="sourceLine" id="cb128-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb128-10" data-line-number="10">alpha1 =<span class="st"> </span><span class="kw">pr2ar_Adam</span>(xx, par, alphat[<span class="dv">1</span>],XX0)</a>
+<a class="sourceLine" id="cb128-11" data-line-number="11">alpha2 =<span class="st"> </span><span class="kw">pr2ar_Adam</span>(xx, par) </a>
+<a class="sourceLine" id="cb128-12" data-line-number="12"><span class="kw">cbind</span>(alphat, alpha1, alpha2)</a></code></pre></div>
+<pre><code>## Warning in cbind(alphat, alpha1, alpha2): number of rows of result is not a
+## multiple of vector length (arg 2)</code></pre>
+<pre><code>##       alphat    alpha1     alpha2    
+##  [1,] 0.1       Numeric,20 Numeric,20
+##  [2,] 0.1117129 List,5     List,5    
+##  [3,] 0.1133752 Numeric,20 Numeric,20
+##  [4,] 0.1149378 List,5     List,5    
+##  [5,] 0.1163543 Numeric,20 Numeric,20
+##  [6,] 0.1175831 List,5     List,5    
+##  [7,] 0.1185876 Numeric,20 Numeric,20
+##  [8,] 0.1193384 List,5     List,5    
+##  [9,] 0.1198131 Numeric,20 Numeric,20
+## [10,] 0.1199977 List,5     List,5    
+## [11,] 0.1198868 Numeric,20 Numeric,20
+## [12,] 0.1194836 List,5     List,5    
+## [13,] 0.1188001 Numeric,20 Numeric,20
+## [14,] 0.1178565 List,5     List,5    
+## [15,] 0.1166806 Numeric,20 Numeric,20
+## [16,] 0.1153073 List,5     List,5    
+## [17,] 0.1137771 Numeric,20 Numeric,20
+## [18,] 0.1121352 List,5     List,5    
+## [19,] 0.1104302 Numeric,20 Numeric,20
+## [20,] 0.1087125 List,5     List,5    
+## [21,] 0.1070329 Numeric,20 Numeric,20</code></pre>
+</div>
+</div>
+<div id="metric-conversions" class="section level3">
+<h3><span class="header-section-number">12.6.2</span> Metric Conversions</h3>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">ar2History =<span class="st"> </span><span class="cf">function</span>(alpha, par, <span class="dt">XX=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb131-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.null</span>(XX)){</a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">    XX =<span class="st"> </span><span class="kw">ar2stableWave</span>(alpha,par)</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5">  eir =<span class="st"> </span><span class="kw">ar2eir</span>(alpha)</a>
+<a class="sourceLine" id="cb131-6" data-line-number="6">  kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb131-7" data-line-number="7">  kappaT =<span class="st"> </span>kappa </a>
+<a class="sourceLine" id="cb131-8" data-line-number="8">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(alpha)){</a>
+<a class="sourceLine" id="cb131-9" data-line-number="9">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha[i], XX, par)</a>
+<a class="sourceLine" id="cb131-10" data-line-number="10">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par) </a>
+<a class="sourceLine" id="cb131-11" data-line-number="11">    kappaT =<span class="st"> </span><span class="kw">c</span>(kappaT, kappa)</a>
+<a class="sourceLine" id="cb131-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb131-13" data-line-number="13">  V =<span class="st"> </span>eir<span class="op">/</span>kappa </a>
+<a class="sourceLine" id="cb131-14" data-line-number="14">  history =<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span>x, <span class="dt">alpha=</span>alpha, <span class="dt">eir=</span>eir, <span class="dt">kappa=</span>kappaT, <span class="dt">V=</span>V, <span class="dt">XX0=</span>XX)</a>
+<a class="sourceLine" id="cb131-15" data-line-number="15">  <span class="kw">return</span>(history)</a>
+<a class="sourceLine" id="cb131-16" data-line-number="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">pr2History =<span class="st"> </span><span class="cf">function</span>(x,par){</a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">  init =<span class="st"> </span><span class="kw">pr2ar_Adam</span>(x,par)</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">  XX =<span class="st"> </span>init<span class="op">$</span>XX</a>
+<a class="sourceLine" id="cb132-4" data-line-number="4">  alpha =<span class="st"> </span>init<span class="op">$</span>alpha</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5">  eir =<span class="st"> </span><span class="kw">ar2eir</span>(alpha)</a>
+<a class="sourceLine" id="cb132-6" data-line-number="6">  kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb132-7" data-line-number="7">  kappaT =<span class="st"> </span>kappa </a>
+<a class="sourceLine" id="cb132-8" data-line-number="8">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(alpha)){</a>
+<a class="sourceLine" id="cb132-9" data-line-number="9">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha[i], XX, par)</a>
+<a class="sourceLine" id="cb132-10" data-line-number="10">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par) </a>
+<a class="sourceLine" id="cb132-11" data-line-number="11">    kappaT =<span class="st"> </span><span class="kw">c</span>(kappaT, kappa)</a>
+<a class="sourceLine" id="cb132-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb132-13" data-line-number="13">  V =<span class="st"> </span>eir<span class="op">/</span>kappa </a>
+<a class="sourceLine" id="cb132-14" data-line-number="14">  history =<span class="st"> </span><span class="kw">list</span>(<span class="dt">x=</span>x, <span class="dt">alpha=</span>alpha, <span class="dt">eir=</span>eir, <span class="dt">kappa=</span>kappaT, <span class="dt">V=</span>V, <span class="dt">XX0=</span>XX)</a>
+<a class="sourceLine" id="cb132-15" data-line-number="15">  <span class="kw">return</span>(history)</a>
+<a class="sourceLine" id="cb132-16" data-line-number="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co">#history = pr2History(xx,par)</span></a></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">pr2SS_Adam =<span class="st"> </span><span class="cf">function</span>(x, par, <span class="dt">tol =</span> <span class="fl">0.001</span>){</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">  alpha =<span class="st"> </span><span class="kw">pr2arSS_Adam</span>(x,par)</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3">  XX =<span class="st"> </span><span class="kw">ar2stableWave_Adam</span>(alpha,par)</a>
+<a class="sourceLine" id="cb134-4" data-line-number="4">  xi =<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb134-5" data-line-number="5">  df =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb134-6" data-line-number="6">  i=<span class="dv">1</span></a>
+<a class="sourceLine" id="cb134-7" data-line-number="7">  <span class="cf">while</span>(df<span class="op">&gt;</span>tol){</a>
+<a class="sourceLine" id="cb134-8" data-line-number="8">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb134-9" data-line-number="9">    eir   =<span class="st"> </span><span class="kw">ar2eir</span>(alpha) </a>
+<a class="sourceLine" id="cb134-10" data-line-number="10">    VC    =<span class="st"> </span>eir<span class="op">/</span>kappa </a>
+<a class="sourceLine" id="cb134-11" data-line-number="11">    XX    =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha, XX, par)</a>
+<a class="sourceLine" id="cb134-12" data-line-number="12">    xi     =<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb134-13" data-line-number="13">    df    =<span class="st"> </span>(x<span class="op">-</span>xi)<span class="op">^</span><span class="dv">2</span> </a>
+<a class="sourceLine" id="cb134-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb134-15" data-line-number="15">  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">XX=</span>XX, <span class="dt">kappa=</span>kappa, <span class="dt">eir=</span>eir, <span class="dt">alpha=</span>alpha, <span class="dt">x=</span>x, <span class="dt">V=</span>VC))</a>
+<a class="sourceLine" id="cb134-16" data-line-number="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">sseg =<span class="st"> </span><span class="kw">pr2SS_Adam</span>(.<span class="dv">1</span>,par)</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">vc2SS_Adam =<span class="st"> </span><span class="cf">function</span>(VC, par, <span class="dt">XX0=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb136-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.null</span>(XX0)){</a>
+<a class="sourceLine" id="cb136-3" data-line-number="3">    XX =<span class="st"> </span><span class="kw">emptyXX_Adam</span>()</a>
+<a class="sourceLine" id="cb136-4" data-line-number="4">    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(.<span class="dv">1</span>,XX,par)</a>
+<a class="sourceLine" id="cb136-5" data-line-number="5">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb136-6" data-line-number="6">    XX =<span class="st"> </span>XX0 </a>
+<a class="sourceLine" id="cb136-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb136-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb136-9" data-line-number="9">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2920</span>){</a>
+<a class="sourceLine" id="cb136-10" data-line-number="10">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb136-11" data-line-number="11">    eir   =<span class="st"> </span>VC<span class="op">*</span>kappa </a>
+<a class="sourceLine" id="cb136-12" data-line-number="12">    alpha =<span class="st"> </span><span class="kw">eir2ar</span>(eir)</a>
+<a class="sourceLine" id="cb136-13" data-line-number="13">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha, XX, par)</a>
+<a class="sourceLine" id="cb136-14" data-line-number="14">    x =<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb136-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb136-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb136-17" data-line-number="17">  df =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb136-18" data-line-number="18">  XXl =<span class="st"> </span>XX</a>
+<a class="sourceLine" id="cb136-19" data-line-number="19">  xi =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb136-20" data-line-number="20">  <span class="cf">while</span>(df<span class="op">&gt;</span>.<span class="dv">000001</span>){</a>
+<a class="sourceLine" id="cb136-21" data-line-number="21">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb136-22" data-line-number="22">    eir   =<span class="st"> </span>VC<span class="op">*</span>kappa </a>
+<a class="sourceLine" id="cb136-23" data-line-number="23">    alpha =<span class="st"> </span><span class="kw">eir2ar</span>(eir)</a>
+<a class="sourceLine" id="cb136-24" data-line-number="24">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha, XX, par)</a>
+<a class="sourceLine" id="cb136-25" data-line-number="25">    x =<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb136-26" data-line-number="26">    <span class="kw">print</span>(<span class="kw">c</span>(<span class="dt">x=</span>x, <span class="dt">xi=</span>xi))</a>
+<a class="sourceLine" id="cb136-27" data-line-number="27">    df =<span class="st"> </span>(x<span class="op">-</span>xi)<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb136-28" data-line-number="28">    xi=x</a>
+<a class="sourceLine" id="cb136-29" data-line-number="29">  } </a>
+<a class="sourceLine" id="cb136-30" data-line-number="30">  <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">XX=</span>XX, <span class="dt">kappa=</span>kappa, <span class="dt">eir=</span>eir, <span class="dt">alpha=</span>alpha, <span class="dt">x=</span>x, <span class="dt">V=</span>VC))</a>
+<a class="sourceLine" id="cb136-31" data-line-number="31">}</a></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="co">#ssvc = vc2SS_Adam(sseg$V, par, XX0 = sseg$XX)</span></a>
+<a class="sourceLine" id="cb137-2" data-line-number="2">ssvc =<span class="st"> </span><span class="kw">vc2SS_Adam</span>(sseg<span class="op">$</span>V, par)</a></code></pre></div>
+<pre><code>##         x        xi 
+## 0.0999684 1.0000000 
+##          x         xi 
+## 0.09996839 0.09996840</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">vcSim_Adam =<span class="st"> </span><span class="cf">function</span>(VC, par, <span class="dt">XX0=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.null</span>(XX0)){XX =<span class="st"> </span><span class="kw">vc2ss</span>(VC[<span class="dv">1</span>])}</a>
+<a class="sourceLine" id="cb139-3" data-line-number="3">  kT =<span class="st"> </span>eT =<span class="st"> </span>aT =<span class="st"> </span>xT =<span class="st"> </span><span class="kw">c</span>() </a>
+<a class="sourceLine" id="cb139-4" data-line-number="4">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(VC)){</a>
+<a class="sourceLine" id="cb139-5" data-line-number="5">    kappa =<span class="st"> </span><span class="kw">kappaF_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb139-6" data-line-number="6">    eir   =<span class="st"> </span>VC[i]<span class="op">*</span>kappa </a>
+<a class="sourceLine" id="cb139-7" data-line-number="7">    alpha =<span class="st"> </span><span class="kw">eir2ar</span>(eir)</a>
+<a class="sourceLine" id="cb139-8" data-line-number="8">    XX =<span class="st"> </span><span class="kw">PtimesX_Adam</span>(alpha, XX, par)</a>
+<a class="sourceLine" id="cb139-9" data-line-number="9">    x =<span class="st"> </span><span class="kw">XX2pr29_Adam</span>(XX,par)</a>
+<a class="sourceLine" id="cb139-10" data-line-number="10">    kT =<span class="st"> </span><span class="kw">c</span>(kT, kappa)  </a>
+<a class="sourceLine" id="cb139-11" data-line-number="11">    eT =<span class="st"> </span><span class="kw">c</span>(eT, eir)  </a>
+<a class="sourceLine" id="cb139-12" data-line-number="12">    xT =<span class="st"> </span><span class="kw">c</span>(xT, x)  </a>
+<a class="sourceLine" id="cb139-13" data-line-number="13">    aT =<span class="st"> </span><span class="kw">c</span>(aT, alpha)  </a>
+<a class="sourceLine" id="cb139-14" data-line-number="14">  }</a>
+<a class="sourceLine" id="cb139-15" data-line-number="15">   <span class="kw">return</span>(<span class="kw">list</span>(<span class="dt">x=</span>xT, <span class="dt">kappa=</span>kT, <span class="dt">eir=</span>eT, <span class="dt">alpha=</span>aT, <span class="dt">XX=</span>XX))</a>
+<a class="sourceLine" id="cb139-16" data-line-number="16">}</a></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="co">#sim = vcSim_Adam(history$V, history$XX0, par)</span></a></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="simulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="unit-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

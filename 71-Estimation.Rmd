@@ -1,0 +1,50 @@
+
+# Exposure and Infection 
+
+The relationships between the annual *Pf*EIR, the *Pf*FoI, and the *Pf*PR are among the most important in malaria. A few studies analyzed the data [@BeierJC1999ShortReport;@HaySI2005UrbanizationMalaria]. The first paper I wrote on the topic, in 2005, suggested an important role for heterogeneous biting [@SmithDL2005_EIRvPR]. At the time, we were thinking mainly about frailty. After some correspondence, we took a closer look at the relationship between the *Pf*EIR and the *Pf*FoI [@SmithDL2010_InefficientTransmission], which helped us rule out immunity. With some data in hand, we took a closer look at heterogeneous exposure [@CooperL2019ParetoRules], which drew our attention to environmental heterogeneity. Meanwhile, we developed the age-standardization algorithms for the Malaria Atlas Project [@SmithDL2007_StandardizingPfPR]. As we grappled with the data from Bioko Island, it became clear that malaria importation could be an important factor [@GuerraCA2019HumanMobility]. None of this considered either seasonality or drug taking and chemo-protection.  
+
+The *Pf*PR to *Pf*EIR converstion algorthims defined in \@ref(pr2eir) are among the most important for policy. 
+
+## Data 
+
+### EIR vs. PR 
+
+We have revisited the relationship one more time, but we do it in two steps. First, we take another look at the EIR-PR and EIR-FoI data, with a focus on *house effects*
+
+### EIR vs. FoI 
+
+### Chemoprotection  
+
+## Models 
+
+Second, we re-evaluate the many sources of variability, and how each one works across the spectrum of transmission: 
+
++ Age: What is the age of the population being examined?   
+
++ Drug Taking and Chemoprotection: What is the distribution of drug-taking rates and habits in the population?  
+
++ Pre-erythrocytic Immunity  
+
++ Heterogeneous Exposure
+
+    - seasonality: how much does seasonality affect the probability of detection? 
+
+    - [Frailty] (Section \@ref(frailty)) 
+
+        - age 
+    
+        - other  
+
+    + [Environmental Heterogeneity] (Section \@ref(environmentalHeterogeneity)) 
+
++ Travel Exposure and Malaria Importation
+        
++ Immunity 
+
+    - maternal protection 
+    
+    - detection 
+
+
+## *Pf*PR $\rightarrow$ *Pf*EIR {#pr2eir}
+

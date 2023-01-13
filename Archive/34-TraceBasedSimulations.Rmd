@@ -1,0 +1,4 @@
+
+# Trace-Based Simulations {#TraceBasedSimulations} 
+
+The dynamics of malaria are exogenously forced by weather, socio-economic change, vector control, malaria case management, mass interventions of various sorts, evolution of resistance to drugs and pesticides, and other factors. One device for dealing with this sort of complexity is called a *trace-based simulation,* in which a complex process is modeled, stored, and passed to a simulation.  

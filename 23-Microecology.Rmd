@@ -1,0 +1,3 @@
+# Mosquito Microecology
+
+Modeling mosquito population dynamics on point sets. 

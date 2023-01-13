@@ -1,0 +1,240 @@
+## The Pipeline
+```{r}
+cXX = cohortXX_Adam(.1,par)
+XX = cohort2ages_Adam(cXX,par)
+XX = ar2stableWave_Adam(.1, par)
+```
+
+```{r}
+for(i in 1:100) XX = PtimesX_Adam(.1, XX, par)
+plot(par$ages-XX$ageInDays/365, ylim = c(0,1), type = "l")
+```
+
+```{r}
+XX0 = ar2stableWave_Adam(alphat[1], par)
+```
+
+```{r}
+tt = 1:1000
+alphat = c(0.1, .1 +.01*(1 + sin(2*pi*tt/36.5)))
+XX = XX0 
+xx= XX2pr29_Adam(XX0,par)
+for(i in 2:length(alphat)){
+  XX = PtimesX_Adam(alphat[i], XX, par) 
+  xx= c(xx,XX2pr29_Adam(XX,par)) 
+}
+```
+
+```{r}
+alpha2 = pr2ar_Adam(xx, par) 
+cbind(alphat,  alpha2$alpha)
+```
+
+```{r}
+ar2burden_Adam(alpha2$alpha[1:10], par) -> burden
+```
+
+```{r}
+#XXs = ar2SW_Adam(.1,par)
+plot(par$ages - XXs$ageInDays/365, type = "l", ylim = c(0,1))
+
+```
+
+```{r}
+aa = matrix(0, 1, 66)
+for(i in 1:5000) aa = (aa+par$tau)%*%par$calO
+plot(par$ages - aa/365, type = "l")
+```
+
+
+```{r}
+par(mfrow = c(3,3))
+ar2burden_Adam(alphat[1:9], par, XX0) -> burden
+```
+
+## Steady States
+
+```{r fastPfPR Adam}
+#` Compute PfPR quickly using the cohort utility
+fastPfPR_Adam = function(alpha, par){
+  XX = cohortXX_Adam(alpha, par, 365)
+  x = par$calDlm%*%XX$X
+  mean(x[74:365])
+}
+```
+
+
+
+
+
+
+
+```{r ar2burden}
+ar2burden_Adam = function(alpha, par, XX0=NULL){with(par,{
+   if(is.null(XX0)) {
+    XX = ar2stableWave_Adam(alpha[1], par, .01)
+  } else {
+    XX=XX0
+  }
+  
+  burden = XX2burden_Adam(XX,par) 
+  for(t in 2:length(alpha)){ 
+    XX = PtimesX_Adam(alpha[t], XX, par)
+    burden = rbind(burden, XX2burden_Adam(XX,par)) 
+  } 
+  return(data.frame(burden))
+})} 
+```
+
+```{r ar2History}
+ar2History_Adam = function(alpha, par, XX=NULL){
+  if(is.null(XX)){
+    XX = ar2stableWave_Adam(alpha,par)
+  }
+  eir = ar2eir(alpha)
+  kappa = kappaF_Adam(XX,par)
+  kappaT = kappa 
+  for(i in 1:length(alpha)){
+    XX = PtimesX_Adam(alpha[i], XX, par)
+    kappa = kappaF_Adam(XX,par) 
+    kappaT = c(kappaT, kappa)
+  }
+  V = eir/kappa 
+  history = list(x=x, alpha=alpha, eir=eir, kappa=kappaT, V=V, XX0=XX)
+  return(history)
+}
+```
+
+```{r}
+ar2History_Adam(alphat[1:10], par, XX0) -> hstry
+```
+
+```{r vcCohortXX Adam, echo=FALSE}
+#' cohortXX simulates a cohort from birth over mx 
+#' time steps and returns it as an XX object
+vcInitXX = function(vc, par, mx=2920){
+  XX = emptyXX_Adam()
+  XX$V = 
+  for(i in 1:100) XX = PtimesX_Adam(.1, XX, par) 
+
+  for(i in 1:20){
+    kappa = kappaF_Adam(XX,par)
+    eir = vc*kappa
+    alpha=eir2ar(eir)
+    XX = PtimesX_Adam(alpha, XX, par)    
+  }
+  return(XX) 
+}
+```
+
+```{r}
+vcInitXX(hstry$V[1],par) -> XXvc
+```
+
+
+```{r vcSimulate}
+vcSimulate = function(VC, par, XX=NULL){
+  if(is.null(XX)){
+    XX = vcInitXX(VC[1], par)
+  }
+ # browser() 
+  kappa = kappaF_Adam(XX,par)
+  eir = VC[1]*kappa 
+  alphaT = alpha = eir2ar(eir)
+  for(i in 2:length(VC)){
+    XX = PtimesX_Adam(alpha, XX, par)
+    kappa = kappaF_Adam(XX,par)
+    eir = VC[i]*kappa 
+    alpha = eir2ar(eir)
+    alphaT = c(alphaT, alpha)
+  }
+  return(alphaT)
+}
+```
+
+```{r}
+vcSimulate(hstry$V, par, XXvc) -> vcSimOut
+```
+
+## Simulation 
+
+## Metric Conversions 
+
+```{r pr2arSteadyState}
+#' Find ar such that the 
+pr2arSteadyState_Adam = function(x,par){
+  errFgood = function(alpha){
+    (ar2pr_Adam(alpha,par)-x)^2
+  }
+  errFfast = function(alpha){
+    (fastPfPR_Adam(alpha,par)-x)^2
+  }
+  alpha0=optimize(errFfast,c(0,1))$min
+  #optimize(errFgood,c(alpha0/2,alpha0*2))$min
+  return(alpha0)
+}
+pr2arSteadyState_Adam(.1, par)
+```
+
+```{r ar2stableWave}
+ar2stableWave_Adam = function(alpha, par, tol = 0.01){
+  cXX = cohortXX_Adam(alpha,par,2920)  
+  XX = cohort2ages_Adam(cXX,par)
+  for(i in 1:100) XX = PtimesX_Adam(alpha, XX, par)
+  x = XX2pr29_Adam(XX,par)
+  df = 1
+  while(df > tol){
+    XXl = XX
+    XX = PtimesX_Adam(alpha, XX, par)
+    x = XX2pr29_Adam(XX,par)
+    df=sum(abs(XXl$X - XX$X))
+  }
+  XX
+}
+```
+
+```{r ar2SW}
+ar2SW_Adam = function(alpha, par, mx = 2920){
+  XX = emptyXX_Adam() 
+  for(i in 1:mx) XX = PtimesX_Adam(alpha, XX, par)
+  XX
+}
+XXs = ar2SW_Adam(.1, par)
+```
+
+```{r peekAhead Adam}
+peekAhead_Adam = function(x2, XX, par){with(c(XX,par),{
+ errF = function(alpha){
+   XX = PtimesX_Adam(alpha,XX,par)
+   XX = PtimesX_Adam(alpha,XX,par)
+   (x2 - XX2pr29_Adam(XX,par))^2
+ }
+ #alpha0 = 2*alpha1 - alpha2
+ #inits = pmax(0,pmin(c(alpha0/3, alpha0*3), 1))  
+ inits = pmax(0,c(0,1))  
+ optimize(errF, inits)$min
+})}
+```
+
+```{r pr2ar}
+pr2ar_Adam = function(xx, par, alpha0=NULL, XX0=NULL, tol = 0.01){
+  if(is.null(alpha0)) {
+    alpha = pr2arSS_Adam(xx[1],par)
+  } else {
+    alpha=alpha0
+  }
+  if(is.null(XX0)) {
+    XX = ar2stableWave_Adam(alpha,par,tol)
+  } else {
+    XX=XX0
+  }
+  alphaT = alpha
+  for(t in 3:length(xx)){ 
+    alpha = peekAhead_Adam(xx[t],XX,par)
+    XX = PtimesX_Adam(alpha, XX, par)
+    alphaT = c(alphaT, alpha) 
+  } 
+  return(list(alpha=alphaT, XX=XX)) 
+}
+```
+

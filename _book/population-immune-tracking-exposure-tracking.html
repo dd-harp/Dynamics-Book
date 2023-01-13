@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.1 Population Immune Tracking: Exposure Tracking | RAMP Models and Algorithms</title>
+  <meta name="description" content="The RAMP Model and Algorithm Library" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.1 Population Immune Tracking: Exposure Tracking | RAMP Models and Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The RAMP Model and Algorithm Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.1 Population Immune Tracking: Exposure Tracking | RAMP Models and Algorithms" />
+  
+  <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
+  
+
+<meta name="author" content="David L. Smith, Austin Carter, John M. Henry, Daniel T. Citron, Andrew Dolgert, Sean L. Wu, Hector M. Sanchez C." />
+
+
+<meta name="date" content="2020-05-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tracking-variables.html"/>
+<link rel="next" href="cumulative-exposure.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="chapter" data-level="1" data-path="the-ramp-model-library.html"><a href="the-ramp-model-library.html"><i class="fa fa-check"></i><b>1</b> The RAMP Model Library</a><ul>
+<li class="chapter" data-level="1.1" data-path="the-operational-model-library.html"><a href="the-operational-model-library.html"><i class="fa fa-check"></i><b>1.1</b> The <code>Operational Model Library</code></a></li>
+<li class="chapter" data-level="1.2" data-path="the-xde-model-library.html"><a href="the-xde-model-library.html"><i class="fa fa-check"></i><b>1.2</b> The <code>xDE Model Library</code></a></li>
+<li class="chapter" data-level="1.3" data-path="the-ibm-library.html"><a href="the-ibm-library.html"><i class="fa fa-check"></i><b>1.3</b> The <code>IBM Library</code></a></li>
+<li class="chapter" data-level="1.4" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>1.4</b> Style Guide</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="style-guide.html"><a href="style-guide.html#style-for-xde-model-library"><i class="fa fa-check"></i><b>1.4.1</b> Style for xDE Model Library</a></li>
+<li class="chapter" data-level="1.4.2" data-path="style-guide.html"><a href="style-guide.html#style-for-the-operational-model-library"><i class="fa fa-check"></i><b>1.4.2</b> Style for the Operational Model Library</a></li>
+<li class="chapter" data-level="1.4.3" data-path="style-guide.html"><a href="style-guide.html#style-for-the-trace-maker-library"><i class="fa fa-check"></i><b>1.4.3</b> Style for the Trace Maker Library</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dynamic-models-and-computation.html"><a href="dynamic-models-and-computation.html"><i class="fa fa-check"></i><b>2</b> Dynamic Models and Computation</a></li>
+<li class="chapter" data-level="3" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>3</b> The Epidemiological State Space and Tensor Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html"><i class="fa fa-check"></i><b>3.1</b> Nested Models with Tensors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html#structured-population-model"><i class="fa fa-check"></i><b>3.1.1</b> Structured Population Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="a-complex-state-space-tensor-model.html"><a href="a-complex-state-space-tensor-model.html"><i class="fa fa-check"></i><b>3.2</b> A Complex State Space Tensor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="stage-of-infection-models.html"><a href="stage-of-infection-models.html"><i class="fa fa-check"></i><b>4</b> Stage of Infection Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html"><i class="fa fa-check"></i><b>4.1</b> SoI as an ODE Model</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#simple-soi"><i class="fa fa-check"></i><b>4.1.1</b> Simple SoI</a></li>
+<li class="chapter" data-level="4.1.2" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#stage-of-infection-with-superinfection"><i class="fa fa-check"></i><b>4.1.2</b> Stage of Infection, with Superinfection</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html"><i class="fa fa-check"></i><b>4.2</b> SoI as a Tensor Model</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html#sois-pit"><i class="fa fa-check"></i><b>4.2.1</b> 4SoI+S-PIT*</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="stage-structured-infections-with-overwriting-superinfection.html"><a href="stage-structured-infections-with-overwriting-superinfection.html"><i class="fa fa-check"></i><b>4.3</b> Stage Structured Infections with Overwriting Superinfection</a></li>
+<li class="chapter" data-level="4.4" data-path="detection.html"><a href="detection.html"><i class="fa fa-check"></i><b>4.4</b> Detection</a></li>
+<li class="chapter" data-level="4.5" data-path="age-of-infection.html"><a href="age-of-infection.html"><i class="fa fa-check"></i><b>4.5</b> Age of Infection</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="age-structure-and-operators.html"><a href="age-structure-and-operators.html"><i class="fa fa-check"></i><b>5</b> Age Structure and Operators</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-shift-operator.html"><a href="the-shift-operator.html"><i class="fa fa-check"></i><b>5.1</b> The Shift Operator</a></li>
+<li class="chapter" data-level="5.2" data-path="age-classes.html"><a href="age-classes.html"><i class="fa fa-check"></i><b>5.2</b> Age Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tracking-variables.html"><a href="tracking-variables.html"><i class="fa fa-check"></i><b>6</b> Tracking Variables</a><ul>
+<li class="chapter" data-level="6.1" data-path="population-immune-tracking-exposure-tracking.html"><a href="population-immune-tracking-exposure-tracking.html"><i class="fa fa-check"></i><b>6.1</b> Population Immune Tracking: Exposure Tracking</a></li>
+<li class="chapter" data-level="6.2" data-path="cumulative-exposure.html"><a href="cumulative-exposure.html"><i class="fa fa-check"></i><b>6.2</b> Cumulative Exposure</a></li>
+<li class="chapter" data-level="6.3" data-path="sentinel-populations.html"><a href="sentinel-populations.html"><i class="fa fa-check"></i><b>6.3</b> Sentinel Populations</a></li>
+<li class="chapter" data-level="6.4" data-path="age-structure.html"><a href="age-structure.html"><i class="fa fa-check"></i><b>6.4</b> Age Structure</a></li>
+<li class="chapter" data-level="6.5" data-path="counters.html"><a href="counters.html"><i class="fa fa-check"></i><b>6.5</b> Counters</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="counters.html"><a href="counters.html#a-vectorial-capacity-model"><i class="fa fa-check"></i><b>6.5.1</b> A Vectorial-Capacity Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mosquito-behavioral-state-models.html"><a href="mosquito-behavioral-state-models.html"><i class="fa fa-check"></i><b>7</b> Mosquito Behavioral State Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="mbdetes.html"><a href="mbdetes.html"><i class="fa fa-check"></i><b>7.1</b> MBDETES</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lumping-days-in-mosquito-models.html"><a href="lumping-days-in-mosquito-models.html"><i class="fa fa-check"></i><b>8</b> Lumping Days in Mosquito Models</a></li>
+<li class="chapter" data-level="9" data-path="TraceBasedSimulations.html"><a href="TraceBasedSimulations.html"><i class="fa fa-check"></i><b>9</b> Trace-Based Simulations</a></li>
+<li class="chapter" data-level="10" data-path="vector-control.html"><a href="vector-control.html"><i class="fa fa-check"></i><b>10</b> Vector Control</a><ul>
+<li class="chapter" data-level="10.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html"><i class="fa fa-check"></i><b>10.1</b> Trace-Based Vector Control Simulations</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#irs-trace-objects"><i class="fa fa-check"></i><b>10.1.1</b> IRS Trace Objects</a></li>
+<li class="chapter" data-level="10.1.2" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#itn-trace-objects"><i class="fa fa-check"></i><b>10.1.2</b> ITN Trace Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="vector-control-traces.html"><a href="vector-control-traces.html"><i class="fa fa-check"></i><b>10.2</b> Vector Control Traces</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="benchmarking.html"><a href="benchmarking.html"><i class="fa fa-check"></i><b>11</b> Benchmarking</a></li>
+<li class="chapter" data-level="12" data-path="adam.html"><a href="adam.html"><i class="fa fa-check"></i><b>12</b> Adam</a><ul>
+<li class="chapter" data-level="12.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>12.1</b> Overview</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="overview.html"><a href="overview.html#basic-features"><i class="fa fa-check"></i><b>12.1.1</b> Basic Features</a></li>
+<li class="chapter" data-level="12.1.2" data-path="overview.html"><a href="overview.html#exogenous-variables"><i class="fa fa-check"></i><b>12.1.2</b> Exogenous Variables</a></li>
+<li class="chapter" data-level="12.1.3" data-path="overview.html"><a href="overview.html#endogenous-dynamics"><i class="fa fa-check"></i><b>12.1.3</b> Endogenous Dynamics</a></li>
+<li class="chapter" data-level="12.1.4" data-path="overview.html"><a href="overview.html#oml-specs"><i class="fa fa-check"></i><b>12.1.4</b> <code>OML</code> Specs</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="outline.html"><a href="outline.html"><i class="fa fa-check"></i><b>12.2</b> Outline</a></li>
+<li class="chapter" data-level="12.3" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html"><i class="fa fa-check"></i><b>12.3</b> Malaria Epidemiology</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#defining-the-model"><i class="fa fa-check"></i><b>12.3.1</b> Defining the Model</a></li>
+<li class="chapter" data-level="12.3.2" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#constructing-the-model"><i class="fa fa-check"></i><b>12.3.2</b> Constructing the Model</a></li>
+<li class="chapter" data-level="12.3.3" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html#age-structure-1"><i class="fa fa-check"></i><b>12.3.3</b> Age Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="the-vector-model.html"><a href="the-vector-model.html"><i class="fa fa-check"></i><b>12.4</b> The Vector Model</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="the-vector-model.html"><a href="the-vector-model.html#vectorial-capacity-as-an-exogenous-variable"><i class="fa fa-check"></i><b>12.4.1</b> Vectorial Capacity as an Exogenous Variable</a></li>
+<li class="chapter" data-level="12.4.2" data-path="the-vector-model.html"><a href="the-vector-model.html#vector-control-effect-size-traces"><i class="fa fa-check"></i><b>12.4.2</b> Vector Control Effect Size Traces</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>12.5</b> Simulation</a></li>
+<li class="chapter" data-level="12.6" data-path="synthetic-history.html"><a href="synthetic-history.html"><i class="fa fa-check"></i><b>12.6</b> Synthetic History</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="synthetic-history.html"><a href="synthetic-history.html#the-pr2ar-algorithm"><i class="fa fa-check"></i><b>12.6.1</b> The <code>pr2ar</code> Algorithm</a></li>
+<li class="chapter" data-level="12.6.2" data-path="synthetic-history.html"><a href="synthetic-history.html#metric-conversions"><i class="fa fa-check"></i><b>12.6.2</b> Metric Conversions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="unit-testing.html"><a href="unit-testing.html"><i class="fa fa-check"></i><b>12.7</b> Unit Testing</a></li>
+<li class="chapter" data-level="12.8" data-path="benchmarking-1.html"><a href="benchmarking-1.html"><i class="fa fa-check"></i><b>12.8</b> Benchmarking</a><ul>
+<li class="chapter" data-level="12.8.1" data-path="benchmarking-1.html"><a href="benchmarking-1.html#duration-of-an-untreated-infection"><i class="fa fa-check"></i><b>12.8.1</b> Duration of an Untreated Infection</a></li>
+<li class="chapter" data-level="12.8.2" data-path="benchmarking-1.html"><a href="benchmarking-1.html#pfpr-by-age"><i class="fa fa-check"></i><b>12.8.2</b> <em>Pf</em>PR by Age</a></li>
+<li class="chapter" data-level="12.8.3" data-path="benchmarking-1.html"><a href="benchmarking-1.html#eir-vs.pr"><i class="fa fa-check"></i><b>12.8.3</b> EIR vs. PR</a></li>
+<li class="chapter" data-level="12.8.4" data-path="benchmarking-1.html"><a href="benchmarking-1.html#clinical-disease"><i class="fa fa-check"></i><b>12.8.4</b> Clinical Disease</a></li>
+<li class="chapter" data-level="12.8.5" data-path="benchmarking-1.html"><a href="benchmarking-1.html#mortality"><i class="fa fa-check"></i><b>12.8.5</b> Mortality</a></li>
+<li class="chapter" data-level="12.8.6" data-path="benchmarking-1.html"><a href="benchmarking-1.html#misc"><i class="fa fa-check"></i><b>12.8.6</b> MISC</a></li>
+</ul></li>
+<li class="chapter" data-level="12.9" data-path="new.html"><a href="new.html"><i class="fa fa-check"></i><b>12.9</b> New</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RAMP Models and Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="population-immune-tracking-exposure-tracking" class="section level2">
+<h2><span class="header-section-number">6.1</span> Population Immune Tracking: Exposure Tracking</h2>
+<p>In a population stratified by age, cumulative exposure will vary by age. Let <span class="math inline">\(I_{a,t}\)</span> denote an immune tracking variable that tracks exposure for people of age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>. It is updated by the following recursive relationship:</p>
+<p><span class="math display">\[\begin{equation}
+I_{a,t+1} = \alpha_t + (1-\mu) I_{a,t}
+\end{equation}\]</span></p>
+<p>Note that for <span class="math inline">\(\mu=0\)</span>, the equation simply tracks cumulative exposure. This version returns only the last value:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">basePIT<span class="fl">.0</span> =<span class="st"> </span><span class="cf">function</span>(alpha, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">vecV =</span> <span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">calO=</span><span class="kw">matrix</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">N=</span><span class="dv">1</span>, <span class="dt">w=</span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">  <span class="co">###################################################################</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">  <span class="co"># If alpha is a vector (a time series), then N is its length.</span></a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">  <span class="co"># If alpha is a scalar, then N is passed as an optional argument.</span></a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">  <span class="co"># Default values update one time step for alpha and mu.</span></a>
+<a class="sourceLine" id="cb49-6" data-line-number="6">  <span class="co">###################################################################</span></a>
+<a class="sourceLine" id="cb49-7" data-line-number="7">  <span class="cf">if</span>(<span class="kw">length</span>(alpha)<span class="op">==</span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb49-8" data-line-number="8">    alpha =<span class="st"> </span><span class="kw">rep</span>(alpha, N)</a>
+<a class="sourceLine" id="cb49-9" data-line-number="9">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb49-10" data-line-number="10">    N =<span class="st"> </span><span class="kw">length</span>(alpha) </a>
+<a class="sourceLine" id="cb49-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb49-12" data-line-number="12">  <span class="co">####################################</span></a>
+<a class="sourceLine" id="cb49-13" data-line-number="13">  <span class="co"># alpha is the &quot;attack&quot; rate</span></a>
+<a class="sourceLine" id="cb49-14" data-line-number="14">  <span class="co"># mu describes the &quot;decay&quot;</span></a>
+<a class="sourceLine" id="cb49-15" data-line-number="15">  <span class="co"># w describes biting weights by age</span></a>
+<a class="sourceLine" id="cb49-16" data-line-number="16">  <span class="co"># calO is an age operator</span></a>
+<a class="sourceLine" id="cb49-17" data-line-number="17">  <span class="co">####################################</span></a>
+<a class="sourceLine" id="cb49-18" data-line-number="18">  <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){</a>
+<a class="sourceLine" id="cb49-19" data-line-number="19">    vecV =<span class="st"> </span>((<span class="dv">1</span><span class="op">-</span>mu)<span class="op">*</span>vecV <span class="op">+</span><span class="st"> </span>w<span class="op">*</span>alpha[t])<span class="op">%*%</span>calO</a>
+<a class="sourceLine" id="cb49-20" data-line-number="20">  } </a>
+<a class="sourceLine" id="cb49-21" data-line-number="21">  <span class="kw">return</span>(vecV)</a>
+<a class="sourceLine" id="cb49-22" data-line-number="22">}</a></code></pre></div>
+<p>This version returns the whole time series (including the initial value):</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">basePIT.TS =<span class="st"> </span><span class="cf">function</span>(alpha, <span class="dt">mu=</span><span class="dv">0</span>, <span class="dt">vecV =</span> <span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">calO=</span><span class="kw">matrix</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">N=</span><span class="dv">1</span>, <span class="dt">w=</span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">  <span class="co">###################################################################</span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">  <span class="co"># If alpha is a vector (a time series), then N is its length.</span></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4">  <span class="co"># If alpha is a scalar, then N is passed as an optional argument.</span></a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">  <span class="co"># Default values update one time step for alpha and mu.</span></a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">  <span class="co">###################################################################</span></a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">  <span class="cf">if</span>(<span class="kw">length</span>(alpha)<span class="op">==</span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">    alpha =<span class="st"> </span><span class="kw">rep</span>(alpha, N)</a>
+<a class="sourceLine" id="cb50-9" data-line-number="9">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb50-10" data-line-number="10">    N =<span class="st"> </span><span class="kw">length</span>(alpha) </a>
+<a class="sourceLine" id="cb50-11" data-line-number="11">  }</a>
+<a class="sourceLine" id="cb50-12" data-line-number="12">  <span class="co">####################################</span></a>
+<a class="sourceLine" id="cb50-13" data-line-number="13">  <span class="co"># alpha is the &quot;attack&quot; rate</span></a>
+<a class="sourceLine" id="cb50-14" data-line-number="14">  <span class="co"># mu describes the &quot;decay&quot;</span></a>
+<a class="sourceLine" id="cb50-15" data-line-number="15">  <span class="co"># w describes biting weights by age</span></a>
+<a class="sourceLine" id="cb50-16" data-line-number="16">  <span class="co"># calO is an age operator</span></a>
+<a class="sourceLine" id="cb50-17" data-line-number="17">  <span class="co">####################################</span></a>
+<a class="sourceLine" id="cb50-18" data-line-number="18">  matV =<span class="st"> </span>vecV</a>
+<a class="sourceLine" id="cb50-19" data-line-number="19">  <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){</a>
+<a class="sourceLine" id="cb50-20" data-line-number="20">    vecV =<span class="st"> </span>((<span class="dv">1</span><span class="op">-</span>mu)<span class="op">*</span>vecV <span class="op">+</span><span class="st"> </span>w<span class="op">*</span>alpha[t])<span class="op">%*%</span>calO</a>
+<a class="sourceLine" id="cb50-21" data-line-number="21">    matV =<span class="st"> </span><span class="kw">cbind</span>(matV, vecV)</a>
+<a class="sourceLine" id="cb50-22" data-line-number="22">  } </a>
+<a class="sourceLine" id="cb50-23" data-line-number="23">  <span class="kw">return</span>(matV)</a>
+<a class="sourceLine" id="cb50-24" data-line-number="24">}</a></code></pre></div>
+<p>We write a function <code>plotPITxAge</code> that plots PIT variables by age.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">plotPITxAge =<span class="st"> </span><span class="cf">function</span>(ages, vecV, <span class="dt">lines=</span><span class="ot">FALSE</span>, <span class="dt">clr=</span><span class="ot">NULL</span>, <span class="dt">d2y=</span>F){</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">  clr &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.null</span>(clr),<span class="st">&quot;black&quot;</span>, clr)</a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">  <span class="cf">if</span>(d2y <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) ages &lt;-<span class="st"> </span>ages<span class="op">/</span><span class="dv">365</span></a>
+<a class="sourceLine" id="cb51-4" data-line-number="4">  <span class="cf">if</span>(lines<span class="op">==</span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb51-5" data-line-number="5">    <span class="kw">plot</span>(ages, vecV, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Age (Years)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;PIT&quot;</span>, <span class="dt">col =</span> clr)</a>
+<a class="sourceLine" id="cb51-6" data-line-number="6">  } <span class="cf">else</span> { </a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">    <span class="kw">lines</span>(ages, vecV, <span class="dt">col =</span> clr)</a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb51-9" data-line-number="9">}</a></code></pre></div>
+<p>We use the age operator, <span class="math inline">\({\cal O\)</span>} and the <code>1066</code> age structure (from the <code>AgeOperators.R</code> in the the <code>Operational-Model-Library</code>). The following plots cumulative exposure by age. The age structure here tracks populations for 85 years. Black shows 85 years of exposure. Blue shows the results for 10,000 days ($<span class="math inline">\(27.4 years) and red for 1,000 days (\)</span>$2.7 years). Starting from no exposure, we see the relationship saturate. This is a cautionary tale to take care to set the initial conditions for tracking variables <span class="math inline">\(V_0\)</span> with great care.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">source</span> (<span class="st">&quot;./Operational-Model-Library/AgeOperators.R&quot;</span>)</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">calO =<span class="st"> </span><span class="kw">calO_1066</span>()</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">ages =<span class="st"> </span><span class="kw">ages_1066</span>()</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">vecV =<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">66</span>)</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb52-6" data-line-number="6"><span class="kw">plotPITxAge</span>(ages, <span class="kw">basePIT.0</span>(<span class="fl">0.1</span>, <span class="dt">mu=</span><span class="dv">0</span>, vecV, calO, <span class="dt">N=</span><span class="dv">3000</span>))</a>
+<a class="sourceLine" id="cb52-7" data-line-number="7"><span class="kw">plotPITxAge</span>(ages, <span class="kw">basePIT.0</span>(<span class="fl">0.1</span>, <span class="dt">mu=</span><span class="dv">0</span>, vecV, calO, <span class="dt">N=</span><span class="dv">1000</span>), T, <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8"><span class="kw">plotPITxAge</span>(ages, <span class="kw">basePIT.0</span>(<span class="fl">0.1</span>, <span class="dt">mu=</span><span class="dv">0</span>, vecV, calO, <span class="dt">N=</span><span class="dv">100</span>), T,<span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/eg-baseXage-1.png" width="672" /></p>
+<p>We plot another function, <code>plotPITxTime</code> that plots PIT variables over time.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">plotPITxTime =<span class="st"> </span><span class="cf">function</span>(tm, vecV, <span class="dt">lines=</span><span class="ot">FALSE</span>, <span class="dt">clr=</span><span class="ot">NULL</span>, <span class="dt">d2y=</span>F){</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">  clr &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.null</span>(clr),<span class="st">&quot;black&quot;</span>, clr)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">  <span class="cf">if</span>(d2y <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) tm &lt;-<span class="st"> </span>tm<span class="op">/</span><span class="dv">365</span></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4">  <span class="cf">if</span>(lines<span class="op">==</span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb53-5" data-line-number="5">    <span class="kw">plot</span>(tm, vecV, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Time (Years)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;PIT&quot;</span>, <span class="dt">col =</span> clr)</a>
+<a class="sourceLine" id="cb53-6" data-line-number="6">  } <span class="cf">else</span> { </a>
+<a class="sourceLine" id="cb53-7" data-line-number="7">    <span class="kw">lines</span>(tm, vecV, <span class="dt">col =</span> clr)</a>
+<a class="sourceLine" id="cb53-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9">}</a></code></pre></div>
+<p>The following shows how the PIT variables behave with respect to time. Exposure is plotted in red. Other colors track exposure with decay:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">vecV0 =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(alphaT, <span class="dt">mu=</span><span class="fl">0.05</span>, vecV0)-&gt;V05)</a>
+<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(alphaT, <span class="dt">mu=</span><span class="fl">0.1</span>, vecV0)-&gt;V10, T, <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb54-4" data-line-number="4"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(alphaT, <span class="dt">mu=</span><span class="fl">0.2</span>, vecV0)-&gt;V20, T,<span class="st">&quot;darkred&quot;</span>)</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(alphaT, <span class="dt">mu=</span><span class="fl">0.3</span>, vecV0)-&gt;V30, T,<span class="st">&quot;darkgreen&quot;</span>)</a>
+<a class="sourceLine" id="cb54-6" data-line-number="6"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(alphaT, <span class="dt">mu=</span><span class="fl">0.5</span>, vecV0)-&gt;V50, T,<span class="st">&quot;purple&quot;</span>)</a>
+<a class="sourceLine" id="cb54-7" data-line-number="7"><span class="kw">lines</span>(ttTT[<span class="op">-</span><span class="dv">401</span>], alphaT, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>This shows how the tracking variables work for constant exposure:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">vecV0 =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(stepT, <span class="dt">mu=</span><span class="fl">0.05</span>, vecV0)-&gt;V05)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(stepT, <span class="dt">mu=</span><span class="fl">0.1</span>, vecV0)-&gt;V10, T, <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(stepT, <span class="dt">mu=</span><span class="fl">0.2</span>, vecV0)-&gt;V20, T,<span class="st">&quot;darkred&quot;</span>)</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(stepT, <span class="dt">mu=</span><span class="fl">0.3</span>, vecV0)-&gt;V30, T,<span class="st">&quot;darkgreen&quot;</span>)</a>
+<a class="sourceLine" id="cb55-6" data-line-number="6"><span class="kw">plotPITxTime</span>(ttTT, <span class="kw">basePIT.TS</span>(stepT, <span class="dt">mu=</span><span class="fl">0.5</span>, vecV0)-&gt;V50, T,<span class="st">&quot;purple&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+Isolating the decay:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">ix =<span class="st"> </span><span class="dv">200</span><span class="op">:</span><span class="dv">300</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2">tix =<span class="st"> </span><span class="kw">c</span>(ix<span class="dv">-200</span>)<span class="op">/</span><span class="fl">36.5</span></a>
+<a class="sourceLine" id="cb56-3" data-line-number="3"><span class="kw">plot</span>(tix, V05[ix]<span class="op">/</span><span class="kw">max</span>(V05), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Time (Years)&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Relative to Max&quot;</span>)</a>
+<a class="sourceLine" id="cb56-4" data-line-number="4"><span class="kw">lines</span>(tix,V10[ix]<span class="op">/</span><span class="kw">max</span>(V10), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb56-5" data-line-number="5"><span class="kw">lines</span>(tix,V20[ix]<span class="op">/</span><span class="kw">max</span>(V20), <span class="dt">col =</span> <span class="st">&quot;darkred&quot;</span>)</a>
+<a class="sourceLine" id="cb56-6" data-line-number="6"><span class="kw">lines</span>(tix,V30[ix]<span class="op">/</span><span class="kw">max</span>(V30), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb56-7" data-line-number="7"><span class="kw">lines</span>(tix,V50[ix]<span class="op">/</span><span class="kw">max</span>(V50), <span class="dt">col =</span> <span class="st">&quot;purple&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tracking-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cumulative-exposure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

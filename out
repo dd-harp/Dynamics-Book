@@ -1,0 +1,51 @@
+mv 01-Introduction.Rmd 01-Introduction.Rmd
+mv 02-RossMacdonald.Rmd 02-RossMacdonald.Rmd
+mv 03-ModularComputation.Rmd 03-ModularComputation.Rmd
+
+mv 10-Dynamics.Rmd 10-Dynamics.Rmd
+mv 11-Heterogeneity.Rmd 11-Heterogeneity.Rmd
+mv 12-BloodFeeding.Rmd 12-BloodFeeding.Rmd
+
+mv 20-Mosquitoes.Rmd 20-Mosquitoes.Rmd
+mv 21-BehavioralStates.Rmd 21-BehavioralStates.Rmd
+mv 22-AquaticEcology.Rmd 22-AquaticEcology.Rmd
+mv 23-Microecology.Rmd 23-Microecology.Rmd
+mv 24-MosquitoDispersal.Rmd 24-MosquitoDispersal.Rmd
+mv 25-MosquitoEcology.Rmd 25-MosquitoEcology.Rmd
+mv 26-VectorCompetence.Rmd 26-VectorCompetence.Rmd
+mv 27-MeasuringMosquitoes.Rmd 27-MeasuringMosquitoes.Rmd
+
+mv 31-SpatialDynamics.Rmd 31-SpatialDynamics.Rmd
+mv 32-TemporalDynamics.Rmd 32-TemporalDynamics.Rmd
+mv 33-Stratification.Rmd 33-Stratification.Rmd
+
+mv 40-MalariaInfection.Rmd 40-MalariaInfection.Rmd
+mv 41-MalariaImmunity.Rmd 41-MalariaImmunity.Rmd
+mv 42-Detection.Rmd 42-Detection.Rmd
+mv 43-Gametocytes.Rmd 43-Gametocytes.Rmd
+mv 44-Disease.Rmd 44-Disease.Rmd
+mv 45-CareSeeking.Rmd 45-CareSeeking.Rmd
+mv 46-DrugTaking.Rmd 46-DrugTaking.Rmd
+mv 47-Demography.Rmd 47-Demography.Rmd
+mv 48-Mobility.Rmd 48-Mobility.Rmd
+mv 49-MalariaEpidemiology.Rmd 49-MalariaEpidemiology.Rmd
+mv 20-HumanEcology.Rmd 50-HumanEcology.Rmd
+mv 23-Travel.Rmd 51-Travel.Rmd
+
+mv 50-VectorControl.Rmd 60-VectorControl.Rmd
+mv 51-ITN.Rmd 61-ITN.Rmd
+mv 52-IRS.Rmd 62-IRS.Rmd
+mv 53-LSM.Rmd 63-LSM.Rmd
+mv 54-ATSB.Rmd 64-ATSB.Rmd
+
+mv 55-SpatialControl.Rmd 65-SpatialControl.Rmd
+mv 56-IntegratedVectorControl.Rmd 66-IntegratedVectorControl.Rmd
+mv 57-Pharmaceuticals.Rmd 67-Pharmaceuticals.Rmd
+mv 64-Microsimulation.Rmd 68-Microsimulation.Rmd
+mv 65-Connectivity.Rmd 69-Connectivity.Rmd
+
+mv 70-Estimation.Rmd 70-Estimation.Rmd
+mv 80-ModelLibraries.Rmd 80-ModelLibraries.Rmd
+mv 99-References.Rmd 99-References.Rmd
+mv index.Rmd index.Rmd
+

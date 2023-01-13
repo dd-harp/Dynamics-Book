@@ -1,0 +1,67 @@
+
+# Lumping Days in Mosquito Models
+
+
+
+```{r}
+makeP.rm = function(lambda = 1, p=.9, f=0.3, Q=0.95, n=10){
+  ########################################################
+  # p :: the probability of surviving one day
+  # f :: the proportion of mosquitoes feeding each day
+  # Q :: the proportion of blood meal hosts who are human 
+  # n :: the EIP (must be an integer)
+  ########################################################
+  list(lambda=lambda,p=p,f=f,Q=Q, n=round(n))  
+}
+
+prm.rm = makeP.rm() 
+```
+
+
+```{r}
+makeVar = function(P){
+  # Y is a vector of length EIP
+  with(P,list(M=1, Y=rep(0, n), Z=0)) 
+}
+MosyVar.rm = makeVar(prm.rm)
+```
+
+```{r}
+daily.rm = function(kappa,t,MOS,P){with(c(MOS,P),{
+  tt = t%%n+1
+  M = lambda + p*M
+  Z = p*(Z + Y[tt])
+  Y[tt] = (1-(1-kappa)^(f*Q))*(M-sum(Y)-Z)*p^n
+  list(M=M,Y=Y,Z=Z)
+})}
+```
+
+
+```{r}
+runDaily.rm = function(kappa, P, MOS, tt=1:100){
+  MM=c(MOS$M, MOS$Z)
+  for(t in tt)
+  {
+    MOS = daily.rm(kappa, t, MOS, P)
+    MM = rbind(MM, c(MOS$M, MOS$Z))
+  }
+
+  plot(0:100, MM[,1], type = "l", ylim = range(0,MM))
+  lines(0:100, MM[,2])
+  MM
+}
+
+MM1 = runDaily.rm(.1, prm.rm, MosyVar.rm)
+```
+```{r}
+dMdt.ld10 = function(lambda, kappa, MOS, Pd){with(c(MOS,Pd),{
+  Z = p^d*Z+ p^((1-p^d)/(1-p))*EIP1*Y  
+  Y = (1-(1-kappa)^(f*Q*d))*(M-Y1-Z)*pD
+  M = pd*M + lambda*D
+  list(M=M,Y1=Y1,Y2=0,Y3=0,Z=Z)
+})}
+```
+
+VCdt = function(){
+  EIR = 
+}

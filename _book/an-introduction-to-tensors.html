@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 An Introduction to Tensors | RAMP Models and Algorithms</title>
+  <meta name="description" content="The RAMP Model and Algorithm Library" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 An Introduction to Tensors | RAMP Models and Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The RAMP Model and Algorithm Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 An Introduction to Tensors | RAMP Models and Algorithms" />
+  
+  <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
+  
+
+<meta name="author" content="David L. Smith, Austin Carter, John M. Henry, Daniel T. Citron, Andrew Dolgert, Sean L. Wu, Hector M. Sanchez C." />
+
+
+<meta name="date" content="2020-02-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="style-guide.html"/>
+<link rel="next" href="nested-models-with-tensors.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreward</a></li>
+<li class="chapter" data-level="1" data-path="the-ramp-model-library.html"><a href="the-ramp-model-library.html"><i class="fa fa-check"></i><b>1</b> The RAMP Model Library</a><ul>
+<li class="chapter" data-level="1.1" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>1.1</b> Style Guide</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="style-guide.html"><a href="style-guide.html#style-for-xde-model-library"><i class="fa fa-check"></i><b>1.1.1</b> Style for xDE Model Library</a></li>
+<li class="chapter" data-level="1.1.2" data-path="style-guide.html"><a href="style-guide.html#style-for-the-tensor-model-library"><i class="fa fa-check"></i><b>1.1.2</b> Style for the Tensor Model Library</a></li>
+<li class="chapter" data-level="1.1.3" data-path="style-guide.html"><a href="style-guide.html#style-for-the-trace-maker-library"><i class="fa fa-check"></i><b>1.1.3</b> Style for the Trace Maker Library</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="an-introduction-to-tensors.html"><a href="an-introduction-to-tensors.html"><i class="fa fa-check"></i><b>2</b> An Introduction to Tensors</a><ul>
+<li class="chapter" data-level="2.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html"><i class="fa fa-check"></i><b>2.1</b> Nested Models with Tensors</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html#structured-population-model"><i class="fa fa-check"></i><b>2.1.1</b> Structured Population Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-complex-state-space-tensor-model.html"><a href="a-complex-state-space-tensor-model.html"><i class="fa fa-check"></i><b>2.2</b> A Complex State Space Tensor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tracking-variables.html"><a href="tracking-variables.html"><i class="fa fa-check"></i><b>3</b> Tracking Variables</a></li>
+<li class="chapter" data-level="4" data-path="trace-based-simulations.html"><a href="trace-based-simulations.html"><i class="fa fa-check"></i><b>4</b> Trace-Based Simulations</a></li>
+<li class="chapter" data-level="5" data-path="stage-of-infection-models.html"><a href="stage-of-infection-models.html"><i class="fa fa-check"></i><b>5</b> Stage of Infection Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html"><i class="fa fa-check"></i><b>5.1</b> SoI as an ODE Model</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#simple-soi"><i class="fa fa-check"></i><b>5.1.1</b> Simple SoI</a></li>
+<li class="chapter" data-level="5.1.2" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#stage-of-infection-with-superinfection"><i class="fa fa-check"></i><b>5.1.2</b> Stage of Infection, with Superinfection</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html"><i class="fa fa-check"></i><b>5.2</b> SoI as a Tensor Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html#sois-pit"><i class="fa fa-check"></i><b>5.2.1</b> 4SoI+S-PIT*</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="stage-structured-infections-with-overwriting-superinfection.html"><a href="stage-structured-infections-with-overwriting-superinfection.html"><i class="fa fa-check"></i><b>5.3</b> Stage Structured Infections with Overwriting Superinfection</a></li>
+<li class="chapter" data-level="5.4" data-path="detection.html"><a href="detection.html"><i class="fa fa-check"></i><b>5.4</b> Detection</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="demography-and-age-structure.html"><a href="demography-and-age-structure.html"><i class="fa fa-check"></i><b>6</b> Demography and Age Structure</a></li>
+<li class="chapter" data-level="7" data-path="exposure-tracking-variables.html"><a href="exposure-tracking-variables.html"><i class="fa fa-check"></i><b>7</b> Exposure Tracking Variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="cumulative-exposure.html"><a href="cumulative-exposure.html"><i class="fa fa-check"></i><b>7.1</b> Cumulative Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mosquito-behavioral-state-models.html"><a href="mosquito-behavioral-state-models.html"><i class="fa fa-check"></i><b>8</b> Mosquito Behavioral State Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="mbdetes.html"><a href="mbdetes.html"><i class="fa fa-check"></i><b>8.1</b> MBDETES</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lumping-days-in-mosquito-models.html"><a href="lumping-days-in-mosquito-models.html"><i class="fa fa-check"></i><b>9</b> Lumping Days in Mosquito Models</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RAMP Models and Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="an-introduction-to-tensors" class="section level1">
+<h1><span class="header-section-number">2</span> An Introduction to Tensors</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(tensor)</code></pre></div>
+<pre><code>## Loading required package: tensor</code></pre>
+<p>Let <span class="math inline">\(\vec X\)</span>, a vector, describe the epidemiological state space, and let <span class="math inline">\({\cal P}(\alpha, \ldots)\)</span> denote the associated probability transition matrix, which can be a function of the attack rate <span class="math inline">\(\alpha\)</span> and other parameters or variables. The dynamics for this simple state space model on a single population are described by a recursion relationship:</p>
+<span class="math display">\[\begin{equation}
+\vec X_{t+1} = {\cal P}(\alpha_t, \ldots) \vec X_t.
+\end{equation}\]</span>
+<p>By <code>simple state space</code>, we mean that the epidemiological state space is a vector. For the class of models we consider in the tensor model library, it is always possible to write the epidemiological state space as a vector. In some cases, however, it is easier to write down complex models using <strong>tensors</strong>. Some enhanced models involve <code>orthogonal</code> extensions: they are derived by extending a base model by adding a new factor such that each epidemiological state space of the base model is replicated for each level of the new factor. When the epidemiological state space is written as a matrix or array, we say it has a <code>higher order state space</code>. Alternatively, we can easily adapt our model to <code>structured</code> populations where we have multiple interacting populations, each with its own probability transition matrix. The two constructs are very similar. In many cases, it is possible to build in the same factor using either an orthogonal extensions or as a population structure. The flexibility is useful. In both cases, the models are constructed using the same logic as the linear algebra we have already defined, but the probability transition matrix and operators are tensors.</p>
+<p>Suppose, for example that we wanted to extend a model to a higher order using an orthognonal variable: <span class="math inline">\(\vec X_i\)</span> would represent the epidemiological states of the new factor, respectively, for <span class="math inline">\(i \in \left\{1,2\right\}\)</span> and <span class="math display">\[\left[X\right] = \left[ \vec X_1, \vec X_2 \right].\]</span> Each vector would have associated with it a probability transition matrix <span class="math inline">\({\cal P}_i\)</span> associated with the base model, each of which is a level in a tensor. There is, however, an additional element of the probability transition matrix that connects the two levels (<em>i.e.</em> elements that would be in the off-diagonal blocks in the matrix representation).</p>
+<p>For structured populations, let <span class="math inline">\(\left[X\right]\)</span> denote a matrix in which the <span class="math inline">\(i^{th}\)</span> column is an epidemiological state space vector <span class="math inline">\(\vec X_i\)</span>. Without much effort, we can write <span class="math display">\[\left[X\right]_{t+1} = {\cal P}(\alpha_t) \left[X\right]_t.\]</span> What makes tensors useful is that we can also let <span class="math inline">\(\left[{\cal P} \right]\)</span> denote an array in which the <span class="math inline">\(i^{th}\)</span> element <span class="math inline">\({\cal P}_i\)</span> is a probability transition matrix that works on the <span class="math inline">\(i^{th}\)</span> element of <span class="math inline">\(\left[X\right]\)</span>. This allows us to construct models on <code>structured</code> populations.</p>
+<p>Whether we deal with higher-order epidemiological state spaces or structured populations, the models are defined by the tensors <span class="math inline">\(\left[X\right]\)</span> and <span class="math inline">\(\left[{\cal P}\right]\)</span>, and the dynamics are defined by the recursive tensor operation:</p>
+<span class="math display">\[\begin{equation}
+\left[X\right]_{t+1} = \left[{\cal P}\right](\alpha_t, \ldots) \left[X\right]_t.
+\end{equation}\]</span>
+<p>The <code>Tensor Model Library</code> includes a set of base models, and utilities that transform this simple equation into a practical way of building new models</p>
+<p>Some relevant use cases for higher-order state spaces are:</p>
+<ul>
+<li><p>Fever and disease</p></li>
+<li><p>Stage structured immunity</p></li>
+<li><p>Vaccination</p></li>
+<li><p>Multiplicity of infection</p></li>
+<li><p>Infectious reservoir models</p></li>
+</ul>
+<p>Some relevant use cases for structured populations are:</p>
+<ul>
+<li><p>Age structure and demography</p></li>
+<li><p>Heterogeneous exposure</p></li>
+<li><p>Spatial dynamics and heterogeneous mixing</p></li>
+</ul>
+<p>Let <span class="math inline">\(S = \mbox{dim}(\vec X)\)</span> for a simple state space model. It follows that <span class="math inline">\(\mbox{dim}({\cal P})=S\times S.\)</span> If the dimension of the state space is <span class="math inline">\(\mbox{dim}(\left[X\right])\)</span>, then <span class="math inline">\(\mbox{dim}(\left[{\cal P} \right]) = \ldots\)</span>.</p> 
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="style-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nested-models-with-tensors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

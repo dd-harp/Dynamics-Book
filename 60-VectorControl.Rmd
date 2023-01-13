@@ -1,0 +1,5 @@
+# (PART) Malaria Control {-}
+
+# Vector Control
+
+Towards a theory of vector control. 

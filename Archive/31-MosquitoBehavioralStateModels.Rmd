@@ -1,0 +1,9 @@
+
+# Mosquito Behavioral State Models
+
+This is a guide to behavioral state models in the RAMP DE model library. 
+
+## MBDETES
+
+
+

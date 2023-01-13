@@ -1,0 +1,171 @@
+---
+title: "Isolating Problem"
+author: "David L Smith"
+date: "7/13/2020"
+output: html_document
+---
+## Age of Infection 
+
+```{r AoI Functions}
+# Density of infections of age alpha
+# in a cohort of age a 
+xda = function(alpha, a, FoI, h=5/365, r=1/200,d=0){
+  FoI(a-alpha,h,d)*exp(-r*alpha)
+}
+
+# sapply version of xda 
+sxda = function(alpha, a, FoI, h=5/365, r=1/200,d=0){
+  sapply(alpha, xda, a=a,FoI=FoI,h=h,r=r,d=d)
+} 
+
+# Mean MoI in a cohort of age a 
+mda = function(a, FoI, h=5/365,r=1/200,d=0){
+  integrate(xda, 0, a, a=a, FoI=FoI,h=h,r=r,d=d)$value
+}
+
+# sapply version of mda
+smda = function(a, FoI, h=5/365,r=1/200,d=0){
+  sapply(a, mda, FoI=FoI,h=h,r=r,d=d)
+}
+
+# The PDF for AoI 
+PDFx = function(alpha, a, FoI, h, r=1/200, d=0){
+  sxda(alpha,a,FoI,h, r, d) / mda(a,FoI,h,r,d)
+}
+
+# sapply version of PDFx 
+sPDFx = function(alpha, a, FoI, h, r=1/200, d=0){
+  sapply(alpha, PDFx, a=a, FoI=FoI, h=h, r=r, d=d)
+}
+
+# The CDF for AoI 
+CDFx = function(alpha, a, FoI, h, r=1/200, d=0){
+  1-integrate(PDFx,alpha,a,a=a,FoI=FoI,h=h,r=r,d=d)$value
+}
+
+# sapply version of CDFx
+sCDFx = function(alpha, a, FoI, h, r=1/200, d=0){
+  sapply(alpha, CDFx, a=a, FoI=FoI, h=h, r=r, d=d)
+}
+
+Wda = function(a, FoI, h=5/365,r=1/200,d=0, deltaW=0){
+  ff = function(s, a, FoI, h, r, d, deltaW)  Xda(a-s,FoI,h,r,d)*exp(-deltaW*(a-s))
+  integrate(ff,0,a,a=a,FoI=FoI,h=h,r=r,d=d,deltaW=deltaW)$value
+}
+
+sWda = function(a, FoI, h=5/365,r=1/200,d=0, deltaW=0){
+  sapply(a, Wda, FoI=FoI,h=h,r=r,d=d,deltaW=deltaW)
+}
+```
+
+```{r}
+rhatx = function(a, FoI, h, r=1/200, d=0, alphamin=0, N=1000){
+  if(N==0) return(-1)
+  alpha = alphamin:a
+  scdf = sCDFx(alpha, a, FoI, h, r, d) 
+  scdf = scdf-min(scdf)
+  scdf = scdf/max(scdf)
+  pa = diff(c(0,scdf))
+  sample(alpha, N, replace=T, prob=pa/sum(pa)) 
+}
+hist(rhatx(5*365, FoI3, 5/365, alphamin=7))
+```
+
+
+```{r}
+aa1a = 7:(5*365)
+```
+
+
+```{r}
+v1f = function(a, FoI, h, r=1/200, d=0, alphamin=0, N=1000){
+  alpha = alphamin:a
+  scdf = sCDFx(alpha, a, FoI, h, r, d) 
+  scdf = scdf-min(scdf)
+  scdf = scdf/max(scdf)
+  plot(alpha, scdf, type = "l")
+  cbind(alpha, scdf)
+}
+v1f(5*365, FoI3, 5/365, alphamin=7) -> v1out
+```
+
+
+```{r PDFx vs rhatx, fig.height=6, fig.width=4.5, echo=F, purl=F}
+par(mfrow=c(2,1))
+
+aa1a = 7:(5*365) 
+
+rhx = rhatx(5*365, FoI3, 5/365, alphamin=7, N=10000)
+bks = c(7:1825)-0.5
+hist(rhx, breaks=bks, xlim = range(aa1a) , probability=T)->out
+
+ppx = sPDFx(aa1a, 5*365, FoI3, 5/365)
+lines(aa1a, ppx/(max(ppx))*max(out$density), col="yellow", lwd=2)
+
+
+out2=rhat2counts(rhx,plotit=F)
+lines(out2$bks, out2$dyn, col = "purple")
+lines(aa1a, ppx/(max(ppx))*max(out$density), col="yellow", lwd=2)
+
+plot(ecdf(rhx), xlim = c(0,1825))
+lines(aa1a, cumsum(ppx)/sum(ppx), col = "yellow", lty = 2, lwd=2)
+
+```
+```{r}
+Bmu = function(alpha, W=0, Sw =.05/365, D=20, liver=6, hatb=10.5, hatl=2, Sa = .005){
+  B = hatl + pmax(0,(hatb-hatl)*exp(-(Sa*(alpha-D)+Sw*W))) 
+  ix = which(alpha<=D)
+  if(length(ix>0)) B[ix] = hatb*alpha[ix]/D *exp(-Sw*W)
+  ix = which(alpha<=liver)
+  if(length(ix>0)) B[ix] = sqrt(-1)
+  B
+}
+
+sBmu = function(alpha, W=0, Sw =.05/365, D=20, liver=6, hatb=10.5, hatl=2, Sa = .005){
+  sapply(alpha, Bmu, W=W, Sw=Sw, D=D,liver=liver,hatB=hatB, hatl=hatl, Sa=Sa)
+} 
+
+Balpha = function(a, FoI, h=5/365, r=1/200, d=0, deltaW=0, Sw =.05/365, D=20, liver=6, L=300){
+  W = Wda(a,FoI,h,r,d,deltaW)
+  Bmesh = seq(0,13, length.out=L)
+  Ba = Bmesh*0
+  alpha = (liver+1):a
+  scdf = sCDFx(alpha, a, FoI, h, r, d) 
+  scdf = scdf-min(scdf)
+  scdf = scdf/max(scdf)
+  pdf = diff(c(0,scdf))
+  Bm = Bmu(alpha, W, Sw=Sw, D=D, liver=liver)
+  for(i in 1:length(alpha)){
+    Ba = Ba + pdf[i]*dlogB(Bmesh,Bm[i])
+  } 
+  list(alpha=alpha, Bm=Bm, Bv=Bmesh, pdfB = Ba/sum(Ba), cdfB = cumsum(Ba)/sum(Ba)) 
+}
+```
+
+```{r}
+rhatBmu = function(a, FoI, h, r=1/200, d=0, deltaW=0, Sw=0.05/365, D=20, liver=6, N=10000){
+  W = Wda(a,FoI,h,r,d,deltaW)
+  alpha = rhatx(a,FoI,h,r,d,alphamin=liver+1, N)
+  xpB = Bmu(alpha, W, Sw, D=D, liver=liver+1)
+  rB = rlogB(N, xpB)
+  list(alpha=alpha, Bm=xpB, B=rB) 
+}
+```
+
+```{r, fig.height=3, fig.width=7}
+verifyBmu = function(a, FoI, h, r=1/200, d=0, deltaW=0, Sw=0.05/365, D=20, liver=6, N=10000){
+  
+  rhbmu <- rhatBmu(a, FoI, h, r, d, deltaW, Sw, D, liver, N)
+  
+  Ba <- Balpha(a, FoI, h, r, d, deltaW, Sw, D, liver)
+  hist(rhbmu$B, probability=T, breaks=bb, xlim = c(0,13))-> out
+  lines(Ba$Bv, Ba$pdfB/max(Ba$pdfB)*max(out$density), col = "red") 
+  
+  plot(ecdf(rhbmu$B), xlim = c(0,13))
+  lines(Ba$Bv, Ba$cdfB, col = "red", lwd=2, lty=2)
+  #plot(Ba$alpha, Ba$Bm, type = "l") 
+}
+par(mfrow = c(1,2))
+verifyBmu(730, FoI3, 5/365)
+```
+

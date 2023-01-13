@@ -1,0 +1,14 @@
+# (PART) Estimation {-}
+
+
+# Approximation 
+
+In this chapter, we use some of the simple models we've developed to introduce some basic ideas. 
+
++ Because it is easy for models of heterogeneous exposure,  we introduce a *model to model distance metric* for models that makes it possible to rigorously measure the distance between two models. 
+
++ Using distance metrics, we use model-model comparison to show how models approximate each another. Informally, we compare this to a one way *model to data distance metric* that can be used to compare how far two models are from some data set. We imagine an unobserved real world, and we show how information bout the real world is transferred through data.
+
+## The Distance between Two Models
+
+## The Distance from Models to Data

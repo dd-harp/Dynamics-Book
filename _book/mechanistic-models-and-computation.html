@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.1 Mechanistic Models and Computation | RAMP Models and Algorithms</title>
+  <meta name="description" content="The RAMP Model and Algorithm Library" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.1 Mechanistic Models and Computation | RAMP Models and Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The RAMP Model and Algorithm Library" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.1 Mechanistic Models and Computation | RAMP Models and Algorithms" />
+  
+  <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
+  
+
+<meta name="author" content="David L. Smith, Austin Carter, John M. Henry, Daniel T. Citron, Andrew Dolgert, Sean L. Wu, Hector M. Sanchez C." />
+
+
+<meta name="date" content="2020-04-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-ramp-model-library.html"/>
+<link rel="next" href="the-tensor-model-library.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a></li>
+<li class="chapter" data-level="1" data-path="the-ramp-model-library.html"><a href="the-ramp-model-library.html"><i class="fa fa-check"></i><b>1</b> The RAMP Model Library</a><ul>
+<li class="chapter" data-level="1.1" data-path="mechanistic-models-and-computation.html"><a href="mechanistic-models-and-computation.html"><i class="fa fa-check"></i><b>1.1</b> Mechanistic Models and Computation</a></li>
+<li class="chapter" data-level="1.2" data-path="the-tensor-model-library.html"><a href="the-tensor-model-library.html"><i class="fa fa-check"></i><b>1.2</b> The <code>Tensor Model Library</code></a></li>
+<li class="chapter" data-level="1.3" data-path="the-xde-model-library.html"><a href="the-xde-model-library.html"><i class="fa fa-check"></i><b>1.3</b> The <code>xDE Model Library</code></a></li>
+<li class="chapter" data-level="1.4" data-path="the-ibm-library.html"><a href="the-ibm-library.html"><i class="fa fa-check"></i><b>1.4</b> The <code>IBM Library</code></a></li>
+<li class="chapter" data-level="1.5" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>1.5</b> Style Guide</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="style-guide.html"><a href="style-guide.html#style-for-xde-model-library"><i class="fa fa-check"></i><b>1.5.1</b> Style for xDE Model Library</a></li>
+<li class="chapter" data-level="1.5.2" data-path="style-guide.html"><a href="style-guide.html#style-for-the-tensor-model-library"><i class="fa fa-check"></i><b>1.5.2</b> Style for the Tensor Model Library</a></li>
+<li class="chapter" data-level="1.5.3" data-path="style-guide.html"><a href="style-guide.html#style-for-the-trace-maker-library"><i class="fa fa-check"></i><b>1.5.3</b> Style for the Trace Maker Library</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>2</b> The Epidemiological State Space and Tensor Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html"><i class="fa fa-check"></i><b>2.1</b> Nested Models with Tensors</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="nested-models-with-tensors.html"><a href="nested-models-with-tensors.html#structured-population-model"><i class="fa fa-check"></i><b>2.1.1</b> Structured Population Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-complex-state-space-tensor-model.html"><a href="a-complex-state-space-tensor-model.html"><i class="fa fa-check"></i><b>2.2</b> A Complex State Space Tensor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tracking-variables.html"><a href="tracking-variables.html"><i class="fa fa-check"></i><b>3</b> Tracking Variables</a><ul>
+<li class="chapter" data-level="3.1" data-path="population-immune-tracking-exposure-tracking.html"><a href="population-immune-tracking-exposure-tracking.html"><i class="fa fa-check"></i><b>3.1</b> Population Immune Tracking: Exposure Tracking</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="TraceBasedSimulations.html"><a href="TraceBasedSimulations.html"><i class="fa fa-check"></i><b>4</b> Trace-Based Simulations</a></li>
+<li class="chapter" data-level="5" data-path="stage-of-infection-models.html"><a href="stage-of-infection-models.html"><i class="fa fa-check"></i><b>5</b> Stage of Infection Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html"><i class="fa fa-check"></i><b>5.1</b> SoI as an ODE Model</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#simple-soi"><i class="fa fa-check"></i><b>5.1.1</b> Simple SoI</a></li>
+<li class="chapter" data-level="5.1.2" data-path="soi-as-an-ode-model.html"><a href="soi-as-an-ode-model.html#stage-of-infection-with-superinfection"><i class="fa fa-check"></i><b>5.1.2</b> Stage of Infection, with Superinfection</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html"><i class="fa fa-check"></i><b>5.2</b> SoI as a Tensor Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="soi-as-a-tensor-model.html"><a href="soi-as-a-tensor-model.html#sois-pit"><i class="fa fa-check"></i><b>5.2.1</b> 4SoI+S-PIT*</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="stage-structured-infections-with-overwriting-superinfection.html"><a href="stage-structured-infections-with-overwriting-superinfection.html"><i class="fa fa-check"></i><b>5.3</b> Stage Structured Infections with Overwriting Superinfection</a></li>
+<li class="chapter" data-level="5.4" data-path="detection.html"><a href="detection.html"><i class="fa fa-check"></i><b>5.4</b> Detection</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="age-structure-and-operators.html"><a href="age-structure-and-operators.html"><i class="fa fa-check"></i><b>6</b> Age Structure and Operators</a><ul>
+<li class="chapter" data-level="6.1" data-path="the-shift-operator.html"><a href="the-shift-operator.html"><i class="fa fa-check"></i><b>6.1</b> The Shift Operator</a></li>
+<li class="chapter" data-level="6.2" data-path="age-classes.html"><a href="age-classes.html"><i class="fa fa-check"></i><b>6.2</b> Age Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exposure-tracking-variables.html"><a href="exposure-tracking-variables.html"><i class="fa fa-check"></i><b>7</b> Exposure Tracking Variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="cumulative-exposure.html"><a href="cumulative-exposure.html"><i class="fa fa-check"></i><b>7.1</b> Cumulative Exposure</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mosquito-behavioral-state-models.html"><a href="mosquito-behavioral-state-models.html"><i class="fa fa-check"></i><b>8</b> Mosquito Behavioral State Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="mbdetes.html"><a href="mbdetes.html"><i class="fa fa-check"></i><b>8.1</b> MBDETES</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="lumping-days-in-mosquito-models.html"><a href="lumping-days-in-mosquito-models.html"><i class="fa fa-check"></i><b>9</b> Lumping Days in Mosquito Models</a></li>
+<li class="chapter" data-level="10" data-path="vector-control.html"><a href="vector-control.html"><i class="fa fa-check"></i><b>10</b> Vector Control</a><ul>
+<li class="chapter" data-level="10.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html"><i class="fa fa-check"></i><b>10.1</b> Trace-Based Vector Control Simulations</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#irs-trace-objects"><i class="fa fa-check"></i><b>10.1.1</b> IRS Trace Objects</a></li>
+<li class="chapter" data-level="10.1.2" data-path="trace-based-vector-control-simulations.html"><a href="trace-based-vector-control-simulations.html#itn-trace-objects"><i class="fa fa-check"></i><b>10.1.2</b> ITN Trace Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="vector-control-traces.html"><a href="vector-control-traces.html"><i class="fa fa-check"></i><b>10.2</b> Vector Control Traces</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">RAMP Models and Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mechanistic-models-and-computation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Mechanistic Models and Computation</h2>
+<p>Three RAMP libraries, the <code>xDE Model Library</code>, the <code>Tensor Model Library</code> and the <code>IBM Library</code> describe mechanistic models of malaria developed using different species of mathematics: differential equations, difference equations, and stochastic processes.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-ramp-model-library.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-tensor-model-library.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

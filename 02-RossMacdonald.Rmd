@@ -1,0 +1,310 @@
+# A Ross-Macdonald Model
+
+This chapter introduces one version of the Ross-Macdonald model, which is the simplest way to get started [@SmithDL2012_RossMacdonald]. This particular system of delay differential equations traces back to a 1982 book chapter written by Joan Aron and Robert May [@AronJL1982PopulationDynamics]. 
+
+We chose this model because it is *extensible.* Most other versions of Ross-Macdonald are difficult to extend. Why? The variables in some versions of the Ross-Macdonald represent fractions, so the equations are difficult to modify when the denominators change. Most Ross-Macdonald equations are *autonomous* (time is never used in computing derivatives), but these equations are already non-autonomous (*i.e.* time drives a seasonal pattern). Malaria transmission dynamics are forced by exogenous variables (*e.g.*, weather), so why start by assuming it isn't? 
+
+Please skim this chapter, even if you're familiar with the Ross-Macdonald model. In writing the equations, we introduced some concepts and conventions that became important for the software design. 
+
+## Aron and May's Equations
+
+The simplest quantitative description of malaria dynamics tracks the number of infected and infectious mosquitoes and the number of infected and infectious humans. To develop systems of equations, we assign names to variables that represent these quantities: the number of infected and infectious people is denoted $X(t)$ (out of $H$ total); the number of mosquitoes is $M(t)$; the number of infected mosquitoes is $Y(t)$ (out of $M(t)$ total); and the number of infectious mosquitoes is denoted $Z(t)$ (out of $M(t)$ total).  
+
+In dynamical systems, we ask how these variables change over time. For our first equation, we start with adult, female mosquito populations. (It is tiresome to repeat *adult, female* each time, and we're ignoring male mosquitoes at this point anyway, so *mosquito* hereafter means *adult, female mosquito*, unless we say otherwise.) The number of mosquitoes is changing as new adults emerge from aquatic habitats or die. 
+
+
+### Mosquito Ecology 
+
+We assume the following: 
+
++ mosquitoes emerge at the rate of $\Lambda(t)$ adults, per day; 
+
++ mosquitoes die at a constant rate, $g$. The fraction surviving one day is $e^{-g}$; and the average lifespan is $1/g$. 
+
+Our first equation describes changes in the number of mosquitoes: 
+
+\begin{equation}
+\frac{dM}{dt} = \Lambda(t) - g M
+\end{equation}
+
+
+### Infected Mosquitoes
+
+Mosquitoes become infected after blood feeding on an infectious human. Here, we describe blood feeding using a few simple parameters.  
+
+To describe *blood feeding*, we assume the following:
+
++ mosquitoes blood feed at the rate $f$, per mosquito, per day; in this model, this implies that the waiting time to a blood meal is $1/f$ days.
+
++ a fraction of all mosquito blood meals, $q$, is taken on humans; we call this the *human fraction*
+
++ the human blood feeding rate is the product of these two parameters, $fq$, which is defined as the number of human blood meals, per mosquito, per day. 
+
+The number of human blood meals by a population of vector mosquitoes, per person, per day is called the human biting rate (HBR). In this model, HBR is given by a formula:
+
+$$\mbox{HBR} = \frac{fqM}{H}$$ 
+
+Later, we can worry about how to map that onto an estimated HBR value, but not right now. 
+
+In the mosquito population, we need to know what fraction of blood meals end up infecting a mosquito that has not already been infected. 
+
+To describe *infection rates*, we assume the following: 
+
++ a fraction of human blood meals, infects mosquitoes. We call this quantity *net infectiousness* (NI) and (for reasons that we will discuss in a moment), we give it a name, $\kappa$: $$\kappa(t) = c \frac{X{t}}{H}$$
+
++ infected mosquitoes die at the same rate as uninfected mosquitoes.  
+
+
+We can now write down our second equation describing changes in the number of infected mosquitoes: 
+
+\begin{equation}
+\frac{dY}{dt} = f q \kappa (M-Y) -g Y
+\end{equation}
+
+
+### Infectious Mosquitoes
+
+To become infectious, a mosquito has to become infected and then survive through the extrinsic incubation period (EIP). We assume:
+
++ mosquitoes become infectious after a fixed delay, $\tau$ days, called the EIP. The fraction of mosquitoes that survive through the EIP is $e^{-g \tau}$.
+
++ infectious mosquitoes die at the same rate as other mosquitoes.
+
+For a mosquito to become infectious, it must have become infected $\tau$ days ago and survived through $\tau$ days with probability $e^{-g\tau}$. To write this in equations, we use a subscripted $\tau$ to denote the value of a variable ($M$, $Y$ or $X$) or term ($\kappa$) at time $t-\tau$. For example $X_\tau$ is the number of people who were infected and infecious at time $t-\tau$, and $M_\tau$ is the number of mosquitoes at time $t-\tau$. 
+
+The number of infectious mosquitoes that are added to the population at a point in time includes all the mosquitoes that became infected at time $t-\tau$ and survived the EIP. This is our third equation describing changes in the number of infectious mosquitoes: 
+
+\begin{equation}
+\frac{dZ}{dt} = f q  \kappa_\tau (M_\tau-Y_\tau) e^{-g\tau} -g Z
+\end{equation}
+
+Here, $Z$ represents the number of mosquitoes with *sporozoites* in their salivary glands. The *fraction* of mosquitoes with sporozoites in their salivary glands has been called the *sporozoite rate* (SR), which in our notation is 
+
+$$ z = \frac{Z}{M}$$ 
+
+The number of bites by vector mosquitoes, per person, per day is called the entomological inoculation rate (EIR). It is defined as the product of the HBR and the SR: 
+
+$$\mbox{EIR} = \mbox{SR} \times \mbox{HBR}$$
+
+In our notation, the EIR is: 
+
+$$\mbox{EIR} = z \frac{fqM}{H} = \frac{fqZ}{H}$$ 
+As with the HBR, we would like to know how to connect estiamted values of the EIR to our formulas. Since that's *really* complicated, we've spent a lot of time in the following sections discussing it. 
+
+
+### Infected Humans
+
+Humans become infected after being bitten by an infectious mosquito. We assume the following: 
+
++ A fraction $b$ of all bites by infectious mosquitoes cause an infection. 
+
++ The hazard rate for infection, also called the *force of infection* (FoI) and denoted $h$ is $b \times$ EIR: $$h = fqb \frac{Z}{H}$$
+
++ Infections clear at the rate $r$, per infection, per day (the average time to clear is $1/r$ days), and after clearing an infection a person becomes susceptible to infection again. 
+
+We can now write down our fourth equation describing changes in the number of infected humans: 
+
+\begin{equation}
+\frac{dX}{dt} = h (H-X) - r X 
+\end{equation}
+
+### ...as a System 
+
+
+While we presented these equations one at a time, they work as a system. To see it all at once, we write it here as a system with four equations and two terms: 
+
+\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &= \Lambda(t) - g M \\
+\frac{dY}{dt} &= fq\kappa(M-Y) - g Y \\
+\frac{dZ}{dt} &= fq\kappa_\tau(M_\tau-Y_\tau)e^{-g\tau} - g Z \\
+\frac{dX}{dt} &= h (H-X) - rX  \\ \\ \hline \\ 
+\kappa &= c \frac{X(t)}{H} \\
+h &= b fq \frac{Z(t)}{H} \\
+\end{array}
+\end{equation}
+
+<center> 
+
+![A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [@AronJL1982PopulationDynamics]](../Figures/AronMay.png)
+
+</center> 
+
+These equations describe processes in three domains (Figure 2.1): 
+
++ adult mosquito ecology ($M$); 
+
++ parasite infection dynamics in mosquito populations ($Y$ and $Z$); 
+
++ parasite infection dynamics in human populations ($X$). 
+
+The equations describing parasite infections in mosquito populations also include the variable $M$, so the mosquito infection dynamics are coupled to the mosquito population dynamics.  The way we've written the equations, each compartment has an input term (*i.e.*, $\Lambda$, $\kappa$, or $h$) that depends on something else. We've passed $\Lambda$ as a parameter. For the infection dynamics, the terms $\kappa$ and $h$ couple two separate systems. For adult mosquito dynamics, emergence is passed to the model as a parameters. 
+
+There are, of course, more compact ways of writing these equations. We have written the equations this way to emphasize a few things. First, the terms make it clear exactly how the equations in one domain are connected to another. Second, if we wanted to start *changing* some of the assumptions, these terms help to isolate the parts we might like to change. By writing the equations in this modularized form, we can start to understand how we might be able to write software that would allow us to represent mosquito infection dynamics with different systems of equations.  
+
+The next step is to find solutions.  
+
+## Solutions 
+
+What does a **solution** to these equations look like? 
+
+Solutions to these equations are values of the variables over time $\left( M(t), Y(t), Z(t), X(t) \right)$ that satisfy the system of four equations described above. We call these solutions *orbits.* To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition $$\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},$$ and then we used the values of the orbits at time $t$ to compute $dM/dt$, $dY/dt$, $dZ/dt$, and $dX/dt$ (*i.e.*, using the formulas on the previous page), they would be the same.  
+
+It is important that these orbits are unique: after specifying the *initial values* of these variables, there is one and only one set of orbits that solves the equations. When we solve the equations, we tend to produce orbits forward in time, but the orbits are defined for all time -- $i.e.$ the process implies the existence of solutions far back into the past. These are deterministic equations, after all. 
+
+As written, the equations do not define a *model,* though it is an easy mistake to make (and one we'll probably make repeatedly when we can get away with it). Instead, the equations define a process or a **model family.** A model is something that *can* produce orbits, and we can't possibly produce orbits until we assign specific values to the parameters. 
+
+To find solutions of equations we use an R software package called `deSolve.` Because of the delay for the EIP, these are called *delay differential equations,* which are handled using a function called `dede`. An important part of these delay differential is that the values of variables at a time lag are retreived using a function called `lagvalue()`. 
+
+A very important part of solving a delay differential equation is that we must specify the initial conditions for an interval of time, not just at a point. (Since the equation for $dZ/dt$ looks back $\tau$ units, we must specify values of $M(t)$, $Y(t)$, and $X(t)$ for all values of $t \in (-\tau, 0)$.) This forces an awkward choice, since we would need to know the solutions back in time to use them. What is typically done -- and we've done it here -- is to specify a constant set of initial values. Doing this introduces a little *numerical slop.* These values are *not* what we would get if we ran the equations backwards in time. We're happy to acknowledge this little problem and find ways around it, but we should never forget it is there. 
+
+### Derivatives
+
+With `deSolve`, solving differential equations is not difficult. The first step is to write down the equations to compute the derivatives. (Many users will find that reading this code is like learning how to compute $\sqrt{2}$. If so, feel free to skip it.) 
+
+The solver expects a function with three required arguments (in this order): 
+
++ `t` is time 
+
++ `y` is the list of variables
+
++ `params` is a set of parameters 
+
+The derivatives are computed and returned in the same order as 'y' in a `list`. To make code that is easy to read, we make `params` as a `list` with parameter names (see below), so that inside the function `with(params,{...})`, the parameter names are visible. 
+
+```{r}
+dAronMay = function(t, y, params){with(params,{
+ 
+  # Variables  
+  if(t<=tau) ylag<-y0 else ylag <- lagvalue(t-tau)
+  M=y[1]; M_tau = ylag[1]
+  Y=y[2]; Y_tau = ylag[2]; 
+  Z=y[3]; 
+  X=y[4]; X_tau = ylag[4]
+   
+  # Terms 
+  kappa = c*X/H; kappa_tau = c*X_tau/H
+  h = b*f*q*Z/H 
+   
+  # Dynamics 
+  dM = Lambda(t) - g*M
+  dY = f*q*kappa*(M-Y) -g*Y
+  dZ = f*q*kappa_tau*(M_tau-Y_tau)*exp(-g*tau) -g*Z
+  dX = h*(H-X)-r*X
+  
+  return(list(c(dM, dY, dZ, dX)))
+})} 
+```
+
+### Initial Values 
+
+To run the model, we must supply initial values. A useful convention for simple models is to pass the initial values as a named list. Later, we can turn the outputs into a data frame, and then we can retrieve the variables by name. If you're writing code yourself, remember that the initial values and the return value for the derivatives must occur in the same order.   
+
+```{r}
+y0= c(M=60, Y=0, Z=0, X=1)
+```
+
+### Parameter Values 
+
+We pass the parameters as a list. It might seem like overkill, but we have written a function that takes default values and generates the list. This makes it easy to generate a new set of parameter values with alternative values, and it also helps us to write and pass function $\Lambda(t)$ with parameters we like. By passing the parameter as a list, the parameter values are available to the function `dAronMay` when we use `with(params, {})`. 
+
+Note that we have also attached the initial values of the variables as a parameter set, which are the return values for `lagvalue(t)` when `t<0`.   
+
+```{r}
+makeParams = function(y0, 
+                      g=1/12, f=1/2.5, q=0.95,  
+                      c=0.15,
+                      b=0.55, r=1/200, H=1000,  
+                      m=.05, ss=1,  
+                      tau=10  
+                      ){
+  ss = min(1,max(0, ss))
+return(list(y0=y0,g=g,f=f,q=q,c=c,H=H,tau=tau,b=b,r=r,
+  Lambda = function(t){m*H*(1 + ss*sin(2*pi*t/365))})) 
+} 
+params = makeParams(y0)
+```
+
+To make it absolutely clear, we are assuming: 
+
++ $g=1/12$: mosquitoes live about $12$ days, on average
+
++ $f=1/2.5$: mosquitoes feed every 2.5 days, on average 
+
++ $q=0.95$: the human fraction is 95\%; mosquitoes feed on humans 95\% of the time 
+
++ $c=0.15$: about 15\% of bites on infectious humans infect a mosquito 
+
++ $b=0.55$: about 55\% of bites by infective mosquitoes cause an infection
+
++ $r=1/200$: human infections last about $200$ days, on average 
+
++ $H=1000$: we're simulating transmission in a population of a thousand humans
+
++ $\tau=10$: the extrinsic incubation period is about 10 days 
+
++ For emergence, we tune the average value using $m$ and it is scaled to $H$: 
+
+    - The parameter $m$ in the function above has been set to $0.05$ by default. 
+    
+    - The parameter $ss$ affects the amplitude of the fluctuations. We force it to take on values between 0 and 1. 
+    
+    - Emergence is modeled as a sinusoidal function with a yearly cycle. 
+    
+$$\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)$$
+
+### Solving 
+
+This code solves the equations: 
+
+```{r, message=F, warning=F}
+require(deSolve)
+tt = seq(0,5*365, by=5) 
+yout <- dede(y=y0, times=tt, func=dAronMay, parms=params) 
+```
+
+### Visualizing 
+
+We write a function so that we can plot things easily:
+
+```{r}
+plotTS_AronMay = function(yout){with(data.frame(yout),{
+  par(mfrow = c(2,1))
+  plot(time/365, M, type = "l", col = "blue", 
+       xlab = "Time (in Years)", 
+       ylab = "Mosquito Density", 
+       main = "Mosquitoes")
+  lines(time/365, Y, col = "purple")
+  lines(time/365, Z, col = "red")
+  
+  plot(time/365, X, ylim = c(0,1000), type = "l", 
+       xlab = "Time (in Years)", 
+       ylab = "# Infected Humans", 
+       main = "Humans")
+})}
+```
+
+This code plots the outputs: 
+
+```{r, fig.height= 6.5, fig.width = 5.5}
+plotTS_AronMay(yout)
+```
+
+\clearpage
+
+
+## Understanding the Dynamics
+
++ The idea of stability and basins of attraction.
+
+  - Stable states 
+  
+  - Stable orbits
+
++ Long-term average *vs* steady states
+
+### Thresholds 
+
+### Parameters 
+
+

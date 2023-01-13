@@ -1,0 +1,109 @@
+
+```{r}
+require(Matrix)
+```
+
+## Age of Infection
+
+The basic age of infection works as a shift operator. Let $\tau$ denote the time step. Let $s_i$ be the fraction that remains infected at the $i^{th}$ time step following the age of infection, $T_i$ the fraction that are treated and cured, and $q_i$ the fraction that clears its infection. Let $P$ denote the duration of the population that is in the $i^{th}$ period of chemoprotection.
+
+
+The probability transition matrix is
+
+\begin{equation} \left[ \begin{array} {c|ccccccccc|cccc}
+    & U & X_0 & X_1 & X_2 & \ldots & X_{n-3} & X_{n-2} & X_{n-1} & X_n & P_1 & P_2 & \ldots & P_n \\ \hline
+U   & 1-\alpha_t & q_0 & q_1 & q_2 & \ldots & q_{n-3} & q_{n-2} & q_{n-1} & q_n &  &  & & 1\\ 
+X_0 & \alpha_t & . & &  &  & &  &  & \\ 
+X_1 &   & s_0 & . &  &  & &  &  &\\ 
+X_2 &  & & s_1 & . &  &  & &  &  &\\   
+\vdots &  &  &  &  & \ddots &  &  & &  \\  
+X_{n-3} &  &  & &  &  & . &  & &  \\  
+X_{n-2} &  &  & &  &  & s_{n-3} & . & &  \\  
+X_{n-1} &  &  & &  & &  & s_{n-2} & . &  \\  
+X_n &  &  & &  &  &  &  & s_{n-1} & s_n \\  \hline
+P_1   &  0 & T_0 & T_1 & T_2 & \ldots & T_{n-3} & T_{n-2} & T_{n-1} & T_n  & . &  &  & \\ 
+P_2 &  &  &  &  &  &  & &  &  & 1 & . & &  \\  
+P_3 &  &  &  &  &  &  & &  &  &  & 1 & . &  \\  
+\vdots &  &  &  &  &  &  & &  &  &  &  & \ddots &  \\  
+P_n  &  &  &  &  &  &  &  & &  &  &  &  & .\\  
+\end{array} \right]  \end{equation}
+```{r}
+
+```
+
+For the 10-day model, we let $X_0$ denote the incubation period.
+
+```{r constructP_AoI}
+
+makeParams_AoIten = function(
+  nX = 21, 
+  nP = 3,
+  nr = 3,
+  rho1 = 0.3,
+  rho2 = 0.05,
+  r = 1/200,
+  pwr = 3,
+  tau = 10
+){list(nX=nX,nP=nP,nr=nr,r=r, rho1=rho1,rho2=rho2,pwr=pwr,tau=tau)} 
+
+constructP_AoIten = function(alpha, par){ with(par,{
+  eta = c(0,0, rho1, rho2*(c(nX:4)/nX)^pwr,0)
+  s = c(alpha, rep(1, nr), rep(exp(-tau*r), nX-nr))*(1-eta)
+  s = c(s,rep(1, nP))
+  P = t(bandSparse(nX+nP+1, k=1)*s) 
+  P[nX+2,1+0:nX] = eta
+  P[nX+1, nX+1] = exp(-tau*r)
+  P[1,] = 1-colSums(P)
+  return(P)
+})}
+```
+
+```{r demoP}
+par = makeParams_AoIten()
+constructP_AoIten(.01, par) -> Paoi
+colSums(Paoi)
+```
+```{r X0}
+vecX0 = with(par,matrix(c(1, rep(0, nX+nP))), 1, nX+nP+1) 
+```
+
+```{r make alpha}
+#alpha = rbeta(146, 10*c(1+sin(2*pi*c(1:146)/36.5)), 100)/100
+alpha = (1+sin(2*pi*c(1:146)/36.5))*0.01
+plot(alpha, type="l")
+```
+
+```{r sim}
+X = vecX0
+for(a in alpha){
+  X = constructP_AoIten(a,par) %*% X 
+}
+Xt=X
+for(a in alpha){
+  X = constructP_AoIten(a,par) %*% X 
+  Xt = cbind(Xt, X)
+}
+```
+
+```{r calD}
+calDlm = with(par,matrix(c(0,0,c(nX:2)/(nX-1), rep(0,nP)),1,nX+nP+1))
+calDtrue = with(par,matrix(c(0,0,rep(1, nX-1), rep(0,nP)),1,nX+nP+1))
+```
+
+
+```{r plot PR}
+xlm = calDlm %*% as.matrix(Xt)
+xtrue = calDtrue %*% as.matrix(Xt)
+plot(0:146, xtrue, type = "l", ylim =range(0,xtrue))
+lines(0:146, xlm, col = "red")
+lines(1:146, alpha, col = "blue") 
+```
+
+```{r plot Sensitivity}
+plot(0:146, xlm/xtrue, type ="l")
+```
+
+```{r plot Phase}
+plot(alpha, c(xlm/xtrue)[-1], type = "l") 
+```
+

@@ -1,0 +1,96 @@
+---
+title: "33-VectorControl"
+author: "IHME Malaria Team"
+date: "3/18/2020"
+output:
+ html_document: default
+ pdf_document: default
+---
+
+# Vector Control
+
+This chapter discusses the challenges of modeling vector control at a national scale. As part of the `RAMP-AP`, we start from the point of view of knowing a history of vectorial capacity, $V_c$, which we call the adjusted vectorial capacity (aVC - *i.e.* it was adjusted by vector control). 
+
+The picture that takes us to vectorial capacity is this: 
+
+\begin{equation} \boxed{
+\begin{array}{rcccccc}
+&& \alpha & \rightarrow & E \\ 
+x & \nearrow \atop \searrow & &&\downarrow \\
+&& \kappa & \rightarrow & V_c\\ 
+\end{array}} 
+\end{equation}
+
+The picture we would now like to address is how to estimate vectorial capacity at baseline knowing aVC and the history of malaria control, $\vec \phi$. 
+
+\begin{equation} \boxed{
+\begin{array}{rcccc}
+V_c& \rightarrow& V_0 & \leftarrow & \vec \phi \\ 
+\end{array}} 
+\end{equation}
+
+To get to $V_0$ from $V_c$, we need a model that estimates the effect sizes of control, given coverage. There are several important factors we need to consider: 
+
++ **Coverage.** There are many ways of measuring coverage and these differences can effect how well vector control works:
+
+    - An important measure of ITN coverage is utilization. 
+    
+    - Ownership is usually expressed at household level, leaving unanswered the question of what is the relationship between how many nets are in a house, how many people are in a house, who gets bitten, and what happens to mosquitoes after entering that house.
+    
+    - An important measure of IRS coverage is what surfaces in the house were sprayed, the type of surface (*e.g.* mud vs. cement), the type of insecticide used.
+    
+     - Spatial heterogeneity of coverage in relation to heterogeneity in the spatial distribution of mosquito habitats and adult mosquito movement.
+
++ **Vector species composition and behaviors.** small behavioral differences can affect how frequently mosquitoes come into contact with vector-based interventions. Important factors are daytime and outdoor feeding (for ITNs) and outdoor resting or indoor resting micro-behaviors that might be mismatched with spraying practices (for IRS). 
+
++ **Population dynamic responses to control.** Quantitatively, changes in the abundance of mosquitoes can be among the largest effects of adult vector control, but there are many questions about what factors affect changes in mosquito population density in relation to coverage. 
+
++ **Insecticide resistance.** These differences modify the effect sizes, given coverage.  
+
+These factors affect the responses to vector control, but they often require information -- usually local information. When policies are evaluated or planned at a national scale, we must do something about data gaps over space and time and the resulting uncertainty that arises.
+
+Once we have estimated the effect sizes, we can use the reconstructed baseline vectorial capacity $V_0$, to simulate the counterfactual as a way of estimating the number of deaths averted. From the point of view of simulation, this is the picture: 
+
+\begin{equation} \boxed{
+\begin{array}{rcccccc}
+V_0 &\rightarrow& E & \rightarrow & \alpha \\ 
+ && \uparrow &&\downarrow \\
+&& \kappa & \leftarrow & x\\ 
+\end{array}} 
+\end{equation}
+
+In other simulations, we can replace $V_0$ with other scenarios that evaluate other vector control policies. 
+
+In these pictures, VC is the exogenous forcing quantity. This is one of many approaches we can adopt. The following sections explain how we can construct models with increasing detail. 
+
++ *Trace-based* simulations (also, see Chapter \@ref(TraceBasedSimulations)). If we follow the logical progression from coverage levels achieved during mass net distributions / mass spraying, to declining ownership / killing effects over time, to their effects on mosquito populations, it's important to recognize that some of these quantities can be estimated independently of malaria and passed to the model as a *trace.*  Notably, the effects of temperature on the EIP can also be included in this way:
+
+    - VC is a trace.
+    
+    - Mosquito emergence and bionomic parameters are passed as a trace. Mosquito infection dynamics are simulated. 
+
+    - Coverage is passed as a trace. Mosquito population dynamics and infection dynamics are simulated.
+
+These ideas are fleshed out in the following sections. 
+
+## Trace-Based Vector Control Simulations
+
+
+### IRS Trace Objects
+
+```{r}
+source("./Operational-Model-Library/irsTrace.R")
+irsKillXtime.0 = c(rep(.95,15), c(9:1)/10)
+```
+
+### ITN Trace Objects
+
+```{r}
+print("Source ITN Trace")
+#source("./Operational-Model-Library/itnTrace.R")
+```
+
+
+## Vector Control Traces
+
+
