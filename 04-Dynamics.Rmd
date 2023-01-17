@@ -1,0 +1,156 @@
+# Realism 
+
+There are several reasons why models for policy will tend to be more complex than models developed for science. When models are used for policy, the advice should be consistent across studies, which may mean that the models must be complex enough to serve many purposes all at once. To build models that can serve malaria policy, we need the models to be *realistic* enough to be compelling. It might take a lot of work to build a model that resembles malaria in a particular place and time, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers. 
+
+In designing a software solution to the problem of building realistic models, we wanted a toolbox to build models that would directly address the concerns of malaria programs. In the chapters that follow, we'll show the features of this framework by constructing examples. If we're principled about it, the primary cost is *computational complexity.* That is something the software was designed to manage. For the moment, we thus want to set aside concerns about *realism* vs. *abstraction*, about *parsimony*, and about *error propagation,* and we want to simply ask the question of how to build models with the features we want. 
+
+This chapter is an overview of the toolbox. We'll cover the same material in much greater detail, with examples, in the chapters that follow.  
+
+## Stratification 
+
+The first topic we want to cover is *segmentation* of the human population into *strata.* When we talk about *stratification,* we mean it the narrow sense of segmenting the human population, usually to deal with heterogeneity of some sort.^[In a broader sense, stratification is also about subdividing landscapes into a set of spatial domains that share relevant features in order to *tailor interventions to context.* That is a topic we take up in a separate book, 
+(<a target="_blank" href = "/Users/smitdave/git/RAMP-Book/_book/index.html"> **Robust Analytics for Malaria Policy.** </a>).] 
+The guiding principle is that our analytics will be more accurate if we identify and remove any sources of heterogeneity, either for estimating the impact of interventions in the past or for projecting those impacts into the future. We acknowledge that models are approximations, and that our approximations don't have to be perfect. The goal is to find ways of propagating uncertainty that are *good enough* for the task at hand. 
+
+
+In malaria epidemiology, *some* kinds of endogenous heterogeneity *could* be built into the *epidemiological state space.* Other kinds of heterogeneity, including consistent differences in exposure, differences in care seeking and drug taking, and differences created by malaria control (*e.g.* net ownership or vaccination), usually require stratification. The decision about how to strike the right balance depends on the model and the purpose of a study.
+
+The framework and supporting software offer a toolbox for stratification. It is designed to stratify populations in a principled way, so that we can *understand* how the heterogeneity affects transmission or outcomes that we care about, but we can also *combine* effects. We want to stratify populations by applying rules that *split* populations when the differences are large enough. (If we started with complex models, we might choose to *join* populations if the differences were small.) By so doing, we can *compare* the behaviors of models that differ from each other in only one way. If the differences are not too large, or if the differences in dynamical behaviors we care about are not too large, we might decide not to split the strata, and use the average.  Because of the way models are encoded, it's easy to build models that split the strata in multiple, independent ways. 
+
+### Strata in Ross's model 
+
+As a simple example, consider a simple Ross-style model for infection with exposure and recovery (described in Section \@ref(RossEqn)): 
+
+$$\frac{dX}{dt} = h (H-X)-r X$$
+
+If exposure is heterogeneous, we could split this population into two strata and add subscripts (*i.e.*, indexed by $i \in \left\{1,2, \ldots \right\}$): 
+
+$$\frac{dX_i}{dt} =  k_i h (H_i -X_i)-r X_i$$ 
+
+We hold the *average* FoI constant by constraining the values of $k_i$:
+
+$$\frac{\sum_i k_i H_i}{H} = 1$$ 
+Stratification is important if the differences are large. With two strata, it would not make sense to stratify if $k_1 \approx k_2$, but if $k_2 \gg k_1$ then it might change our expectations, or it might change what we recommend. 
+
+### Frailties 
+
+We will introduce segmentation first through models of [Heterogeneous Exposure] to malaria, where we consider various sources of *frailty* -- proportional differences in the average hazard rate for infection ($k_i$, in the example above). These differences in exposure can arise because of age, house type, risky behaviors, other factors. Frailty that is attributable to location (*e.g.* proximity of home to aquatic habitats) can be dealt with by sub-dividing space into *patches,* a topic that is taken up in [Space] below and [Spatial Dynamics]. Depending on the size of the patches, some differences in average rates of exposure due to location can persist, and these could be dealt with by generic stratification into high *vs.* low exposure strata. 
+
+Some of the heterogeneous traits that we care about change dynamically, so we will also need to consider population *flows* among strata, which change the sizes of the strata. We would like to deal with these flows in a principled way. Bed net ownership and use are among the human behaviors that matters most for programs. In some cases, we will want to understand dynamic changes in bed net ownership, the patterns of use among those who own a net, personal protection, and community effects. Later, we show how to construct an example that *describes* all of these aspects of bednets. 
+
+Segmentation is what we need to build models of pharmaceutical interventions with waning effectiveness, such as mass vaccination. Among the most important factors in malaria is age. We have defined algorithms to model [Aging] and other demographic change, the loss of bednets, waning protection or changing housing quality.
+
+## Blood Feeding 
+
+The second topic we must tackle is blood feeding, which is an interaction between mosquitoes and humans. It is an asymmetric relationship -- mosquitoes search for blood hosts, select a host, and blood feed. Humans, for their part, attract mosquitoes from a distance, move around, and spend time in places when mosquitoes are biting. Humans can wear protective clothing (or not), use bed nets (or not), or do other things that make them more or less available to humans. Despite all this, humans are often unaware that they have been bitten. 
+
+Transmission occurs during blood feeding, and models of blood feeding *should* be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate ($f$) and a human fraction ($q$). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding [@WuSL2022SpatialDynamics].  
+
+Over the past two decades, several papers have drawn attention to the way blood feeding behaviors are or ought to be constrained by the availability of vertebrate hosts. It may be fine to assume that the density of vertebrate hosts doesn't change, but *something* should change when a large fraction of people are using bednets. Even with static parameters, we should think through the limiting cases: if there are no vertebrate hosts, then there blood feeding should not occur (*i.e.*, $f=0$); if there are no human hosts, then there should be no human blood meals ($q=0$); and if there are no alternatives to humans, all blood meals should be on humans ($q=1$). 
+
+The concepts we devised for blood feeding must, therefore, integrate the notion of frailty with the process of mosquito search. On the one hand, the mosquitoes should blood feed at a slower rate if hosts are unavailable. On the other hand, human biting should become heterogeneous. To arrive at an adequate description, we need to formalize this notion of host availability. 
+The logic is that mosquitoes *search* for humans. Differences among humans in their attractiveness are represented by a *search weight.* Mosquito search in a place depends on the amount of time spent by humans, but also by daily mosquito activity patterns; from these, we develop a notion of *time at risk* that characterize the way human activities expose them to mosquitoes. The mosquitoes add up all the time at risk spent by all the humans, which gives a measure of their *availability.* Availability describes humans as well as other vertebrate hosts, which are modified by mosquito preferences. The overall feeding rates and the human fraction are computed from availability using *functional responses.* 
+
+To complete the picture, we consider how the expected rate of exposure could have a distribution in the population, which we call environmental heterogeneity. 
+
+### Search and Risk 
+
+### Search Weights and Availability
+
+To deal with heterogeneous exposure and many other phenomena, we need a sensible way of segmenting humans into population **strata**. Stratification makes it possible to deal with population heterogeneity. 
+
+A new model of **blood feeding** is based on a model of blood feeding as the endpoint of a search for a blood host [@WuSL2022SpatialDynamics]. 
+
++ Each sub-population has a *search weight* ($w$), and the total *availability* of humans for blood feeding ($W$) is the sum of the sizes of the strata weighted by their search weights. 
+
++ We also consider the availability of alternative vertebrate species for blood feeding ($O$).
+
+
+### Functional Response 
+
++ Mosquito blood feeding rates are computed using a *functional response* to total availability of vertebrate hosts ($f = F_f(B)$). 
+
++ To compute total availability, we add a scaling parameter on alternative hosts, because mosquito preferences can translate into different patterns of search; total availability is $B=W + O^\zeta$.  
+
++ The human fraction is proportional to the relative availability of hosts $q = W/B$. 
+
+### Environmental Heterogeneity  
+
++ The *search weights* thus translate into a kind of **[Frailty]**, which is one component of *heterogeneous exposure.* Important sources of frailty include bednet use, housing type, and age. 
+
++ We also want to consider *variability* in exposure within a stratum -- what is the distribution of the *expected* number of bites over time? We have already discussed frailties, so this is a different kind of heterogeneous exposure that we call **[Environmental Heterogeneity]**.  This helps us to align models with data: mosquito counts data tend to be described well by *negative binomial* distributions, so it is likely that the distribution of infectious bites also follows a negative binomial distribution. We introduce a function that translate the EIR into the FoI: 
+$$h=F_h(E)$$ 
+
+
+In the Ross-Macdonald model, the underlying assumption is consistent with a Poisson distribution, but we have also derived *negative binomial hazard rates*. Environmental heterogeneity can arise from two sources: 
+
+- the aggregated distributions of mosquitoes in micro-habitats, and the redistribution of mosquito populations by wind and weather; 
+    
+- random movements of humans around mosquito micro-habitats that affect their risk in a way that doesn't tend to change the mean; 
+
+## Mosquito Behavior 
+
+### Resource Availability
+
+### Egg Laying 
+
+### Search and Dispersal  
+
+## Space
+
+Space is big, so we start by drawing boundaries around a part of the world we want to study, that we call the *spatial domain.*  
+
+### Human Travel and Mobility
+
+The notion of a spatially distributed risk for humans and the modalities of human travel. 
+
++ Humans move around, so we develop a model of *time spent*. Time spent is sub-divided into three parts:
+
+    - time spent at home; 
+    
+    - time spent traveling, when a night is spent away from home; 
+    
+    - human mobility, which describes time spent around home when not traveling.
+
++ For travel, we estimate a travel FoI.
+
++ For time at home and mobility, after weighing time spent and mosquito diurnal activity patterns by time of day, we modify time spent to get a notion of *time at risk*  
+
++ After modifying time at risk by search weights, mosquito blood meals are distributed among all hosts according to their availability. 
+
+### Mosquito Dispersal and Demography
+
+To describe mosquito spatial dynamics, we 
+
+## Time 
+
+## Epidemiology 
+
+## Aging 
+
+Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny. 
+
+For systems described generically by the state space, $\mathscr X$,  the dynamics we care about have the form: 
+
+$$\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}$$
+
+We might want to deal with malaria differently if we are studying malaria in cohorts. In a population where the FoI over time is $h(t)$, we might want to follow a birth cohort, so we define $h_d(a) = h(t-a)$ for all $t>d$. We can then solve: 
+
+$$\frac{d{\mathscr X}}{d a} $$
+which produces states in cohorts as they age, ${\mathscr X}(a|h).$
+
+When we simulate malaria transmission dynamics in populations for policy, we will want to put a mesh on age and segment the population. The dynamics are define for age strata, where the FoI is defined differently for each age stratum:  
+
+$$\frac{d{\mathscr X}_a}{d t}$$
+
+which produces age-dependent states over time, ${\mathscr X}_a(t|h).$ 
+
+Our algorithms should guarantee that the epidemiological states over time provide an accurate match for the epidemiological states over age. 
+
+## Mosquito Ecology  
+
+## Integrated Vector Control
+
+## Pharmaceutic Interventions 
+
+## Context 

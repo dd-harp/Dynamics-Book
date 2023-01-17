@@ -1,9 +1,7 @@
-# Cohorts and Demography
+# Cohort Dynamics
 
 We need a way of incorporating age into our models. 
 
 ## Boxcar Models
 
 ## Delay  
-
-## Migration 

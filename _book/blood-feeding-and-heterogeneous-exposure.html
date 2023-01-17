@@ -23,14 +23,14 @@
 <meta name="author" content="David L. Smith" />
 
 
-<meta name="date" content="2023-01-13" />
+<meta name="date" content="2023-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="adding-realism-to-models.html"/>
+<link rel="prev" href="realism.html"/>
 <link rel="next" href="space.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -54,70 +54,6 @@
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -194,8 +130,8 @@ div.csl-indent {
 <li class="chapter" data-level="4.2.1" data-path="modular-computation.html"><a href="modular-computation.html#exde"><i class="fa fa-check"></i><b>4.2.1</b> <code>exDE</code></a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>II Blood Feeding, Exposure, and Transmission</b></span></li>
-<li class="chapter" data-level="5" data-path="adding-realism-to-models.html"><a href="adding-realism-to-models.html"><i class="fa fa-check"></i><b>5</b> Adding Realism to Models</a>
+<li class="part"><span><b>II Modeling Transmission</b></span></li>
+<li class="chapter" data-level="5" data-path="realism.html"><a href="realism.html"><i class="fa fa-check"></i><b>5</b> Realism</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="blood-feeding-and-heterogeneous-exposure.html"><a href="blood-feeding-and-heterogeneous-exposure.html"><i class="fa fa-check"></i><b>5.1</b> Blood Feeding and Heterogeneous Exposure</a></li>
 <li class="chapter" data-level="5.2" data-path="space.html"><a href="space.html"><i class="fa fa-check"></i><b>5.2</b> Space</a>
@@ -365,7 +301,7 @@ div.csl-indent {
 We end up describing human blood feeding in terms of a blood feeding rates (denoted <span class="math inline">\(f\)</span>) and a human fraction (denoted <span class="math inline">\(q\)</span>). A question for us is how these rates vary by context, and the consequences for exposure. To do this, we need to rethink the mathematics of blood feeding.</p>
 <p>Over the past two decades, several papers have drawn attention to the way blood feeding is constrained by the availability of vertebrate hosts. It may be fine to assume that the density of vertebrate hosts doesn’t change, but <em>something</em> should change when a large fraction of people are using bednets. Even with static parameters, we should think through the limiting cases: if there are no vertebrate hosts, then there blood feeding should not occur (<em>i.e.</em>, <span class="math inline">\(f=0\)</span>); if there are no human hosts, then there should be no human blood meals (<span class="math inline">\(q=0\)</span>); and if there are no alternatives to humans, all blood meals should be on humans (<span class="math inline">\(q=1\)</span>). On the one hand, the mosquitoes should blood feed at a slower rate. On the other hand, human biting should become heterogeneous.</p>
 <p>To deal with heterogeneous exposure and many other phenomena, we need a sensible way of segmenting humans into population <strong>strata</strong>. Stratification makes it possible to deal with population heterogeneity.</p>
-<p>A new model of <strong>blood feeding</strong> is based on a model of blood feeding as the endpoint of a search for a blood host <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">16</a>]</span>:</p>
+<p>A new model of <strong>blood feeding</strong> is based on a model of blood feeding as the endpoint of a search for a blood host <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">1</a>]</span>:</p>
 <ul>
 <li><p>Each sub-population has a <em>search weight</em> (<span class="math inline">\(w\)</span>), and the total <em>availability</em> of humans for blood feeding (<span class="math inline">\(W\)</span>) is the sum of the sizes of the strata weighted by their search weights.</p></li>
 <li><p>We also consider the availability of alternative vertebrate species for blood feeding (<span class="math inline">\(O\)</span>).</p></li>
@@ -388,7 +324,7 @@ In the Ross-Macdonald model, the underlying assumption is consistent with a Pois
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-WuSL2022SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">16. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
 </div>
 </div>
             </section>
@@ -396,7 +332,7 @@ In the Ross-Macdonald model, the underlying assumption is consistent with a Pois
           </div>
         </div>
       </div>
-<a href="adding-realism-to-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="realism.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="space.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

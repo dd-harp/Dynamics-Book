@@ -1,4 +1,4 @@
-# Extending Ross-Macdonald
+# Mosquito Population Dynamics 
 
 In this chapter, we modify the Ross-Macdonald model by adding a
 fully defined model for mosquito ecology. The process is actually
