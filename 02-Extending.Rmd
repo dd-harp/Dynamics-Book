@@ -1,20 +1,29 @@
 # Mosquito Population Dynamics 
 
-In this chapter, we modify the Ross-Macdonald model by adding a
-fully defined model for mosquito ecology. The process is actually
-quite simple:
+There are some very good reasons to care about mosquito ecology, particularly when it comes to vector control [@BradyOJ2015AdultVector]. In this chapter, we fully define a model for mosquito ecology [@SmithDL2013_LarvalDynamics]. The process is actually quite simple:
 
 + We define terms that describe egg-laying by adult mosquitoes; 
 
 + We write a basic equation that determines how eggs develop in
 aquatic habitats and then emerge as adults; 
 
-+ We incorporate seasonality into the aquatic model; 
++ We incorporate seasonality into parameters in an aquatic model; 
 
 + We replace the parameter $\Lambda(t)$ from the Aron-May model with a term that
 describes emergence of adults from aquatic habitats.
 
 ## Aquatic Dynamics 
+
+\begin{equation}
+\begin{array}{rl}
+\frac{dL}{dt} &= \eta - (\psi + \phi + \theta L) L \\ 
+\frac{dM}{dt} &= \Lambda - g M\\  \\ \hline 
+\Lambda &= \frac{\psi L}{2} \\ 
+\eta &= \chi \nu M \\ 
+\end{array}
+\end{equation}
+
+
 
 ## Understanding Mosquito Dynamics 
  

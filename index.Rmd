@@ -11,12 +11,14 @@ output:
     config:
       toolbar:
         position: static
+    extra_dependencies: caption
   bookdown::pdf_book:
     keep_tex: yes
     toc: true
     toc_depth: 3
     extra_dependencies:
       mathrsfs: null
+      caption: null
 documentclass: book
 bibliography: ../RAMP-Model-Library/references.bib
 csl: ../RAMP-Model-Library/plos.csl

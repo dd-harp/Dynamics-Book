@@ -310,7 +310,7 @@ To make it absolutely clear, we are assuming:
     
 $$\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)$$
 
-## Time Mesh
+### Time Mesh
 
 We define a mesh over time -- the points in time when we would like to know the values of the variables: 
 
@@ -435,6 +435,8 @@ At the steady state, $$\kappa = c \frac{X}{H}.$$ If we substitute this into the 
 \mbox{EIR} = c V X\frac{1}{H + c S X} 
 \end{equation}
 
+**** 
+
 Now, we're going to define 
 $$R_0 = \frac{bcV}{r}.$$ 
 
@@ -443,29 +445,43 @@ If we plug this into $dX/dt$ we get an expression that involves only $X$
 $$\frac{1}{r} \frac{dX}{dt} = X \left( R_0  \frac{H-X}{H + cSX} - 1\right)$$ 
 Since $X$ is the density of infected humans, it can never be a negative number and it is always smaller than $H$: we write $X \in [0, H]$. When $X$ is very close to $0$, then 
 
+$$\frac{H-X}{H + cSX} \lessapprox 1$$ 
+
+but in the limit: 
+
 $$\lim_{X \rightarrow 0} \frac{H-X}{H + cSX} = 1$$ 
 
-In fact, 
-$$\frac{H-X}{H + cSX} \lapprox 1$$ 
-
+It follows that when $X$ is small: 
 
 $$\frac{1}{r} \frac{dX}{dt} \approx X \left( R_0  - 1\right)$$ 
-It follows that if $R_0 >1$, then $X$ will tend to increase. 
+so if $R_0 >1$, then $X$ will tend to increase. 
 
 We let $$x = \frac{X}{H}$$ denote the *prevalence* of infection, or the fraction of people who are infected. Since $H$ is constant, it is a simple matter to change the variables, and can write: 
 
 In this equation, if $R_0 > 1$, then there is a steady state at: 
 
-$$ x= \frac{R_0 -1}{R_0 + c S}$$ 
+$$\bar x= \frac{R_0 -1}{R_0 + c S}$$ 
 and if $R_0<1$, then there is a stable steady state at $\bar x=0$.
 
+Since at the steady state, $\kappa = c \bar x$, we can plug this back into the formulas above to get $\bar Y$ and $\bar Z$. 
 
+What this analysis has shown is that when mosquito population densities are constant, then malaria reaches a steady state: if $R_0 >1$, then there is a positive endemic equilibrium, and if $R_0 < 1$, then malaria is absent from the system. The system is said to be stable -- in fact, is is globally asymptotically stable, which means that  all the orbits end up converging to the steady state. This statement has been proved many times in many papers, and since this book is focused on policy, we'll let others worry about proofs. 
 
 
 ## Stable Orbits 
 
-The first point we want to make is about the    
-```{r}
+If emergence rates vary seasonally, how much of the analysis that we did to understand *steady states* still holds?  Obviously, things change, but many of the same principles still hold. It is easy enough to simulate, but the resulting dynamics can be quite difficult. Here, we show that the steady state analysis provides a good qualitative guide, but that the answers differ quantitatively.  
+
+
+### Orbits  
+
+If $R_0 >1$, then the system is characterized by *stable orbits* (See Figure 1.1). If $\Lambda(t)$ has an annual cycle, then after the orbits converge: 
+
+    - $M(t+365) = M(t)$; 
+    - $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
+    - $X(t+365) = X(t)$. 
+
+```{r, echo=F, }
 compareTS_AronMay = function(yout1, yout2){
   dta1 = data.frame(yout1) 
   dta2 = data.frame(yout2) 
@@ -475,17 +491,20 @@ compareTS_AronMay = function(yout1, yout2){
        ylab = "Mosquito Density", 
        main = "Mosquitoes"))
   with(dta2, lines(time/365, M, col = "blue", lty=2))
-  with(dta1,plot(time/365, Y, type = "l", col = "purple", 
+  yrng = range(dta1$Y, dta2$Y)
+  with(dta1,plot(time/365, Y, type = "l", ylim = yrng, col = "purple", 
        xlab = "Time (in Years)", 
        ylab = "Infected Mosquito Density", 
        main = "Mosquitoes"))
   with(dta2, lines(time/365, Y, col = "purple", lty=2))
-  with(dta1,plot(time/365, Z, type = "l", col = "red", 
+  zrng = range(dta1$Z, dta2$Z)
+  with(dta1,plot(time/365, Z, type = "l", ylim = zrng, col = "red", 
        xlab = "Time (in Years)", 
        ylab = "Infectious Mosquito Density", 
        main = "Mosquitoes"))
   with(dta2, lines(time/365, Z, col = "red", lty=2))
-  with(dta1,plot(time/365, X, ylim = c(0,1000), type = "l", 
+  xrng = range(dta1$X, dta2$X)
+  with(dta1,plot(time/365, X, ylim = xrng, type = "l", 
        xlab = "Time (in Years)", 
        ylab = "# Infected Humans", 
        main = "Humans"))
@@ -493,23 +512,74 @@ compareTS_AronMay = function(yout1, yout2){
 }
 ```
 
-```{r}
+
+```{r, echo=F, fig.cap = "With different initial values, the orbits converge and eventually lie on top of one another."}
 y1 = c(M=1100, Y=100, Z=100, X=100)
+tt = seq(0, 830, by =1)
 params1 = makeParams(y1)
+yout0 <- dede(y=y0, times=tt, func=dAronMay, parms=params) 
 yout1 <- dede(y=y1, times=tt, func=dAronMay, parms=params1) 
-compareTS_AronMay(yout, yout1)
+compareTS_AronMay(yout0, yout1)
 ```
-  
 
-+ The idea of stability and basins of attraction.
+\clearpage
 
-  - Stable states 
-  
-  - Stable orbits
+### Thresholds
 
-+ Long-term average *vs* steady states
+There is a threshold condition $R_0>1$ that determines whether malaria is endemic, but the formula for $R_0$ depends on the form of $\Lambda(t)$. If we set $R_0=1$, we can show that the threshold for persistence in a seasonal environment is $R_0 > \sigma > 1$.  The math to compute threshold conditions in seasonal environments is in [Temporal Dynamics]. 
 
-## The Basic Reproductive Number 
+
+```{r, echo=F}
+makeParamsThresh = function(y0, 
+                      g=1/12, f=1/2.5, q=0.95,  
+                      c=0.15,
+                      b=0.55, r=1/200, H=1000,  
+                      ss=1, R0=1, 
+                      tau=10  
+                      ){
+  S = f*q/g 
+  m = R0*r/(b*c*S^2*exp(-g*tau))
+  ss = min(1,max(0, ss))
+return(list(y0=y0,g=g,f=f,q=q,c=c,H=H,tau=tau,b=b,r=r,
+  Lambda = function(t){m*H*(1 + ss*sin(2*pi*t/365))})) 
+} 
+``` 
+
+
+```{r, echo=F, fig.cap = "Here, we set $R_0= 1.02$ for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same *average* emergence rate, malaria declines with seasonality."}
+yI = c(M=2, Y=0, Z=0, X=10)
+tt = seq(0, 7300, by=5)
+
+paramsA = makeParamsThresh(yI, R0=1.02, ss=0)
+paramsB = makeParamsThresh(yI, R0=1.02)
+youtA <- dede(y=yI, times=tt, func=dAronMay, parms=paramsA) 
+youtB <- dede(y=yI, times=tt, func=dAronMay, parms=paramsB) 
+
+compareTS_AronMay(youtB, youtA)
+```
+
+\clearpage
+
+### Average Dynamics 
+
+Away from thresholds, the *average* prevalence of malaria infection is variable in a seasonal environment, though when it has been averaged across the year, it tends to be lower.  
+
+```{r, echo=F, fig.cap = "Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall."}
+yI = c(M=20, Y=5, Z=1, X=100)
+tt = seq(0, 7300, by=5)
+
+paramsC = makeParamsThresh(yI, R0=2, ss=0)
+paramsD = makeParamsThresh(yI, R0=2)
+youtC <- dede(y=yI, times=tt, func=dAronMay, parms=paramsC) 
+youtD <- dede(y=yI, times=tt, func=dAronMay, parms=paramsD) 
+
+compareTS_AronMay(youtD, youtC)
+```
+
+## Endemic Malaria 
+
+When we do the mathematics, we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year. 
+
 
 ## Discussion
 

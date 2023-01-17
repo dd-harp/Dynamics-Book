@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.5 Stable Orbits | Applied Malaria Dynamics</title>
+  <title>1.4 Stable Orbits | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.5 Stable Orbits | Applied Malaria Dynamics" />
+  <meta property="og:title" content="1.4 Stable Orbits | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="The RAMP Model and Algorithm Library" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.5 Stable Orbits | Applied Malaria Dynamics" />
+  <meta name="twitter:title" content="1.4 Stable Orbits | Applied Malaria Dynamics" />
   
   <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="steady-states.html"/>
-<link rel="next" href="the-basic-reproductive-number.html"/>
+<link rel="next" href="endemic-malaria.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,16 +175,19 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.1" data-path="solutions.html"><a href="solutions.html#derivatives"><i class="fa fa-check"></i><b>1.2.1</b> Derivatives</a></li>
 <li class="chapter" data-level="1.2.2" data-path="solutions.html"><a href="solutions.html#initial-values"><i class="fa fa-check"></i><b>1.2.2</b> Initial Values</a></li>
 <li class="chapter" data-level="1.2.3" data-path="solutions.html"><a href="solutions.html#parameter-values"><i class="fa fa-check"></i><b>1.2.3</b> Parameter Values</a></li>
+<li class="chapter" data-level="1.2.4" data-path="solutions.html"><a href="solutions.html#time-mesh"><i class="fa fa-check"></i><b>1.2.4</b> Time Mesh</a></li>
+<li class="chapter" data-level="1.2.5" data-path="solutions.html"><a href="solutions.html#solving"><i class="fa fa-check"></i><b>1.2.5</b> Solving</a></li>
+<li class="chapter" data-level="1.2.6" data-path="solutions.html"><a href="solutions.html#visualizing"><i class="fa fa-check"></i><b>1.2.6</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="time-mesh.html"><a href="time-mesh.html"><i class="fa fa-check"></i><b>1.3</b> Time Mesh</a>
+<li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a></li>
+<li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="time-mesh.html"><a href="time-mesh.html#solving"><i class="fa fa-check"></i><b>1.3.1</b> Solving</a></li>
-<li class="chapter" data-level="1.3.2" data-path="time-mesh.html"><a href="time-mesh.html#visualizing"><i class="fa fa-check"></i><b>1.3.2</b> Visualizing</a></li>
+<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.1</b> Orbits</a></li>
+<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.2</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>1.4.3</b> Average Dynamics</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.4</b> Steady States</a></li>
-<li class="chapter" data-level="1.5" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.5</b> Stable Orbits</a></li>
-<li class="chapter" data-level="1.6" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>1.6</b> The Basic Reproductive Number</a></li>
-<li class="chapter" data-level="1.7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.7</b> Discussion</a></li>
+<li class="chapter" data-level="1.5" data-path="endemic-malaria.html"><a href="endemic-malaria.html"><i class="fa fa-check"></i><b>1.5</b> Endemic Malaria</a></li>
+<li class="chapter" data-level="1.6" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.6</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mosquito-population-dynamics.html"><a href="mosquito-population-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Population Dynamics</a>
 <ul>
@@ -386,47 +389,42 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stable-orbits" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Stable Orbits<a href="stable-orbits.html#stable-orbits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The first point we want to make is about the</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="stable-orbits.html#cb14-1" aria-hidden="true" tabindex="-1"></a>compareTS_AronMay <span class="ot">=</span> <span class="cf">function</span>(yout1, yout2){</span>
-<span id="cb14-2"><a href="stable-orbits.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  dta1 <span class="ot">=</span> <span class="fu">data.frame</span>(yout1) </span>
-<span id="cb14-3"><a href="stable-orbits.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  dta2 <span class="ot">=</span> <span class="fu">data.frame</span>(yout2) </span>
-<span id="cb14-4"><a href="stable-orbits.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb14-5"><a href="stable-orbits.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta1,<span class="fu">plot</span>(time<span class="sc">/</span><span class="dv">365</span>, M, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, </span>
-<span id="cb14-6"><a href="stable-orbits.html#cb14-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Time (in Years)&quot;</span>, </span>
-<span id="cb14-7"><a href="stable-orbits.html#cb14-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Mosquito Density&quot;</span>, </span>
-<span id="cb14-8"><a href="stable-orbits.html#cb14-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Mosquitoes&quot;</span>))</span>
-<span id="cb14-9"><a href="stable-orbits.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta2, <span class="fu">lines</span>(time<span class="sc">/</span><span class="dv">365</span>, M, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span>
-<span id="cb14-10"><a href="stable-orbits.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta1,<span class="fu">plot</span>(time<span class="sc">/</span><span class="dv">365</span>, Y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>, </span>
-<span id="cb14-11"><a href="stable-orbits.html#cb14-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Time (in Years)&quot;</span>, </span>
-<span id="cb14-12"><a href="stable-orbits.html#cb14-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Infected Mosquito Density&quot;</span>, </span>
-<span id="cb14-13"><a href="stable-orbits.html#cb14-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Mosquitoes&quot;</span>))</span>
-<span id="cb14-14"><a href="stable-orbits.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta2, <span class="fu">lines</span>(time<span class="sc">/</span><span class="dv">365</span>, Y, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span>
-<span id="cb14-15"><a href="stable-orbits.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta1,<span class="fu">plot</span>(time<span class="sc">/</span><span class="dv">365</span>, Z, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, </span>
-<span id="cb14-16"><a href="stable-orbits.html#cb14-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Time (in Years)&quot;</span>, </span>
-<span id="cb14-17"><a href="stable-orbits.html#cb14-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;Infectious Mosquito Density&quot;</span>, </span>
-<span id="cb14-18"><a href="stable-orbits.html#cb14-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Mosquitoes&quot;</span>))</span>
-<span id="cb14-19"><a href="stable-orbits.html#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta2, <span class="fu">lines</span>(time<span class="sc">/</span><span class="dv">365</span>, Z, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span>
-<span id="cb14-20"><a href="stable-orbits.html#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta1,<span class="fu">plot</span>(time<span class="sc">/</span><span class="dv">365</span>, X, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, </span>
-<span id="cb14-21"><a href="stable-orbits.html#cb14-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Time (in Years)&quot;</span>, </span>
-<span id="cb14-22"><a href="stable-orbits.html#cb14-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&quot;# Infected Humans&quot;</span>, </span>
-<span id="cb14-23"><a href="stable-orbits.html#cb14-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;Humans&quot;</span>))</span>
-<span id="cb14-24"><a href="stable-orbits.html#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(dta2, <span class="fu">lines</span>(time<span class="sc">/</span><span class="dv">365</span>, X, <span class="at">lty=</span><span class="dv">2</span>))</span>
-<span id="cb14-25"><a href="stable-orbits.html#cb14-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="stable-orbits.html#cb15-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">=</span> <span class="fu">c</span>(<span class="at">M=</span><span class="dv">1100</span>, <span class="at">Y=</span><span class="dv">100</span>, <span class="at">Z=</span><span class="dv">100</span>, <span class="at">X=</span><span class="dv">100</span>)</span>
-<span id="cb15-2"><a href="stable-orbits.html#cb15-2" aria-hidden="true" tabindex="-1"></a>params1 <span class="ot">=</span> <span class="fu">makeParams</span>(y1)</span>
-<span id="cb15-3"><a href="stable-orbits.html#cb15-3" aria-hidden="true" tabindex="-1"></a>yout1 <span class="ot">&lt;-</span> <span class="fu">dede</span>(<span class="at">y=</span>y1, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>params1) </span>
-<span id="cb15-4"><a href="stable-orbits.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compareTS_AronMay</span>(yout, yout1)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<ul>
-<li><p>The idea of stability and basins of attraction.</p>
-<ul>
-<li><p>Stable states</p></li>
-<li><p>Stable orbits</p></li>
-</ul></li>
-<li><p>Long-term average <em>vs</em> steady states</p></li>
-</ul>
+<div id="stable-orbits" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Stable Orbits<a href="stable-orbits.html#stable-orbits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If emergence rates vary seasonally, how much of the analysis that we did to understand <em>steady states</em> still holds? Obviously, things change, but many of the same principles still hold. It is easy enough to simulate, but the resulting dynamics can be quite difficult. Here, we show that the steady state analysis provides a good qualitative guide, but that the answers differ quantitatively.</p>
+<div id="orbits" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Orbits<a href="stable-orbits.html#orbits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If <span class="math inline">\(R_0 &gt;1\)</span>, then the system is characterized by <em>stable orbits</em> (See Figure 1.1). If <span class="math inline">\(\Lambda(t)\)</span> has an annual cycle, then after the orbits converge:</p>
+<pre><code>- $M(t+365) = M(t)$; 
+- $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
+- $X(t+365) = X(t)$. </code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="_main_files/figure-html/unnamed-chunk-12-1.png" alt="With different initial values, the orbits converge and eventually lie on top of one another." width="672" />
+<p class="caption">
+Figure 1.1: With different initial values, the orbits converge and eventually lie on top of one another.
+</p>
+</div>
+</div>
+<div id="thresholds" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Thresholds<a href="stable-orbits.html#thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There is a threshold condition <span class="math inline">\(R_0&gt;1\)</span> that determines whether malaria is endemic, but the formula for <span class="math inline">\(R_0\)</span> depends on the form of <span class="math inline">\(\Lambda(t)\)</span>. If we set <span class="math inline">\(R_0=1\)</span>, we can show that the threshold for persistence in a seasonal environment is <span class="math inline">\(R_0 &gt; \sigma &gt; 1\)</span>. The math to compute threshold conditions in seasonal environments is in <a href="temporal-dynamics.html#temporal-dynamics">Temporal Dynamics</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<img src="_main_files/figure-html/unnamed-chunk-14-1.png" alt="Here, we set $R_0= 1.02$ for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same *average* emergence rate, malaria declines with seasonality." width="672" />
+<p class="caption">
+Figure 1.2: Here, we set <span class="math inline">\(R_0= 1.02\)</span> for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same <em>average</em> emergence rate, malaria declines with seasonality.
+</p>
+</div>
+</div>
+<div id="average-dynamics" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Average Dynamics<a href="stable-orbits.html#average-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Away from thresholds, the <em>average</em> prevalence of malaria infection is variable in a seasonal environment, though when it has been averaged across the year, it tends to be lower.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
+<img src="_main_files/figure-html/unnamed-chunk-15-1.png" alt="Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall." width="672" />
+<p class="caption">
+Figure 1.3: Here, we set <span class="math inline">\(R_0= 2\)</span> for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it’s higher as transmission peaks, lower in the off-season, and lower overall.
+</p>
+</div>
+</div>
 </div>
             </section>
 
@@ -434,7 +432,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="steady-states.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-basic-reproductive-number.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="endemic-malaria.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

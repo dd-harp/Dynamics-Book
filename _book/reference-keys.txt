@@ -15,8 +15,10 @@ solving
 visualizing
 steady-states
 stable-orbits
+orbits
 thresholds
-parameters
+average-dynamics
+endemic-malaria
 discussion
 mosquito-population-dynamics
 aquatic-dynamics
@@ -142,4 +144,3 @@ models
 pr2eir
 model-libraries
 references
-the-basic-reproductive-number

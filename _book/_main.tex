@@ -124,6 +124,7 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage{mathrsfs}
+\usepackage{caption}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -238,11 +239,11 @@ To learn how to use that software, we need to get through a lot of material. The
 
 The first model we present is a Ross-Macdonald model.
 
-\hypertarget{part-introduction}{%
-\part{Introduction}\label{part-introduction}}
+\hypertarget{part-basic-concepts}{%
+\part{Basic Concepts}\label{part-basic-concepts}}
 
-\hypertarget{malaria-dynamics}{%
-\chapter{Malaria Dynamics}\label{malaria-dynamics}}
+\hypertarget{malaria-population-dynamics}{%
+\chapter{Malaria Population Dynamics}\label{malaria-population-dynamics}}
 
 We start by introducing a Ross-Macdonald model {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{4}{]}.
 This particular system of delay differential equations traces back to a 1982 book chapter written by Joan Aron and Robert May {[}\protect\hyperlink{ref-AronJL1982PopulationDynamics}{5}{]}. We think it's a good starting point.
@@ -316,8 +317,15 @@ Mosquitoes become infected after blood feeding on an infectious human. To model 
 To model changes in \(Y\), we need to describe \emph{infection rates}. We assume the following:
 
 \begin{itemize}
+\tightlist
 \item
-  a fraction of human blood meals, infects mosquitoes. We call this quantity \emph{net infectiousness} (NI) and (for reasons that we will discuss in a moment), we give it a name, \(\kappa\): \[\kappa(t) = c \frac{X{t}}{H}\]
+  a fraction of human blood meals, infects mosquitoes. We call this quantity \emph{net infectiousness} (NI) and (for reasons that we will discuss in a moment), we give it a name, \(\kappa\):
+\end{itemize}
+
+\[\kappa(t) = c \frac{X(t)}{H}\]
+
+\begin{itemize}
+\tightlist
 \item
   infected mosquitoes die at the same rate as uninfected mosquitoes.
 \end{itemize}
@@ -609,7 +617,7 @@ To make it absolutely clear, we are assuming:
 \[\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)\]
 
 \hypertarget{time-mesh}{%
-\section{Time Mesh}\label{time-mesh}}
+\subsection{Time Mesh}\label{time-mesh}}
 
 We define a mesh over time -- the points in time when we would like to know the values of the variables:
 
@@ -667,77 +675,176 @@ This code plots the outputs:
 
 \clearpage
 
-\hypertarget{understanding-the-dynamics}{%
-\section{Understanding the Dynamics}\label{understanding-the-dynamics}}
+\hypertarget{steady-states}{%
+\section{Steady States}\label{steady-states}}
 
-The first point we want to make is about the
+To analyze this system, we first set the parameter \texttt{ss=1}, so that we can look at the system \emph{without} seasonality. Without seasonality, the system is actually \emph{autonomous.} We do this, in part, because the resulting system is easier to understand, which helps us develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{compareTS\_AronMay }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(yout1, yout2)\{}
-\NormalTok{  dta1 }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(yout1) }
-\NormalTok{  dta2 }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(yout2) }
-  \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta1,}\FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, M, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"Mosquito Density"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Mosquitoes"}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta2, }\FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, M, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta1,}\FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Y, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"Infected Mosquito Density"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Mosquitoes"}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta2, }\FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Y, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta1,}\FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Z, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"Infectious Mosquito Density"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Mosquitoes"}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta2, }\FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Z, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta1,}\FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, X, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"\# Infected Humans"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Humans"}\NormalTok{))}
-  \FunctionTok{with}\NormalTok{(dta2, }\FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, X, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{))}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
+\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &= \Lambda - g M \\
+\frac{dY}{dt} &= fq\kappa(M-Y) - g Y \\
+\frac{dZ}{dt} &= fq\kappa_\tau(M_\tau-Y_\tau)e^{-g\tau} - g Z \\
+\frac{dX}{dt} &= h (H-X) - rX  \\ \\ \hline \\ 
+\kappa &= c \frac{X(t)}{H} \\
+h &= b fq \frac{Z(t)}{H} \\
+\end{array}
+\end{equation}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y1 }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\DecValTok{1100}\NormalTok{, }\AttributeTok{Y=}\DecValTok{100}\NormalTok{, }\AttributeTok{Z=}\DecValTok{100}\NormalTok{, }\AttributeTok{X=}\DecValTok{100}\NormalTok{)}
-\NormalTok{params1 }\OtherTok{=} \FunctionTok{makeParams}\NormalTok{(y1)}
-\NormalTok{yout1 }\OtherTok{\textless{}{-}} \FunctionTok{dede}\NormalTok{(}\AttributeTok{y=}\NormalTok{y1, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{dAronMay, }\AttributeTok{parms=}\NormalTok{params1) }
-\FunctionTok{compareTS\_AronMay}\NormalTok{(yout, yout1)}
-\end{Highlighting}
-\end{Shaded}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+The first thing to note is that \(M\) affects \(Y\) and \(Z\), which affect \(X\); but \(M\) is not affected by \(Y\) or \(Z\). Mosquito population density is an \emph{exogenous} factor affecting malaria population dynamics.
+
+We can thus treat it separately:
+
+\begin{equation}
+\frac{dM}{dt} = \Lambda - g M 
+\end{equation}
+
+Since emergence rates are steady, mosquito population density reaches a steady state when \(dM/dt=0\), which occurs at:
+
+\begin{equation}
+\bar M = \frac{\Lambda}{g} 
+\end{equation}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Next, we note that at a steady state, the delayed values of variables and terms don't change, so from \(dY/dt\), we get:
+
+\begin{equation}
+g \bar Y = fq\kappa(\bar M- \bar Y) 
+\end{equation}
+
+If we substitute the formula for \(\bar M\) and solve for \(\bar Y\), we get:
+
+\begin{equation}
+\bar Y = \frac{fq\kappa}{g + fq\kappa} \frac{\Lambda}{g}
+\end{equation}
+
+and we substitute the formula for \(g \bar Y\) into \(dZ/dt\) to get:
+
+\begin{equation}
+\bar Y e^{-g\tau} = \bar Z
+\end{equation}
+
+or equivalently:
+
+\begin{equation}
+\bar Z =  \frac{f q \kappa}{g + fq \kappa} \frac{\Lambda}{g} e^{-g\tau} 
+\end{equation}
+
+It is a little thing, but the quantity \[S = \frac{fq}{g}\] is the number of bloodmeals a mosquito would take over its lifespan.
+
+At the steady state, \[\mbox{EIR} = fq \frac{\bar Z}{H},\]
+
+but if we rearrange the terms a bit, we get:
+
+\begin{equation}
+\mbox{EIR} = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa} 
+\end{equation}
+
+For the moment, we let \[V = \frac{\Lambda}{H} S^2  e^{-g\tau}.\] It is the formula for vectorial capacity. We can thus write:
+
+\begin{equation}
+\mbox{EIR} = V \kappa \frac{1}{1 + S \kappa} 
+\end{equation}
+
+At the steady state, \[\kappa = c \frac{X}{H}.\] If we substitute this into the expression for the EIR, we get:
+
+\begin{equation}
+\mbox{EIR} = c V X\frac{1}{H + c S X} 
+\end{equation}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Now, we're going to define
+\[R_0 = \frac{bcV}{r}.\]
+
+If we plug this into \(dX/dt\) we get an expression that involves only \(X\)
+
+\[\frac{1}{r} \frac{dX}{dt} = X \left( R_0  \frac{H-X}{H + cSX} - 1\right)\]
+Since \(X\) is the density of infected humans, it can never be a negative number and it is always smaller than \(H\): we write \(X \in [0, H]\). When \(X\) is very close to \(0\), then
+
+\[\frac{H-X}{H + cSX} \lessapprox 1\]
+
+but in the limit:
+
+\[\lim_{X \rightarrow 0} \frac{H-X}{H + cSX} = 1\]
+
+It follows that when \(X\) is small:
+
+\[\frac{1}{r} \frac{dX}{dt} \approx X \left( R_0  - 1\right)\]
+so if \(R_0 >1\), then \(X\) will tend to increase.
+
+We let \[x = \frac{X}{H}\] denote the \emph{prevalence} of infection, or the fraction of people who are infected. Since \(H\) is constant, it is a simple matter to change the variables, and can write:
+
+In this equation, if \(R_0 > 1\), then there is a steady state at:
+
+\[\bar x= \frac{R_0 -1}{R_0 + c S}\]
+and if \(R_0<1\), then there is a stable steady state at \(\bar x=0\).
+
+Since at the steady state, \(\kappa = c \bar x\), we can plug this back into the formulas above to get \(\bar Y\) and \(\bar Z\).
+
+What this analysis has shown is that when mosquito population densities are constant, then malaria reaches a steady state: if \(R_0 >1\), then there is a positive endemic equilibrium, and if \(R_0 < 1\), then malaria is absent from the system. The system is said to be stable -- in fact, is is globally asymptotically stable, which means that all the orbits end up converging to the steady state. This statement has been proved many times in many papers, and since this book is focused on policy, we'll let others worry about proofs.
+
+\hypertarget{stable-orbits}{%
+\section{Stable Orbits}\label{stable-orbits}}
+
+If emergence rates vary seasonally, how much of the analysis that we did to understand \emph{steady states} still holds? Obviously, things change, but many of the same principles still hold. It is easy enough to simulate, but the resulting dynamics can be quite difficult. Here, we show that the steady state analysis provides a good qualitative guide, but that the answers differ quantitatively.
+
+\hypertarget{orbits}{%
+\subsection{Orbits}\label{orbits}}
+
+If \(R_0 >1\), then the system is characterized by \emph{stable orbits} (See Figure 1.1). If \(\Lambda(t)\) has an annual cycle, then after the orbits converge:
+
+\begin{verbatim}
+- $M(t+365) = M(t)$; 
+- $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
+- $X(t+365) = X(t)$. 
+\end{verbatim}
+
+\begin{figure}
+\centering
 \includegraphics{_main_files/figure-latex/unnamed-chunk-13-1.pdf}
+\caption{\label{fig:unnamed-chunk-13}With different initial values, the orbits converge and eventually lie on top of one another.}
+\end{figure}
 
-\begin{itemize}
-\item
-  The idea of stability and basins of attraction.
-
-  \begin{itemize}
-  \item
-    Stable states
-  \item
-    Stable orbits
-  \end{itemize}
-\item
-  Long-term average \emph{vs} steady states
-\end{itemize}
+\clearpage
 
 \hypertarget{thresholds}{%
 \subsection{Thresholds}\label{thresholds}}
 
-\hypertarget{parameters}{%
-\subsection{Parameters}\label{parameters}}
+There is a threshold condition \(R_0>1\) that determines whether malaria is endemic, but the formula for \(R_0\) depends on the form of \(\Lambda(t)\). If we set \(R_0=1\), we can show that the threshold for persistence in a seasonal environment is \(R_0 > \sigma > 1\). The math to compute threshold conditions in seasonal environments is in \protect\hyperlink{temporal-dynamics}{Temporal Dynamics}.
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/unnamed-chunk-15-1.pdf}
+\caption{\label{fig:unnamed-chunk-15}Here, we set \(R_0= 1.02\) for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same \emph{average} emergence rate, malaria declines with seasonality.}
+\end{figure}
+
+\clearpage
+
+\hypertarget{average-dynamics}{%
+\subsection{Average Dynamics}\label{average-dynamics}}
+
+Away from thresholds, the \emph{average} prevalence of malaria infection is variable in a seasonal environment, though when it has been averaged across the year, it tends to be lower.
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/unnamed-chunk-16-1.pdf}
+\caption{\label{fig:unnamed-chunk-16}Here, we set \(R_0= 2\) for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall.}
+\end{figure}
+
+\hypertarget{endemic-malaria}{%
+\section{Endemic Malaria}\label{endemic-malaria}}
+
+When we do the mathematics, we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-\hypertarget{extending-ross-macdonald}{%
-\chapter{Extending Ross-Macdonald}\label{extending-ross-macdonald}}
+\hypertarget{mosquito-population-dynamics}{%
+\chapter{Mosquito Population Dynamics}\label{mosquito-population-dynamics}}
 
 In this chapter, we modify the Ross-Macdonald model by adding a
 fully defined model for mosquito ecology. The process is actually
@@ -750,7 +857,7 @@ quite simple:
   We write a basic equation that determines how eggs develop in
   aquatic habitats and then emerge as adults;
 \item
-  We incorporate seasonality into the aquatic model;
+  We incorporate seasonality into parameters in an aquatic model;
 \item
   We replace the parameter \(\Lambda(t)\) from the Aron-May model with a term that
   describes emergence of adults from aquatic habitats.

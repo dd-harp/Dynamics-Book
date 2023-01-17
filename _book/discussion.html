@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.7 Discussion | Applied Malaria Dynamics</title>
+  <title>1.6 Discussion | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.7 Discussion | Applied Malaria Dynamics" />
+  <meta property="og:title" content="1.6 Discussion | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="The RAMP Model and Algorithm Library" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.7 Discussion | Applied Malaria Dynamics" />
+  <meta name="twitter:title" content="1.6 Discussion | Applied Malaria Dynamics" />
   
   <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-basic-reproductive-number.html"/>
+<link rel="prev" href="endemic-malaria.html"/>
 <link rel="next" href="mosquito-population-dynamics.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -175,16 +175,19 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.1" data-path="solutions.html"><a href="solutions.html#derivatives"><i class="fa fa-check"></i><b>1.2.1</b> Derivatives</a></li>
 <li class="chapter" data-level="1.2.2" data-path="solutions.html"><a href="solutions.html#initial-values"><i class="fa fa-check"></i><b>1.2.2</b> Initial Values</a></li>
 <li class="chapter" data-level="1.2.3" data-path="solutions.html"><a href="solutions.html#parameter-values"><i class="fa fa-check"></i><b>1.2.3</b> Parameter Values</a></li>
+<li class="chapter" data-level="1.2.4" data-path="solutions.html"><a href="solutions.html#time-mesh"><i class="fa fa-check"></i><b>1.2.4</b> Time Mesh</a></li>
+<li class="chapter" data-level="1.2.5" data-path="solutions.html"><a href="solutions.html#solving"><i class="fa fa-check"></i><b>1.2.5</b> Solving</a></li>
+<li class="chapter" data-level="1.2.6" data-path="solutions.html"><a href="solutions.html#visualizing"><i class="fa fa-check"></i><b>1.2.6</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="time-mesh.html"><a href="time-mesh.html"><i class="fa fa-check"></i><b>1.3</b> Time Mesh</a>
+<li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a></li>
+<li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="time-mesh.html"><a href="time-mesh.html#solving"><i class="fa fa-check"></i><b>1.3.1</b> Solving</a></li>
-<li class="chapter" data-level="1.3.2" data-path="time-mesh.html"><a href="time-mesh.html#visualizing"><i class="fa fa-check"></i><b>1.3.2</b> Visualizing</a></li>
+<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.1</b> Orbits</a></li>
+<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.2</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>1.4.3</b> Average Dynamics</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.4</b> Steady States</a></li>
-<li class="chapter" data-level="1.5" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.5</b> Stable Orbits</a></li>
-<li class="chapter" data-level="1.6" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>1.6</b> The Basic Reproductive Number</a></li>
-<li class="chapter" data-level="1.7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.7</b> Discussion</a></li>
+<li class="chapter" data-level="1.5" data-path="endemic-malaria.html"><a href="endemic-malaria.html"><i class="fa fa-check"></i><b>1.5</b> Endemic Malaria</a></li>
+<li class="chapter" data-level="1.6" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.6</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mosquito-population-dynamics.html"><a href="mosquito-population-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Population Dynamics</a>
 <ul>
@@ -386,8 +389,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="discussion" class="section level2 hasAnchor" number="1.7">
-<h2><span class="header-section-number">1.7</span> Discussion<a href="discussion.html#discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="discussion" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Discussion<a href="discussion.html#discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 <!-- </div> -->
@@ -396,7 +399,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="the-basic-reproductive-number.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="endemic-malaria.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="mosquito-population-dynamics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
