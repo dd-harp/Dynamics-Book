@@ -2,10 +2,9 @@
 
 # Malaria Population Dynamics 
 
-We start by introducing a Ross-Macdonald model [@SmithDL2012_RossMacdonald]. 
-This particular system of delay differential equations traces back to a 1982 book chapter written by Joan Aron and Robert May [@AronJL1982PopulationDynamics]. We think it's a good starting point.
+We start by introducing a Ross-Macdonald model [@SmithDL2012_RossMacdonald]. This particular model family is a system of delay differential equations that traces back to a 1982 book chapter written by Joan Aron and Robert May [@AronJL1982PopulationDynamics]. We think it's a good starting point.
 
-We chose it because it is *extensible*. The variables in this model represent population densities. The variables are used to compute statistics like *prevalence,* a proportion. The variables in most other versions of the Ross-Macdonald are proportions.  In building models, we would sometimes like to change the *total* number of hosts (*i.e.* the denominators), but if the variables in equations described proportions, they are much more difficult to modify. 
+We chose it because it is *extensible*. The variables represent population densities, which are used to compute proportions, like *prevalence.* The variables in many other versions of the Ross-Macdonald are proportions. In some models, we would like to be able to change the *total* number of hosts (*i.e.* the denominators, if the variables are proportions), but if the variables in equations described proportions, they are much more difficult to modify. 
 
 We chose it because we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model, as it was presented by Macdonald. While Macdonald's analysis and formulas are familiar, they overlooked the role of mosquito ecology. This model lets us bypass a lengthy discussion about history and the way it skews opinions. Our formula for vectorial capacity is consistent with the original, but our analysis includes effects on mosquito ecology. 
 
@@ -144,7 +143,7 @@ h &= b fq \frac{Z(t)}{H} \\
 
 <center> 
 
-![A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [@AronJL1982PopulationDynamics]](../RAMP-Model-Library/Figures/AronMay.png)
+![A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [@AronJL1982PopulationDynamics]](../../RAMP-Model-Library/Figures/AronMay.png)
 
 </center> 
 

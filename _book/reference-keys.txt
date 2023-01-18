@@ -1,3 +1,6 @@
+fig:unnamed-chunk-13
+fig:unnamed-chunk-15
+fig:unnamed-chunk-16
 malaria-population-dynamics
 aron-and-mays-equations
 mosquito-ecology
@@ -144,3 +147,5 @@ models
 pr2eir
 model-libraries
 references
+fig:unnamed-chunk-12
+fig:unnamed-chunk-14

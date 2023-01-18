@@ -180,8 +180,13 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.6" data-path="solutions.html"><a href="solutions.html#visualizing"><i class="fa fa-check"></i><b>1.2.6</b> Visualizing</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a></li>
-<li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a></li>
-<li class="chapter" data-level="1.5" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>1.5</b> The Basic Reproductive Number</a></li>
+<li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.1</b> Orbits</a></li>
+<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.2</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>1.4.3</b> Average Dynamics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="endemic-malaria.html"><a href="endemic-malaria.html"><i class="fa fa-check"></i><b>1.5</b> Endemic Malaria</a></li>
 <li class="chapter" data-level="1.6" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.6</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mosquito-population-dynamics.html"><a href="mosquito-population-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Population Dynamics</a>
@@ -399,7 +404,7 @@ div.csl-indent {
 keep the focus on the policy questions and on a dialogue between malaria managers and the analytical support team. We thus sought to design modular software with <em>plug-and-play</em> functionality and a high degree of structural flexibility. We needed the framework to be extensible. After making a lot of mistakes, the primary design phase is over, and the algorithms have been published in two software packages. We are currently extending the library of <em>base models</em>, which includes some simple or classical models that are instructive or of historical interest. We are also fine-tuning the design requirements for models as we develop protocols that streamline fitting models to data. The software avoids the mistakes we made over the past few years, reuses models, and streamlines the model building process. We hope this software has dramatically lowered the costs of building and analyzing these complex, realistic models.</p>
 <center>
 <div class="figure">
-<img src="../RAMP-Model-Library/Figures/ScalableComplexity.png" style="width:80.0%" alt="" />
+<img src="../../RAMP-Model-Library/Figures/ScalableComplexity.png" style="width:80.0%" alt="" />
 <p class="caption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</p>
 </div>
 </center>
@@ -414,7 +419,7 @@ keep the focus on the policy questions and on a dialogue between malaria manager
 <hr />
 <p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the academic work that followed.</p>
 <p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1908, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis" role="doc-biblioref">2</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908ReportPrevention" role="doc-biblioref">3</a>]</span>. When it came to thinking through control, Ross found it useful to do the math.</p>
+<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis" role="doc-biblioref">5</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908ReportPrevention" role="doc-biblioref">6</a>]</span>. When it came to thinking through control, Ross found it useful to do the math.</p>
 <hr />
 <p>This is a book about how to do the math that is required for malaria programs. The goal is to use all the data available, but especially the data generated by malaria programs, to paint a clear picture of malaria transmission as a changing baseline that has been modified by control. The software is structured into three major domains: the humans and malaria epidemiology, including the effects of treating malaria with drugs; the mosquitoes and the way they have been changed by weather and vector control; and parasite transmission through mosquito blood feeding. Within each domain, there are multiple sub-domains, and there are built in design features to deal with heterogeneity and other features for malaria control. After a 140 years of studying malaria, there’s a lot of detail that could be important in some way. Part of what we need to do is sort through all that detail to find what is most relevant.</p>
 <p>We have organized the concepts in this book around a narrative that allows us to introduce the core concepts – those that make modular computation possible – in an order that minimizes the need to draw on unfamiliar concepts. We start with the Ross-Maconald model, but our next task is to update the model for mosquito blood feeding.</p>
@@ -431,10 +436,10 @@ keep the focus on the policy questions and on a dialogue between malaria manager
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
 </div>
 <div id="ref-RossR1908ReportPrevention" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. Available: <a href="https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ">https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ</a></div>
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. Available: <a href="https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ">https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ</a></div>
 </div>
 </div>
             </section>

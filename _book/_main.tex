@@ -846,9 +846,7 @@ When we do the mathematics, we focus on threshold conditions and the behavior of
 \hypertarget{mosquito-population-dynamics}{%
 \chapter{Mosquito Population Dynamics}\label{mosquito-population-dynamics}}
 
-In this chapter, we modify the Ross-Macdonald model by adding a
-fully defined model for mosquito ecology. The process is actually
-quite simple:
+There are some very good reasons to care about mosquito ecology, particularly when it comes to vector control {[}\protect\hyperlink{ref-BradyOJ2015AdultVector}{6}{]}. In this chapter, we fully define a model for mosquito ecology {[}\protect\hyperlink{ref-SmithDL2013_LarvalDynamics}{7}{]}. The process is actually quite simple:
 
 \begin{itemize}
 \item
@@ -865,6 +863,15 @@ quite simple:
 
 \hypertarget{aquatic-dynamics}{%
 \section{Aquatic Dynamics}\label{aquatic-dynamics}}
+
+\begin{equation}
+\begin{array}{rl}
+\frac{dL}{dt} &= \eta - (\psi + \phi + \theta L) L \\ 
+\frac{dM}{dt} &= \Lambda - g M\\  \\ \hline 
+\Lambda &= \frac{\psi L}{2} \\ 
+\eta &= \chi \nu M \\ 
+\end{array}
+\end{equation}
 
 \hypertarget{understanding-mosquito-dynamics}{%
 \section{Understanding Mosquito Dynamics}\label{understanding-mosquito-dynamics}}
@@ -1070,7 +1077,7 @@ Our algorithms should guarantee that the epidemiological states over time provid
 \hypertarget{modularity-and-software}{%
 \chapter{Modularity and Software}\label{modularity-and-software}}
 
-Hundreds of publications have described new models of malaria {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{6},\protect\hyperlink{ref-SmithNR2018AgentbasedModels}{7}{]}. The challenge we have taken on is to find a new way of building models for malaria that draws from all those good ideas to build models at any level of complexity. We want to do this with reusable, professional quality software. Ideally, the models that we develop would be sufficiently complex to address policy questions, yet remain amenable to analysis. To get there, we took a step back to try and understand \emph{malaria models}, and to put this into a birds-eye view of the process of model building.
+Hundreds of publications have described new models of malaria {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{8},\protect\hyperlink{ref-SmithNR2018AgentbasedModels}{9}{]}. The challenge we have taken on is to find a new way of building models for malaria that draws from all those good ideas to build models at any level of complexity. We want to do this with reusable, professional quality software. Ideally, the models that we develop would be sufficiently complex to address policy questions, yet remain amenable to analysis. To get there, we took a step back to try and understand \emph{malaria models}, and to put this into a birds-eye view of the process of model building.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1080,11 +1087,11 @@ Ross's models, and contributions to mathematical study of malaria made by Alfred
 
 Over that same period of time, mathematical theory for directly transmitted diseases took a parallel path, with important mathematical contributions from Kermack and McKendrick, NTJ Bailey, and Bartlett. Sometime around 1980, mathematical epidemiology began a period of innovation and synthesis, particularly after the publications of Robert May and Roy Anderson made it a mainstream activity in departments of ecology.
 
-In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{8}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{9}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{10}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{11},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{12}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{13},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{14}{]}.
+In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{10}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{11}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{12}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{13},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{14}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{15},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{16}{]}.
 
 The last epoch of malaria, which starts around 2006, is marked by two major developments: a maturing theory of malaria control; and the rise of branded, individual-based models.
 
-The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{15},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{16}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{16}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
+The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{17},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{18}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{18}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
 
 Around 2007, new models of vector control began to appear that related intevention coverage levels to effect sizes. Macdonald's work had focused on sensitivity to parameters, and the GMEP emphasized technical efficiency to achieve very high coverage (with IRS). Garrett-Jones developed vectorial capacity as a way of understanding vector control and effect modification by insecticide resistance. The new models extended Garrett-Jones ideas. The need for new models was motivated, at least in part, by the goal of achieving universal coverage with ITNs. What were reasonable coverage targets? The new generation of vector control models introduced the concept of an effect size on transmission as a function of intervention coverage levels, where coverage had one definition for operations (\emph{e.g.} something like ownership) and another for effect sizes (\emph{e.g.} related to vector contact rates with interventions). The goal of achieving very high coverage with ITNs bumped into the reality that nets are not durable, so new models have been devised to look at intervention coverage in relation to distribution schemes and product durability. While these concepts had been considered during the GMEP design phase, they did not appear in Macdonald's models.
 
@@ -1131,7 +1138,7 @@ In malaria, this \emph{ad hoc} process of writing new models was found to be ina
 \hypertarget{modular-computation}{%
 \section{Modular Computation}\label{modular-computation}}
 
-Before \emph{OpenMalaria}, most models of malaria modified the Ross-Macdonald model in one way {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{6}{]}. The innovation was focused on specific themes or questions: how long would an infection last in models with superinfection?
+Before \emph{OpenMalaria}, most models of malaria modified the Ross-Macdonald model in one way {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{8}{]}. The innovation was focused on specific themes or questions: how long would an infection last in models with superinfection?
 
 \hypertarget{exde}{%
 \subsection{\texorpdfstring{\texttt{exDE}}{exDE}}\label{exde}}
@@ -1464,7 +1471,7 @@ In this chapter, we use some of the simple models we've developed to introduce s
 \hypertarget{exposure-and-infection}{%
 \chapter{Exposure and Infection}\label{exposure-and-infection}}
 
-The relationships between the annual \emph{Pf}EIR, the \emph{Pf}FoI, and the \emph{Pf}PR are among the most important in malaria. A few studies analyzed the data {[}\protect\hyperlink{ref-BeierJC1999ShortReport}{17},\protect\hyperlink{ref-HaySI2005UrbanizationMalaria}{18}{]}. The first paper I wrote on the topic, in 2005, suggested an important role for heterogeneous biting {[}\protect\hyperlink{ref-SmithDL2005_EIRvPR}{19}{]}. At the time, we were thinking mainly about frailty. After some correspondence, we took a closer look at the relationship between the \emph{Pf}EIR and the \emph{Pf}FoI {[}\protect\hyperlink{ref-SmithDL2010_InefficientTransmission}{20}{]}, which helped us rule out immunity. With some data in hand, we took a closer look at heterogeneous exposure {[}\protect\hyperlink{ref-CooperL2019ParetoRules}{21}{]}, which drew our attention to environmental heterogeneity. Meanwhile, we developed the age-standardization algorithms for the Malaria Atlas Project {[}\protect\hyperlink{ref-SmithDL2007_StandardizingPfPR}{22}{]}. As we grappled with the data from Bioko Island, it became clear that malaria importation could be an important factor {[}\protect\hyperlink{ref-GuerraCA2019HumanMobility}{23}{]}. None of this considered either seasonality or drug taking and chemo-protection.
+The relationships between the annual \emph{Pf}EIR, the \emph{Pf}FoI, and the \emph{Pf}PR are among the most important in malaria. A few studies analyzed the data {[}\protect\hyperlink{ref-BeierJC1999ShortReport}{19},\protect\hyperlink{ref-HaySI2005UrbanizationMalaria}{20}{]}. The first paper I wrote on the topic, in 2005, suggested an important role for heterogeneous biting {[}\protect\hyperlink{ref-SmithDL2005_EIRvPR}{21}{]}. At the time, we were thinking mainly about frailty. After some correspondence, we took a closer look at the relationship between the \emph{Pf}EIR and the \emph{Pf}FoI {[}\protect\hyperlink{ref-SmithDL2010_InefficientTransmission}{22}{]}, which helped us rule out immunity. With some data in hand, we took a closer look at heterogeneous exposure {[}\protect\hyperlink{ref-CooperL2019ParetoRules}{23}{]}, which drew our attention to environmental heterogeneity. Meanwhile, we developed the age-standardization algorithms for the Malaria Atlas Project {[}\protect\hyperlink{ref-SmithDL2007_StandardizingPfPR}{24}{]}. As we grappled with the data from Bioko Island, it became clear that malaria importation could be an important factor {[}\protect\hyperlink{ref-GuerraCA2019HumanMobility}{25}{]}. None of this considered either seasonality or drug taking and chemo-protection.
 
 The \emph{Pf}PR to \emph{Pf}EIR converstion algorthims defined in \ref{pr2eir} are among the most important for policy.
 
@@ -1561,76 +1568,84 @@ If you want a PDF and can't find it at the link provided, let us know and we can
 \CSLLeftMargin{5. }%
 \CSLRightInline{Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The {Population Dynamics} of {Infectious Diseases}: {Theory} and {Applications}. {Boston, MA}: {Springer US}; 1982. pp. 139--179. doi:\href{https://doi.org/10.1007/978-1-4899-2901-3_5}{10.1007/978-1-4899-2901-3\_5}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-ReinerRCJ2013SystematicReview}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-BradyOJ2015AdultVector}{}}%
 \CSLLeftMargin{6. }%
+\CSLRightInline{Brady OJ, Godfray HCJ, Tatem AJ, Gething PW, Cohen JM, McKenzie FE, et al. Adult vector control, mosquito ecology and malaria transmission. Int Health. 2015;7: 121--129. doi:\href{https://doi.org/10.1093/inthealth/ihv010}{10.1093/inthealth/ihv010}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2013_LarvalDynamics}{}}%
+\CSLLeftMargin{7. }%
+\CSLRightInline{Smith DL, Perkins TA, Tusting LS, Scott TW, Lindsay SW. Mosquito {Population Regulation} and {Larval Source Management} in {Heterogeneous Environments}. PLOS ONE. 2013;8: e71247. doi:\href{https://doi.org/10.1371/journal.pone.0071247}{10.1371/journal.pone.0071247}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ReinerRCJ2013SystematicReview}{}}%
+\CSLLeftMargin{8. }%
 \CSLRightInline{Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-SmithNR2018AgentbasedModels}{}}%
-\CSLLeftMargin{7. }%
+\CSLLeftMargin{9. }%
 \CSLRightInline{Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: {A} systematic review. Malar J. 2018;17: 299. doi:\href{https://doi.org/10.1186/s12936-018-2442-y}{10.1186/s12936-018-2442-y}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1974MalariaModel}{}}%
-\CSLLeftMargin{8. }%
+\CSLLeftMargin{10. }%
 \CSLRightInline{Dietz K, Molineaux L, Thomas A. A malaria model tested in the {African} savannah. Bull Wld Hlth Org. 1974;50: 347--357. Available: \url{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve\&db=PubMed\&dopt=Citation\&list_uids=4613512}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1975ModelsParasitic}{}}%
-\CSLLeftMargin{9. }%
+\CSLLeftMargin{11. }%
 \CSLRightInline{Dietz K. Models for parasitic disease control. Bull Int Stat Inst. 1975;46: 531--544. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1976IncidenceInfectious}{}}%
-\CSLLeftMargin{10. }%
+\CSLLeftMargin{12. }%
 \CSLRightInline{Dietz K. The {Incidence} of {Infectious Diseases} under the {Influence} of {Seasonal Fluctuations}. Mathematical {Models} in {Medicine}. {Springer Berlin Heidelberg}; 1976. pp. 1--15. doi:\href{https://doi.org/10.1007/978-3-642-93048-5_1}{10.1007/978-3-642-93048-5\_1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1980ModelsVectorborne}{}}%
-\CSLLeftMargin{11. }%
+\CSLLeftMargin{13. }%
 \CSLRightInline{Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito {Volterra Symposium} on {Mathematical Models} in biology. {Berlin}: {Springer-Verlag}; 1980. pp. 264--277. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1988EpidemiologicalModels}{}}%
-\CSLLeftMargin{12. }%
+\CSLLeftMargin{14. }%
 \CSLRightInline{Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1--25. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DyeC1986PopulationDynamics}{}}%
-\CSLLeftMargin{13. }%
+\CSLLeftMargin{15. }%
 \CSLRightInline{Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69--77. doi:\href{https://doi.org/10.1016/0035-9203(86)90199-9}{10.1016/0035-9203(86)90199-9}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-HasibederG1988PopulationDynamics}{}}%
-\CSLLeftMargin{14. }%
+\CSLLeftMargin{16. }%
 \CSLRightInline{Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31--53. doi:\href{https://doi.org/10.1016/0040-5809(88)90003-2}{10.1016/0040-5809(88)90003-2}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL1999ReviewIntrahost}{}}%
-\CSLLeftMargin{15. }%
+\CSLLeftMargin{17. }%
 \CSLRightInline{Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221--231. Available: \url{http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed\&id=10697860\&retmode=ref\&cmd=prlinks}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL2001PlasmodiumFalciparum}{}}%
-\CSLLeftMargin{16. }%
+\CSLLeftMargin{18. }%
 \CSLRightInline{Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. \emph{Plasmodium falciparum} parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379--391. doi:\href{https://doi.org/10.1017/s0031182001007533}{10.1017/s0031182001007533}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-BeierJC1999ShortReport}{}}%
-\CSLLeftMargin{17. }%
+\CSLLeftMargin{19. }%
 \CSLRightInline{Beier JC, Killeen GF, Githure JI. Short report: Entomologic inoculation rates and {Plasmodium} falciparum malaria prevalence in {Africa}. Am J Trop Med Hyg. 1999;61: 109--113. doi:\href{https://doi.org/10.4269/ajtmh.1999.61.109}{10.4269/ajtmh.1999.61.109}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-HaySI2005UrbanizationMalaria}{}}%
-\CSLLeftMargin{18. }%
+\CSLLeftMargin{20. }%
 \CSLRightInline{Hay SI, Guerra CA, Tatem AJ, Atkinson PM, Snow RW. Urbanization, malaria transmission and disease burden in {Africa}. Nat Rev Microbiol. 2005;3: 81--90. doi:\href{https://doi.org/10.1038/nrmicro1069}{10.1038/nrmicro1069}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-SmithDL2005_EIRvPR}{}}%
-\CSLLeftMargin{19. }%
+\CSLLeftMargin{21. }%
 \CSLRightInline{Smith DL, Dushoff J, Snow RW, Hay SI. The entomological inoculation rate and {\emph{Plasmodium}} {\emph{falciparum}} infection in {African} children. Nature. 2005;438: 492--495. doi:\href{https://doi.org/10.1038/nature04024}{10.1038/nature04024}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-SmithDL2010_InefficientTransmission}{}}%
-\CSLLeftMargin{20. }%
+\CSLLeftMargin{22. }%
 \CSLRightInline{Smith DL, Drakeley CJ, Chiyaka C, Hay SI. A quantitative analysis of transmission efficiency versus intensity for malaria. Nat Commun. 2010;1: 108. doi:\href{https://doi.org/10.1038/ncomms1107}{10.1038/ncomms1107}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-CooperL2019ParetoRules}{}}%
-\CSLLeftMargin{21. }%
+\CSLLeftMargin{23. }%
 \CSLRightInline{Cooper L, Kang SY, Bisanzio D, Maxwell K, Rodriguez-Barraquer I, Greenhouse B, et al. Pareto rules for malaria super-spreaders and super-spreading. Nat Commun. 2019;10: 3939. doi:\href{https://doi.org/10.1038/s41467-019-11861-y}{10.1038/s41467-019-11861-y}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-SmithDL2007_StandardizingPfPR}{}}%
-\CSLLeftMargin{22. }%
+\CSLLeftMargin{24. }%
 \CSLRightInline{Smith DL, Guerra CA, Snow RW, Hay SI. Standardizing estimates of the {\emph{Plasmodium}}{ \emph{Falciparum}} parasite rate. Malar J. 2007;6: 131. doi:\href{https://doi.org/10.1186/1475-2875-6-131}{10.1186/1475-2875-6-131}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-GuerraCA2019HumanMobility}{}}%
-\CSLLeftMargin{23. }%
+\CSLLeftMargin{25. }%
 \CSLRightInline{Guerra CA, Kang SY, Citron DT, Hergott DEB, Perry M, Smith J, et al. Human mobility patterns and malaria importation on {Bioko Island}. Nat Commun. 2019;10: 2332. doi:\href{https://doi.org/10.1038/s41467-019-10339-1}{10.1038/s41467-019-10339-1}}
 
 \end{CSLReferences}
