@@ -1,4 +1,4 @@
-# Mosquito Population Dynamics 
+# Mosquito Dynamics 
 
 There are some very good reasons to care about mosquito ecology, particularly when it comes to vector control [@BradyOJ2015AdultVector]. In this chapter, we fully define a model for mosquito ecology [@SmithDL2013_LarvalDynamics]. The process is actually quite simple:
 

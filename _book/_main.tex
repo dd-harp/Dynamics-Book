@@ -146,7 +146,7 @@
 \makeatother
 \subtitle{Dynamical Systems for Adaptive Malaria Control}
 \author{David L. Smith and the RAMP Team}
-\date{2023-01-17}
+\date{2023-01-19}
 
 \begin{document}
 \maketitle
@@ -159,20 +159,25 @@
 \chapter*{Foreword}\label{foreword}}
 \addcontentsline{toc}{chapter}{Foreword}
 
-A large fraction of my time over the past 20 years has been devoted to learning about malaria epidemiology, mosquito ecology, and vector control. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory that has been developed over more than a century of malaria research. A new framework would require rethinking the way we build models. Ideally, a new framework would be \emph{extensible} with \emph{plug-and-play} modularity and structural flexibility. It should include models that could scale down for fine-grained simulations, or to scale up to understand regional spatial patterns. To serve the needs of malaria programs, a framework would need to be capable of modeling malaria as a changing baseline modified by control. The framework would need built-in support to model exogenous forcing by weather and vector control. To get integrated malaria control right, we needed to go all in on mosquito ecology. New models, algorithms, or theory were needed for blood feeding, heterogeneous exposure, human mobility, cohort dynamics, and mosquito dispersal. We wanted the software to use the existing theory for thresholds for malaria transmission in heterogeneous systems. Sometime in the fall of 2022, the last few pieces came together. We published the first versions of \href{https://cran.r-project.org/package=MicroMoB}{MicroMoB}
-and \href{https://CRAN.R-project.org/package=exDE}{exDE} at CRAN, submitted a paper to PLoS Computational Biology {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{1}{]}, and realized it was time to write this book.
+A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology and transmission dynamics, mosquito ecology, vector control, and the evolution of resistance.
+All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ross and Macdonald {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{1}{]}.
+A new framework would integrate the concepts and models that have influenced malaria through the present day {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{2},\protect\hyperlink{ref-SmithNR2018AgentbasedModels}{3}{]}, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control {[}\protect\hyperlink{ref-SmithDL2014_Recasting}{4}{]}.
 
-This book is about building malaria models that are up to the task of guiding malaria policy. It fills a gap that comes after an introduction to mathematical epidemiology or infectious disease modeling. What are all the special topics that would need to be covered to build models that could be of use in malaria? There will probably never be enough graduate students who are interested in applied malaria dynamics to teach a class on the topic at any university, but there are quite a few if you added up all the students who needed a course like this across the planet.
+The goal was to build a framework that could serve malaria policy. Policy discussions might need the math, but the discussion should never be about the math.There were some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered. Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
 
-The premise of the book is that the reader has a solid background in infectious disease models, and they've seen the Ross-Macdonald model before. Our goal is to teach the material through examples, so we won't try to fill in any technical details in the text. Instead, we have written some vignettes and lessons to accompany the book in the \texttt{RAMP-Model-Library}.
+I wanted the new framework to be \emph{extensible,} with \emph{plug-and-play} modularity (for major dynamical components), and with structural flexibility. It should have the capability of scaling down for fine-grained spatial simulations {[}\protect\hyperlink{ref-CarterR2002SpatialSimulation}{5}--\protect\hyperlink{ref-PerkinsTA2013HeterogeneityMixing}{7}{]}, or scaling up to understand or analyze regional processes and the emerging patterns {[}\protect\hyperlink{ref-TatemAJ2010InternationalPopulation}{8}{]}. To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control. To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model with exquisite biological detail {[}\protect\hyperlink{ref-WuSL2020MBITES}{9}{]}, which inspired new ideas about mosquito search and a new base model for mosquito ecology and behavior. To serve programmatic needs, we needed algorithms that could address the durability of a unit of vector control -- coverage could decay over time through loss (\emph{e.g.} bed nets) or waning potency. To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component -- one that was dead simple, and one that had a was highly realistic. In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal. In making a master list to test the framework's extensibility, we found that some odd cases that needed to pass information among components -- endectocides and auto-disseminated larvicides -- but it was easy enough to accommodate these. These models needed supporting theory. We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.
 
-This book is about model building. We present some motivating examples, but we stop short of fitting models to data. Some of those topics are being taken up in a companion \href{../../RAMP-Book/_book/index.html}{\textbf{Robust Analytics for Malaria Policy.}}
+Sometime in the fall of 2022, the last few pieces came together. We published the first versions of \href{https://cran.r-project.org/package=MicroMoB}{MicroMoB} and \href{https://CRAN.R-project.org/package=exDE}{exDE} at CRAN. We submitted a paper to PLoS Computational Biology {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{10}{]}. Then it was time to write this book.
 
-\textbf{David L. Smith}
+With the software developed, we have the capability of building models that are up to the task of guiding malaria policy. The advantage of using the framework and accompanying software is that we solved many of the potential design problems that come from combining models. We found most of them the hard way. The framework took longer to developed than I had expected, in part, because there were more pitfalls than we had anticipated.
 
-\hypertarget{dynamics-for-policy}{%
-\section*{Dynamics for Policy}\label{dynamics-for-policy}}
-\addcontentsline{toc}{section}{Dynamics for Policy}
+This book shows, through examples, how to use the software to build malaria models. Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria. What are all the special topics that would need to be covered to build models that could be needed in malaria? This book \emph{could} be the basis for such a course, if there were ever enough students. Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere. This book teaches how to build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, \href{../../RAMP-Book/_book/index.html}{\textbf{Robust Analytics for Malaria Policy.}}
+
+The premise of this book is thus that the reader has a solid background in infectious disease models and malaria. We assume they've seen the Ross-Macdonald model before, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for \texttt{exDE} or \texttt{MicroMoB} or it can be found in the \href{../../RAMP-Model-Library/RAMP-Model-Library.html}{\texttt{RAMP-Model-Library}}.
+
+\hypertarget{models-for-policy}{%
+\section*{Models for Policy}\label{models-for-policy}}
+\addcontentsline{toc}{section}{Models for Policy}
 
 Malaria is complex and heterogeneous, which makes it difficult to study and manage. A core challenge in both science and policy is the availability of information. Mathematical models can help us understand and analyze all that complexity and make informed decisions despite the data gaps.
 
@@ -197,7 +202,7 @@ keep the focus on the policy questions and on a dialogue between malaria manager
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth,height=\textheight]{../RAMP-Model-Library/Figures/ScalableComplexity.png}
+\includegraphics[width=0.8\textwidth,height=\textheight]{Figures/ScalableComplexity.png}
 \caption{A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)}
 \end{figure}
 
@@ -223,7 +228,7 @@ In doing all this, we are building on an enormous body of work that started with
 
 After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1908, it's clear that he was searching for quantitative way of saying something simple -- if there are not enough mosquitoes, the malaria transmission can't be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.
 
-It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross's first model was a discussion of adult mosquito movement to guide larval source management {[}\protect\hyperlink{ref-RossR1905LogicalBasis}{2}{]}. The first model describing malaria transmission appeared in a book, \emph{The Prevention of Malaria in Mauritius} {[}\protect\hyperlink{ref-RossR1908ReportPrevention}{3}{]}. When it came to thinking through control, Ross found it useful to do the math.
+It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross's first model was a discussion of adult mosquito movement to guide larval source management {[}\protect\hyperlink{ref-RossR1905LogicalBasis}{11}{]}. The first model describing malaria transmission appeared in a book, \emph{The Prevention of Malaria in Mauritius} {[}\protect\hyperlink{ref-RossR1908ReportPrevention}{12}{]}. When it came to thinking through control, Ross found it useful to do the math.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -239,22 +244,33 @@ To learn how to use that software, we need to get through a lot of material. The
 
 The first model we present is a Ross-Macdonald model.
 
+\hypertarget{contributors}{%
+\section*{Contributors}\label{contributors}}
+\addcontentsline{toc}{section}{Contributors}
+
+Most of the content so far was written by David L Smith.
+
+The software package \texttt{MicroMoB} was written by Sean L Wu, Sophie Liebkind, and David L Smith. The software package \texttt{exDE} was written by Sean L Wu and David L Smith.
+
+\ldots please consult Dave if you would like a writing role.
+
+\textbf{David L. Smith}
+
 \hypertarget{part-basic-concepts}{%
 \part{Basic Concepts}\label{part-basic-concepts}}
 
-\hypertarget{malaria-population-dynamics}{%
-\chapter{Malaria Population Dynamics}\label{malaria-population-dynamics}}
+\hypertarget{malaria-dynamics}{%
+\chapter{Malaria Dynamics}\label{malaria-dynamics}}
 
-We start by introducing a Ross-Macdonald model {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{4}{]}.
-This particular system of delay differential equations traces back to a 1982 book chapter written by Joan Aron and Robert May {[}\protect\hyperlink{ref-AronJL1982PopulationDynamics}{5}{]}. We think it's a good starting point.
+We start by introducing a Ross-Macdonald model {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{1}{]}. This particular model family is a system of delay differential equations that traces back to a 1982 book chapter written by Joan Aron and Robert May {[}\protect\hyperlink{ref-AronJL1982PopulationDynamics}{13}{]}. We think it's a good starting point.
 
-We chose it because it is \emph{extensible}. The variables in this model represent population densities. The variables are used to compute statistics like \emph{prevalence,} a proportion. The variables in most other versions of the Ross-Macdonald are proportions. In building models, we would sometimes like to change the \emph{total} number of hosts (\emph{i.e.} the denominators), but if the variables in equations described proportions, they are much more difficult to modify.
+We chose it because it is \emph{extensible}. The variables represent population densities, which are used to compute proportions, like \emph{prevalence.} The variables in many other versions of the Ross-Macdonald are proportions. In some models, we would like to be able to change the \emph{total} number of hosts, but if the variables are proporions, these are the denominators. When a variables in equations described proportions, they are much more difficult to modify.
 
-We chose it because we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model, as it was presented by Macdonald. While Macdonald's analysis and formulas are familiar, they overlooked the role of mosquito ecology. This model lets us bypass a lengthy discussion about history and the way it skews opinions. Our formula for vectorial capacity is consistent with the original, but our analysis includes effects on mosquito ecology.
+We chose it because it already includes mosquito ecology, so we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model. While Macdonald's analysis and formulas are familiar, they were not complete {[}\protect\hyperlink{ref-SmithDL2004_Statics}{14},\protect\hyperlink{ref-SmithDL2021_NewTestOldMosquitoes}{15}{]}. We develop a formula for vectorial capacity that is consistent with the intent of the original, but our analysis of sensitivity to parameters includes effects on mosquito ecology {[}\protect\hyperlink{ref-BradyOJ2015AdultVector}{16}{]}. (A lengthy and philosophical discussion of the history and its failings is planned.)
 
-We chose it because it is \emph{realistic.} Most Ross-Macdonald equations are \emph{autonomous} (time is never used in computing derivatives), but these equations are already non-autonomous (\emph{i.e.} time drives a seasonal pattern). We know that malaria transmission dynamics are forced by exogenous variables (\emph{e.g.}, weather), so why start by avoiding that fact?
+We chose it because it is \emph{realistic.} Time does not appear in most versions of the Ross-Macdonald model: the equations are \emph{autonomous}. These equations use time to drive a seasonal pattern: they are \emph{non-autonomous}. Since we know we are interested in dealing with exogenous forcing, we start out with a model that is forced.
 
-We recommend that everyone reads this chapter, even those who are familiar with the Ross-Macdonald model. In writing the equations, we introduced some concepts and conventions that became important for the software design.
+While the following model is basic, we recommend reading it, if only because we introduce concepts and conventions that are important for the software design.
 
 \hypertarget{aron-and-mays-equations}{%
 \section{Aron and May's Equations}\label{aron-and-mays-equations}}
@@ -407,8 +423,8 @@ h &= b fq \frac{Z(t)}{H} \\
 
 \begin{figure}
 \centering
-\includegraphics{../RAMP-Model-Library/Figures/AronMay.png}
-\caption{A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May {[}\protect\hyperlink{ref-AronJL1982PopulationDynamics}{5}{]}}
+\includegraphics{Figures/AronMay.png}
+\caption{A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May {[}\protect\hyperlink{ref-AronJL1982PopulationDynamics}{13}{]}}
 \end{figure}
 
 These equations describe processes in three domains (Figure 2.1):
@@ -428,12 +444,14 @@ There are, of course, more compact ways of writing these equations. We have writ
 
 The next step is to find solutions.
 
+\emph{NOTE:} We don't introduce \texttt{exDE} or \texttt{MicroMoB} until \protect\hyperlink{modularity-and-software}{Modularity and Software}.
+
 \hypertarget{solutions}{%
 \section{Solutions}\label{solutions}}
 
 What does a \textbf{solution} to these equations look like?
 
-Solutions to these equations are values of the variables over time \(\left( M(t), Y(t), Z(t), X(t) \right)\) that satisfy the system of four equations described above. We call these solutions \emph{orbits.} To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition \[\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},\] and then we used the values of the variables at time \(t\) to compute \(dM/dt\), \(dY/dt\), \(dZ/dt\), and \(dX/dt\) (\emph{i.e.}, using the formulas on the previous page), we would get the same values.
+Solutions to these equations are values of the variables over time \(\left( M(t), Y(t), Z(t), X(t) \right)\) that satisfy the system of four equations described above. We call these solutions \emph{orbits.} To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition \[\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},\] and then we used the values of the variables at time \(t\) to compute \(dM/dt\), \(dY/dt\), \(dZ/dt\), and \(dX/dt\) (\emph{i.e.}, using the formulas), we would get the same values.
 
 It is important that these orbits are unique: after specifying the \emph{initial values} of the variables, there is one and only one set of orbits that solves the equations. When we solve the equations, we usually produce solutions from a starting point into a future, but the orbits are defined for all time -- \(i.e.\) the process implies the existence of solutions far back into the past. These are deterministic equations, after all.
 
@@ -616,8 +634,8 @@ To make it absolutely clear, we are assuming:
 
 \[\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)\]
 
-\hypertarget{time-mesh}{%
-\subsection{Time Mesh}\label{time-mesh}}
+\hypertarget{solving}{%
+\subsection{Solving}\label{solving}}
 
 We define a mesh over time -- the points in time when we would like to know the values of the variables:
 
@@ -626,9 +644,6 @@ We define a mesh over time -- the points in time when we would like to know the 
 \NormalTok{tt }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\SpecialCharTok{*}\DecValTok{365}\NormalTok{, }\AttributeTok{by=}\DecValTok{5}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{solving}{%
-\subsection{Solving}\label{solving}}
 
 This code solves the equations:
 
@@ -642,34 +657,7 @@ This code solves the equations:
 \hypertarget{visualizing}{%
 \subsection{Visualizing}\label{visualizing}}
 
-We write a function so that we can plot things easily:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plotTS\_AronMay }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(yout)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(yout),\{}
-  \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
-  \FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, M, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"Mosquito Density"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Mosquitoes"}\NormalTok{)}
-  \FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Y, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{)}
-  \FunctionTok{lines}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, Z, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
-  
-  \FunctionTok{plot}\NormalTok{(time}\SpecialCharTok{/}\DecValTok{365}\NormalTok{, X, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1000}\NormalTok{), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }
-       \AttributeTok{xlab =} \StringTok{"Time (in Years)"}\NormalTok{, }
-       \AttributeTok{ylab =} \StringTok{"\# Infected Humans"}\NormalTok{, }
-       \AttributeTok{main =} \StringTok{"Humans"}\NormalTok{)}
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
-
-This code plots the outputs:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plotTS\_AronMay}\NormalTok{(yout)}
-\end{Highlighting}
-\end{Shaded}
+When we plot out the solutions, they look like this.
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-11-1.pdf}
 
@@ -678,7 +666,7 @@ This code plots the outputs:
 \hypertarget{steady-states}{%
 \section{Steady States}\label{steady-states}}
 
-To analyze this system, we first set the parameter \texttt{ss=1}, so that we can look at the system \emph{without} seasonality. Without seasonality, the system is actually \emph{autonomous.} We do this, in part, because the resulting system is easier to understand, which helps us develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system:
+Here, we analyze the system of equations in a narrow case when there is \emph{no seasonality,} and the system reaches a \emph{steady state.} To do so, we set the parameter \texttt{ss=1}, so that \(\Lambda(t)\) is a constant; the resulting system is \emph{autonomous.} We do this, in part, because the resulting system is easier to understand. We can develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system:
 
 \begin{equation}
 \begin{array}{rl}
@@ -691,11 +679,14 @@ h &= b fq \frac{Z(t)}{H} \\
 \end{array}
 \end{equation}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+As before, we have put the equations in their modularized form above, and the connecting terms below.
 
-The first thing to note is that \(M\) affects \(Y\) and \(Z\), which affect \(X\); but \(M\) is not affected by \(Y\) or \(Z\). Mosquito population density is an \emph{exogenous} factor affecting malaria population dynamics.
+The first thing to note is that \(M\) affects \(Y\) and \(Z\), which affect \(X\); but \(M\) is not affected by \(Y\) or \(Z\). Mosquito population density is \emph{exogenous} to malaria dynamics.
 
-We can thus treat it separately:
+\hypertarget{mosquito-density}{%
+\subsection{Mosquito Density}\label{mosquito-density}}
+
+We can thus treat it separately in the analysis:
 
 \begin{equation}
 \frac{dM}{dt} = \Lambda - g M 
@@ -707,7 +698,8 @@ Since emergence rates are steady, mosquito population density reaches a steady s
 \bar M = \frac{\Lambda}{g} 
 \end{equation}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\hypertarget{eir-and-vectorial-capacity}{%
+\subsection{EIR and Vectorial Capacity}\label{eir-and-vectorial-capacity}}
 
 Next, we note that at a steady state, the delayed values of variables and terms don't change, so from \(dY/dt\), we get:
 
@@ -721,44 +713,65 @@ If we substitute the formula for \(\bar M\) and solve for \(\bar Y\), we get:
 \bar Y = \frac{fq\kappa}{g + fq\kappa} \frac{\Lambda}{g}
 \end{equation}
 
-and we substitute the formula for \(g \bar Y\) into \(dZ/dt\) to get:
+and since at the steady state, any variable at time \(t+\tau\) is equal to its value at time \(t\), we substitute the formula for \(g \bar Y\) into \(dZ/dt\) to get:
 
 \begin{equation}
-\bar Y e^{-g\tau} = \bar Z
+g \bar Y e^{-g\tau} = g \bar Z
 \end{equation}
 
-or equivalently:
+Solving for \(\bar Z\) we get:
 
 \begin{equation}
 \bar Z =  \frac{f q \kappa}{g + fq \kappa} \frac{\Lambda}{g} e^{-g\tau} 
 \end{equation}
 
-It is a little thing, but the quantity \[S = \frac{fq}{g}\] is the number of bloodmeals a mosquito would take over its lifespan.
-
 At the steady state, \[\mbox{EIR} = fq \frac{\bar Z}{H},\]
 
-but if we rearrange the terms a bit, we get:
+Here, we pause to define the a quantity \[S = \frac{fq}{g}.\] Since \(1/g\) is the lifespan, this term \(S\) is the number of bloodmeals a mosquito would take over its lifespan. If we rearrange the terms a bit, we can write out the expression for the EIR as a function of several parameters and one term:
 
 \begin{equation}
-\mbox{EIR} = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa} 
+\mbox{EIR}(\kappa) = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa} 
 \end{equation}
 
-For the moment, we let \[V = \frac{\Lambda}{H} S^2  e^{-g\tau}.\] It is the formula for vectorial capacity. We can thus write:
+We think of the EIR as having two parts. We call the first part \emph{vectorial capacity} (\(V\)):
 
 \begin{equation}
-\mbox{EIR} = V \kappa \frac{1}{1 + S \kappa} 
+V = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} 
 \end{equation}
+
+The second part involves only \(\kappa\):
+
+\begin{equation}
+\frac{\kappa}{1 + S \kappa} 
+\end{equation}
+
+The numerator \(\kappa\) is the probability of becoming infected, per bite. It is rarely close to one. The denominator, \(1+S\kappa\), is a measure of saturation -- how frequently are mosquitoes \emph{reinfected.} The main point here is that as \(\kappa\) increases, saturation increases. If we set \(S\) to the values in the previous plots, we can isolate this:
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+In the limit as \(\kappa\) becomes small, we isolate the first part:
+
+\[\lim_{\kappa \rightarrow 0} \mbox{EIR}(\kappa) = \frac{\Lambda}{H} S^2  e^{-g\tau} = V\]
+The two terms, EIR and vectorial capacity, are closely related. The EIR is the number of infective bites received, per person, per day. Vectorial capacity can be understood as the number of infective bites arising from all the mosquitoes biting a single human on a single day, assuming \(\kappa=1\).
+
+The difference between the two is precisely
+
+\begin{equation}
+\frac{\kappa}{1 + S \kappa} 
+\end{equation}
+
+\hypertarget{thresholds-and-malaria-prevalence}{%
+\subsection{Thresholds and Malaria Prevalence}\label{thresholds-and-malaria-prevalence}}
+
+Now we want to use all of this to understand malaria prevalence as a function of vectorial capacity, but first we define the basic reproductive number:
+
+\[R_0 = \frac{bcV}{r}.\]
 
 At the steady state, \[\kappa = c \frac{X}{H}.\] If we substitute this into the expression for the EIR, we get:
 
 \begin{equation}
 \mbox{EIR} = c V X\frac{1}{H + c S X} 
 \end{equation}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-Now, we're going to define
-\[R_0 = \frac{bcV}{r}.\]
 
 If we plug this into \(dX/dt\) we get an expression that involves only \(X\)
 
@@ -790,31 +803,12 @@ What this analysis has shown is that when mosquito population densities are cons
 \hypertarget{stable-orbits}{%
 \section{Stable Orbits}\label{stable-orbits}}
 
-If emergence rates vary seasonally, how much of the analysis that we did to understand \emph{steady states} still holds? Obviously, things change, but many of the same principles still hold. It is easy enough to simulate, but the resulting dynamics can be quite difficult. Here, we show that the steady state analysis provides a good qualitative guide, but that the answers differ quantitatively.
-
-\hypertarget{orbits}{%
-\subsection{Orbits}\label{orbits}}
-
-If \(R_0 >1\), then the system is characterized by \emph{stable orbits} (See Figure 1.1). If \(\Lambda(t)\) has an annual cycle, then after the orbits converge:
-
-\begin{verbatim}
-- $M(t+365) = M(t)$; 
-- $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
-- $X(t+365) = X(t)$. 
-\end{verbatim}
-
-\begin{figure}
-\centering
-\includegraphics{_main_files/figure-latex/unnamed-chunk-13-1.pdf}
-\caption{\label{fig:unnamed-chunk-13}With different initial values, the orbits converge and eventually lie on top of one another.}
-\end{figure}
-
-\clearpage
+If emergence rates vary seasonally, how much of the analysis that we did to understand \emph{steady states} still holds? Obviously, if conditions are changing seasonally, the model does not reach a steady state. In fact, after modification to suit the context, many of the same principles translate. The steady state analysis provides a good qualitative guide, but that the answers will look different. Here, we illustrate by solving systems to illustrate some basic points, which is easy enough. Analysis of the resulting dynamics can be quite difficult; it is covered in \protect\hyperlink{temporal-dynamics}{Temporal Dynamics}.
 
 \hypertarget{thresholds}{%
 \subsection{Thresholds}\label{thresholds}}
 
-There is a threshold condition \(R_0>1\) that determines whether malaria is endemic, but the formula for \(R_0\) depends on the form of \(\Lambda(t)\). If we set \(R_0=1\), we can show that the threshold for persistence in a seasonal environment is \(R_0 > \sigma > 1\). The math to compute threshold conditions in seasonal environments is in \protect\hyperlink{temporal-dynamics}{Temporal Dynamics}.
+There is a threshold condition \(R_0>1\) that determines whether malaria is endemic, but the formula for \(R_0\) depends on the form of \(\Lambda(t)\). If we set \(R_0=1\), we can show that the threshold for persistence in a seasonal environment is \(R_0 > \sigma > 1\) (see Figure 1.1). The math to compute threshold conditions in seasonal environments is in \protect\hyperlink{temporal-dynamics}{Temporal Dynamics}.
 
 \begin{figure}
 \centering
@@ -824,29 +818,48 @@ There is a threshold condition \(R_0>1\) that determines whether malaria is ende
 
 \clearpage
 
-\hypertarget{average-dynamics}{%
-\subsection{Average Dynamics}\label{average-dynamics}}
+\hypertarget{orbits}{%
+\subsection{Orbits}\label{orbits}}
 
-Away from thresholds, the \emph{average} prevalence of malaria infection is variable in a seasonal environment, though when it has been averaged across the year, it tends to be lower.
+If \(R_0 >1\), then all orbits converge to a set of \emph{stable orbits} (See Figure 1.1). If \(\Lambda(t)\) has an annual cycle, then after the orbits converge:
+
+\begin{verbatim}
+- $M(t+365) = M(t)$; 
+- $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
+- $X(t+365) = X(t)$. 
+\end{verbatim}
 
 \begin{figure}
 \centering
 \includegraphics{_main_files/figure-latex/unnamed-chunk-16-1.pdf}
-\caption{\label{fig:unnamed-chunk-16}Here, we set \(R_0= 2\) for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall.}
+\caption{\label{fig:unnamed-chunk-16}With different initial values, the orbits converge and eventually lie on top of one another.}
+\end{figure}
+
+\clearpage
+
+\hypertarget{average-dynamics}{%
+\subsection{Average Dynamics}\label{average-dynamics}}
+
+If \(R_0>1\) and malaria is endemic, the \emph{average} prevalence of malaria infection is variable in a seasonal environment. While the prevalence is higher at the peak, the average for the whole year tends to be lower.
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/unnamed-chunk-17-1.pdf}
+\caption{\label{fig:unnamed-chunk-17}Here, we set \(R_0= 2\) for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall.}
 \end{figure}
 
 \hypertarget{endemic-malaria}{%
 \section{Endemic Malaria}\label{endemic-malaria}}
 
-When we do the mathematics, we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year.
+When we analyze these equations to determine their \emph{stability} and to identify \emph{threshold conditions,} we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-\hypertarget{mosquito-population-dynamics}{%
-\chapter{Mosquito Population Dynamics}\label{mosquito-population-dynamics}}
+\hypertarget{mosquito-dynamics}{%
+\chapter{Mosquito Dynamics}\label{mosquito-dynamics}}
 
-There are some very good reasons to care about mosquito ecology, particularly when it comes to vector control {[}\protect\hyperlink{ref-BradyOJ2015AdultVector}{6}{]}. In this chapter, we fully define a model for mosquito ecology {[}\protect\hyperlink{ref-SmithDL2013_LarvalDynamics}{7}{]}. The process is actually quite simple:
+There are some very good reasons to care about mosquito ecology, particularly when it comes to vector control {[}\protect\hyperlink{ref-BradyOJ2015AdultVector}{16}{]}. In this chapter, we fully define a model for mosquito ecology {[}\protect\hyperlink{ref-SmithDL2013_LarvalDynamics}{17}{]}. The process is actually quite simple:
 
 \begin{itemize}
 \item
@@ -876,31 +889,97 @@ There are some very good reasons to care about mosquito ecology, particularly wh
 \hypertarget{understanding-mosquito-dynamics}{%
 \section{Understanding Mosquito Dynamics}\label{understanding-mosquito-dynamics}}
 
-\hypertarget{measuring-malaria}{%
-\chapter{Measuring Malaria}\label{measuring-malaria}}
-
 \hypertarget{realism}{%
 \chapter{Realism}\label{realism}}
 
-There are several reasons why models for policy will tend to be more complex than models developed for science. When models are used for policy, the advice should be consistent across studies, which may mean that the models must be complex enough to serve many purposes all at once. To build models that can serve malaria policy, we need the models to be \emph{realistic} enough to be compelling. It might take a lot of work to build a model that resembles malaria in a particular place and time, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers.
+There are several reasons why models for policy will tend to be more complex than models developed for science. When models are used to guide policy, the evidence should be cumulative, and the advice should be consistent across studies. Over time, the advice should shift from \emph{generic} advice to \emph{specific} advice as more evidence is gathered. To carry a conversation forward, the models used to guide discussions will tend to grow more complex over time. To build models that can serve malaria policy, we need the models to be \emph{realistic} enough to be compelling. It might take a lot of work to build a model that has been fit to all the evidence describing malaria in a management unit over the recent past, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers. In policy, models must be complex enough to serve many purposes all at once.
 
 In designing a software solution to the problem of building realistic models, we wanted a toolbox to build models that would directly address the concerns of malaria programs. In the chapters that follow, we'll show the features of this framework by constructing examples. If we're principled about it, the primary cost is \emph{computational complexity.} That is something the software was designed to manage. For the moment, we thus want to set aside concerns about \emph{realism} vs.~\emph{abstraction}, about \emph{parsimony}, and about \emph{error propagation,} and we want to simply ask the question of how to build models with the features we want.
 
-This chapter is an overview of the toolbox. We'll cover the same material in much greater detail, with examples, in the chapters that follow.
+This chapter is an overview of the historical development of malaria models and an introduction to the toolbox. We'll cover the same material in much greater detail in the chapters that follow, and we'll construct examples using \texttt{exDE} and \texttt{MicroMoB}.
 
-\hypertarget{stratification}{%
-\section{Stratification}\label{stratification}}
+\hypertarget{epidemiology}{%
+\section{Epidemiology}\label{epidemiology}}
 
-The first topic we want to cover is \emph{segmentation} of the human population into \emph{strata.} When we talk about \emph{stratification,} we mean it the narrow sense of segmenting the human population, usually to deal with heterogeneity of some sort.\footnote{In a broader sense, stratification is also about subdividing landscapes into a set of spatial domains that share relevant features in order to \emph{tailor interventions to context.} That is a topic we take up in a separate book,
-  ( \textbf{Robust Analytics for Malaria Policy.} ).}
-The guiding principle is that our analytics will be more accurate if we identify and remove any sources of heterogeneity, either for estimating the impact of interventions in the past or for projecting those impacts into the future. We acknowledge that models are approximations, and that our approximations don't have to be perfect. The goal is to find ways of propagating uncertainty that are \emph{good enough} for the task at hand.
+Malaria epidemiology, in the narrow sense, deals with exposure, infection, immunity, disease, infectiousness, and drug taking. We need models that can be used as a synthesis for research and surveillance data. The complexity is daunting. This introduction is mainly historical, but we use it to preview some of the themes.
+
+\hypertarget{superinfection}{%
+\subsection{Superinfection}\label{superinfection}}
+
+\hypertarget{infection-and-immunity}{%
+\subsection{Infection and Immunity}\label{infection-and-immunity}}
+
+\begin{itemize}
+\item
+  The Garki Model
+\item
+  stage structured immunity
+\item
+  Dutertre's model
+\item
+  There is no steady state; it is a stable orbit wrt age.
+\end{itemize}
+
+\hypertarget{treatment-and-chemoprotection}{%
+\subsection{Treatment and Chemoprotection}\label{treatment-and-chemoprotection}}
+
+\hypertarget{intrahost-models}{%
+\subsection{Intrahost Models}\label{intrahost-models}}
+
+\hypertarget{disease}{%
+\subsection{Disease}\label{disease}}
+
+\hypertarget{individual-based-models}{%
+\subsection{Individual-Based Models}\label{individual-based-models}}
+
+\hypertarget{age-of-infection}{%
+\subsection{Age of Infection}\label{age-of-infection}}
+
+\hypertarget{stage-of-infection}{%
+\subsection{Stage of Infection}\label{stage-of-infection}}
+
+\hypertarget{synthesis}{%
+\subsection{Synthesis}\label{synthesis}}
+
+\hypertarget{age-and-aging}{%
+\section{Age and Aging}\label{age-and-aging}}
+
+Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny.
+
+For systems described generically by the state space, \(\mathscr X\), the dynamics we care about have the form:
+
+\[\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}\]
+
+We might want to deal with malaria differently if we are studying malaria in cohorts. In a population where the FoI over time is \(h(t)\), we might want to follow a birth cohort, so we define \(h_d(a) = h(t-a)\) for all \(t>d\). We can then solve:
+
+\[\frac{d{\mathscr X}}{d a} \]
+which produces states in cohorts as they age, \({\mathscr X}(a|h).\)
+
+When we simulate malaria transmission dynamics in populations for policy, we will want to put a mesh on age and segment the population. The dynamics are define for age strata, where the FoI is defined differently for each age stratum:
+
+\[\frac{d{\mathscr X}_a}{d t}\]
+
+which produces age-dependent states over time, \({\mathscr X}_a(t|h).\)
+
+Our algorithms should guarantee that the epidemiological states over time provide an accurate match for the epidemiological states over age.
+
+\hypertarget{boxcar-models}{%
+\subsection{Boxcar Models}\label{boxcar-models}}
+
+\hypertarget{delayed-age-strata}{%
+\subsection{Delayed Age Strata}\label{delayed-age-strata}}
+
+\hypertarget{population-heterogeneity-and-stratification}{%
+\section{Population Heterogeneity and Stratification}\label{population-heterogeneity-and-stratification}}
+
+Human populations are heterogeneous. Some kinds of heterogeneity affect how we understand malaria and what we should do, including who to target. To deal with heterogeneity in models, we will often need to \emph{segment} a human population into sub-populations, or \emph{strata.} When we talk about \emph{stratification,} we mean it the narrow sense of segmenting a human population (\emph{i.e.} not subdividing landscapes spatially\footnote{In a broader sense, stratification is also about subdividing landscapes into a set of spatial domains that share relevant features in order to \emph{tailor interventions to context.} That is a topic we take up in a separate book, ( \textbf{Robust Analytics for Malaria Policy.} ).}), because the model predictions made by creating strata that are more homogeneous should be more accurate. The guiding principle is that our analytics will should strive to be more accurate, and that we should thus identify and remove those sources of heterogeneity that would affect policy advice, whether it affects estimating the impact of interventions in the past or projecting those impacts into the future. We acknowledge that models are approximations, and that our approximations don't have to be perfect. The goal is to find ways of propagating uncertainty that are \emph{good enough} for the task at hand.
 
 In malaria epidemiology, \emph{some} kinds of endogenous heterogeneity \emph{could} be built into the \emph{epidemiological state space.} Other kinds of heterogeneity, including consistent differences in exposure, differences in care seeking and drug taking, and differences created by malaria control (\emph{e.g.} net ownership or vaccination), usually require stratification. The decision about how to strike the right balance depends on the model and the purpose of a study.
 
 The framework and supporting software offer a toolbox for stratification. It is designed to stratify populations in a principled way, so that we can \emph{understand} how the heterogeneity affects transmission or outcomes that we care about, but we can also \emph{combine} effects. We want to stratify populations by applying rules that \emph{split} populations when the differences are large enough. (If we started with complex models, we might choose to \emph{join} populations if the differences were small.) By so doing, we can \emph{compare} the behaviors of models that differ from each other in only one way. If the differences are not too large, or if the differences in dynamical behaviors we care about are not too large, we might decide not to split the strata, and use the average. Because of the way models are encoded, it's easy to build models that split the strata in multiple, independent ways.
 
-\hypertarget{strata-in-rosss-model}{%
-\subsection{Strata in Ross's model}\label{strata-in-rosss-model}}
+\hypertarget{strata-in-the-ross-model}{%
+\subsection{Strata in the Ross model}\label{strata-in-the-ross-model}}
 
 As a simple example, consider a simple Ross-style model for infection with exposure and recovery (described in Section \ref{RossEqn}):
 
@@ -922,14 +1001,17 @@ We will introduce segmentation first through models of \protect\hyperlink{hetero
 
 Some of the heterogeneous traits that we care about change dynamically, so we will also need to consider population \emph{flows} among strata, which change the sizes of the strata. We would like to deal with these flows in a principled way. Bed net ownership and use are among the human behaviors that matters most for programs. In some cases, we will want to understand dynamic changes in bed net ownership, the patterns of use among those who own a net, personal protection, and community effects. Later, we show how to construct an example that \emph{describes} all of these aspects of bednets.
 
-Segmentation is what we need to build models of pharmaceutical interventions with waning effectiveness, such as mass vaccination. Among the most important factors in malaria is age. We have defined algorithms to model \protect\hyperlink{aging}{Aging} and other demographic change, the loss of bednets, waning protection or changing housing quality.
+Segmentation is what we need to build models of pharmaceutical interventions with waning effectiveness, such as mass vaccination. Among the most important factors in malaria is age. We have defined algorithms to model {[}Aging{]} and other demographic change, the loss of bednets, waning protection or changing housing quality.
+
+\hypertarget{demographic-change}{%
+\subsection{Demographic Change}\label{demographic-change}}
 
 \hypertarget{blood-feeding}{%
 \section{Blood Feeding}\label{blood-feeding}}
 
 The second topic we must tackle is blood feeding, which is an interaction between mosquitoes and humans. It is an asymmetric relationship -- mosquitoes search for blood hosts, select a host, and blood feed. Humans, for their part, attract mosquitoes from a distance, move around, and spend time in places when mosquitoes are biting. Humans can wear protective clothing (or not), use bed nets (or not), or do other things that make them more or less available to humans. Despite all this, humans are often unaware that they have been bitten.
 
-Transmission occurs during blood feeding, and models of blood feeding \emph{should} be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate (\(f\)) and a human fraction (\(q\)). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{1}{]}.
+Transmission occurs during blood feeding, and models of blood feeding \emph{should} be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate (\(f\)) and a human fraction (\(q\)). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{10}{]}.
 
 Over the past two decades, several papers have drawn attention to the way blood feeding behaviors are or ought to be constrained by the availability of vertebrate hosts. It may be fine to assume that the density of vertebrate hosts doesn't change, but \emph{something} should change when a large fraction of people are using bednets. Even with static parameters, we should think through the limiting cases: if there are no vertebrate hosts, then there blood feeding should not occur (\emph{i.e.}, \(f=0\)); if there are no human hosts, then there should be no human blood meals (\(q=0\)); and if there are no alternatives to humans, all blood meals should be on humans (\(q=1\)).
 
@@ -946,7 +1028,7 @@ To complete the picture, we consider how the expected rate of exposure could hav
 
 To deal with heterogeneous exposure and many other phenomena, we need a sensible way of segmenting humans into population \textbf{strata}. Stratification makes it possible to deal with population heterogeneity.
 
-A new model of \textbf{blood feeding} is based on a model of blood feeding as the endpoint of a search for a blood host {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{1}{]}.
+A new model of \textbf{blood feeding} is based on a model of blood feeding as the endpoint of a search for a blood host {[}\protect\hyperlink{ref-WuSL2022SpatialDynamics}{10}{]}.
 
 \begin{itemize}
 \item
@@ -1037,30 +1119,17 @@ To describe mosquito spatial dynamics, we
 \hypertarget{time}{%
 \section{Time}\label{time}}
 
-\hypertarget{epidemiology}{%
-\section{Epidemiology}\label{epidemiology}}
+\hypertarget{the-eip}{%
+\subsection{The EIP}\label{the-eip}}
 
-\hypertarget{aging}{%
-\section{Aging}\label{aging}}
+\hypertarget{seasonality}{%
+\subsection{Seasonality}\label{seasonality}}
 
-Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny.
+\hypertarget{exogenous-forcing}{%
+\subsection{Exogenous Forcing}\label{exogenous-forcing}}
 
-For systems described generically by the state space, \(\mathscr X\), the dynamics we care about have the form:
-
-\[\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}\]
-
-We might want to deal with malaria differently if we are studying malaria in cohorts. In a population where the FoI over time is \(h(t)\), we might want to follow a birth cohort, so we define \(h_d(a) = h(t-a)\) for all \(t>d\). We can then solve:
-
-\[\frac{d{\mathscr X}}{d a} \]
-which produces states in cohorts as they age, \({\mathscr X}(a|h).\)
-
-When we simulate malaria transmission dynamics in populations for policy, we will want to put a mesh on age and segment the population. The dynamics are define for age strata, where the FoI is defined differently for each age stratum:
-
-\[\frac{d{\mathscr X}_a}{d t}\]
-
-which produces age-dependent states over time, \({\mathscr X}_a(t|h).\)
-
-Our algorithms should guarantee that the epidemiological states over time provide an accurate match for the epidemiological states over age.
+\hypertarget{vector-control}{%
+\subsection{Vector Control}\label{vector-control}}
 
 \hypertarget{mosquito-ecology-1}{%
 \section{Mosquito Ecology}\label{mosquito-ecology-1}}
@@ -1074,24 +1143,131 @@ Our algorithms should guarantee that the epidemiological states over time provid
 \hypertarget{context}{%
 \section{Context}\label{context}}
 
+\hypertarget{measuring-malaria}{%
+\chapter{Measuring Malaria}\label{measuring-malaria}}
+
+If we want to use evidence to make policy, we need to understand transmission in its local context. Two major premises in malaria epidemiology and control are that we can understand malaria prevalence as an outcome of exposure, and that the outcomes of malaria control will also vary with exposure. A problem for us is that we must rely on estimated exposure to make our decisions, but there is a paucity of \emph{Pf}EIR data, so we will rely on whatever data we have to \emph{estimate} the \emph{Pf}EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.
+
+Exposure is actually quite complex, but a major component of it involves understanding local mosquito populations. To quantify these factors, we rely on paired estimates of metrics to understand the factors affecting their scaling relationships: the \emph{Pf}PR; the \emph{Pf}EIR, the \emph{Pf}FoI. Ideally, we would use the \emph{Pf}SPR, if we knew how to correct for biases. In most cases, we must estimate the \emph{Pf}EIR from the \emph{Pf}PR. While we do this out of necessity, we must be aware of many sources of error that we can identify either \emph{a priori} or that we can study through simulation. The framework we have developed makes it comparatively easy to simulate the effects and effect sizes of these factors. The list of things we must consider includes:
+
+\begin{itemize}
+\item
+  The \emph{Pf}PR varies in a population by age, sex, and the diagnostic method;
+\item
+  The \emph{Pf}PR is modified by drug-taking; the effect modification varies in a population by age, access to care, and adherance to drug regimens
+\item
+  Exposure is \emph{seasonal}
+
+  \begin{itemize}
+  \item
+    seasonality \emph{would} affect the true \emph{Pf}PR and the true \emph{Pf}EIR over time;
+  \item
+    seasonality \emph{could} be a source of error in the estimated \emph{Pf}PR (especially with respect to age) and estimated \emph{Pf}EIR.
+  \end{itemize}
+\item
+  Heterogeneous exposure:
+
+  \begin{itemize}
+  \item
+    exposure varies by age;
+  \item
+    there are other identifiable sources of frailty that we can deal with through stratification (\emph{e.g.} house type, location, bed net use), and there are many frailties we will not be able to identify;
+  \item
+    the relationship between exposure and infection is affected by \emph{environmental heterogeneity;} because of variability in mosquito populations at a fine spatial grain over time and space, and the trajectories of individual humans who are put at risk,
+  \end{itemize}
+\item
+  The \emph{Pf}EIR near home is obscured by human mobility through time at risk and exposure away from home;
+\item
+  Travel and imported malaria can increase the \emph{Pf}PR
+\item
+  Measurement errors in the \emph{Pf}EIR
+
+  \begin{itemize}
+  \item
+    There are \emph{house effects} that bias the estimation of the \emph{Pf}EIR
+  \item
+    Different methods of catching mosquitoes give different estimates for the HBR.
+  \end{itemize}
+\end{itemize}
+
+These effects are incorporated into the framework. Frailties are dealt with by stratifying by age (\(\omega(a)\)) and other traits and assigning \emph{biting weights}; when combined with mobility, these become part of the mixing matrix, \(\beta\). Environmental heterogeneity modifies the relationship between the \emph{Pf}EIR by stratum and the \emph{Pf}FoI (through \(F_h\)). Seasonality in mosquito density (\(Z(t)\)) translates into seasonality in exposure (\(S(t)\)). Drug taking and immunity modify the \emph{Pf}PR after exposure.
+
+In the following sections, we use the framework to illustrate the effects and effect sizes of these factors.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{figure}
+\centering
+\includegraphics{./Figures/Estimation.png}
+\caption{Figure 4.1: A generalized framwork for understanding the relationship between the \emph{Pf}EIR and the \emph{Pf}PR:}
+\end{figure}
+
+\hypertarget{realistic-bounds}{%
+\section{Realistic Bounds}\label{realistic-bounds}}
+
+An important reality check is that we can set sensible expectations about upper bounds on the \emph{Pf}PR in relation to exposure. The maximum value of the \emph{Pf}PR will tend to be observed in untreated populations with homogeneous exposure. To identify these bounds, we assume that we are passing the \emph{true} \emph{Pf}EIR, but not necessarily the \emph{local} \emph{Pf}EIR.
+
+\hypertarget{the-local-fraction}{%
+\section{The Local Fraction}\label{the-local-fraction}}
+
+\hypertarget{travel}{%
+\subsection{Travel}\label{travel}}
+
+\hypertarget{mobility}{%
+\subsection{Mobility}\label{mobility}}
+
+\hypertarget{drug-taking}{%
+\section{Drug Taking}\label{drug-taking}}
+
+\hypertarget{seasonality-1}{%
+\section{Seasonality}\label{seasonality-1}}
+
+\hypertarget{frailty}{%
+\section{Frailty}\label{frailty}}
+
+At low intensity, frailty can affect the prevalence
+
+\hypertarget{environmental-heterogeneity-1}{%
+\section{Environmental Heterogeneity}\label{environmental-heterogeneity-1}}
+
+\hypertarget{pfeir-vs.-pfpr-in-data}{%
+\section{\texorpdfstring{\emph{Pf}EIR \emph{vs.} \emph{Pf}PR in Data}{PfEIR vs. PfPR in Data}}\label{pfeir-vs.-pfpr-in-data}}
+
+\hypertarget{pfeir-vs.-pffoi-in-data}{%
+\section{\texorpdfstring{\emph{Pf}EIR \emph{vs.} \emph{Pf}FoI in Data}{PfEIR vs. PfFoI in Data}}\label{pfeir-vs.-pffoi-in-data}}
+
+\hypertarget{synthesis-1}{%
+\section{Synthesis}\label{synthesis-1}}
+
+\hypertarget{measuring-control}{%
+\chapter{Measuring Control}\label{measuring-control}}
+
+Control modifies transmission, but it needs its own theory.
+
+\hypertarget{coverage}{%
+\section{Coverage}\label{coverage}}
+
+\hypertarget{effect-sizes}{%
+\section{Effect Sizes}\label{effect-sizes}}
+
 \hypertarget{modularity-and-software}{%
 \chapter{Modularity and Software}\label{modularity-and-software}}
 
-Hundreds of publications have described new models of malaria {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{8},\protect\hyperlink{ref-SmithNR2018AgentbasedModels}{9}{]}. The challenge we have taken on is to find a new way of building models for malaria that draws from all those good ideas to build models at any level of complexity. We want to do this with reusable, professional quality software. Ideally, the models that we develop would be sufficiently complex to address policy questions, yet remain amenable to analysis. To get there, we took a step back to try and understand \emph{malaria models}, and to put this into a birds-eye view of the process of model building.
+Hundreds of publications have described new models of malaria {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{2},\protect\hyperlink{ref-SmithNR2018AgentbasedModels}{3}{]}. The challenge we have taken on is to find a new way of building models for malaria that draws from all those good ideas to build models at any level of complexity. We want to do this with reusable, professional quality software. Ideally, the models that we develop would be sufficiently complex to address policy questions, yet remain amenable to analysis. To get there, we took a step back to try and understand \emph{malaria models}, and to put this into a birds-eye view of the process of model building.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 From Ross's first published model in 1905 to the first draft of this book, 117 years have passed. The story of malaria models can be summarized in three epochs.
 
-Ross's models, and contributions to mathematical study of malaria made by Alfred J Lotka (1912-1923), George Macdonald (1950-1968), and Garrett-Jones (1964-1970) take us to the end first epoch, which is marked by the end of the Global Malaria Eradication Programme (GMEP, 1955-1969). As part of the GMEP, Macdonald's formulas were extended by Garrett-Jones into the concept of \emph{vectorial capacity} and a rudimentary theory of vector control. By 1970, the \emph{Ross-Macdonald} model was more than just a set of equations. It was a theory for malaria dynamics and control supported by a well-developed set of concepts, parameters and metrics {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{4}{]}.
+Ross's models, and contributions to mathematical study of malaria made by Alfred J Lotka (1912-1923), George Macdonald (1950-1968), and Garrett-Jones (1964-1970) take us to the end first epoch, which is marked by the end of the Global Malaria Eradication Programme (GMEP, 1955-1969). As part of the GMEP, Macdonald's formulas were extended by Garrett-Jones into the concept of \emph{vectorial capacity} and a rudimentary theory of vector control. By 1970, the \emph{Ross-Macdonald} model was more than just a set of equations. It was a theory for malaria dynamics and control supported by a well-developed set of concepts, parameters and metrics {[}\protect\hyperlink{ref-SmithDL2012_RossMacdonald}{1}{]}.
 
 Over that same period of time, mathematical theory for directly transmitted diseases took a parallel path, with important mathematical contributions from Kermack and McKendrick, NTJ Bailey, and Bartlett. Sometime around 1980, mathematical epidemiology began a period of innovation and synthesis, particularly after the publications of Robert May and Roy Anderson made it a mainstream activity in departments of ecology.
 
-In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{10}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{11}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{12}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{13},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{14}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{15},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{16}{]}.
+In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{18}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{19}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{20}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{21},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{22}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{23},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{24}{]}.
 
 The last epoch of malaria, which starts around 2006, is marked by two major developments: a maturing theory of malaria control; and the rise of branded, individual-based models.
 
-The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{17},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{18}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{18}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
+The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{25},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{26}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{26}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
 
 Around 2007, new models of vector control began to appear that related intevention coverage levels to effect sizes. Macdonald's work had focused on sensitivity to parameters, and the GMEP emphasized technical efficiency to achieve very high coverage (with IRS). Garrett-Jones developed vectorial capacity as a way of understanding vector control and effect modification by insecticide resistance. The new models extended Garrett-Jones ideas. The need for new models was motivated, at least in part, by the goal of achieving universal coverage with ITNs. What were reasonable coverage targets? The new generation of vector control models introduced the concept of an effect size on transmission as a function of intervention coverage levels, where coverage had one definition for operations (\emph{e.g.} something like ownership) and another for effect sizes (\emph{e.g.} related to vector contact rates with interventions). The goal of achieving very high coverage with ITNs bumped into the reality that nets are not durable, so new models have been devised to look at intervention coverage in relation to distribution schemes and product durability. While these concepts had been considered during the GMEP design phase, they did not appear in Macdonald's models.
 
@@ -1138,7 +1314,7 @@ In malaria, this \emph{ad hoc} process of writing new models was found to be ina
 \hypertarget{modular-computation}{%
 \section{Modular Computation}\label{modular-computation}}
 
-Before \emph{OpenMalaria}, most models of malaria modified the Ross-Macdonald model in one way {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{8}{]}. The innovation was focused on specific themes or questions: how long would an infection last in models with superinfection?
+Before \emph{OpenMalaria}, most models of malaria modified the Ross-Macdonald model in one way {[}\protect\hyperlink{ref-ReinerRCJ2013SystematicReview}{2}{]}. The innovation was focused on specific themes or questions: how long would an infection last in models with superinfection?
 
 \hypertarget{exde}{%
 \subsection{\texorpdfstring{\texttt{exDE}}{exDE}}\label{exde}}
@@ -1163,7 +1339,7 @@ For humans, exposure to malaria means exposure to the bites of infectious mosqui
 \item
   We set the stage for a new model of mosquito \textbf{blood feeding} that we introduce in the next chapter.
 \item
-  In a chapter on \protect\hyperlink{approximation}{Approximation}, we use these models to discuss the problem of model-based inference.
+  In a chapter on {[}Approximation{]}, we use these models to discuss the problem of model-based inference.
 \end{itemize}
 
 \hypertarget{overview}{%
@@ -1207,11 +1383,19 @@ Continuous distributions are difficult to extend, but we can stratify a populati
 \hypertarget{blood-feeding-1}{%
 \chapter{Blood Feeding}\label{blood-feeding-1}}
 
-\hypertarget{availability-and-blood-feeding-rates}{%
-\section{Availability and Blood Feeding Rates}\label{availability-and-blood-feeding-rates}}
+The endpoint
 
-\hypertarget{host-selection}{%
-\section{Host Selection}\label{host-selection}}
+\hypertarget{host-availability}{%
+\section{Host Availability}\label{host-availability}}
+
+\hypertarget{blood-feeding-rates}{%
+\section{Blood Feeding Rates}\label{blood-feeding-rates}}
+
+\hypertarget{the-human-fraction}{%
+\section{The Human Fraction}\label{the-human-fraction}}
+
+\hypertarget{the-mixing-matrix-beta}{%
+\section{\texorpdfstring{The Mixing Matrix, \(\beta\)}{The Mixing Matrix, \textbackslash beta}}\label{the-mixing-matrix-beta}}
 
 \hypertarget{spatial-dynamics}{%
 \chapter{Spatial Dynamics}\label{spatial-dynamics}}
@@ -1219,13 +1403,19 @@ Continuous distributions are difficult to extend, but we can stratify a populati
 \hypertarget{temporal-dynamics}{%
 \chapter{Temporal Dynamics}\label{temporal-dynamics}}
 
+\hypertarget{exogenous-forcing-1}{%
+\section{Exogenous Forcing}\label{exogenous-forcing-1}}
+
+\hypertarget{mosquito-survival-through-the-eip}{%
+\section{Mosquito Survival through the EIP}\label{mosquito-survival-through-the-eip}}
+
 \hypertarget{cohort-dynamics}{%
 \chapter{Cohort Dynamics}\label{cohort-dynamics}}
 
 We need a way of incorporating age into our models.
 
-\hypertarget{boxcar-models}{%
-\section{Boxcar Models}\label{boxcar-models}}
+\hypertarget{boxcar-models-1}{%
+\section{Boxcar Models}\label{boxcar-models-1}}
 
 \hypertarget{delay}{%
 \section{Delay}\label{delay}}
@@ -1236,14 +1426,14 @@ We need a way of incorporating age into our models.
 \hypertarget{migration}{%
 \section{Migration}\label{migration}}
 
-\hypertarget{stratification-1}{%
-\chapter{Stratification}\label{stratification-1}}
+\hypertarget{stratification}{%
+\chapter{Stratification}\label{stratification}}
 
-\hypertarget{part-humans}{%
-\part{Humans}\label{part-humans}}
+\hypertarget{part-human-ecology}{%
+\part{Human Ecology}\label{part-human-ecology}}
 
-\hypertarget{human-behaviors-and-ecology}{%
-\chapter{Human Behaviors and Ecology}\label{human-behaviors-and-ecology}}
+\hypertarget{human-behavior}{%
+\chapter{Human Behavior}\label{human-behavior}}
 
 \hypertarget{human-mobility}{%
 \chapter{Human Mobility}\label{human-mobility}}
@@ -1330,8 +1520,8 @@ Exposure \emph{vs.} age.
 \hypertarget{care-seeking}{%
 \chapter{Care Seeking}\label{care-seeking}}
 
-\hypertarget{drug-taking}{%
-\chapter{Drug Taking}\label{drug-taking}}
+\hypertarget{drug-taking-1}{%
+\chapter{Drug Taking}\label{drug-taking-1}}
 
 \hypertarget{curing-infections}{%
 \section{Curing Infections}\label{curing-infections}}
@@ -1406,8 +1596,8 @@ Modeling mosquito population dynamics on point sets.
 \hypertarget{part-malaria-control}{%
 \part{Malaria Control}\label{part-malaria-control}}
 
-\hypertarget{vector-control}{%
-\chapter{Vector Control}\label{vector-control}}
+\hypertarget{vector-control-1}{%
+\chapter{Vector Control}\label{vector-control-1}}
 
 Towards a theory of vector control.
 
@@ -1447,94 +1637,6 @@ Towards a theory of vector control.
 \hypertarget{spatial-concepts-and-connectivity}{%
 \chapter{Spatial Concepts and Connectivity}\label{spatial-concepts-and-connectivity}}
 
-\hypertarget{part-estimation}{%
-\part{Estimation}\label{part-estimation}}
-
-\hypertarget{approximation}{%
-\chapter{Approximation}\label{approximation}}
-
-In this chapter, we use some of the simple models we've developed to introduce some basic ideas.
-
-\begin{itemize}
-\item
-  Because it is easy for models of heterogeneous exposure, we introduce a \emph{model to model distance metric} for models that makes it possible to rigorously measure the distance between two models.
-\item
-  Using distance metrics, we use model-model comparison to show how models approximate each another. Informally, we compare this to a one way \emph{model to data distance metric} that can be used to compare how far two models are from some data set. We imagine an unobserved real world, and we show how information bout the real world is transferred through data.
-\end{itemize}
-
-\hypertarget{the-distance-between-two-models}{%
-\section{The Distance between Two Models}\label{the-distance-between-two-models}}
-
-\hypertarget{the-distance-from-models-to-data}{%
-\section{The Distance from Models to Data}\label{the-distance-from-models-to-data}}
-
-\hypertarget{exposure-and-infection}{%
-\chapter{Exposure and Infection}\label{exposure-and-infection}}
-
-The relationships between the annual \emph{Pf}EIR, the \emph{Pf}FoI, and the \emph{Pf}PR are among the most important in malaria. A few studies analyzed the data {[}\protect\hyperlink{ref-BeierJC1999ShortReport}{19},\protect\hyperlink{ref-HaySI2005UrbanizationMalaria}{20}{]}. The first paper I wrote on the topic, in 2005, suggested an important role for heterogeneous biting {[}\protect\hyperlink{ref-SmithDL2005_EIRvPR}{21}{]}. At the time, we were thinking mainly about frailty. After some correspondence, we took a closer look at the relationship between the \emph{Pf}EIR and the \emph{Pf}FoI {[}\protect\hyperlink{ref-SmithDL2010_InefficientTransmission}{22}{]}, which helped us rule out immunity. With some data in hand, we took a closer look at heterogeneous exposure {[}\protect\hyperlink{ref-CooperL2019ParetoRules}{23}{]}, which drew our attention to environmental heterogeneity. Meanwhile, we developed the age-standardization algorithms for the Malaria Atlas Project {[}\protect\hyperlink{ref-SmithDL2007_StandardizingPfPR}{24}{]}. As we grappled with the data from Bioko Island, it became clear that malaria importation could be an important factor {[}\protect\hyperlink{ref-GuerraCA2019HumanMobility}{25}{]}. None of this considered either seasonality or drug taking and chemo-protection.
-
-The \emph{Pf}PR to \emph{Pf}EIR converstion algorthims defined in \ref{pr2eir} are among the most important for policy.
-
-\hypertarget{data}{%
-\section{Data}\label{data}}
-
-\hypertarget{eir-vs.-pr}{%
-\subsection{EIR vs.~PR}\label{eir-vs.-pr}}
-
-We have revisited the relationship one more time, but we do it in two steps. First, we take another look at the EIR-PR and EIR-FoI data, with a focus on \emph{house effects}
-
-\hypertarget{eir-vs.-foi}{%
-\subsection{EIR vs.~FoI}\label{eir-vs.-foi}}
-
-\hypertarget{chemoprotection-1}{%
-\subsection{Chemoprotection}\label{chemoprotection-1}}
-
-\hypertarget{models}{%
-\section{Models}\label{models}}
-
-Second, we re-evaluate the many sources of variability, and how each one works across the spectrum of transmission:
-
-\begin{itemize}
-\item
-  Age: What is the age of the population being examined?
-\item
-  Drug Taking and Chemoprotection: What is the distribution of drug-taking rates and habits in the population?
-\item
-  Pre-erythrocytic Immunity
-\item
-  Heterogeneous Exposure
-
-  \begin{itemize}
-  \item
-    seasonality: how much does seasonality affect the probability of detection?
-  \item
-    \protect\hyperlink{frailty}{Frailty} (Section \ref{frailty})
-
-    \begin{itemize}
-    \item
-      age
-    \item
-      other
-    \end{itemize}
-  \item
-    \protect\hyperlink{environmentalHeterogeneity}{Environmental Heterogeneity} (Section \ref{environmentalHeterogeneity})
-  \end{itemize}
-\item
-  Travel Exposure and Malaria Importation
-\item
-  Immunity
-
-  \begin{itemize}
-  \item
-    maternal protection
-  \item
-    detection
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{pr2eir}{%
-\section{\texorpdfstring{\emph{Pf}PR \(\rightarrow\) \emph{Pf}EIR}{PfPR \textbackslash rightarrow PfEIR}}\label{pr2eir}}
-
 \hypertarget{model-libraries}{%
 \chapter{Model Libraries}\label{model-libraries}}
 
@@ -1548,105 +1650,109 @@ If you want a PDF and can't find it at the link provided, let us know and we can
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-WuSL2022SpatialDynamics}{}}%
-\CSLLeftMargin{1. }%
-\CSLRightInline{Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial {Dynamics} of {Malaria Transmission}. 2022. Available: \url{http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-RossR1905LogicalBasis}{}}%
-\CSLLeftMargin{2. }%
-\CSLRightInline{Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689--699. doi:\href{https://doi.org/10.1126/science.22.570.689}{10.1126/science.22.570.689}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-RossR1908ReportPrevention}{}}%
-\CSLLeftMargin{3. }%
-\CSLRightInline{Ross R. Report on the {Prevention} of {Malaria} in {Mauritius}. {London}: {Waterlow}; 1908. Available: \url{https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-SmithDL2012_RossMacdonald}{}}%
-\CSLLeftMargin{4. }%
+\CSLLeftMargin{1. }%
 \CSLRightInline{Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, {Macdonald}, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:\href{https://doi.org/10.1371/journal.ppat.1002588}{10.1371/journal.ppat.1002588}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-AronJL1982PopulationDynamics}{}}%
-\CSLLeftMargin{5. }%
-\CSLRightInline{Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The {Population Dynamics} of {Infectious Diseases}: {Theory} and {Applications}. {Boston, MA}: {Springer US}; 1982. pp. 139--179. doi:\href{https://doi.org/10.1007/978-1-4899-2901-3_5}{10.1007/978-1-4899-2901-3\_5}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-BradyOJ2015AdultVector}{}}%
-\CSLLeftMargin{6. }%
-\CSLRightInline{Brady OJ, Godfray HCJ, Tatem AJ, Gething PW, Cohen JM, McKenzie FE, et al. Adult vector control, mosquito ecology and malaria transmission. Int Health. 2015;7: 121--129. doi:\href{https://doi.org/10.1093/inthealth/ihv010}{10.1093/inthealth/ihv010}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2013_LarvalDynamics}{}}%
-\CSLLeftMargin{7. }%
-\CSLRightInline{Smith DL, Perkins TA, Tusting LS, Scott TW, Lindsay SW. Mosquito {Population Regulation} and {Larval Source Management} in {Heterogeneous Environments}. PLOS ONE. 2013;8: e71247. doi:\href{https://doi.org/10.1371/journal.pone.0071247}{10.1371/journal.pone.0071247}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-ReinerRCJ2013SystematicReview}{}}%
-\CSLLeftMargin{8. }%
+\CSLLeftMargin{2. }%
 \CSLRightInline{Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-SmithNR2018AgentbasedModels}{}}%
-\CSLLeftMargin{9. }%
+\CSLLeftMargin{3. }%
 \CSLRightInline{Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: {A} systematic review. Malar J. 2018;17: 299. doi:\href{https://doi.org/10.1186/s12936-018-2442-y}{10.1186/s12936-018-2442-y}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-DietzK1974MalariaModel}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2014_Recasting}{}}%
+\CSLLeftMargin{4. }%
+\CSLRightInline{Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185--197. doi:\href{https://doi.org/10.1093/trstmh/tru026}{10.1093/trstmh/tru026}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-CarterR2002SpatialSimulation}{}}%
+\CSLLeftMargin{5. }%
+\CSLRightInline{Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617--1624. doi:\href{https://doi.org/10.1016/S0020-7519(02)00190-X}{10.1016/S0020-7519(02)00190-X}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-GuW2003IndividualbasedModel}{}}%
+\CSLLeftMargin{6. }%
+\CSLRightInline{Gu W, Killeen GF, Mbogo CM, Regens JL, Githure JI, Beier JC. An individual-based model of {\emph{Plasmodium}} {\emph{falciparum} } malaria transmission on the coast of {Kenya}. Trans R Soc Trop Med Hyg. 2003;97: 43--50. doi:\href{https://doi.org/10.1016/s0035-9203(03)90018-6}{10.1016/s0035-9203(03)90018-6}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-PerkinsTA2013HeterogeneityMixing}{}}%
+\CSLLeftMargin{7. }%
+\CSLRightInline{Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. doi:\href{https://doi.org/10.1371/journal.pcbi.1003540}{10.1371/journal.pcbi.1003540}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-TatemAJ2010InternationalPopulation}{}}%
+\CSLLeftMargin{8. }%
+\CSLRightInline{Tatem AJ, Smith DL. International population movements and regional {\emph{Plasmodium}}{ \emph{Falciparum}} malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222--12227. doi:\href{https://doi.org/10.1073/pnas.1002971107}{10.1073/pnas.1002971107}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-WuSL2020MBITES}{}}%
+\CSLLeftMargin{9. }%
+\CSLRightInline{Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:\href{https://doi.org/10.1371/journal.pcbi.1007446}{10.1371/journal.pcbi.1007446}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-WuSL2022SpatialDynamics}{}}%
 \CSLLeftMargin{10. }%
+\CSLRightInline{Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial {Dynamics} of {Malaria Transmission}. 2022. Available: \url{http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-RossR1905LogicalBasis}{}}%
+\CSLLeftMargin{11. }%
+\CSLRightInline{Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689--699. doi:\href{https://doi.org/10.1126/science.22.570.689}{10.1126/science.22.570.689}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-RossR1908ReportPrevention}{}}%
+\CSLLeftMargin{12. }%
+\CSLRightInline{Ross R. Report on the {Prevention} of {Malaria} in {Mauritius}. {London}: {Waterlow}; 1908. Available: \url{https://play.google.com/store/books/details?id=0Mc1AQAAMAAJ}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-AronJL1982PopulationDynamics}{}}%
+\CSLLeftMargin{13. }%
+\CSLRightInline{Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The {Population Dynamics} of {Infectious Diseases}: {Theory} and {Applications}. {Boston, MA}: {Springer US}; 1982. pp. 139--179. doi:\href{https://doi.org/10.1007/978-1-4899-2901-3_5}{10.1007/978-1-4899-2901-3\_5}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2004_Statics}{}}%
+\CSLLeftMargin{14. }%
+\CSLRightInline{Smith DL, McKenzie FE. Statics and dynamics of malaria infection in {Anopheles} mosquitoes. Malaria J. 2004;3: 13. doi:\href{https://doi.org/10.1186/1475-2875-3-13}{10.1186/1475-2875-3-13}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2021_NewTestOldMosquitoes}{}}%
+\CSLLeftMargin{15. }%
+\CSLRightInline{Smith DL, Musiime AK, Maxwell K, Lindsay SW, Kiware S. A {New Test} of a {Theory} about {Old Mosquitoes}. Trends Parasitol. 2021;37: 185--194. doi:\href{https://doi.org/10.1016/j.pt.2020.10.011}{10.1016/j.pt.2020.10.011}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-BradyOJ2015AdultVector}{}}%
+\CSLLeftMargin{16. }%
+\CSLRightInline{Brady OJ, Godfray HCJ, Tatem AJ, Gething PW, Cohen JM, McKenzie FE, et al. Adult vector control, mosquito ecology and malaria transmission. Int Health. 2015;7: 121--129. doi:\href{https://doi.org/10.1093/inthealth/ihv010}{10.1093/inthealth/ihv010}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2013_LarvalDynamics}{}}%
+\CSLLeftMargin{17. }%
+\CSLRightInline{Smith DL, Perkins TA, Tusting LS, Scott TW, Lindsay SW. Mosquito {Population Regulation} and {Larval Source Management} in {Heterogeneous Environments}. PLOS ONE. 2013;8: e71247. doi:\href{https://doi.org/10.1371/journal.pone.0071247}{10.1371/journal.pone.0071247}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-DietzK1974MalariaModel}{}}%
+\CSLLeftMargin{18. }%
 \CSLRightInline{Dietz K, Molineaux L, Thomas A. A malaria model tested in the {African} savannah. Bull Wld Hlth Org. 1974;50: 347--357. Available: \url{http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve\&db=PubMed\&dopt=Citation\&list_uids=4613512}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1975ModelsParasitic}{}}%
-\CSLLeftMargin{11. }%
+\CSLLeftMargin{19. }%
 \CSLRightInline{Dietz K. Models for parasitic disease control. Bull Int Stat Inst. 1975;46: 531--544. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1976IncidenceInfectious}{}}%
-\CSLLeftMargin{12. }%
+\CSLLeftMargin{20. }%
 \CSLRightInline{Dietz K. The {Incidence} of {Infectious Diseases} under the {Influence} of {Seasonal Fluctuations}. Mathematical {Models} in {Medicine}. {Springer Berlin Heidelberg}; 1976. pp. 1--15. doi:\href{https://doi.org/10.1007/978-3-642-93048-5_1}{10.1007/978-3-642-93048-5\_1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1980ModelsVectorborne}{}}%
-\CSLLeftMargin{13. }%
+\CSLLeftMargin{21. }%
 \CSLRightInline{Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito {Volterra Symposium} on {Mathematical Models} in biology. {Berlin}: {Springer-Verlag}; 1980. pp. 264--277. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1988EpidemiologicalModels}{}}%
-\CSLLeftMargin{14. }%
+\CSLLeftMargin{22. }%
 \CSLRightInline{Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1--25. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DyeC1986PopulationDynamics}{}}%
-\CSLLeftMargin{15. }%
+\CSLLeftMargin{23. }%
 \CSLRightInline{Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69--77. doi:\href{https://doi.org/10.1016/0035-9203(86)90199-9}{10.1016/0035-9203(86)90199-9}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-HasibederG1988PopulationDynamics}{}}%
-\CSLLeftMargin{16. }%
+\CSLLeftMargin{24. }%
 \CSLRightInline{Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31--53. doi:\href{https://doi.org/10.1016/0040-5809(88)90003-2}{10.1016/0040-5809(88)90003-2}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL1999ReviewIntrahost}{}}%
-\CSLLeftMargin{17. }%
+\CSLLeftMargin{25. }%
 \CSLRightInline{Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221--231. Available: \url{http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed\&id=10697860\&retmode=ref\&cmd=prlinks}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL2001PlasmodiumFalciparum}{}}%
-\CSLLeftMargin{18. }%
+\CSLLeftMargin{26. }%
 \CSLRightInline{Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. \emph{Plasmodium falciparum} parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379--391. doi:\href{https://doi.org/10.1017/s0031182001007533}{10.1017/s0031182001007533}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-BeierJC1999ShortReport}{}}%
-\CSLLeftMargin{19. }%
-\CSLRightInline{Beier JC, Killeen GF, Githure JI. Short report: Entomologic inoculation rates and {Plasmodium} falciparum malaria prevalence in {Africa}. Am J Trop Med Hyg. 1999;61: 109--113. doi:\href{https://doi.org/10.4269/ajtmh.1999.61.109}{10.4269/ajtmh.1999.61.109}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-HaySI2005UrbanizationMalaria}{}}%
-\CSLLeftMargin{20. }%
-\CSLRightInline{Hay SI, Guerra CA, Tatem AJ, Atkinson PM, Snow RW. Urbanization, malaria transmission and disease burden in {Africa}. Nat Rev Microbiol. 2005;3: 81--90. doi:\href{https://doi.org/10.1038/nrmicro1069}{10.1038/nrmicro1069}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2005_EIRvPR}{}}%
-\CSLLeftMargin{21. }%
-\CSLRightInline{Smith DL, Dushoff J, Snow RW, Hay SI. The entomological inoculation rate and {\emph{Plasmodium}} {\emph{falciparum}} infection in {African} children. Nature. 2005;438: 492--495. doi:\href{https://doi.org/10.1038/nature04024}{10.1038/nature04024}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2010_InefficientTransmission}{}}%
-\CSLLeftMargin{22. }%
-\CSLRightInline{Smith DL, Drakeley CJ, Chiyaka C, Hay SI. A quantitative analysis of transmission efficiency versus intensity for malaria. Nat Commun. 2010;1: 108. doi:\href{https://doi.org/10.1038/ncomms1107}{10.1038/ncomms1107}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-CooperL2019ParetoRules}{}}%
-\CSLLeftMargin{23. }%
-\CSLRightInline{Cooper L, Kang SY, Bisanzio D, Maxwell K, Rodriguez-Barraquer I, Greenhouse B, et al. Pareto rules for malaria super-spreaders and super-spreading. Nat Commun. 2019;10: 3939. doi:\href{https://doi.org/10.1038/s41467-019-11861-y}{10.1038/s41467-019-11861-y}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-SmithDL2007_StandardizingPfPR}{}}%
-\CSLLeftMargin{24. }%
-\CSLRightInline{Smith DL, Guerra CA, Snow RW, Hay SI. Standardizing estimates of the {\emph{Plasmodium}}{ \emph{Falciparum}} parasite rate. Malar J. 2007;6: 131. doi:\href{https://doi.org/10.1186/1475-2875-6-131}{10.1186/1475-2875-6-131}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-GuerraCA2019HumanMobility}{}}%
-\CSLLeftMargin{25. }%
-\CSLRightInline{Guerra CA, Kang SY, Citron DT, Hergott DEB, Perry M, Smith J, et al. Human mobility patterns and malaria importation on {Bioko Island}. Nat Commun. 2019;10: 2332. doi:\href{https://doi.org/10.1038/s41467-019-10339-1}{10.1038/s41467-019-10339-1}}
 
 \end{CSLReferences}
 

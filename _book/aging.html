@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.7 Aging | Applied Malaria Dynamics</title>
+  <title>3.3 Aging | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.7 Aging | Applied Malaria Dynamics" />
+  <meta property="og:title" content="3.3 Aging | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="The RAMP Model and Algorithm Library" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.7 Aging | Applied Malaria Dynamics" />
+  <meta name="twitter:title" content="3.3 Aging | Applied Malaria Dynamics" />
   
   <meta name="twitter:description" content="The RAMP Model and Algorithm Library" />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-01-17" />
+<meta name="date" content="2023-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="epidemiology.html"/>
-<link rel="next" href="mosquito-ecology-1.html"/>
+<link rel="prev" href="population-heterogeneity-and-stratification.html"/>
+<link rel="next" href="blood-feeding.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,70 +54,6 @@
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -156,6 +92,7 @@ div.csl-indent {
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a>
 <ul>
+<li class="chapter" data-level="" data-path="contributors.html"><a href="contributors.html"><i class="fa fa-check"></i>Contributors</a></li>
 <li class="chapter" data-level="" data-path="dynamics-for-policy.html"><a href="dynamics-for-policy.html"><i class="fa fa-check"></i>Dynamics for Policy</a></li>
 </ul></li>
 <li class="part"><span><b>I Basic Concepts</b></span></li>
@@ -182,8 +119,8 @@ div.csl-indent {
 <li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a></li>
 <li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.1</b> Orbits</a></li>
-<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.2</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.1</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.2</b> Orbits</a></li>
 <li class="chapter" data-level="1.4.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>1.4.3</b> Average Dynamics</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="endemic-malaria.html"><a href="endemic-malaria.html"><i class="fa fa-check"></i><b>1.5</b> Endemic Malaria</a></li>
@@ -194,39 +131,68 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a></li>
 <li class="chapter" data-level="2.2" data-path="understanding-mosquito-dynamics.html"><a href="understanding-mosquito-dynamics.html"><i class="fa fa-check"></i><b>2.2</b> Understanding Mosquito Dynamics</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>3</b> Measuring Malaria</a></li>
-<li class="chapter" data-level="4" data-path="realism.html"><a href="realism.html"><i class="fa fa-check"></i><b>4</b> Realism</a>
+<li class="chapter" data-level="3" data-path="realism.html"><a href="realism.html"><i class="fa fa-check"></i><b>3</b> Realism</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.1</b> Stratification</a>
+<li class="chapter" data-level="3.1" data-path="epidemiology.html"><a href="epidemiology.html"><i class="fa fa-check"></i><b>3.1</b> Epidemiology</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="stratification.html"><a href="stratification.html#strata-in-rosss-model"><i class="fa fa-check"></i><b>4.1.1</b> Strata in Ross’s model</a></li>
-<li class="chapter" data-level="4.1.2" data-path="stratification.html"><a href="stratification.html#frailties"><i class="fa fa-check"></i><b>4.1.2</b> Frailties</a></li>
+<li class="chapter" data-level="3.1.1" data-path="epidemiology.html"><a href="epidemiology.html#the-time-course-of-a-simple-infection"><i class="fa fa-check"></i><b>3.1.1</b> The Time Course of a Simple Infection</a></li>
+<li class="chapter" data-level="3.1.2" data-path="epidemiology.html"><a href="epidemiology.html#immunity"><i class="fa fa-check"></i><b>3.1.2</b> Immunity</a></li>
+<li class="chapter" data-level="3.1.3" data-path="epidemiology.html"><a href="epidemiology.html#multiplicity-of-infection"><i class="fa fa-check"></i><b>3.1.3</b> Multiplicity of Infection</a></li>
+<li class="chapter" data-level="3.1.4" data-path="epidemiology.html"><a href="epidemiology.html#age-of-infection"><i class="fa fa-check"></i><b>3.1.4</b> Age of Infection</a></li>
+<li class="chapter" data-level="3.1.5" data-path="epidemiology.html"><a href="epidemiology.html#stage-of-infection"><i class="fa fa-check"></i><b>3.1.5</b> Stage of Infection</a></li>
+<li class="chapter" data-level="3.1.6" data-path="epidemiology.html"><a href="epidemiology.html#drug-taking"><i class="fa fa-check"></i><b>3.1.6</b> Drug Taking</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="blood-feeding.html"><a href="blood-feeding.html"><i class="fa fa-check"></i><b>4.2</b> Blood Feeding</a>
+<li class="chapter" data-level="3.2" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html"><i class="fa fa-check"></i><b>3.2</b> Population Heterogeneity and Stratification</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="blood-feeding.html"><a href="blood-feeding.html#search-and-risk"><i class="fa fa-check"></i><b>4.2.1</b> Search and Risk</a></li>
-<li class="chapter" data-level="4.2.2" data-path="blood-feeding.html"><a href="blood-feeding.html#search-weights-and-availability"><i class="fa fa-check"></i><b>4.2.2</b> Search Weights and Availability</a></li>
-<li class="chapter" data-level="4.2.3" data-path="blood-feeding.html"><a href="blood-feeding.html#functional-response"><i class="fa fa-check"></i><b>4.2.3</b> Functional Response</a></li>
-<li class="chapter" data-level="4.2.4" data-path="blood-feeding.html"><a href="blood-feeding.html#environmental-heterogeneity"><i class="fa fa-check"></i><b>4.2.4</b> Environmental Heterogeneity</a></li>
+<li class="chapter" data-level="3.2.1" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html#strata-in-the-ross-model"><i class="fa fa-check"></i><b>3.2.1</b> Strata in the Ross model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html#frailties"><i class="fa fa-check"></i><b>3.2.2</b> Frailties</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html"><i class="fa fa-check"></i><b>4.3</b> Mosquito Behavior</a>
+<li class="chapter" data-level="3.3" data-path="aging.html"><a href="aging.html"><i class="fa fa-check"></i><b>3.3</b> Aging</a></li>
+<li class="chapter" data-level="3.4" data-path="blood-feeding.html"><a href="blood-feeding.html"><i class="fa fa-check"></i><b>3.4</b> Blood Feeding</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#resource-availability"><i class="fa fa-check"></i><b>4.3.1</b> Resource Availability</a></li>
-<li class="chapter" data-level="4.3.2" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#egg-laying"><i class="fa fa-check"></i><b>4.3.2</b> Egg Laying</a></li>
-<li class="chapter" data-level="4.3.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#search-and-dispersal"><i class="fa fa-check"></i><b>4.3.3</b> Search and Dispersal</a></li>
+<li class="chapter" data-level="3.4.1" data-path="blood-feeding.html"><a href="blood-feeding.html#search-and-risk"><i class="fa fa-check"></i><b>3.4.1</b> Search and Risk</a></li>
+<li class="chapter" data-level="3.4.2" data-path="blood-feeding.html"><a href="blood-feeding.html#search-weights-and-availability"><i class="fa fa-check"></i><b>3.4.2</b> Search Weights and Availability</a></li>
+<li class="chapter" data-level="3.4.3" data-path="blood-feeding.html"><a href="blood-feeding.html#functional-response"><i class="fa fa-check"></i><b>3.4.3</b> Functional Response</a></li>
+<li class="chapter" data-level="3.4.4" data-path="blood-feeding.html"><a href="blood-feeding.html#environmental-heterogeneity"><i class="fa fa-check"></i><b>3.4.4</b> Environmental Heterogeneity</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="space.html"><a href="space.html"><i class="fa fa-check"></i><b>4.4</b> Space</a>
+<li class="chapter" data-level="3.5" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html"><i class="fa fa-check"></i><b>3.5</b> Mosquito Behavior</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="space.html"><a href="space.html#human-travel-and-mobility"><i class="fa fa-check"></i><b>4.4.1</b> Human Travel and Mobility</a></li>
-<li class="chapter" data-level="4.4.2" data-path="space.html"><a href="space.html#mosquito-dispersal-and-demography"><i class="fa fa-check"></i><b>4.4.2</b> Mosquito Dispersal and Demography</a></li>
+<li class="chapter" data-level="3.5.1" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#resource-availability"><i class="fa fa-check"></i><b>3.5.1</b> Resource Availability</a></li>
+<li class="chapter" data-level="3.5.2" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#egg-laying"><i class="fa fa-check"></i><b>3.5.2</b> Egg Laying</a></li>
+<li class="chapter" data-level="3.5.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#search-and-dispersal"><i class="fa fa-check"></i><b>3.5.3</b> Search and Dispersal</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="time.html"><a href="time.html"><i class="fa fa-check"></i><b>4.5</b> Time</a></li>
-<li class="chapter" data-level="4.6" data-path="epidemiology.html"><a href="epidemiology.html"><i class="fa fa-check"></i><b>4.6</b> Epidemiology</a></li>
-<li class="chapter" data-level="4.7" data-path="aging.html"><a href="aging.html"><i class="fa fa-check"></i><b>4.7</b> Aging</a></li>
-<li class="chapter" data-level="4.8" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>4.8</b> Mosquito Ecology</a></li>
-<li class="chapter" data-level="4.9" data-path="integrated-vector-control.html"><a href="integrated-vector-control.html"><i class="fa fa-check"></i><b>4.9</b> Integrated Vector Control</a></li>
-<li class="chapter" data-level="4.10" data-path="pharmaceutic-interventions.html"><a href="pharmaceutic-interventions.html"><i class="fa fa-check"></i><b>4.10</b> Pharmaceutic Interventions</a></li>
-<li class="chapter" data-level="4.11" data-path="context.html"><a href="context.html"><i class="fa fa-check"></i><b>4.11</b> Context</a></li>
+<li class="chapter" data-level="3.6" data-path="space.html"><a href="space.html"><i class="fa fa-check"></i><b>3.6</b> Space</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="space.html"><a href="space.html#human-travel-and-mobility"><i class="fa fa-check"></i><b>3.6.1</b> Human Travel and Mobility</a></li>
+<li class="chapter" data-level="3.6.2" data-path="space.html"><a href="space.html#mosquito-dispersal-and-demography"><i class="fa fa-check"></i><b>3.6.2</b> Mosquito Dispersal and Demography</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="time.html"><a href="time.html"><i class="fa fa-check"></i><b>3.7</b> Time</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="time.html"><a href="time.html#the-eip"><i class="fa fa-check"></i><b>3.7.1</b> The EIP</a></li>
+<li class="chapter" data-level="3.7.2" data-path="time.html"><a href="time.html#seasonality"><i class="fa fa-check"></i><b>3.7.2</b> Seasonality</a></li>
+<li class="chapter" data-level="3.7.3" data-path="time.html"><a href="time.html#exogenous-forcing"><i class="fa fa-check"></i><b>3.7.3</b> Exogenous Forcing</a></li>
+<li class="chapter" data-level="3.7.4" data-path="time.html"><a href="time.html#vector-control"><i class="fa fa-check"></i><b>3.7.4</b> Vector Control</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>3.8</b> Mosquito Ecology</a></li>
+<li class="chapter" data-level="3.9" data-path="integrated-vector-control.html"><a href="integrated-vector-control.html"><i class="fa fa-check"></i><b>3.9</b> Integrated Vector Control</a></li>
+<li class="chapter" data-level="3.10" data-path="pharmaceutic-interventions.html"><a href="pharmaceutic-interventions.html"><i class="fa fa-check"></i><b>3.10</b> Pharmaceutic Interventions</a></li>
+<li class="chapter" data-level="3.11" data-path="context.html"><a href="context.html"><i class="fa fa-check"></i><b>3.11</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>4</b> Measuring Malaria</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="realistic-bounds.html"><a href="realistic-bounds.html"><i class="fa fa-check"></i><b>4.1</b> Realistic Bounds</a></li>
+<li class="chapter" data-level="4.2" data-path="the-local-fraction.html"><a href="the-local-fraction.html"><i class="fa fa-check"></i><b>4.2</b> The Local Fraction</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="the-local-fraction.html"><a href="the-local-fraction.html#travel"><i class="fa fa-check"></i><b>4.2.1</b> Travel</a></li>
+<li class="chapter" data-level="4.2.2" data-path="the-local-fraction.html"><a href="the-local-fraction.html#mobility"><i class="fa fa-check"></i><b>4.2.2</b> Mobility</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="drug-taking-1.html"><a href="drug-taking-1.html"><i class="fa fa-check"></i><b>4.3</b> Drug Taking</a></li>
+<li class="chapter" data-level="4.4" data-path="seasonality-1.html"><a href="seasonality-1.html"><i class="fa fa-check"></i><b>4.4</b> Seasonality</a></li>
+<li class="chapter" data-level="4.5" data-path="frailty.html"><a href="frailty.html"><i class="fa fa-check"></i><b>4.5</b> Frailty</a></li>
+<li class="chapter" data-level="4.6" data-path="environmental-heterogeneity-1.html"><a href="environmental-heterogeneity-1.html"><i class="fa fa-check"></i><b>4.6</b> Environmental Heterogeneity</a></li>
+<li class="chapter" data-level="4.7" data-path="pfeir-vs.-pfpr-in-data.html"><a href="pfeir-vs.-pfpr-in-data.html"><i class="fa fa-check"></i><b>4.7</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>PR in Data</a></li>
+<li class="chapter" data-level="4.8" data-path="pfeir-vs.-pffoi-in-data.html"><a href="pfeir-vs.-pffoi-in-data.html"><i class="fa fa-check"></i><b>4.8</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>FoI in Data</a></li>
+<li class="chapter" data-level="4.9" data-path="synthesis.html"><a href="synthesis.html"><i class="fa fa-check"></i><b>4.9</b> Synthesis</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="modularity-and-software.html"><a href="modularity-and-software.html"><i class="fa fa-check"></i><b>5</b> Modularity and Software</a>
 <ul>
@@ -246,7 +212,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.1.3" data-path="overview.html"><a href="overview.html#house-type"><i class="fa fa-check"></i><b>6.1.3</b> House Type</a></li>
 <li class="chapter" data-level="6.1.4" data-path="overview.html"><a href="overview.html#activities"><i class="fa fa-check"></i><b>6.1.4</b> Activities</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="frailty.html"><a href="frailty.html"><i class="fa fa-check"></i><b>6.2</b> Frailty</a></li>
+<li class="chapter" data-level="6.2" data-path="frailty.html"><a href="frailty.html#frailty"><i class="fa fa-check"></i><b>6.2</b> Frailty</a></li>
 <li class="chapter" data-level="6.3" data-path="environmentalHeterogeneity.html"><a href="environmentalHeterogeneity.html"><i class="fa fa-check"></i><b>6.3</b> Environmental Heterogeneity</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="blood-feeding-1.html"><a href="blood-feeding-1.html"><i class="fa fa-check"></i><b>7</b> Blood Feeding</a>
@@ -265,7 +231,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="11.1" data-path="migration.html"><a href="migration.html"><i class="fa fa-check"></i><b>11.1</b> Migration</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="stratification-1.html"><a href="stratification-1.html"><i class="fa fa-check"></i><b>12</b> Stratification</a></li>
+<li class="chapter" data-level="12" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>12</b> Stratification</a></li>
 <li class="part"><span><b>III Humans</b></span></li>
 <li class="chapter" data-level="13" data-path="human-behaviors-and-ecology.html"><a href="human-behaviors-and-ecology.html"><i class="fa fa-check"></i><b>13</b> Human Behaviors and Ecology</a></li>
 <li class="chapter" data-level="14" data-path="human-mobility.html"><a href="human-mobility.html"><i class="fa fa-check"></i><b>14</b> Human Mobility</a></li>
@@ -305,7 +271,7 @@ div.csl-indent {
 <li class="chapter" data-level="20.3" data-path="severe-disease.html"><a href="severe-disease.html"><i class="fa fa-check"></i><b>20.3</b> Severe Disease</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="care-seeking.html"><a href="care-seeking.html"><i class="fa fa-check"></i><b>21</b> Care Seeking</a></li>
-<li class="chapter" data-level="22" data-path="drug-taking.html"><a href="drug-taking.html"><i class="fa fa-check"></i><b>22</b> Drug Taking</a>
+<li class="chapter" data-level="22" data-path="drug-taking-2.html"><a href="drug-taking-2.html"><i class="fa fa-check"></i><b>22</b> Drug Taking</a>
 <ul>
 <li class="chapter" data-level="22.1" data-path="curing-infections.html"><a href="curing-infections.html"><i class="fa fa-check"></i><b>22.1</b> Curing Infections</a></li>
 <li class="chapter" data-level="22.2" data-path="chemoprotection.html"><a href="chemoprotection.html"><i class="fa fa-check"></i><b>22.2</b> Chemoprotection</a></li>
@@ -337,7 +303,7 @@ div.csl-indent {
 <li class="chapter" data-level="32" data-path="vector-competence.html"><a href="vector-competence.html"><i class="fa fa-check"></i><b>32</b> Vector Competence</a></li>
 <li class="chapter" data-level="33" data-path="measuring-mosquitoes.html"><a href="measuring-mosquitoes.html"><i class="fa fa-check"></i><b>33</b> Measuring Mosquitoes</a></li>
 <li class="part"><span><b>VI Malaria Control</b></span></li>
-<li class="chapter" data-level="34" data-path="vector-control.html"><a href="vector-control.html"><i class="fa fa-check"></i><b>34</b> Vector Control</a></li>
+<li class="chapter" data-level="34" data-path="vector-control-1.html"><a href="vector-control-1.html"><i class="fa fa-check"></i><b>34</b> Vector Control</a></li>
 <li class="chapter" data-level="35" data-path="insecticide-treated-bednets.html"><a href="insecticide-treated-bednets.html"><i class="fa fa-check"></i><b>35</b> Insecticide-Treated Bednets</a></li>
 <li class="chapter" data-level="36" data-path="indoor-residual-spraying.html"><a href="indoor-residual-spraying.html"><i class="fa fa-check"></i><b>36</b> Indoor Residual Spraying</a></li>
 <li class="chapter" data-level="37" data-path="larval-source-management.html"><a href="larval-source-management.html"><i class="fa fa-check"></i><b>37</b> Larval Source Management</a></li>
@@ -389,8 +355,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="aging" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> Aging<a href="aging.html#aging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="aging" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Aging<a href="aging.html#aging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny.</p>
 <p>For systems described generically by the state space, <span class="math inline">\(\mathscr X\)</span>, the dynamics we care about have the form:</p>
 <p><span class="math display">\[\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}\]</span></p>
@@ -407,8 +373,8 @@ which produces states in cohorts as they age, <span class="math inline">\({\math
           </div>
         </div>
       </div>
-<a href="epidemiology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mosquito-ecology-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="population-heterogeneity-and-stratification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="blood-feeding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

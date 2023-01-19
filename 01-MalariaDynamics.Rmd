@@ -1,16 +1,16 @@
 # (PART) Basic Concepts {-}
 
-# Malaria Population Dynamics 
+# Malaria Dynamics 
 
 We start by introducing a Ross-Macdonald model [@SmithDL2012_RossMacdonald]. This particular model family is a system of delay differential equations that traces back to a 1982 book chapter written by Joan Aron and Robert May [@AronJL1982PopulationDynamics]. We think it's a good starting point.
 
-We chose it because it is *extensible*. The variables represent population densities, which are used to compute proportions, like *prevalence.* The variables in many other versions of the Ross-Macdonald are proportions. In some models, we would like to be able to change the *total* number of hosts (*i.e.* the denominators, if the variables are proportions), but if the variables in equations described proportions, they are much more difficult to modify. 
+We chose it because it is *extensible*. The variables represent population densities, which are used to compute proportions, like *prevalence.* The variables in many other versions of the Ross-Macdonald are proportions. In some models, we would like to be able to change the *total* number of hosts, but if the variables are proporions, these are the denominators. When a variables in equations described proportions, they are much more difficult to modify. 
 
-We chose it because we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model, as it was presented by Macdonald. While Macdonald's analysis and formulas are familiar, they overlooked the role of mosquito ecology. This model lets us bypass a lengthy discussion about history and the way it skews opinions. Our formula for vectorial capacity is consistent with the original, but our analysis includes effects on mosquito ecology. 
+We chose it because it already includes mosquito ecology, so we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model. While Macdonald's analysis and formulas are familiar, they were not complete [@SmithDL2004_Statics; @SmithDL2021_NewTestOldMosquitoes]. We develop a formula for vectorial capacity that is consistent with the intent of the original, but our analysis of sensitivity to parameters includes effects on mosquito ecology [@BradyOJ2015AdultVector]. (A lengthy and philosophical discussion of the history and its failings is planned.) 
 
-We chose it because it is *realistic.* Most Ross-Macdonald equations are *autonomous* (time is never used in computing derivatives), but these equations are already non-autonomous (*i.e.* time drives a seasonal pattern). We know that malaria transmission dynamics are forced by exogenous variables (*e.g.*, weather), so why start by avoiding that fact?  
+We chose it because it is *realistic.* Time does not appear in most versions of the Ross-Macdonald model: the equations are *autonomous*. These equations use time to drive a seasonal pattern: they are *non-autonomous*. Since we know we are interested in dealing with exogenous forcing, we start out with a model that is forced.  
 
-We recommend that everyone reads this chapter, even those who are familiar with the Ross-Macdonald model. In writing the equations, we introduced some concepts and conventions that became important for the software design. 
+While the following model is basic, we recommend reading it, if only because we introduce concepts and conventions that are important for the software design.
 
 ## Aron and May's Equations
 
@@ -143,7 +143,7 @@ h &= b fq \frac{Z(t)}{H} \\
 
 <center> 
 
-![A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [@AronJL1982PopulationDynamics]](../../RAMP-Model-Library/Figures/AronMay.png)
+![A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [@AronJL1982PopulationDynamics]](Figures/AronMay.png)
 
 </center> 
 
@@ -161,11 +161,13 @@ There are, of course, more compact ways of writing these equations. We have writ
 
 The next step is to find solutions.  
 
+*NOTE:* We don't introduce `exDE` or `MicroMoB` until [Modularity and Software].
+
 ## Solutions 
 
 What does a **solution** to these equations look like? 
 
-Solutions to these equations are values of the variables over time $\left( M(t), Y(t), Z(t), X(t) \right)$ that satisfy the system of four equations described above. We call these solutions *orbits.* To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition $$\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},$$ and then we used the values of the variables at time $t$ to compute $dM/dt$, $dY/dt$, $dZ/dt$, and $dX/dt$ (*i.e.*, using the formulas on the previous page), we would get the same values.  
+Solutions to these equations are values of the variables over time $\left( M(t), Y(t), Z(t), X(t) \right)$ that satisfy the system of four equations described above. We call these solutions *orbits.* To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition $$\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},$$ and then we used the values of the variables at time $t$ to compute $dM/dt$, $dY/dt$, $dZ/dt$, and $dX/dt$ (*i.e.*, using the formulas), we would get the same values.  
 
 It is important that these orbits are unique: after specifying the *initial values* of the variables, there is one and only one set of orbits that solves the equations. When we solve the equations, we usually produce solutions from a starting point into a future, but the orbits are defined for all time -- $i.e.$ the process implies the existence of solutions far back into the past. These are deterministic equations, after all. 
 
@@ -309,15 +311,13 @@ To make it absolutely clear, we are assuming:
     
 $$\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)$$
 
-### Time Mesh
+### Solving 
 
 We define a mesh over time -- the points in time when we would like to know the values of the variables: 
 
 ```{r}
 tt = seq(0,5*365, by=5) 
 ```
-
-### Solving 
 
 This code solves the equations: 
 
@@ -328,28 +328,26 @@ yout <- dede(y=y0, times=tt, func=dAronMay, parms=params)
 
 ### Visualizing 
 
-We write a function so that we can plot things easily:
-
-```{r}
+```{r, echo=F}
 plotTS_AronMay = function(yout){with(data.frame(yout),{
   par(mfrow = c(2,1))
   plot(time/365, M, type = "l", col = "blue", 
        xlab = "Time (in Years)", 
-       ylab = "Mosquito Density", 
+       ylab = expression(list(M(t), Y(t), Z(t))), 
        main = "Mosquitoes")
   lines(time/365, Y, col = "purple")
   lines(time/365, Z, col = "red")
   
   plot(time/365, X, ylim = c(0,1000), type = "l", 
        xlab = "Time (in Years)", 
-       ylab = "# Infected Humans", 
+       ylab = expression(X(t)), 
        main = "Humans")
 })}
 ```
 
-This code plots the outputs: 
+When we plot out the solutions, they look like this. 
 
-```{r, fig.height= 6.5, fig.width = 5.5}
+```{r, fig.height= 6.5, fig.width = 5.5, echo=F}
 plotTS_AronMay(yout)
 ```
 
@@ -357,7 +355,7 @@ plotTS_AronMay(yout)
 
 ## Steady States
 
-To analyze this system, we first set the parameter `ss=1`, so that we can look at the system *without* seasonality. Without seasonality, the system is actually *autonomous.* We do this, in part, because the resulting system is easier to understand, which helps us develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system: 
+Here, we analyze the system of equations in a narrow case when there is *no seasonality,* and the system reaches a *steady state.* To do so, we set the parameter `ss=1`, so that $\Lambda(t)$ is a constant; the resulting system is *autonomous.* We do this, in part, because the resulting system is easier to understand. We can develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system: 
 
 \begin{equation}
 \begin{array}{rl}
@@ -370,11 +368,13 @@ h &= b fq \frac{Z(t)}{H} \\
 \end{array}
 \end{equation}
 
-*** 
+As before, we have put the equations in their modularized form above, and the connecting terms below. 
 
-The first thing to note is that $M$ affects $Y$ and $Z$, which affect $X$; but $M$ is not affected by $Y$ or $Z$. Mosquito population density is an *exogenous* factor affecting malaria population dynamics. 
+The first thing to note is that $M$ affects $Y$ and $Z$, which affect $X$; but $M$ is not affected by $Y$ or $Z$. Mosquito population density is *exogenous* to malaria dynamics. 
 
-We can thus treat it separately:  
+### Mosquito Density 
+
+We can thus treat it separately in the analysis:  
 
 \begin{equation}
 \frac{dM}{dt} = \Lambda - g M 
@@ -386,7 +386,7 @@ Since emergence rates are steady, mosquito population density reaches a steady s
 \bar M = \frac{\Lambda}{g} 
 \end{equation}
 
-*** 
+### EIR and Vectorial Capacity 
 
 Next, we note that at a steady state, the delayed values of variables and terms don't change, so from $dY/dt$, we get: 
 
@@ -400,44 +400,70 @@ If we substitute the formula for $\bar M$ and solve for $\bar Y$, we get:
 \bar Y = \frac{fq\kappa}{g + fq\kappa} \frac{\Lambda}{g}
 \end{equation}
 
-and we substitute the formula for $g \bar Y$ into $dZ/dt$ to get:  
+and since at the steady state, any variable at time $t+\tau$ is equal to its value at time $t$, we substitute the formula for $g \bar Y$ into $dZ/dt$ to get:  
 
 \begin{equation}
-\bar Y e^{-g\tau} = \bar Z
+g \bar Y e^{-g\tau} = g \bar Z
 \end{equation}
 
-or equivalently: 
+Solving for $\bar Z$ we get: 
 
 \begin{equation}
 \bar Z =  \frac{f q \kappa}{g + fq \kappa} \frac{\Lambda}{g} e^{-g\tau} 
 \end{equation}
 
-It is a little thing, but the quantity $$S = \frac{fq}{g}$$ is the number of bloodmeals a mosquito would take over its lifespan.  
-
 At the steady state, $$\mbox{EIR} = fq \frac{\bar Z}{H},$$ 
 
-but if we rearrange the terms a bit, we get:
+Here, we pause to define the a quantity $$S = \frac{fq}{g}.$$ Since $1/g$ is the lifespan, this term $S$ is the number of bloodmeals a mosquito would take over its lifespan. If we rearrange the terms a bit, we can write out the expression for the EIR as a function of several parameters and one term:
 
 \begin{equation}
-\mbox{EIR} = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa} 
+\mbox{EIR}(\kappa) = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa} 
 \end{equation}
 
-For the moment, we let $$V = \frac{\Lambda}{H} S^2  e^{-g\tau}.$$ It is the formula for vectorial capacity. We can thus write: 
+We think of the EIR as having two parts. We call the first part *vectorial capacity* ($V$): 
 
 \begin{equation}
-\mbox{EIR} = V \kappa \frac{1}{1 + S \kappa} 
+V = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} 
 \end{equation}
+
+The second part involves only $\kappa$:
+
+\begin{equation}
+\frac{\kappa}{1 + S \kappa} 
+\end{equation}
+
+The numerator $\kappa$ is the probability of becoming infected, per bite. It is rarely close to one. The denominator, $1+S\kappa$, is a measure of saturation -- how frequently are mosquitoes *reinfected.* The main point here is that as $\kappa$ increases, saturation increases. If we set $S$ to the values in the previous plots, we can isolate this: 
+
+```{r, echo = F}
+S = with(params, f*q/g) 
+kappa = seq(0,.25, length.out=100)
+plot(kappa, kappa/(1+S*kappa), type = "l", xlab=expression(kappa), ylab = expression(kappa / (1 + S*kappa)))
+segments(0,0,0.12,0.12, lty = 2)
+```
+
+In the limit as $\kappa$ becomes small, we isolate the first part: 
+
+$$\lim_{\kappa \rightarrow 0} \mbox{EIR}(\kappa) = \frac{\Lambda}{H} S^2  e^{-g\tau} = V$$ 
+The two terms, EIR and vectorial capacity, are closely related. The EIR is the number of infective bites received, per person, per day. Vectorial capacity can be understood as the number of infective bites arising from all the mosquitoes biting a single human on a single day, assuming $\kappa=1$. 
+
+The difference between the two is precisely  
+
+\begin{equation}
+\frac{\kappa}{1 + S \kappa} 
+\end{equation}
+
+
+### Thresholds and Malaria Prevalence  
+
+Now we want to use all of this to understand malaria prevalence as a function of vectorial capacity, but first we define the basic reproductive number:
+
+$$R_0 = \frac{bcV}{r}.$$ 
 
 At the steady state, $$\kappa = c \frac{X}{H}.$$ If we substitute this into the expression for the EIR, we get: 
 
 \begin{equation}
 \mbox{EIR} = c V X\frac{1}{H + c S X} 
 \end{equation}
-
-**** 
-
-Now, we're going to define 
-$$R_0 = \frac{bcV}{r}.$$ 
 
 If we plug this into $dX/dt$ we get an expression that involves only $X$
 
@@ -469,16 +495,7 @@ What this analysis has shown is that when mosquito population densities are cons
 
 ## Stable Orbits 
 
-If emergence rates vary seasonally, how much of the analysis that we did to understand *steady states* still holds?  Obviously, things change, but many of the same principles still hold. It is easy enough to simulate, but the resulting dynamics can be quite difficult. Here, we show that the steady state analysis provides a good qualitative guide, but that the answers differ quantitatively.  
-
-
-### Orbits  
-
-If $R_0 >1$, then the system is characterized by *stable orbits* (See Figure 1.1). If $\Lambda(t)$ has an annual cycle, then after the orbits converge: 
-
-    - $M(t+365) = M(t)$; 
-    - $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
-    - $X(t+365) = X(t)$. 
+If emergence rates vary seasonally, how much of the analysis that we did to understand *steady states* still holds?  Obviously, if conditions are changing seasonally, the model does not reach a steady state. In fact, after modification to suit the context, many of the same principles translate. The steady state analysis provides a good qualitative guide, but that the answers will look different. Here, we illustrate by solving systems to illustrate some basic points, which is easy enough. Analysis of the resulting dynamics can be quite difficult; it is covered in [Temporal Dynamics].   
 
 ```{r, echo=F, }
 compareTS_AronMay = function(yout1, yout2){
@@ -487,45 +504,33 @@ compareTS_AronMay = function(yout1, yout2){
   par(mfrow = c(2,2))
   with(dta1,plot(time/365, M, type = "l", col = "blue", 
        xlab = "Time (in Years)", 
-       ylab = "Mosquito Density", 
+       ylab = expression(M(t)), 
        main = "Mosquitoes"))
   with(dta2, lines(time/365, M, col = "blue", lty=2))
   yrng = range(dta1$Y, dta2$Y)
   with(dta1,plot(time/365, Y, type = "l", ylim = yrng, col = "purple", 
        xlab = "Time (in Years)", 
-       ylab = "Infected Mosquito Density", 
-       main = "Mosquitoes"))
+       ylab = expression(Y(t)), 
+       main = "Infected Mosquitoes"))
   with(dta2, lines(time/365, Y, col = "purple", lty=2))
   zrng = range(dta1$Z, dta2$Z)
   with(dta1,plot(time/365, Z, type = "l", ylim = zrng, col = "red", 
        xlab = "Time (in Years)", 
-       ylab = "Infectious Mosquito Density", 
-       main = "Mosquitoes"))
+       ylab = expression(Z(t)), 
+       main = "Infectious Mosquitoes"))
   with(dta2, lines(time/365, Z, col = "red", lty=2))
   xrng = range(dta1$X, dta2$X)
   with(dta1,plot(time/365, X, ylim = xrng, type = "l", 
        xlab = "Time (in Years)", 
-       ylab = "# Infected Humans", 
-       main = "Humans"))
+       ylab = expression(X(t)), 
+       main = "Infected Humans"))
   with(dta2, lines(time/365, X, lty=2))
 }
 ```
 
-
-```{r, echo=F, fig.cap = "With different initial values, the orbits converge and eventually lie on top of one another."}
-y1 = c(M=1100, Y=100, Z=100, X=100)
-tt = seq(0, 830, by =1)
-params1 = makeParams(y1)
-yout0 <- dede(y=y0, times=tt, func=dAronMay, parms=params) 
-yout1 <- dede(y=y1, times=tt, func=dAronMay, parms=params1) 
-compareTS_AronMay(yout0, yout1)
-```
-
-\clearpage
-
 ### Thresholds
 
-There is a threshold condition $R_0>1$ that determines whether malaria is endemic, but the formula for $R_0$ depends on the form of $\Lambda(t)$. If we set $R_0=1$, we can show that the threshold for persistence in a seasonal environment is $R_0 > \sigma > 1$.  The math to compute threshold conditions in seasonal environments is in [Temporal Dynamics]. 
+There is a threshold condition $R_0>1$ that determines whether malaria is endemic, but the formula for $R_0$ depends on the form of $\Lambda(t)$. If we set $R_0=1$, we can show that the threshold for persistence in a seasonal environment is $R_0 > \sigma > 1$ (see Figure 1.1). The math to compute threshold conditions in seasonal environments is in [Temporal Dynamics]. 
 
 
 ```{r, echo=F}
@@ -559,9 +564,31 @@ compareTS_AronMay(youtB, youtA)
 
 \clearpage
 
+### Orbits  
+
+If $R_0 >1$, then all orbits converge to a set of *stable orbits* (See Figure 1.1). If $\Lambda(t)$ has an annual cycle, then after the orbits converge: 
+
+    - $M(t+365) = M(t)$; 
+    - $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
+    - $X(t+365) = X(t)$. 
+
+
+```{r, echo=F, fig.cap = "With different initial values, the orbits converge and eventually lie on top of one another."}
+y1 = c(M=1100, Y=100, Z=100, X=100)
+tt = seq(0, 830, by =1)
+params1 = makeParams(y1)
+yout0 <- dede(y=y0, times=tt, func=dAronMay, parms=params) 
+yout1 <- dede(y=y1, times=tt, func=dAronMay, parms=params1) 
+compareTS_AronMay(yout0, yout1)
+```
+
+\clearpage
+
+
+
 ### Average Dynamics 
 
-Away from thresholds, the *average* prevalence of malaria infection is variable in a seasonal environment, though when it has been averaged across the year, it tends to be lower.  
+If $R_0>1$ and malaria is endemic, the *average* prevalence of malaria infection is variable in a seasonal environment. While the prevalence is higher at the peak, the average for the whole year tends to be lower.  
 
 ```{r, echo=F, fig.cap = "Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall."}
 yI = c(M=20, Y=5, Z=1, X=100)
@@ -577,7 +604,7 @@ compareTS_AronMay(youtD, youtC)
 
 ## Endemic Malaria 
 
-When we do the mathematics, we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year. 
+When we analyze these equations to determine their *stability* and to identify *threshold conditions,* we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year. 
 
 
 ## Discussion

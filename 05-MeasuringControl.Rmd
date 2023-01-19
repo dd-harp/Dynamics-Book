@@ -1,0 +1,7 @@
+# Measuring Control
+
+Control modifies transmission, but it needs its own theory.
+
+## Coverage 
+
+## Effect Sizes 

@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-01-17" />
+<meta name="date" content="2023-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="dynamics-for-policy.html"/>
+<link rel="next" href="models-for-policy.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -156,10 +156,11 @@ div.csl-indent {
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a>
 <ul>
-<li class="chapter" data-level="" data-path="dynamics-for-policy.html"><a href="dynamics-for-policy.html"><i class="fa fa-check"></i>Dynamics for Policy</a></li>
+<li class="chapter" data-level="" data-path="models-for-policy.html"><a href="models-for-policy.html"><i class="fa fa-check"></i>Models for Policy</a></li>
+<li class="chapter" data-level="" data-path="contributors.html"><a href="contributors.html"><i class="fa fa-check"></i>Contributors</a></li>
 </ul></li>
 <li class="part"><span><b>I Basic Concepts</b></span></li>
-<li class="chapter" data-level="1" data-path="malaria-population-dynamics.html"><a href="malaria-population-dynamics.html"><i class="fa fa-check"></i><b>1</b> Malaria Population Dynamics</a>
+<li class="chapter" data-level="1" data-path="malaria-dynamics.html"><a href="malaria-dynamics.html"><i class="fa fa-check"></i><b>1</b> Malaria Dynamics</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="aron-and-mays-equations.html"><a href="aron-and-mays-equations.html"><i class="fa fa-check"></i><b>1.1</b> Aron and May’s Equations</a>
 <ul>
@@ -175,203 +176,242 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.1" data-path="solutions.html"><a href="solutions.html#derivatives"><i class="fa fa-check"></i><b>1.2.1</b> Derivatives</a></li>
 <li class="chapter" data-level="1.2.2" data-path="solutions.html"><a href="solutions.html#initial-values"><i class="fa fa-check"></i><b>1.2.2</b> Initial Values</a></li>
 <li class="chapter" data-level="1.2.3" data-path="solutions.html"><a href="solutions.html#parameter-values"><i class="fa fa-check"></i><b>1.2.3</b> Parameter Values</a></li>
-<li class="chapter" data-level="1.2.4" data-path="solutions.html"><a href="solutions.html#time-mesh"><i class="fa fa-check"></i><b>1.2.4</b> Time Mesh</a></li>
-<li class="chapter" data-level="1.2.5" data-path="solutions.html"><a href="solutions.html#solving"><i class="fa fa-check"></i><b>1.2.5</b> Solving</a></li>
-<li class="chapter" data-level="1.2.6" data-path="solutions.html"><a href="solutions.html#visualizing"><i class="fa fa-check"></i><b>1.2.6</b> Visualizing</a></li>
+<li class="chapter" data-level="1.2.4" data-path="solutions.html"><a href="solutions.html#solving"><i class="fa fa-check"></i><b>1.2.4</b> Solving</a></li>
+<li class="chapter" data-level="1.2.5" data-path="solutions.html"><a href="solutions.html#visualizing"><i class="fa fa-check"></i><b>1.2.5</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a></li>
+<li class="chapter" data-level="1.3" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>1.3</b> Steady States</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="steady-states.html"><a href="steady-states.html#mosquito-density"><i class="fa fa-check"></i><b>1.3.1</b> Mosquito Density</a></li>
+<li class="chapter" data-level="1.3.2" data-path="steady-states.html"><a href="steady-states.html#eir-and-vectorial-capacity"><i class="fa fa-check"></i><b>1.3.2</b> EIR and Vectorial Capacity</a></li>
+<li class="chapter" data-level="1.3.3" data-path="steady-states.html"><a href="steady-states.html#thresholds-and-malaria-prevalence"><i class="fa fa-check"></i><b>1.3.3</b> Thresholds and Malaria Prevalence</a></li>
+</ul></li>
 <li class="chapter" data-level="1.4" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>1.4</b> Stable Orbits</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.1</b> Orbits</a></li>
-<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.2</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.1" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds"><i class="fa fa-check"></i><b>1.4.1</b> Thresholds</a></li>
+<li class="chapter" data-level="1.4.2" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>1.4.2</b> Orbits</a></li>
 <li class="chapter" data-level="1.4.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>1.4.3</b> Average Dynamics</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="endemic-malaria.html"><a href="endemic-malaria.html"><i class="fa fa-check"></i><b>1.5</b> Endemic Malaria</a></li>
 <li class="chapter" data-level="1.6" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>1.6</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="mosquito-population-dynamics.html"><a href="mosquito-population-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Population Dynamics</a>
+<li class="chapter" data-level="2" data-path="mosquito-dynamics.html"><a href="mosquito-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Dynamics</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a></li>
 <li class="chapter" data-level="2.2" data-path="understanding-mosquito-dynamics.html"><a href="understanding-mosquito-dynamics.html"><i class="fa fa-check"></i><b>2.2</b> Understanding Mosquito Dynamics</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>3</b> Measuring Malaria</a></li>
-<li class="chapter" data-level="4" data-path="realism.html"><a href="realism.html"><i class="fa fa-check"></i><b>4</b> Realism</a>
+<li class="chapter" data-level="3" data-path="realism.html"><a href="realism.html"><i class="fa fa-check"></i><b>3</b> Realism</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>4.1</b> Stratification</a>
+<li class="chapter" data-level="3.1" data-path="epidemiology.html"><a href="epidemiology.html"><i class="fa fa-check"></i><b>3.1</b> Epidemiology</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="stratification.html"><a href="stratification.html#strata-in-rosss-model"><i class="fa fa-check"></i><b>4.1.1</b> Strata in Ross’s model</a></li>
-<li class="chapter" data-level="4.1.2" data-path="stratification.html"><a href="stratification.html#frailties"><i class="fa fa-check"></i><b>4.1.2</b> Frailties</a></li>
+<li class="chapter" data-level="3.1.1" data-path="epidemiology.html"><a href="epidemiology.html#superinfection"><i class="fa fa-check"></i><b>3.1.1</b> Superinfection</a></li>
+<li class="chapter" data-level="3.1.2" data-path="epidemiology.html"><a href="epidemiology.html#infection-and-immunity"><i class="fa fa-check"></i><b>3.1.2</b> Infection and Immunity</a></li>
+<li class="chapter" data-level="3.1.3" data-path="epidemiology.html"><a href="epidemiology.html#treatment-and-chemoprotection"><i class="fa fa-check"></i><b>3.1.3</b> Treatment and Chemoprotection</a></li>
+<li class="chapter" data-level="3.1.4" data-path="epidemiology.html"><a href="epidemiology.html#intrahost-models"><i class="fa fa-check"></i><b>3.1.4</b> Intrahost Models</a></li>
+<li class="chapter" data-level="3.1.5" data-path="epidemiology.html"><a href="epidemiology.html#disease"><i class="fa fa-check"></i><b>3.1.5</b> Disease</a></li>
+<li class="chapter" data-level="3.1.6" data-path="epidemiology.html"><a href="epidemiology.html#individual-based-models"><i class="fa fa-check"></i><b>3.1.6</b> Individual-Based Models</a></li>
+<li class="chapter" data-level="3.1.7" data-path="epidemiology.html"><a href="epidemiology.html#age-of-infection"><i class="fa fa-check"></i><b>3.1.7</b> Age of Infection</a></li>
+<li class="chapter" data-level="3.1.8" data-path="epidemiology.html"><a href="epidemiology.html#stage-of-infection"><i class="fa fa-check"></i><b>3.1.8</b> Stage of Infection</a></li>
+<li class="chapter" data-level="3.1.9" data-path="epidemiology.html"><a href="epidemiology.html#synthesis"><i class="fa fa-check"></i><b>3.1.9</b> Synthesis</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="blood-feeding.html"><a href="blood-feeding.html"><i class="fa fa-check"></i><b>4.2</b> Blood Feeding</a>
+<li class="chapter" data-level="3.2" data-path="age-and-aging.html"><a href="age-and-aging.html"><i class="fa fa-check"></i><b>3.2</b> Age and Aging</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="blood-feeding.html"><a href="blood-feeding.html#search-and-risk"><i class="fa fa-check"></i><b>4.2.1</b> Search and Risk</a></li>
-<li class="chapter" data-level="4.2.2" data-path="blood-feeding.html"><a href="blood-feeding.html#search-weights-and-availability"><i class="fa fa-check"></i><b>4.2.2</b> Search Weights and Availability</a></li>
-<li class="chapter" data-level="4.2.3" data-path="blood-feeding.html"><a href="blood-feeding.html#functional-response"><i class="fa fa-check"></i><b>4.2.3</b> Functional Response</a></li>
-<li class="chapter" data-level="4.2.4" data-path="blood-feeding.html"><a href="blood-feeding.html#environmental-heterogeneity"><i class="fa fa-check"></i><b>4.2.4</b> Environmental Heterogeneity</a></li>
+<li class="chapter" data-level="3.2.1" data-path="age-and-aging.html"><a href="age-and-aging.html#boxcar-models"><i class="fa fa-check"></i><b>3.2.1</b> Boxcar Models</a></li>
+<li class="chapter" data-level="3.2.2" data-path="age-and-aging.html"><a href="age-and-aging.html#delayed-age-strata"><i class="fa fa-check"></i><b>3.2.2</b> Delayed Age Strata</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html"><i class="fa fa-check"></i><b>4.3</b> Mosquito Behavior</a>
+<li class="chapter" data-level="3.3" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html"><i class="fa fa-check"></i><b>3.3</b> Population Heterogeneity and Stratification</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#resource-availability"><i class="fa fa-check"></i><b>4.3.1</b> Resource Availability</a></li>
-<li class="chapter" data-level="4.3.2" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#egg-laying"><i class="fa fa-check"></i><b>4.3.2</b> Egg Laying</a></li>
-<li class="chapter" data-level="4.3.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#search-and-dispersal"><i class="fa fa-check"></i><b>4.3.3</b> Search and Dispersal</a></li>
+<li class="chapter" data-level="3.3.1" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html#strata-in-the-ross-model"><i class="fa fa-check"></i><b>3.3.1</b> Strata in the Ross model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html#frailties"><i class="fa fa-check"></i><b>3.3.2</b> Frailties</a></li>
+<li class="chapter" data-level="3.3.3" data-path="population-heterogeneity-and-stratification.html"><a href="population-heterogeneity-and-stratification.html#demographic-change"><i class="fa fa-check"></i><b>3.3.3</b> Demographic Change</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="space.html"><a href="space.html"><i class="fa fa-check"></i><b>4.4</b> Space</a>
+<li class="chapter" data-level="3.4" data-path="blood-feeding.html"><a href="blood-feeding.html"><i class="fa fa-check"></i><b>3.4</b> Blood Feeding</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="space.html"><a href="space.html#human-travel-and-mobility"><i class="fa fa-check"></i><b>4.4.1</b> Human Travel and Mobility</a></li>
-<li class="chapter" data-level="4.4.2" data-path="space.html"><a href="space.html#mosquito-dispersal-and-demography"><i class="fa fa-check"></i><b>4.4.2</b> Mosquito Dispersal and Demography</a></li>
+<li class="chapter" data-level="3.4.1" data-path="blood-feeding.html"><a href="blood-feeding.html#search-and-risk"><i class="fa fa-check"></i><b>3.4.1</b> Search and Risk</a></li>
+<li class="chapter" data-level="3.4.2" data-path="blood-feeding.html"><a href="blood-feeding.html#search-weights-and-availability"><i class="fa fa-check"></i><b>3.4.2</b> Search Weights and Availability</a></li>
+<li class="chapter" data-level="3.4.3" data-path="blood-feeding.html"><a href="blood-feeding.html#functional-response"><i class="fa fa-check"></i><b>3.4.3</b> Functional Response</a></li>
+<li class="chapter" data-level="3.4.4" data-path="blood-feeding.html"><a href="blood-feeding.html#environmental-heterogeneity"><i class="fa fa-check"></i><b>3.4.4</b> Environmental Heterogeneity</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="time.html"><a href="time.html"><i class="fa fa-check"></i><b>4.5</b> Time</a></li>
-<li class="chapter" data-level="4.6" data-path="epidemiology.html"><a href="epidemiology.html"><i class="fa fa-check"></i><b>4.6</b> Epidemiology</a></li>
-<li class="chapter" data-level="4.7" data-path="aging.html"><a href="aging.html"><i class="fa fa-check"></i><b>4.7</b> Aging</a></li>
-<li class="chapter" data-level="4.8" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>4.8</b> Mosquito Ecology</a></li>
-<li class="chapter" data-level="4.9" data-path="integrated-vector-control.html"><a href="integrated-vector-control.html"><i class="fa fa-check"></i><b>4.9</b> Integrated Vector Control</a></li>
-<li class="chapter" data-level="4.10" data-path="pharmaceutic-interventions.html"><a href="pharmaceutic-interventions.html"><i class="fa fa-check"></i><b>4.10</b> Pharmaceutic Interventions</a></li>
-<li class="chapter" data-level="4.11" data-path="context.html"><a href="context.html"><i class="fa fa-check"></i><b>4.11</b> Context</a></li>
+<li class="chapter" data-level="3.5" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html"><i class="fa fa-check"></i><b>3.5</b> Mosquito Behavior</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#resource-availability"><i class="fa fa-check"></i><b>3.5.1</b> Resource Availability</a></li>
+<li class="chapter" data-level="3.5.2" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#egg-laying"><i class="fa fa-check"></i><b>3.5.2</b> Egg Laying</a></li>
+<li class="chapter" data-level="3.5.3" data-path="mosquito-behavior.html"><a href="mosquito-behavior.html#search-and-dispersal"><i class="fa fa-check"></i><b>3.5.3</b> Search and Dispersal</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="modularity-and-software.html"><a href="modularity-and-software.html"><i class="fa fa-check"></i><b>5</b> Modularity and Software</a>
+<li class="chapter" data-level="3.6" data-path="space.html"><a href="space.html"><i class="fa fa-check"></i><b>3.6</b> Space</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>5.1</b> Model Building</a></li>
-<li class="chapter" data-level="5.2" data-path="modular-computation.html"><a href="modular-computation.html"><i class="fa fa-check"></i><b>5.2</b> Modular Computation</a>
+<li class="chapter" data-level="3.6.1" data-path="space.html"><a href="space.html#human-travel-and-mobility"><i class="fa fa-check"></i><b>3.6.1</b> Human Travel and Mobility</a></li>
+<li class="chapter" data-level="3.6.2" data-path="space.html"><a href="space.html#mosquito-dispersal-and-demography"><i class="fa fa-check"></i><b>3.6.2</b> Mosquito Dispersal and Demography</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="time.html"><a href="time.html"><i class="fa fa-check"></i><b>3.7</b> Time</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="modular-computation.html"><a href="modular-computation.html#exde"><i class="fa fa-check"></i><b>5.2.1</b> <code>exDE</code></a></li>
+<li class="chapter" data-level="3.7.1" data-path="time.html"><a href="time.html#the-eip"><i class="fa fa-check"></i><b>3.7.1</b> The EIP</a></li>
+<li class="chapter" data-level="3.7.2" data-path="time.html"><a href="time.html#seasonality"><i class="fa fa-check"></i><b>3.7.2</b> Seasonality</a></li>
+<li class="chapter" data-level="3.7.3" data-path="time.html"><a href="time.html#exogenous-forcing"><i class="fa fa-check"></i><b>3.7.3</b> Exogenous Forcing</a></li>
+<li class="chapter" data-level="3.7.4" data-path="time.html"><a href="time.html#vector-control"><i class="fa fa-check"></i><b>3.7.4</b> Vector Control</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>3.8</b> Mosquito Ecology</a></li>
+<li class="chapter" data-level="3.9" data-path="integrated-vector-control.html"><a href="integrated-vector-control.html"><i class="fa fa-check"></i><b>3.9</b> Integrated Vector Control</a></li>
+<li class="chapter" data-level="3.10" data-path="pharmaceutic-interventions.html"><a href="pharmaceutic-interventions.html"><i class="fa fa-check"></i><b>3.10</b> Pharmaceutic Interventions</a></li>
+<li class="chapter" data-level="3.11" data-path="context.html"><a href="context.html"><i class="fa fa-check"></i><b>3.11</b> Context</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>4</b> Measuring Malaria</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="realistic-bounds.html"><a href="realistic-bounds.html"><i class="fa fa-check"></i><b>4.1</b> Realistic Bounds</a></li>
+<li class="chapter" data-level="4.2" data-path="the-local-fraction.html"><a href="the-local-fraction.html"><i class="fa fa-check"></i><b>4.2</b> The Local Fraction</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="the-local-fraction.html"><a href="the-local-fraction.html#travel"><i class="fa fa-check"></i><b>4.2.1</b> Travel</a></li>
+<li class="chapter" data-level="4.2.2" data-path="the-local-fraction.html"><a href="the-local-fraction.html#mobility"><i class="fa fa-check"></i><b>4.2.2</b> Mobility</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="drug-taking.html"><a href="drug-taking.html"><i class="fa fa-check"></i><b>4.3</b> Drug Taking</a></li>
+<li class="chapter" data-level="4.4" data-path="seasonality-1.html"><a href="seasonality-1.html"><i class="fa fa-check"></i><b>4.4</b> Seasonality</a></li>
+<li class="chapter" data-level="4.5" data-path="frailty.html"><a href="frailty.html"><i class="fa fa-check"></i><b>4.5</b> Frailty</a></li>
+<li class="chapter" data-level="4.6" data-path="environmental-heterogeneity-1.html"><a href="environmental-heterogeneity-1.html"><i class="fa fa-check"></i><b>4.6</b> Environmental Heterogeneity</a></li>
+<li class="chapter" data-level="4.7" data-path="pfeir-vs.-pfpr-in-data.html"><a href="pfeir-vs.-pfpr-in-data.html"><i class="fa fa-check"></i><b>4.7</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>PR in Data</a></li>
+<li class="chapter" data-level="4.8" data-path="pfeir-vs.-pffoi-in-data.html"><a href="pfeir-vs.-pffoi-in-data.html"><i class="fa fa-check"></i><b>4.8</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>FoI in Data</a></li>
+<li class="chapter" data-level="4.9" data-path="synthesis-1.html"><a href="synthesis-1.html"><i class="fa fa-check"></i><b>4.9</b> Synthesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="measuring-control.html"><a href="measuring-control.html"><i class="fa fa-check"></i><b>5</b> Measuring Control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="coverage.html"><a href="coverage.html"><i class="fa fa-check"></i><b>5.1</b> Coverage</a></li>
+<li class="chapter" data-level="5.2" data-path="effect-sizes.html"><a href="effect-sizes.html"><i class="fa fa-check"></i><b>5.2</b> Effect Sizes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modularity-and-software.html"><a href="modularity-and-software.html"><i class="fa fa-check"></i><b>6</b> Modularity and Software</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>6.1</b> Model Building</a></li>
+<li class="chapter" data-level="6.2" data-path="modular-computation.html"><a href="modular-computation.html"><i class="fa fa-check"></i><b>6.2</b> Modular Computation</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="modular-computation.html"><a href="modular-computation.html#exde"><i class="fa fa-check"></i><b>6.2.1</b> <code>exDE</code></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Transmission</b></span></li>
-<li class="chapter" data-level="6" data-path="heterogeneous-exposure.html"><a href="heterogeneous-exposure.html"><i class="fa fa-check"></i><b>6</b> Heterogeneous Exposure</a>
+<li class="chapter" data-level="7" data-path="heterogeneous-exposure.html"><a href="heterogeneous-exposure.html"><i class="fa fa-check"></i><b>7</b> Heterogeneous Exposure</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>6.1</b> Overview</a>
+<li class="chapter" data-level="7.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>7.1</b> Overview</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="overview.html"><a href="overview.html#age"><i class="fa fa-check"></i><b>6.1.1</b> Age</a></li>
-<li class="chapter" data-level="6.1.2" data-path="overview.html"><a href="overview.html#location"><i class="fa fa-check"></i><b>6.1.2</b> Location</a></li>
-<li class="chapter" data-level="6.1.3" data-path="overview.html"><a href="overview.html#house-type"><i class="fa fa-check"></i><b>6.1.3</b> House Type</a></li>
-<li class="chapter" data-level="6.1.4" data-path="overview.html"><a href="overview.html#activities"><i class="fa fa-check"></i><b>6.1.4</b> Activities</a></li>
+<li class="chapter" data-level="7.1.1" data-path="overview.html"><a href="overview.html#age"><i class="fa fa-check"></i><b>7.1.1</b> Age</a></li>
+<li class="chapter" data-level="7.1.2" data-path="overview.html"><a href="overview.html#location"><i class="fa fa-check"></i><b>7.1.2</b> Location</a></li>
+<li class="chapter" data-level="7.1.3" data-path="overview.html"><a href="overview.html#house-type"><i class="fa fa-check"></i><b>7.1.3</b> House Type</a></li>
+<li class="chapter" data-level="7.1.4" data-path="overview.html"><a href="overview.html#activities"><i class="fa fa-check"></i><b>7.1.4</b> Activities</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="frailty.html"><a href="frailty.html"><i class="fa fa-check"></i><b>6.2</b> Frailty</a></li>
-<li class="chapter" data-level="6.3" data-path="environmentalHeterogeneity.html"><a href="environmentalHeterogeneity.html"><i class="fa fa-check"></i><b>6.3</b> Environmental Heterogeneity</a></li>
+<li class="chapter" data-level="7.2" data-path="frailtyCh.html"><a href="frailtyCh.html"><i class="fa fa-check"></i><b>7.2</b> Frailty</a></li>
+<li class="chapter" data-level="7.3" data-path="environmentalHeterogeneity.html"><a href="environmentalHeterogeneity.html"><i class="fa fa-check"></i><b>7.3</b> Environmental Heterogeneity</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="blood-feeding-1.html"><a href="blood-feeding-1.html"><i class="fa fa-check"></i><b>7</b> Blood Feeding</a>
+<li class="chapter" data-level="8" data-path="blood-feeding-1.html"><a href="blood-feeding-1.html"><i class="fa fa-check"></i><b>8</b> Blood Feeding</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="availability-and-blood-feeding-rates.html"><a href="availability-and-blood-feeding-rates.html"><i class="fa fa-check"></i><b>7.1</b> Availability and Blood Feeding Rates</a></li>
-<li class="chapter" data-level="7.2" data-path="host-selection.html"><a href="host-selection.html"><i class="fa fa-check"></i><b>7.2</b> Host Selection</a></li>
+<li class="chapter" data-level="8.1" data-path="host-availability.html"><a href="host-availability.html"><i class="fa fa-check"></i><b>8.1</b> Host Availability</a></li>
+<li class="chapter" data-level="8.2" data-path="blood-feeding-rates.html"><a href="blood-feeding-rates.html"><i class="fa fa-check"></i><b>8.2</b> Blood Feeding Rates</a></li>
+<li class="chapter" data-level="8.3" data-path="the-human-fraction.html"><a href="the-human-fraction.html"><i class="fa fa-check"></i><b>8.3</b> The Human Fraction</a></li>
+<li class="chapter" data-level="8.4" data-path="the-mixing-matrix-beta.html"><a href="the-mixing-matrix-beta.html"><i class="fa fa-check"></i><b>8.4</b> The Mixing Matrix, <span class="math inline">\(\beta\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="spatial-dynamics.html"><a href="spatial-dynamics.html"><i class="fa fa-check"></i><b>8</b> Spatial Dynamics</a></li>
-<li class="chapter" data-level="9" data-path="temporal-dynamics.html"><a href="temporal-dynamics.html"><i class="fa fa-check"></i><b>9</b> Temporal Dynamics</a></li>
-<li class="chapter" data-level="10" data-path="cohort-dynamics.html"><a href="cohort-dynamics.html"><i class="fa fa-check"></i><b>10</b> Cohort Dynamics</a>
+<li class="chapter" data-level="9" data-path="spatial-dynamics.html"><a href="spatial-dynamics.html"><i class="fa fa-check"></i><b>9</b> Spatial Dynamics</a></li>
+<li class="chapter" data-level="10" data-path="temporal-dynamics.html"><a href="temporal-dynamics.html"><i class="fa fa-check"></i><b>10</b> Temporal Dynamics</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="boxcar-models.html"><a href="boxcar-models.html"><i class="fa fa-check"></i><b>10.1</b> Boxcar Models</a></li>
-<li class="chapter" data-level="10.2" data-path="delay.html"><a href="delay.html"><i class="fa fa-check"></i><b>10.2</b> Delay</a></li>
+<li class="chapter" data-level="10.1" data-path="exogenous-forcing-1.html"><a href="exogenous-forcing-1.html"><i class="fa fa-check"></i><b>10.1</b> Exogenous Forcing</a></li>
+<li class="chapter" data-level="10.2" data-path="mosquito-survival-through-the-eip.html"><a href="mosquito-survival-through-the-eip.html"><i class="fa fa-check"></i><b>10.2</b> Mosquito Survival through the EIP</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="demography.html"><a href="demography.html"><i class="fa fa-check"></i><b>11</b> Demography</a>
+<li class="chapter" data-level="11" data-path="cohort-dynamics.html"><a href="cohort-dynamics.html"><i class="fa fa-check"></i><b>11</b> Cohort Dynamics</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="migration.html"><a href="migration.html"><i class="fa fa-check"></i><b>11.1</b> Migration</a></li>
+<li class="chapter" data-level="11.1" data-path="boxcar-models-1.html"><a href="boxcar-models-1.html"><i class="fa fa-check"></i><b>11.1</b> Boxcar Models</a></li>
+<li class="chapter" data-level="11.2" data-path="delay.html"><a href="delay.html"><i class="fa fa-check"></i><b>11.2</b> Delay</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="stratification-1.html"><a href="stratification-1.html"><i class="fa fa-check"></i><b>12</b> Stratification</a></li>
-<li class="part"><span><b>III Humans</b></span></li>
-<li class="chapter" data-level="13" data-path="human-behaviors-and-ecology.html"><a href="human-behaviors-and-ecology.html"><i class="fa fa-check"></i><b>13</b> Human Behaviors and Ecology</a></li>
-<li class="chapter" data-level="14" data-path="human-mobility.html"><a href="human-mobility.html"><i class="fa fa-check"></i><b>14</b> Human Mobility</a></li>
-<li class="chapter" data-level="15" data-path="human-travel-and-malaria-importation.html"><a href="human-travel-and-malaria-importation.html"><i class="fa fa-check"></i><b>15</b> Human Travel and Malaria Importation</a></li>
+<li class="chapter" data-level="12" data-path="demography.html"><a href="demography.html"><i class="fa fa-check"></i><b>12</b> Demography</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="migration.html"><a href="migration.html"><i class="fa fa-check"></i><b>12.1</b> Migration</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="stratification.html"><a href="stratification.html"><i class="fa fa-check"></i><b>13</b> Stratification</a></li>
+<li class="part"><span><b>III Human Ecology</b></span></li>
+<li class="chapter" data-level="14" data-path="human-behavior.html"><a href="human-behavior.html"><i class="fa fa-check"></i><b>14</b> Human Behavior</a></li>
+<li class="chapter" data-level="15" data-path="human-mobility.html"><a href="human-mobility.html"><i class="fa fa-check"></i><b>15</b> Human Mobility</a></li>
+<li class="chapter" data-level="16" data-path="human-travel-and-malaria-importation.html"><a href="human-travel-and-malaria-importation.html"><i class="fa fa-check"></i><b>16</b> Human Travel and Malaria Importation</a></li>
 <li class="part"><span><b>IV Epidemiology</b></span></li>
-<li class="chapter" data-level="16" data-path="malaria-infection.html"><a href="malaria-infection.html"><i class="fa fa-check"></i><b>16</b> Malaria Infection</a>
+<li class="chapter" data-level="17" data-path="malaria-infection.html"><a href="malaria-infection.html"><i class="fa fa-check"></i><b>17</b> Malaria Infection</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i><b>16.1</b> Overview</a></li>
-<li class="chapter" data-level="16.2" data-path="multiplicity-of-infection-moi.html"><a href="multiplicity-of-infection-moi.html"><i class="fa fa-check"></i><b>16.2</b> Multiplicity of Infection (MoI)</a></li>
-<li class="chapter" data-level="16.3" data-path="age-of-infection-aoi.html"><a href="age-of-infection-aoi.html"><i class="fa fa-check"></i><b>16.3</b> Age of Infection (AoI)</a></li>
-<li class="chapter" data-level="16.4" data-path="stage-of-infection-soi.html"><a href="stage-of-infection-soi.html"><i class="fa fa-check"></i><b>16.4</b> Stage of Infection (SoI)</a></li>
+<li class="chapter" data-level="17.1" data-path="overview-1.html"><a href="overview-1.html"><i class="fa fa-check"></i><b>17.1</b> Overview</a></li>
+<li class="chapter" data-level="17.2" data-path="multiplicity-of-infection-moi.html"><a href="multiplicity-of-infection-moi.html"><i class="fa fa-check"></i><b>17.2</b> Multiplicity of Infection (MoI)</a></li>
+<li class="chapter" data-level="17.3" data-path="age-of-infection-aoi.html"><a href="age-of-infection-aoi.html"><i class="fa fa-check"></i><b>17.3</b> Age of Infection (AoI)</a></li>
+<li class="chapter" data-level="17.4" data-path="stage-of-infection-soi.html"><a href="stage-of-infection-soi.html"><i class="fa fa-check"></i><b>17.4</b> Stage of Infection (SoI)</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="malaria-immunity.html"><a href="malaria-immunity.html"><i class="fa fa-check"></i><b>17</b> Malaria Immunity</a>
+<li class="chapter" data-level="18" data-path="malaria-immunity.html"><a href="malaria-immunity.html"><i class="fa fa-check"></i><b>18</b> Malaria Immunity</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="the-garki-model.html"><a href="the-garki-model.html"><i class="fa fa-check"></i><b>17.1</b> The Garki Model</a></li>
-<li class="chapter" data-level="17.2" data-path="stage-structured-immunity.html"><a href="stage-structured-immunity.html"><i class="fa fa-check"></i><b>17.2</b> Stage-Structured Immunity</a></li>
-<li class="chapter" data-level="17.3" data-path="strain-specific-immunity.html"><a href="strain-specific-immunity.html"><i class="fa fa-check"></i><b>17.3</b> Strain Specific Immunity</a></li>
-<li class="chapter" data-level="17.4" data-path="memory-tracking.html"><a href="memory-tracking.html"><i class="fa fa-check"></i><b>17.4</b> Memory Tracking</a></li>
-<li class="chapter" data-level="17.5" data-path="age-vs.-prevalence.html"><a href="age-vs.-prevalence.html"><i class="fa fa-check"></i><b>17.5</b> Age <em>vs.</em> Prevalence</a></li>
+<li class="chapter" data-level="18.1" data-path="the-garki-model.html"><a href="the-garki-model.html"><i class="fa fa-check"></i><b>18.1</b> The Garki Model</a></li>
+<li class="chapter" data-level="18.2" data-path="stage-structured-immunity.html"><a href="stage-structured-immunity.html"><i class="fa fa-check"></i><b>18.2</b> Stage-Structured Immunity</a></li>
+<li class="chapter" data-level="18.3" data-path="strain-specific-immunity.html"><a href="strain-specific-immunity.html"><i class="fa fa-check"></i><b>18.3</b> Strain Specific Immunity</a></li>
+<li class="chapter" data-level="18.4" data-path="memory-tracking.html"><a href="memory-tracking.html"><i class="fa fa-check"></i><b>18.4</b> Memory Tracking</a></li>
+<li class="chapter" data-level="18.5" data-path="age-vs.-prevalence.html"><a href="age-vs.-prevalence.html"><i class="fa fa-check"></i><b>18.5</b> Age <em>vs.</em> Prevalence</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="detecting-parasites.html"><a href="detecting-parasites.html"><i class="fa fa-check"></i><b>18</b> Detecting Parasites</a>
+<li class="chapter" data-level="19" data-path="detecting-parasites.html"><a href="detecting-parasites.html"><i class="fa fa-check"></i><b>19</b> Detecting Parasites</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="parasite-densities-and-detection.html"><a href="parasite-densities-and-detection.html"><i class="fa fa-check"></i><b>18.1</b> Parasite Densities and Detection</a></li>
-<li class="chapter" data-level="18.2" data-path="light-microscopy.html"><a href="light-microscopy.html"><i class="fa fa-check"></i><b>18.2</b> Light Microscopy</a></li>
-<li class="chapter" data-level="18.3" data-path="biomarkers-and-rdts.html"><a href="biomarkers-and-rdts.html"><i class="fa fa-check"></i><b>18.3</b> Biomarkers and RDTs</a></li>
-<li class="chapter" data-level="18.4" data-path="pcr.html"><a href="pcr.html"><i class="fa fa-check"></i><b>18.4</b> PCR</a></li>
+<li class="chapter" data-level="19.1" data-path="parasite-densities-and-detection.html"><a href="parasite-densities-and-detection.html"><i class="fa fa-check"></i><b>19.1</b> Parasite Densities and Detection</a></li>
+<li class="chapter" data-level="19.2" data-path="light-microscopy.html"><a href="light-microscopy.html"><i class="fa fa-check"></i><b>19.2</b> Light Microscopy</a></li>
+<li class="chapter" data-level="19.3" data-path="biomarkers-and-rdts.html"><a href="biomarkers-and-rdts.html"><i class="fa fa-check"></i><b>19.3</b> Biomarkers and RDTs</a></li>
+<li class="chapter" data-level="19.4" data-path="pcr.html"><a href="pcr.html"><i class="fa fa-check"></i><b>19.4</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="gametocytes-and-infectiousness.html"><a href="gametocytes-and-infectiousness.html"><i class="fa fa-check"></i><b>19</b> Gametocytes and Infectiousness</a>
+<li class="chapter" data-level="20" data-path="gametocytes-and-infectiousness.html"><a href="gametocytes-and-infectiousness.html"><i class="fa fa-check"></i><b>20</b> Gametocytes and Infectiousness</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="gametocytemia.html"><a href="gametocytemia.html"><i class="fa fa-check"></i><b>19.1</b> Gametocytemia</a></li>
-<li class="chapter" data-level="19.2" data-path="anti-gametocyte-immunity.html"><a href="anti-gametocyte-immunity.html"><i class="fa fa-check"></i><b>19.2</b> Anti-Gametocyte Immunity</a></li>
+<li class="chapter" data-level="20.1" data-path="gametocytemia.html"><a href="gametocytemia.html"><i class="fa fa-check"></i><b>20.1</b> Gametocytemia</a></li>
+<li class="chapter" data-level="20.2" data-path="anti-gametocyte-immunity.html"><a href="anti-gametocyte-immunity.html"><i class="fa fa-check"></i><b>20.2</b> Anti-Gametocyte Immunity</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="fever-and-severe-disease.html"><a href="fever-and-severe-disease.html"><i class="fa fa-check"></i><b>20</b> Fever and Severe Disease</a>
+<li class="chapter" data-level="21" data-path="fever-and-severe-disease.html"><a href="fever-and-severe-disease.html"><i class="fa fa-check"></i><b>21</b> Fever and Severe Disease</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="fever.html"><a href="fever.html"><i class="fa fa-check"></i><b>20.1</b> Fever</a></li>
-<li class="chapter" data-level="20.2" data-path="anemia.html"><a href="anemia.html"><i class="fa fa-check"></i><b>20.2</b> Anemia</a></li>
-<li class="chapter" data-level="20.3" data-path="severe-disease.html"><a href="severe-disease.html"><i class="fa fa-check"></i><b>20.3</b> Severe Disease</a></li>
+<li class="chapter" data-level="21.1" data-path="fever.html"><a href="fever.html"><i class="fa fa-check"></i><b>21.1</b> Fever</a></li>
+<li class="chapter" data-level="21.2" data-path="anemia.html"><a href="anemia.html"><i class="fa fa-check"></i><b>21.2</b> Anemia</a></li>
+<li class="chapter" data-level="21.3" data-path="severe-disease.html"><a href="severe-disease.html"><i class="fa fa-check"></i><b>21.3</b> Severe Disease</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="care-seeking.html"><a href="care-seeking.html"><i class="fa fa-check"></i><b>21</b> Care Seeking</a></li>
-<li class="chapter" data-level="22" data-path="drug-taking.html"><a href="drug-taking.html"><i class="fa fa-check"></i><b>22</b> Drug Taking</a>
+<li class="chapter" data-level="22" data-path="care-seeking.html"><a href="care-seeking.html"><i class="fa fa-check"></i><b>22</b> Care Seeking</a></li>
+<li class="chapter" data-level="23" data-path="drug-taking-1.html"><a href="drug-taking-1.html"><i class="fa fa-check"></i><b>23</b> Drug Taking</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="curing-infections.html"><a href="curing-infections.html"><i class="fa fa-check"></i><b>22.1</b> Curing Infections</a></li>
-<li class="chapter" data-level="22.2" data-path="chemoprotection.html"><a href="chemoprotection.html"><i class="fa fa-check"></i><b>22.2</b> Chemoprotection</a></li>
-<li class="chapter" data-level="22.3" data-path="adherance.html"><a href="adherance.html"><i class="fa fa-check"></i><b>22.3</b> Adherance</a></li>
-<li class="chapter" data-level="22.4" data-path="treatment-rates.html"><a href="treatment-rates.html"><i class="fa fa-check"></i><b>22.4</b> Treatment Rates</a></li>
+<li class="chapter" data-level="23.1" data-path="curing-infections.html"><a href="curing-infections.html"><i class="fa fa-check"></i><b>23.1</b> Curing Infections</a></li>
+<li class="chapter" data-level="23.2" data-path="chemoprotection.html"><a href="chemoprotection.html"><i class="fa fa-check"></i><b>23.2</b> Chemoprotection</a></li>
+<li class="chapter" data-level="23.3" data-path="adherance.html"><a href="adherance.html"><i class="fa fa-check"></i><b>23.3</b> Adherance</a></li>
+<li class="chapter" data-level="23.4" data-path="treatment-rates.html"><a href="treatment-rates.html"><i class="fa fa-check"></i><b>23.4</b> Treatment Rates</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="pharmaceutical-interventions.html"><a href="pharmaceutical-interventions.html"><i class="fa fa-check"></i><b>23</b> Pharmaceutical Interventions</a>
+<li class="chapter" data-level="24" data-path="pharmaceutical-interventions.html"><a href="pharmaceutical-interventions.html"><i class="fa fa-check"></i><b>24</b> Pharmaceutical Interventions</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="smc.html"><a href="smc.html"><i class="fa fa-check"></i><b>23.1</b> SMC</a></li>
-<li class="chapter" data-level="23.2" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>23.2</b> MDA</a></li>
-<li class="chapter" data-level="23.3" data-path="drugs.html"><a href="drugs.html"><i class="fa fa-check"></i><b>23.3</b> Drugs</a></li>
-<li class="chapter" data-level="23.4" data-path="vaccines.html"><a href="vaccines.html"><i class="fa fa-check"></i><b>23.4</b> Vaccines</a></li>
+<li class="chapter" data-level="24.1" data-path="smc.html"><a href="smc.html"><i class="fa fa-check"></i><b>24.1</b> SMC</a></li>
+<li class="chapter" data-level="24.2" data-path="mda.html"><a href="mda.html"><i class="fa fa-check"></i><b>24.2</b> MDA</a></li>
+<li class="chapter" data-level="24.3" data-path="drugs.html"><a href="drugs.html"><i class="fa fa-check"></i><b>24.3</b> Drugs</a></li>
+<li class="chapter" data-level="24.4" data-path="vaccines.html"><a href="vaccines.html"><i class="fa fa-check"></i><b>24.4</b> Vaccines</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html"><i class="fa fa-check"></i><b>24</b> Malaria Epidemiology</a>
+<li class="chapter" data-level="25" data-path="malaria-epidemiology.html"><a href="malaria-epidemiology.html"><i class="fa fa-check"></i><b>25</b> Malaria Epidemiology</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="age-of-the-youngest-infection.html"><a href="age-of-the-youngest-infection.html"><i class="fa fa-check"></i><b>24.1</b> Age of the Youngest Infection</a></li>
+<li class="chapter" data-level="25.1" data-path="age-of-the-youngest-infection.html"><a href="age-of-the-youngest-infection.html"><i class="fa fa-check"></i><b>25.1</b> Age of the Youngest Infection</a></li>
 </ul></li>
 <li class="part"><span><b>V Mosquito Ecology</b></span></li>
-<li class="chapter" data-level="25" data-path="mosquitoes.html"><a href="mosquitoes.html"><i class="fa fa-check"></i><b>25</b> Mosquitoes</a></li>
-<li class="chapter" data-level="26" data-path="behavioral-state-models.html"><a href="behavioral-state-models.html"><i class="fa fa-check"></i><b>26</b> Behavioral State Models</a></li>
-<li class="chapter" data-level="27" data-path="aquatic-ecology.html"><a href="aquatic-ecology.html"><i class="fa fa-check"></i><b>27</b> Aquatic Ecology</a></li>
-<li class="chapter" data-level="28" data-path="mosquito-microecology.html"><a href="mosquito-microecology.html"><i class="fa fa-check"></i><b>28</b> Mosquito Microecology</a></li>
-<li class="chapter" data-level="29" data-path="mosquito-dispersal.html"><a href="mosquito-dispersal.html"><i class="fa fa-check"></i><b>29</b> Mosquito Dispersal</a></li>
-<li class="chapter" data-level="30" data-path="microsimulation.html"><a href="microsimulation.html"><i class="fa fa-check"></i><b>30</b> Microsimulation</a></li>
-<li class="chapter" data-level="31" data-path="mosquito-ecology-2.html"><a href="mosquito-ecology-2.html"><i class="fa fa-check"></i><b>31</b> Mosquito Ecology</a>
+<li class="chapter" data-level="26" data-path="mosquitoes.html"><a href="mosquitoes.html"><i class="fa fa-check"></i><b>26</b> Mosquitoes</a></li>
+<li class="chapter" data-level="27" data-path="behavioral-state-models.html"><a href="behavioral-state-models.html"><i class="fa fa-check"></i><b>27</b> Behavioral State Models</a></li>
+<li class="chapter" data-level="28" data-path="aquatic-ecology.html"><a href="aquatic-ecology.html"><i class="fa fa-check"></i><b>28</b> Aquatic Ecology</a></li>
+<li class="chapter" data-level="29" data-path="mosquito-microecology.html"><a href="mosquito-microecology.html"><i class="fa fa-check"></i><b>29</b> Mosquito Microecology</a></li>
+<li class="chapter" data-level="30" data-path="mosquito-dispersal.html"><a href="mosquito-dispersal.html"><i class="fa fa-check"></i><b>30</b> Mosquito Dispersal</a></li>
+<li class="chapter" data-level="31" data-path="microsimulation.html"><a href="microsimulation.html"><i class="fa fa-check"></i><b>31</b> Microsimulation</a></li>
+<li class="chapter" data-level="32" data-path="mosquito-ecology-2.html"><a href="mosquito-ecology-2.html"><i class="fa fa-check"></i><b>32</b> Mosquito Ecology</a>
 <ul>
-<li class="chapter" data-level="31.1" data-path="population-dynamics.html"><a href="population-dynamics.html"><i class="fa fa-check"></i><b>31.1</b> Population Dynamics</a></li>
+<li class="chapter" data-level="32.1" data-path="population-dynamics.html"><a href="population-dynamics.html"><i class="fa fa-check"></i><b>32.1</b> Population Dynamics</a></li>
 </ul></li>
-<li class="chapter" data-level="32" data-path="vector-competence.html"><a href="vector-competence.html"><i class="fa fa-check"></i><b>32</b> Vector Competence</a></li>
-<li class="chapter" data-level="33" data-path="measuring-mosquitoes.html"><a href="measuring-mosquitoes.html"><i class="fa fa-check"></i><b>33</b> Measuring Mosquitoes</a></li>
+<li class="chapter" data-level="33" data-path="vector-competence.html"><a href="vector-competence.html"><i class="fa fa-check"></i><b>33</b> Vector Competence</a></li>
+<li class="chapter" data-level="34" data-path="measuring-mosquitoes.html"><a href="measuring-mosquitoes.html"><i class="fa fa-check"></i><b>34</b> Measuring Mosquitoes</a></li>
 <li class="part"><span><b>VI Malaria Control</b></span></li>
-<li class="chapter" data-level="34" data-path="vector-control.html"><a href="vector-control.html"><i class="fa fa-check"></i><b>34</b> Vector Control</a></li>
-<li class="chapter" data-level="35" data-path="insecticide-treated-bednets.html"><a href="insecticide-treated-bednets.html"><i class="fa fa-check"></i><b>35</b> Insecticide-Treated Bednets</a></li>
-<li class="chapter" data-level="36" data-path="indoor-residual-spraying.html"><a href="indoor-residual-spraying.html"><i class="fa fa-check"></i><b>36</b> Indoor Residual Spraying</a></li>
-<li class="chapter" data-level="37" data-path="larval-source-management.html"><a href="larval-source-management.html"><i class="fa fa-check"></i><b>37</b> Larval Source Management</a></li>
-<li class="chapter" data-level="38" data-path="attractive-toxic-sugar-baits.html"><a href="attractive-toxic-sugar-baits.html"><i class="fa fa-check"></i><b>38</b> Attractive Toxic Sugar Baits</a></li>
-<li class="chapter" data-level="39" data-path="integrated-vector-control-1.html"><a href="integrated-vector-control-1.html"><i class="fa fa-check"></i><b>39</b> Integrated Vector Control</a></li>
-<li class="chapter" data-level="40" data-path="spatial-control.html"><a href="spatial-control.html"><i class="fa fa-check"></i><b>40</b> Spatial Control</a></li>
-<li class="chapter" data-level="41" data-path="pharmaceutical-interventions-1.html"><a href="pharmaceutical-interventions-1.html"><i class="fa fa-check"></i><b>41</b> Pharmaceutical Interventions</a>
+<li class="chapter" data-level="35" data-path="vector-control-1.html"><a href="vector-control-1.html"><i class="fa fa-check"></i><b>35</b> Vector Control</a></li>
+<li class="chapter" data-level="36" data-path="insecticide-treated-bednets.html"><a href="insecticide-treated-bednets.html"><i class="fa fa-check"></i><b>36</b> Insecticide-Treated Bednets</a></li>
+<li class="chapter" data-level="37" data-path="indoor-residual-spraying.html"><a href="indoor-residual-spraying.html"><i class="fa fa-check"></i><b>37</b> Indoor Residual Spraying</a></li>
+<li class="chapter" data-level="38" data-path="larval-source-management.html"><a href="larval-source-management.html"><i class="fa fa-check"></i><b>38</b> Larval Source Management</a></li>
+<li class="chapter" data-level="39" data-path="attractive-toxic-sugar-baits.html"><a href="attractive-toxic-sugar-baits.html"><i class="fa fa-check"></i><b>39</b> Attractive Toxic Sugar Baits</a></li>
+<li class="chapter" data-level="40" data-path="integrated-vector-control-1.html"><a href="integrated-vector-control-1.html"><i class="fa fa-check"></i><b>40</b> Integrated Vector Control</a></li>
+<li class="chapter" data-level="41" data-path="spatial-control.html"><a href="spatial-control.html"><i class="fa fa-check"></i><b>41</b> Spatial Control</a></li>
+<li class="chapter" data-level="42" data-path="pharmaceutical-interventions-1.html"><a href="pharmaceutical-interventions-1.html"><i class="fa fa-check"></i><b>42</b> Pharmaceutical Interventions</a>
 <ul>
-<li class="chapter" data-level="41.1" data-path="smc-1.html"><a href="smc-1.html"><i class="fa fa-check"></i><b>41.1</b> SMC</a></li>
-<li class="chapter" data-level="41.2" data-path="mda-1.html"><a href="mda-1.html"><i class="fa fa-check"></i><b>41.2</b> MDA</a></li>
-<li class="chapter" data-level="41.3" data-path="drugs-1.html"><a href="drugs-1.html"><i class="fa fa-check"></i><b>41.3</b> Drugs</a></li>
-<li class="chapter" data-level="41.4" data-path="vaccines-1.html"><a href="vaccines-1.html"><i class="fa fa-check"></i><b>41.4</b> Vaccines</a></li>
+<li class="chapter" data-level="42.1" data-path="smc-1.html"><a href="smc-1.html"><i class="fa fa-check"></i><b>42.1</b> SMC</a></li>
+<li class="chapter" data-level="42.2" data-path="mda-1.html"><a href="mda-1.html"><i class="fa fa-check"></i><b>42.2</b> MDA</a></li>
+<li class="chapter" data-level="42.3" data-path="drugs-1.html"><a href="drugs-1.html"><i class="fa fa-check"></i><b>42.3</b> Drugs</a></li>
+<li class="chapter" data-level="42.4" data-path="vaccines-1.html"><a href="vaccines-1.html"><i class="fa fa-check"></i><b>42.4</b> Vaccines</a></li>
 </ul></li>
-<li class="chapter" data-level="42" data-path="spatial-concepts-and-connectivity.html"><a href="spatial-concepts-and-connectivity.html"><i class="fa fa-check"></i><b>42</b> Spatial Concepts and Connectivity</a></li>
-<li class="part"><span><b>VII Estimation</b></span></li>
-<li class="chapter" data-level="43" data-path="approximation.html"><a href="approximation.html"><i class="fa fa-check"></i><b>43</b> Approximation</a>
-<ul>
-<li class="chapter" data-level="43.1" data-path="the-distance-between-two-models.html"><a href="the-distance-between-two-models.html"><i class="fa fa-check"></i><b>43.1</b> The Distance between Two Models</a></li>
-<li class="chapter" data-level="43.2" data-path="the-distance-from-models-to-data.html"><a href="the-distance-from-models-to-data.html"><i class="fa fa-check"></i><b>43.2</b> The Distance from Models to Data</a></li>
-</ul></li>
-<li class="chapter" data-level="44" data-path="exposure-and-infection.html"><a href="exposure-and-infection.html"><i class="fa fa-check"></i><b>44</b> Exposure and Infection</a>
-<ul>
-<li class="chapter" data-level="44.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>44.1</b> Data</a>
-<ul>
-<li class="chapter" data-level="44.1.1" data-path="data.html"><a href="data.html#eir-vs.-pr"><i class="fa fa-check"></i><b>44.1.1</b> EIR vs. PR</a></li>
-<li class="chapter" data-level="44.1.2" data-path="data.html"><a href="data.html#eir-vs.-foi"><i class="fa fa-check"></i><b>44.1.2</b> EIR vs. FoI</a></li>
-<li class="chapter" data-level="44.1.3" data-path="data.html"><a href="data.html#chemoprotection-1"><i class="fa fa-check"></i><b>44.1.3</b> Chemoprotection</a></li>
-</ul></li>
-<li class="chapter" data-level="44.2" data-path="models.html"><a href="models.html"><i class="fa fa-check"></i><b>44.2</b> Models</a></li>
-<li class="chapter" data-level="44.3" data-path="pr2eir.html"><a href="pr2eir.html"><i class="fa fa-check"></i><b>44.3</b> <em>Pf</em>PR <span class="math inline">\(\rightarrow\)</span> <em>Pf</em>EIR</a></li>
-</ul></li>
-<li class="chapter" data-level="45" data-path="model-libraries.html"><a href="model-libraries.html"><i class="fa fa-check"></i><b>45</b> Model Libraries</a></li>
-<li class="part"><span><b>VIII Supplements</b></span></li>
-<li class="chapter" data-level="46" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>46</b> References</a></li>
+<li class="chapter" data-level="43" data-path="discrete-time.html"><a href="discrete-time.html"><i class="fa fa-check"></i><b>43</b> Discrete Time</a></li>
+<li class="chapter" data-level="44" data-path="stochasticity.html"><a href="stochasticity.html"><i class="fa fa-check"></i><b>44</b> Stochasticity</a></li>
+<li class="chapter" data-level="45" data-path="base-models.html"><a href="base-models.html"><i class="fa fa-check"></i><b>45</b> Base Models</a></li>
+<li class="chapter" data-level="46" data-path="built-in-analytics.html"><a href="built-in-analytics.html"><i class="fa fa-check"></i><b>46</b> Built-in Analytics</a></li>
+<li class="chapter" data-level="47" data-path="spatial-concepts-and-connectivity.html"><a href="spatial-concepts-and-connectivity.html"><i class="fa fa-check"></i><b>47</b> Spatial Concepts and Connectivity</a></li>
+<li class="chapter" data-level="48" data-path="model-libraries.html"><a href="model-libraries.html"><i class="fa fa-check"></i><b>48</b> Model Libraries</a></li>
+<li class="part"><span><b>VII Supplements</b></span></li>
+<li class="chapter" data-level="49" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>49</b> References</a></li>
 </ul>
 
       </nav>
@@ -393,16 +433,19 @@ div.csl-indent {
 <h1 class="title">Applied Malaria Dynamics</h1>
 <h2 class="subtitle"><em>Dynamical Systems for Adaptive Malaria Control</em></h2>
 <p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2023-01-17</em></p>
+<p class="date"><em>2023-01-19</em></p>
 </div>
 <div id="foreword" class="section level1 unnumbered hasAnchor">
 <h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria epidemiology, mosquito ecology, and vector control. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory that has been developed over more than a century of malaria research starting with the Ross-Macdonald model <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald" role="doc-biblioref">1</a>]</span> and building on more recent research <span class="citation">[<a href="#ref-ReinerRCJ2013SystematicReview" role="doc-biblioref">2</a>,<a href="#ref-SmithNR2018AgentbasedModels" role="doc-biblioref">3</a>]</span>. A new framework would require rethinking the way we implement models. Ideally, it would be <em>extensible</em> with <em>plug-and-play</em> modularity and structural flexibility. It should include models that could scale down for fine-grained simulations, or to scale up to understand regional spatial patterns. To serve the needs of malaria programs, a framework would need to be capable of modeling malaria as a changing baseline modified by control. The framework would need built-in support to model exogenous forcing by weather and vector control. To get integrated malaria control right, we needed to go all in on mosquito ecology. This required developing generic interfaces for the major components, including some new models and algorithms. New models, algorithms, or theory were developed for blood feeding, heterogeneous exposure, human mobility, cohort dynamics, and mosquito dispersal. We wanted the software to help compute thresholds for malaria transmission in heterogeneous systems. Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a>
-and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN, submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">4</a>]</span>, and realized it was time to write this book.</p>
-<p>This book is about building malaria models that are up to the task of guiding malaria policy. It fills a gap that comes after taking an introduction to mathematical epidemiology or infectious disease modeling. What are all the special topics that would need to be covered to build models that could be needed in malaria? This book <em>could</em> be the basis for a course, if there were ever enough students. Since there will probably never be enough graduate students who are interested in applied malaria dynamics to support a course at a university, we have developed the material for all the students who might needed a course like this anywhere on the planet.</p>
-<p>The premise of this book is thus that the reader has a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, and that they know something about how to construct models. Our goal is to teach the material through examples, so we won’t try to fill in any technical details in the text. Instead, we have written some vignettes and lessons to accompany the book in the <code>RAMP-Model-Library</code>.</p>
-<p>This book teaches about model building for malaria policy. We present some motivating examples, but we stop short of fitting models to data or applying models to policy. Some of those topics are being taken up in a companion <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong>Robust Analytics for Malaria Policy.</strong></a></p>
-<p><strong>David L. Smith</strong></p>
+<p>A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology and transmission dynamics, mosquito ecology, vector control, and the evolution of resistance.
+All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ross and Macdonald <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald" role="doc-biblioref">1</a>]</span>.
+A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRCJ2013SystematicReview" role="doc-biblioref">2</a>,<a href="#ref-SmithNR2018AgentbasedModels" role="doc-biblioref">3</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014_Recasting" role="doc-biblioref">4</a>]</span>.</p>
+<p>The goal was to build a framework that could serve malaria policy. Policy discussions might need the math, but the discussion should never be about the math.There were some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered. Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.</p>
+<p>I wanted the new framework to be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), and with structural flexibility. It should have the capability of scaling down for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation" role="doc-biblioref">5</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing" role="doc-biblioref">7</a>]</span>, or scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation" role="doc-biblioref">8</a>]</span>. To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control. To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model with exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES" role="doc-biblioref">9</a>]</span>, which inspired new ideas about mosquito search and a new base model for mosquito ecology and behavior. To serve programmatic needs, we needed algorithms that could address the durability of a unit of vector control – coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency. To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic. In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal. In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these. These models needed supporting theory. We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
+<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">10</a>]</span>. Then it was time to write this book.</p>
+<p>With the software developed, we have the capability of building models that are up to the task of guiding malaria policy. The advantage of using the framework and accompanying software is that we solved many of the potential design problems that come from combining models. We found most of them the hard way. The framework took longer to developed than I had expected, in part, because there were more pitfalls than we had anticipated.</p>
+<p>This book shows, through examples, how to use the software to build malaria models. Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria. What are all the special topics that would need to be covered to build models that could be needed in malaria? This book <em>could</em> be the basis for such a course, if there were ever enough students. Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere. This book teaches how to build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong>Robust Analytics for Malaria Policy.</strong></a></p>
+<p>The premise of this book is thus that the reader has a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
@@ -415,8 +458,23 @@ and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN, submitte
 <div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
 <div class="csl-left-margin">3. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
 </div>
+<div id="ref-SmithDL2014_Recasting" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
+</div>
+<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
+</div>
+<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. doi:<a href="https://doi.org/10.1371/journal.pcbi.1003540">10.1371/journal.pcbi.1003540</a></div>
+</div>
+<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
+</div>
+<div id="ref-WuSL2020MBITES" class="csl-entry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
+</div>
 <div id="ref-WuSL2022SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
 </div>
 </div>
             </section>
@@ -425,7 +483,7 @@ and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN, submitte
         </div>
       </div>
 
-<a href="dynamics-for-policy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="models-for-policy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

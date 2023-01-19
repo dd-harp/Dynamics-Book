@@ -30,7 +30,7 @@ Some reasons heterogeneous exposure to malaria have been documented in hundreds 
 
 ### Activities 
 
-## Frailty {#frailty}
+## Frailty {#frailtyCh}
 
 In general, we define frailty as a multiplicative factor on the FoI. If the average FoI in the population is $h$, then the FoI in a stratum is $hk$. The size of the stratum, $p_k$, is constrained such that:
 

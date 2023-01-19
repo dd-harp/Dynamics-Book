@@ -1,0 +1,72 @@
+# Measuring Malaria 
+
+If we want to use evidence to make policy, we need to understand transmission in its local context. Two major premises in malaria epidemiology and control are that we can understand malaria prevalence as an outcome of exposure, and that the outcomes of malaria control will also vary with exposure. A problem for us is that we must rely on estimated exposure to make our decisions, but there is a paucity of *Pf*EIR data, so we will rely on whatever data we have to *estimate* the *Pf*EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.  
+
+Exposure is actually quite complex, but a major component of it involves understanding local mosquito populations. To quantify these factors, we rely on paired estimates of metrics to understand the factors affecting their scaling relationships: the *Pf*PR; the *Pf*EIR, the *Pf*FoI. Ideally, we would use the *Pf*SPR, if we knew how to correct for biases.  In most cases, we must estimate the *Pf*EIR from the *Pf*PR. While we do this out of necessity, we must be aware of many sources of error that we can identify either *a priori* or that we can study through simulation. The framework we have developed makes it comparatively easy to simulate the effects and effect sizes of these factors. The list of things we must consider includes:  
+
++ The *Pf*PR varies in a population by age, sex, and the diagnostic method; 
+
++ The *Pf*PR is modified by drug-taking; the effect modification varies in a population by age, access to care, and adherance to drug regimens
+
++ Exposure is *seasonal* 
+
+    - seasonality *would* affect the true *Pf*PR and the true *Pf*EIR over time; 
+    
+    - seasonality *could* be a source of error in the estimated *Pf*PR (especially with respect to age) and estimated *Pf*EIR. 
+
++ Heterogeneous exposure:
+
+    - exposure varies by age; 
+    
+    - there are other identifiable sources of frailty that we can deal with through stratification (*e.g.* house type, location, bed net use), and there are many frailties we will not be able to identify; 
+    
+    - the relationship between exposure and infection is affected by *environmental heterogeneity;* because of variability in mosquito populations at a fine spatial grain over time and space, and the trajectories of individual humans who are put at risk,  
+    
++ The *Pf*EIR near home is obscured by human mobility through time at risk and exposure away from home; 
+
++ Travel and imported malaria can increase the *Pf*PR  
+
++ Measurement errors in the *Pf*EIR 
+
+    - There are *house effects* that bias the estimation of the *Pf*EIR 
+    
+    - Different methods of catching mosquitoes give different estimates for the HBR.  
+
+These effects are incorporated into the framework. Frailties are dealt with by stratifying by age ($\omega(a)$) and other traits and assigning *biting weights*; when combined with mobility, these become part of the mixing matrix, $\beta$. Environmental heterogeneity modifies the relationship between the *Pf*EIR by stratum and the *Pf*FoI (through $F_h$). Seasonality in mosquito density ($Z(t)$) translates into seasonality in exposure ($S(t)$). Drug taking and immunity modify the *Pf*PR after exposure. 
+
+In the following sections, we use the framework to illustrate the effects and effect sizes of these factors. 
+
+*** 
+
+![Figure 4.1: A generalized framwork for understanding the relationship between the *Pf*EIR and the *Pf*PR: ](./Figures/Estimation.png)
+
+## Realistic Bounds 
+
+An important reality check is that we can set sensible expectations about upper bounds on the *Pf*PR in relation to exposure. The maximum value of the *Pf*PR will tend to be observed in untreated populations with homogeneous exposure. To identify these bounds, we assume that we are passing the *true* *Pf*EIR, but not necessarily the *local* *Pf*EIR. 
+
+## The Local Fraction 
+
+### Travel 
+
+### Mobility 
+
+
+## Drug Taking 
+
+## Seasonality 
+
+## Frailty
+
+At low intensity, frailty can affect the prevalence 
+
+## Environmental Heterogeneity  
+
+## *Pf*EIR *vs.* *Pf*PR in Data 
+
+## *Pf*EIR *vs.* *Pf*FoI in Data 
+
+## Synthesis 
+
+
+
+

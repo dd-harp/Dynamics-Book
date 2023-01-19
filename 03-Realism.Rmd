@@ -1,23 +1,76 @@
 # Realism 
 
-There are several reasons why models for policy will tend to be more complex than models developed for science. When models are used for policy, the advice should be consistent across studies, which may mean that the models must be complex enough to serve many purposes all at once. To build models that can serve malaria policy, we need the models to be *realistic* enough to be compelling. It might take a lot of work to build a model that resembles malaria in a particular place and time, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers. 
+There are several reasons why models for policy will tend to be more complex than models developed for science. When models are used to guide policy, the evidence should be cumulative, and the advice should be consistent across studies. Over time, the advice should shift from *generic* advice to *specific* advice as more evidence is gathered. To carry a conversation forward, the models used to guide discussions will tend to grow more complex over time. To build models that can serve malaria policy, we need the models to be *realistic* enough to be compelling. It might take a lot of work to build a model that has been fit to all the evidence describing malaria in a management unit over the recent past, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers. In policy, models must be complex enough to serve many purposes all at once. 
 
 In designing a software solution to the problem of building realistic models, we wanted a toolbox to build models that would directly address the concerns of malaria programs. In the chapters that follow, we'll show the features of this framework by constructing examples. If we're principled about it, the primary cost is *computational complexity.* That is something the software was designed to manage. For the moment, we thus want to set aside concerns about *realism* vs. *abstraction*, about *parsimony*, and about *error propagation,* and we want to simply ask the question of how to build models with the features we want. 
 
-This chapter is an overview of the toolbox. We'll cover the same material in much greater detail, with examples, in the chapters that follow.  
+This chapter is an overview of the historical development of malaria models and an introduction to the toolbox. We'll cover the same material in much greater detail in the chapters that follow, and we'll construct examples using `exDE` and `MicroMoB`. 
 
-## Stratification 
+## Epidemiology 
 
-The first topic we want to cover is *segmentation* of the human population into *strata.* When we talk about *stratification,* we mean it the narrow sense of segmenting the human population, usually to deal with heterogeneity of some sort.^[In a broader sense, stratification is also about subdividing landscapes into a set of spatial domains that share relevant features in order to *tailor interventions to context.* That is a topic we take up in a separate book, 
-(<a target="_blank" href = "/Users/smitdave/git/RAMP-Book/_book/index.html"> **Robust Analytics for Malaria Policy.** </a>).] 
-The guiding principle is that our analytics will be more accurate if we identify and remove any sources of heterogeneity, either for estimating the impact of interventions in the past or for projecting those impacts into the future. We acknowledge that models are approximations, and that our approximations don't have to be perfect. The goal is to find ways of propagating uncertainty that are *good enough* for the task at hand. 
+Malaria epidemiology, in the narrow sense, deals with exposure, infection, immunity, disease, infectiousness, and drug taking. We need models that can be used as a synthesis for research and surveillance data. The complexity is daunting. This introduction is mainly historical, but we use it to preview some of the themes. 
+
+### Superinfection 
+
+### Infection and Immunity 
+
++ The Garki Model 
+
++ stage structured immunity  
+
++ Dutertre's model
+
++ There is no steady state; it is a stable orbit wrt age.  
+
+### Treatment and Chemoprotection 
+
+### Intrahost Models 
+
+### Disease 
+
+### Individual-Based Models 
+
+### Age of Infection  
+
+### Stage of Infection
+
+### Synthesis
+
+## Age and Aging 
+
+Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny. 
+
+For systems described generically by the state space, $\mathscr X$,  the dynamics we care about have the form: 
+
+$$\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}$$
+
+We might want to deal with malaria differently if we are studying malaria in cohorts. In a population where the FoI over time is $h(t)$, we might want to follow a birth cohort, so we define $h_d(a) = h(t-a)$ for all $t>d$. We can then solve: 
+
+$$\frac{d{\mathscr X}}{d a} $$
+which produces states in cohorts as they age, ${\mathscr X}(a|h).$
+
+When we simulate malaria transmission dynamics in populations for policy, we will want to put a mesh on age and segment the population. The dynamics are define for age strata, where the FoI is defined differently for each age stratum:  
+
+$$\frac{d{\mathscr X}_a}{d t}$$
+
+which produces age-dependent states over time, ${\mathscr X}_a(t|h).$ 
+
+Our algorithms should guarantee that the epidemiological states over time provide an accurate match for the epidemiological states over age. 
+
+### Boxcar Models
+
+### Delayed Age Strata 
+
+## Population Heterogeneity and Stratification 
+
+Human populations are heterogeneous. Some kinds of heterogeneity affect how we understand malaria and what we should do, including who to target. To deal with heterogeneity in models, we will often need to *segment* a human population into sub-populations, or *strata.* When we talk about *stratification,* we mean it the narrow sense of segmenting a human population (*i.e.* not subdividing landscapes spatially^[In a broader sense, stratification is also about subdividing landscapes into a set of spatial domains that share relevant features in order to *tailor interventions to context.* That is a topic we take up in a separate book,  (<a target="_blank" href = "/Users/smitdave/git/RAMP-Book/_book/index.html"> **Robust Analytics for Malaria Policy.** </a>).]), because the model predictions made by creating strata that are more homogeneous should be more accurate.  The guiding principle is that our analytics will should strive to be more accurate, and that we should thus identify and remove those sources of heterogeneity that would affect policy advice, whether it affects estimating the impact of interventions in the past or projecting those impacts into the future. We acknowledge that models are approximations, and that our approximations don't have to be perfect. The goal is to find ways of propagating uncertainty that are *good enough* for the task at hand. 
 
 
 In malaria epidemiology, *some* kinds of endogenous heterogeneity *could* be built into the *epidemiological state space.* Other kinds of heterogeneity, including consistent differences in exposure, differences in care seeking and drug taking, and differences created by malaria control (*e.g.* net ownership or vaccination), usually require stratification. The decision about how to strike the right balance depends on the model and the purpose of a study.
 
 The framework and supporting software offer a toolbox for stratification. It is designed to stratify populations in a principled way, so that we can *understand* how the heterogeneity affects transmission or outcomes that we care about, but we can also *combine* effects. We want to stratify populations by applying rules that *split* populations when the differences are large enough. (If we started with complex models, we might choose to *join* populations if the differences were small.) By so doing, we can *compare* the behaviors of models that differ from each other in only one way. If the differences are not too large, or if the differences in dynamical behaviors we care about are not too large, we might decide not to split the strata, and use the average.  Because of the way models are encoded, it's easy to build models that split the strata in multiple, independent ways. 
 
-### Strata in Ross's model 
+### Strata in the Ross model 
 
 As a simple example, consider a simple Ross-style model for infection with exposure and recovery (described in Section \@ref(RossEqn)): 
 
@@ -39,6 +92,8 @@ We will introduce segmentation first through models of [Heterogeneous Exposure] 
 Some of the heterogeneous traits that we care about change dynamically, so we will also need to consider population *flows* among strata, which change the sizes of the strata. We would like to deal with these flows in a principled way. Bed net ownership and use are among the human behaviors that matters most for programs. In some cases, we will want to understand dynamic changes in bed net ownership, the patterns of use among those who own a net, personal protection, and community effects. Later, we show how to construct an example that *describes* all of these aspects of bednets. 
 
 Segmentation is what we need to build models of pharmaceutical interventions with waning effectiveness, such as mass vaccination. Among the most important factors in malaria is age. We have defined algorithms to model [Aging] and other demographic change, the loss of bednets, waning protection or changing housing quality.
+
+### Demographic Change
 
 ## Blood Feeding 
 
@@ -124,28 +179,18 @@ To describe mosquito spatial dynamics, we
 
 ## Time 
 
-## Epidemiology 
+### The EIP 
 
-## Aging 
+### Seasonality 
 
-Immunity to malaria develops with age and exposure. The development of immunity is probably changing throughout life, so it makes sense to think of malaria epidemiology as ontogeny. 
+### Exogenous Forcing  
 
-For systems described generically by the state space, $\mathscr X$,  the dynamics we care about have the form: 
+### Vector Control  
 
-$$\frac{\partial {\mathscr X}(a,t)}{\partial a} + \frac{\partial {\mathscr X}(a,t)}{\partial t}$$
 
-We might want to deal with malaria differently if we are studying malaria in cohorts. In a population where the FoI over time is $h(t)$, we might want to follow a birth cohort, so we define $h_d(a) = h(t-a)$ for all $t>d$. We can then solve: 
 
-$$\frac{d{\mathscr X}}{d a} $$
-which produces states in cohorts as they age, ${\mathscr X}(a|h).$
 
-When we simulate malaria transmission dynamics in populations for policy, we will want to put a mesh on age and segment the population. The dynamics are define for age strata, where the FoI is defined differently for each age stratum:  
 
-$$\frac{d{\mathscr X}_a}{d t}$$
-
-which produces age-dependent states over time, ${\mathscr X}_a(t|h).$ 
-
-Our algorithms should guarantee that the epidemiological states over time provide an accurate match for the epidemiological states over age. 
 
 ## Mosquito Ecology  
 

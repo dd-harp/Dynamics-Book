@@ -1,5 +1,11 @@
 # Blood Feeding
 
-## Availability and Blood Feeding Rates 
+The endpoint  
 
-## Host Selection 
+## Host Availability 
+
+## Blood Feeding Rates 
+
+## The Human Fraction 
+
+## The Mixing Matrix, $\beta$ 
