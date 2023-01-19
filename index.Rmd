@@ -20,8 +20,8 @@ output:
       mathrsfs: null
       caption: null
 documentclass: book
-bibliography: ../RAMP-Model-Library/references.bib
-csl: ../RAMP-Model-Library/plos.csl
+bibliography: references.bib
+csl: plos.csl
 link-citations: true
 description: "The RAMP Model and Algorithm Library"
 ---
