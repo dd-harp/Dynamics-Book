@@ -3,7 +3,8 @@
 .Rhistory
 .RData
 .Ruserdata
-_book/
-_bookdown_files/
-_bookdown_files/_main_files/
+_book/*
+_main_files/*
+_bookdown_files/*
+_bookdown_files/_main_files/*
 *.html

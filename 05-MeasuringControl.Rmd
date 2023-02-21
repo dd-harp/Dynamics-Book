@@ -1,6 +1,6 @@
-# Measuring Control
+# Measuring Vector Control
 
-Control modifies transmission, but it needs its own theory.
+In the previous chapter, we consider adult mosquito population density as a process closely related to, but also exogenous to the process of parasite transmission. 
 
 ## Coverage 
 
