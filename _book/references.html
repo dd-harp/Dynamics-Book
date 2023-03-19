@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>49 References | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="49 References | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-01-28" />
+<meta name="date" content="2023-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,7 +197,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="mosquito-dynamics.html"><a href="mosquito-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Dynamics</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a></li>
+<li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#equations"><i class="fa fa-check"></i><b>2.1.1</b> Equations</a></li>
+<li class="chapter" data-level="2.1.2" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#solutions-1"><i class="fa fa-check"></i><b>2.1.2</b> Solutions</a></li>
+<li class="chapter" data-level="2.1.3" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#regulation"><i class="fa fa-check"></i><b>2.1.3</b> Regulation</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="understanding-mosquito-dynamics.html"><a href="understanding-mosquito-dynamics.html"><i class="fa fa-check"></i><b>2.2</b> Understanding Mosquito Dynamics</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="realism-pragmatism.html"><a href="realism-pragmatism.html"><i class="fa fa-check"></i><b>3</b> Realism &amp; Pragmatism</a>
@@ -254,7 +259,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>3.10</b> Mosquito Ecology</a>
 <ul>
-<li class="chapter" data-level="3.10.1" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#regulation"><i class="fa fa-check"></i><b>3.10.1</b> Regulation</a></li>
+<li class="chapter" data-level="3.10.1" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#regulation-1"><i class="fa fa-check"></i><b>3.10.1</b> Regulation</a></li>
 <li class="chapter" data-level="3.10.2" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#exogenous-forcing-1"><i class="fa fa-check"></i><b>3.10.2</b> Exogenous Forcing</a></li>
 <li class="chapter" data-level="3.10.3" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#habitat-dynamics"><i class="fa fa-check"></i><b>3.10.3</b> Habitat Dynamics</a></li>
 </ul></li>
@@ -278,7 +283,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.8" data-path="pfeir-vs.-pffoi-in-data.html"><a href="pfeir-vs.-pffoi-in-data.html"><i class="fa fa-check"></i><b>4.8</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>FoI in Data</a></li>
 <li class="chapter" data-level="4.9" data-path="synthesis-1.html"><a href="synthesis-1.html"><i class="fa fa-check"></i><b>4.9</b> Synthesis</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="measuring-control.html"><a href="measuring-control.html"><i class="fa fa-check"></i><b>5</b> Measuring Control</a>
+<li class="chapter" data-level="5" data-path="measuring-vector-control.html"><a href="measuring-vector-control.html"><i class="fa fa-check"></i><b>5</b> Measuring Vector Control</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="coverage.html"><a href="coverage.html"><i class="fa fa-check"></i><b>5.1</b> Coverage</a></li>
 <li class="chapter" data-level="5.2" data-path="effect-sizes.html"><a href="effect-sizes.html"><i class="fa fa-check"></i><b>5.2</b> Effect Sizes</a></li>
@@ -524,25 +529,28 @@ div.csl-indent {
 <div class="csl-left-margin">27. </div><div class="csl-right-inline">Dietz K. Models for parasitic disease control. Bull Int Stat Inst. 1975;46: 531–544. </div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">28. </div><div class="csl-right-inline">Dietz K. The <span>Incidence</span> of <span>Infectious Diseases</span> under the <span>Influence</span> of <span>Seasonal Fluctuations</span>. Mathematical <span>Models</span> in <span>Medicine</span>. <span>Springer Berlin Heidelberg</span>; 1976. pp. 1–15. doi:<a href="https://doi.org/10.1007/978-3-642-93048-5_1">10.1007/978-3-642-93048-5_1</a></div>
+<div class="csl-left-margin">28. </div><div class="csl-right-inline">Hay SI, Smith DL, Snow RW. Measuring malaria endemicity from intense to interrupted transmission. Lancet Infect Dis. 2008;8: 369–378. doi:<a href="https://doi.org/10.1016/S1473-3099(08)70069-0">10.1016/S1473-3099(08)70069-0</a></div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">29. </div><div class="csl-right-inline">Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito <span>Volterra Symposium</span> on <span>Mathematical Models</span> in biology. <span>Berlin</span>: <span>Springer-Verlag</span>; 1980. pp. 264–277. </div>
+<div class="csl-left-margin">29. </div><div class="csl-right-inline">Dietz K. The <span>Incidence</span> of <span>Infectious Diseases</span> under the <span>Influence</span> of <span>Seasonal Fluctuations</span>. Mathematical <span>Models</span> in <span>Medicine</span>. <span>Springer Berlin Heidelberg</span>; 1976. pp. 1–15. doi:<a href="https://doi.org/10.1007/978-3-642-93048-5_1">10.1007/978-3-642-93048-5_1</a></div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">30. </div><div class="csl-right-inline">Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1–25. </div>
+<div class="csl-left-margin">30. </div><div class="csl-right-inline">Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito <span>Volterra Symposium</span> on <span>Mathematical Models</span> in biology. <span>Berlin</span>: <span>Springer-Verlag</span>; 1980. pp. 264–277. </div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">31. </div><div class="csl-right-inline">Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69–77. doi:<a href="https://doi.org/10.1016/0035-9203(86)90199-9">10.1016/0035-9203(86)90199-9</a></div>
+<div class="csl-left-margin">31. </div><div class="csl-right-inline">Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1–25. </div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">32. </div><div class="csl-right-inline">Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31–53. doi:<a href="https://doi.org/10.1016/0040-5809(88)90003-2">10.1016/0040-5809(88)90003-2</a></div>
+<div class="csl-left-margin">32. </div><div class="csl-right-inline">Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69–77. doi:<a href="https://doi.org/10.1016/0035-9203(86)90199-9">10.1016/0035-9203(86)90199-9</a></div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">33. </div><div class="csl-right-inline">Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221–231. Available: <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks</a></div>
+<div class="csl-left-margin">33. </div><div class="csl-right-inline">Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31–53. doi:<a href="https://doi.org/10.1016/0040-5809(88)90003-2">10.1016/0040-5809(88)90003-2</a></div>
 </div>
 <div class="csl-entry">
-<div class="csl-left-margin">34. </div><div class="csl-right-inline">Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. <em>Plasmodium falciparum</em> parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379–391. doi:<a href="https://doi.org/10.1017/s0031182001007533">10.1017/s0031182001007533</a></div>
+<div class="csl-left-margin">34. </div><div class="csl-right-inline">Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221–231. Available: <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks</a></div>
+</div>
+<div class="csl-entry">
+<div class="csl-left-margin">35. </div><div class="csl-right-inline">Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. <em>Plasmodium falciparum</em> parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379–391. doi:<a href="https://doi.org/10.1017/s0031182001007533">10.1017/s0031182001007533</a></div>
 </div>
 </div>
 </div>

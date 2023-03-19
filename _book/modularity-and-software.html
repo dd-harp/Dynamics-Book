@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Modularity and Software | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Modularity and Software | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-01-28" />
+<meta name="date" content="2023-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,7 +197,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="mosquito-dynamics.html"><a href="mosquito-dynamics.html"><i class="fa fa-check"></i><b>2</b> Mosquito Dynamics</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a></li>
+<li class="chapter" data-level="2.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>2.1</b> Aquatic Dynamics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#equations"><i class="fa fa-check"></i><b>2.1.1</b> Equations</a></li>
+<li class="chapter" data-level="2.1.2" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#solutions-1"><i class="fa fa-check"></i><b>2.1.2</b> Solutions</a></li>
+<li class="chapter" data-level="2.1.3" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#regulation"><i class="fa fa-check"></i><b>2.1.3</b> Regulation</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="understanding-mosquito-dynamics.html"><a href="understanding-mosquito-dynamics.html"><i class="fa fa-check"></i><b>2.2</b> Understanding Mosquito Dynamics</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="realism-pragmatism.html"><a href="realism-pragmatism.html"><i class="fa fa-check"></i><b>3</b> Realism &amp; Pragmatism</a>
@@ -254,7 +259,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html"><i class="fa fa-check"></i><b>3.10</b> Mosquito Ecology</a>
 <ul>
-<li class="chapter" data-level="3.10.1" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#regulation"><i class="fa fa-check"></i><b>3.10.1</b> Regulation</a></li>
+<li class="chapter" data-level="3.10.1" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#regulation-1"><i class="fa fa-check"></i><b>3.10.1</b> Regulation</a></li>
 <li class="chapter" data-level="3.10.2" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#exogenous-forcing-1"><i class="fa fa-check"></i><b>3.10.2</b> Exogenous Forcing</a></li>
 <li class="chapter" data-level="3.10.3" data-path="mosquito-ecology-1.html"><a href="mosquito-ecology-1.html#habitat-dynamics"><i class="fa fa-check"></i><b>3.10.3</b> Habitat Dynamics</a></li>
 </ul></li>
@@ -278,7 +283,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.8" data-path="pfeir-vs.-pffoi-in-data.html"><a href="pfeir-vs.-pffoi-in-data.html"><i class="fa fa-check"></i><b>4.8</b> <em>Pf</em>EIR <em>vs.</em> <em>Pf</em>FoI in Data</a></li>
 <li class="chapter" data-level="4.9" data-path="synthesis-1.html"><a href="synthesis-1.html"><i class="fa fa-check"></i><b>4.9</b> Synthesis</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="measuring-control.html"><a href="measuring-control.html"><i class="fa fa-check"></i><b>5</b> Measuring Control</a>
+<li class="chapter" data-level="5" data-path="measuring-vector-control.html"><a href="measuring-vector-control.html"><i class="fa fa-check"></i><b>5</b> Measuring Vector Control</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="coverage.html"><a href="coverage.html"><i class="fa fa-check"></i><b>5.1</b> Coverage</a></li>
 <li class="chapter" data-level="5.2" data-path="effect-sizes.html"><a href="effect-sizes.html"><i class="fa fa-check"></i><b>5.2</b> Effect Sizes</a></li>
@@ -444,9 +449,9 @@ div.csl-indent {
 <p>From Ross’s first published model in 1905 to the first draft of this book, 117 years have passed. The story of malaria models can be summarized in three epochs.</p>
 <p>Ross’s models, and contributions to mathematical study of malaria made by Alfred J Lotka (1912-1923), George Macdonald (1950-1968), and Garrett-Jones (1964-1970) take us to the end first epoch, which is marked by the end of the Global Malaria Eradication Programme (GMEP, 1955-1969). As part of the GMEP, Macdonald’s formulas were extended by Garrett-Jones into the concept of <em>vectorial capacity</em> and a rudimentary theory of vector control. By 1970, the <em>Ross-Macdonald</em> model was more than just a set of equations. It was a theory for malaria dynamics and control supported by a well-developed set of concepts, parameters and metrics <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald" role="doc-biblioref">1</a>]</span>.</p>
 <p>Over that same period of time, mathematical theory for directly transmitted diseases took a parallel path, with important mathematical contributions from Kermack and McKendrick, NTJ Bailey, and Bartlett. Sometime around 1980, mathematical epidemiology began a period of innovation and synthesis, particularly after the publications of Robert May and Roy Anderson made it a mainstream activity in departments of ecology.</p>
-<p>In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project <span class="citation">[<a href="#ref-DietzK1974MalariaModel" role="doc-biblioref">26</a>]</span>, work on the dynamics of malaria under treatment by drugs <span class="citation">[<a href="#ref-DietzK1975ModelsParasitic" role="doc-biblioref">27</a>]</span>, seasonality <span class="citation">[<a href="#ref-DietzK1976IncidenceInfectious" role="doc-biblioref">28</a>]</span>, and heterogeneous biting <span class="citation">[<a href="#ref-DietzK1980ModelsVectorborne" role="doc-biblioref">29</a>,<a href="#ref-DietzK1988EpidemiologicalModels" role="doc-biblioref">30</a>]</span>. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens <span class="citation">[<a href="#ref-DyeC1986PopulationDynamics" role="doc-biblioref">31</a>,<a href="#ref-HasibederG1988PopulationDynamics" role="doc-biblioref">32</a>]</span>.</p>
+<p>In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project <span class="citation">[<a href="#ref-DietzK1974MalariaModel" role="doc-biblioref">26</a>]</span>, work on the dynamics of malaria under treatment by drugs <span class="citation">[<a href="#ref-DietzK1975ModelsParasitic" role="doc-biblioref">27</a>]</span>, seasonality <span class="citation">[<a href="#ref-DietzK1976IncidenceInfectious" role="doc-biblioref">29</a>]</span>, and heterogeneous biting <span class="citation">[<a href="#ref-DietzK1980ModelsVectorborne" role="doc-biblioref">30</a>,<a href="#ref-DietzK1988EpidemiologicalModels" role="doc-biblioref">31</a>]</span>. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens <span class="citation">[<a href="#ref-DyeC1986PopulationDynamics" role="doc-biblioref">32</a>,<a href="#ref-HasibederG1988PopulationDynamics" role="doc-biblioref">33</a>]</span>.</p>
 <p>The last epoch of malaria, which starts around 2006, is marked by two major developments: a maturing theory of malaria control; and the rise of branded, individual-based models.</p>
-<p>The publication of <em>OpenMalaria</em> in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for <em>Aedes</em> dynamics and dengue virus transmission, as <em>CIMSiM</em> and <em>DENSiM</em>. In malaria, several within-host models had been developed <span class="citation">[<a href="#ref-MolineauxL1999ReviewIntrahost" role="doc-biblioref">33</a>,<a href="#ref-MolineauxL2001PlasmodiumFalciparum" role="doc-biblioref">34</a>]</span>. <em>OpenMalaria</em> traces its history back to an intrahost model developed by Dietz and Louis Molineaux <span class="citation">[<a href="#ref-MolineauxL2001PlasmodiumFalciparum" role="doc-biblioref">34</a>]</span>. After <em>OpenMalaria,</em> two other branded individual-based models were developed. One was developed by a team at Imperial College called <em>Malaria Tools.</em> Another was developed by a team at the Institute for Disease Modeling called <em>eMod.</em> The fact that the models were named and branded was significant – the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with <em>disease</em> in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.</p>
+<p>The publication of <em>OpenMalaria</em> in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for <em>Aedes</em> dynamics and dengue virus transmission, as <em>CIMSiM</em> and <em>DENSiM</em>. In malaria, several within-host models had been developed <span class="citation">[<a href="#ref-MolineauxL1999ReviewIntrahost" role="doc-biblioref">34</a>,<a href="#ref-MolineauxL2001PlasmodiumFalciparum" role="doc-biblioref">35</a>]</span>. <em>OpenMalaria</em> traces its history back to an intrahost model developed by Dietz and Louis Molineaux <span class="citation">[<a href="#ref-MolineauxL2001PlasmodiumFalciparum" role="doc-biblioref">35</a>]</span>. After <em>OpenMalaria,</em> two other branded individual-based models were developed. One was developed by a team at Imperial College called <em>Malaria Tools.</em> Another was developed by a team at the Institute for Disease Modeling called <em>eMod.</em> The fact that the models were named and branded was significant – the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with <em>disease</em> in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.</p>
 <p>Around 2007, new models of vector control began to appear that related intevention coverage levels to effect sizes. Macdonald’s work had focused on sensitivity to parameters, and the GMEP emphasized technical efficiency to achieve very high coverage (with IRS). Garrett-Jones developed vectorial capacity as a way of understanding vector control and effect modification by insecticide resistance. The new models extended Garrett-Jones ideas. The need for new models was motivated, at least in part, by the goal of achieving universal coverage with ITNs. What were reasonable coverage targets? The new generation of vector control models introduced the concept of an effect size on transmission as a function of intervention coverage levels, where coverage had one definition for operations (<em>e.g.</em> something like ownership) and another for effect sizes (<em>e.g.</em> related to vector contact rates with interventions). The goal of achieving very high coverage with ITNs bumped into the reality that nets are not durable, so new models have been devised to look at intervention coverage in relation to distribution schemes and product durability. While these concepts had been considered during the GMEP design phase, they did not appear in Macdonald’s models.</p>
 <hr />
 <p>If we want to take advantage of all the research that has been done, we need a way of understanding malaria models and the whole business of model building.</p>
@@ -469,25 +474,25 @@ div.csl-indent {
 <div class="csl-left-margin">27. </div><div class="csl-right-inline">Dietz K. Models for parasitic disease control. Bull Int Stat Inst. 1975;46: 531–544. </div>
 </div>
 <div id="ref-DietzK1976IncidenceInfectious" class="csl-entry">
-<div class="csl-left-margin">28. </div><div class="csl-right-inline">Dietz K. The <span>Incidence</span> of <span>Infectious Diseases</span> under the <span>Influence</span> of <span>Seasonal Fluctuations</span>. Mathematical <span>Models</span> in <span>Medicine</span>. <span>Springer Berlin Heidelberg</span>; 1976. pp. 1–15. doi:<a href="https://doi.org/10.1007/978-3-642-93048-5_1">10.1007/978-3-642-93048-5_1</a></div>
+<div class="csl-left-margin">29. </div><div class="csl-right-inline">Dietz K. The <span>Incidence</span> of <span>Infectious Diseases</span> under the <span>Influence</span> of <span>Seasonal Fluctuations</span>. Mathematical <span>Models</span> in <span>Medicine</span>. <span>Springer Berlin Heidelberg</span>; 1976. pp. 1–15. doi:<a href="https://doi.org/10.1007/978-3-642-93048-5_1">10.1007/978-3-642-93048-5_1</a></div>
 </div>
 <div id="ref-DietzK1980ModelsVectorborne" class="csl-entry">
-<div class="csl-left-margin">29. </div><div class="csl-right-inline">Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito <span>Volterra Symposium</span> on <span>Mathematical Models</span> in biology. <span>Berlin</span>: <span>Springer-Verlag</span>; 1980. pp. 264–277. </div>
+<div class="csl-left-margin">30. </div><div class="csl-right-inline">Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito <span>Volterra Symposium</span> on <span>Mathematical Models</span> in biology. <span>Berlin</span>: <span>Springer-Verlag</span>; 1980. pp. 264–277. </div>
 </div>
 <div id="ref-DietzK1988EpidemiologicalModels" class="csl-entry">
-<div class="csl-left-margin">30. </div><div class="csl-right-inline">Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1–25. </div>
+<div class="csl-left-margin">31. </div><div class="csl-right-inline">Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1–25. </div>
 </div>
 <div id="ref-DyeC1986PopulationDynamics" class="csl-entry">
-<div class="csl-left-margin">31. </div><div class="csl-right-inline">Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69–77. doi:<a href="https://doi.org/10.1016/0035-9203(86)90199-9">10.1016/0035-9203(86)90199-9</a></div>
+<div class="csl-left-margin">32. </div><div class="csl-right-inline">Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69–77. doi:<a href="https://doi.org/10.1016/0035-9203(86)90199-9">10.1016/0035-9203(86)90199-9</a></div>
 </div>
 <div id="ref-HasibederG1988PopulationDynamics" class="csl-entry">
-<div class="csl-left-margin">32. </div><div class="csl-right-inline">Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31–53. doi:<a href="https://doi.org/10.1016/0040-5809(88)90003-2">10.1016/0040-5809(88)90003-2</a></div>
+<div class="csl-left-margin">33. </div><div class="csl-right-inline">Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31–53. doi:<a href="https://doi.org/10.1016/0040-5809(88)90003-2">10.1016/0040-5809(88)90003-2</a></div>
 </div>
 <div id="ref-MolineauxL1999ReviewIntrahost" class="csl-entry">
-<div class="csl-left-margin">33. </div><div class="csl-right-inline">Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221–231. Available: <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks</a></div>
+<div class="csl-left-margin">34. </div><div class="csl-right-inline">Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221–231. Available: <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks</a></div>
 </div>
 <div id="ref-MolineauxL2001PlasmodiumFalciparum" class="csl-entry">
-<div class="csl-left-margin">34. </div><div class="csl-right-inline">Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. <em>Plasmodium falciparum</em> parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379–391. doi:<a href="https://doi.org/10.1017/s0031182001007533">10.1017/s0031182001007533</a></div>
+<div class="csl-left-margin">35. </div><div class="csl-right-inline">Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. <em>Plasmodium falciparum</em> parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379–391. doi:<a href="https://doi.org/10.1017/s0031182001007533">10.1017/s0031182001007533</a></div>
 </div>
 </div>
             </section>

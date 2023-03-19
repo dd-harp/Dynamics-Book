@@ -146,7 +146,7 @@
 \makeatother
 \subtitle{Dynamical Systems for Adaptive Malaria Control}
 \author{David L. Smith and the RAMP Team}
-\date{2023-01-28}
+\date{2023-03-18}
 
 \begin{document}
 \maketitle
@@ -1088,28 +1088,34 @@ One of the big themes we want to introduce here is that the outcomes of vector c
 \hypertarget{aquatic-dynamics}{%
 \section{Aquatic Dynamics}\label{aquatic-dynamics}}
 
-Here, we start with the equation from before, leaving out parasite transmission dynamics. The mosquito maturation rate, \(\psi\) defines the average time from egg to emergence. The per-capita mortality rate, \(\psi + \theta L\), is a function of
+\hypertarget{equations}{%
+\subsection{Equations}\label{equations}}
+
+Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding {[}\protect\hyperlink{ref-SmithDL2013_LarvalDynamics}{19}{]}. The mosquito maturation rate, \(\psi e^{-\sigma L}\) defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, \(\psi + \theta L\), has two parts: a density independent term \(\psi\) and a response to mean crowding \(\theta L\). We assume that adults lay \(\chi\) eggs per feeding cycle.
 
 \begin{equation}
 \begin{array}{rl}
 \frac{dM}{dt} &= \Lambda - g M\\  \\ \hline 
-\frac{dL}{dt} &= \eta - (\psi + \phi + \theta L) L \\ 
-\Lambda &= \frac{\psi L}{2} \\ 
+\frac{dL}{dt} &= \eta - (\psi e^{-\sigma L} + \phi + \theta L) L \\ 
+\Lambda &= \frac{1}{2} \psi L e^{-\sigma L}\\ 
 \eta &= \chi f M \\ 
 \end{array}
 \end{equation}
+
+\hypertarget{solutions-1}{%
+\subsection{Solutions}\label{solutions-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{BasicAquatic\_dML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(t, y, params)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{c}\NormalTok{(params, }\FunctionTok{as.list}\NormalTok{(y)),\{}
    
   \CommentTok{\# Terms }
-\NormalTok{  Lambda }\OtherTok{=}\NormalTok{ psi}\SpecialCharTok{*}\NormalTok{L}\SpecialCharTok{/}\DecValTok{2} 
+\NormalTok{  Lambda }\OtherTok{=}\NormalTok{ psi}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{sigma}\SpecialCharTok{*}\NormalTok{L)}\SpecialCharTok{*}\NormalTok{L}\SpecialCharTok{/}\DecValTok{2} 
 \NormalTok{  eta }\OtherTok{=}\NormalTok{ chi}\SpecialCharTok{*}\NormalTok{f}\SpecialCharTok{*}\NormalTok{M }
    
   \CommentTok{\# Dynamics }
 \NormalTok{  dM }\OtherTok{=}\NormalTok{ Lambda }\SpecialCharTok{{-}}\NormalTok{ g}\SpecialCharTok{*}\NormalTok{M}
-\NormalTok{  dL }\OtherTok{=}\NormalTok{ eta }\SpecialCharTok{{-}}\NormalTok{ (psi }\SpecialCharTok{+}\NormalTok{ phi }\SpecialCharTok{+}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{L)}\SpecialCharTok{*}\NormalTok{L }
+\NormalTok{  dL }\OtherTok{=}\NormalTok{ eta }\SpecialCharTok{{-}}\NormalTok{ (psi}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{sigma}\SpecialCharTok{*}\NormalTok{L) }\SpecialCharTok{+}\NormalTok{ phi }\SpecialCharTok{+}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{L)}\SpecialCharTok{*}\NormalTok{L }
   
   \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{c}\NormalTok{(dM, dL)))}
 \NormalTok{\})\} }
@@ -1118,19 +1124,23 @@ Here, we start with the equation from before, leaving out parasite transmission 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{makePar\_BasicAquatic }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{f=}\DecValTok{1}\SpecialCharTok{/}\FloatTok{2.5}\NormalTok{, }\AttributeTok{g=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{chi =} \DecValTok{50}\NormalTok{, }\AttributeTok{psi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{phi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{theta =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{)\{}
-  \FunctionTok{list}\NormalTok{(}\AttributeTok{f=}\NormalTok{f, }\AttributeTok{g=}\NormalTok{g, }\AttributeTok{chi=}\NormalTok{chi, }\AttributeTok{psi=}\NormalTok{psi, }\AttributeTok{phi=}\NormalTok{phi, }\AttributeTok{theta=}\NormalTok{theta)}
+\NormalTok{makePar\_BasicAquatic }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{f=}\DecValTok{1}\SpecialCharTok{/}\FloatTok{2.5}\NormalTok{, }\AttributeTok{g=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{chi =} \DecValTok{50}\NormalTok{, }\AttributeTok{psi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{phi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{theta =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\AttributeTok{sigma=}\DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{list}\NormalTok{(}\AttributeTok{f=}\NormalTok{f, }\AttributeTok{g=}\NormalTok{g, }\AttributeTok{chi=}\NormalTok{chi, }\AttributeTok{psi=}\NormalTok{psi, }\AttributeTok{phi=}\NormalTok{phi, }\AttributeTok{theta=}\NormalTok{theta, }\AttributeTok{sigma=}\NormalTok{sigma)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{regulation}{%
+\subsection{Regulation}\label{regulation}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tt }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{180}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{) }
+\NormalTok{tt }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{) }
 \NormalTok{y0 }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\DecValTok{1}\NormalTok{, }\AttributeTok{L=}\DecValTok{1}\NormalTok{)}
 \NormalTok{params }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{()}
-\NormalTok{params1 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{phi=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{params1 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{phi=}\DecValTok{1}\NormalTok{)}
 \NormalTok{params2 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{theta=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
+\NormalTok{params3 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{sigma=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\AttributeTok{theta=}\DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1139,37 +1149,59 @@ This code solves the equations:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{require}\NormalTok{(deSolve)}
-\NormalTok{yout }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params) }
+\NormalTok{yout  }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params) }
 \NormalTok{yout1 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params1) }
 \NormalTok{yout2 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params2) }
+\NormalTok{yout3 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params3) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plotML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
-  \FunctionTok{plot}\NormalTok{(time, L, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{xlab =} \StringTok{"Time (Days)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{) }
-  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM) }
+\NormalTok{plotML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{llwd=}\DecValTok{1}\NormalTok{, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"red"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
+  \FunctionTok{plot}\NormalTok{(time, L, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd=}\NormalTok{llwd, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{xlab =} \StringTok{"Time (Days)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{) }
+  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM, }\AttributeTok{lwd=}\NormalTok{llwd) }
 \NormalTok{\})\}}
 
-\NormalTok{addML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{llty =} \DecValTok{2}\NormalTok{, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
-  \FunctionTok{lines}\NormalTok{(time, L, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{lty =}\NormalTok{ llty) }
-  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM, }\AttributeTok{lty=}\NormalTok{llty) }
+\NormalTok{addML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{llty =} \DecValTok{2}\NormalTok{, }\AttributeTok{llwd=}\DecValTok{1}\NormalTok{, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"red"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
+  \FunctionTok{lines}\NormalTok{(time, L, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{lty=}\NormalTok{llty, }\AttributeTok{lwd=}\NormalTok{llwd) }
+  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM, }\AttributeTok{lty=}\NormalTok{llty, }\AttributeTok{lwd=}\NormalTok{llwd) }
 \NormalTok{\})\}}
 \end{Highlighting}
 \end{Shaded}
 
-The first thing to point out is that the
+The first thing to point out is that changing the dynamics take some time to approach equilibrium -- a couple of months, in this model. The second is that increasing mortality rates for mosquitoes in aquatic habitats by a factor of 10 affects the mosquito densities in minor ways.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{plotML}\NormalTok{(yout)}
-\FunctionTok{addML}\NormalTok{(yout1)}
-\FunctionTok{addML}\NormalTok{(yout2, }\AttributeTok{llty=}\DecValTok{3}\NormalTok{)}
+\FunctionTok{addML}\NormalTok{(yout1, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+The third is that increasing the response to mean crowding has a very strong effect on the population dynamics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotML}\NormalTok{(yout)}
+\FunctionTok{addML}\NormalTok{(yout2, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+The third point is that density dependent responses to mean crowding cause much larger changes to this system than density-dependent mortality. Aquatic dynamics have a strong tendency to oscillate, but more critically, delayed maturation strongly affects the ratio of adult mosquitoes to adults.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotML}\NormalTok{(yout)}
+\FunctionTok{addML}\NormalTok{(yout3, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-30-1.pdf}
 
 \hypertarget{understanding-mosquito-dynamics}{%
 \section{Understanding Mosquito Dynamics}\label{understanding-mosquito-dynamics}}
@@ -1177,7 +1209,24 @@ The first thing to point out is that the
 \hypertarget{realism-pragmatism}{%
 \chapter{Realism \& Pragmatism}\label{realism-pragmatism}}
 
-There are several reasons why models for policy will tend to be more complex than models developed for science. To build models that can serve malaria policy, the models must be \emph{realistic} enough to be compelling. Policy advice should be checked for consistency across studies, which requires methods that allow for comparisons across subject matter domains. When models are used to guide policy, the evidence should reflect the knowledge and experience accumulated over years of studying and controlling malaria. Over time, the advice should shift from \emph{generic} advice to \emph{specific} advice as more evidence is gathered. The view is that policy should be based on model swarms, and that the predictions of those models must be specific enough to be proven wrong, so that over time \emph{some} of the models are trusted over others. To carry a conversation forward, the models used to guide discussions will need to retain a memory of what has been learned already, so they will tend to add features and grow more complex. It might take a lot of work to build a model that has been fit to all the evidence describing malaria in a management unit over the recent past, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers. In policy, models must be complex enough to serve many purposes all at once.
+There are several reasons why models for policy will tend to be more complex than models developed for science.
+In science, the questions are narrow and the study designs are focused enough to form tests of ideas that have clear outcomes.
+When models are used to guide policy, the same level of scientific rigor should be applied, but weighing all the evidence requires a broder synthesis.\\
+To build models that can guide malaria policies, the models must be \emph{realistic} enough to be compelling, and they \emph{ought} to reflect the knowledge and experience accumulated over years of studying and controlling malaria.
+Policy advice should be checked for consistency across studies.
+The models must be complex enough to serve many purposes all at once.
+To weigh tradeoffs, policy requires broad, synthetic models that allow for comparisons across subject matter domains.
+
+To carry a conversation forward, the models used to guide discussions will need to retain a memory of what has been learned already, so they will tend to add features and grow more complex.
+Given the uncertainty, policy should be based on model swarms that propagate the uncertainty.
+The predictions of those models must be specific enough to be proven wrong, so that over time \emph{some} of the models can be trusted over others.
+The same models can be used to identify which missing data would have the greatest impact on a policy, and ideally, studies can be conducted to gather this data.
+Over time, the advice should shift from \emph{generic} advice to \emph{specific} advice as more evidence is gathered.
+This is, in a nutshell, how daptive management works.
+
+It might take a lot of work to build a model that has been fit to all the evidence describing malaria in a management unit over the recent past, and it might cut against the instincts we have as scientists to add all that realism, but it's worth it to make the effort if it helps communicate with malaria managers.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 In designing a software solution to the problem of building realistic models, we designed a framework for building models and a toolbox to build model swarms that would address the concerns of malaria programs. In the chapters that follow, we'll show the features of this framework by constructing examples. Even if we're principled about adding complexity, a cost of doing so is \emph{computational complexity.} That is something the software was designed to manage. For the moment, we thus want to set aside concerns about \emph{realism} vs.~\emph{abstraction}, about \emph{parsimony}, and about \emph{error propagation,} and we want to simply ask the question of how to build models with the features we want.
 
@@ -1514,8 +1563,8 @@ To describe mosquito spatial dynamics, we
 \hypertarget{mosquito-ecology-1}{%
 \section{Mosquito Ecology}\label{mosquito-ecology-1}}
 
-\hypertarget{regulation}{%
-\subsection{Regulation}\label{regulation}}
+\hypertarget{regulation-1}{%
+\subsection{Regulation}\label{regulation-1}}
 
 \hypertarget{exogenous-forcing-1}{%
 \subsection{Exogenous Forcing}\label{exogenous-forcing-1}}
@@ -1535,17 +1584,25 @@ To describe mosquito spatial dynamics, we
 \hypertarget{measuring-malaria}{%
 \chapter{Measuring Malaria}\label{measuring-malaria}}
 
-\textbf{Scaling Relationships}
+If we want to use evidence to make policy, we need to understand transmission and disease in its local context, which we learn about from assembling and analyzing the evidence. In malaria, the evidence is usually one or more of a core set of metrics. One useful metric is the \emph{Pf}PR from cross sectional surveys; these are available from research studies, but they are also available from demographic health surveys (DHS) or malaria indicator surveys (MIS). If we are lucky, we will also have mosquito catch counts data (by some method), which we scale by effort and report as something like the \emph{Pf}HBR. We estimate the \emph{Pf}SR from some of these caught mosquitoes, and we take their product, the \emph{Pf}EIR. From other designs, we might have estimtes of the \emph{Pf}FoI, or if serology was done, we might know the \emph{Pf}SCR.
 
-If we want to use evidence to make policy, we need to understand transmission in its local context. Two major premises in malaria epidemiology and control are that we can understand malaria prevalence as an outcome of exposure, and that the outcomes of malaria control will also vary with exposure. A problem for us is that we must rely on estimated exposure to make our decisions, but there is a paucity of \emph{Pf}EIR data, so we will rely on whatever data we have to \emph{estimate} the \emph{Pf}EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.
+From routine clinical surveillance, we could get case counts or the \emph{Pf}SPR. We can learn more if we stratify by age, or if we follow populations over time.
 
-Exposure is actually quite complex, but a major component of it involves understanding local mosquito populations. To quantify these factors, we rely on paired estimates of metrics to understand the factors affecting their scaling relationships: the \emph{Pf}PR; the \emph{Pf}EIR, the \emph{Pf}FoI. Ideally, we would use the \emph{Pf}SPR, if we knew how to correct for biases. In most cases, we must estimate the \emph{Pf}EIR from the \emph{Pf}PR. While we do this out of necessity, we must be aware of many sources of error that we can identify either \emph{a priori} or that we can study through simulation. The framework we have developed makes it comparatively easy to simulate the effects and effect sizes of these factors. The list of things we must consider includes:
+If we are to make sense of malaria as a changing baseline that has been modified by control, then we must know something about how transmission has been modified by control. First and foremost, we must understand anti-malarial drug taking, including the frequency of drug taking (for any purpose), adherence to prescribed regimens, and drug taking by severity. To understand transmission, we must have data describing intervention coverage and its timing. This would include patterns of bed net ownership and use over time, IRS and its coverage. We can't make sense of vector control coverage data without knowing something about the patterns of insecticide resistance. We discuss \protect\hyperlink{measuring-vector-control}{Measuring Vector Control} in the next chapter.
+
+For planning, we would like to know the burden of malaria, and we would like to have an estimate of transmission -- something like a malaria reproductive number.
+
+In most places, we will have routine surveillance data. We would like to piece together a coherent and accurate picture of transmission from this and from any other data we may have. To do so, we would like to know how these statistics compare in settings where two or more of them have been measured at the same place and at the same time. From studies like this, we can start to understand the \textbf{scaling relationships} among metrics, and the factors that influence them. What we have learned from studying these relationships is that there the relationship are highly non-linear {[}\protect\hyperlink{ref-HaySI2008MeasuringMalaria}{28}{]}, and that some of the factors affecting this relationship are context dependent. We have already mentioned drug taking, and we must acknowledge the difficulty of estimating drug taking by age, in part, because it is often highly heterogeneous in populations. Other factors that have been implicated are heterogeneous biting, environmental heterogeneity, seasonality, travel and mobility.
+
+Sitting between us and the truth is an observational process, and we must attempt to quantify bias and error in this sampling process if we are to have any hope of getting an accurate picture of transmission in context.
+
+To get there, we need to organize our algorithms:
 
 \begin{itemize}
 \item
-  The \emph{Pf}PR varies in a population by age, sex, and the diagnostic method;
+  The \emph{Pf}PR varies in a population by age, sex, and the diagnostic method; so we simulate malaria in cohorts as they age, and we output the predicted \emph{Pf}PR by age, sex, and diagnostic method.
 \item
-  The \emph{Pf}PR is modified by drug-taking; the effect modification varies in a population by age, access to care, and adherance to drug regimens
+  The \emph{Pf}PR is modified by drug-taking; the effect modification varies in a population by age, access to care, and adherence to drug regimens. In our algorithms, we must consider various patterns of drug taking and chemoprotection.
 \item
   Exposure is \emph{seasonal}
 
@@ -1553,7 +1610,7 @@ Exposure is actually quite complex, but a major component of it involves underst
   \item
     seasonality \emph{would} affect the true \emph{Pf}PR and the true \emph{Pf}EIR over time;
   \item
-    seasonality \emph{could} be a source of error in the estimated \emph{Pf}PR (especially with respect to age) and estimated \emph{Pf}EIR.
+    seasonality \emph{could} be a source of error in the estimated \emph{Pf}PR (especially with respect to age) and estimated \emph{Pf}EIR, particularly if the \emph{Pf}PR is reported in young children, and mismatched even slightly with \emph{Pf}EIR.
   \end{itemize}
 \item
   Heterogeneous exposure:
@@ -1569,7 +1626,7 @@ Exposure is actually quite complex, but a major component of it involves underst
 \item
   The \emph{Pf}EIR near home is obscured by human mobility through time at risk and exposure away from home;
 \item
-  Travel and imported malaria can increase the \emph{Pf}PR
+  Travel and imported malaria can increase the \emph{Pf}PR, even if there is no local exposure.
 \item
   Measurement errors in the \emph{Pf}EIR
 
@@ -1583,7 +1640,9 @@ Exposure is actually quite complex, but a major component of it involves underst
 
 These effects are incorporated into the framework. Frailties are dealt with by stratifying by age (\(\omega(a)\)) and other traits and assigning \emph{biting weights}; when combined with mobility, these become part of the mixing matrix, \(\beta\). Environmental heterogeneity modifies the relationship between the \emph{Pf}EIR by stratum and the \emph{Pf}FoI (through \(F_h\)). Seasonality in mosquito density (\(Z(t)\)) translates into seasonality in exposure (\(S(t)\)). Drug taking and immunity modify the \emph{Pf}PR after exposure.
 
-In the following sections, we use the framework to illustrate the effects and effect sizes of these factors.
+We would like to understand mosquito populations, but we will rely on whatever data we have to \emph{estimate} the \emph{Pf}EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.
+
+In the following sections, we use the framework to illustrate the effects and effect sizes of these factors. The task of estimating is for another book, \textbf{Robust Analytics for Malaria Policy.} In this study, we make full use of modularity. We start by \emph{stratifying} our human population by age, and possibly by other factors. We write algorithms that pass the density of blood feeding mosquitoes in a place, and our algorithms predict mosquito catch counts, depending on the method. From this, we compute the total FoI, which includes the \emph{local} FoI (at and around home), and the \emph{travel} FoI. These exposure rates, and algorithms describing drug taking, are translated into estimates of the true \emph{Pf}PR. The models output the predicted \emph{Pf}PR by age, sex, and method; and we also output the predicted patterns of care seeking and associated metrics at health facilities in an HMIS, by age and sex.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1630,8 +1689,8 @@ At low intensity, frailty can affect the prevalence
 \hypertarget{synthesis-1}{%
 \section{Synthesis}\label{synthesis-1}}
 
-\hypertarget{measuring-control}{%
-\chapter{Measuring Control}\label{measuring-control}}
+\hypertarget{measuring-vector-control}{%
+\chapter{Measuring Vector Control}\label{measuring-vector-control}}
 
 In the previous chapter, we consider adult mosquito population density as a process closely related to, but also exogenous to the process of parasite transmission.
 
@@ -1654,11 +1713,11 @@ Ross's models, and contributions to mathematical study of malaria made by Alfred
 
 Over that same period of time, mathematical theory for directly transmitted diseases took a parallel path, with important mathematical contributions from Kermack and McKendrick, NTJ Bailey, and Bartlett. Sometime around 1980, mathematical epidemiology began a period of innovation and synthesis, particularly after the publications of Robert May and Roy Anderson made it a mainstream activity in departments of ecology.
 
-In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{26}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{27}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{28}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{29},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{30}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{31},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{32}{]}.
+In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project {[}\protect\hyperlink{ref-DietzK1974MalariaModel}{26}{]}, work on the dynamics of malaria under treatment by drugs {[}\protect\hyperlink{ref-DietzK1975ModelsParasitic}{27}{]}, seasonality {[}\protect\hyperlink{ref-DietzK1976IncidenceInfectious}{29}{]}, and heterogeneous biting {[}\protect\hyperlink{ref-DietzK1980ModelsVectorborne}{30},\protect\hyperlink{ref-DietzK1988EpidemiologicalModels}{31}{]}. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens {[}\protect\hyperlink{ref-DyeC1986PopulationDynamics}{32},\protect\hyperlink{ref-HasibederG1988PopulationDynamics}{33}{]}.
 
 The last epoch of malaria, which starts around 2006, is marked by two major developments: a maturing theory of malaria control; and the rise of branded, individual-based models.
 
-The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{33},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{34}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{34}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
+The publication of \emph{OpenMalaria} in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for \emph{Aedes} dynamics and dengue virus transmission, as \emph{CIMSiM} and \emph{DENSiM}. In malaria, several within-host models had been developed {[}\protect\hyperlink{ref-MolineauxL1999ReviewIntrahost}{34},\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{35}{]}. \emph{OpenMalaria} traces its history back to an intrahost model developed by Dietz and Louis Molineaux {[}\protect\hyperlink{ref-MolineauxL2001PlasmodiumFalciparum}{35}{]}. After \emph{OpenMalaria,} two other branded individual-based models were developed. One was developed by a team at Imperial College called \emph{Malaria Tools.} Another was developed by a team at the Institute for Disease Modeling called \emph{eMod.} The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with \emph{disease} in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.
 
 Around 2007, new models of vector control began to appear that related intevention coverage levels to effect sizes. Macdonald's work had focused on sensitivity to parameters, and the GMEP emphasized technical efficiency to achieve very high coverage (with IRS). Garrett-Jones developed vectorial capacity as a way of understanding vector control and effect modification by insecticide resistance. The new models extended Garrett-Jones ideas. The need for new models was motivated, at least in part, by the goal of achieving universal coverage with ITNs. What were reasonable coverage targets? The new generation of vector control models introduced the concept of an effect size on transmission as a function of intervention coverage levels, where coverage had one definition for operations (\emph{e.g.} something like ownership) and another for effect sizes (\emph{e.g.} related to vector contact rates with interventions). The goal of achieving very high coverage with ITNs bumped into the reality that nets are not durable, so new models have been devised to look at intervention coverage in relation to distribution schemes and product durability. While these concepts had been considered during the GMEP design phase, they did not appear in Macdonald's models.
 
@@ -2161,32 +2220,36 @@ If you want a PDF and can't find it at the link provided, let us know and we can
 \CSLLeftMargin{27. }%
 \CSLRightInline{Dietz K. Models for parasitic disease control. Bull Int Stat Inst. 1975;46: 531--544. }
 
-\leavevmode\vadjust pre{\hypertarget{ref-DietzK1976IncidenceInfectious}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-HaySI2008MeasuringMalaria}{}}%
 \CSLLeftMargin{28. }%
+\CSLRightInline{Hay SI, Smith DL, Snow RW. Measuring malaria endemicity from intense to interrupted transmission. Lancet Infect Dis. 2008;8: 369--378. doi:\href{https://doi.org/10.1016/S1473-3099(08)70069-0}{10.1016/S1473-3099(08)70069-0}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-DietzK1976IncidenceInfectious}{}}%
+\CSLLeftMargin{29. }%
 \CSLRightInline{Dietz K. The {Incidence} of {Infectious Diseases} under the {Influence} of {Seasonal Fluctuations}. Mathematical {Models} in {Medicine}. {Springer Berlin Heidelberg}; 1976. pp. 1--15. doi:\href{https://doi.org/10.1007/978-3-642-93048-5_1}{10.1007/978-3-642-93048-5\_1}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1980ModelsVectorborne}{}}%
-\CSLLeftMargin{29. }%
+\CSLLeftMargin{30. }%
 \CSLRightInline{Dietz K. Models for vector-borne parasitic diseases. In: Barigozzi C, Levin SA, editors. Vito {Volterra Symposium} on {Mathematical Models} in biology. {Berlin}: {Springer-Verlag}; 1980. pp. 264--277. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DietzK1988EpidemiologicalModels}{}}%
-\CSLLeftMargin{30. }%
+\CSLLeftMargin{31. }%
 \CSLRightInline{Dietz K, Hadeler KP. Epidemiological models for sexually transmitted diseases. J Math Biol. 1988;26: 1--25. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-DyeC1986PopulationDynamics}{}}%
-\CSLLeftMargin{31. }%
+\CSLLeftMargin{32. }%
 \CSLRightInline{Dye C, Hasibeder G. Population dynamics of mosquito-borne disease: Effects of flies which bite some people more frequently than others. Trans R Soc Trop Med Hyg. 1986;80: 69--77. doi:\href{https://doi.org/10.1016/0035-9203(86)90199-9}{10.1016/0035-9203(86)90199-9}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-HasibederG1988PopulationDynamics}{}}%
-\CSLLeftMargin{32. }%
+\CSLLeftMargin{33. }%
 \CSLRightInline{Hasibeder G, Dye C. Population dynamics of mosquito-borne disease: Persistence in a completely heterogeneous environment. Theor Popul Biol. 1988;33: 31--53. doi:\href{https://doi.org/10.1016/0040-5809(88)90003-2}{10.1016/0040-5809(88)90003-2}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL1999ReviewIntrahost}{}}%
-\CSLLeftMargin{33. }%
+\CSLLeftMargin{34. }%
 \CSLRightInline{Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221--231. Available: \url{http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed\&id=10697860\&retmode=ref\&cmd=prlinks}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MolineauxL2001PlasmodiumFalciparum}{}}%
-\CSLLeftMargin{34. }%
+\CSLLeftMargin{35. }%
 \CSLRightInline{Molineaux L, Diebner HH, Eichner M, Collins WE, Jeffery GM, Dietz K. \emph{Plasmodium falciparum} parasitaemia described by a new mathematical model. Parasitology. 2001;122: 379--391. doi:\href{https://doi.org/10.1017/s0031182001007533}{10.1017/s0031182001007533}}
 
 \end{CSLReferences}
