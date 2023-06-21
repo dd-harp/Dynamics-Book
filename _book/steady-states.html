@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 Steady States | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 Steady States | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -499,7 +503,7 @@ g \bar Y e^{-g\tau} = g \bar Z
 <p><span class="math display">\[\begin{equation}
 \mbox{EIR} = \frac{\textstyle{fq\Lambda}}{\textstyle{H}} \times \frac{\textstyle{f q \kappa}}{\textstyle{g + fq \kappa}} e^{-g\tau}
 \end{equation}\]</span></p>
-<p>This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model <span class="citation">[<a href="#ref-MacdonaldG1952_SporozoiteRate" role="doc-biblioref">17</a>,<a href="#ref-ArmitageP1953NoteEpidemiology" role="doc-biblioref">18</a>]</span>. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography <span class="citation">[<a href="#ref-SmithDL2004_Statics" role="doc-biblioref">14</a>]</span>.</p>
+<p>This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model <span class="citation">[<a href="#ref-MacdonaldG1952_SporozoiteRate">16</a>,<a href="#ref-ArmitageP1953NoteEpidemiology"><strong>ArmitageP1953NoteEpidemiology?</strong></a>]</span>. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography <span class="citation">[<a href="#ref-SmithDL2004_Statics">13</a>]</span>.</p>
 </div>
 <div id="vectorial-capacity" class="section level3 hasAnchor" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Vectorial Capacity<a href="steady-states.html#vectorial-capacity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -547,8 +551,8 @@ V = \frac{\Lambda}{H} S^2  e^{-g\tau}
 \end{equation}\]</span></p>
 <p>As a reminder, while Eq. <a href="steady-states.html#eq:VCstory">(1.6)</a> includes <span class="math inline">\(\kappa\)</span>, the formula for VC, in Eq. <a href="steady-states.html#eq:VCdefined">(1.2)</a>, assumes that <span class="math inline">\(\kappa=1\)</span>: the VC describes transmission as if humans were perfectly infectious. It was defined this way on purpose: it was meant to include mosquito parameters and exclude human factors. We can think of VC as defining something like a conditional expectation, a maximum, or (as we have already said) a measure of <em>potential transmission by mosquitoes</em> that is independent of human factors.</p>
 <p>While <span class="math inline">\(\kappa\)</span> (the numerator in Eq.<a href="steady-states.html#eq:EIR2ndpart">(1.3)</a> accounts for <em>most</em> of the difference between the EIR and the VC, the rest of the difference is due to the denominator in Eq. <a href="steady-states.html#eq:EIR2ndpart">(1.3)</a>, <span class="math inline">\(1+S\kappa\)</span>, which traces back to the formula from <span class="math inline">\(dY/dt\)</span>, which assumes that mosquitoes are either infected or not. The denominator is a measure of saturation – the fraction of mosquitoes that get <em>superinfected</em> with parasites. The main point here is that as <span class="math inline">\(\kappa\)</span> increases, saturation increases. If we set <span class="math inline">\(S\)</span> to the values in the previous plots, we can isolate the relationship:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
-<img src="_main_files/figure-html/unnamed-chunk-12-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="_main_files/figure-html/unnamed-chunk-11-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
 <p class="caption">
 Figure 1.1: The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.
 </p>
@@ -612,39 +616,39 @@ R_0 = \frac{bcV}{r}.
 <h3><span class="header-section-number">1.3.5</span> Checking our Work<a href="steady-states.html#checking-our-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An advantage of working in this environment is that we can check our work. One way we could solve these equations would be to run them for a very long time:</p>
 <p>We make a parameter set that defines the model:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="steady-states.html#cb12-1" aria-hidden="true" tabindex="-1"></a>y0<span class="ot">=</span><span class="fu">c</span>(<span class="at">M=</span><span class="dv">100</span>, <span class="at">Y=</span><span class="dv">10</span>, <span class="at">Z=</span><span class="dv">5</span>, <span class="at">X=</span><span class="dv">200</span>)</span>
-<span id="cb12-2"><a href="steady-states.html#cb12-2" aria-hidden="true" tabindex="-1"></a>paramsSteady <span class="ot">=</span> <span class="fu">makeParams</span>(y0, <span class="at">ss=</span><span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="steady-states.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dede</span>(y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>paramsSteady) <span class="ot">-&gt;</span> yout</span>
-<span id="cb13-2"><a href="steady-states.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(yout, <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>] <span class="ot">-&gt;</span> eq1 </span>
-<span id="cb13-3"><a href="steady-states.html#cb13-3" aria-hidden="true" tabindex="-1"></a>eq1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="steady-states.html#cb12-1" tabindex="-1"></a>y0<span class="ot">=</span><span class="fu">c</span>(<span class="at">M=</span><span class="dv">100</span>, <span class="at">Y=</span><span class="dv">10</span>, <span class="at">Z=</span><span class="dv">5</span>, <span class="at">X=</span><span class="dv">200</span>)</span>
+<span id="cb12-2"><a href="steady-states.html#cb12-2" tabindex="-1"></a>paramsSteady <span class="ot">=</span> <span class="fu">makeParams</span>(y0, <span class="at">ss=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="steady-states.html#cb13-1" tabindex="-1"></a><span class="fu">dede</span>(y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>paramsSteady) <span class="ot">-&gt;</span> yout</span>
+<span id="cb13-2"><a href="steady-states.html#cb13-2" tabindex="-1"></a><span class="fu">tail</span>(yout, <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>] <span class="ot">-&gt;</span> eq1 </span>
+<span id="cb13-3"><a href="steady-states.html#cb13-3" tabindex="-1"></a>eq1</span></code></pre></div>
 <pre><code>## [1] 600.00000 211.01706  91.70764 793.10541</code></pre>
 <p>By plotting it out, we can check to see if we’ve run it for long enough:</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="528" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="528" /></p>
 <p>We can check our algebra by computing the same quantities, and <span class="math inline">\(R_0\)</span> and other quantities we care about:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="steady-states.html#cb15-1" aria-hidden="true" tabindex="-1"></a>steadyStates_AronMay <span class="ot">=</span> <span class="cf">function</span>(params){<span class="fu">with</span>(params,{</span>
-<span id="cb15-2"><a href="steady-states.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  Lambda <span class="ot">=</span> m<span class="sc">*</span>H</span>
-<span id="cb15-3"><a href="steady-states.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  Meq <span class="ot">=</span> Lambda<span class="sc">/</span>g</span>
-<span id="cb15-4"><a href="steady-states.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">=</span> <span class="fu">with</span>(paramsSteady, f<span class="sc">*</span>q<span class="sc">/</span>g)</span>
-<span id="cb15-5"><a href="steady-states.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">=</span> m<span class="sc">*</span>S<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau)</span>
-<span id="cb15-6"><a href="steady-states.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  R0 <span class="ot">=</span> b<span class="sc">*</span>c<span class="sc">*</span>V<span class="sc">/</span>r</span>
-<span id="cb15-7"><a href="steady-states.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">ifelse</span>(R0<span class="sc">&gt;</span><span class="dv">1</span>,(R0<span class="dv">-1</span>)<span class="sc">/</span>(R0<span class="sc">+</span>c<span class="sc">*</span>S), <span class="dv">0</span>) </span>
-<span id="cb15-8"><a href="steady-states.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  Xeq <span class="ot">=</span> x<span class="sc">*</span>H</span>
-<span id="cb15-9"><a href="steady-states.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>x</span>
-<span id="cb15-10"><a href="steady-states.html#cb15-10" aria-hidden="true" tabindex="-1"></a>  Yeq <span class="ot">=</span> S<span class="sc">*</span>kappa<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>S<span class="sc">*</span>kappa)<span class="sc">*</span>Meq </span>
-<span id="cb15-11"><a href="steady-states.html#cb15-11" aria-hidden="true" tabindex="-1"></a>  Zeq <span class="ot">=</span> Yeq<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) </span>
-<span id="cb15-12"><a href="steady-states.html#cb15-12" aria-hidden="true" tabindex="-1"></a>  EIR <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>Zeq<span class="sc">/</span>H</span>
-<span id="cb15-13"><a href="steady-states.html#cb15-13" aria-hidden="true" tabindex="-1"></a>  FoI <span class="ot">=</span> b<span class="sc">*</span>EIR</span>
-<span id="cb15-14"><a href="steady-states.html#cb15-14" aria-hidden="true" tabindex="-1"></a>  aEIR <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>EIR </span>
-<span id="cb15-15"><a href="steady-states.html#cb15-15" aria-hidden="true" tabindex="-1"></a>  aFoI <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>FoI </span>
-<span id="cb15-16"><a href="steady-states.html#cb15-16" aria-hidden="true" tabindex="-1"></a>  extra<span class="ot">=</span><span class="fu">c</span>(<span class="at">S=</span>S, <span class="at">V=</span>V, <span class="at">R0=</span>R0, <span class="at">x=</span>x, <span class="at">kappa=</span>kappa, </span>
-<span id="cb15-17"><a href="steady-states.html#cb15-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">EIR=</span>EIR, <span class="at">FoI=</span>FoI)</span>
-<span id="cb15-18"><a href="steady-states.html#cb15-18" aria-hidden="true" tabindex="-1"></a>  annual <span class="ot">=</span><span class="fu">c</span>(<span class="at">aEIR =</span> aEIR, <span class="at">aFoI=</span>aFoI)</span>
-<span id="cb15-19"><a href="steady-states.html#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">std=</span><span class="fu">c</span>(<span class="at">M=</span>Meq, <span class="at">Y=</span>Yeq, <span class="at">Z=</span>Zeq, <span class="at">X=</span>Xeq), </span>
-<span id="cb15-20"><a href="steady-states.html#cb15-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">extra=</span><span class="fu">signif</span>(extra, <span class="dv">3</span>),</span>
-<span id="cb15-21"><a href="steady-states.html#cb15-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">annual =</span> <span class="fu">signif</span>(annual,<span class="dv">3</span>)) </span>
-<span id="cb15-22"><a href="steady-states.html#cb15-22" aria-hidden="true" tabindex="-1"></a>})}</span>
-<span id="cb15-23"><a href="steady-states.html#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">steadyStates_AronMay</span>(paramsSteady) <span class="ot">-&gt;</span> eq2</span>
-<span id="cb15-24"><a href="steady-states.html#cb15-24" aria-hidden="true" tabindex="-1"></a>eq2</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="steady-states.html#cb15-1" tabindex="-1"></a>steadyStates_AronMay <span class="ot">=</span> <span class="cf">function</span>(params){<span class="fu">with</span>(params,{</span>
+<span id="cb15-2"><a href="steady-states.html#cb15-2" tabindex="-1"></a>  Lambda <span class="ot">=</span> m<span class="sc">*</span>H</span>
+<span id="cb15-3"><a href="steady-states.html#cb15-3" tabindex="-1"></a>  Meq <span class="ot">=</span> Lambda<span class="sc">/</span>g</span>
+<span id="cb15-4"><a href="steady-states.html#cb15-4" tabindex="-1"></a>  S <span class="ot">=</span> <span class="fu">with</span>(paramsSteady, f<span class="sc">*</span>q<span class="sc">/</span>g)</span>
+<span id="cb15-5"><a href="steady-states.html#cb15-5" tabindex="-1"></a>  V <span class="ot">=</span> m<span class="sc">*</span>S<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau)</span>
+<span id="cb15-6"><a href="steady-states.html#cb15-6" tabindex="-1"></a>  R0 <span class="ot">=</span> b<span class="sc">*</span>c<span class="sc">*</span>V<span class="sc">/</span>r</span>
+<span id="cb15-7"><a href="steady-states.html#cb15-7" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">ifelse</span>(R0<span class="sc">&gt;</span><span class="dv">1</span>,(R0<span class="dv">-1</span>)<span class="sc">/</span>(R0<span class="sc">+</span>c<span class="sc">*</span>S), <span class="dv">0</span>) </span>
+<span id="cb15-8"><a href="steady-states.html#cb15-8" tabindex="-1"></a>  Xeq <span class="ot">=</span> x<span class="sc">*</span>H</span>
+<span id="cb15-9"><a href="steady-states.html#cb15-9" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>x</span>
+<span id="cb15-10"><a href="steady-states.html#cb15-10" tabindex="-1"></a>  Yeq <span class="ot">=</span> S<span class="sc">*</span>kappa<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>S<span class="sc">*</span>kappa)<span class="sc">*</span>Meq </span>
+<span id="cb15-11"><a href="steady-states.html#cb15-11" tabindex="-1"></a>  Zeq <span class="ot">=</span> Yeq<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) </span>
+<span id="cb15-12"><a href="steady-states.html#cb15-12" tabindex="-1"></a>  EIR <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>Zeq<span class="sc">/</span>H</span>
+<span id="cb15-13"><a href="steady-states.html#cb15-13" tabindex="-1"></a>  FoI <span class="ot">=</span> b<span class="sc">*</span>EIR</span>
+<span id="cb15-14"><a href="steady-states.html#cb15-14" tabindex="-1"></a>  aEIR <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>EIR </span>
+<span id="cb15-15"><a href="steady-states.html#cb15-15" tabindex="-1"></a>  aFoI <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>FoI </span>
+<span id="cb15-16"><a href="steady-states.html#cb15-16" tabindex="-1"></a>  extra<span class="ot">=</span><span class="fu">c</span>(<span class="at">S=</span>S, <span class="at">V=</span>V, <span class="at">R0=</span>R0, <span class="at">x=</span>x, <span class="at">kappa=</span>kappa, </span>
+<span id="cb15-17"><a href="steady-states.html#cb15-17" tabindex="-1"></a>          <span class="at">EIR=</span>EIR, <span class="at">FoI=</span>FoI)</span>
+<span id="cb15-18"><a href="steady-states.html#cb15-18" tabindex="-1"></a>  annual <span class="ot">=</span><span class="fu">c</span>(<span class="at">aEIR =</span> aEIR, <span class="at">aFoI=</span>aFoI)</span>
+<span id="cb15-19"><a href="steady-states.html#cb15-19" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">std=</span><span class="fu">c</span>(<span class="at">M=</span>Meq, <span class="at">Y=</span>Yeq, <span class="at">Z=</span>Zeq, <span class="at">X=</span>Xeq), </span>
+<span id="cb15-20"><a href="steady-states.html#cb15-20" tabindex="-1"></a>       <span class="at">extra=</span><span class="fu">signif</span>(extra, <span class="dv">3</span>),</span>
+<span id="cb15-21"><a href="steady-states.html#cb15-21" tabindex="-1"></a>       <span class="at">annual =</span> <span class="fu">signif</span>(annual,<span class="dv">3</span>)) </span>
+<span id="cb15-22"><a href="steady-states.html#cb15-22" tabindex="-1"></a>})}</span>
+<span id="cb15-23"><a href="steady-states.html#cb15-23" tabindex="-1"></a><span class="fu">steadyStates_AronMay</span>(paramsSteady) <span class="ot">-&gt;</span> eq2</span>
+<span id="cb15-24"><a href="steady-states.html#cb15-24" tabindex="-1"></a>eq2</span></code></pre></div>
 <pre><code>## $std
 ##         M         Y         Z         X 
 ## 600.00000 211.01706  91.70764 793.10541 
@@ -657,7 +661,7 @@ R_0 = \frac{bcV}{r}.
 ## aEIR aFoI 
 ## 12.7  7.0</code></pre>
 <p>Now, we can compare directly:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="steady-states.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">eq1=</span>eq1, <span class="at">eq2=</span>eq2<span class="sc">$</span>std)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="steady-states.html#cb17-1" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">eq1=</span>eq1, <span class="at">eq2=</span>eq2<span class="sc">$</span>std)</span></code></pre></div>
 <pre><code>##       M        Y        Z        X
 ## eq1 600 211.0171 91.70764 793.1054
 ## eq2 600 211.0171 91.70764 793.1054</code></pre>
@@ -666,13 +670,10 @@ R_0 = \frac{bcV}{r}.
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-SmithDL2004_Statics" class="csl-entry">
-<div class="csl-left-margin">14. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria J. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria Journal. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
 </div>
 <div id="ref-MacdonaldG1952_SporozoiteRate" class="csl-entry">
-<div class="csl-left-margin">17. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. </div>
-</div>
-<div id="ref-ArmitageP1953NoteEpidemiology" class="csl-entry">
-<div class="csl-left-margin">18. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
 </div>
 </div>
             </section>

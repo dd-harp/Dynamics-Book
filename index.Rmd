@@ -11,7 +11,6 @@ output:
     config:
       toolbar:
         position: static
-    extra_dependencies: caption
   bookdown::pdf_book:
     keep_tex: yes
     toc: true
@@ -20,7 +19,7 @@ output:
       mathrsfs: null
       caption: null
 documentclass: book
-bibliography: references.bib
+bibliography: refs.bib
 csl: plos.csl
 link-citations: true
 description: "The RAMP Model and Algorithm Library"
@@ -33,12 +32,14 @@ knitr::write_bib(c("knitr", "book"), "", width = 60)
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
+
+require(deSolve)
 ```
 
 # Foreword {-}
 
 A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ross and Macdonald [@SmithDL2012_RossMacdonald]. 
-A new framework would integrate the concepts and models that have influenced malaria through the present day [@ReinerRCJ2013SystematicReview;@SmithNR2018AgentbasedModels], and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control [@SmithDL2014_Recasting]. 
+A new framework would integrate the concepts and models that have influenced malaria through the present day [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels], and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control [@SmithDL2014_Recasting]. 
 
 The goal was to build a framework that could serve malaria policy. Policy discussions might need the math, but the discussion should never be about the math. There were some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered. Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination. 
 

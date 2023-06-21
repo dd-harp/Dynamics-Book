@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Malaria Dynamics | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Malaria Dynamics | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -444,9 +448,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="malaria-dynamics" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Malaria Dynamics<a href="malaria-dynamics.html#malaria-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We start by introducing a Ross-Macdonald model <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald" role="doc-biblioref">1</a>]</span>. This particular model family is a system of delay differential equations that traces back to a 1982 book chapter written by Joan Aron and Robert May <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics" role="doc-biblioref">13</a>]</span>. We think it’s a good starting point.</p>
+<p>We start by introducing a Ross-Macdonald model <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald">1</a>]</span>. This particular model family is a system of delay differential equations that traces back to a 1982 book chapter written by Joan Aron and Robert May <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics">12</a>]</span>. We think it’s a good starting point.</p>
 <p>We chose it because it is <em>extensible</em>. The variables represent population densities, which are used to compute proportions, like <em>prevalence.</em> The variables in many other versions of the Ross-Macdonald are proportions. In some models, we would like to be able to change the <em>total</em> number of hosts, but if the variables are proporions, these are the denominators. When a variables in equations described proportions, they are much more difficult to modify.</p>
-<p>We chose it because it already includes mosquito ecology, so we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model. While Macdonald’s analysis and formulas are familiar, they were not complete <span class="citation">[<a href="#ref-SmithDL2004_Statics" role="doc-biblioref">14</a>,<a href="#ref-SmithDL2021_NewTestOldMosquitoes" role="doc-biblioref">15</a>]</span>. We develop a formula for vectorial capacity that is consistent with the intent of the original, but our analysis of sensitivity to parameters includes effects on mosquito ecology <span class="citation">[<a href="#ref-BradyOJ2015AdultVector" role="doc-biblioref">16</a>]</span>. (A lengthy and philosophical discussion of the history and its failings is planned.)</p>
+<p>We chose it because it already includes mosquito ecology, so we can bypass a lengthy discussion of the limitations of the Ross-Macdonald model. While Macdonald’s analysis and formulas are familiar, they were not complete <span class="citation">[<a href="#ref-SmithDL2004_Statics">13</a>,<a href="#ref-SmithDL2021_NewTestOldMosquitoes">14</a>]</span>. We develop a formula for vectorial capacity that is consistent with the intent of the original, but our analysis of sensitivity to parameters includes effects on mosquito ecology <span class="citation">[<a href="#ref-BradyOJ2015AdultVector">15</a>]</span>. (A lengthy and philosophical discussion of the history and its failings is planned.)</p>
 <p>We chose it because it is <em>realistic.</em> Time does not appear in most versions of the Ross-Macdonald model: the equations are <em>autonomous</em>. These equations use time to drive a seasonal pattern: they are <em>non-autonomous</em>. Since we know we are interested in dealing with exogenous forcing, we start out with a model that is forced.</p>
 <p>While the following model is basic, we recommend reading it, if only because we introduce concepts and conventions that are important for the software design.</p>
 </div>
@@ -456,16 +460,16 @@ div.csl-indent {
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
 </div>
 <div id="ref-AronJL1982PopulationDynamics" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population Dynamics</span> of <span>Infectious Diseases</span>: <span>Theory</span> and <span>Applications</span>. <span>Boston, MA</span>: <span>Springer US</span>; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population</span> <span>Dynamics</span> of <span>Infectious</span> <span>Diseases</span>: <span>Theory</span> and <span>Applications</span>. Boston, MA: Springer US; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
 </div>
 <div id="ref-SmithDL2004_Statics" class="csl-entry">
-<div class="csl-left-margin">14. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria J. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria Journal. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
 </div>
 <div id="ref-SmithDL2021_NewTestOldMosquitoes" class="csl-entry">
-<div class="csl-left-margin">15. </div><div class="csl-right-inline">Smith DL, Musiime AK, Maxwell K, Lindsay SW, Kiware S. A <span>New Test</span> of a <span>Theory</span> about <span>Old Mosquitoes</span>. Trends Parasitol. 2021;37: 185–194. doi:<a href="https://doi.org/10.1016/j.pt.2020.10.011">10.1016/j.pt.2020.10.011</a></div>
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Smith DL, Musiime AK, Maxwell K, Lindsay SW, Kiware S. A <span>New</span> <span>Test</span> of a <span>Theory</span> about <span>Old</span> <span>Mosquitoes</span>. Trends Parasitol. 2021;37: 185–194. doi:<a href="https://doi.org/10.1016/j.pt.2020.10.011">10.1016/j.pt.2020.10.011</a></div>
 </div>
 <div id="ref-BradyOJ2015AdultVector" class="csl-entry">
-<div class="csl-left-margin">16. </div><div class="csl-right-inline">Brady OJ, Godfray HCJ, Tatem AJ, Gething PW, Cohen JM, McKenzie FE, et al. Adult vector control, mosquito ecology and malaria transmission. Int Health. 2015;7: 121–129. doi:<a href="https://doi.org/10.1093/inthealth/ihv010">10.1093/inthealth/ihv010</a></div>
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Brady OJ, Godfray HCJ, Tatem AJ, Gething PW, Cohen JM, McKenzie FE, et al. Adult vector control, mosquito ecology and malaria transmission. International Health. 2015;7: 121–129. doi:<a href="https://doi.org/10.1093/inthealth/ihv010">10.1093/inthealth/ihv010</a></div>
 </div>
 </div>
             </section>

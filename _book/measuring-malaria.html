@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Measuring Malaria | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Measuring Malaria | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -448,7 +452,7 @@ div.csl-indent {
 <p>From routine clinical surveillance, we could get case counts or the <em>Pf</em>SPR. We can learn more if we stratify by age, or if we follow populations over time.</p>
 <p>If we are to make sense of malaria as a changing baseline that has been modified by control, then we must know something about how transmission has been modified by control. First and foremost, we must understand anti-malarial drug taking, including the frequency of drug taking (for any purpose), adherence to prescribed regimens, and drug taking by severity. To understand transmission, we must have data describing intervention coverage and its timing. This would include patterns of bed net ownership and use over time, IRS and its coverage. We can’t make sense of vector control coverage data without knowing something about the patterns of insecticide resistance. We discuss <a href="measuring-vector-control.html#measuring-vector-control">Measuring Vector Control</a> in the next chapter.</p>
 <p>For planning, we would like to know the burden of malaria, and we would like to have an estimate of transmission – something like a malaria reproductive number.</p>
-<p>In most places, we will have routine surveillance data. We would like to piece together a coherent and accurate picture of transmission from this and from any other data we may have. To do so, we would like to know how these statistics compare in settings where two or more of them have been measured at the same place and at the same time. From studies like this, we can start to understand the <strong>scaling relationships</strong> among metrics, and the factors that influence them. What we have learned from studying these relationships is that there the relationship are highly non-linear <span class="citation">[<a href="#ref-HaySI2008MeasuringMalaria" role="doc-biblioref">28</a>]</span>, and that some of the factors affecting this relationship are context dependent. We have already mentioned drug taking, and we must acknowledge the difficulty of estimating drug taking by age, in part, because it is often highly heterogeneous in populations. Other factors that have been implicated are heterogeneous biting, environmental heterogeneity, seasonality, travel and mobility.</p>
+<p>In most places, we will have routine surveillance data. We would like to piece together a coherent and accurate picture of transmission from this and from any other data we may have. To do so, we would like to know how these statistics compare in settings where two or more of them have been measured at the same place and at the same time. From studies like this, we can start to understand the <strong>scaling relationships</strong> among metrics, and the factors that influence them. What we have learned from studying these relationships is that there the relationship are highly non-linear <span class="citation">[<a href="#ref-HaySI2008MeasuringMalaria">25</a>]</span>, and that some of the factors affecting this relationship are context dependent. We have already mentioned drug taking, and we must acknowledge the difficulty of estimating drug taking by age, in part, because it is often highly heterogeneous in populations. Other factors that have been implicated are heterogeneous biting, environmental heterogeneity, seasonality, travel and mobility.</p>
 <p>Sitting between us and the truth is an observational process, and we must attempt to quantify bias and error in this sampling process if we are to have any hope of getting an accurate picture of transmission in context.</p>
 <p>To get there, we need to organize our algorithms:</p>
 <ul>
@@ -477,15 +481,15 @@ div.csl-indent {
 <p>We would like to understand mosquito populations, but we will rely on whatever data we have to <em>estimate</em> the <em>Pf</em>EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.</p>
 <p>In the following sections, we use the framework to illustrate the effects and effect sizes of these factors. The task of estimating is for another book, <strong>Robust Analytics for Malaria Policy.</strong> In this study, we make full use of modularity. We start by <em>stratifying</em> our human population by age, and possibly by other factors. We write algorithms that pass the density of blood feeding mosquitoes in a place, and our algorithms predict mosquito catch counts, depending on the method. From this, we compute the total FoI, which includes the <em>local</em> FoI (at and around home), and the <em>travel</em> FoI. These exposure rates, and algorithms describing drug taking, are translated into estimates of the true <em>Pf</em>PR. The models output the predicted <em>Pf</em>PR by age, sex, and method; and we also output the predicted patterns of care seeking and associated metrics at health facilities in an HMIS, by age and sex.</p>
 <hr />
-<div class="figure">
-<img src="Figures/Estimation.png" alt="" />
-<p class="caption">Figure 4.1: A generalized framwork for understanding the relationship between the <em>Pf</em>EIR and the <em>Pf</em>PR:</p>
+<div class="float">
+<img src="Figures/Estimation.png" alt="Figure 4.1: A generalized framwork for understanding the relationship between the PfEIR and the PfPR:" />
+<div class="figcaption">Figure 4.1: A generalized framwork for understanding the relationship between the <em>Pf</em>EIR and the <em>Pf</em>PR:</div>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-HaySI2008MeasuringMalaria" class="csl-entry">
-<div class="csl-left-margin">28. </div><div class="csl-right-inline">Hay SI, Smith DL, Snow RW. Measuring malaria endemicity from intense to interrupted transmission. Lancet Infect Dis. 2008;8: 369–378. doi:<a href="https://doi.org/10.1016/S1473-3099(08)70069-0">10.1016/S1473-3099(08)70069-0</a></div>
+<div class="csl-left-margin">25. </div><div class="csl-right-inline">Hay SI, Smith DL, Snow RW. Measuring malaria endemicity from intense to interrupted transmission. Lancet Infect Dis. 2008;8: 369–378. doi:<a href="https://doi.org/10.1016/S1473-3099(08)70069-0">10.1016/S1473-3099(08)70069-0</a></div>
 </div>
 </div>
             </section>

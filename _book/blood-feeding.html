@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.5 Blood Feeding | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.5 Blood Feeding | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -445,7 +449,7 @@ div.csl-indent {
 <div id="blood-feeding" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Blood Feeding<a href="blood-feeding.html#blood-feeding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The second topic we must tackle is blood feeding, which is an interaction between mosquitoes and humans. It is an asymmetric relationship – mosquitoes search for blood hosts, select a host, and blood feed. Humans, for their part, attract mosquitoes from a distance, move around, and spend time in places when mosquitoes are biting. Humans can wear protective clothing (or not), use bed nets (or not), or do other things that make them more or less available to humans. Despite all this, humans are often unaware that they have been bitten.</p>
-<p>Transmission occurs during blood feeding, and models of blood feeding <em>should</em> be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate (<span class="math inline">\(f\)</span>) and a human fraction (<span class="math inline">\(q\)</span>). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">10</a>]</span>.</p>
+<p>Transmission occurs during blood feeding, and models of blood feeding <em>should</em> be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate (<span class="math inline">\(f\)</span>) and a human fraction (<span class="math inline">\(q\)</span>). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics">9</a>]</span>.</p>
 <p>Over the past two decades, several papers have drawn attention to the way blood feeding behaviors are or ought to be constrained by the availability of vertebrate hosts. It may be fine to assume that the density of vertebrate hosts doesn’t change, but <em>something</em> should change when a large fraction of people are using bednets. Even with static parameters, we should think through the limiting cases: if there are no vertebrate hosts, then there blood feeding should not occur (<em>i.e.</em>, <span class="math inline">\(f=0\)</span>); if there are no human hosts, then there should be no human blood meals (<span class="math inline">\(q=0\)</span>); and if there are no alternatives to humans, all blood meals should be on humans (<span class="math inline">\(q=1\)</span>).</p>
 <p>The concepts we devised for blood feeding must, therefore, integrate the notion of frailty with the process of mosquito search. On the one hand, the mosquitoes should blood feed at a slower rate if hosts are unavailable. On the other hand, human biting should become heterogeneous. To arrive at an adequate description, we need to formalize this notion of host availability.
 The logic is that mosquitoes <em>search</em> for humans. Differences among humans in their attractiveness are represented by a <em>search weight.</em> Mosquito search in a place depends on the amount of time spent by humans, but also by daily mosquito activity patterns; from these, we develop a notion of <em>time at risk</em> that characterize the way human activities expose them to mosquitoes. The mosquitoes add up all the time at risk spent by all the humans, which gives a measure of their <em>availability.</em> Availability describes humans as well as other vertebrate hosts, which are modified by mosquito preferences. The overall feeding rates and the human fraction are computed from availability using <em>functional responses.</em></p>
@@ -456,7 +460,7 @@ The logic is that mosquitoes <em>search</em> for humans. Differences among human
 <div id="search-weights-and-availability" class="section level3 hasAnchor" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Search Weights and Availability<a href="blood-feeding.html#search-weights-and-availability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To deal with heterogeneous exposure and many other phenomena, we need a sensible way of segmenting humans into population <strong>strata</strong>. Stratification makes it possible to deal with population heterogeneity.</p>
-<p>A new model of <strong>blood feeding</strong> is based on a model of blood feeding as the endpoint of a search for a blood host <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics" role="doc-biblioref">10</a>]</span>.</p>
+<p>A new model of <strong>blood feeding</strong> is based on a model of blood feeding as the endpoint of a search for a blood host <span class="citation">[<a href="#ref-WuSL2022SpatialDynamics">9</a>]</span>.</p>
 <ul>
 <li><p>Each sub-population has a <em>search weight</em> (<span class="math inline">\(w\)</span>), and the total <em>availability</em> of humans for blood feeding (<span class="math inline">\(W\)</span>) is the sum of the sizes of the strata weighted by their search weights.</p></li>
 <li><p>We also consider the availability of alternative vertebrate species for blood feeding (<span class="math inline">\(O\)</span>).</p></li>
@@ -474,7 +478,7 @@ The logic is that mosquitoes <em>search</em> for humans. Differences among human
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-WuSL2022SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Mbabazi Ssebuliba D, Nakakawa Nsumba J, Sánchez C. HM, et al. Spatial <span>Dynamics</span> of <span>Malaria</span> <span>Transmission</span>. 2022. Available: <a href="http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract">http://medrxiv.org/content/early/2022/11/15/2022.11.07.22282044.abstract</a></div>
 </div>
 </div>
             </section>

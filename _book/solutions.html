@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.2 Solutions | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.2 Solutions | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -471,63 +475,63 @@ In these equations, since the equation for <span class="math inline">\(dZ/dt\)</
 <li><p><code>params</code> is a set of parameters</p></li>
 </ul>
 <p>The derivatives are computed and returned in the same order as ‘y’ in a <code>list</code>. To make code that is easy to read, we make <code>params</code> as a <code>list</code> with parameter names (see below), so that inside the function <code>with(params,{...})</code>, the parameter names are visible.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="solutions.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dAronMay <span class="ot">=</span> <span class="cf">function</span>(t, y, params){<span class="fu">with</span>(params,{</span>
-<span id="cb1-2"><a href="solutions.html#cb1-2" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-3"><a href="solutions.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Variables  </span></span>
-<span id="cb1-4"><a href="solutions.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">&lt;=</span>tau) ylag<span class="ot">&lt;-</span>y0 <span class="cf">else</span> ylag <span class="ot">&lt;-</span> <span class="fu">lagvalue</span>(t<span class="sc">-</span>tau)</span>
-<span id="cb1-5"><a href="solutions.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  M<span class="ot">=</span>y[<span class="dv">1</span>]; M_tau <span class="ot">=</span> ylag[<span class="dv">1</span>]</span>
-<span id="cb1-6"><a href="solutions.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  Y<span class="ot">=</span>y[<span class="dv">2</span>]; Y_tau <span class="ot">=</span> ylag[<span class="dv">2</span>]; </span>
-<span id="cb1-7"><a href="solutions.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  Z<span class="ot">=</span>y[<span class="dv">3</span>]; </span>
-<span id="cb1-8"><a href="solutions.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  X<span class="ot">=</span>y[<span class="dv">4</span>]; X_tau <span class="ot">=</span> ylag[<span class="dv">4</span>]</span>
-<span id="cb1-9"><a href="solutions.html#cb1-9" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-10"><a href="solutions.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Terms </span></span>
-<span id="cb1-11"><a href="solutions.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>X<span class="sc">/</span>H; kappa_tau <span class="ot">=</span> c<span class="sc">*</span>X_tau<span class="sc">/</span>H</span>
-<span id="cb1-12"><a href="solutions.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  h <span class="ot">=</span> b<span class="sc">*</span>f<span class="sc">*</span>q<span class="sc">*</span>Z<span class="sc">/</span>H </span>
-<span id="cb1-13"><a href="solutions.html#cb1-13" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-14"><a href="solutions.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Dynamics </span></span>
-<span id="cb1-15"><a href="solutions.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  dM <span class="ot">=</span> <span class="fu">Lambda</span>(t) <span class="sc">-</span> g<span class="sc">*</span>M</span>
-<span id="cb1-16"><a href="solutions.html#cb1-16" aria-hidden="true" tabindex="-1"></a>  dY <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa<span class="sc">*</span>(M<span class="sc">-</span>Y) <span class="sc">-</span>g<span class="sc">*</span>Y</span>
-<span id="cb1-17"><a href="solutions.html#cb1-17" aria-hidden="true" tabindex="-1"></a>  dZ <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa_tau<span class="sc">*</span>(M_tau<span class="sc">-</span>Y_tau)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) <span class="sc">-</span>g<span class="sc">*</span>Z</span>
-<span id="cb1-18"><a href="solutions.html#cb1-18" aria-hidden="true" tabindex="-1"></a>  dX <span class="ot">=</span> h<span class="sc">*</span>(H<span class="sc">-</span>X)<span class="sc">-</span>r<span class="sc">*</span>X</span>
-<span id="cb1-19"><a href="solutions.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-20"><a href="solutions.html#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dM, dY, dZ, dX)))</span>
-<span id="cb1-21"><a href="solutions.html#cb1-21" aria-hidden="true" tabindex="-1"></a>})} </span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="solutions.html#cb1-1" tabindex="-1"></a>dAronMay <span class="ot">=</span> <span class="cf">function</span>(t, y, params){<span class="fu">with</span>(params,{</span>
+<span id="cb1-2"><a href="solutions.html#cb1-2" tabindex="-1"></a> </span>
+<span id="cb1-3"><a href="solutions.html#cb1-3" tabindex="-1"></a>  <span class="co"># Variables  </span></span>
+<span id="cb1-4"><a href="solutions.html#cb1-4" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">&lt;=</span>tau) ylag<span class="ot">&lt;-</span>y0 <span class="cf">else</span> ylag <span class="ot">&lt;-</span> <span class="fu">lagvalue</span>(t<span class="sc">-</span>tau)</span>
+<span id="cb1-5"><a href="solutions.html#cb1-5" tabindex="-1"></a>  M<span class="ot">=</span>y[<span class="dv">1</span>]; M_tau <span class="ot">=</span> ylag[<span class="dv">1</span>]</span>
+<span id="cb1-6"><a href="solutions.html#cb1-6" tabindex="-1"></a>  Y<span class="ot">=</span>y[<span class="dv">2</span>]; Y_tau <span class="ot">=</span> ylag[<span class="dv">2</span>]; </span>
+<span id="cb1-7"><a href="solutions.html#cb1-7" tabindex="-1"></a>  Z<span class="ot">=</span>y[<span class="dv">3</span>]; </span>
+<span id="cb1-8"><a href="solutions.html#cb1-8" tabindex="-1"></a>  X<span class="ot">=</span>y[<span class="dv">4</span>]; X_tau <span class="ot">=</span> ylag[<span class="dv">4</span>]</span>
+<span id="cb1-9"><a href="solutions.html#cb1-9" tabindex="-1"></a>   </span>
+<span id="cb1-10"><a href="solutions.html#cb1-10" tabindex="-1"></a>  <span class="co"># Terms </span></span>
+<span id="cb1-11"><a href="solutions.html#cb1-11" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>X<span class="sc">/</span>H; kappa_tau <span class="ot">=</span> c<span class="sc">*</span>X_tau<span class="sc">/</span>H</span>
+<span id="cb1-12"><a href="solutions.html#cb1-12" tabindex="-1"></a>  h <span class="ot">=</span> b<span class="sc">*</span>f<span class="sc">*</span>q<span class="sc">*</span>Z<span class="sc">/</span>H </span>
+<span id="cb1-13"><a href="solutions.html#cb1-13" tabindex="-1"></a>   </span>
+<span id="cb1-14"><a href="solutions.html#cb1-14" tabindex="-1"></a>  <span class="co"># Dynamics </span></span>
+<span id="cb1-15"><a href="solutions.html#cb1-15" tabindex="-1"></a>  dM <span class="ot">=</span> <span class="fu">Lambda</span>(t) <span class="sc">-</span> g<span class="sc">*</span>M</span>
+<span id="cb1-16"><a href="solutions.html#cb1-16" tabindex="-1"></a>  dY <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa<span class="sc">*</span>(M<span class="sc">-</span>Y) <span class="sc">-</span>g<span class="sc">*</span>Y</span>
+<span id="cb1-17"><a href="solutions.html#cb1-17" tabindex="-1"></a>  dZ <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa_tau<span class="sc">*</span>(M_tau<span class="sc">-</span>Y_tau)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) <span class="sc">-</span>g<span class="sc">*</span>Z</span>
+<span id="cb1-18"><a href="solutions.html#cb1-18" tabindex="-1"></a>  dX <span class="ot">=</span> h<span class="sc">*</span>(H<span class="sc">-</span>X)<span class="sc">-</span>r<span class="sc">*</span>X</span>
+<span id="cb1-19"><a href="solutions.html#cb1-19" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="solutions.html#cb1-20" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dM, dY, dZ, dX)))</span>
+<span id="cb1-21"><a href="solutions.html#cb1-21" tabindex="-1"></a>})} </span></code></pre></div>
 </div>
 <div id="initial-values" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Initial Values<a href="solutions.html#initial-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To run the model, we must supply initial values. If you were writing code yourself, it would be important to remember that the initial values and the return value for the derivatives must occur in the same order.</p>
 <p>A useful convention in {R} is to pass the initial values as a named list. Later, we can turn the outputs into a data frame, and then we can retrieve the variables by name.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="solutions.html#cb2-1" aria-hidden="true" tabindex="-1"></a>y0<span class="ot">=</span> <span class="fu">c</span>(<span class="at">M=</span><span class="dv">60</span>, <span class="at">Y=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">X=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="solutions.html#cb2-1" tabindex="-1"></a>y0<span class="ot">=</span> <span class="fu">c</span>(<span class="at">M=</span><span class="dv">60</span>, <span class="at">Y=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">X=</span><span class="dv">1</span>)</span></code></pre></div>
 <p>The object <code>y0</code> is a named list – the names are attached but invisible.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="solutions.html#cb3-1" aria-hidden="true" tabindex="-1"></a>y0</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="solutions.html#cb3-1" tabindex="-1"></a>y0</span></code></pre></div>
 <pre><code>##  M  Y  Z  X 
 ## 60  0  0  1</code></pre>
 <p>When we turn it into a list, with <code>as.list,</code> the names are attached to the values:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="solutions.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(y0)<span class="sc">$</span>M</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="solutions.html#cb5-1" tabindex="-1"></a><span class="fu">as.list</span>(y0)<span class="sc">$</span>M</span></code></pre></div>
 <pre><code>## [1] 60</code></pre>
 <p>If we use <code>with</code>, we create an environment where we can simply use the names:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="solutions.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">as.list</span>(y0), {</span>
-<span id="cb7-2"><a href="solutions.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  M</span>
-<span id="cb7-3"><a href="solutions.html#cb7-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="solutions.html#cb7-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">as.list</span>(y0), {</span>
+<span id="cb7-2"><a href="solutions.html#cb7-2" tabindex="-1"></a>  M</span>
+<span id="cb7-3"><a href="solutions.html#cb7-3" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>## [1] 60</code></pre>
 </div>
 <div id="parameter-values" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Parameter Values<a href="solutions.html#parameter-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We pass the parameters as a list. It might seem like overkill, but we have written a function <code>makeParams()</code> that takes default values and generates a list. This makes it easy to generate a new set of parameter values with alternative values, and it also helps us to write and pass function <span class="math inline">\(\Lambda(t)\)</span> with parameters we like. By passing the parameter as a list, the parameter values are available to the function <code>dAronMay</code> when we use <code>with(params, {})</code>.</p>
 <p>Note that we have also attached the initial values of the variables as a parameter set, which are the return values for <code>lagvalue(t)</code> when <code>t&lt;0</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="solutions.html#cb9-1" aria-hidden="true" tabindex="-1"></a>makeParams <span class="ot">=</span> <span class="cf">function</span>(y0, </span>
-<span id="cb9-2"><a href="solutions.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">g=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>, <span class="at">f=</span><span class="dv">1</span><span class="sc">/</span><span class="fl">2.5</span>, <span class="at">q=</span><span class="fl">0.95</span>,  </span>
-<span id="cb9-3"><a href="solutions.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">c=</span><span class="fl">0.15</span>,</span>
-<span id="cb9-4"><a href="solutions.html#cb9-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">b=</span><span class="fl">0.55</span>, <span class="at">r=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="at">H=</span><span class="dv">1000</span>,  </span>
-<span id="cb9-5"><a href="solutions.html#cb9-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">m=</span>.<span class="dv">05</span>, <span class="at">ss=</span><span class="dv">1</span>,  </span>
-<span id="cb9-6"><a href="solutions.html#cb9-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tau=</span><span class="dv">10</span>  </span>
-<span id="cb9-7"><a href="solutions.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                      ){</span>
-<span id="cb9-8"><a href="solutions.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">=</span> <span class="fu">min</span>(<span class="dv">1</span>,<span class="fu">max</span>(<span class="dv">0</span>, ss))</span>
-<span id="cb9-9"><a href="solutions.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  Lambda <span class="ot">=</span> <span class="cf">function</span>(t){m<span class="sc">*</span>H<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">+</span> ss<span class="sc">*</span><span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>t<span class="sc">/</span><span class="dv">365</span>))}</span>
-<span id="cb9-10"><a href="solutions.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">y0=</span>y0,<span class="at">g=</span>g,<span class="at">f=</span>f,<span class="at">q=</span>q,<span class="at">c=</span>c,</span>
-<span id="cb9-11"><a href="solutions.html#cb9-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">H=</span>H,<span class="at">m=</span>m,<span class="at">tau=</span>tau,<span class="at">b=</span>b,<span class="at">r=</span>r,<span class="at">Lambda=</span>Lambda))</span>
-<span id="cb9-12"><a href="solutions.html#cb9-12" aria-hidden="true" tabindex="-1"></a>} </span>
-<span id="cb9-13"><a href="solutions.html#cb9-13" aria-hidden="true" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">makeParams</span>(y0)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="solutions.html#cb9-1" tabindex="-1"></a>makeParams <span class="ot">=</span> <span class="cf">function</span>(y0, </span>
+<span id="cb9-2"><a href="solutions.html#cb9-2" tabindex="-1"></a>                      <span class="at">g=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>, <span class="at">f=</span><span class="dv">1</span><span class="sc">/</span><span class="fl">2.5</span>, <span class="at">q=</span><span class="fl">0.95</span>,  </span>
+<span id="cb9-3"><a href="solutions.html#cb9-3" tabindex="-1"></a>                      <span class="at">c=</span><span class="fl">0.15</span>,</span>
+<span id="cb9-4"><a href="solutions.html#cb9-4" tabindex="-1"></a>                      <span class="at">b=</span><span class="fl">0.55</span>, <span class="at">r=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="at">H=</span><span class="dv">1000</span>,  </span>
+<span id="cb9-5"><a href="solutions.html#cb9-5" tabindex="-1"></a>                      <span class="at">m=</span>.<span class="dv">05</span>, <span class="at">ss=</span><span class="dv">1</span>,  </span>
+<span id="cb9-6"><a href="solutions.html#cb9-6" tabindex="-1"></a>                      <span class="at">tau=</span><span class="dv">10</span>  </span>
+<span id="cb9-7"><a href="solutions.html#cb9-7" tabindex="-1"></a>                      ){</span>
+<span id="cb9-8"><a href="solutions.html#cb9-8" tabindex="-1"></a>  ss <span class="ot">=</span> <span class="fu">min</span>(<span class="dv">1</span>,<span class="fu">max</span>(<span class="dv">0</span>, ss))</span>
+<span id="cb9-9"><a href="solutions.html#cb9-9" tabindex="-1"></a>  Lambda <span class="ot">=</span> <span class="cf">function</span>(t){m<span class="sc">*</span>H<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">+</span> ss<span class="sc">*</span><span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>t<span class="sc">/</span><span class="dv">365</span>))}</span>
+<span id="cb9-10"><a href="solutions.html#cb9-10" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">y0=</span>y0,<span class="at">g=</span>g,<span class="at">f=</span>f,<span class="at">q=</span>q,<span class="at">c=</span>c,</span>
+<span id="cb9-11"><a href="solutions.html#cb9-11" tabindex="-1"></a>              <span class="at">H=</span>H,<span class="at">m=</span>m,<span class="at">tau=</span>tau,<span class="at">b=</span>b,<span class="at">r=</span>r,<span class="at">Lambda=</span>Lambda))</span>
+<span id="cb9-12"><a href="solutions.html#cb9-12" tabindex="-1"></a>} </span>
+<span id="cb9-13"><a href="solutions.html#cb9-13" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">makeParams</span>(y0)</span></code></pre></div>
 <p>To make it absolutely clear, we are assuming:</p>
 <ul>
 <li><p><span class="math inline">\(g=1/12\)</span>: mosquitoes live about <span class="math inline">\(12\)</span> days, on average</p></li>
@@ -550,15 +554,15 @@ In these equations, since the equation for <span class="math inline">\(dZ/dt\)</
 <div id="solving" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> Solving<a href="solutions.html#solving" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We define a mesh over time – the points in time when we would like to know the values of the variables:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="solutions.html#cb10-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">5</span><span class="sc">*</span><span class="dv">365</span>, <span class="at">by=</span><span class="dv">5</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="solutions.html#cb10-1" tabindex="-1"></a>tt <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">5</span><span class="sc">*</span><span class="dv">365</span>, <span class="at">by=</span><span class="dv">5</span>) </span></code></pre></div>
 <p>This code solves the equations:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="solutions.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span>
-<span id="cb11-2"><a href="solutions.html#cb11-2" aria-hidden="true" tabindex="-1"></a>yout <span class="ot">&lt;-</span> <span class="fu">dede</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>params) </span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="solutions.html#cb11-1" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span>
+<span id="cb11-2"><a href="solutions.html#cb11-2" tabindex="-1"></a>yout <span class="ot">&lt;-</span> <span class="fu">dede</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>params) </span></code></pre></div>
 </div>
 <div id="visualizing" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> Visualizing<a href="solutions.html#visualizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When we plot out the solutions, they look like this.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="528" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="528" /></p>
 </div>
 </div>
             </section>

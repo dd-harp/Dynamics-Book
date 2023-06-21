@@ -210,7 +210,7 @@ The first step is to write down the equations to compute the derivatives. The so
 
 The derivatives are computed and returned in the same order as 'y' in a `list`. To make code that is easy to read, we make `params` as a `list` with parameter names (see below), so that inside the function `with(params,{...})`, the parameter names are visible. 
 
-```{r}
+```{r dAronMay}
 dAronMay = function(t, y, params){with(params,{
  
   # Variables  
@@ -751,7 +751,7 @@ compareTS_AronMay(yout0, yout1)
 
 If $R_0>1$ and malaria is endemic, the *average* prevalence of malaria infection is variable in a seasonal environment. While the prevalence is higher at the peak, the average for the whole year tends to be lower.  
 
-```{r, echo=F, fig.cap = "Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall."}
+```{r compareTS, echo=F, fig.cap = "Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall."}
 yI = c(M=20, Y=5, Z=1, X=100)
 tt = seq(0, 7300, by=5)
 

@@ -75,7 +75,7 @@ yout2 <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params2)
 yout3 <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params3) 
 ```
 
-```{r}
+```{r, plotML}
 plotML = function(out, llwd=1, clrL = "blue", clrM="red"){with(data.frame(out),{
   plot(time, L, type = "l", lwd=llwd, col = clrL, xlab = "Time (Days)", ylab = "Density") 
   lines(time, M, col = clrM, lwd=llwd) 
@@ -104,10 +104,15 @@ addML(yout2, clrL = "darkblue", clrM="darkred", llwd=1.5)
 
 The third point is that density dependent responses to mean crowding cause much larger changes to this system than density-dependent mortality. Aquatic dynamics have a strong tendency to oscillate, but more critically, delayed maturation strongly affects the ratio of adult mosquitoes to adults.  
 
-```{r}
+```{r compareML}
 plotML(yout)
 addML(yout3, clrL = "darkblue", clrM="darkred", llwd=1.5)
 ```
 
+```{r test}
+plot(1,1)
+```
+
 ## Understanding Mosquito Dynamics 
- 
+
+This 

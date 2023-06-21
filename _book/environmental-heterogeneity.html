@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.6 Environmental Heterogeneity | Applied Malaria Dynamics</title>
   <meta name="description" content="The RAMP Model and Algorithm Library" />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.6 Environmental Heterogeneity | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2023-03-18" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -445,8 +449,8 @@ div.csl-indent {
 <div id="environmental-heterogeneity" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Environmental Heterogeneity<a href="environmental-heterogeneity.html#environmental-heterogeneity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p>The <em>search weights</em> thus translate into a kind of <strong><a href="frailtyCh.html#frailtyCh">Frailty</a></strong>, which is one component of <em>heterogeneous exposure.</em> Important sources of frailty include bednet use, housing type, and age.</p></li>
-<li><p>We also want to consider <em>variability</em> in exposure within a stratum – what is the distribution of the <em>expected</em> number of bites over time? We have already discussed frailties, so this is a different kind of heterogeneous exposure that we call <strong><a href="environmentalHeterogeneity.html#environmentalHeterogeneity">Environmental Heterogeneity</a></strong>. This helps us to align models with data: mosquito counts data tend to be described well by <em>negative binomial</em> distributions, so it is likely that the distribution of infectious bites also follows a negative binomial distribution. We introduce a function that translate the EIR into the FoI:
+<li><p>The <em>search weights</em> thus translate into a kind of <strong><a href="frailty.html#frailty">Frailty</a></strong>, which is one component of <em>heterogeneous exposure.</em> Important sources of frailty include bednet use, housing type, and age.</p></li>
+<li><p>We also want to consider <em>variability</em> in exposure within a stratum – what is the distribution of the <em>expected</em> number of bites over time? We have already discussed frailties, so this is a different kind of heterogeneous exposure that we call <strong><a href="environmental-heterogeneity.html#environmental-heterogeneity">Environmental Heterogeneity</a></strong>. This helps us to align models with data: mosquito counts data tend to be described well by <em>negative binomial</em> distributions, so it is likely that the distribution of infectious bites also follows a negative binomial distribution. We introduce a function that translate the EIR into the FoI:
 <span class="math display">\[h=F_h(E)\]</span></p></li>
 </ul>
 <p>In the Ross-Macdonald model, the underlying assumption is consistent with a Poisson distribution, but we have also derived <em>negative binomial hazard rates</em>. Environmental heterogeneity can arise from two sources:</p>
