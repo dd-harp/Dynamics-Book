@@ -1,4 +1,4 @@
-# Realism & Pragmatism
+# Realism & Complexity 
 
 There are several reasons why models for policy will tend to be more complex than models developed for science.
 In science, the questions are narrow and the study designs are focused enough to form tests of ideas that have clear outcomes.
@@ -24,21 +24,24 @@ In designing a software solution to the problem of building realistic models, we
 
 This chapter is an overview of the historical development of malaria models and an introduction to the toolbox. We'll cover the same material in much greater detail in the chapters that follow, and we'll construct examples using `exDE` and `MicroMoB`. 
 
+
 ## Epidemiology
 
-A major challenge for malaria dynamics is how to define an state space describing malaria infection and immunity in human populations that captures the essential elements of malaria dynamics -- good enough to trust for making policies. There are features of malaria infections that have been identified and studied in the past: superinfection; the complex time course of an infection -- including fluctuating parasite densities -- and the problem of detection; gametogenesis, gametocyte maturation and gametocyte dynamics; fever and disease; development of immunity with exposure including its effects on infection, disease, and infectiousness; treatment, adherence to drug regimens, chemoprotection and infection curing. Over time, these issues have been addressed in various models. We need model that is good enough for policy, but this also means developing a commmon understanding of malaria that can serve as a basis for discussion.  
+A major challenge for malaria dynamics is how to define an state space describing malaria infection and immunity in human populations that captures the essential elements of malaria dynamics well enough to trust for making policies. 
+There are features of malaria infections that have been identified and studied in the past: superinfection; the complex time course of an infection -- including fluctuating parasite densities -- and the problem of detection; gametogenesis, gametocyte maturation and gametocyte dynamics; fever and disease; development of immunity with exposure including its effects on infection, disease, and infectiousness; treatment, adherence to drug regimens, chemoprotection and infection curing. Over time, these issues have been addressed in various models. 
+We need model that is good enough for policy, but this also means developing a commmon understanding of malaria that can serve as a basis for discussion.  
 
 To get to that point, we must start simple and add complexity. 
 
-The model for malaria infection that we presented in [Malaria Dynamics] was developed by Ross. In today's vernacular, it would be called an SIS compartment model. The model is very simple, and it is probably inadequate for every task, but it is useful and it has been used. The model assumes that malaria infections clear at a constant rate regardless of the age of infection or other factors. The persistence of malaria infections over decades tells us that this assumption is clearly false, but it is good enough for some programmatic needs. During the GMEP, Ross's model was used to characterized the response timelines for the *Pf*PR after the interruption of transmission. Drawing on multiple sources, Macdonald estimated that the duration of infection was around 200 days, which was good enough to use as a basis for monitoring and evaluating the interruption of transmission  [@MacdonaldG1964MalariaParasite]. The simpler model was used even though Macdonald had already proposed an alternative model that considered superinfection [@MacdonaldG1950_Superinfection]. Despite the simplicity, the model was adequate to the task [@SmithDL2009EndemicityResponse]. An important lesson is that the simplicity has some advantages, and the models that get used in policy tend to be very simple. 
+The model for malaria infection that we presented in [Malaria Dynamics] was developed by Ross. In today's vernacular, it would be called an SIS compartment model. The model is very simple, and it is probably inadequate for every task, but it is useful and it has been used. The model assumes that malaria infections clear at a constant rate regardless of the age of infection or other factors. The persistence of malaria infections over decades tells us that this assumption is clearly false, but it is good enough for some programmatic needs. During the GMEP, Ross's model was used to characterized the response timelines for the *Pf*PR after the interruption of transmission. Drawing on multiple sources, Macdonald estimated that the duration of infection was around 200 days, which was good enough to use as a basis for monitoring and evaluating the interruption of transmission  [@MacdonaldG1964MalariaParasite]. The simpler model was used even though Macdonald had already proposed an alternative model that considered superinfection [@MacdonaldG1950Superinfection]. Despite the simplicity, the model was adequate to the task [@SmithDL2009EndemicityResponse]. An important lesson is that the simplicity has some advantages, and the models that get used in policy tend to be very simple. 
 
 The question is how to develop models that are simple and yet are up to policy tasks, which means that the models must (at some point) get validated against research data. Doing so means having sufficient complexity to deal with exposure, infection, detection, immunity, disease, infectiousness, care seeking, and drug taking. Whatever model is selected as a basis for policy, it should be simple enough to understand and yet complex enough to capture the *gist* of malaria epidemiology. The models, however chosen, must get it right. Sorting through all the complexity to get a model that is good enough is a daunting task. This introduction is mainly historical, but we use it to preview some of the themes. In the following history, we discuss some of the important innovations. 
 
 ### Superinfection 
 
-From early on in malaria epidemiology it was clear that exposure to malaria differed among populations, and that in some places, the rate of exposure was far higher than the rate of clearance. Ross emphasized a need to measure exposure both entomologically, through metrics that are known today as the EIR and the FoI, and parasitologically, through the prevalence of infection by light microscopy (or more commonly today, through RDTs), which was called the malaria *parasite rate* . There was no good reason to believe that people in highly malarious areas would be exposed faster than they would clear infections, so they would carry infections that could be traced back to many infectious mosquitoes [@WaltonG1947ControlMalaria]. This phenomenon was called superinfection.
+From early on in malaria epidemiology it was clear that exposure to malaria differed among populations, and that in some places, the rate of exposure was far higher than the rate of clearance. Ross emphasized a need to measure exposure both entomologically, through metrics that are known today as the EIR and the FoI, and parasitologically, through the prevalence of infection by light microscopy (or more commonly today, through RDTs), which was called the malaria *parasite rate* . There was no good reason to believe that people in highly malarious areas would be exposed faster than they would clear infections, so they would carry infections that could be traced back to many infectious mosquitoes [@WaltonGA1947ControlMalaria]. This phenomenon was called superinfection.
 
-Macdonald was the first to develop a mechanistic model of superinfection [@MacdonaldG1950_Superinfection], but the mathematical formulation was at odds with his description [@FinePEM1975SuperinfectionProblem]. It is an interesting bit of history for a different time. 
+Macdonald was the first to develop a mechanistic model of superinfection [@MacdonaldG1950Superinfection], but the mathematical formulation was at odds with his description [@FinePEM1975SuperinfectionProblem]. It is an interesting bit of history for a different time. 
 
 A mathematical basis for understanding superinfection was worked out as a problem in the study of stochastic processes as part of *queueing theory.* This may seem strange, but understanding how many people are queueing involves understanding how people come in and how fast they are processed. One of these queuing models has become a mainstay of malaria epidemiology; in queuing theory, it is called $M/M/\infty$. 
 
@@ -72,7 +75,7 @@ In the Garki Model (see below), the waiting time to clear an infection used thes
 
 The biggest failing of Ross's model, perhaps, was that it did not make any attempt to grapple with acquired immunity to malaria. It had always been clear that immunity to malaria was important because the prevalence of infection declined throughout adolescence and was consistently lower in adults, and because disease and severe disease were common in young children. The data accumulated through years of studying malaria, done as part of malaria therapy, provided supporting evidence for immunity. There was a difference in outcomes from being exposed to the same parasite (homologous challenge) compared with a different parasite (a heterologous challenge). Immunity had something to do with the number of different parasites that a person had seen. 
 
-The first model to grapple with immunity was the Garki Model [@DietzK1974MalariaModel]. The main idea in the Garki Model was that it would be possible to understand malaria dynamics by expanding the number of compartments: the population was sub-divided into two non-immmune or semi-immune. Infection dynamics were tracked separately within each immune category: the infections would clear faster from semi-immune individuals, they were are not infectious, and they are less likely to test positive if they were infectious. Some features of the Garki model seem odd in retrospect: there were two infected states for non-immunes ($y_1$ and $y_2$), but only one for semi-immunes; there was no way to lose immunity; and the assumption that semi-immunes are not infectious. 
+The first model to grapple with immunity was the Garki Model [@DietzK1974GarkiModel]. The main idea in the Garki Model was that it would be possible to understand malaria dynamics by expanding the number of compartments: the population was sub-divided into two non-immmune or semi-immune. Infection dynamics were tracked separately within each immune category: the infections would clear faster from semi-immune individuals, they were are not infectious, and they are less likely to test positive if they were infectious. Some features of the Garki model seem odd in retrospect: there were two infected states for non-immunes ($y_1$ and $y_2$), but only one for semi-immunes; there was no way to lose immunity; and the assumption that semi-immunes are not infectious. 
 
 The Garki Model has had a poweful influence on malaria modeling. Several models since then have expanded on various themes. Several compartment models have been developed that replicate infection dynamics across immune stages: we call this *stage-structured immunity.* 
 
@@ -217,7 +220,7 @@ The notion of a spatially distributed risk for humans and the modalities of huma
 
 The second topic we must tackle is blood feeding, which is an interaction between mosquitoes and humans. It is an asymmetric relationship -- mosquitoes search for blood hosts, select a host, and blood feed. Humans, for their part, attract mosquitoes from a distance, move around, and spend time in places when mosquitoes are biting. Humans can wear protective clothing (or not), use bed nets (or not), or do other things that make them more or less available to humans. Despite all this, humans are often unaware that they have been bitten. 
 
-Transmission occurs during blood feeding, and models of blood feeding *should* be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate ($f$) and a human fraction ($q$). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding [@WuSL2022SpatialDynamics].  
+Transmission occurs during blood feeding, and models of blood feeding *should* be able to take all this heterogeneity into account. If the models do a proper accounting, then the total number of human blood meals taken by mosquitoes would equal the number of blood meals received by humans. In doing so, we find no inspiration from Macdonald, whose description of human blood feeding was simple and phenomenological: a single parameter described the human blood feeding rates. After Garrett-Jones described the human blood index, drawing on decades of work, the one parameter was split into an overall blood feeding rate ($f$) and a human fraction ($q$). The question left unaddressed by Macdonald was how these rates vary by context, and the consequences for exposure. To do this, we reformulated the algorithm describing blood feeding [@WuSL2023SpatialDynamics].  
 
 Over the past two decades, several papers have drawn attention to the way blood feeding behaviors are or ought to be constrained by the availability of vertebrate hosts. It may be fine to assume that the density of vertebrate hosts doesn't change, but *something* should change when a large fraction of people are using bednets. Even with static parameters, we should think through the limiting cases: if there are no vertebrate hosts, then there blood feeding should not occur (*i.e.*, $f=0$); if there are no human hosts, then there should be no human blood meals ($q=0$); and if there are no alternatives to humans, all blood meals should be on humans ($q=1$). 
 
@@ -232,7 +235,7 @@ To complete the picture, we consider how the expected rate of exposure could hav
 
 To deal with heterogeneous exposure and many other phenomena, we need a sensible way of segmenting humans into population **strata**. Stratification makes it possible to deal with population heterogeneity. 
 
-A new model of **blood feeding** is based on a model of blood feeding as the endpoint of a search for a blood host [@WuSL2022SpatialDynamics]. 
+A new model of **blood feeding** is based on a model of blood feeding as the endpoint of a search for a blood host [@WuSL2023SpatialDynamics]. 
 
 + Each sub-population has a *search weight* ($w$), and the total *availability* of humans for blood feeding ($W$) is the sum of the sizes of the strata weighted by their search weights. 
 
@@ -261,13 +264,22 @@ In the Ross-Macdonald model, the underlying assumption is consistent with a Pois
     
 - random movements of humans around mosquito micro-habitats that affect their risk in a way that doesn't tend to change the mean; 
 
-## Mosquito Behavior 
+
+## Mosquito Behavior and Ecology
 
 ### Resource Availability
 
 ### Egg Laying 
 
 ### Search and Dispersal  
+
+## Aquatic Mosquito Ecology  
+
+### Regulation 
+
+### Exogenous Forcing 
+
+### Habitat Dynamics
 
 ## Space
 
@@ -292,13 +304,6 @@ To describe mosquito spatial dynamics, we
 ### Vector Control  
 
 
-## Mosquito Ecology  
-
-### Regulation 
-
-### Exogenous Forcing 
-
-### Habitat Dynamics
 
 ## Integrated Vector Control
 

@@ -2,4 +2,119 @@
 
 # Mosquitoes 
 
-An overview of mosquito ecology, 
+In a previous chapter, we consider adult mosquito population density as a process closely related to, but also exogenous to the process of parasite transmission. We formulated the models for mosquito density in terms of an emergence rate, $\Lambda(t)$. In many studies, this might be good enough. There are some challenges in vector control, however, that call for a deeper understanding of adult mosquito population dynamics in relation to the population dynamics of immature mosquito populations. It's hard to imagine giving any advice about LSM without a model of mosquito ecology. Adult vector control will reduce mosquito population densities, but it would also reduce egg laying affecting immature mosquito populations [@BradyOJ2015AdultVector]. Mosquito populations have their own thresholds for persistence, and their own spatial dynamics. 
+
+While it could be argued that these are not the primary concerns for malaria programs -- we would not disagree -- our mathematical framework must be strong enough to support analytics for integrated vector control, including LSM. Immature mosquito dynamics are one of the core dynamical components in our framework. We introduce the topic here, using a very basic model for mosquito ecology [@SmithDL2013_LarvalDynamics]. 
+
+To extend the previous model, we need to make several changes and additional assumptions: 
+
++ We define terms that describe egg-laying by adult mosquitoes; 
+
++ We write a basic equation to describe the dynamics of immature mosquitoes in aquatic habitats as a function of egg-laying. These models describe how eggs hatch, how mosquito larvae develop and mature in aquatic habitats, pupate, and then emerge as adults. The models do not need to be complex, but they could be. 
+
++ We replace the parameter $\Lambda(t)$ from the Aron-May model with a term that
+describes emergence of adults from aquatic habitats.
+
+One of the big themes we want to introduce here is that the outcomes of vector control can vary substantially by context because of differences in mosquito ecology. 
+
+## Aquatic Dynamics 
+
+### Equations
+
+Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding [@SmithDL2013_LarvalDynamics]. The mosquito maturation rate, $\psi e^{-\sigma L}$ defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, $\psi  + \theta L$, has two parts: a density independent term $\psi$ and a response to mean crowding $\theta L$. We assume that adults lay $\chi$ eggs per feeding cycle. 
+
+\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &= \Lambda - g M\\  \\ \hline 
+\frac{dL}{dt} &= \eta - (\psi e^{-\sigma L} + \phi + \theta L) L \\ 
+\Lambda &= \frac{1}{2} \psi L e^{-\sigma L}\\ 
+\eta &= \chi f M \\ 
+\end{array}
+\end{equation}
+
+### Solutions
+
+```{r}
+BasicAquatic_dML = function(t, y, params){with(c(params, as.list(y)),{
+   
+  # Terms 
+  Lambda = psi*exp(-sigma*L)*L/2 
+  eta = chi*f*M 
+   
+  # Dynamics 
+  dM = Lambda - g*M
+  dL = eta - (psi*exp(-sigma*L) + phi + theta*L)*L 
+  
+  return(list(c(dM, dL)))
+})} 
+```
+
+
+```{r}
+makePar_BasicAquatic = function(f=1/2.5, g=1/10, chi = 50, psi = 1/10, phi = 1/10, theta = 1/100, sigma=0){
+  list(f=f, g=g, chi=chi, psi=psi, phi=phi, theta=theta, sigma=sigma)
+}
+```
+
+### Regulation 
+
+```{r}
+tt = seq(0,100, by=1) 
+y0 = c(M=1, L=1)
+params = makePar_BasicAquatic()
+params1 = makePar_BasicAquatic(phi=1)
+params2 = makePar_BasicAquatic(theta=1/10)
+params3 = makePar_BasicAquatic(sigma=1/100, theta=0)
+```
+
+This code solves the equations: 
+
+```{r, message=F, warning=F}
+require(deSolve)
+yout  <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params) 
+yout1 <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params1) 
+yout2 <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params2) 
+yout3 <- lsode(y=y0, times=tt, func=BasicAquatic_dML, parms=params3) 
+```
+
+```{r, plotML}
+plotML = function(out, llwd=1, clrL = "blue", clrM="red"){with(data.frame(out),{
+  plot(time, L, type = "l", lwd=llwd, col = clrL, xlab = "Time (Days)", ylab = "Density") 
+  lines(time, M, col = clrM, lwd=llwd) 
+})}
+
+addML = function(out, llty = 2, llwd=1, clrL = "blue", clrM="red"){with(data.frame(out),{
+  lines(time, L, col = clrL, lty=llty, lwd=llwd) 
+  lines(time, M, col = clrM, lty=llty, lwd=llwd) 
+})}
+
+```
+
+The first thing to point out is that changing the dynamics take some time to approach equilibrium -- a couple of months, in this model. The second is that increasing mortality rates for mosquitoes in aquatic habitats by a factor of 10 affects the mosquito densities in minor ways. 
+
+```{r}
+plotML(yout)
+addML(yout1, clrL = "darkblue", clrM="darkred", llwd=1.5)
+```
+
+The third is that increasing the response to mean crowding has a very strong effect on the population dynamics. 
+
+```{r}
+plotML(yout)
+addML(yout2, clrL = "darkblue", clrM="darkred", llwd=1.5)
+```
+
+The third point is that density dependent responses to mean crowding cause much larger changes to this system than density-dependent mortality. Aquatic dynamics have a strong tendency to oscillate, but more critically, delayed maturation strongly affects the ratio of adult mosquitoes to adults.  
+
+```{r compareML}
+plotML(yout)
+addML(yout3, clrL = "darkblue", clrM="darkred", llwd=1.5)
+```
+
+```{r test}
+plot(1,1)
+```
+
+## Understanding Mosquito Dynamics 
+
+This 

@@ -1,6 +1,12 @@
-# Malaria Immunity
+# Age, Exposure and Malaria Immunity
 
-Exposure *vs.* age. 
+Immunity to malaria has been described as being _weak_ and immunity has a _poor memory_. In quantitative terms, this means that almost every aspect of infection is affected by the history of exposure, and exposure accumulates with age. 
+
+In developing our models so far, we have ignored age as a factor in malaria epidemiology. In analyzing the models, we looked for steady states or stable temporal orbits. These analyses give a misleading impression of malaria.     
+
+The first model to examine malaria immunity was developed for the Garki Project [@DietzK1974GarkiModel]. We will present the model, for historical reasons, and then we will 
+
+it is much easier to formulate models for malaria infection dynamics in cohorts as they age.
 
 ## The Garki Model
 

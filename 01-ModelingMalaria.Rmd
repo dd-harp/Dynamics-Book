@@ -1,0 +1,159 @@
+
+
+# The Study of Malaria in Populations
+
+Ronald Ross is best known for being the first person to observe malaria parasites infecting a mosquito,[@RossR1897PeculiarPigmented] an event that is now celebrated as _mosquito day_.
+In his next paper, Ross presented evidence that mosquitoes transmit the parasites to humans, a step that was required to prove that the parasites cause malaria.[@RossR1898RoleMosquito]
+A few months later, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi.[@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi] 
+Ross's discoveries had closed a loop that Charles Laveran opened in 1880 when he published his discovery of malaria parasites infecting humans [@Laveran1880;@Laveran1884].
+After Laveran, several studies described basic features of malaria infections in humans.[@GarnhamPCC1988HistoryDiscoveries] 
+These discoveries and studies set the stage for the modern study of malaria epidemiology.
+The life-cycle of human malaria parasites as it is now taught was not described fully until the 1940s, when Garnham and colleagues described the liver stages of malaria parasites.[@ShorttHE1948PreerythrocyticStage;@GarnhamPCC1988HistoryDiscoveries]
+The story of how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn, and several good accounts have been written.[@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery] 
+While that story that is of great interest, this book on **Applied Malaria Dynamics** is about the use mathematics -- including dynamical systems -- to study malaria in populations and the prevention of malaria, which brings us back to Ronald Ross.
+
+In 1899, Ross launched a new career that took a very broad approach to the prevention of malaria.[@RossR1899ExterminationMalaria;@RossR1899InauguralLecture]
+Ross was a key player in the early days malaria research, initiating studies of all sorts in malaria epidemiology and control.
+Among his publications are found the first three mathematical models describing malaria transmission dynamics or control.[@RossR1905LogicalBasis;@RossR1908;@RossR1911Book;@RossR1911Nature]
+For the most part, the end of this phase of his career is marked by publication of the  $2^{nd}$ edition of _The Prevention of Malaria_ in 1911,[@RossR1911Book] when Ross changed gears once again.
+His next ambitious goal was to describe mathematical foundations for epidemiology.[@RossR1915AprioriPathometry;@RossR1916ApplicationTheory]
+In 1917, he teamed up with Hilda Hudson, a Cambridge mathematician, to write the first major contribution to mathematical epidemiology, or what he called _a priori pathometry_.[@RossR1917AprioriPathometry2;@RossR1917AprioriPathometry3]
+Over 18 years (1899-1917), Ross's ideas laid a solid foundations for the modern study of malaria transmission and theory of malaria control.[@SmithDL2012_RossMacdonald]
+
+The narrative in this book is often historical, which serves two purposes. 
+First, it provides an excuse to cite and discuss old papers that should not get overlooked.
+Second, a historical narrative allows us to introduce malaria complexity in an ordered way, starting from principles that are simple and abstract, and progressing towards ideas that are non-linear, messy, or subtle.
+We will often use history as a way of structuring discussions, even as our attention turns increasingly to the mathematics we need to deal with the biological complexity of malaria in populations. 
+
+## The Prevention of Malaria 
+
+Ross's interest in malaria control traces to 1899,[@RossR1899ExterminationMalaria;@RossR1899InauguralLecture] just a few months after mosquito day: 
+
+> *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical [@RossR1899ExterminationMalaria].*
+
+Through the first half of the 1900s, Ross promoted malaria control and research on malaria control in various ways. He engaged in public debates about malaria control hosted by the _British Medical Journal_, and he published a book, _Mosquito Brigades and How to Organize Them_ [@RossR1902MosquitoBrigades].
+
+Many of the early attempts to control malaria were implemented by the British Military. In the first few years, there were some successes, but there were also some failures [@RossR1907PreventionMalaria]. Heterogeneity in the responses to malaria control efforts seem to have turned Ross to mathematics. In 1904, he presented a paper at the International Congress of Arts and Science in St. Louis, Missouri that applied diffusion models to larval source management (published also in _Science_[@RossR1905LogicalBasis]). 
+
+Ross's transmission models appear to trace back to his work consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. How would reducing mosquito densities change the prevalence of malaria? Was there a critical population density of mosquitoes required to sustain transmission? The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. For Ross, the mathematical models were a logical next step of trying to understand malaria control in rigorous quantitative terms. 
+
+## Malaria in Populations 
+
+## *A priori* Pathometry 
+
+By 1915, Ross had taken a broader view of the study of epidemics. His intent was to establish a discipline, that he called _a priori pathometry_. He starts [@RossR1916ApplicationTheory]: 
+
+> *It is somewhat surprising that soo little mathematical work should have been done on the subject of epidemics...*
+
+He argues that
+
+> *...the principles of epidemiology on which preventive measures largely depend, such as the rate of infection, the frequency of outbreaks, and the loss of immunity, can scarceley ever be resolved by any other methods than those of analysis.*
+
+After discussing some major differences observed in the patterns of epidemics exemplified by three diseases: tuberculosis; measles; and plague. Ross asks:
+
+> *Why, indeed, should epidemics occur at all, and why should not all infectious diseases belong to the first group and always remain at an almost flat rate?*
+
+After his years of studying malaria, he realized the difficulty of measuring malaria in populations, so he argued for an integrated approach: 
+
+> *The whole subject is capable of study by two distinct methods which are used in other branches of science, which are complementary of each other, and which should converge towards the same results -- the* a posteriori *and the* a priori *methods. In the former we commence with observed statistics, endeavor to fit analytical laws to them, and so work backwards to the underlying cause (as done in much statistical work of the day); and in the latter, we assume a knowledge of the causes, construct our differential equations on that supposition, follow up the logical consequences, and finally test the calculated results by comparing them with the observed statistics.* 
+
+He teamed up with Hilda Hudson, a Cambridge mathematician, and they finished publishing a major general treatment of mathematical epidemiology. 
+
+Taken altogether, we can see Ross's efforts as establishing a rigorous, general approach to inference for infectious diseases. 
+
+To be clear, Ross was not the first to publish a mathematical model describing infectious disease dynamics. 
+
+
+
+
+## Transmission Dynamics 
+
+The development of the Ross-Macdonald model has been discussed elsewhere [@SmithDL2012_RossMacdonald]. There is not a single paper where a system of equations was published by Macdonald. Instead, the model traces back to several different publications that present equations and formulas describing malaria transmission. We have already mentioned that Ronald Ross published two models of malaria. The first described malaria transmission dynamics using  difference equations [@RossR1908]; it was reviewed, analyzed, and critiqued by H. Waite [@WaiteH1910MosquitoesMalaria]. The second was formulated as a system of two ordinary differential equations, in the $2^{nd}$ edition of _The Prevention of Malaria_ [@RossR1911Book]. Ross also published the same model in _Nature_ [@RossR1911Nature] in this form: 
+
+$$ 
+\begin{array}{rl}
+dz/dt &= k' z' (p-z) + q z \\
+dz'/dt &= k z (p'-z') + q' z' \\
+\end{array}
+$$ 
+
+At the time, there was not much evidence from malaria research to frame the problem. A fully parameterized model, using biologically meaningful parameters, would have to wait for a few decades of research and a synthesis by Macdonald.
+
+### Alfred J. Lotka 
+
++ While Alfred J. Lotka is more famous for his work in demography and ecology, he took an interest in Ross's work on malaria and he made some important contributions to mathematical malaria epidemiology: 
+
+- In 1912, he published a set of solutions to Ross's equations [@LotkaAJ1912Nature]; 
+
+- In 1923, Lotka published an analysis of malaria dynamics in five parts. The first two parts reformulate Ross's models [@LotkaAJ1923part1;@LotkaAJ1923part2]. The third part tackles numerical issues, which includes a photograph of a clay model of the phase plane as a surface [@LotkaAJ1923part3], and the fifth part is a concise summary [@LotkaAJ1923part5]. 
+    
+- In the $4^{th}$, which was led by Sharpe, a new model was introduced that included delays for the latent periods [@LotkaAJ1923part4].     
+    
+- Most importantly, Lotka developed the concept of the basic reproductive number in his work in human demography, which was defined as the expected number of females that would be born to a newborn female. 
+
+### George Macdonald  
+
++ In the 1950s, George Macdonald published a set of papers describing malaria transmission dynamics and control, culminating in publicataion of a book _The Epidemiology and Control of Malaria_ [@MacdonaldG1957Book]. An important caveat is that Macdonald relied on the mathematical talents of Armitage for the equations describing superinfection and the sporozoite rate [@ArmitageP1953]. 
+
++ In 1950, Macdonald published a synthetic review of malaria epidemiology [@MacdonaldG1950Epidemiology].  
+    
++ In 1950, Macdonald also published a new model of malaria epidemiology with superinfection [@MacdonaldG1950Superinfection]. 
+    
++ In 1952, Macdonald published a synthetic review of medical entomology [@MacdonaldG1952Sporozoite].   
+
++ In 1952, Macdonald described malaria transmission dynamics in a paper that combined his other work, in which he introduced $R_0$ [@MacdonaldG1952R0].  
+    
+It's highly likely that Macdonald was aware of Lotka's demographic concept of $R_0$, as well as his work with Sharpe on delay differential equations [@LotkaAJ1923part4], though I have been unable to find a single line where Macdonald gives Lotka the credit. For these reasons, and others, the equations ought to be described as the Ross-Lotka-Macdonald model.  
+
+
+## Rebuilding Macdonald's Model 
+
+The following is a candidate for what the Ross-Macdonald model might have looked like, if Macdonald had ever written it down. 
+
+### Variables
+
+The model has two variables:
+
++ $x$ is the fraction of humans who are infected; 
+
++ $y$ is the fraction of mosquitoes who are infected.  
+
+### Parameters
+
+The model has several parameters: 
+
++ $g$: mosquitoes die at a constant rate, $g$. This is equivalent to assuming that the mosquito lifespan is exponentially distributed with a mean $1/g$. Macdonald's equation use $p$, the fraction surviving one day, $p = e^{-g}$. 
+
++ $\tau$: it takes $\tau$ days for parasites to mature and reach the salivary glands, called the EIP.  The fraction surviving the EIP is $p^\tau = e^{-g \tau}$. 
+
++ $m$: there are $m$ mosquitoes per human;
+
++ $a$: mosquitoes blood feed on humans at the rate $a$; 
+
++ $b$: a fraction of bites by *infectious* mosquitoes causes an infection; 
+
++ $r$: human malaria infections clear at the rate $r$;  
+
++ $c$: a fraction of bites on infected humans infect a mosquito, denoted $c$
+
+
+### Dynamics 
+
+In this formulation of the model, we ignore the delay for the EIP but we count the mortality: 
+
+$$ 
+\begin{array}{rl}
+dx/dt &= b m a z (1-x) - r x \\
+dy/dt &= c a x (1-y) - g y  \\
+dz/dt &= c a x_\tau (1-y_\tau) - g z  \\
+\end{array}
+$$   
+
+this. 
+
+## The Basic Reproductive Number 
+
+## Sensitivity to Parameters 
+
+## The Classification of Transmission 
+

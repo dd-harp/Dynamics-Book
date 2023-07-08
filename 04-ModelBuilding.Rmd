@@ -1,0 +1,110 @@
+# Building & Evaluating Models 
+
+> *There must have been a time, in the beginning, when we could have said – no. But somehow we missed it.* (Guildenstern)     
+> -- from _Rosencranz and Guildenstern are Dead_, Tom Stoppard
+
+If we want to scale up simulation-based analytics to support malaria policy through eradication, it will inevitably involve capacity building, but what sort of training is needed? Certainly, we hope that an analytics team would include someone who has the skills required to critically evaluate models, but this is not as easy as you think. What makes a model good? What makes an analysis useful? It is easy to imagine training up a generation who could do some kind of analysis, but we don't want to train automata -- people who would keep doing some analysis, over and over, just because it is what has been done before.  We ought to have a reason for doing the analysis. It ought to serve some purpose. Success in policy analytics requires people who have skills in thinking creatively and critically to solve problems. We need people who can build and evaluate models. 
+
+If we want to discuss the models we might use to analyze malaria policies, and if we want to have a discussion about that process, it will probably help us to be more careful about how we use terms like *model* and *model building.* In the service of defining the skill sets required to be a good analyst, this chapter discusses the life-cycle of a model, including the process of building and evaluating models from the beginning to the end (or in math from $\alpha$ to $\omega$). 
+
+## Primary Model Development
+
+Most models started with a question: something like _Why is the sky blue?_ or _How many mosquitoes does it take to sustain malaria transmission?_ Blue sky questions don't go anywhere unless there's a basis for understanding the underlying process. If there is some kind of basis, the next step is to try represent the process in some logically compelling form, such as a diagram with boxes and arrows. 
+
+In the case of malaria, the first step looked something like this:  
+
+$$
+\left[
+\begin{array}{rcl}
+\mbox{# People Infected Today} &=& \mbox{# People Infected Yesterday} \;\; -\\
+&& \mbox{# Who Cleared Infections} \;\; + \\
+&& \mbox{# Uninfected Who Got Infected}\\
+\end{array} \right]
+$$
+This description ignores infected people who died, infected people who emigrated, and infected people who immigrated. It's not perfect, but it's a starting point. The biggest problem with this description is that it lacks mosquitoes. So we write down: 
+
+$$
+\left[
+\begin{array}{rcl}
+\mbox{# Mosquitoes Infected Today} &=& \mbox{# Mosquitoes Infected Yesterday} \;\; -\\
+&& \mbox{# that Died} \;\; + \\
+&& \mbox{# Uninfected Who Got Infected}\\
+\end{array} \right]
+$$
+What's important here is that infectious mosquitoes are infecting people when they bite, and infectious people are infecting mosquitoes when the mosquito blood feeds. This process is clarified by a diagram: 
+
+### Variables 
+
+What is critical here is that the uninfected people got infected when they were bitten by an infectious mosquito, and the uninfected mosquitoes who got infected yesterday must have blood fed on an infected person. 
+
+To build a model, we need to be quantitative, so we need to start being very precise: 
+
++ Let $H$ be the number of people, and we assume that number doesn't change
+
++ Let $X_t$ be the number of people who are infected at time $t$
+
++ Let $M$ be the number of mosquitoes, and we assume that number doesn't change 
+
++ Let $Y_t$ be the number of mosquitoes who are infected at time $t$
+
+So now we 0
+
++ **Variables:** Defining the state space 
+
++ **Parameters:** transitions / rates 
+
++ **equations / algorithms**
+
+## Implementation and Verification 
+
+### Solving  
+
++ **Fitted Parameters:** 
+
++ **Initial Conditions:** 
+
+
+### Mathematical Analysis  
+
++ **steady states**
+
++ **stability analysis**
+
++ **algorithms**
+
++ **primary analysis**
+
+### Simulation 
+
+## What is a Model?
+
+## Accuracy & Validation 
+
++ Model features 
+
++ Functional range
+
++ Heterogeneity  
+
+### Validation Points
+
+## The Measure of a Model 
+
+If we want to evaluate whether a model is good 
+
+### Limitations 
+
++ **Functional Range** the maximum granularity 
+
+### Parsimony  
+
+## Secondary Model Development  
+
++ **elaboration** 
+
+Model building is a core part of applied dynamics, but if we are to othere are many different activities 
+
+What does it mean to build a model?   
+
+
+## Conclusions 

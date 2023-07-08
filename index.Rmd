@@ -20,9 +20,8 @@ output:
       caption: null
 documentclass: book
 bibliography: refs.bib
-csl: plos.csl
+csl: nature.csl
 link-citations: true
-description: "The RAMP Model and Algorithm Library"
 ---
 
 ```{r include=FALSE}
@@ -32,38 +31,67 @@ knitr::write_bib(c("knitr", "book"), "", width = 60)
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
-
-require(deSolve)
 ```
+
 
 # Foreword {-}
 
-A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ross and Macdonald [@SmithDL2012_RossMacdonald]. 
-A new framework would integrate the concepts and models that have influenced malaria through the present day [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels], and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control [@SmithDL2014_Recasting]. 
+A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross.[@RossR1911Book;@SmithDL2012_RossMacdonald] 
+A new framework would integrate the concepts and models that have influenced malaria through the present day,[@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels] and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control.[@SmithDL2014_Recasting] 
 
-The goal was to build a framework that could serve malaria policy. Policy discussions might need the math, but the discussion should never be about the math. There were some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered. Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination. 
+My goal was to build a framework that could serve studies of malaria policy.
+Policy discussions might need to use mathemetics, but the policy (and not the math) should be the focus.
+Ideally, mathematical ideas should help structure the discussions without ever drawing attention to themselves, except perhaps in the rare circumstance when it could help to clarify something.
+There were some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered.
+Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
+The academic activities supporting all this would meanwhile be taken up on the side.
 
-I wanted the new framework to be *extensible,* with *plug-and-play* modularity (for major dynamical components), and with structural flexibility. It should have the capability of scaling down for fine-grained spatial simulations [@CarterR2002SpatialSimulation;@GuW2003IndividualbasedModel;@PerkinsTA2013HeterogeneityMixing], or scaling up to understand or analyze regional processes and the emerging patterns [@TatemAJ2010InternationalPopulation]. To serve the needs of malaria programs, a framework would need  built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control. To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model with exquisite biological detail [@WuSL2020MBITES], which inspired new ideas about mosquito search and a new base model for mosquito ecology and behavior. To serve programmatic needs, we needed algorithms that could address the durability of a unit of vector control -- coverage could decay over time through loss (*e.g.* bed nets) or waning potency. To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component -- one that was dead simple, and one that had a was highly realistic. In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal. In making a master list to test the framework's extensibility, we found that some odd cases that needed to pass information among components -- endectocides and auto-disseminated larvicides -- but it was easy enough to accommodate these. These models needed supporting theory. We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate. 
+I wanted the new framework to be *extensible,* with *plug-and-play* modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships, and with flexibility on the structural components, including space, time, and population strata.
+It should have the capability of scaling down for fine-grained spatial simulations,[@CarterR2002SpatialSimulation;@GuW2003IndividualbasedModel;@PerkinsTA2013HeterogeneityMixing] or scaling up to understand or analyze regional processes and the emerging patterns [@TatemAJ2010InternationalPopulation].
+To serve the needs of malaria programs, a framework would need  built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control. 
+To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model with exquisite biological detail,[@WuSL2020MBITES] which inspired new ideas about mosquito search and a new base model for mosquito ecology and behavior. 
+To serve programmatic needs, we needed algorithms that could address the durability of a unit of vector control -- coverage could decay over time through loss (*e.g.* bed nets) or waning potency.
+To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component -- one that was dead simple, and one that had a was highly realistic.
+In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal. 
+In making a master list to test the framework's extensibility, we found that some odd cases that needed to pass information among components -- endectocides and auto-disseminated larvicides -- but it was easy enough to accommodate these.
+Beyond the algorithms, these models needed the support of mathematical theory.
+We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate. 
 
-Sometime in the fall of 2022, the last few pieces came together. We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. We submitted a paper to PLoS Computational Biology [@WuSL2022SpatialDynamics]. Then it was time to write this book. 
+Sometime in the fall of 2022, the last few pieces came together. We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. We submitted a paper to PLoS Computational Biology.[@WuSL2023SpatialDynamics] 
+Then it was time to write this book. 
 
-With the software developed, we have the capability of building models that are up to the task of guiding malaria policy. The advantage of using the framework and accompanying software is that we found design solutions after discovering (usually the hard way) the potential pitfalls that arise when combining models. The framework took longer to developed than I had expected, in part, because there were more pitfalls than we had anticipated.  
+The software lowers the costs of building models that are up to the task of guiding malaria policy. 
+An advantage of using this framework and accompanying software is that we found design solutions to problems that we discovered, usually the hard way, the potential pitfalls that arise when combining models. 
+The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.  
 
-This book shows, through examples, how to use the software to build malaria models. Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria. What are all the special topics that would need to be covered to build models that could be needed in malaria? This book *could* be the basis for such a course, if there were ever enough students. Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere. This book teaches how to build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, [**Robust Analytics for Malaria Policy.**](../../RAMP-Book/_book/index.html){target="_blank"} 
+This book shows, through examples, how to use the software to build malaria models.
+Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria. 
+What are all the special topics that would need to be covered to build models that could be needed in malaria? 
+This book *could* be the basis for such a course, if there were ever enough students.
+Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
+I will also be writing and recording some short lectures.
+This book teaches how to build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, [**_Robust Analytics for Malaria Policy_.**](../../RAMP-Book/_book/index.html){target="_blank"} 
 
-The premise of this book is thus that the reader has a solid background in infectious disease models and malaria. We assume they've seen the Ross-Macdonald model before, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for `exDE` or `MicroMoB` or it can be found in the [`RAMP-Model-Library`](../../RAMP-Model-Library/RAMP-Model-Library.html). 
+The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they've seen the Ross-Macdonald model before, that they've taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for `exDE` or `MicroMoB` or it can be found in the [`RAMP-Model-Library`](../../RAMP-Model-Library/RAMP-Model-Library.html). 
 
-I've done the primary writing for this book. The framework would not exist without the work of Sean L Wu and a few others. The book borrows from the work of others, and we have done our best to give credit through citations. It has been a collaborative process (see [Contributors]). The errors, however, are mostly mine. If you find mistakes or have questions, please drop me a note by email: [smitdave@gmail.com](mailto:smitdave@gmail.com). 
-
--- **David L Smith**
-
-\clearpage
 
 ## Models for Policy {-}
 
 Malaria is complex and heterogeneous, which makes it difficult to study and manage. A core challenge in both science and policy is the availability of information. Mathematical models can help us understand and analyze all that complexity and make informed decisions despite the data gaps. 
 
-There are good reasons why we might use different models in basic research and policy analytics. Basic research is epistemologically conservative, by design. In policy, decisions *must* be made in a timely way, and they *should* use all available evidence, even if it's weak. An advantage of policy is that, if we make the effort, we can identify key areas of uncertainty, identify priority data needs, and collect new data that could help resolve some of the most important sources of uncertainty. Building models to do this requires drawing heavily on basic research. In giving advice, we must give different weights to the uncertainty than we would in research. 
+Policy and science are different in many ways, so there are good reasons why we might want to use different models and methods for basic research and policy analytics. 
+In policy, decisions *must* be made in a timely way, and they *should* use all available evidence, even if it's weak. 
+Basic research is epistemologically conservative, by design. 
+Studies that are published in peer review must be repeatable, and in anticipation of criticism, the scientists aim to do things so well that they are unassailable. 
+This usually has the effect of narrowing and controlling the conditions under which the study was conducted.
+When we operate in policy settings, we *should* design our studies in a different way, and we will thus need to deal with the uncertainty differently. 
+The studies that inform policies will need to take an approach that is broader -- the models should be realistic enough to address the question of interest. 
+Such studies will often need to make compromises and decisions that are poorly informed by the evidence, which raises the question of how much a policy maker could trust it.
+One strategy for making policies trustworthy is to repeat the supporting analysis using every reasonable approach, so that we can be reasonably sure our policy recommendations would not change. 
+The idea of fully propagating uncertainty is the essential feature of *robust analytics.*
+If we make the effort, we can identify key sources of uncertainty, identify priority data needs, and collect new data that could help resolve some of the most important sources of uncertainty. 
+Building models to do this is challenging for practical reasons, and it requires drawing heavily on basic research.
+In giving advice, we must give different weights to the uncertainty than we would in research. 
 
 In basic research, we develop mechanistic models to understand malaria as a biological process. In malaria epidemiology, the states and parameters describe infection, immunity, infectiousness, disease, and drug taking in response to exposure. Scientists focus on basic biological mechanisms in order to understand differences in malaria across spectrum of transmission. Immunity and drug-taking are important factors to consider, but it may be that differences in epidemiology and disease across settings arise from differences in the local parasite populations. The models are a way of summarizing knowledge in a quantitative form -- something like a complex hypothesis. A test of a model's adequacy is whether it can describe malaria accurately after accounting for differences in drug taking patterns and pattern of exposure. 
 
@@ -79,8 +107,7 @@ To understand malaria or to give policy advice, we must start simple and then ad
 
 Over the past few years, we developed a new framework for building models that would make it possible to start simple and then build models of malaria transmission at any level of complexity. We wanted to be able to build in realism by adding complexity one feature at a time. Through this process we can create nested, hierarchical models in branching chains. At the ends of the chains, we might find highly realistic models that are, perhaps, overfit. (The cautions against overfitting play out differently in policy given the urgency of acting in a timely way, but it is also possible to go out and collect new data.)  We call the framework's ability to do this **scalability** and the resulting swarms have **scalable complexity.** The iterative attempt to make plans, weigh evidence, quantify uncertainty, gather new data to reduce uncertainty, and then restart the annual cycle, is called **adaptive malaria control.** 
 
-To make this possible, we needed a way of building models that would
-keep the focus on the policy questions and on a dialogue between malaria managers and the analytical support team. We thus sought to design modular software with *plug-and-play* functionality and a high degree of structural flexibility. We needed the framework to be extensible. After making a lot of mistakes, the primary design phase is over, and the algorithms have been published in two software packages. We are currently extending the library of *base models*, which includes some simple or classical models that are instructive or of historical interest. We are also fine-tuning the design requirements for models as we develop protocols that streamline fitting models to data. The software avoids the mistakes we made over the past few years, reuses models, and streamlines the model building process. We hope this software has dramatically lowered the costs of building and analyzing these complex, realistic models. 
+To make this possible, we needed a way of building models that would keep the focus on the policy questions and on a dialogue between malaria managers and the analytical support team. We thus sought to design modular software with *plug-and-play* functionality and a high degree of structural flexibility. We needed the framework to be extensible. After making a lot of mistakes, the primary design phase is over, and the algorithms have been published in two software packages. We are currently extending the library of *base models*, which includes some simple or classical models that are instructive or of historical interest. We are also fine-tuning the design requirements for models as we develop protocols that streamline fitting models to data. The software avoids the mistakes we made over the past few years, reuses models, and streamlines the model building process. We hope this software has dramatically lowered the costs of building and analyzing these complex, realistic models. 
 
 <center> 
 
@@ -110,7 +137,7 @@ In doing all this, we are building on an enormous body of work that started with
 
 After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1908, it's clear that he was searching for quantitative way of saying something simple -- if there are not enough mosquitoes, the malaria transmission can't be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.  
 
-It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross's first model was a discussion of adult mosquito movement to guide larval source management [@RossR1905LogicalBasis]. The first model describing malaria transmission appeared in a book, *The Prevention of Malaria in Mauritius* [@RossR1908ReportPrevention]. When it came to thinking through control, Ross found it useful to do the math. 
+It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross's first model was a discussion of adult mosquito movement to guide larval source management [@RossR1905LogicalBasis]. The first model describing malaria transmission appeared in a book, *The Prevention of Malaria in Mauritius* [@RossR1908]. When it came to thinking through control, Ross found it useful to do the math. 
 
 *** 
 
@@ -128,12 +155,12 @@ The first model we present is a Ross-Macdonald model.
 
 ## Contributors {-}
 
+I've done the primary writing for this book. The framework would not exist without the work of Sean L Wu and a few others. The book borrows from the work of others, and we have done our best to give credit through citations. It has been a collaborative process (see [Contributors]). The errors, however, are mostly mine. If you find mistakes or have questions, please drop me a note by email: [smitdave@gmail.com](mailto:smitdave@gmail.com). 
+
 This is a work in progress, so the list of contributors will change over time. 
 
 The software package `MicroMoB` was written by Sean L Wu, Sophie Liebkind, and David L Smith. The software package `exDE` was written by Sean L Wu and David L Smith. 
 
 Most of the content so far was written by David L Smith. Contributors from the RAMP Team include: 
 
-+ ...please consult Dave if you would like a writing role. 
-
-**David L. Smith**
+...please consult Dave if you would like a writing role. 

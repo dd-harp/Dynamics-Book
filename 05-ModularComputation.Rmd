@@ -1,0 +1,62 @@
+# Modularity and Software
+
+Hundreds of publications have described new models of malaria [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels]. The challenge we have taken on is to find a new way of building models for malaria that draws from all those good ideas to build models at any level of complexity. We want to do this with reusable, professional quality software. Ideally, the models that we develop would be sufficiently complex to address policy questions, yet remain amenable to analysis.  To get there, we took a step back to try and understand *malaria models*, and to put this into a birds-eye view of the process of model building.  
+
+*** 
+
+From Ross's first published model in 1905 to the first draft of this book, 117 years have passed. The story of malaria models can be summarized in three epochs. 
+
+Ross's models, and contributions to mathematical study of malaria made by Alfred J Lotka (1912-1923), George Macdonald (1950-1968), and Garrett-Jones (1964-1970) take us to the end first epoch, which is marked by the end of the Global Malaria Eradication Programme (GMEP, 1955-1969). As part of the GMEP, Macdonald's formulas were extended by  Garrett-Jones into the concept of *vectorial capacity* and a rudimentary theory of vector control. By 1970, the *Ross-Macdonald* model was more than just a set of equations. It was a theory for malaria dynamics and control supported by a well-developed set of concepts, parameters and metrics [@SmithDL2012_RossMacdonald]. 
+
+Over that same period of time, mathematical theory for directly transmitted diseases took a parallel path, with important mathematical contributions from Kermack and McKendrick, NTJ Bailey, and Bartlett. Sometime around 1980, mathematical epidemiology began a period of innovation and synthesis, particularly after the publications of Robert May and Roy Anderson made it a mainstream activity in departments of ecology. 
+
+In malaria and mosquito-borne diseases, Klaus Dietz publications span the second epoch (1971-2006), including development of a mathematical model with immunity for the Garki Project [@DietzK1974GarkiModel], work on the dynamics of malaria under treatment by drugs [@DietzK1975ModelsParasitic], seasonality [@DietzK1976Seasonality], and heterogeneous biting [@DietzK1980ModelsVectorborne;@DietzK1988EpidemiologicalModels]. During this time, theory developed for malaria borrowed concepts and methods. In spatial dynamics, the patch models of Yorke and ** were modified to by Dye and Hasibeder to describe mosquito-borne pathogens [@DyeC1986PopulationDynamics;@HasibederG1988PopulationDynamics]. 
+
+The last epoch of malaria, which starts around 2006, is marked by two major developments: a maturing theory of malaria control; and the rise of branded, individual-based models. 
+
+The publication of *OpenMalaria* in 2006 marks the beginning of the last epoch of malaria. Some important antecedents were Dana Fochs models for *Aedes* dynamics and dengue virus transmission, as *CIMSiM* and *DENSiM*. In malaria, several within-host models had been developed [@MolineauxL1999ReviewIntrahost;@MolineauxL2001PlasmodiumFalciparum]. *OpenMalaria* traces its history back to an intrahost model developed by Dietz and Louis Molineaux [@MolineauxL2001PlasmodiumFalciparum]. After *OpenMalaria,* two other branded individual-based models were developed. One was developed by a team at Imperial College called *Malaria Tools.* Another was developed by a team at the Institute for Disease Modeling called *eMod.* The fact that the models were named and branded was significant -- the authors had developed software that they would maintain and that they were willing to stand behind. The models had finally dealt with *disease* in a serious way, and through publications, the fitted models demonstrated a fidelity to evidence. The branding signaled continuity and consistency.  
+
+Around 2007, new models of vector control began to appear that related intevention coverage levels to effect sizes. Macdonald's work had focused on sensitivity to parameters, and the GMEP emphasized technical efficiency to achieve very high coverage (with IRS). Garrett-Jones developed vectorial capacity as a way of understanding vector control and effect modification by insecticide resistance. The new models extended Garrett-Jones ideas. The need for new models was motivated, at least in part, by the goal of achieving universal coverage with ITNs. What were reasonable coverage targets? The new generation of vector control models introduced the concept of an effect size on transmission as a function of intervention coverage levels, where coverage had one definition for operations (*e.g.* something like ownership) and another for effect sizes (*e.g.* related to vector contact rates with interventions). The goal of achieving very high coverage with ITNs bumped into the reality that nets are not durable, so new models have been devised to look at intervention coverage in relation to distribution schemes and product durability. While these concepts had been considered during the GMEP design phase, they did not appear in Macdonald's models. 
+
+*** 
+
+If we want to take advantage of all the research that has been done, we need a way of understanding malaria models and the whole business of model building. 
+
+
+## Model Building 
+
+Model building is a fairly involved process that includes several unavoidable steps: 
+
++ There must be some motivation for building a model, which usually starts with a conversation, boxes and arrows drawn on paper or a chalkboard or whiteboard. The process involves refining the questions, until there's a well-formed idea -- a reason for building a model.  
+
++ The idea gets translated into mathematics. The boxes get translated into variables, the arrows are rate parameters, a mathematical formalism is selected.
+
++ The model gets analyzed. In some cases, when the model complexity exceeds a very low threshold on complexity, 
+this is done with pencil and paper. It is only possible to analyze individual parts of the model this way.  
+
++ The model gets translated into pseudo-code, and then it gets implemented as software that can produce output. This is followed by a long and painful process of verifying that the software does what the pseudo-code says it *should* do. After awhile, the software is trusted, and it's time to use it.  
+
++ Some thought is given to the correspondence between the variables in a model, observable quantities, and the observational process itself. This process can be a part of what happens above, but at some point, the models need to be fitted to data. 
+
++ The software produces output and then: the outputs are visualized; models are fitted to data; graphs are made; papers or reports are published; and careers advance. 
+
+That's the simple story of model development. What happens next is could be one of the following:  
+
++ Someone re-examines an existing model and notices it is inadequate in some way: it is missing some features, or it might make an assumption that ought to be modified. Simple models become spatial models, single populations are structured. 
+
++ Someone decides to implement the model in a different way, perhaps with a different mathematical formalism. Continuous time models are translated into discrete time models. Deterministic models become stochastic. Autonomous processes become non-autonomous.  
+
+Through this process, hundreds of malaria models were published. 
+
+A problem with this process has been that the software is often developed for bespoke tasks (*i.e.* to publish a paper). The software is often poorly documented and difficult to reuse. The costs of building a model for one task limited the complexity of the model. It was difficult to combine elements of one model developed for one purpose, with someone else's model developed for another purpose.  
+
+In malaria, this *ad hoc* process of writing new models was found to be inadequate to serve the broad range of policy questions. One way of dealing with the complexity was to build individual-based models, but individual-based models have some of the same limitations as reality. 
+
+## Modular Computation
+
+Before *OpenMalaria*, most models of malaria modified the Ross-Macdonald model in one way [@ReinerRC2013SystematicReview]. The innovation was focused on specific themes or questions: how long would an infection last in models with superinfection?  
+
+
+### `exDE` 
+
+We have written the software that solves these equations in a package called [`exDE`](https://cran.r-project.org/web/packages/exDE/index.html).  

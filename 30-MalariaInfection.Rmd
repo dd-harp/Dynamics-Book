@@ -1,13 +1,22 @@
 # (PART) Epidemiology {-}
 
-# Malaria Infection 
+# Malaria Infection and Immunity 
 
 In the following sections, we walk through several models for the dynamics of malaria infection and immunity in humans. We cover infection and detection, immunity, infectiousness, disease, drug taking, and cohort dynamics.
 
-## Overview 
+## Infection
 
-## Multiplicity of Infection (MoI) 
+### Duration of a Simple Infection  
 
-## Age of Infection (AoI) 
+### Superinfection  
 
-## Stage of Infection (SoI) 
+### Age of Infection (AoI)
+
+### Parasite Densities  
+
+### Stage of Infection (SoI)
+
+## Immunity 
+
+## Within Host Models
+
