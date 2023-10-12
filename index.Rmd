@@ -36,7 +36,8 @@ knitr::write_bib(c(
 
 # Foreword {-}
 
-A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance. All the time I was building and analyzing models, I was looking for a way of organizing and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross.[@RossR1911Book;@SmithDL2012_RossMacdonald] 
+A large fraction of my time over the past 20 years has been devoted to learning about mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance.
+All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross.[@RossR1911Book;@SmithDL2012_RossMacdonald]
 A new framework would integrate the concepts and models that have influenced malaria through the present day,[@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels] and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control.[@SmithDL2014_Recasting] 
 
 My goal was to build a framework that could serve studies of malaria policy.
