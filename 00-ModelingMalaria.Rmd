@@ -1,0 +1,184 @@
+
+
+# The Study of Malaria in Populations
+
+Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito, infecting its midgut [@RossR1897PeculiarPigmented], an event that is now celebrated each August 20, called _mosquito day_.
+In his next paper, Ross presented evidence that mosquitoes transmit the parasites to humans, a step that was required to prove that the parasites cause malaria [@RossR1898RoleMosquito].
+A few months later, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi [@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi].
+Ross and Grassi had closed a loop that Charles Laveran opened in 1880 when he published his discovery of malaria parasites infecting humans [@Laveran1880;@Laveran1884].
+After Laveran, several studies described basic features of malaria infections in humans [@GarnhamPCC1988HistoryDiscoveries]. 
+These discoveries and studies set the stage for the modern study of malaria epidemiology.
+The life-cycle of human malaria parasites as it is now taught was not described fully until the 1940s, when Garnham and colleagues described the liver stages of malaria parasites [@ShorttHE1948PreerythrocyticStage;@GarnhamPCC1988HistoryDiscoveries].
+The story of how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn, and several good accounts have been written [@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery].
+
+While that story that is of great interest, this book on **Applied Malaria Dynamics** is about the use mathematics, especially dynamical systems, to study malaria epidemiology, transmission dynamics, and control. This brings us back to Ronald Ross, who -- in the later stages of his career -- turned his attention to the prevention of malaria and the study of epidemics. 
+^[The narrative in this book is often historical, which serves two purposes.
+First, it provides an excuse to cite and discuss old papers that should not get overlooked.
+Second, a historical narrative allows us to introduce malaria complexity in an ordered way, starting from principles that are simple and abstract, and progressing towards ideas that are non-linear, messy, or subtle.
+We will often use history as a way of structuring discussions, even as our attention turns increasingly to the mathematics we need to deal with the biological complexity of malaria in populations.]
+
+## The Prevention of Malaria 
+
+In 1899, Ross launched a new career that took a very broad approach to the prevention of malaria [@RossR1899ExterminationMalaria;@RossR1899InauguralLecture]:
+
+> *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical [@RossR1899ExterminationMalaria].*
+
+Ross became a key player in the early days of malaria research, initiating studies of all sorts in malaria epidemiology and control [@BockarieMJ1999ItAll;@SmithDL2012_RossMacdonald]. 
+Through the first half of the 1900s, Ross promoted malaria control and research on malaria control in various ways. He engaged in public debates about malaria control hosted by the _British Medical Journal_, and he published a book, _Mosquito Brigades and How to Organize Them_ [@RossR1902MosquitoBrigades].
+Among his publications are found the first three mathematical models describing malaria transmission dynamics or control [@RossR1905LogicalBasis;@RossR1908;@RossR1911Book;@RossR1911Nature].
+The end of this phase of his career was marked by publication of the  $2^{nd}$ edition of _The Prevention of Malaria_ in 1911 [@RossR1911Book]. 
+
+
+Many of the early attempts to control malaria were implemented by the British Military. In the first few years, there were some successes, but there were also some failures [@RossR1907PreventionMalaria]. Heterogeneity in the responses to malaria control efforts seem to have turned Ross to mathematics. In 1904, he presented a paper at the International Congress of Arts and Science in St. Louis, Missouri that applied diffusion models to larval source management (published also in _Science_[@RossR1905LogicalBasis]). 
+
+Ross's transmission models appear in publications describing his work consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. How would reducing mosquito densities change the prevalence of malaria? Was there a critical population density of mosquitoes required to sustain transmission? The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. He also published it in Nature [@RossR1911Nature]. For Ross, the mathematical models were a logical next step towards trying to understand malaria control in rigorous quantitative terms.
+
+## The Study of Epidemics 
+
+By 1915, when Ross turned his attention to the broader study of epidemics, his intent was to establish a new discipline, which he called _a priori pathometry_.
+He set out to establish the mathematical foundations for the study of epidemics [@RossR1915AprioriPathometry;@RossR1916ApplicationTheory].
+In his 1916 paper, he wrote  
+
+> *It is somewhat surprising that so little mathematical work should have been done on the subject of epidemics, and, indeed, on the distribution of diseases in general.* 
+
+The case for using mathematics had grown stronger as a result of a scientific revolution caused by invention of the light microscope that established a germ theory of disease, which included Laveran's discovery in 1880. Even without knowing that bacteria, viruses, and parasites were transmitted among hosts causing disease, *contagion* was an impossible concept to ignore. Some mathematical work had already been done on infectious diseases, including a few models. It's not clear whether Ross was aware of Daniel Bernouli's mathematical model of small pox, or Ento's model for flu. 
+Ross may have known about those models, but he certainly didn't cite them. 
+Regardless, the mathematical study of infectious diseases in populations was, at that point in time, underdeveloped. 
+Ross wrote:
+
+> *...the principles of epidemiology on which preventive measures largely depend, such as the rate of infection, the frequency of outbreaks, and the loss of immunity, can scarceley ever be resolved by any other methods than those of analysis.*
+
+Ross proposes a rudimentary three-tiered classification system for epidemics based on the patterns of fluctuating incidence with exemplars: 1) leprosy and tuberculosis; 2) measles and malaria; 3) plague and cholera. 
+
+> *To what are these differences due? Why indeed should epidemics occur at all, and why should not all infectious diseases belong to the first group and not always remain at an almost flat rate?*
+
+In 1917, he teamed up with Hilda Hudson, a Cambridge mathematician, to finish the first major contribution to mathematical epidemiology, or what he called _a priori pathometry_ [@RossR1917AprioriPathometry2;@RossR1917AprioriPathometry3].
+Over 18 years (1899-1917), Ross's ideas laid a solid foundations for the modern study of malaria transmission and theory of malaria control [@SmithDL2012_RossMacdonald].
+
+Despite these heroic efforts, the work by Ross and Hudson on _a priori pathometry_ was missing a key element in the modern mathematical study of epidemics. This appeared in 1920, published by Martini, in the form of a new mathematical model, in which recovery from infection was followed by lifelong immunity. 
+Martini's model would be explored in great detail in a series of papers by Kermack, and Mckendrick. 
+In Ross's model, recovery from human malaria infections returned an individual to the state of being susceptible to infection once again. 
+In modern language, Ross's models would be studied as SIS compartmental models, while Martini's equations would be called SIR compartmental models.
+The dynamical differences between these two kinds of systems of equations are stark. Ross's equations can be solved exactly: 
+after Ross published the equations in Nature in 1911 [@RossR1911Nature], Alfred Lotka published a closed-form solution in 1912 [@LotkaAJ1912Nature]. 
+In an SIS model, individuals could be infected many times, and prevalence is a naturally meaningful statistic.
+There is no closed form solution to the SIR model, and prevalence is an ephemerally changing quantity.
+The natural summary statistic for SIR epidemic is called $S_\infty$, the portion remaining uninfected asymptotically. 
+In simple epidemics -- an epidemic in a single population with no replenishment of susceptible hosts -- the dynamics differ depending on how many cases that first case would tend to generate, called $R_0$. 
+If $R_0 < 1$, then there is a closed form solution: $S_\infty = (1-R_0)^{-1}$. 
+If that first case would generate more than one other case, and the number of cases would initially rise to a peak, when each new case would generate exactly one case. 
+Thereafter, the number of cases would decline. 
+The time course of an SIR epidemic does not have a closed form solution. 
+The difference between SIS and SIR models would provide a mathematical basis for answering Ross's question, and it points to an important role for the concept of population immunity.
+In SIS models, there is no immunity, so prevalence tends to approach an endemic equilibrium with very little tendency to cycle.
+When susceptible populations the SIR models are replenished by birth or migration, there is a natural tendency to cycle.
+
+The SIS model is a useful starting point, but even Ross was aware of evidence that immunity to malaria would develop in humans. 
+The role of immunity is more complex, but a critical feature is that infection with one parasite would not prevent reinfection with another.
+In places where exposure rates were high, reinfection -- also called *superinfection* -- was quite common. 
+The first model of malaria that was *not* an SIS model -- published by George Macdonald but relying on mathematics by P. Armitage -- 
+considered a role for *superinfection,* or reinfection of susceptible individuals. 
+In models with superinfection, an interesting statistic is the multiplicity of infection (MoI).
+A useful discussion of this superinfection model and its mathematical flaws was written by Paul EM Fine [@FinePEM1975SuperinfectionProblem].
+What is, perhaps, more important is that superinfection in malaria facilitates sexual recombination for the parasites.
+Sexual recombination facilitates development of parasite diversity, which could partly explain population immunity in malaria.  
+
+Sticking with Ross's core challenge of how to study epidemics mathematically to understand the tendency to cycle, we must acknowledge 
+the complex natural history of population immunity. In malaria,
+a model for the mathematical talents of Klaus Dietz combined with the epidemiological skills of Louis Molineaux to produce the first model of population immunity to malaria. 
+That model described infection dynamics in a population with partial immunity.
+In malaria epidemiology, a core challenge is the problem of malaria immunity and its relationship to parasite genetic diversity, disease, and infectiousness. 
+In the mathematical study of malaria epidemiology, the formulation of adequate models is among the most pressing and most difficult to address. 
+Measles and a few other pathogens are well-described by the SIR model. 
+For these  acute immunizing infections, infection is followed by a life-long immunity.
+The dengue viruses has four (or maybe five) functionally distinct virues with complex patterns of cross immunity. 
+For other pathogens, population immunity is undermined when immune-escape variantes evolve in the pathogen populations. 
+For the influenza viruses and the coronavirus descendents of the viruses that sparked the global COVID-19 epidemic, escape variants arise at a rate that is high enough to sustain yearly outbreaks.  
+
+Adding to the complexity, immunity is not the only factor affecting a tendency to cycle. 
+For arthropod-transmitted pathogens, fluctuations in arthropod population densities and behaviors driven by weather affect trasmission rates. 
+For directly transmitted pathogens, humidity and survival in the environment and the tendency for populations to congregate amplifies transmission. 
+In malaria, fluctuating mosquito one factor that must *a priori* force transmission, and since population immunity probably has a weak effect, 
+seasonal malaria is largely driven by fluctuating mosquito populations. 
+In SIR models, seasonal fluctuations are sustained by an interaction between environmental factors and the depletion of susceptible individuals. 
+
+
+
+
+## Models for Resarch and Policy 
+
+Malaria is complex and heterogeneous, which makes it difficult to study and manage. A core challenge in both science and policy is the availability of information. Mathematical models can help us understand and analyze all that complexity and make informed decisions, despite the data gaps. 
+
+While this book is about applied dynamics, the approach is eclectic. It relies heavily on conventional statistical analysis. An axiom we espouse is that two inferential approaches are better than one. This point of view was prominent in the early study of epidemics, tracing back to both Ross and Browne [@FinePEM1975RossPriori]. After Ross spent a decade studying malaria control, he realized the difficulty of understanding malaria epidemics, so he argued for an integrated approach. About the study of epidemics, he wrote 
+
+> *The whole subject is capable of study by two distinct methods which are used in other branches of science, which are complementary of each other, and which should converge towards the same results -- the **a posteriori** and the **a priori** methods. In the former we commence with observed statistics, endeavor to fit analytical laws to them, and so work backwards to the underlying cause (as done in much statistical work of the day); and in the latter, we assume a knowledge of the causes, construct our differential equations on that supposition, follow up the logical consequences, and finally test the calculated results by comparing them with the observed statistics.* 
+
+More than a century later, it is much easier to use computational tools to fulfill this vision. 
+
+While this lays out a useful agenda for *understanding malaria,* another axiom we espouse is that the process of giving advice about a policy must take on a broader set of challenges. 
+Policy and science are different in many ways, so there are good reasons why we might want to use different models and methods for basic research and policy analytics. 
+In policy, decisions *must* be made in a timely way, and they *should* use all available evidence, even if it's weak. 
+Basic research is epistemologically conservative, by design. 
+Studies that are published in peer review must be repeatable, and in anticipation of criticism, the scientists aim to do things so well that they are unassailable. 
+This usually has the effect of narrowing and controlling the conditions under which the study was conducted.
+When we operate in policy settings, we *should* design our studies in a different way, and we will thus need to deal with the uncertainty differently. 
+The studies that inform policies will need to take an approach that is broader -- the models should be realistic enough to address the question of interest. 
+Such studies will often need to make compromises and decisions that are poorly informed by the evidence, which raises the question of how much a policy maker could trust it.
+One strategy for making policies trustworthy is to repeat the supporting analysis using every reasonable approach, so that we can be reasonably sure our policy recommendations would not change. 
+The idea of fully propagating uncertainty is the essential feature of *robust analytics.*
+If we make the effort, we can identify key sources of uncertainty, identify priority data needs, and collect new data that could help resolve some of the most important sources of uncertainty. 
+Building models to do this is challenging for practical reasons, and it requires drawing heavily on basic research.
+In giving advice, we must give different weights to the uncertainty than we would in research. 
+
+In basic research, we develop mechanistic models to understand malaria as a biological process. In malaria epidemiology, the states and parameters describe infection, immunity, infectiousness, disease, and drug taking in response to exposure. Scientists focus on basic biological mechanisms in order to understand differences in malaria across spectrum of transmission. Immunity and drug-taking are important factors to consider, but it may be that differences in epidemiology and disease across settings arise from differences in the local parasite populations. The models are a way of summarizing knowledge in a quantitative form -- something like a complex hypothesis. A test of a model's adequacy is whether it can describe malaria accurately after accounting for differences in drug taking patterns and pattern of exposure. 
+
+We study mosquito ecology and blood feeding to understand malaria transmission and develop theory for malaria control. Transmission models couple parasite infection dynamics in humans and mosquitoes through blood feeding. Mosquito populations are shaped by the aquatic habitats for immature mosquito populations. These habitats are standing water bodies, and they are shaped by topography, hydrology, land use, and the water chemistry, which is affected by surrounding rocks, soils, vegetation and pollution. These habitats are filled (exogenously forced) by rainfall and after some eggs are laid, the mosquito dynamics are affected by crowding, predation, and other endogenous dynamics. Larval development and parasite development rates are modified by temperature. Adult mosquito activity rates are affected by temperature, relative humidity, and vector control. Indoor residual spraying (IRS) kills mosquitoes when they rest on a sprayed surface, usually after blood feeding or during the process of searching for a host. Insecticide treated nets (ITNs) protect humans from biting and kill some mosquitoes. By reducing the availability of potential blood hosts, nets can slow blood feeding in some contexts. Larval source management (LSM) reduces immature population densities. 
+
+By studying mosquito ecology and malaria transmission dynamics, we can start to understand malaria as a changing baseline that has been modified by malaria control. This is the problem confronted daily in malaria programs, but dealing with the evidence requires having the tools available to synthesize data describing different parts of malaria. The models help translate evidence into information that can be used to make decisions, to make strategic plans, and to mark progress against national plans. The models encapsulate information about transmission in context, so it is possible to study how malaria persists in a place over time, and how various factors have modified (or could modify) mosquito population dynamics and blood feeding and thereby suppress transmission. Transmission models help us to set intervention coverage targets based on an understanding of malaria connectivity to surrounding regions and local thresholds. 
+
+In policy, we use these models with the expectation that -- if we fit the models by adjusting parameters that affect how malaria works in some particular place -- they *should* help us understand transmission in some particular context and make good decisions about what to do. 
+
+Frustratingly, the heterogeneity and the complexity conspire against us. We would like to be sure about how malaria works across settings before we start using the models to stratify populations, tailor interventions to context, or targeting the interventions. Instead, we must admit that we don't know everything we'd like to, and we probably never will. We must proceed with policy without having satisfactory answers to some basic questions. In policy, we will use the models to evaluate the consequences of having missing information, but we will also use the models to help us prioritize missing data so we can fill in the gaps. What missing data would reduce our uncertainty about what to do about malaria? How do we fill the critical knowledge gaps. 
+
+To understand malaria or to give policy advice, we must start simple and then add complexity, layer on layer. To deal with missing information, we start with generic models, and then add details to address concerns about some of the details that we hope to identify by studying the systems as we intervene. This approach -- starting simple and then layering on complexity -- makes it possible to learn as we go. A question is when it stops making sense to add realism to a model. A model that it too simple and abstract might help us understand the basic dynamics and give generic advice, but we would question the model's adequacy if it could not reproduce the patterns we cared about in some particular place at some particular time. As a rule of thumb, a model should be just complex enough to *describe* the patterns we care about and *weigh* the relevant options to give advice. Practically speaking, it's hard to know you've gone far enough unless, at some point, it's clear that you've gone a bit too far.
+
+Over the past few years, we developed a new framework for building models that would make it possible to start simple and then build models of malaria transmission at any level of complexity. We wanted to be able to build in realism by adding complexity one feature at a time. Through this process we can create nested, hierarchical models in branching chains. At the ends of the chains, we might find highly realistic models that are, perhaps, overfit. (The cautions against overfitting play out differently in policy given the urgency of acting in a timely way, but it is also possible to go out and collect new data.)  We call the framework's ability to do this **scalability** and the resulting swarms have **scalable complexity.** The iterative attempt to make plans, weigh evidence, quantify uncertainty, gather new data to reduce uncertainty, and then restart the annual cycle, is called **adaptive malaria control.** 
+
+To make this possible, we needed a way of building models that would keep the focus on the policy questions and on a dialogue between malaria managers and the analytical support team. We thus sought to design modular software with *plug-and-play* functionality and a high degree of structural flexibility. We needed the framework to be extensible. After making a lot of mistakes, the primary design phase is over, and the algorithms have been published in two software packages. We are currently extending the library of *base models*, which includes some simple or classical models that are instructive or of historical interest. We are also fine-tuning the design requirements for models as we develop protocols that streamline fitting models to data. The software avoids the mistakes we made over the past few years, reuses models, and streamlines the model building process. We hope this software has dramatically lowered the costs of building and analyzing these complex, realistic models. 
+
+
+
+In malaria epidemiology (narrowly defined as a study of infection and disease in humans), the relationship between exposure, infection, immunity, disease, and infectiousness changes in populations as they age, and it is affected by drug taking. This picture grows more complex as we consider intervening with vaccines or monoclonal antibodies, or as we look at interactions with anemia, nutritional status, and human genetics. Our models need to interface with data from clinical settings and research, so they will need to consider diagnostics, parasite counts, detection, and transmission. Combining these factors can give rise to an overwhelming amount of complexity. Later, we will introduce new models and show how it possible to simplify all this complexity and make sense of malaria.  
+
+We are interested in using these models to guide policy, which requires both solid computation and good communication. In this book, we lay a foundation for understanding the complexity by studying some simple compartmental models. We will review classical queuing models for superinfection and the multiplicity of infection (MoI); new models for the age of infection (AoI) or stage of infection (SoI); immunity; parasite densities, fever, disease, and detection; gametocytes and transmission, and drug taking. To end up with models that can handle all the complexity, we build probabilistic models that combine these factors. In doing so, we find that we can do some powerful analysis, and we can map the states in these models onto outcomes that matter for research and policy: test positivity, parasite counts, infectiousness, and disease. With patience, we can combine these factors and develop a framework for understanding malaria in populations that match the features of individual-based simulation models. We end up with a sensible understanding malaria epidemiology as ontogeny -- development of immunity as a part of an organisms history. We back this view with some very usable models that capture the changing character of malaria in cohorts of humans as they age. 
+
+We are interested in understanding malaria control in context, which requires delving into mosquito ecology and behavior. In this book, we start with a simple model for mosquito ecology and parasite infection dynamics in mosquitoes. We add aquatic population dynamics, mosquito population regulation, and exogenous forcing by weather. Later, we worry about adult mosquito behavioral states such as mating, sugar feeding, and egg laying. We introduce the concept of resource availability, and we develop an understanding of mosquito search and movement in response to resource availability. We take some deep dives to understand how mosquito spatial dynamics work at a fine spatial grain, and then we scale up to understand mosquito populations on landscapes. 
+
+At first, we describe mosquito blood feeding and transmission with a few simple parameters. Later, we develop a new model for mosquito blood feeding in a dynamically changing host population with parameters that allow host strata to be more or less available. We also modify our understanding of heterogeneous exposure to biting. We develop a methods for modeling environmental heterogeneity, heterogeneous exposure by age, and a generalized way of handling [failty](Frailty)--  other sources of heterogeneous biting -- through stratification. 
+
+We must take a detour to understand how to handle the effects of temperature on the parasite's extrinsic incubation period (EIP). We need a way of dealing with mosquito survival and dispersal through the EIP. This problem has been effectively solved.  
+
+To round out this picture, we need a way of dealing with other aspects of human ecology that affect malaria transmission dynamics, including human mobility, human demography, bed net usage, adherance to drugs, and care seeking. Differences among humans call for a synthesis of studies that have identified traits that affect malaria, stratification, and simulation to identify useful ways of propagating the heterogeneity through analyses.  
+
+To go along with a theory of transmission, we need a theory of control. We compute effect sizes and evaluate area effects. We develop a generalized concept of effect modification that considers the total effect of a single unit of control. We modify basic processes by including the effects of vector control and mass medical interventions (*e.g.* seasonal malaria chemoprotection, mass drug administration, vaccines, and monoclonal antibodies). Relying on behavioral state models and the concept of resource availability, we develop a models for integrated vector control. 
+
+This is a book about how to do the math that is required for robust analytics for malaria programs. The goal is to use all the data available, but especially the data generated by malaria programs, to paint a clear picture of malaria transmission as a changing baseline that has been modified by control. 
+
+## Software 
+
+Our philosophy has been to design a framework for model building that can be used by programs. 
+In this context, *model building* means designing ensembles of models. The next step involves applying a set of tools to computational tasks that are beyond what our brains could do. To accomplish our goals, we need more than the mathematical framework. We need to be able to implement and compute models. This requires new software. 
+
+The software is structured around three major dynamical components and two interfaces. The dynamical components are: 1) the humans and malaria epidemiology, including the effects of treating malaria with drugs; 2) adult mosquito ecology, behavior and infection dynamics; and 3) aquatic mosquito ecology. Malaria transmission by mosquito populations, including the $2^{nd}$ and $3^{rd}$ dynamical component are set up to consider the effects of weather and vector control. The first interface links humans, adult mosquitoes, and parasites to describe parasite transmission through mosquito blood feeding and human exposure to infective mosquito populations. The second interface links adult and mosquito populations through egg laying and emergence. Within each component and interface, there are multiple sub-domains, and there are built in design features to deal with heterogeneity and other features for malaria control. After a 140 years of studying malaria, there's a lot of detail that could be important in some way. 
+<!-- Part of what we need to do is sort through all that detail to find what is most relevant. -->
+
+<!-- We have organized the concepts in this book around a narrative that allows us to introduce the core concepts -- those that make modular computation possible -- in an order that minimizes the need to draw on unfamiliar concepts. We start with the Ross-Maconald model, but our next task is to explain the new model for mosquito blood feeding.   -->
+
+The software we have developed is meant to lower the costs of building and using models. We want programs to be focused on the decisions, the data, the concepts, and the analysis. As a metaphor, some students learn a numerical method for approximating $\sqrt{2}$ in school, but after learning it once, they stop worrying about *how* it is computed and they punch buttons into a calculator. Knowing how to compute something is sometimes useful, but worrying about how to compute it each time would interrupt the process that called for computing it. Instead, we punch the formula into a scientific calculator or any software that does computation confident that the machine knows how to do it. In applying models, the same kind of logic applies. People need to understand the concepts, but like a calculator, the tools should hide the technical details that don't add to a discussion. The software we have developed is a reliable interface for calculations designed to support policy. 
+
+To learn how to use that software, we need to get through a lot of material. The background material in the following presentation is fairly sparse. We are trying to introduce just *enough* mathematics to teach users the critical concepts so they know what the software can do. We assume that the work will be done by teams that include a few people who understand the mathematics, who can guide others through the process. 
+
+All of this sounds very complex, but we must start with something simple and layer on complexity in an ordered way. The first model we present is a Ross-Macdonald model. 
+
+<!-- To fill in some of the gaps and technical, we have written (or can write) vignettes. On occasion, the text includes links to these vignettes for those who might find them useful. Please send suggestions about new vignettes to [smitdave@gmail.com](mailto:smitdave@gmail.com). -->
+

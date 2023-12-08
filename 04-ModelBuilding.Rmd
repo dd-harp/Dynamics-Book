@@ -11,49 +11,6 @@ If we want to discuss the models we might use to analyze malaria policies, and i
 
 Most models started with a question: something like _Why is the sky blue?_ or _How many mosquitoes does it take to sustain malaria transmission?_ Blue sky questions don't go anywhere unless there's a basis for understanding the underlying process. If there is some kind of basis, the next step is to try represent the process in some logically compelling form, such as a diagram with boxes and arrows. 
 
-In the case of malaria, the first step looked something like this:  
-
-$$
-\left[
-\begin{array}{rcl}
-\mbox{# People Infected Today} &=& \mbox{# People Infected Yesterday} \;\; -\\
-&& \mbox{# Who Cleared Infections} \;\; + \\
-&& \mbox{# Uninfected Who Got Infected}\\
-\end{array} \right]
-$$
-This description ignores infected people who died, infected people who emigrated, and infected people who immigrated. It's not perfect, but it's a starting point. The biggest problem with this description is that it lacks mosquitoes. So we write down: 
-
-$$
-\left[
-\begin{array}{rcl}
-\mbox{# Mosquitoes Infected Today} &=& \mbox{# Mosquitoes Infected Yesterday} \;\; -\\
-&& \mbox{# that Died} \;\; + \\
-&& \mbox{# Uninfected Who Got Infected}\\
-\end{array} \right]
-$$
-What's important here is that infectious mosquitoes are infecting people when they bite, and infectious people are infecting mosquitoes when the mosquito blood feeds. This process is clarified by a diagram: 
-
-### Variables 
-
-What is critical here is that the uninfected people got infected when they were bitten by an infectious mosquito, and the uninfected mosquitoes who got infected yesterday must have blood fed on an infected person. 
-
-To build a model, we need to be quantitative, so we need to start being very precise: 
-
-+ Let $H$ be the number of people, and we assume that number doesn't change
-
-+ Let $X_t$ be the number of people who are infected at time $t$
-
-+ Let $M$ be the number of mosquitoes, and we assume that number doesn't change 
-
-+ Let $Y_t$ be the number of mosquitoes who are infected at time $t$
-
-So now we 0
-
-+ **Variables:** Defining the state space 
-
-+ **Parameters:** transitions / rates 
-
-+ **equations / algorithms**
 
 ## Implementation and Verification 
 
