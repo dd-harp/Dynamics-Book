@@ -2,12 +2,13 @@
 
 # The Study of Malaria in Populations
 
-Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito, infecting its midgut [@RossR1897PeculiarPigmented], an event that is now celebrated each August 20, called _mosquito day_.
-In his next paper, Ross presented evidence that mosquitoes transmit the parasites to humans, a step that was required to prove that the parasites cause malaria [@RossR1898RoleMosquito].
+Ronald Ross is best known for being the first person to observe malaria parasites infecting the midgut of a mosquito [@RossR1897PeculiarPigmented]. 
+The day the event occurred is now celebrated each August 20, called _mosquito day_.
+In his next paper, Ross presented evidence that mosquitoes transmit the parasites to humans, a step that was required to prove that the parasites could cause malaria [@RossR1898RoleMosquito].
 A few months later, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi [@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi].
-Ross and Grassi had closed a loop that Charles Laveran opened in 1880 when he published his discovery of malaria parasites infecting humans [@Laveran1880;@Laveran1884].
+Ross and Grassi had closed a loop that Charles Laveran opened in 1880, which was the original discovery of malaria parasites infecting humans [@Laveran1880;@Laveran1884].
 After Laveran, several studies described basic features of malaria infections in humans [@GarnhamPCC1988HistoryDiscoveries]. 
-These discoveries and studies set the stage for the modern study of malaria epidemiology.
+These discoveries and studies set the stage for the modern study of malaria epidemiology, and in 1902, Ross was awarded the Nobel Prize for Physiology or Medicine.
 The life-cycle of human malaria parasites as it is now taught was not described fully until the 1940s, when Garnham and colleagues described the liver stages of malaria parasites [@ShorttHE1948PreerythrocyticStage;@GarnhamPCC1988HistoryDiscoveries].
 The story of how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn, and several good accounts have been written [@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery].
 
@@ -31,7 +32,7 @@ The end of this phase of his career was marked by publication of the  $2^{nd}$ e
 
 Many of the early attempts to control malaria were implemented by the British Military. In the first few years, there were some successes, but there were also some failures [@RossR1907PreventionMalaria]. Heterogeneity in the responses to malaria control efforts seem to have turned Ross to mathematics. In 1904, he presented a paper at the International Congress of Arts and Science in St. Louis, Missouri that applied diffusion models to larval source management (published also in _Science_[@RossR1905LogicalBasis]). 
 
-Ross's transmission models appear in publications describing his work consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. How would reducing mosquito densities change the prevalence of malaria? Was there a critical population density of mosquitoes required to sustain transmission? The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. He also published it in Nature [@RossR1911Nature]. For Ross, the mathematical models were a logical next step towards trying to understand malaria control in rigorous quantitative terms.
+Ross's transmission models appear in publications that emerged from consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. How would reducing mosquito densities change the prevalence of malaria? Was there a critical population density of mosquitoes required to sustain transmission? The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. He also published it in Nature [@RossR1911Nature]. For Ross, the mathematical models were a logical next step towards trying to understand malaria control in rigorous quantitative terms.
 
 ## The Study of Epidemics 
 
@@ -41,7 +42,7 @@ In his 1916 paper, he wrote
 
 > *It is somewhat surprising that so little mathematical work should have been done on the subject of epidemics, and, indeed, on the distribution of diseases in general.* 
 
-The case for using mathematics had grown stronger as a result of a scientific revolution caused by invention of the light microscope that established a germ theory of disease, which included Laveran's discovery in 1880. Even without knowing that bacteria, viruses, and parasites were transmitted among hosts causing disease, *contagion* was an impossible concept to ignore. Some mathematical work had already been done on infectious diseases, including a few models. It's not clear whether Ross was aware of Daniel Bernouli's mathematical model of small pox, or Ento's model for flu. 
+The case for using mathematics had grown stronger as a result of a scientific revolution caused by invention of the light microscope that established a germ theory of disease, which included Laveran's discovery in 1880. Even without knowing that bacteria, viruses, and parasites were transmitted among hosts causing disease, *contagion* was an impossible concept to ignore. Some mathematical work had already been done on infectious diseases, including a few models. It's not clear whether Ross was aware of Daniel Bernouli's mathematical model of small pox [@BernoulliD2004AttemptNew;@BacaerN2011DanielBernoulli], or PD En'ko's discrete time models for measles [@DietzK1988FirstEpidemic]. 
 Ross may have known about those models, but he certainly didn't cite them. 
 Regardless, the mathematical study of infectious diseases in populations was, at that point in time, underdeveloped. 
 Ross wrote:
@@ -55,25 +56,26 @@ Ross proposes a rudimentary three-tiered classification system for epidemics bas
 In 1917, he teamed up with Hilda Hudson, a Cambridge mathematician, to finish the first major contribution to mathematical epidemiology, or what he called _a priori pathometry_ [@RossR1917AprioriPathometry2;@RossR1917AprioriPathometry3].
 Over 18 years (1899-1917), Ross's ideas laid a solid foundations for the modern study of malaria transmission and theory of malaria control [@SmithDL2012_RossMacdonald].
 
-Despite these heroic efforts, the work by Ross and Hudson on _a priori pathometry_ was missing a key element in the modern mathematical study of epidemics. This appeared in 1920, published by Martini, in the form of a new mathematical model, in which recovery from infection was followed by lifelong immunity. 
+Despite the heroic efforts of Ross and Hudson on _a priori pathometry_, they were missing a key element in the modern mathematical study of epidemics. In 1920, a new mathematical model was published by Martini, which described epidemics in which recovery from infection was followed by lifelong immunity. 
 Martini's model would be explored in great detail in a series of papers by Kermack, and Mckendrick. 
-In Ross's model, recovery from human malaria infections returned an individual to the state of being susceptible to infection once again. 
 In modern language, Ross's models would be studied as SIS compartmental models, while Martini's equations would be called SIR compartmental models.
-The dynamical differences between these two kinds of systems of equations are stark. Ross's equations can be solved exactly: 
-after Ross published the equations in Nature in 1911 [@RossR1911Nature], Alfred Lotka published a closed-form solution in 1912 [@LotkaAJ1912Nature]. 
-In an SIS model, individuals could be infected many times, and prevalence is a naturally meaningful statistic.
+The two systems of equations have strikingly different features, and so do the kinds of epidemics they mimic. 
+
+In Ross's model, a person would become susceptible to infection after recovering, so a person could be infected many times, and prevalence is a naturally meaningful statistic. In fact, Ross's equations can be solved exactly: after Ross published the equations in Nature in 1911 [@RossR1911Nature], Alfred Lotka published a closed-form solution in 1912 [@LotkaAJ1912Nature]. 
+
 There is no closed form solution to the SIR model, and prevalence is an ephemerally changing quantity.
 The natural summary statistic for SIR epidemic is called $S_\infty$, the portion remaining uninfected asymptotically. 
 In simple epidemics -- an epidemic in a single population with no replenishment of susceptible hosts -- the dynamics differ depending on how many cases that first case would tend to generate, called $R_0$. 
-If $R_0 < 1$, then there is a closed form solution: $S_\infty = (1-R_0)^{-1}$. 
+If $R_0 < 1$, then there is a closed form solution: $S_\infty = S_0 - I_0(1-R_0)^{-1}$. 
 If that first case would generate more than one other case, and the number of cases would initially rise to a peak, when each new case would generate exactly one case. 
 Thereafter, the number of cases would decline. 
 The time course of an SIR epidemic does not have a closed form solution. 
-The difference between SIS and SIR models would provide a mathematical basis for answering Ross's question, and it points to an important role for the concept of population immunity.
+
+The differences between SIS and SIR models would provide a mathematical basis for answering Ross's question and point to an important role for the concept of population immunity.
 In SIS models, there is no immunity, so prevalence tends to approach an endemic equilibrium with very little tendency to cycle.
 When susceptible populations the SIR models are replenished by birth or migration, there is a natural tendency to cycle.
 
-The SIS model is a useful starting point, but even Ross was aware of evidence that immunity to malaria would develop in humans. 
+The SIS model is a useful starting point, but Ross was aware of evidence that immunity to malaria would develop in humans. 
 The role of immunity is more complex, but a critical feature is that infection with one parasite would not prevent reinfection with another.
 In places where exposure rates were high, reinfection -- also called *superinfection* -- was quite common. 
 The first model of malaria that was *not* an SIS model -- published by George Macdonald but relying on mathematics by P. Armitage -- 

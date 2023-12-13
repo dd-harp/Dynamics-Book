@@ -59,7 +59,7 @@ We can translate this description into a model, but we need to start speaking ma
 
 + Let $y_t$ be the fraction of mosquitoes who are infected at time $t$
 
-**Parameters** 
+*Parameters* 
 
 + Let $s$ denote the fraction of people who remain infected after one day 
 
@@ -69,7 +69,7 @@ We can translate this description into a model, but we need to start speaking ma
 
 + Let $m$ denote the number of mosquitoes per human 
 
-**Equations** 
+*Equations* 
 
 $$\begin{array}{rl}
 x_{t+1} &=  m a y_t (1-x_t) + s x_t \\ 
