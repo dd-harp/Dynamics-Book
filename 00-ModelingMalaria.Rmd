@@ -20,19 +20,26 @@ We will often use history as a way of structuring discussions, even as our atten
 
 ## The Prevention of Malaria 
 
-In 1899, Ross launched a new career that took a very broad approach to the prevention of malaria [@RossR1899ExterminationMalaria;@RossR1899InauguralLecture]:
+> *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical. --1899, Ronald Ross [@RossR1899ExterminationMalaria]*
 
-> *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical [@RossR1899ExterminationMalaria].*
+In 1899, Ross launched a new phase of his career that took a very broad approach to the prevention of malaria [@RossR1899ExterminationMalaria;@RossR1899InauguralLecture].
+Through the first half of the 1900s, Ross promoted malaria control and malaria research.
+He was a key player in public debates about malaria control and he launched a center to study malaria transmission that is still active today [@BockarieMJ1999ItAll;@SmithDL2012_RossMacdonald].
+He engaged in public debates about malaria control hosted by the _British Medical Journal_, and he published a book, _Mosquito Brigades and How to Organize Them_ [@RossR1902MosquitoBrigades].
+The end of this phase of his career was marked by publication of the  $2^{nd}$ edition of _The Prevention of Malaria_ in 1911 [@RossR1911Book].
 
-Ross became a key player in the early days of malaria research, initiating studies of all sorts in malaria epidemiology and control [@BockarieMJ1999ItAll;@SmithDL2012_RossMacdonald]. 
-Through the first half of the 1900s, Ross promoted malaria control and research on malaria control in various ways. He engaged in public debates about malaria control hosted by the _British Medical Journal_, and he published a book, _Mosquito Brigades and How to Organize Them_ [@RossR1902MosquitoBrigades].
-Among his publications are found the first three mathematical models describing malaria transmission dynamics or control [@RossR1905LogicalBasis;@RossR1908;@RossR1911Book;@RossR1911Nature].
-The end of this phase of his career was marked by publication of the  $2^{nd}$ edition of _The Prevention of Malaria_ in 1911 [@RossR1911Book]. 
 
-
-Many of the early attempts to control malaria were implemented by the British Military. In the first few years, there were some successes, but there were also some failures [@RossR1907PreventionMalaria]. Heterogeneity in the responses to malaria control efforts seem to have turned Ross to mathematics. In 1904, he presented a paper at the International Congress of Arts and Science in St. Louis, Missouri that applied diffusion models to larval source management (published also in _Science_[@RossR1905LogicalBasis]). 
-
-Ross's transmission models appear in publications that emerged from consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. How would reducing mosquito densities change the prevalence of malaria? Was there a critical population density of mosquitoes required to sustain transmission? The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. He also published it in Nature [@RossR1911Nature]. For Ross, the mathematical models were a logical next step towards trying to understand malaria control in rigorous quantitative terms.
+This phase of Ross's career is highly relevant to our study of **Applied Malaria Dynamics** because it was the beginning of a rigorous approach to malaria control including development of the first three mathematical models describing malaria transmission dynamics or control [@RossR1905LogicalBasis;@RossR1908;@RossR1911Book;@RossR1911Nature].
+Many of the early attempts to control malaria were implemented by the British Military. In the first few years, there were some successes, but there were also some failures [@RossR1907PreventionMalaria]. 
+Heterogeneity in the responses to malaria control efforts seem to have turned Ross to mathematics. 
+In 1904, he presented a paper at the International Congress of Arts and Science in St. Louis, Missouri that applied diffusion models to larval source management (published also in _Science_[@RossR1905LogicalBasis]). 
+Ross's transmission models appear in publications that emerged from consulting with national malaria programs in Mauritius and Greece [@RossR1908;@RossR1909]. 
+While he was writing about the nuts and bolts of control, he was also grappling with mathematical formulas that could help him understand malaria control quantitatively. 
+How would reducing mosquito densities change the prevalence of malaria? 
+Was there a critical population density of mosquitoes required to sustain transmission? 
+The result was the first mathematical model to describe malaria transmission dynamics [@RossR1908]. 
+A short time later, Ross would reformulate the model in the $2^{nd}$ edition of his book, _The Prevention of Malaria_ [@RossR1911Book]. 
+He also published it in Nature [@RossR1911Nature]. For Ross, the mathematical models were a logical next step towards trying to understand malaria control in rigorous quantitative terms.
 
 ## The Study of Epidemics 
 
@@ -55,6 +62,8 @@ Ross proposes a rudimentary three-tiered classification system for epidemics bas
 
 In 1917, he teamed up with Hilda Hudson, a Cambridge mathematician, to finish the first major contribution to mathematical epidemiology, or what he called _a priori pathometry_ [@RossR1917AprioriPathometry2;@RossR1917AprioriPathometry3].
 Over 18 years (1899-1917), Ross's ideas laid a solid foundations for the modern study of malaria transmission and theory of malaria control [@SmithDL2012_RossMacdonald].
+
+## Mathematical Epidemiology
 
 Despite the heroic efforts of Ross and Hudson on _a priori pathometry_, they were missing a key element in the modern mathematical study of epidemics. In 1920, a new mathematical model was published by Martini, which described epidemics in which recovery from infection was followed by lifelong immunity. 
 Martini's model would be explored in great detail in a series of papers by Kermack, and Mckendrick. 
