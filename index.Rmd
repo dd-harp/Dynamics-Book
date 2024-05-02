@@ -1,6 +1,5 @@
 ---
-title: "Applied Malaria Dynamics"
-subtitle: "Dynamical Systems for Adaptive Malaria Control"
+title: "Applied Dynamics for Robust Analytics and Adaptive Malaria Control"
 author: "David L. Smith and the RAMP Team"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -36,12 +35,12 @@ knitr::write_bib(c(
 
 # Foreword {-}
 
-A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of resistance.
+A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
 All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross [@RossR1911Book;@SmithDL2012_RossMacdonald].
-A new framework would integrate the concepts and models that have influenced malaria through the present day [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels], and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control [@SmithDL2014_Recasting].
+A new framework would integrate the concepts and models that have influenced malaria through the present day [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels], and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control [@SmithDL2014Recasting].
 
 My goal was to build a framework that could serve the task of using evidence to develop malaria policy.
-Policy discussions might need to use mathemetics, but the discussion should focus on the policy questions, the concepts, and evidence rather than on the mathematics *per se*. 
+Policy discussions might benefit from using mathematics, but the discussion should focus on the policy questions, the concepts, and evidence rather than on the mathematics *per se*. 
 Ideally, mathematical ideas should give rigor to the analysis help structure the discussions without ever drawing attention to itself, except when mathematics could help to clarify something.
 I knew that building a framework would face some core challenges, but if we could solve those, we could make the math easier to use so that discussions would focus on the issues that mattered.
 Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.

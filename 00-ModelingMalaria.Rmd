@@ -2,23 +2,35 @@
 
 # The Study of Malaria in Populations
 
-Ronald Ross is best known for being the first person to observe malaria parasites infecting the midgut of a mosquito [@RossR1897PeculiarPigmented]. 
-The day the event occurred is now celebrated each August 20, called _mosquito day_.
-In his next paper, Ross presented evidence that mosquitoes transmit the parasites to humans, a step that was required to prove that the parasites could cause malaria [@RossR1898RoleMosquito].
-A few months later, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi [@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi].
-Ross and Grassi had closed a loop that Charles Laveran opened in 1880, which was the original discovery of malaria parasites infecting humans [@Laveran1880;@Laveran1884].
-After Laveran, several studies described basic features of malaria infections in humans [@GarnhamPCC1988HistoryDiscoveries]. 
-These discoveries and studies set the stage for the modern study of malaria epidemiology, and in 1902, Ross was awarded the Nobel Prize for Physiology or Medicine.
-The life-cycle of human malaria parasites as it is now taught was not described fully until the 1940s, when Garnham and colleagues described the liver stages of malaria parasites [@ShorttHE1948PreerythrocyticStage;@GarnhamPCC1988HistoryDiscoveries].
-The story of how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn, and several good accounts have been written [@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery].
+Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito [@RossR1897PeculiarPigmented], an event occurred August 20$^{th}$,  1897 and that is celebrated as _mosquito day_.
+In the months that followed, Ross presented evidence that mosquitoes can transmit malaria parasites. 
+Concurrently, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi [@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi].
 
-While that story that is of great interest, this book on **Applied Malaria Dynamics** is about the use mathematics, especially dynamical systems, to study malaria epidemiology, transmission dynamics, and control. This brings us back to Ronald Ross, who -- in the later stages of his career -- turned his attention to the prevention of malaria and the study of epidemics. 
+Ross and Battista Grassi closed a loop that Charles Laveran opened in 1880, when he identified malaria parasites as the cause of human malaria [@Laveran1880;@Laveran1884].
+After Laveran, several studies described basic features of malaria infections in humans [@GarnhamPCC1988HistoryDiscoveries]. It would take decades of research before the modern view of the parasite life-cycle was complete. The liver stages were not  described until the 1940s, through the work of Garnham and colleagues [@ShorttHE1948PreerythrocyticStage;@GarnhamPCC1988HistoryDiscoveries]. The story of how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn.^[Several good historical accounts have been written [@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery].]
+
+The parasite life-cycle is an organizing principle for the study of malaria. The discoveries by Laveran, Ross, Battista Grassi, Garnham and others set the stage for hundreds of thousands of studies over 144 years that have developed a rich and impressive body of knowledge.
+Comprehensive reviews of malaria were published in one two-volume set in 1949, and another in 1988 [@BoydMF1949MalariologyComprehensive;@WernsdorferWH1988MalariaPrinciples]. It will soon be time for an update. 
+
+This is not that book.
+ 
+In 1899, Ross turned is attention to malaria control, leading to the publication of *The Prevention of Malaria* in 1910, which was followed by a $2^{nd}$ edition in 1911. At that time, several tools were available to fight malaria: quinine, bed nets, and larval source management. The latter showed a great deal of promise. At this point, Ross made another important contribution to malaria through the study of malaria prevention: he clearly articulated how malaria control needed a quantitative approach that would include well-developed metrics to measure malaria in populations. He also introduced mathematical models tha were, for him, a tool for applying a quantitative logic to malaria control. Ross played a role in developing most of the metrics that are commonly used today, and he developed the first three mathematical models of malaria.  
+
+Ross was a pioneer at the beginning of a long journey that has been developed by hundreds of scientists and analysts. Nowadays, we can describe the challenge of malaria control using concepts drawn from several modern academic disciplines. Malaria is a managed, complex adaptive system involving non-linear interactions among mosquitoes, parasites, humans, and the managers. These complex systems are heterogeneous: doing the same thing in different places can result in different outcomes. To understand why outcomes of malaria control vary, we need good theory describing malaria transmission intensity and seasonality, mosquito ecology and behaviors, mosquito and parasite genetics, health systems, and human behaviors. To give advice, we need malaria intelligence -- information about these critical factors, and since we are giving advice, and since the systems are heterogeneous, we will need information about all those factors for each management unit. We must grapple with questions about malaria that remain poorly understood, and we most offer advice even if there are enormous gaps in data and knowledge. We want to give policy advice that is robust to uncertainty. We will need well organized systems to store and analyze data and to develop intelligence that can help us learn and adapt. 
+
+In all of these activities, mathematical models of malaria transmission dynamics and control play an important role. 
+
+This book takes a deep dive into dynamical systems models for malaria epidemiology, transmission dynamics, and control. It is designed to serve as an introduction and resource for malaria analysts who seek to use evidence and mathematical models to develop advice about malaria policies. We introduce the material using a modular framework for building malaria models designed to suppport robust analytics for malaria policy (RAMP) [@WuSL2023SpatialDynamics]. Most of the examples use one of two RAMP-branded R packages: one is designed to build and solve systems of ordinary or delay differential equations [ramp.xde](https://dd-harp.github.io/ramp.xde/); and the other supports discrete-time systems [ramp.dts](https://dd-harp.github.io/ramp.dts/). These are further supported by other ramp software packages, including model libraries, and other simulation software that takes a deep dive into mosquito ecology, mosquito dispersal, malaria epidmiology (in the narrow sense).  We also hope that the material can be used in scientific research. 
+
+To get all this started, we bring the narrative back to Ronald Ross and the study of the prevention of malaria and the study of epidemics. 
 ^[The narrative in this book is often historical, which serves two purposes.
 First, it provides an excuse to cite and discuss old papers that should not get overlooked.
 Second, a historical narrative allows us to introduce malaria complexity in an ordered way, starting from principles that are simple and abstract, and progressing towards ideas that are non-linear, messy, or subtle.
 We will often use history as a way of structuring discussions, even as our attention turns increasingly to the mathematics we need to deal with the biological complexity of malaria in populations.]
 
 ## The Prevention of Malaria 
+
+Ross's first mathematical model of malaria appears to have originated from an academic discussion, in 1904, that critiqued a larval source management program in Mian Mar. 
 
 > *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical. --1899, Ronald Ross [@RossR1899ExterminationMalaria]*
 

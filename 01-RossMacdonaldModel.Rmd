@@ -1,7 +1,10 @@
 
 # The Ross-Macdonald Model
 
-The development of the Ross-Macdonald model has been discussed elsewhere [@SmithDL2012_RossMacdonald]. There is not a single paper where a system of equations was published by Macdonald. Instead, the model traces back to several different publications that present equations and formulas describing malaria transmission. We have already mentioned that Ronald Ross published two models of malaria transmission, but we also owe a lot to Alfred Lotka, who analyzed both models.  
+The Ross-Macdonald model and its development have been discussed elsewhere [@AronJL1982PopulationDynamics;@BaileyNTJ1982BiomathematicsMalaria;@SmithDL2012_RossMacdonald]; it was a model developed by Macdonald that was based on Ross's earlier work and that was supported by the mathematical talents of Armitage. There is not a single paper where Macdonald described the system of differential equations. Instead, the model appeared in parts of several different publications that presented equations and formulas describing malaria transmission, and that reviewed existing data. 
+
+The model that Maconald started with was first developed by 
+Ronald Ross (who published two models of malaria transmission), but we also owe a lot to Alfred Lotka, who analyzed both models.  
 
 Ross's first model described malaria transmission dynamics using  difference equations [@RossR1908]. That model was reviewed, analyzed, and critiqued first by H. Waite in 1910,  [@WaiteH1910MosquitoesMalaria]. The formulation is a bit hard to follow, so we will present a system of difference equations in place of the equations Ross actually wrote down. 
 
@@ -9,8 +12,7 @@ Ross's first model described malaria transmission dynamics using  difference equ
 
 Ross's second model was thoroughly analyzed by Lotka, who had taken an active interest in Ross's malaria models. In 1912, he published a set of solutions to Ross's equations [@LotkaAJ1912Nature]. In 1923, Lotka published an analysis of both of Ross's models in five parts. The first two parts reformulate Ross's models [@LotkaAJ1923part1;@LotkaAJ1923part2]. The third part tackles numerical issues, which includes a photograph of a clay model of the phase plane as a surface [@LotkaAJ1923part3], and the fifth part is a concise summary [@LotkaAJ1923part5]. In the $4^{th}$, which was led by Sharpe, a new model was introduced that included delays for the latent periods [@LotkaAJ1923part4].    
 
-**Macdonaald** 
-
+**Macdonald** 
 
 Macdonald made several important contributions to the mathematical study of malaria. Ross's original formulation remained the standard until Macdonald's paper on the sporozoite rate [@MacdonaldG1952Sporozoite]. Because of it's historical interest, we'll discuss Ross's formulation in the discussion of [Macdonald's Model], in part, to make it clear why Macdonald's contribution was significant enough to get his name attached.
 
@@ -23,9 +25,8 @@ As a side note, it's highly likely that Macdonald was aware of Lotka's demograph
 
 ## Difference Equations 
 
-Ross had measured malaria prevalence in different populations, and he knew that the level of prevalence was related to mosquito populations. He recognized that prevalence could change, and that what set its value was a balance between two processes. 
-
-The logic looks like this: 
+Ross noted the differences in malaria prevalence, which he attributed to differences in exposure to infectious mosquitoes. He knew that the level of prevalence was related to local mosquito populations, but he also recognized that malaria could be acquired elsewhere (*e.g.* while traveling). 
+He recognized that prevalence could change, and that what set its value was a balance between two processes. The quantitative logic looks like this: 
 
 $$
 \left[
@@ -35,10 +36,10 @@ $$
 && \mbox{Fraction Uninfected that Got Infected}\\
 \end{array} \right]
 $$
-This description ignores infected people who died, infected people who emigrated, and infected people who immigrated. It's not perfect, but it's a starting point. 
 
-For mosquitoes, we assume they are much more likely to die than to clear infections.  
-So we the process is slightly different: 
+This description ignores infected people who died, infected people who emigrated, and infected people who immigrated. The model is neither comprehensive nor perfect. It was a starting point. 
+
+For short-lived mosquitoes, we assume they are much more likely to die than to clear infections. So for mosquitoes, the process is slightly different: 
 
 $$
 \left[
@@ -47,11 +48,12 @@ $$
 && \mbox{Fraction Uninfected that Got Infected}\\
 \end{array} \right]
 $$
+
 What's important here is that infectious mosquitoes are infecting people when they bite, and infectious people are infecting mosquitoes when the mosquito blood feeds. This process is clarified by a diagram: 
 
-**Model** 
+### Model 
 
-We can translate this description into a model, but we need to start speaking math.  
+We can translate this description into a model, but we need to start speaking math. The parts of a model are 
 
 *Variables:* 
 
