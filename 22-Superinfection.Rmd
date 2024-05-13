@@ -1,4 +1,4 @@
-# Detecting Parasites
+# Superinfection 
 
 ## Parasite Densities and Detection 
 

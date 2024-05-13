@@ -1,4 +1,4 @@
-# Measuring Malaria 
+# Malaria Metrics
 
 If we want to use evidence to make policy, we need to understand transmission and disease in its local context, which we learn about from assembling and analyzing the evidence. In malaria, the evidence is usually one or more of a core set of metrics. One useful metric is the *Pf*PR from cross sectional surveys; these are available from research studies, but they are also available from demographic health surveys (DHS) or malaria indicator surveys (MIS). If we are lucky, we will also have mosquito catch counts data (by some method), which we scale by effort and report as something like the *Pf*HBR. We estimate the *Pf*SR from some of these caught mosquitoes, and we take their product, the *Pf*EIR. From other designs, we might have estimtes of the *Pf*FoI, or if serology was done, we might know the *Pf*SCR. 
 

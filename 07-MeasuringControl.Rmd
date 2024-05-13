@@ -1,7 +1,0 @@
-# Measuring Vector Control
-
-In the previous chapter, we consider adult mosquito population density as a process closely related to, but also exogenous to the process of parasite transmission. 
-
-## Coverage 
-
-## Effect Sizes 

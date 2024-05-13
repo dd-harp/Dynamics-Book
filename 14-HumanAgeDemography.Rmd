@@ -1,0 +1,27 @@
+
+# Human Age & Demography  
+
+A core limitation of most malaria models is that they need to have the capability of handling human demography and age. Here, we present the Ross-Macdonald model for exposure and infection in a population with age. 
+
+**Human Demography:** The problem, in a nutshell, is that our human population is changing dynamically as it ages over time. We let $H(a,t)$ denote the density of a human population of age $a$ at time $t,$ and we can describe age-specific survival as an age- and time-specific rate $\mu(a,t).$ Demographic changes in cohorts are described as follows:   
+$$
+\frac{\partial H(a,t)}{da} + \frac{\partial H(a,t)}{dt} = -\mu(a,t) H(a,t)
+$$
+In this case, births are specified as a boundary condtion $H(0,t) = B(t).$ 
+
+
+**Malaria Dynamics:** To model malaria infection dynamics in this population, we let $h(a,t)$ denote the force of infection for the cohort of age $a$ at time $t$:  
+
+$$
+\frac{\partial X(a,t)}{da} + \frac{\partial X(a,t)}{dt} = h(a,t) \left(H(a,t) - X(a,t) \right) - r X(a,t)
+$$
+The problem for malaria in humans is exacerbated by the development of immunity in populations. We would like to have some methods that make it possible to investigate data describing malaria in populations as they age.  
+
+## Cohort Dynamics
+
+We now
+
+## Gallerkin 
+
+We now
+
