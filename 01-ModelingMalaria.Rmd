@@ -1,9 +1,9 @@
-# (PART) Basic Dynamics {-}
+# (PART) Introduction {-}
 
-# Ross and the Prevention of Malaria 
+# The Prevention of Malaria 
 
-Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito [@RossR1897PeculiarPigmented] on August 20$^{th}$, 1897, celebrated as _mosquito day_.
-In the months that followed, Ross presented evidence that mosquitoes transmit malaria parasites. 
+Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito [@RossR1897PeculiarPigmented]. The event, which occurred in a military hospital in Hyderabad, India on August 20$^{th}$, 1897, is now celebrated as _mosquito day_.
+In the months that followed, Ross made the case that mosquitoes transmit malaria parasites [@RossR1898RoleMosquito]. 
 Concurrently, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi [@GrassiB1898UlterioriRicerche;@GrassiB1901StudiDi]. 
 By 1899, a scientific consensus had formed among malaria experts that malaria was a mosquito-transmitted disease. 
 It would take some time before the "mosquito hypothesis" was accepted more broadly.
@@ -14,9 +14,11 @@ The modern view of the parasite life-cycle was not complete until the 1940s, thr
 
 
 Malaria is a disease that could be treated and measured before anyone knew what caused it or how it was transmitted.
-Malaria was commonly treated with quinine after the compound was isolated in 1824, long before Laveran.
+Malaria was commonly treated with quinine once the compound had been isolated in 1824. 
 The chemical compound was isolated from the bark of Cinchona tree, which had been used to treat malaria fevers.
 The spleen rate, a reasonable metric for malaria was described by Dempster in 1948 [@Dempster1848SpleenRate].
+All of this occurred before Laveran showed how that malaria was caused by infection with a parasite.
+
 The elements of the story of malaria, including a full account of
 how the malaria parasite's life cycle was unravelled over time is a topic that worth taking some time to learn [@Bruce-ChwattLJ1988HistoryMalaria;@GarnhamPCC1988HistoryDiscoveries;@ServiceMW1978ShortHistory;@CoxFEG2010HistoryDiscovery]. 
 
@@ -29,26 +31,29 @@ We try to learn enough history to avoid repeating the same mistakes.
 We are sure to make enough mistakes of our own as we blunder forward.
 
 In this first epoch of malaria control, it is Ross who once again draws our attention.
-After the big discovery, Ross turned his attention to malaria control, and by 1910,
-he published *The Prevention of Malaria,* which was followed by a $2^{nd}$ edition in 1911.
-Ross is of interest because he takes a quantitative approach to the prevention of malaria.
+After his big discovery, Ross turned his attention to malaria control. In 1910,
+he published a book, *The Prevention of Malaria.* A second second edition followed in 1911.
+Ross's work on malaria prevention is of interest because he laid out a vision for a quantitative approach to the prevention of malaria.
 He clearly articulated how malaria control needed quantitative concepts, including well-developed metrics to measure malaria in populations. 
 Ross himself developed the thick film, a technique that was intended to increase the sensitivity of malaria diagnostics [@RossR1903ThickFilm; @RossR1903ImprovedMethod].
 In the service of understanding malaria for purposes of control, Ross developed the first mathematical models for malaria, in which he addressed basic questions about larval source management [@RossR1905LogicalBasis] and malaria transmission [@RossR1908; @RossR1911Book; @RossR1911Nature].
-In the last phase of his career, Ross formed an alliance with Hilda Hudson, a mathematics professor from Cambridge University. Ross and Hudson developed mathematical theory to support the study of epidemics, which they called *a priori pathometry.*  
 
-The parasite life-cycle has been an organizing principle for the study of malaria. 
-The discoveries by Laveran, Ross, Battista Grassi, Garnham and others set the stage for hundreds of thousands of studies over 144 years that have developed a rich and impressive body of knowledge. 
-Over that time, we have learned an enormous amount about malaria and its control.
+In the second decade of malaria control, the last phase of Ross's career, he formed an alliance with Hilda Hudson, a mathematics professor from Cambridge University. Between 1915 and 1917, Ross and Hudson developed mathematical theory to support the study of epidemics, which they called *a priori pathometry.* Then, in 1921, Martini developed a model describing the dynamics of infections that immunized their hosts. In 1927, Kermack and McKendrick published the first of a five-part series on the mathematical theory of epidemics that described the dynamics of acute immunizing infections, which overshadowed the work by Ross and Hudson. Nowadays, the field is called *mathematical epidemiology.*   
+
+*** 
+
+The parasite's life-cycle has been an organizing principle for the study of malaria. 
+The discoveries by Laveran, Ross, Battista Grassi, Garnham and others set the stage for hundreds of thousands of studies over 144 years (at the time of this writing) that have developed a rich and impressive body of knowledge. 
+Over that time, we have learned an enormous amount about malaria and its control. 
 The first comprehensive review of malaria, *Malariology. A Comprehensive Survey of all Aspects of this Group of Diseases from a Global Standpoint,* was published in 1949 in a two volume set edited by Mark F. Boyd with 
 70 chapters and 1643 pages from 65 contributors [@BoydMF1949MalariologyComprehensive]. 
 Almost 40 year later, 1988, the second comprehensive review of malaria was published in another two volume set, *Malaria: Principles and Practice of Malariology,* 
 edited by Walter H Wernsdorfer and Sir Ian McGregor; this set had 57 chapters and 1818 pages from 68 contributors, [@WernsdorferWH1988MalariaPrinciples]. 
 Another 40 years has passed, and it is almost time for an update. 
 
-The book has a narrower focus. 
-It is designed as a a primer to support robust analytics for malaria policy (RAMP).
-It is designed to cover malaria epidemiology, transmission dynamics and control, and some closely related topics (*e.g.* mosquito ecology and human demograph) to support the development of simulation-based analytics for malaria policy. 
+
+This book is a primer on mathematical models to support robust analytics for malaria policy (RAMP). 
+It covers malaria epidemiology, mosquito ecology, human demography, and malaria transmission dynamics and control with a focus on the mathematical theory and models that have been developed over the past century. 
 While this book will cover many of the topics in those two-volume sets, it is focused more narrowly on introducing the mathematical study of malaria that started with Ross.
 The field made some great leaps forward in the 1950s, when Macdonald wrote a series of papers that reviewed decades of field studies and updated Ross's basic models. 
 Macdonald's paper on the sporozoite transformed the quantitative study of malaria transmission by mosquitoes, drawing attention to the importance of mosquito survival.
@@ -63,38 +68,49 @@ Nowadays, we can describe malaria as a managed, complex adaptive system involvin
 
 This book takes a deep dive into dynamical systems models for malaria epidemiology, transmission dynamics, and control. It is designed to serve as an introduction and resource for malaria analysts who seek to use evidence and mathematical models to develop advice about malaria policies. We introduce the material using a modular framework for building malaria models designed to suppport RAMP [@WuSL2023SpatialDynamics]. Most of the examples use one of two RAMP-branded R packages: one is designed to build and solve systems of ordinary or delay differential equations [ramp.xde](https://dd-harp.github.io/ramp.xde/); and the other supports discrete-time systems [ramp.dts](https://dd-harp.github.io/ramp.dts/). These are further supported by other ramp software packages, including model libraries, and other simulation software that takes a deep dive into mosquito ecology, mosquito dispersal, malaria epidmiology (in the narrow sense).  We also hope that the material can be used in scientific research. 
 
-To get all this started, we will walk through concepts as they developed over time, which brings us back to Ronald Ross, the study of the prevention of malaria, and the study of epidemics. 
-^[The narrative in this book is often historical, which serves two purposes.
+To get all this started, we will walk through concepts as they developed over time, which brings us back to Ronald Ross, the study of the prevention of malaria, and the study of epidemics.^[The narrative in this book is often historical, which serves two purposes.
 First, it provides an excuse to cite and discuss old papers that should not get overlooked.
 Second, a historical narrative allows us to introduce malaria complexity in an ordered way, starting from principles that are simple and abstract, and progressing towards ideas that are non-linear, messy, or subtle.
 We will often use history as a way of structuring discussions, even as our attention turns increasingly to the mathematics we need to deal with the biological complexity of malaria in populations.]
 
 ## The Quantitative Approach
 
-The goal of malaria control is to prevent malaria.
-Since malaria is a mosquito-transmitted diseases, malaria control programs need some basic theory to understand how malaria (*i.e.* any disease that is caused by infection with the parasite) and the prevalence of infection are related to malaria transmission by mosquitoes.
-In particular, it should be able to relate the factors driving malaria in a place, the metrics that we use to measure malaria, mosquito population densities and bionomics, and the actions taken by malaria control programs.
-Ross was not the only one to grapple with the complex, multi-factorial nature of malaria transmission and vector control, but what set him apart was his use of mathematics to illustrate his ideas to malaria. 
-(At the end of this chapter, we make some attempt to put Ross into a broader historical narrative.)
+The goal of malaria control is to prevent malaria. In the long-term, the expectation is that malaria will be eliminated from an ever growing list of places, and that it will eventually be eradicated. 
+All of this revolves around the study of malaria transmission by mosquito populations through blood feeding.
+
+Since malaria is a mosquito-transmitted diseases, malaria control programs need some basic theory to understand how malaria (*i.e.* any disease that is caused by infection with the parasite) is related to exposure risk, malaria transmission intensity, and the prevalence of infection. 
+In particular, programs should should have a basic understanding that relates the factors driving malaria in a place, the metrics that we use to measure malaria, mosquito population densities and bionomics, and the actions taken by malaria control programs. 
+
+A vision for doing all this was articulated by Ross in the first decade of studying malaria transmission.
+Ross was not the only one to grapple with the complex, multi-factorial nature of malaria transmission and vector control, but what set him apart was his attempt to use of mathematics to illustrate his ideas about malaria. 
+We will use Ross's writings throughout this chapter to introduce the nature of the challenges of managing malaria control. 
+With the benefit of decades of research and cheap high-speed computing, we are in a better position to fulfill that vision than Ross ever could have.  
+
+At the end of this chapter, we make some attempt to put Ross into a broader historical narrative.
 
 *** 
 
-In 1899, Ross launched a new phase of his career that focused on the prevention of malaria in a pair of essays that discussed the possibility of *exterminating* or *extirpating* malaria through mosquito control  [@RossR1899ExterminationMalaria;@RossR1899InauguralLecture]. Ross's initial focus was on larval source management: 
+In 1899, Ross announced a new phase of his career in a pair of essays on *exterminating* or *extirpating* malaria through mosquito control  [@RossR1899ExterminationMalaria;@RossR1899InauguralLecture]. Ross's initial focus was on larval source management: 
 
 > *...in order to eliminate malaria wholly or partly from a given locality, it is necessary only to exterminate the various species of insect which carry the infection. This will certainly remove the malaria to a large extent and will almost certainly remove it altogether. It remains only to consider whether such a measure is practical [@RossR1899ExterminationMalaria].*
 
-Over the decade, Ross began to use quantitative concepts to understand some very basic questions. Among Ross's writing, we find a question posed in 1902, in *Mosquito Brigades and How to Organise Them* [@RossR1902MosquitoBrigades]: 
+Over the decade, Ross began to use quantitative concepts to understand some very basic questions. Ross was interested in using mathematics to help him reason through problems. 
+Among Ross's early writings, we find a question posed in 1902, in *Mosquito Brigades and How to Organise Them* [@RossR1902MosquitoBrigades]: 
 
 > It may now be asked, what percentage of diminution in mosquito-borne diseases may be expected to follow a given percentage of reduction in the number of mosquitoes? I regret that I cannot as yet give any actual statistics on the point, but we may perhaps attempt an estimate on *a priori* grounds. We ask, are we to expect a decrease in the same ratio as the decrease in the number of mosquitoes; or in a dupblicate ratio? The disease will probably diminish in a duplicate ratio? ---pp. 56 in [@RossR1902MosquitoBrigades]
 
-Ross was thus trying to develop some kind of quantitative logic to help set reasonable expectations about the responses to mosquito control. His guess was that the responses should be non-linear because two bites are required for transmission -- one to infect a mosquito and another to transmit it back to humans. In paragraph that follows, Ross explains what he meant by a *duplicate ratio.* 
+Ross was thus trying to develop quantitative intuition to establish reasonable expectations about malaria transmission and the responses to mosquito control. His guess was that the responses should be non-linear because two bites are required for transmission -- one to infect a mosquito and another to transmit it back to humans. In paragraph that follows, Ross explains what he meant by a *duplicate ratio.* 
 
 > Now, if we reduce the number of mosquitoes in the locality by one-half, the mosquito bites also will be reduced by one half; and, consequently, only half as many people will now become infected as was formerly the case. But, since the mosquitoes themselves are infected by biting previously infected persons, the percentage of infected mosquitoes ... will also be reduced in its turn, because the insects will now find fewer infected persons to bite. Hence, ultimately, the number of infected persons in the locality will be reduced by much more than one-half. In fact, we may perhaps assume that the number of infected persons will be reduced to one-quarter, that is, in the duplicate ratio of the percentage of reduction of the mosquitoes. ---pp. 56 in [@RossR1902MosquitoBrigades]
 
-While Ross was right that there should be a non-linearity, his quantitative logic failed when he tried to use it without going the rigorous process of developing and analyzing a mathematical model. Using mathematical models, we would now argue that, in fact, the expected reduction varies from place to place, depending on the intensity of transmission, which scales linearly with the density of mosquitoes. When transmission is very intense, halving mosquitoes would scarcely change the fraction of humans infected. In some places, halving mosquitoes might be enough to end malaria transmission. 
+While Ross was right that there should be a non-linearity, his quantitative logic failed when he tried to use it without going the rigorous process of developing and analyzing a mathematical model. 
+Using mathematical models, we would now argue that, in fact, the expected reduction varies from place to place.
+The response would depend on the intensity of transmission before doing any control, which scales linearly with the density of mosquitoes.
+When transmission is very intense, halving mosquitoes would scarcely change the fraction of humans infected.
+In some places, halving mosquitoes might be enough to end local malaria transmission. If malaria transmission were sustained through malaria importation, then Ross's answer would not be too far off. 
 
-
-Despite getting the logic wrong, Ross was asking relevant questions about *scaling relationships* in malaria transmission and their causes.
+Despite getting the logic wrong -- or at the very least, underestimating the complexity of the question -- Ross was asking relevant questions. 
+In this case, we was asking about *scaling relationships* in malaria transmission and their causes.
 The search for an *a priori* approach would eventually lead to development of his first mathematical model for malaria transmission in 1908, in *Report on the Prevention of Malaria in Mauritius* [@RossR1908]. A clear basis for giving an answer would finally come when Lotka analyzed Ross's models in 1923 [@LotkaAJ1923part1; @LotkaAJ1923part2; @LotkaAJ1923part3; @LotkaAJ1923part5], and in Macdonald's analysis of the sporozoite rate [@MacdonaldG1952Sporozoite] and his formula for the basic reproductive number for malaria [@MacdonaldG1952R0]. The study of these scaling relationships is still evolving.  
 
 Ross also discused response timelines. He was aware of differences in duration of infection for yellow fever, lypmhatic filariasis, and malaria. Compared to yellow fever, the responses to vector control should be slow because,  

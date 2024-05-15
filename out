@@ -1,9 +1,7 @@
-mv 70-MalariaAnalytics.Rmd 70-MalariaAnalytics.Rmd
-touch 71-MeasuringMalaria.Rmd
-mv 71-Scaling.Rmd 72-Scaling.Rmd
-mv 72-Connectivity.Rmd 73-Connectivity.Rmd
-mv 73-BuiltInAnalytics.Rmd 84-BuiltInAnalytics.Rmd
-mv 73-Stochasticity.Rmd 85-Stochasticity.Rmd
-mv 74-Microecology.Rmd 74-Microecology.Rmd
-mv 74-Microsimulation.Rmd 75-Microsimulation.Rmd
-mv 75-SpatialControl.Rmd 76-SpatialControl.Rmd
+mv 10-ModelBuilding.Rmd 10-ModelBuilding.Rmd
+mv 11-AdultMosquitoDynamics.Rmd 11-AdultMosquitoDynamics.Rmd
+touch 12-BloodFeeding.Rmd 
+mv 12-MosquitoEcology.Rmd 13-MosquitoEcology.Rmd
+mv 13-HumanAgeDemography.Rmd 14-HumanAgeDemography.Rmd
+mv 14-Realism.Rmd 15-Realism.Rmd
+mv 18-ModularComputation.Rmd 18-ModularComputation.Rmd
