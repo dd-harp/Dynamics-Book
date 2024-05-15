@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Basic Malaria Models 
 
 Ross was interested in understanding malaria so he could make plans about malaria control.
@@ -58,17 +63,21 @@ In all of these models, we will adhere rigidly to Ross's simplifying assumptions
 
 ## Discrete Time, Deterministic
 
-We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model. 
+We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, parameters, and equations. 
 
 In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things. 
 
-+ **Variables** --- These are the quantities we want to compute. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time.  
+### Variables
 
-    + Let $x_t$ be the fraction of people who are infected at time $t,$ and $0 \leq x_t \leq 1.$
+Variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time.  
 
-    + Let $y_t$ be the fraction of mosquitoes who are infected at time $t,$ and $0 \leq y_t \leq 1.$ 
++ Let $x_t$ be the fraction of people who are infected at time $t,$ and $0 \leq x_t \leq 1.$
 
-+ **Initial Conditions** --- Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything unless we can say how the process gets started. What are the values of our variables at the beginning (at time $t=0$)? 
++ Let $y_t$ be the fraction of mosquitoes who are infected at time $t,$ and $0 \leq y_t \leq 1.$ 
+
+### Initial Conditions
+
+Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything unless we can say how the process gets started. What are the values of our variables at the beginning of our simulations (usually, at time $t=0$)? 
 
 We set these initial values to be small: 
 
@@ -76,16 +85,18 @@ We set these initial values to be small:
 # Initial Conditions, as a Named Vector
 x0 = .01
 y0 = .001
-xy = c(x=x0, y=y0)
+xy = c(t=0, x=x0, y=y0)
 ```
 
-+ **Parameters** --- The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, the fraction of infected mosquitoes that survive. Unlike variables, parameters are passed to the model. 
+### Parameters 
 
-  + Let $s$ denote the fraction of people who remain infected after one day; $0 < s < 1.$ 
+The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.  
 
-  + Let $p$ denote the fraction of mosquitoes who remain alive after one day; $0 < p < 1.$ 
+  + Let $s$ denote the fraction of people who clear infections after one day; $0 < s < 1.$ 
 
-  + Let $a$ denote the fraction of mosquitoes who blood feed on a human; $0 < a < 1.$ 
+  + Let $u$ denote the fraction of mosquitoes who die in one day; $0 < u < 1.$ 
+
+  + Let $a$ denote the fraction of mosquitoes who blood feed on a human in a day; $0 < a < 1.$ 
 
   + Let $m$ denote the number of mosquitoes per human; $m \geq 0.$ 
 
@@ -99,28 +110,30 @@ par = list(
 ) 
 ```
 
-+ **Equations:** Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms: 
+### Equations 
 
-    + The fraction of humans who are infected is $x_t$; a fraction $s$ clear infections.
+Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms: 
+
++ The fraction of humans who are infected is $x_t$; a fraction $s$ clear infections.
     
-    + The fraction of mosquitoes who are infected is $x_t$; a fraction $u$ die. 
++ The fraction of mosquitoes who are infected is $x_t$; a fraction $u$ die. 
     
-    + The fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ will become infected. 
++ The fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ will become infected. 
     
-    + The fraction of mosquitoes who are not infected is $1-x_t$; a fraction $a x_t$ become infected. 
++ The fraction of mosquitoes who are not infected is $1-x_t$; a fraction $a x_t$ become infected. 
 
 $$\begin{array}{rl}
 x_{t+1} &=  x_t - s x_t + m a y_t (1-x_t)  \\ 
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}$$
 
-We write a function that computes and returns the updated values of the variables: 
+We write a function that computes and returns the updated values of the variables. We adopt a simple naming convention: since this is a discrete time system, we will call the function `dts_xy_1.` It accepts the variables, which describe the state of the system at the current time (as a named vector) and the parameter values (as a list) and it returns the state of the system (as a named vector): 
 
 ```{r}
-dxy = function(xy, p){with(as.list(xy), with(p,{
+dts_xy_1 = function(xy, p){with(as.list(xy), with(p,{
   xn = x + m*a*y*(1-x) - s*x
   yn = y + a*x*(1-y) - u*y
-  return(c(x=xn, y=yn))
+  return(c(t=t+1, x=xn, y=yn))
 }))}
 ```
 
@@ -138,9 +151,13 @@ We name the variables so that later we can call them by name.
 
 ```{r}
 # Compute and store the values of the variables  
-xy = dxy(xy, par)
+xy = dts_xy_1(xy, par)
 xy_t = rbind(xy_t, xy)
+```
 
+We can take a peak at the values we computed: 
+
+```{r}
 # Print 
 print(xy) 
 ```
@@ -150,7 +167,7 @@ We can iterate over many time steps, storing the values in columns:
 ```{r}
 # Iterate to compute the values as they change over time 
 for(t in 2:40){
-  xy = dxy(xy, par) 
+  xy = dts_xy_1(xy, par) 
   xy_t = rbind(xy_t, xy) 
 } 
 ```
@@ -163,7 +180,6 @@ print(tail(xy_t, 3))
 We can now plot out the values over the first 40 days 
 
 ```{r}
-t=0:40
 with(data.frame(xy_t),{
   plot(t, x, type = "b", ylim = c(0,1), col = "darkgreen", ylab = "x, y", xlab = "Time", pch=15)
   lines(t, y, type = "b", col = "darkorange", pch =19)
@@ -173,18 +189,18 @@ with(data.frame(xy_t),{
 After 40 days, the values of $x$ and $y$ are not changing very much:
 
 ```{r}
-# The last value is still stored as xy
-xy - dxy(xy, par)
+# The last value is still stored as xy; the [-1] omits t
+xy[-1] - dts_xy_1(xy, par)[-1]
 ```
 
 If we iterate another hundred days and check again, the differences are effectively zero. 
 
 ```{r}
 for(i in 41:140){
-  xy = dxy(xy, par)
+  xy = dts_xy_1(xy, par)
   xy_t = rbind(xy_t, xy) 
 } 
-xy - dxy(xy, par)
+xy[-1] - dts_xy_1(xy, par)[-1]
 ```
 
 After simulating, the variables reach a steady state, where asymptotically $x_{t+1} = x_t$ and $y_{t+1} = y_t$. 
@@ -223,7 +239,7 @@ We can write a function to compute this steady state:
 
 ```{r}
 # Compute the steady state 
-find_eq = function(par){with(par,{
+find_eq_dts_1 = function(par){with(par,{
   xx = (m*a^2 - s*u)/ (m*a^2 + s*a)
   yy = a*xx/(u+a*xx) 
   c(x=xx,y=yy)
@@ -236,38 +252,47 @@ We want to get used to double checking everything to avoid inserting mistakes. O
 
 If we've done everything right, we ought to get the same values for the steady states through our analysis and simulation. 
 ```{r}
-xy 
-find_eq(par) 
+xy[-1]
+find_eq_dts_1(par) 
 ```
 
-It's tempting to look at the printout and assume these two numbers are exactly equal. This is the land of computation, so things won't be exact. We can simply sum up the differences: 
+It's tempting to look at the printout and assume these two numbers are exactly equal. This is the land of computation, so things won't be exact. We can simply sum up the absolute values of the differences: 
 
 ```{r}
-sum(abs(xy - find_eq(par))) 
+verify_dts_1 = function(xy, pars){
+  sum(abs(xy[-1] - find_eq_dts_1(pars))) 
+}
+verify_dts_1(xy, par)
 ```
 
 If we wanted to reduce this to a simple error check, we should pick a tolerance level -- say $10^{-9}$ -- and then just ask if we are closer than that: 
 
 ```{r}
-sum(abs(xy - find_eq(par))) < 1e-7
+check_it_dts_1 = function(xy, pars, tol=1e-9)
+{
+  verify_dts_1(xy, pars) < tol
+}
+check_it_dts_1(xy, par)
 ```
 
-### Packaging
+### Packaging Workflows
 
-In policy, if we have a task that we want to repeat, we can simply write a function to do it. In this case, we want to write a function that *solves* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
+If we want to repeat tasks, we can simply write a wrapper around other functions that expedite the work. In this case, we want to write a function that *solves* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
 
 ```{r}
-solve_dxy = function(pars, x0=.01, y0 = 0.001, tmax=100){
-   xy = c(x=x0, y=y0) 
+solve_dts_xy_1 = function(pars, x0=.01, y0 = 0.001, tmax=100){
+   xy = c(t=0, x=x0, y=y0) 
    xy_t = xy 
    for(t in 1:tmax){
-     xy = dxy(xy, pars)
+     xy = dts_xy_1(xy, pars)
      xy_t = rbind(xy_t, xy)
    }
-   return(list(t=0:tmax, x=xy_t[,1], y = xy_t[,2])) 
+   return(list(t=xy_t[,1], x=xy_t[,2], y = xy_t[,3], last = xy)) 
 }
 ```
 
+We can write another function that *plots* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
+ 
 ```{r}
 plot_xy = function(xy_t, add_points = FALSE){with(xy_t,{
   llty = "l"
@@ -277,27 +302,31 @@ plot_xy = function(xy_t, add_points = FALSE){with(xy_t,{
 })}
 ```
 
-
-Now, we can just plot solutions: 
+Now, all the work we did above can be plotted using a single function call:  
 
 ```{r}
-plot_xy(solve_dxy(par, tmax=30), add_points=TRUE) 
+plot_xy(solve_dts_xy_1(par, tmax=40), add_points=TRUE) 
 ```
 
-### Checking 
+Now, it is easier to use the models in various ways. 
 
-All our analysis worked out for the basic models that we chose, but what if we had picked different parameters. There must be some very low level of mosquitoes, for example, where malaria can't reproduce. If we reduce $m$ to $0.005$ and evaluate the expression at the steady state, we get negative values for $x$ and $y$. 
+
+### Thresholds 
+
+All our analysis worked out well for the parameter values that we chose, but what if we had picked different parameters? 
+
+There must be some very low level of mosquitoes, for example, where malaria can't reproduce. If we reduce $m$ to $0.005$ and evaluate the expression at the steady state, we get negative values for $x$ and $y$. 
 
 ```{r}
 par1 = par
 par1$m = 0.005
-find_eq(par1)
+find_eq_dts_1(par1)
 ```
 
 What happens if we simulate this? (Let's set the initial conditions to reasonably high values) 
 
 ```{r}
-plot_xy(solve_dxy(par1, x0 = .5, y0=.3, tmax=1500)) 
+plot_xy(solve_dts_xy_1(par1, x0 = .5, y0=.3, tmax=1500)) 
 ```
 
 If we look at the equations, it's easy enough to spot the problem. Since $x$ and $y$ must be positive, then it must be true that $$m a^2 > su.$$ We call this a threshold condition.
@@ -312,7 +341,7 @@ If we check, we find that this gives us the disease free equilibrium.
 ```{r}
 par2 = par
 par2$m = m_crit
-find_eq(par2)
+find_eq_dts_1(par2)
 ```
 
 ### Numerical Stability 
@@ -322,7 +351,7 @@ There is another problem with the equations. If we set $m$ too high, such that a
 ```{r}
 par3 = par
 par3$m = 20 
-plot_xy(solve_dxy(par3, x0 = .01, y0=.001, tmax=20)) 
+plot_xy(solve_dts_xy_1(par3, x0 = .01, y0=.001, tmax=20)) 
 ```
 
 In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back to the assumption that the fraction getting infected is linearly proportional to the number of infective bites. One way to do this is to say that the *expected* number of bites would follow a Poisson distribution with mean $may_t,$ so that the fraction getting infected is the zero term from a Poisson:
@@ -336,43 +365,106 @@ x_{t+1} &=  x_t - s x_t + (1-e^{m a y_t}) (1-x_t)  \\
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}$$
 
-If we want to do any analysis with pencil and paper in this new system, we're stuck with the problem of solving this:  
+Now, if we want to compute the steady state, we're stuck with the problem of solving this:  
 
-$$(1-e^{-m a^2 x/(u + a x)}) (1-x) = s$$ 
-
-We can, however, numerically solve the equations: 
+$$(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx$$ 
+It's surprisingly easy to write down equations, like this one, that we can't solve with pencil and paper. We can still find a way of computing the steady state, but we have to write R code that solves for $x$ numerically. 
 
 ```{r}
-dxy_1 = function(xy, p){with(as.list(xy), with(p,{
-  xn = x + (1-exp(-m*a*y))*(1-x) - s*x
-  yn = y + a*x*(1-y) - u*y
-  return(c(x=xn, y=yn))
+find_eq_dts_2 = function(pars){with(pars,{
+   f_xx = function(x, pp){with(pp,{
+     xx = (1 - exp(-m*a^2*x/(u+a*x)))*(1-x) - s*x
+     y = a*xx/(u+a*xx)
+     yy = u*y + a*xx*(1-y) 
+     return(xx^2 + yy^2)
+   })}
+   xx = optimize(f_xx, c(0,1), pp=pars)$min
+   yy = a*xx/(u+a*xx) 
+   c(xx, yy)
+})}
+```
+
+The new equilibrium is at:
+
+```{r}
+find_eq_dts_2(par3)
+```
+
+We can just as easily write the code to numerically solve the discrete time system: 
+
+```{r}
+dts_xy_2 = function(xy, p){with(as.list(xy), with(p,{
+  xn = x - s*x + (1-exp(-m*a*y))*(1-x) 
+  yn = y - u*y + a*x*(1-y) 
+  t=t+1
+  return(c(t=t, x=xn, y=yn))
 }))}
 ```
 
+Once again, we can wrap a function around the solver so that it's easier to use the code: 
+
 ```{r}
-solve_dxy1 = function(pars, x0=.01, y0 = 0.001, tmax=100){
-   xy = c(x=x0, y=y0) 
+solve_dts_xy_2 = function(pars, x0=.01, y0 = 0.001, tmax=100){
+   xy = c(t=0, x=x0, y=y0) 
    xy_t = xy 
    for(t in 1:tmax){
-     xy = dxy_1(xy, pars)
+     xy = dts_xy_2(xy, pars)
      xy_t = rbind(xy_t, xy)
    }
-   return(list(t=0:tmax, x=xy_t[,1], y = xy_t[,2])) 
+   return(list(t=xy_t[,1], x=xy_t[,2], y = xy_t[,3], last = xy)) 
 }
 ```
 
-Now, we have fixed our stability problem. 
+
+Now, we can visualize the output and see that we have fixed our stability problem. 
 
 ```{r}
-plot_xy(solve_dxy1(par3, x0 = .01, y0=.001, tmax=30)) 
+plot_xy(solve_dts_xy_2(par3, x0 = .01, y0=.001, tmax=20)) 
+```
+
+```{r}
+find_eq_dts_2(par3)
 ```
 
 
+```{r}
+solve_dts_xy_2(par3, x0=.1, y0=.05,tmax=300)$last[-1]
+```
+
+Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results. 
+
+```{r}
+verify_dts_2 = function(pars, x0 = .1, y0=.05, tmax=200){
+  xyt = solve_dts_xy_2(pars, x0=x0, y0=y0, tmax=tmax)
+  sum(abs(xyt$last[-1] - find_eq_dts_2(pars))) 
+}
+```
+
+```{r}
+verify_dts_2(par3, tmax=300)
+```
+
+A function to check that it is accurate to some level of tolerance, but the numerical precision is mismatched, somehow.   
+
+```{r}
+check_it_dts_2 = function(pars, x0 = .1, y0=.05, tmax=200, tol=1e-5)
+{
+  verify_dts_2(pars, x0, y0, tmax) < tol
+}
+check_it_dts_2(par3, tmax=200)
+```
+
+### Notes
+
+Some useful notes:
+
+1. The two models we just presented can be implemented in a spreadsheet. We will be using software written in R.  
+
+2.  
 
 ## Continuous Time, Deterministic
 
-The second was formulated as a system of two ordinary differential equations, in the $2^{nd}$ edition of _The Prevention of Malaria_ [@RossR1911Book]. Ross also published the same model in _Nature_ [@RossR1911Nature] in this form: 
+In 1911, Ross formulated his second model as a system of two ordinary differential equations. The model appeared in the $2^{nd}$ edition of _The Prevention of Malaria_ [@RossR1911Book], and it also appeared in _Nature_ [@RossR1911Nature] in this form: 
 
 $$ 
 \begin{array}{rl}
@@ -382,13 +474,23 @@ dz'/dt &= k z (p'-z') + q' z' \\
 $$ 
 At the time, there was not much evidence from malaria research to frame the problem. A fully parameterized model, using biologically meaningful parameters, would have to wait for a few decades of research and a synthesis by Macdonald.
 
-If we change a few variable and parameter names (let $z=x$, $z'=y$, $k' = ma$, $k=a$, $r=e^{-s}$, and $p=e^{-g}$), we get something that looks like the other equations: 
+In the following, we analyze this system, but we change the variable and parameter names (let $z=x$, $z'=y$, $k' = ma$, $k=a$, $r=e^{-s}$, and $p=e^{-g}$), to get something that is easier to compare to Macdonald's model.  
+
+### Variables 
+
+
+
 $$ 
 \begin{array}{rl}
 dx/dt &= may(1-z) - r x\\
 dy/dt &= ax(1-y) - g z \\
 \end{array}
 $$ 
+
+
+
+These differential equations require  
+
 This equation lacks an infective state for mosquitoes. 
 
 ## Discrete Time, Stochastic 
