@@ -6,4 +6,4 @@ output:
     theme: simplex 
 ---
 
-[Book Draft](../_book/index.html)
+[Book Draft](_book/index.html)
