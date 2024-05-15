@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
-  <meta name="description" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <title>45 Malaria Metrics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
+  <meta name="description" content="45 Malaria Metrics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta property="og:title" content="45 Malaria Metrics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta name="twitter:title" content="45 Malaria Metrics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contributors.html"/>
+<link rel="prev" href="malaria-analytics.html"/>
+<link rel="next" href="realistic-bounds.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,101 +560,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Applied Dynamics for Robust Analytics and Adaptive Malaria Control</h1>
-<p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-15</em></p>
-</div>
-<div id="foreword" class="section level1 unnumbered hasAnchor">
-<h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross <span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">4</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>.</p>
-<p>After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics <em>per se</em>.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that – if we could solve those challenges – then we could make the math easier to use so that discussions would focus on the issues that mattered.
-Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.</p>
-<p>We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">6</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">8</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, or to scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">10</a>]</span>.
-To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.</p>
-<p>To serve programmatic needs, we needed algorithms that could address the decay of interventions
-– coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency –
-and the net effect of one unit of vector control in relation to transmission intensity and coverage.
-To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic.
-In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
-In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
-Beyond the algorithms, these models needed the support of mathematical theory.
-We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">11</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing <span class="citation">[<a href="#ref-addCite"><strong>addCite?</strong></a>]</span>.
-Then it was time to write this book.</p>
-<p>The software lowers the costs of building models that are up to the task of guiding malaria policy.
-An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
-These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.</p>
-<p>This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.</p>
+<div id="malaria-metrics" class="section level1 hasAnchor" number="45">
+<h1><span class="header-section-number">45</span> Malaria Metrics<a href="malaria-metrics.html#malaria-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>If we want to use evidence to make policy, we need to understand transmission and disease in its local context, which we learn about from assembling and analyzing the evidence. In malaria, the evidence is usually one or more of a core set of metrics. One useful metric is the <em>Pf</em>PR from cross sectional surveys; these are available from research studies, but they are also available from demographic health surveys (DHS) or malaria indicator surveys (MIS). If we are lucky, we will also have mosquito catch counts data (by some method), which we scale by effort and report as something like the <em>Pf</em>HBR. We estimate the <em>Pf</em>SR from some of these caught mosquitoes, and we take their product, the <em>Pf</em>EIR. From other designs, we might have estimtes of the <em>Pf</em>FoI, or if serology was done, we might know the <em>Pf</em>SCR.</p>
+<p>From routine clinical surveillance, we could get case counts or the <em>Pf</em>SPR. We can learn more if we stratify by age, or if we follow populations over time.</p>
+<p>If we are to make sense of malaria as a changing baseline that has been modified by control, then we must know something about how transmission has been modified by control. First and foremost, we must understand anti-malarial drug taking, including the frequency of drug taking (for any purpose), adherence to prescribed regimens, and drug taking by severity. To understand transmission, we must have data describing intervention coverage and its timing. This would include patterns of bed net ownership and use over time, IRS and its coverage. We can’t make sense of vector control coverage data without knowing something about the patterns of insecticide resistance. We discuss [Measuring Vector Control] in the next chapter.</p>
+<p>For planning, we would like to know the burden of malaria, and we would like to have an estimate of transmission – something like a malaria reproductive number.</p>
+<p>In most places, we will have routine surveillance data. We would like to piece together a coherent and accurate picture of transmission from this and from any other data we may have. To do so, we would like to know how these statistics compare in settings where two or more of them have been measured at the same place and at the same time. From studies like this, we can start to understand the <strong>scaling relationships</strong> among metrics, and the factors that influence them. What we have learned from studying these relationships is that there the relationship are highly non-linear <span class="citation">[<a href="#ref-HaySI2008MeasuringMalaria">78</a>]</span>, and that some of the factors affecting this relationship are context dependent. We have already mentioned drug taking, and we must acknowledge the difficulty of estimating drug taking by age, in part, because it is often highly heterogeneous in populations. Other factors that have been implicated are heterogeneous biting, environmental heterogeneity, seasonality, travel and mobility.</p>
+<p>Sitting between us and the truth is an observational process, and we must attempt to quantify bias and error in this sampling process if we are to have any hope of getting an accurate picture of transmission in context.</p>
+<p>To get there, we need to organize our algorithms:</p>
+<ul>
+<li><p>The <em>Pf</em>PR varies in a population by age, sex, and the diagnostic method; so we simulate malaria in cohorts as they age, and we output the predicted <em>Pf</em>PR by age, sex, and diagnostic method.</p></li>
+<li><p>The <em>Pf</em>PR is modified by drug-taking; the effect modification varies in a population by age, access to care, and adherence to drug regimens. In our algorithms, we must consider various patterns of drug taking and chemoprotection.</p></li>
+<li><p>Exposure is <em>seasonal</em></p>
+<ul>
+<li><p>seasonality <em>would</em> affect the true <em>Pf</em>PR and the true <em>Pf</em>EIR over time;</p></li>
+<li><p>seasonality <em>could</em> be a source of error in the estimated <em>Pf</em>PR (especially with respect to age) and estimated <em>Pf</em>EIR, particularly if the <em>Pf</em>PR is reported in young children, and mismatched even slightly with <em>Pf</em>EIR.</p></li>
+</ul></li>
+<li><p>Heterogeneous exposure:</p>
+<ul>
+<li><p>exposure varies by age;</p></li>
+<li><p>there are other identifiable sources of frailty that we can deal with through stratification (<em>e.g.</em> house type, location, bed net use), and there are many frailties we will not be able to identify;</p></li>
+<li><p>the relationship between exposure and infection is affected by <em>environmental heterogeneity;</em> because of variability in mosquito populations at a fine spatial grain over time and space, and the trajectories of individual humans who are put at risk,</p></li>
+</ul></li>
+<li><p>The <em>Pf</em>EIR near home is obscured by human mobility through time at risk and exposure away from home;</p></li>
+<li><p>Travel and imported malaria can increase the <em>Pf</em>PR, even if there is no local exposure.</p></li>
+<li><p>Measurement errors in the <em>Pf</em>EIR</p>
+<ul>
+<li><p>There are <em>house effects</em> that bias the estimation of the <em>Pf</em>EIR</p></li>
+<li><p>Different methods of catching mosquitoes give different estimates for the HBR.</p></li>
+</ul></li>
+</ul>
+<p>These effects are incorporated into the framework. Frailties are dealt with by stratifying by age (<span class="math inline">\(\omega(a)\)</span>) and other traits and assigning <em>biting weights</em>; when combined with mobility, these become part of the mixing matrix, <span class="math inline">\(\beta\)</span>. Environmental heterogeneity modifies the relationship between the <em>Pf</em>EIR by stratum and the <em>Pf</em>FoI (through <span class="math inline">\(F_h\)</span>). Seasonality in mosquito density (<span class="math inline">\(Z(t)\)</span>) translates into seasonality in exposure (<span class="math inline">\(S(t)\)</span>). Drug taking and immunity modify the <em>Pf</em>PR after exposure.</p>
+<p>We would like to understand mosquito populations, but we will rely on whatever data we have to <em>estimate</em> the <em>Pf</em>EIR (see Figure 4.1). This is a core algorithm for simulation-based analytics, and the framework was designed to serve these ends.</p>
+<p>In the following sections, we use the framework to illustrate the effects and effect sizes of these factors. The task of estimating is for another book, <strong>Robust Analytics for Malaria Policy.</strong> In this study, we make full use of modularity. We start by <em>stratifying</em> our human population by age, and possibly by other factors. We write algorithms that pass the density of blood feeding mosquitoes in a place, and our algorithms predict mosquito catch counts, depending on the method. From this, we compute the total FoI, which includes the <em>local</em> FoI (at and around home), and the <em>travel</em> FoI. These exposure rates, and algorithms describing drug taking, are translated into estimates of the true <em>Pf</em>PR. The models output the predicted <em>Pf</em>PR by age, sex, and method; and we also output the predicted patterns of care seeking and associated metrics at health facilities in an HMIS, by age and sex.</p>
 <hr />
-<center>
 <div class="float">
-<img src="Figures/ScalableComplexity.png" style="width:80.0%" alt="A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)" />
-<div class="figcaption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</div>
+<img src="Figures/Estimation.png" alt="Figure 4.1: A generalized framwork for understanding the relationship between the PfEIR and the PfPR:" />
+<div class="figcaption">Figure 4.1: A generalized framwork for understanding the relationship between the <em>Pf</em>EIR and the <em>Pf</em>PR:</div>
 </div>
-</center>
-<hr />
-<p>This book shows, through examples, how to use the software to build malaria models.
-Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria.
-What are all the special topics that would need to be covered to build models that could be needed in malaria?
-This book <em>could</em> be the basis for such a course, if there were ever enough students.
-Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
-I will also be writing and recording some short lectures on a subset of topics.</p>
-<p>The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, that they’ve taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
-<p>While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong><em>Robust Analytics for Malaria Policy</em>.</strong></a></p>
-<hr />
-<p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
-<p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">12</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">13</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
-<p>–David L. Smith</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-RossR1911Book" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. The <span>Prevention</span> of <span>Malaria</span>. 2nd ed. <span>London</span>: <span>John Murray</span>; 1911. </div>
-</div>
-<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-ReinerRC2013SystematicReview" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. </div>
-</div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
-<div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
-</div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
-</div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
-</div>
-<div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
-</div>
-<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
-</div>
-<div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
-</div>
-<div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
-</div>
-<div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. </div>
+<div id="ref-HaySI2008MeasuringMalaria" class="csl-entry">
+<div class="csl-left-margin">78. </div><div class="csl-right-inline">Hay SI, Smith DL, Snow RW. Measuring malaria endemicity from intense to interrupted transmission. Lancet Infect Dis. 2008;8: 369–378. doi:<a href="https://doi.org/10.1016/S1473-3099(08)70069-0">10.1016/S1473-3099(08)70069-0</a></div>
 </div>
 </div>
             </section>
@@ -662,8 +611,8 @@ I will also be writing and recording some short lectures on a subset of topics.<
           </div>
         </div>
       </div>
-
-<a href="contributors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="malaria-analytics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="realistic-bounds.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
-  <meta name="description" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <title>7.2 Steady States | Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
+  <meta name="description" content="7.2 Steady States | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta property="og:title" content="7.2 Steady States | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta name="twitter:title" content="7.2 Steady States | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contributors.html"/>
+<link rel="prev" href="mosquito-ecology.html"/>
+<link rel="next" href="stable-orbits.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,101 +560,234 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Applied Dynamics for Robust Analytics and Adaptive Malaria Control</h1>
-<p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-15</em></p>
+<div id="steady-states" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Steady States<a href="steady-states.html#steady-states" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we analyze the system of equations in a narrow case when there is <em>no seasonality,</em> and the system reaches a <em>steady state.</em> To do so, we set the parameter <code>ss=1</code>, so that <span class="math inline">\(\Lambda(t)\)</span> is a constant; the resulting system is <em>autonomous.</em> We do this, in part, because the resulting system is easier to understand. We can develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &amp;= \Lambda - g M \\
+\frac{dY}{dt} &amp;= fq\kappa(M-Y) - g Y \\
+\frac{dZ}{dt} &amp;= fq\kappa_\tau(M_\tau-Y_\tau)e^{-g\tau} - g Z \\
+\frac{dX}{dt} &amp;= h (H-X) - rX  \\ \\ \hline \\
+\kappa &amp;= c \frac{X(t)}{H} \\
+h &amp;= b fq \frac{Z(t)}{H} \\
+\end{array}
+\end{equation}\]</span></p>
+<p>As before, we have put the equations in their modularized form above, and the connecting terms below.</p>
+<p>The first thing to note is that <span class="math inline">\(M\)</span> affects <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span>, which affect <span class="math inline">\(X\)</span>; but <span class="math inline">\(M\)</span> is not affected by <span class="math inline">\(Y\)</span> or <span class="math inline">\(Z\)</span>. Mosquito population density is <em>exogenous</em> to malaria dynamics.</p>
+<div id="mosquito-density" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Mosquito Density<a href="steady-states.html#mosquito-density" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can thus treat it separately in the analysis:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dM}{dt} = \Lambda - g M
+\end{equation}\]</span></p>
+<p>Since emergence rates are steady, mosquito population density reaches a steady state when <span class="math inline">\(dM/dt=0\)</span>, which occurs at:</p>
+<p><span class="math display">\[\begin{equation}
+\bar M = \frac{\Lambda}{g}
+\end{equation}\]</span></p>
 </div>
-<div id="foreword" class="section level1 unnumbered hasAnchor">
-<h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross <span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">4</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>.</p>
-<p>After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics <em>per se</em>.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that – if we could solve those challenges – then we could make the math easier to use so that discussions would focus on the issues that mattered.
-Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.</p>
-<p>We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">6</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">8</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, or to scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">10</a>]</span>.
-To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.</p>
-<p>To serve programmatic needs, we needed algorithms that could address the decay of interventions
-– coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency –
-and the net effect of one unit of vector control in relation to transmission intensity and coverage.
-To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic.
-In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
-In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
-Beyond the algorithms, these models needed the support of mathematical theory.
-We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">11</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing <span class="citation">[<a href="#ref-addCite"><strong>addCite?</strong></a>]</span>.
-Then it was time to write this book.</p>
-<p>The software lowers the costs of building models that are up to the task of guiding malaria policy.
-An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
-These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.</p>
-<p>This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.</p>
-<hr />
-<center>
-<div class="float">
-<img src="Figures/ScalableComplexity.png" style="width:80.0%" alt="A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)" />
-<div class="figcaption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</div>
+<div id="eir" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> EIR<a href="steady-states.html#eir" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we note that at a steady state, the delayed values of variables and terms don’t change, so from <span class="math inline">\(dY/dt\)</span>, we get:</p>
+<p><span class="math display">\[\begin{equation}
+g \bar Y = fq\kappa(\bar M- \bar Y)
+\end{equation}\]</span></p>
+<p>If we substitute the formula for <span class="math inline">\(\bar M\)</span> and solve for <span class="math inline">\(\bar Y\)</span>, we get:</p>
+<p><span class="math display">\[\begin{equation}
+\bar Y = \frac{fq\kappa}{g + fq\kappa} \frac{\Lambda}{g}
+\end{equation}\]</span></p>
+<p>and since at the steady state, any variable at time <span class="math inline">\(t+\tau\)</span> is equal to its value at time <span class="math inline">\(t\)</span>, we substitute the formula for <span class="math inline">\(g \bar Y\)</span> into <span class="math inline">\(dZ/dt\)</span> to get:</p>
+<p><span class="math display">\[\begin{equation}
+g \bar Y e^{-g\tau} = g \bar Z
+\end{equation}\]</span></p>
+<p>Solving for <span class="math inline">\(\bar Z\)</span> we get:</p>
+<p><span class="math display">\[\begin{equation}
+\bar Z =  \frac{f q \kappa}{g + fq \kappa} \frac{\Lambda}{g} e^{-g\tau}
+\end{equation}\]</span></p>
+<p>At the steady state, <span class="math display">\[\mbox{EIR} = fq \frac{\bar Z}{H}.\]</span></p>
+<p>In field studies, the EIR is the product of the HBR and the sporozoite rate (SR). The sporozoite rate (SR, <span class="math inline">\(z\)</span>) is given by:</p>
+<p><span class="math display">\[\begin{equation}
+\bar z =  \frac{Z}{M} = \frac{f q \kappa}{g + fq \kappa} e^{-g\tau}
+\end{equation}\]</span></p>
+<p>So we can understand the EIR as having two parts:</p>
+<p><span class="math display">\[\begin{equation}
+\mbox{EIR} = \mbox{HBR} \times  \mbox{SR}
+\end{equation}\]</span></p>
+<p>or equivalently</p>
+<p><span class="math display">\[\begin{equation}
+\mbox{EIR} = \frac{\textstyle{fq\Lambda}}{\textstyle{H}} \times \frac{\textstyle{f q \kappa}}{\textstyle{g + fq \kappa}} e^{-g\tau}
+\end{equation}\]</span></p>
+<p>This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model <span class="citation">[<a href="#ref-MacdonaldG1952Sporozoite">38</a>,<a href="#ref-ArmitageP1953">61</a>]</span>. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography <span class="citation">[<a href="#ref-SmithDL2004_Statics"><strong>SmithDL2004_Statics?</strong></a>]</span>.</p>
 </div>
-</center>
-<hr />
-<p>This book shows, through examples, how to use the software to build malaria models.
-Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria.
-What are all the special topics that would need to be covered to build models that could be needed in malaria?
-This book <em>could</em> be the basis for such a course, if there were ever enough students.
-Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
-I will also be writing and recording some short lectures on a subset of topics.</p>
-<p>The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, that they’ve taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
-<p>While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong><em>Robust Analytics for Malaria Policy</em>.</strong></a></p>
-<hr />
-<p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
-<p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">12</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">13</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
-<p>–David L. Smith</p>
+<div id="vectorial-capacity" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Vectorial Capacity<a href="steady-states.html#vectorial-capacity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here, we pause to define a term that describes the number of human blood meals each mosquito would take over its whole life:</p>
+<p><span class="math display">\[S = \frac{fq}{g}.\]</span></p>
+<p>Since <span class="math inline">\(1/g\)</span> is the mosquito lifespan in days, and <span class="math inline">\(fq\)</span> is the human blood feeding rate, <span class="math inline">\(S\)</span> is the number of human bloodmeals a mosquito would take over its lifespan. Intuitively, it makes sense that this <em>should</em> be what drives transmission, since it takes two human blood meals to transmit malaria parasites.</p>
+<p>If we rearrange the terms a bit, we can rewrite out the expression for the EIR:</p>
+<p><span class="math display">\[\begin{equation}
+\mbox{EIR}(\kappa) = fq \frac{\bar Z}{H} = \frac{\Lambda}{H} S^2  e^{-g\tau} \frac{\kappa}{1 + S \kappa}
+\end{equation}\]</span></p>
+<p>This formula for the EIR has two parts. We call the first part <em>vectorial capacity</em> (<span class="math inline">\(V\)</span>):</p>
+<p><span class="math display" id="eq:VCdefined">\[\begin{equation}
+V = \frac{\Lambda}{H} S^2  e^{-g\tau}
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>The second part is an expression that involves mainly <span class="math inline">\(\kappa\)</span>.</p>
+<p><span class="math display" id="eq:EIR2ndpart">\[\begin{equation}
+\frac{\kappa}{1 + S \kappa}
+\tag{7.3}
+\end{equation}\]</span></p>
+<p>The relationship between VC and EIR at a steady state is a product:</p>
+<p><span class="math display" id="eq:EIR2VC">\[\begin{equation}
+\mbox{EIR}(\kappa) = V \frac{\kappa}{1 + S \kappa}
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>Vectorial capacity describes the slope of the EIR when <span class="math inline">\(\kappa\)</span> is small:</p>
+<p><span class="math display" id="eq:VCisdEIR">\[\begin{equation}
+\left. d\frac{\mbox{EIR}(\kappa)}{d\kappa}\right|_{\kappa = 0} = V
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>We say that VC describes <em>potential</em> transmission, even if the parasites are absent. Another way to say the same thing is that when <span class="math inline">\(\kappa\)</span> is small, then:</p>
+<p><span class="math display">\[\begin{equation}
+\mbox{EIR}(\kappa) \approx V \kappa
+\end{equation}\]</span></p>
+<p>We can interpret vectorial capacity (<span class="math inline">\(V\)</span>) in simple terms. It describes <em>the number of infective bites that would arise from all the mosquitoes biting a single human on a single day</em> but only <em>if all those mosquitoes became infected.</em> Vectorial capacity tells the story of potential parasite transmission by mosquitoes in four steps, which highlights the fact that two human blood meals are required for the parasite to be transmitted and complete its life-cycle.</p>
+<p><span class="math display" id="eq:VCstory">\[\begin{equation}
+\begin{array}{|c|c|c|c|c|c|c|}
+\Lambda/H &amp;  &amp; S \kappa &amp;  &amp; e^{-g\tau} &amp; &amp; S \\
+&amp; \rightarrow &amp;  &amp; \rightarrow &amp;  &amp; \rightarrow &amp;  \\
+\mbox{Mosquito} &amp; &amp; \mbox{Parasite} &amp; &amp; \mbox{Mosquito} &amp;&amp; \mbox{Parasite} \\
+\mbox{Emerges} &amp; &amp; \mbox{Infects} &amp; &amp; \mbox{Survives} &amp;&amp; \mbox{Infects} \\
+&amp; &amp; \mbox{Mosquito} &amp; &amp; \mbox{EIP} &amp;&amp; \mbox{Human}
+\end{array}
+\tag{7.6}
+\end{equation}\]</span></p>
+<p>As a reminder, while Eq. <a href="steady-states.html#eq:VCstory">(7.6)</a> includes <span class="math inline">\(\kappa\)</span>, the formula for VC, in Eq. <a href="steady-states.html#eq:VCdefined">(7.2)</a>, assumes that <span class="math inline">\(\kappa=1\)</span>: the VC describes transmission as if humans were perfectly infectious. It was defined this way on purpose: it was meant to include mosquito parameters and exclude human factors. We can think of VC as defining something like a conditional expectation, a maximum, or (as we have already said) a measure of <em>potential transmission by mosquitoes</em> that is independent of human factors.</p>
+<p>While <span class="math inline">\(\kappa\)</span> (the numerator in Eq.<a href="steady-states.html#eq:EIR2ndpart">(7.3)</a> accounts for <em>most</em> of the difference between the EIR and the VC, the rest of the difference is due to the denominator in Eq. <a href="steady-states.html#eq:EIR2ndpart">(7.3)</a>, <span class="math inline">\(1+S\kappa\)</span>, which traces back to the formula from <span class="math inline">\(dY/dt\)</span>, which assumes that mosquitoes are either infected or not. The denominator is a measure of saturation – the fraction of mosquitoes that get <em>superinfected</em> with parasites. The main point here is that as <span class="math inline">\(\kappa\)</span> increases, saturation increases. If we set <span class="math inline">\(S\)</span> to the values in the previous plots, we can isolate the relationship:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="_main_files/figure-html/unnamed-chunk-45-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
+<p class="caption">
+Figure 7.1: The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.
+</p>
+</div>
+<p>In these formulas, the measure of saturation is exactly <span class="math inline">\(1+S\kappa\)</span>. We could rewrite the relationship between the EIR and VC in a way
+that tells us something about how we might be underestimating a parasite’s reproductive success:</p>
+<p><span class="math display">\[\mbox{EIR}\times (1 + S \kappa) = V \kappa\]</span>
+which suggests that each infectious bite is passing along an excess <span class="math inline">\(S\kappa\)</span> bites.</p>
+</div>
+<div id="malaria-prevalence-thresholds" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Malaria Prevalence &amp; Thresholds<a href="steady-states.html#malaria-prevalence-thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We let <span class="math inline">\(x\)</span> denote infection prevalence:</p>
+<p><span class="math display">\[\begin{equation}
+x = \frac{X}{H}
+\end{equation}\]</span></p>
+<p>so <span class="math inline">\(\kappa = c x\)</span>, and</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dx}{dt} = \frac{1}{H} \frac{dX}{dt} = h (1-x)-r x
+\end{equation}\]</span></p>
+<p>We can also define the basic reproductive number:</p>
+<p><span class="math display">\[\begin{equation}
+R_0 = \frac{bcV}{r}.
+\end{equation}\]</span></p>
+<p>It is the product of four terms:</p>
+<ul>
+<li><p>Vectorial capacity, <span class="math inline">\(V\)</span>, the number of infective bites, per person, per day;</p></li>
+<li><p>The number of days a person would remain infectious, <span class="math inline">\(1/r\)</span>;</p></li>
+<li><p>The fraction of infectious bites that would infect a human, <span class="math inline">\(b\)</span>;</p></li>
+<li><p>The fraction of blood meals on infectious humans that would infect a mosquito, <span class="math inline">\(c\)</span></p></li>
+</ul>
+<p>After taking their product, we can interpret <span class="math inline">\(R_0\)</span> as a measure of the parasite’s reproductive success after a single generation. It only depends on where we start counting. It could be one of the following:</p>
+<ul>
+<li><p>the number of infected mosquitoes that would arise from a single infected mosquito;</p></li>
+<li><p>the number of infectious mosquitoes that would arise from a single infectious mosquito;</p></li>
+<li><p>the number of infected and infectious humans that would arise from a single infected and infectious human.</p></li>
+</ul>
+<p>Here, <span class="math inline">\(R_0\)</span> plays an important role in these equations if we start with <span class="math inline">\(dX/dt\)</span>; then transform it to <span class="math inline">\(dx/dt\)</span>; then replace <span class="math inline">\(h\)</span> with <span class="math inline">\(bE\)</span>; then replace <span class="math inline">\(\kappa\)</span> with <span class="math inline">\(cx\)</span>; then divide by <span class="math inline">\(r\)</span>; and rearrange:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1}{r} \frac{dx}{dt} = x \left[R_0 \left(\frac{1-x}{1 + cSx} \right)  - 1\right]  
+\end{equation}\]</span></p>
+<p>Since <span class="math inline">\(x\)</span> is the prevalence, it is always in the interval <span class="math inline">\([0,1]\)</span>. When <span class="math inline">\(x\)</span> is very close to <span class="math inline">\(0\)</span>, then</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1-x}{1 + cSx} \lesssim 1.
+\end{equation}\]</span></p>
+<p>and as <span class="math inline">\(x\)</span> grows very small:</p>
+<p><span class="math display">\[\begin{equation}
+\lim_{x \rightarrow 0} \frac{1-x}{1 + cSx} = 1.
+\end{equation}\]</span></p>
+<p>It follows that when <span class="math inline">\(x\)</span> is small, <span class="math inline">\(dx/dt&gt;0\)</span> if and only if <span class="math inline">\(R_0 &gt; 1\)</span>. Depending on <span class="math inline">\(R_0\)</span>, only one of two possibilities can hold:</p>
+<ul>
+<li><p>either <span class="math inline">\(R_0&lt;1\)</span>, so that <span class="math inline">\(x=0\)</span> is the steady state;</p></li>
+<li><p>or <span class="math inline">\(R_0 &gt; 1\)</span>, and the steady state is:</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\bar x = \frac{R_0 -1}{R_0 + c S}
+\end{equation}\]</span></p>
+<p>Since at the steady state, <span class="math inline">\(\kappa = c \bar x\)</span>, we can plug this back into the formulas above to get <span class="math inline">\(\bar Y\)</span> and <span class="math inline">\(\bar Z\)</span>.</p>
+<p>What we’ve learned about these equations is that if mosquito population densities are constant, then malaria reaches a steady state: if <span class="math inline">\(R_0 &gt;1\)</span>, then there is a positive endemic equilibrium, and if <span class="math inline">\(R_0 &lt; 1\)</span>, then malaria is absent from the system. The system is said to be stable – in fact, is is globally asymptotically stable, which means that all the orbits end up converging to the steady state. This statement has been proved many times in many papers, and since this book is focused on policy, we’ll let others worry about proofs.</p>
+</div>
+<div id="checking-our-work" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Checking our Work<a href="steady-states.html#checking-our-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An advantage of working in this environment is that we can check our work. One way we could solve these equations would be to run them for a very long time:</p>
+<p>We make a parameter set that defines the model:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="steady-states.html#cb63-1" tabindex="-1"></a>y0<span class="ot">=</span><span class="fu">c</span>(<span class="at">M=</span><span class="dv">100</span>, <span class="at">Y=</span><span class="dv">10</span>, <span class="at">Z=</span><span class="dv">5</span>, <span class="at">X=</span><span class="dv">200</span>)</span>
+<span id="cb63-2"><a href="steady-states.html#cb63-2" tabindex="-1"></a>paramsSteady <span class="ot">=</span> <span class="fu">makeParams</span>(y0, <span class="at">ss=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="steady-states.html#cb64-1" tabindex="-1"></a><span class="fu">dede</span>(y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>paramsSteady) <span class="ot">-&gt;</span> yout</span>
+<span id="cb64-2"><a href="steady-states.html#cb64-2" tabindex="-1"></a><span class="fu">tail</span>(yout, <span class="dv">1</span>)[<span class="sc">-</span><span class="dv">1</span>] <span class="ot">-&gt;</span> eq1 </span>
+<span id="cb64-3"><a href="steady-states.html#cb64-3" tabindex="-1"></a>eq1</span></code></pre></div>
+<pre><code>## [1] 600.00000 211.01706  91.70764 793.10541</code></pre>
+<p>By plotting it out, we can check to see if we’ve run it for long enough:</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="528" /></p>
+<p>We can check our algebra by computing the same quantities, and <span class="math inline">\(R_0\)</span> and other quantities we care about:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="steady-states.html#cb66-1" tabindex="-1"></a>steadyStates_AronMay <span class="ot">=</span> <span class="cf">function</span>(params){<span class="fu">with</span>(params,{</span>
+<span id="cb66-2"><a href="steady-states.html#cb66-2" tabindex="-1"></a>  Lambda <span class="ot">=</span> m<span class="sc">*</span>H</span>
+<span id="cb66-3"><a href="steady-states.html#cb66-3" tabindex="-1"></a>  Meq <span class="ot">=</span> Lambda<span class="sc">/</span>g</span>
+<span id="cb66-4"><a href="steady-states.html#cb66-4" tabindex="-1"></a>  S <span class="ot">=</span> <span class="fu">with</span>(paramsSteady, f<span class="sc">*</span>q<span class="sc">/</span>g)</span>
+<span id="cb66-5"><a href="steady-states.html#cb66-5" tabindex="-1"></a>  V <span class="ot">=</span> m<span class="sc">*</span>S<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau)</span>
+<span id="cb66-6"><a href="steady-states.html#cb66-6" tabindex="-1"></a>  R0 <span class="ot">=</span> b<span class="sc">*</span>c<span class="sc">*</span>V<span class="sc">/</span>r</span>
+<span id="cb66-7"><a href="steady-states.html#cb66-7" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">ifelse</span>(R0<span class="sc">&gt;</span><span class="dv">1</span>,(R0<span class="dv">-1</span>)<span class="sc">/</span>(R0<span class="sc">+</span>c<span class="sc">*</span>S), <span class="dv">0</span>) </span>
+<span id="cb66-8"><a href="steady-states.html#cb66-8" tabindex="-1"></a>  Xeq <span class="ot">=</span> x<span class="sc">*</span>H</span>
+<span id="cb66-9"><a href="steady-states.html#cb66-9" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>x</span>
+<span id="cb66-10"><a href="steady-states.html#cb66-10" tabindex="-1"></a>  Yeq <span class="ot">=</span> S<span class="sc">*</span>kappa<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>S<span class="sc">*</span>kappa)<span class="sc">*</span>Meq </span>
+<span id="cb66-11"><a href="steady-states.html#cb66-11" tabindex="-1"></a>  Zeq <span class="ot">=</span> Yeq<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) </span>
+<span id="cb66-12"><a href="steady-states.html#cb66-12" tabindex="-1"></a>  EIR <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>Zeq<span class="sc">/</span>H</span>
+<span id="cb66-13"><a href="steady-states.html#cb66-13" tabindex="-1"></a>  FoI <span class="ot">=</span> b<span class="sc">*</span>EIR</span>
+<span id="cb66-14"><a href="steady-states.html#cb66-14" tabindex="-1"></a>  aEIR <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>EIR </span>
+<span id="cb66-15"><a href="steady-states.html#cb66-15" tabindex="-1"></a>  aFoI <span class="ot">=</span> <span class="dv">365</span><span class="sc">*</span>FoI </span>
+<span id="cb66-16"><a href="steady-states.html#cb66-16" tabindex="-1"></a>  extra<span class="ot">=</span><span class="fu">c</span>(<span class="at">S=</span>S, <span class="at">V=</span>V, <span class="at">R0=</span>R0, <span class="at">x=</span>x, <span class="at">kappa=</span>kappa, </span>
+<span id="cb66-17"><a href="steady-states.html#cb66-17" tabindex="-1"></a>          <span class="at">EIR=</span>EIR, <span class="at">FoI=</span>FoI)</span>
+<span id="cb66-18"><a href="steady-states.html#cb66-18" tabindex="-1"></a>  annual <span class="ot">=</span><span class="fu">c</span>(<span class="at">aEIR =</span> aEIR, <span class="at">aFoI=</span>aFoI)</span>
+<span id="cb66-19"><a href="steady-states.html#cb66-19" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">std=</span><span class="fu">c</span>(<span class="at">M=</span>Meq, <span class="at">Y=</span>Yeq, <span class="at">Z=</span>Zeq, <span class="at">X=</span>Xeq), </span>
+<span id="cb66-20"><a href="steady-states.html#cb66-20" tabindex="-1"></a>       <span class="at">extra=</span><span class="fu">signif</span>(extra, <span class="dv">3</span>),</span>
+<span id="cb66-21"><a href="steady-states.html#cb66-21" tabindex="-1"></a>       <span class="at">annual =</span> <span class="fu">signif</span>(annual,<span class="dv">3</span>)) </span>
+<span id="cb66-22"><a href="steady-states.html#cb66-22" tabindex="-1"></a>})}</span>
+<span id="cb66-23"><a href="steady-states.html#cb66-23" tabindex="-1"></a><span class="fu">steadyStates_AronMay</span>(paramsSteady) <span class="ot">-&gt;</span> eq2</span>
+<span id="cb66-24"><a href="steady-states.html#cb66-24" tabindex="-1"></a>eq2</span></code></pre></div>
+<pre><code>## $std
+##         M         Y         Z         X 
+## 600.00000 211.01706  91.70764 793.10541 
+## 
+## $extra
+##      S      V     R0      x  kappa    EIR    FoI 
+## 4.5600 0.4520 7.4600 0.7930 0.1190 0.0348 0.0192 
+## 
+## $annual
+## aEIR aFoI 
+## 12.7  7.0</code></pre>
+<p>Now, we can compare directly:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="steady-states.html#cb68-1" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">eq1=</span>eq1, <span class="at">eq2=</span>eq2<span class="sc">$</span>std)</span></code></pre></div>
+<pre><code>##       M        Y        Z        X
+## eq1 600 211.0171 91.70764 793.1054
+## eq2 600 211.0171 91.70764 793.1054</code></pre>
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-RossR1911Book" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. The <span>Prevention</span> of <span>Malaria</span>. 2nd ed. <span>London</span>: <span>John Murray</span>; 1911. </div>
+<div id="ref-MacdonaldG1952Sporozoite" class="csl-entry">
+<div class="csl-left-margin">38. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
 </div>
-<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-ReinerRC2013SystematicReview" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. </div>
-</div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
-<div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
-</div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
-</div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
-</div>
-<div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
-</div>
-<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
-</div>
-<div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
-</div>
-<div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
-</div>
-<div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. </div>
+<div id="ref-ArmitageP1953" class="csl-entry">
+<div class="csl-left-margin">61. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
 </div>
 </div>
             </section>
@@ -662,8 +795,8 @@ I will also be writing and recording some short lectures on a subset of topics.<
           </div>
         </div>
       </div>
-
-<a href="contributors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mosquito-ecology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stable-orbits.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

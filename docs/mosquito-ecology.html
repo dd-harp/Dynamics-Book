@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
-  <meta name="description" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <title>7.1 Mosquito Ecology | Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
+  <meta name="description" content="7.1 Mosquito Ecology | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta property="og:title" content="7.1 Mosquito Ecology | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta name="twitter:title" content="7.1 Mosquito Ecology | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contributors.html"/>
+<link rel="prev" href="adult-mosquito-dynamics.html"/>
+<link rel="next" href="steady-states.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,101 +560,253 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Applied Dynamics for Robust Analytics and Adaptive Malaria Control</h1>
-<p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-15</em></p>
+<div id="mosquito-ecology" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Mosquito Ecology<a href="mosquito-ecology.html#mosquito-ecology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="variables-2" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Variables<a href="mosquito-ecology.html#variables-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Aron &amp; May, 1982</p>
+<p>We define the following variables:</p>
+<ul>
+<li><p><span class="math inline">\(M\)</span> is the density of mosquitoes.</p></li>
+<li><p><span class="math inline">\(Y\)</span> is the density of infected mosquitoes.</p></li>
+<li><p><span class="math inline">\(Z\)</span> is the density of infectious mosquitoes.</p></li>
+<li><p><span class="math inline">\(X\)</span> is the density of infected humans.</p></li>
+</ul>
+<p>In dynamical systems, we ask how the variables (<em>i.e.</em> <span class="math inline">\(M\)</span>, <span class="math inline">\(Y\)</span>, <span class="math inline">\(Z\)</span>, and <span class="math inline">\(X\)</span>) change over time. In the following, we describe the changes on variable about a time.</p>
+<p>For our first equation, we start with adult, female mosquito populations. (It is tiresome to repeat <em>adult, female</em> each time, and we’re ignoring male mosquitoes at this point anyway, so <em>mosquito</em> hereafter means <em>adult, female mosquito</em>, unless we say otherwise.) The number of mosquitoes is changing as new adults emerge from aquatic habitats or die.</p>
+<p>To model changes in <span class="math inline">\(M\)</span>, we assume the following:</p>
+<ul>
+<li><p>mosquitoes emerge from aquatic habitats at the rate of <span class="math inline">\(\Lambda(t)\)</span> adults, per day;</p></li>
+<li><p>mosquitoes die at a constant rate, <span class="math inline">\(g\)</span>. This is equivalent to assuming that the mosquito lifespan is exponentially distributed with a mean <span class="math inline">\(1/g\)</span>. The fraction surviving one day is <span class="math inline">\(e^{-g}\)</span>.</p></li>
+</ul>
+<p>Our first equation describes changes in the number of mosquitoes:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dM}{dt} = \Lambda(t) - g M
+\end{equation}\]</span></p>
 </div>
-<div id="foreword" class="section level1 unnumbered hasAnchor">
-<h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross <span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">4</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>.</p>
-<p>After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics <em>per se</em>.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that – if we could solve those challenges – then we could make the math easier to use so that discussions would focus on the issues that mattered.
-Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.</p>
-<p>We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">6</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">8</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, or to scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">10</a>]</span>.
-To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.</p>
-<p>To serve programmatic needs, we needed algorithms that could address the decay of interventions
-– coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency –
-and the net effect of one unit of vector control in relation to transmission intensity and coverage.
-To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic.
-In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
-In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
-Beyond the algorithms, these models needed the support of mathematical theory.
-We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">11</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing <span class="citation">[<a href="#ref-addCite"><strong>addCite?</strong></a>]</span>.
-Then it was time to write this book.</p>
-<p>The software lowers the costs of building models that are up to the task of guiding malaria policy.
-An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
-These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.</p>
-<p>This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.</p>
-<hr />
+<div id="blood-fed-mosquitoes" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Blood Fed Mosquitoes<a href="mosquito-ecology.html#blood-fed-mosquitoes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>At this point, we will take a detour and define a variable describing the density of mosquitoes that have blood fed at least once, <span class="math inline">\(V\)</span>. After blood feeding, a mosquito is either gravid or <em>parous</em>, meaning its ovaries are distended from laying an egg batch. We do this, in part, because the fraction of mosquitoes that are parous is routinely collected, and because it gives us a chance to focus on blood feeding.</p>
+<p>To describe <em>blood feeding</em>, we assume the following:</p>
+<ul>
+<li><p>mosquitoes blood feed at the rate <span class="math inline">\(f\)</span>, per mosquito, per day; in this model, this implies that the waiting time to a blood meal is <span class="math inline">\(1/f\)</span> days.</p></li>
+<li><p>a fraction of all mosquito blood meals, <span class="math inline">\(q\)</span>, is taken on humans; we call this the <em>human fraction</em></p></li>
+<li><p>the human blood feeding rate is the product of these two parameters, <span class="math inline">\(fq\)</span>, which is defined as the number of human blood meals, per mosquito, per day.</p></li>
+</ul>
+<p>The number of human blood meals by a population of vector mosquitoes, per person, per day is called the human biting rate (HBR). In this model, HBR is given by a formula:</p>
+<p><span class="math display">\[\mbox{HBR} = \frac{fqM}{H}\]</span></p>
+<p>Later, we discuss the correspondence between the HBR in models and data.</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dY}{dt} = f q (M-Y) - g V
+\end{equation}\]</span></p>
+<p>We won’t use <span class="math inline">\(V\)</span> to describe the dynamics of infection, but we might find it useful to understand how parity changes in mosquito populations.</p>
+</div>
+<div id="infected-mosquitoes" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Infected Mosquitoes<a href="mosquito-ecology.html#infected-mosquitoes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Mosquitoes become infected after blood feeding on an infectious human. To model changes in <span class="math inline">\(Y\)</span>, we extend the model of blood feeding to include infection. We need to know what fraction of blood meals end up infecting a mosquito that has not already been infected.</p>
+<p>To model changes in <span class="math inline">\(Y\)</span>, we need to describe <em>infection rates</em>. We assume the following:</p>
+<ul>
+<li>a fraction of human blood meals, infects mosquitoes. We call this quantity <em>net infectiousness</em> (NI) and (for reasons that we will discuss in a moment), we give it a name, <span class="math inline">\(\kappa\)</span>:</li>
+</ul>
+<p><span class="math display" id="eq:kappaDef">\[\begin{equation}
+\kappa(t) = c \frac{X(t)}{H}
+\tag{7.1}
+\end{equation}\]</span></p>
+<ul>
+<li>infected mosquitoes die at the same rate as uninfected mosquitoes.</li>
+</ul>
+<p>We can now write down our second equation describing changes in the number of infected mosquitoes:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dY}{dt} = f q \kappa (M-Y) -g Y
+\end{equation}\]</span></p>
+</div>
+<div id="infectious-mosquitoes" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Infectious Mosquitoes<a href="mosquito-ecology.html#infectious-mosquitoes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To become infectious, a mosquito has to become infected and then survive through the extrinsic incubation period (EIP). We assume:</p>
+<ul>
+<li><p>mosquitoes become infectious after a fixed delay, <span class="math inline">\(\tau\)</span> days, called the EIP. The fraction of mosquitoes that survive through the EIP is <span class="math inline">\(e^{-g \tau}\)</span>.</p></li>
+<li><p>infectious mosquitoes die at the same rate as other mosquitoes.</p></li>
+</ul>
+<p>For a mosquito to become infectious, it must have become infected <span class="math inline">\(\tau\)</span> days ago and survived through <span class="math inline">\(\tau\)</span> days with probability <span class="math inline">\(e^{-g\tau}\)</span>. To write this in equations, we use a subscripted <span class="math inline">\(\tau\)</span> to denote the value of a variable (<span class="math inline">\(M\)</span>, <span class="math inline">\(Y\)</span> or <span class="math inline">\(X\)</span>) or term (<span class="math inline">\(\kappa\)</span>) at time <span class="math inline">\(t-\tau\)</span>. For example <span class="math inline">\(X_\tau\)</span> is the number of people who were infected and infecious at time <span class="math inline">\(t-\tau\)</span>, and <span class="math inline">\(M_\tau\)</span> is the number of mosquitoes at time <span class="math inline">\(t-\tau\)</span>.</p>
+<p>The number of infectious mosquitoes that are added to the population at a point in time includes all the mosquitoes that became infected at time <span class="math inline">\(t-\tau\)</span> and survived the EIP. This is our third equation describing changes in the number of infectious mosquitoes:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dZ}{dt} = f q  \kappa_\tau (M_\tau-Y_\tau) e^{-g\tau} -g Z
+\end{equation}\]</span></p>
+<p>Here, <span class="math inline">\(Z\)</span> represents the number of mosquitoes with <em>sporozoites</em> in their salivary glands. The <em>fraction</em> of mosquitoes with sporozoites in their salivary glands has been called the <em>sporozoite rate</em> (SR), which in our notation is</p>
+<p><span class="math display">\[ z = \frac{Z}{M}\]</span></p>
+<p>The number of bites by vector mosquitoes, per person, per day is called the entomological inoculation rate (EIR). It is defined as the product of the HBR and the SR:</p>
+<p><span class="math display">\[\mbox{EIR} = \mbox{SR} \times \mbox{HBR}\]</span></p>
+<p>In our notation, the EIR is:</p>
+<p><span class="math display">\[\mbox{EIR} = z \frac{fqM}{H} = \frac{fqZ}{H}\]</span>
+As with the HBR, we would like to know how to connect estiamted values of the EIR to our formulas. Since that’s <em>really</em> complicated, we’ve spent a lot of time in the following sections discussing it.</p>
+</div>
+<div id="RossEqn" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> Infected Humans<a href="mosquito-ecology.html#RossEqn" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Humans become infected after being bitten by an infectious mosquito. We assume the following:</p>
+<ul>
+<li><p>A fraction <span class="math inline">\(b\)</span> of all bites by infectious mosquitoes cause an infection.</p></li>
+<li><p>The hazard rate for infection, also called the <em>force of infection</em> (FoI) and denoted <span class="math inline">\(h\)</span> is <span class="math inline">\(b \times\)</span> EIR: <span class="math display">\[h = fqb \frac{Z}{H}\]</span></p></li>
+<li><p>Infections clear at the rate <span class="math inline">\(r\)</span>, per infection, per day (the average time to clear is <span class="math inline">\(1/r\)</span> days), and after clearing an infection a person becomes susceptible to infection again.</p></li>
+</ul>
+<p>We can now write down our fourth equation describing changes in the number of infected humans:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{dX}{dt} = h (H-X) - r X
+\end{equation}\]</span></p>
+</div>
+<div id="as-a-system" class="section level3 hasAnchor" number="7.1.6">
+<h3><span class="header-section-number">7.1.6</span> …as a System<a href="mosquito-ecology.html#as-a-system" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While we presented these equations one at a time, they work as a system. To see it all at once, we write it here as a system with four equations and two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &amp;= \Lambda(t) - g M \\
+\frac{dY}{dt} &amp;= fq\kappa(M-Y) - g Y \\
+\frac{dZ}{dt} &amp;= fq\kappa_\tau(M_\tau-Y_\tau)e^{-g\tau} - g Z \\
+\frac{dX}{dt} &amp;= h (H-X) - rX  \\ \\ \hline \\
+\kappa &amp;= c \frac{X(t)}{H} \\
+h &amp;= b fq \frac{Z(t)}{H} \\
+\end{array}
+\end{equation}\]</span></p>
 <center>
 <div class="float">
-<img src="Figures/ScalableComplexity.png" style="width:80.0%" alt="A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)" />
-<div class="figcaption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</div>
+<img src="Figures/AronMay.png" alt="A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May [54]" />
+<div class="figcaption">A diagram of the a version of the Ross-Macdonald model, using equations from Aron and May <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics">54</a>]</span></div>
 </div>
 </center>
-<hr />
-<p>This book shows, through examples, how to use the software to build malaria models.
-Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria.
-What are all the special topics that would need to be covered to build models that could be needed in malaria?
-This book <em>could</em> be the basis for such a course, if there were ever enough students.
-Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
-I will also be writing and recording some short lectures on a subset of topics.</p>
-<p>The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, that they’ve taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
-<p>While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong><em>Robust Analytics for Malaria Policy</em>.</strong></a></p>
-<hr />
-<p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
-<p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">12</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">13</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
-<p>–David L. Smith</p>
+<p>These equations describe processes in three domains (Figure 2.1):</p>
+<ul>
+<li><p>adult mosquito ecology (<span class="math inline">\(M\)</span>, and perhaps <span class="math inline">\(V\)</span>);</p></li>
+<li><p>parasite infection dynamics in mosquito populations (<span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span>);</p></li>
+<li><p>parasite infection dynamics in human populations (<span class="math inline">\(X\)</span>).</p></li>
+</ul>
+<p>The equations describing parasite infections in mosquito populations also include the variable <span class="math inline">\(M\)</span>, so the mosquito infection dynamics are coupled to the mosquito population dynamics. The way we’ve written the equations, each compartment has an input term (<em>i.e.</em>, <span class="math inline">\(\Lambda\)</span>, <span class="math inline">\(\kappa\)</span>, or <span class="math inline">\(h\)</span>) that depends on something else. We’ve passed <span class="math inline">\(\Lambda\)</span> as a parameter. For the infection dynamics, the terms <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(h\)</span> couple two separate systems. For adult mosquito dynamics, emergence is passed to the model as a parameters.</p>
+<p>There are, of course, more compact ways of writing these equations. We have written the equations this way to emphasize a few things. First, the terms make it clear exactly how the equations in one domain are connected to another. Second, if we wanted to start <em>changing</em> some of the assumptions, these terms help to isolate the parts we might like to change. By writing the equations in this modularized form, we can start to understand how we might be able to write software that would allow us to represent mosquito infection dynamics with different systems of equations.</p>
+<p>The next step is to find solutions.</p>
+<p><em>NOTE:</em> We don’t introduce <code>exDE</code> or <code>MicroMoB</code> until <a href="modularity-and-software.html#modularity-and-software">Modularity and Software</a>.</p>
+</div>
+<div id="solutions" class="section level3 hasAnchor" number="7.1.7">
+<h3><span class="header-section-number">7.1.7</span> Solutions<a href="mosquito-ecology.html#solutions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What does a <strong>solution</strong> to these equations look like?</p>
+<p>Solutions to these equations are values of the variables over time <span class="math inline">\(\left( M(t), Y(t), Z(t), X(t) \right)\)</span> that satisfy the system of four equations described above. We call these solutions <em>orbits.</em> To put it another way, if we took the derivatives of the orbits for any variable at any point in time using the basic definition <span class="math display">\[\lim_{h\rightarrow 0} \frac{x(t+h)-x(t)}{h},\]</span> and then we used the values of the variables at time <span class="math inline">\(t\)</span> to compute <span class="math inline">\(dM/dt\)</span>, <span class="math inline">\(dY/dt\)</span>, <span class="math inline">\(dZ/dt\)</span>, and <span class="math inline">\(dX/dt\)</span> (<em>i.e.</em>, using the formulas), we would get the same values.</p>
+<p>It is important that these orbits are unique: after specifying the <em>initial values</em> of the variables, there is one and only one set of orbits that solves the equations. When we solve the equations, we usually produce solutions from a starting point into a future, but the orbits are defined for all time – <span class="math inline">\(i.e.\)</span> the process implies the existence of solutions far back into the past. These are deterministic equations, after all.</p>
+<p>As written, the equations do not define a <em>model.</em> Instead, the equations define a process or a <strong>model family.</strong> A model is something that <em>can</em> produce orbits. A model is defined only after assigning specific values to the parameters. Informally, we will often slip and use the “model” to describe a model family. It’s easy to slip up, and sometimes we can get by with being sloppy, but we need to remember the distinction. When we say that the software is <em>modular,</em> we mean that it is easy to swap out one <em>model family</em> for another.</p>
+<p>To find solutions of equations we use an R software package called <code>deSolve.</code> Because of the delay for the EIP, these are called <em>delay differential equations,</em> which are handled using a function called <code>dede</code>. An important step in solving delay differential equations is a function <code>lagvalue()</code> that computes and returns the values of variables at a time lag, <span class="math inline">\(\ell\)</span>. In these equations, the lag is set by the EIP, <span class="math inline">\(\tau\)</span>, so we must evaluate
+<code>lagvalue(t-tau).</code></p>
+<p>In solving <em>ordinary differential equations,</em> we must pass initial conditions. To solve a delay differential equations with a maximum lag <span class="math inline">\(\ell\)</span>, we must specify the initial conditions for the interval <span class="math inline">\([-\ell, t_0)\)</span>, where <span class="math inline">\(t_0\)</span> is the point in time when we start computing solutions.
+In these equations, since the equation for <span class="math inline">\(dZ/dt\)</span> looks back <span class="math inline">\(\tau\)</span> units, we must specify values of <span class="math inline">\(M(t)\)</span>, <span class="math inline">\(Y(t)\)</span>, and <span class="math inline">\(X(t)\)</span> for all values of <span class="math inline">\(t \in [-\tau, t_0)\)</span>. This forces an awkward choice, since we don’t know the solutions backwards in time, but would need to know those solutions to use them. What is typically done – and we’ve done it here – is to specify a constant set of initial values and moving on.</p>
+<p>Doing this introduces a little <em>numerical slop.</em> By slop, we mean that these values are <em>not</em> what we would get if we ran the equations backwards in time. In these equations, it won’t affect our analysis most of the time, so we’re happy to acknowledge this little problem and find ways around it. It’s a little thing, but we should never forget it, because we might find that it <em>is</em> affecting our analysis at some point.</p>
+<p>With <code>deSolve,</code> solving differential equations is not difficult – it just involves following a few steps. In the following, we walk through these steps:</p>
+<ul>
+<li><p>Write a function that computes the derivatives;</p></li>
+<li><p>Define initial conditions;</p></li>
+<li><p>Define the values of the parameters;</p></li>
+<li><p>Define a mesh on time;</p></li>
+<li><p>Call a function that solves the equations, such as <code>dede</code> for delay differential equations.</p></li>
+</ul>
+<p>Many users will find that reading this code is like learning how to compute <span class="math inline">\(\sqrt{2}\)</span>. If so, feel free to learn it once and then skip it.</p>
+<div id="derivatives" class="section level4 hasAnchor" number="7.1.7.1">
+<h4><span class="header-section-number">7.1.7.1</span> Derivatives<a href="mosquito-ecology.html#derivatives" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The first step is to write down the equations to compute the derivatives. The solver expects a function with three required arguments (in this order):</p>
+<ul>
+<li><p><code>t</code> is time</p></li>
+<li><p><code>y</code> is the list of variables</p></li>
+<li><p><code>params</code> is a set of parameters</p></li>
+</ul>
+<p>The derivatives are computed and returned in the same order as ‘y’ in a <code>list</code>. To make code that is easy to read, we make <code>params</code> as a <code>list</code> with parameter names (see below), so that inside the function <code>with(params,{...})</code>, the parameter names are visible.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="mosquito-ecology.html#cb52-1" tabindex="-1"></a>dAronMay <span class="ot">=</span> <span class="cf">function</span>(t, y, params){<span class="fu">with</span>(params,{</span>
+<span id="cb52-2"><a href="mosquito-ecology.html#cb52-2" tabindex="-1"></a> </span>
+<span id="cb52-3"><a href="mosquito-ecology.html#cb52-3" tabindex="-1"></a>  <span class="co"># Variables  </span></span>
+<span id="cb52-4"><a href="mosquito-ecology.html#cb52-4" tabindex="-1"></a>  <span class="cf">if</span>(t<span class="sc">&lt;=</span>tau) ylag<span class="ot">&lt;-</span>y0 <span class="cf">else</span> ylag <span class="ot">&lt;-</span> <span class="fu">lagvalue</span>(t<span class="sc">-</span>tau)</span>
+<span id="cb52-5"><a href="mosquito-ecology.html#cb52-5" tabindex="-1"></a>  M<span class="ot">=</span>y[<span class="dv">1</span>]; M_tau <span class="ot">=</span> ylag[<span class="dv">1</span>]</span>
+<span id="cb52-6"><a href="mosquito-ecology.html#cb52-6" tabindex="-1"></a>  Y<span class="ot">=</span>y[<span class="dv">2</span>]; Y_tau <span class="ot">=</span> ylag[<span class="dv">2</span>]; </span>
+<span id="cb52-7"><a href="mosquito-ecology.html#cb52-7" tabindex="-1"></a>  Z<span class="ot">=</span>y[<span class="dv">3</span>]; </span>
+<span id="cb52-8"><a href="mosquito-ecology.html#cb52-8" tabindex="-1"></a>  X<span class="ot">=</span>y[<span class="dv">4</span>]; X_tau <span class="ot">=</span> ylag[<span class="dv">4</span>]</span>
+<span id="cb52-9"><a href="mosquito-ecology.html#cb52-9" tabindex="-1"></a>   </span>
+<span id="cb52-10"><a href="mosquito-ecology.html#cb52-10" tabindex="-1"></a>  <span class="co"># Terms </span></span>
+<span id="cb52-11"><a href="mosquito-ecology.html#cb52-11" tabindex="-1"></a>  kappa <span class="ot">=</span> c<span class="sc">*</span>X<span class="sc">/</span>H; kappa_tau <span class="ot">=</span> c<span class="sc">*</span>X_tau<span class="sc">/</span>H</span>
+<span id="cb52-12"><a href="mosquito-ecology.html#cb52-12" tabindex="-1"></a>  h <span class="ot">=</span> b<span class="sc">*</span>f<span class="sc">*</span>q<span class="sc">*</span>Z<span class="sc">/</span>H </span>
+<span id="cb52-13"><a href="mosquito-ecology.html#cb52-13" tabindex="-1"></a>   </span>
+<span id="cb52-14"><a href="mosquito-ecology.html#cb52-14" tabindex="-1"></a>  <span class="co"># Dynamics </span></span>
+<span id="cb52-15"><a href="mosquito-ecology.html#cb52-15" tabindex="-1"></a>  dM <span class="ot">=</span> <span class="fu">Lambda</span>(t) <span class="sc">-</span> g<span class="sc">*</span>M</span>
+<span id="cb52-16"><a href="mosquito-ecology.html#cb52-16" tabindex="-1"></a>  dY <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa<span class="sc">*</span>(M<span class="sc">-</span>Y) <span class="sc">-</span>g<span class="sc">*</span>Y</span>
+<span id="cb52-17"><a href="mosquito-ecology.html#cb52-17" tabindex="-1"></a>  dZ <span class="ot">=</span> f<span class="sc">*</span>q<span class="sc">*</span>kappa_tau<span class="sc">*</span>(M_tau<span class="sc">-</span>Y_tau)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>g<span class="sc">*</span>tau) <span class="sc">-</span>g<span class="sc">*</span>Z</span>
+<span id="cb52-18"><a href="mosquito-ecology.html#cb52-18" tabindex="-1"></a>  dX <span class="ot">=</span> h<span class="sc">*</span>(H<span class="sc">-</span>X)<span class="sc">-</span>r<span class="sc">*</span>X</span>
+<span id="cb52-19"><a href="mosquito-ecology.html#cb52-19" tabindex="-1"></a>  </span>
+<span id="cb52-20"><a href="mosquito-ecology.html#cb52-20" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dM, dY, dZ, dX)))</span>
+<span id="cb52-21"><a href="mosquito-ecology.html#cb52-21" tabindex="-1"></a>})} </span></code></pre></div>
+</div>
+</div>
+<div id="initial-values" class="section level3 hasAnchor" number="7.1.8">
+<h3><span class="header-section-number">7.1.8</span> Initial Values<a href="mosquito-ecology.html#initial-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To run the model, we must supply initial values. If you were writing code yourself, it would be important to remember that the initial values and the return value for the derivatives must occur in the same order.</p>
+<p>A useful convention in {R} is to pass the initial values as a named list. Later, we can turn the outputs into a data frame, and then we can retrieve the variables by name.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="mosquito-ecology.html#cb53-1" tabindex="-1"></a>y0<span class="ot">=</span> <span class="fu">c</span>(<span class="at">M=</span><span class="dv">60</span>, <span class="at">Y=</span><span class="dv">0</span>, <span class="at">Z=</span><span class="dv">0</span>, <span class="at">X=</span><span class="dv">1</span>)</span></code></pre></div>
+<p>The object <code>y0</code> is a named list – the names are attached but invisible.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="mosquito-ecology.html#cb54-1" tabindex="-1"></a>y0</span></code></pre></div>
+<pre><code>##  M  Y  Z  X 
+## 60  0  0  1</code></pre>
+<p>When we turn it into a list, with <code>as.list,</code> the names are attached to the values:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="mosquito-ecology.html#cb56-1" tabindex="-1"></a><span class="fu">as.list</span>(y0)<span class="sc">$</span>M</span></code></pre></div>
+<pre><code>## [1] 60</code></pre>
+<p>If we use <code>with</code>, we create an environment where we can simply use the names:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="mosquito-ecology.html#cb58-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">as.list</span>(y0), {</span>
+<span id="cb58-2"><a href="mosquito-ecology.html#cb58-2" tabindex="-1"></a>  M</span>
+<span id="cb58-3"><a href="mosquito-ecology.html#cb58-3" tabindex="-1"></a>})</span></code></pre></div>
+<pre><code>## [1] 60</code></pre>
+</div>
+<div id="parameter-values" class="section level3 hasAnchor" number="7.1.9">
+<h3><span class="header-section-number">7.1.9</span> Parameter Values<a href="mosquito-ecology.html#parameter-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We pass the parameters as a list. It might seem like overkill, but we have written a function <code>makeParams()</code> that takes default values and generates a list. This makes it easy to generate a new set of parameter values with alternative values, and it also helps us to write and pass function <span class="math inline">\(\Lambda(t)\)</span> with parameters we like. By passing the parameter as a list, the parameter values are available to the function <code>dAronMay</code> when we use <code>with(params, {})</code>.</p>
+<p>Note that we have also attached the initial values of the variables as a parameter set, which are the return values for <code>lagvalue(t)</code> when <code>t&lt;0</code>.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="mosquito-ecology.html#cb60-1" tabindex="-1"></a>makeParams <span class="ot">=</span> <span class="cf">function</span>(y0, </span>
+<span id="cb60-2"><a href="mosquito-ecology.html#cb60-2" tabindex="-1"></a>                      <span class="at">g=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>, <span class="at">f=</span><span class="dv">1</span><span class="sc">/</span><span class="fl">2.5</span>, <span class="at">q=</span><span class="fl">0.95</span>,  </span>
+<span id="cb60-3"><a href="mosquito-ecology.html#cb60-3" tabindex="-1"></a>                      <span class="at">c=</span><span class="fl">0.15</span>,</span>
+<span id="cb60-4"><a href="mosquito-ecology.html#cb60-4" tabindex="-1"></a>                      <span class="at">b=</span><span class="fl">0.55</span>, <span class="at">r=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="at">H=</span><span class="dv">1000</span>,  </span>
+<span id="cb60-5"><a href="mosquito-ecology.html#cb60-5" tabindex="-1"></a>                      <span class="at">m=</span>.<span class="dv">05</span>, <span class="at">ss=</span><span class="dv">1</span>,  </span>
+<span id="cb60-6"><a href="mosquito-ecology.html#cb60-6" tabindex="-1"></a>                      <span class="at">tau=</span><span class="dv">10</span>  </span>
+<span id="cb60-7"><a href="mosquito-ecology.html#cb60-7" tabindex="-1"></a>                      ){</span>
+<span id="cb60-8"><a href="mosquito-ecology.html#cb60-8" tabindex="-1"></a>  ss <span class="ot">=</span> <span class="fu">min</span>(<span class="dv">1</span>,<span class="fu">max</span>(<span class="dv">0</span>, ss))</span>
+<span id="cb60-9"><a href="mosquito-ecology.html#cb60-9" tabindex="-1"></a>  Lambda <span class="ot">=</span> <span class="cf">function</span>(t){m<span class="sc">*</span>H<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">+</span> ss<span class="sc">*</span><span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>t<span class="sc">/</span><span class="dv">365</span>))}</span>
+<span id="cb60-10"><a href="mosquito-ecology.html#cb60-10" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">y0=</span>y0,<span class="at">g=</span>g,<span class="at">f=</span>f,<span class="at">q=</span>q,<span class="at">c=</span>c,</span>
+<span id="cb60-11"><a href="mosquito-ecology.html#cb60-11" tabindex="-1"></a>              <span class="at">H=</span>H,<span class="at">m=</span>m,<span class="at">tau=</span>tau,<span class="at">b=</span>b,<span class="at">r=</span>r,<span class="at">Lambda=</span>Lambda))</span>
+<span id="cb60-12"><a href="mosquito-ecology.html#cb60-12" tabindex="-1"></a>} </span>
+<span id="cb60-13"><a href="mosquito-ecology.html#cb60-13" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">makeParams</span>(y0)</span></code></pre></div>
+<p>To make it absolutely clear, we are assuming:</p>
+<ul>
+<li><p><span class="math inline">\(g=1/12\)</span>: mosquitoes live about <span class="math inline">\(12\)</span> days, on average</p></li>
+<li><p><span class="math inline">\(f=1/2.5\)</span>: mosquitoes feed every 2.5 days, on average</p></li>
+<li><p><span class="math inline">\(q=0.95\)</span>: the human fraction is 95%; mosquitoes feed on humans 95% of the time</p></li>
+<li><p><span class="math inline">\(c=0.15\)</span>: about 15% of bites on infectious humans infect a mosquito</p></li>
+<li><p><span class="math inline">\(b=0.55\)</span>: about 55% of bites by infective mosquitoes cause an infection</p></li>
+<li><p><span class="math inline">\(r=1/200\)</span>: human infections last about <span class="math inline">\(200\)</span> days, on average</p></li>
+<li><p><span class="math inline">\(H=1000\)</span>: we’re simulating transmission in a population of a thousand humans</p></li>
+<li><p><span class="math inline">\(\tau=10\)</span>: the extrinsic incubation period is about 10 days</p></li>
+<li><p>For emergence, we tune the average value using <span class="math inline">\(m\)</span> and it is scaled to <span class="math inline">\(H\)</span>:</p>
+<ul>
+<li><p>The parameter <span class="math inline">\(m\)</span> in the function above has been set to <span class="math inline">\(0.05\)</span> by default.</p></li>
+<li><p>The parameter <span class="math inline">\(ss\)</span> affects the amplitude of the fluctuations. We force it to take on values between 0 and 1.</p></li>
+<li><p>Emergence is modeled as a sinusoidal function with a yearly cycle.</p></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)\]</span></p>
+</div>
+<div id="solving-1" class="section level3 hasAnchor" number="7.1.10">
+<h3><span class="header-section-number">7.1.10</span> Solving<a href="mosquito-ecology.html#solving-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We define a mesh over time – the points in time when we would like to know the values of the variables:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="mosquito-ecology.html#cb61-1" tabindex="-1"></a>tt <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">5</span><span class="sc">*</span><span class="dv">365</span>, <span class="at">by=</span><span class="dv">5</span>) </span></code></pre></div>
+<p>This code solves the equations:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="mosquito-ecology.html#cb62-1" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span>
+<span id="cb62-2"><a href="mosquito-ecology.html#cb62-2" tabindex="-1"></a>yout <span class="ot">&lt;-</span> <span class="fu">dede</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>dAronMay, <span class="at">parms=</span>params) </span></code></pre></div>
+</div>
+<div id="visualizing" class="section level3 hasAnchor" number="7.1.11">
+<h3><span class="header-section-number">7.1.11</span> Visualizing<a href="mosquito-ecology.html#visualizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we plot out the solutions, they look like this.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="528" /></p>
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-RossR1911Book" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. The <span>Prevention</span> of <span>Malaria</span>. 2nd ed. <span>London</span>: <span>John Murray</span>; 1911. </div>
-</div>
-<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-ReinerRC2013SystematicReview" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. </div>
-</div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
-<div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
-</div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
-</div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
-</div>
-<div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
-</div>
-<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
-</div>
-<div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
-</div>
-<div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
-</div>
-<div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. </div>
+<div id="ref-AronJL1982PopulationDynamics" class="csl-entry">
+<div class="csl-left-margin">54. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population Dynamics</span> of <span>Infectious Diseases</span>: <span>Theory</span> and <span>Applications</span>. <span>Boston, MA</span>: <span>Springer US</span>; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
 </div>
 </div>
             </section>
@@ -662,8 +814,8 @@ I will also be writing and recording some short lectures on a subset of topics.<
           </div>
         </div>
       </div>
-
-<a href="contributors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="adult-mosquito-dynamics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="steady-states.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

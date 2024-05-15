@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
-  <meta name="description" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <title>2.2 Continuous Time, Deterministic | Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
+  <meta name="description" content="2.2 Continuous Time, Deterministic | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta property="og:title" content="2.2 Continuous Time, Deterministic | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta name="twitter:title" content="2.2 Continuous Time, Deterministic | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contributors.html"/>
+<link rel="prev" href="discrete-time-deterministic.html"/>
+<link rel="next" href="discrete-time-stochastic.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,101 +560,58 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Applied Dynamics for Robust Analytics and Adaptive Malaria Control</h1>
-<p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-15</em></p>
+<div id="continuous-time-deterministic" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Continuous Time, Deterministic<a href="continuous-time-deterministic.html#continuous-time-deterministic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we present a continuous time, deterministic model. It is homologous to Ross’s 2nd model <span class="citation">[<a href="#ref-RossR1911Nature">28</a>]</span>, after renaming the parameters. To deal with these equations, you need a background in calculus.</p>
+<div id="variables-and-initial-conditions" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Variables and Initial Conditions<a href="continuous-time-deterministic.html#variables-and-initial-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once again, variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a continuous time system, the values of the variables are defined for all values of <span class="math inline">\(t.\)</span></p>
+<ul>
+<li><p>Let <span class="math inline">\(x(t)\)</span> be the fraction of people who are infected at time <span class="math inline">\(t,\)</span> and <span class="math inline">\(0 \leq x(t) \leq 1.\)</span></p></li>
+<li><p>Let <span class="math inline">\(y(t)\)</span> be the fraction of mosquitoes who are infected at time <span class="math inline">\(t,\)</span> <span class="math inline">\(0 \leq y(t) \leq 1.\)</span></p></li>
+</ul>
+<p>As before, we will need to define initial conditions.</p>
 </div>
-<div id="foreword" class="section level1 unnumbered hasAnchor">
-<h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross <span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">4</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>.</p>
-<p>After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics <em>per se</em>.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that – if we could solve those challenges – then we could make the math easier to use so that discussions would focus on the issues that mattered.
-Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.</p>
-<p>We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">6</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">8</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, or to scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">10</a>]</span>.
-To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.</p>
-<p>To serve programmatic needs, we needed algorithms that could address the decay of interventions
-– coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency –
-and the net effect of one unit of vector control in relation to transmission intensity and coverage.
-To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic.
-In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
-In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
-Beyond the algorithms, these models needed the support of mathematical theory.
-We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">11</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing <span class="citation">[<a href="#ref-addCite"><strong>addCite?</strong></a>]</span>.
-Then it was time to write this book.</p>
-<p>The software lowers the costs of building models that are up to the task of guiding malaria policy.
-An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
-These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.</p>
-<p>This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.</p>
-<hr />
-<center>
-<div class="float">
-<img src="Figures/ScalableComplexity.png" style="width:80.0%" alt="A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)" />
-<div class="figcaption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</div>
+<div id="parameters-1" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Parameters<a href="continuous-time-deterministic.html#parameters-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.</p>
+<ul>
+<li><p>Let <span class="math inline">\(r\)</span> denote the fraction of people who clear infections after one day; <span class="math inline">\(0 &lt; r &lt; 1.\)</span></p></li>
+<li><p>Let <span class="math inline">\(g\)</span> denote the fraction of mosquitoes who die in one day; <span class="math inline">\(0 &lt; g &lt; 1.\)</span></p></li>
+<li><p>Let <span class="math inline">\(a\)</span> denote the fraction of mosquitoes who blood feed on a human in a day; <span class="math inline">\(0 &lt; a &lt; 1.\)</span></p></li>
+<li><p>Let <span class="math inline">\(m\)</span> denote the number of mosquitoes per human; <span class="math inline">\(m \geq 0.\)</span></p></li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="continuous-time-deterministic.html#cb51-1" tabindex="-1"></a><span class="co"># The Parameters, as a Named Vector</span></span>
+<span id="cb51-2"><a href="continuous-time-deterministic.html#cb51-2" tabindex="-1"></a>par <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb51-3"><a href="continuous-time-deterministic.html#cb51-3" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="co"># The fraction of infections that clear each day</span></span>
+<span id="cb51-4"><a href="continuous-time-deterministic.html#cb51-4" tabindex="-1"></a>  <span class="at">g =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>,  <span class="co"># The fraction of mosquitoes that die each day</span></span>
+<span id="cb51-5"><a href="continuous-time-deterministic.html#cb51-5" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,   <span class="co"># The fraction of mosquitoes that blood feed on a human each day</span></span>
+<span id="cb51-6"><a href="continuous-time-deterministic.html#cb51-6" tabindex="-1"></a>  <span class="at">m =</span> <span class="dv">2</span>      <span class="co"># The number of mosquitoes per human</span></span>
+<span id="cb51-7"><a href="continuous-time-deterministic.html#cb51-7" tabindex="-1"></a>) </span></code></pre></div>
 </div>
-</center>
-<hr />
-<p>This book shows, through examples, how to use the software to build malaria models.
-Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria.
-What are all the special topics that would need to be covered to build models that could be needed in malaria?
-This book <em>could</em> be the basis for such a course, if there were ever enough students.
-Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
-I will also be writing and recording some short lectures on a subset of topics.</p>
-<p>The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, that they’ve taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
-<p>While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong><em>Robust Analytics for Malaria Policy</em>.</strong></a></p>
-<hr />
-<p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
-<p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">12</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">13</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
-<p>–David L. Smith</p>
+<div id="equations-1" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Equations<a href="continuous-time-deterministic.html#equations-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms:</p>
+<ul>
+<li><p>The fraction of humans who are infected is <span class="math inline">\(x\)</span>; infections clear at the rate <span class="math inline">\(r.\)</span></p></li>
+<li><p>The fraction of mosquitoes who are infected is <span class="math inline">\(y\)</span>; mosquitoes die at the rate <span class="math inline">\(g.\)</span></p></li>
+<li><p>The fraction of humans who are infected is <span class="math inline">\(1-x\)</span>; infections occur at the rate <span class="math inline">\(m a y.\)</span></p></li>
+<li><p>The fraction of mosquitoes who are not infected is <span class="math inline">\(1-y\)</span>; infections occur at the rate <span class="math inline">\(a x.\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{rl}
+dx/dt &amp;= may(1-z) - r x\\
+dy/dt &amp;= ax(1-y) - g z \\
+\end{array}
+\]</span></p>
+<p>These differential equations require</p>
+<p>This equation lacks an infective state for mosquitoes.</p>
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
-<div id="ref-RossR1911Book" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. The <span>Prevention</span> of <span>Malaria</span>. 2nd ed. <span>London</span>: <span>John Murray</span>; 1911. </div>
-</div>
-<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-ReinerRC2013SystematicReview" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. </div>
-</div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
-<div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
-</div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
-</div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
-</div>
-<div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
-</div>
-<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
-</div>
-<div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
-</div>
-<div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
-</div>
-<div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. </div>
+<div id="ref-RossR1911Nature" class="csl-entry">
+<div class="csl-left-margin">28. </div><div class="csl-right-inline">Ross R. Some quantitative studies in epidemiology. Nature. 1911;87: 466–467. </div>
 </div>
 </div>
             </section>
@@ -662,8 +619,8 @@ I will also be writing and recording some short lectures on a subset of topics.<
           </div>
         </div>
       </div>
-
-<a href="contributors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="discrete-time-deterministic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="discrete-time-stochastic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

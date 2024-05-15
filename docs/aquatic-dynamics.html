@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
-  <meta name="description" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <title>26.1 Aquatic Dynamics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control</title>
+  <meta name="description" content="26.1 Aquatic Dynamics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta property="og:title" content="26.1 Aquatic Dynamics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
+  <meta name="twitter:title" content="26.1 Aquatic Dynamics | Applied Dynamics for Robust Analytics and Adaptive Malaria Control" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="contributors.html"/>
+<link rel="prev" href="mosquitoes.html"/>
+<link rel="next" href="understanding-mosquito-dynamics.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -560,101 +560,75 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Applied Dynamics for Robust Analytics and Adaptive Malaria Control</h1>
-<p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-15</em></p>
+<div id="aquatic-dynamics" class="section level2 hasAnchor" number="26.1">
+<h2><span class="header-section-number">26.1</span> Aquatic Dynamics<a href="aquatic-dynamics.html#aquatic-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="equations-3" class="section level3 hasAnchor" number="26.1.1">
+<h3><span class="header-section-number">26.1.1</span> Equations<a href="aquatic-dynamics.html#equations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding <span class="citation">[<a href="#ref-SmithDL2013_LarvalDynamics"><strong>SmithDL2013_LarvalDynamics?</strong></a>]</span>. The mosquito maturation rate, <span class="math inline">\(\psi e^{-\sigma L}\)</span> defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, <span class="math inline">\(\psi  + \theta L\)</span>, has two parts: a density independent term <span class="math inline">\(\psi\)</span> and a response to mean crowding <span class="math inline">\(\theta L\)</span>. We assume that adults lay <span class="math inline">\(\chi\)</span> eggs per feeding cycle.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{rl}
+\frac{dM}{dt} &amp;= \Lambda - g M\\  \\ \hline
+\frac{dL}{dt} &amp;= \eta - (\psi e^{-\sigma L} + \phi + \theta L) L \\
+\Lambda &amp;= \frac{1}{2} \psi L e^{-\sigma L}\\
+\eta &amp;= \chi f M \\
+\end{array}
+\end{equation}\]</span></p>
 </div>
-<div id="foreword" class="section level1 unnumbered hasAnchor">
-<h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross <span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-A new framework would integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">4</a>]</span>, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>.</p>
-<p>After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics <em>per se</em>.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that – if we could solve those challenges – then we could make the math easier to use so that discussions would focus on the issues that mattered.
-Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.</p>
-<p>We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be <em>extensible,</em> with <em>plug-and-play</em> modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">6</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">8</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, or to scaling up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">10</a>]</span>.
-To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">9</a>]</span>, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.</p>
-<p>To serve programmatic needs, we needed algorithms that could address the decay of interventions
-– coverage could decay over time through loss (<em>e.g.</em> bed nets) or waning potency –
-and the net effect of one unit of vector control in relation to transmission intensity and coverage.
-To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component – one that was dead simple, and one that had a was highly realistic.
-In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
-In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
-Beyond the algorithms, these models needed the support of mathematical theory.
-We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN. We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">11</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing <span class="citation">[<a href="#ref-addCite"><strong>addCite?</strong></a>]</span>.
-Then it was time to write this book.</p>
-<p>The software lowers the costs of building models that are up to the task of guiding malaria policy.
-An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
-These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.</p>
-<p>This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.</p>
-<hr />
-<center>
-<div class="float">
-<img src="Figures/ScalableComplexity.png" style="width:80.0%" alt="A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)" />
-<div class="figcaption">A schematic diagram of the elements in the framework (top half) and the process of model building and model fitting (bottom half)</div>
+<div id="solutions-1" class="section level3 hasAnchor" number="26.1.2">
+<h3><span class="header-section-number">26.1.2</span> Solutions<a href="aquatic-dynamics.html#solutions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="aquatic-dynamics.html#cb71-1" tabindex="-1"></a>BasicAquatic_dML <span class="ot">=</span> <span class="cf">function</span>(t, y, params){<span class="fu">with</span>(<span class="fu">c</span>(params, <span class="fu">as.list</span>(y)),{</span>
+<span id="cb71-2"><a href="aquatic-dynamics.html#cb71-2" tabindex="-1"></a>   </span>
+<span id="cb71-3"><a href="aquatic-dynamics.html#cb71-3" tabindex="-1"></a>  <span class="co"># Terms </span></span>
+<span id="cb71-4"><a href="aquatic-dynamics.html#cb71-4" tabindex="-1"></a>  Lambda <span class="ot">=</span> psi<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>sigma<span class="sc">*</span>L)<span class="sc">*</span>L<span class="sc">/</span><span class="dv">2</span> </span>
+<span id="cb71-5"><a href="aquatic-dynamics.html#cb71-5" tabindex="-1"></a>  eta <span class="ot">=</span> chi<span class="sc">*</span>f<span class="sc">*</span>M </span>
+<span id="cb71-6"><a href="aquatic-dynamics.html#cb71-6" tabindex="-1"></a>   </span>
+<span id="cb71-7"><a href="aquatic-dynamics.html#cb71-7" tabindex="-1"></a>  <span class="co"># Dynamics </span></span>
+<span id="cb71-8"><a href="aquatic-dynamics.html#cb71-8" tabindex="-1"></a>  dM <span class="ot">=</span> Lambda <span class="sc">-</span> g<span class="sc">*</span>M</span>
+<span id="cb71-9"><a href="aquatic-dynamics.html#cb71-9" tabindex="-1"></a>  dL <span class="ot">=</span> eta <span class="sc">-</span> (psi<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>sigma<span class="sc">*</span>L) <span class="sc">+</span> phi <span class="sc">+</span> theta<span class="sc">*</span>L)<span class="sc">*</span>L </span>
+<span id="cb71-10"><a href="aquatic-dynamics.html#cb71-10" tabindex="-1"></a>  </span>
+<span id="cb71-11"><a href="aquatic-dynamics.html#cb71-11" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dM, dL)))</span>
+<span id="cb71-12"><a href="aquatic-dynamics.html#cb71-12" tabindex="-1"></a>})} </span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="aquatic-dynamics.html#cb72-1" tabindex="-1"></a>makePar_BasicAquatic <span class="ot">=</span> <span class="cf">function</span>(<span class="at">f=</span><span class="dv">1</span><span class="sc">/</span><span class="fl">2.5</span>, <span class="at">g=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="at">chi =</span> <span class="dv">50</span>, <span class="at">psi =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="at">phi =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="at">theta =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">100</span>, <span class="at">sigma=</span><span class="dv">0</span>){</span>
+<span id="cb72-2"><a href="aquatic-dynamics.html#cb72-2" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">f=</span>f, <span class="at">g=</span>g, <span class="at">chi=</span>chi, <span class="at">psi=</span>psi, <span class="at">phi=</span>phi, <span class="at">theta=</span>theta, <span class="at">sigma=</span>sigma)</span>
+<span id="cb72-3"><a href="aquatic-dynamics.html#cb72-3" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-</center>
-<hr />
-<p>This book shows, through examples, how to use the software to build malaria models.
-Even without the software, it fills a gap for students who have taken an introduction to mathematical epidemiology or infectious disease modeling and want to go on in malaria.
-What are all the special topics that would need to be covered to build models that could be needed in malaria?
-This book <em>could</em> be the basis for such a course, if there were ever enough students.
-Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
-I will also be writing and recording some short lectures on a subset of topics.</p>
-<p>The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they’ve seen the Ross-Macdonald model before, that they’ve taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for <code>exDE</code> or <code>MicroMoB</code> or it can be found in the <a href="../../RAMP-Model-Library/RAMP-Model-Library.html"><code>RAMP-Model-Library</code></a>.</p>
-<p>While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, <a href="../../RAMP-Book/_book/index.html" target="_blank"><strong><em>Robust Analytics for Malaria Policy</em>.</strong></a></p>
-<hr />
-<p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
-<p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">12</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">13</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
-<p>–David L. Smith</p>
-</div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body">
-<div id="ref-RossR1911Book" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. The <span>Prevention</span> of <span>Malaria</span>. 2nd ed. <span>London</span>: <span>John Murray</span>; 1911. </div>
-</div>
-<div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-ReinerRC2013SystematicReview" class="csl-entry">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">Reiner RC Jr, Perkins TA, Barker CM, Niu T, Chaves LF, Ellis AM, et al. A systematic review of mathematical models of mosquito-borne pathogen transmission: 1970-2010. J R Soc Interface. 2013;10: 20120921. </div>
-</div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
-<div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
-</div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
-</div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
-</div>
-<div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
-</div>
-<div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <span><em>Plasmodium</em></span><span> <em>Falciparum</em></span> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
-</div>
-<div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
-</div>
-<div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
-</div>
-<div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. <span>London</span>: <span>Waterlow</span>; 1908. </div>
+<div id="regulation-1" class="section level3 hasAnchor" number="26.1.3">
+<h3><span class="header-section-number">26.1.3</span> Regulation<a href="aquatic-dynamics.html#regulation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="aquatic-dynamics.html#cb73-1" tabindex="-1"></a>tt <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>, <span class="at">by=</span><span class="dv">1</span>) </span>
+<span id="cb73-2"><a href="aquatic-dynamics.html#cb73-2" tabindex="-1"></a>y0 <span class="ot">=</span> <span class="fu">c</span>(<span class="at">M=</span><span class="dv">1</span>, <span class="at">L=</span><span class="dv">1</span>)</span>
+<span id="cb73-3"><a href="aquatic-dynamics.html#cb73-3" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">makePar_BasicAquatic</span>()</span>
+<span id="cb73-4"><a href="aquatic-dynamics.html#cb73-4" tabindex="-1"></a>params1 <span class="ot">=</span> <span class="fu">makePar_BasicAquatic</span>(<span class="at">phi=</span><span class="dv">1</span>)</span>
+<span id="cb73-5"><a href="aquatic-dynamics.html#cb73-5" tabindex="-1"></a>params2 <span class="ot">=</span> <span class="fu">makePar_BasicAquatic</span>(<span class="at">theta=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb73-6"><a href="aquatic-dynamics.html#cb73-6" tabindex="-1"></a>params3 <span class="ot">=</span> <span class="fu">makePar_BasicAquatic</span>(<span class="at">sigma=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">100</span>, <span class="at">theta=</span><span class="dv">0</span>)</span></code></pre></div>
+<p>This code solves the equations:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="aquatic-dynamics.html#cb74-1" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span>
+<span id="cb74-2"><a href="aquatic-dynamics.html#cb74-2" tabindex="-1"></a>yout  <span class="ot">&lt;-</span> <span class="fu">lsode</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>BasicAquatic_dML, <span class="at">parms=</span>params) </span>
+<span id="cb74-3"><a href="aquatic-dynamics.html#cb74-3" tabindex="-1"></a>yout1 <span class="ot">&lt;-</span> <span class="fu">lsode</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>BasicAquatic_dML, <span class="at">parms=</span>params1) </span>
+<span id="cb74-4"><a href="aquatic-dynamics.html#cb74-4" tabindex="-1"></a>yout2 <span class="ot">&lt;-</span> <span class="fu">lsode</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>BasicAquatic_dML, <span class="at">parms=</span>params2) </span>
+<span id="cb74-5"><a href="aquatic-dynamics.html#cb74-5" tabindex="-1"></a>yout3 <span class="ot">&lt;-</span> <span class="fu">lsode</span>(<span class="at">y=</span>y0, <span class="at">times=</span>tt, <span class="at">func=</span>BasicAquatic_dML, <span class="at">parms=</span>params3) </span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="aquatic-dynamics.html#cb75-1" tabindex="-1"></a>plotML <span class="ot">=</span> <span class="cf">function</span>(out, <span class="at">llwd=</span><span class="dv">1</span>, <span class="at">clrL =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">clrM=</span><span class="st">&quot;red&quot;</span>){<span class="fu">with</span>(<span class="fu">data.frame</span>(out),{</span>
+<span id="cb75-2"><a href="aquatic-dynamics.html#cb75-2" tabindex="-1"></a>  <span class="fu">plot</span>(time, L, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span>llwd, <span class="at">col =</span> clrL, <span class="at">xlab =</span> <span class="st">&quot;Time (Days)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Density&quot;</span>) </span>
+<span id="cb75-3"><a href="aquatic-dynamics.html#cb75-3" tabindex="-1"></a>  <span class="fu">lines</span>(time, M, <span class="at">col =</span> clrM, <span class="at">lwd=</span>llwd) </span>
+<span id="cb75-4"><a href="aquatic-dynamics.html#cb75-4" tabindex="-1"></a>})}</span>
+<span id="cb75-5"><a href="aquatic-dynamics.html#cb75-5" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="aquatic-dynamics.html#cb75-6" tabindex="-1"></a>addML <span class="ot">=</span> <span class="cf">function</span>(out, <span class="at">llty =</span> <span class="dv">2</span>, <span class="at">llwd=</span><span class="dv">1</span>, <span class="at">clrL =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">clrM=</span><span class="st">&quot;red&quot;</span>){<span class="fu">with</span>(<span class="fu">data.frame</span>(out),{</span>
+<span id="cb75-7"><a href="aquatic-dynamics.html#cb75-7" tabindex="-1"></a>  <span class="fu">lines</span>(time, L, <span class="at">col =</span> clrL, <span class="at">lty=</span>llty, <span class="at">lwd=</span>llwd) </span>
+<span id="cb75-8"><a href="aquatic-dynamics.html#cb75-8" tabindex="-1"></a>  <span class="fu">lines</span>(time, M, <span class="at">col =</span> clrM, <span class="at">lty=</span>llty, <span class="at">lwd=</span>llwd) </span>
+<span id="cb75-9"><a href="aquatic-dynamics.html#cb75-9" tabindex="-1"></a>})}</span></code></pre></div>
+<p>The first thing to point out is that changing the dynamics take some time to approach equilibrium – a couple of months, in this model. The second is that increasing mortality rates for mosquitoes in aquatic habitats by a factor of 10 affects the mosquito densities in minor ways.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="aquatic-dynamics.html#cb76-1" tabindex="-1"></a><span class="fu">plotML</span>(yout)</span>
+<span id="cb76-2"><a href="aquatic-dynamics.html#cb76-2" tabindex="-1"></a><span class="fu">addML</span>(yout1, <span class="at">clrL =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">clrM=</span><span class="st">&quot;darkred&quot;</span>, <span class="at">llwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p>The third is that increasing the response to mean crowding has a very strong effect on the population dynamics.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="aquatic-dynamics.html#cb77-1" tabindex="-1"></a><span class="fu">plotML</span>(yout)</span>
+<span id="cb77-2"><a href="aquatic-dynamics.html#cb77-2" tabindex="-1"></a><span class="fu">addML</span>(yout2, <span class="at">clrL =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">clrM=</span><span class="st">&quot;darkred&quot;</span>, <span class="at">llwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>The third point is that density dependent responses to mean crowding cause much larger changes to this system than density-dependent mortality. Aquatic dynamics have a strong tendency to oscillate, but more critically, delayed maturation strongly affects the ratio of adult mosquitoes to adults.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="aquatic-dynamics.html#cb78-1" tabindex="-1"></a><span class="fu">plotML</span>(yout)</span>
+<span id="cb78-2"><a href="aquatic-dynamics.html#cb78-2" tabindex="-1"></a><span class="fu">addML</span>(yout3, <span class="at">clrL =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">clrM=</span><span class="st">&quot;darkred&quot;</span>, <span class="at">llwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/compareML-1.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="aquatic-dynamics.html#cb79-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/test-1.png" width="672" /></p>
 </div>
 </div>
             </section>
@@ -662,8 +636,8 @@ I will also be writing and recording some short lectures on a subset of topics.<
           </div>
         </div>
       </div>
-
-<a href="contributors.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mosquitoes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="understanding-mosquito-dynamics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
