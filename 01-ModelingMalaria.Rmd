@@ -163,6 +163,15 @@ In planning and evaluating malaria control, it was important to develop some kin
 
 Despite all the focus on malaria, transmission Ross's first mathematical model of malaria was about mosquito populations. 
 
+In 1911, Ross formulated a model (his second) as a system of two ordinary differential equations. The model appeared in the $2^{nd}$ edition of _The Prevention of Malaria_ [@RossR1911Book], and it also appeared in _Nature_ [@RossR1911Nature] in this form: 
+
+$$ 
+\begin{array}{rl}
+dz/dt &= k' z' (p-z) + q z \\
+dz'/dt &= k z (p'-z') + q' z' \\
+\end{array}
+$$ 
+
 ## Measuring Transmission 
 
 

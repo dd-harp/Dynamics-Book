@@ -47,7 +47,8 @@ For this to describe local transmission, it's important that the two processes a
 
 ![](Figures/LifeCycleModel.png)
 
-We note that this diagram illustrates a cycle. Causal graphs must be acyclic. What is missing from the picture is an arrow showing that causation is played out over time in populations of humans and mosquitoes, as the parasites are transmitted back and forth. 
+
+
 
 To describe the factors that affect malaria transmission and that determine the prevalence of malaria in human populations over time, we will need to use mathematical models. In the following, we will write down four distinct mathematical equations that follow these basic rules: 
 
@@ -63,17 +64,17 @@ In all of these models, we will adhere rigidly to Ross's simplifying assumptions
 
 ## Discrete Time, Deterministic
 
-We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, parameters, and equations. 
+We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, and parameters.  
 
 In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things. 
 
 ### Variables
 
-Variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time.  
+Variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a discrete time system, the values of the variables are defined only at integer values of $t.$ 
 
 + Let $x_t$ be the fraction of people who are infected at time $t,$ and $0 \leq x_t \leq 1.$
 
-+ Let $y_t$ be the fraction of mosquitoes who are infected at time $t,$ and $0 \leq y_t \leq 1.$ 
++ Let $y_t$ be the fraction of mosquitoes who are infected at time $t,$ $0 \leq y_t \leq 1.$ 
 
 ### Initial Conditions
 
@@ -116,11 +117,11 @@ Finally, we put all this together into a mathematical statement that has transla
 
 + The fraction of humans who are infected is $x_t$; a fraction $s$ clear infections.
     
-+ The fraction of mosquitoes who are infected is $x_t$; a fraction $u$ die. 
++ The fraction of mosquitoes who are infected is $y_t$; a fraction $u$ die. 
     
 + The fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ will become infected. 
     
-+ The fraction of mosquitoes who are not infected is $1-x_t$; a fraction $a x_t$ become infected. 
++ The fraction of mosquitoes who are not infected is $1-y_t$; a fraction $a x_t$ become infected. 
 
 $$\begin{array}{rl}
 x_{t+1} &=  x_t - s x_t + m a y_t (1-x_t)  \\ 
@@ -177,6 +178,7 @@ The way we implemented this, the values of $x$ and $y$ are stored in columns:
 ```{r}
 print(tail(xy_t, 3)) 
 ```
+
 We can now plot out the values over the first 40 days 
 
 ```{r}
@@ -458,27 +460,57 @@ check_it_dts_2(par3, tmax=200)
 
 Some useful notes:
 
-1. The two models we just presented can be implemented in a spreadsheet. We will be using software written in R.  
+1. The two models we just presented above can be implemented in a spreadsheet.  
 
 2.  
 
 ## Continuous Time, Deterministic
 
-In 1911, Ross formulated his second model as a system of two ordinary differential equations. The model appeared in the $2^{nd}$ edition of _The Prevention of Malaria_ [@RossR1911Book], and it also appeared in _Nature_ [@RossR1911Nature] in this form: 
+Here, we present a continuous time, deterministic model. It is homologous to Ross's 2nd model [@RossR1911Nature], after renaming the parameters. To deal with these equations, you need a background in calculus. 
 
-$$ 
-\begin{array}{rl}
-dz/dt &= k' z' (p-z) + q z \\
-dz'/dt &= k z (p'-z') + q' z' \\
-\end{array}
-$$ 
-At the time, there was not much evidence from malaria research to frame the problem. A fully parameterized model, using biologically meaningful parameters, would have to wait for a few decades of research and a synthesis by Macdonald.
+### Variables and Initial Conditions
 
-In the following, we analyze this system, but we change the variable and parameter names (let $z=x$, $z'=y$, $k' = ma$, $k=a$, $r=e^{-s}$, and $p=e^{-g}$), to get something that is easier to compare to Macdonald's model.  
+Once again, variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a continuous time system, the values of the variables are defined for all values of $t.$ 
 
-### Variables 
++ Let $x(t)$ be the fraction of people who are infected at time $t,$ and $0 \leq x(t) \leq 1.$
 
++ Let $y(t)$ be the fraction of mosquitoes who are infected at time $t,$ $0 \leq y(t) \leq 1.$ 
 
+As before, we will need to define initial conditions. 
+
+### Parameters 
+
+The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.  
+
+  + Let $r$ denote the fraction of people who clear infections after one day; $0 < r < 1.$ 
+
+  + Let $g$ denote the fraction of mosquitoes who die in one day; $0 < g < 1.$ 
+
+  + Let $a$ denote the fraction of mosquitoes who blood feed on a human in a day; $0 < a < 1.$ 
+
+  + Let $m$ denote the number of mosquitoes per human; $m \geq 0.$ 
+
+```{r}
+# The Parameters, as a Named Vector
+par = list(
+  r = 1/200, # The fraction of infections that clear each day
+  g = 1/12,  # The fraction of mosquitoes that die each day
+  a = 1/4,   # The fraction of mosquitoes that blood feed on a human each day
+  m = 2      # The number of mosquitoes per human
+) 
+```
+
+### Equations
+
+Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms: 
+
++ The fraction of humans who are infected is $x$; infections clear at the rate $r.$ 
+    
++ The fraction of mosquitoes who are infected is $y$; mosquitoes die at the rate $g.$ 
+    
++ The fraction of humans who are infected is $1-x$; infections occur at the rate $m a y.$ 
+    
++ The fraction of mosquitoes who are not infected is $1-y$; infections occur at the rate $a x.$ 
 
 $$ 
 \begin{array}{rl}
