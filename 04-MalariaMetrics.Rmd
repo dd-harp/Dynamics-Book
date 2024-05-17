@@ -1,10 +1,29 @@
 # Measuring Malaria 
 
+If we want to manage malaria, we must be able to measure it. 
+
 ## Infection
+
++ Spleen Rate
+
++ Parasite Rate 
+
++ Force of Infection 
+
+## Infectiousness
 
 ## Malaria Incidence 
 
++ Infection vs. Disease 
+
 ## Exposure Risk 
 
-## Mosquito Bionomics 
++ HBR
 
++ SR 
+
++ EIR 
+
+## Vectorial Capacity  
+
+## Transmission Efficiency

@@ -441,7 +441,7 @@ or equivalently
 \mbox{EIR} = \frac{\textstyle{fq\Lambda}}{\textstyle{H}} \times \frac{\textstyle{f q \kappa}}{\textstyle{g + fq \kappa}} e^{-g\tau} 
 \end{equation}
 
-This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model [@MacdonaldG1952Sporozoite; @ArmitageP1953]. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography [@SmithDL2004_Statics]. 
+This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model [@MacdonaldG1952Sporozoite; @ArmitageP1953]. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography [@SmithDL2004Statics]. 
 
 ### Vectorial Capacity 
 

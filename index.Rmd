@@ -14,6 +14,7 @@ output:
     keep_tex: yes
     toc: true
     toc_depth: 3
+    citation_package: biblatex
     extra_dependencies:
       mathrsfs: null
       caption: null
@@ -61,7 +62,7 @@ In making a master list to test the framework's extensibility, we found that som
 Beyond the algorithms, these models needed the support of mathematical theory.
 We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate. 
 
-Sometime in the fall of 2022, the last few pieces came together. We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. We submitted a paper to PLoS Computational Biology [@WuSL2023SpatialDynamics]. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [@addCite]. 
+Sometime in the fall of 2022, the last few pieces came together. We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. We submitted a paper to PLoS Computational Biology [@WuSL2023SpatialDynamics]. A second paper forced us to confront a set of software design questions in relation to exogenous forcing **addCite**. 
 Then it was time to write this book. 
 
 The software lowers the costs of building models that are up to the task of guiding malaria policy.

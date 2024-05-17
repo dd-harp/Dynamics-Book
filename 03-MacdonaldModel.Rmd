@@ -1,15 +1,20 @@
 
 # Macdonald's Model
 
-A few years ago, I went searching for *The Ross-Macdonald Model.* I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations. Instead, I found the history of an idea that was spread across several publications [@SmithDL2012_RossMacdonald]. 
-What I sought was first published in 1982 [@AronJL1982PopulationDynamics;@BaileyNTJ1982BiomathematicsMalaria].  
+When I first learned about malaria, the basic model was commonly called the *Ross-Macdonald Model.*
+A few years ago, I went searching for *The Ross-Macdonald Model* with the hope of getting a clear answer about how and why George Macdonald's name had attached.
+I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations.
+Instead, I found that Macdonald was associated with several new ideas spread across several publications, including many ideas he attributed (or ought to have attributed) to others [@SmithDL2012_RossMacdonald]. 
+Macdonald's papers are focused on the concepts and evidence; the formulas are mostly relegated to appendices.
+I finally found the equations in a concise form in publications from 1982   [@AronJL1982PopulationDynamics;@BaileyNTJ1982BiomathematicsMalaria]. 
 
-Macdonald never wrote down his model for malaria transmission as a system of equations in a single place.
+Macdonald published XX papers on a range of topics in malaria epidemiology, transmission dynamics and control between 1950 and 1956. 
+The papers were followed by a book in 1957, called *The Epidemiology and Control of Malaria.* 
 In 1950, he published a review of malaria malaria epidemiology [@MacdonaldG1950Epidemiology], and a new model for superinfection [@MacdonaldG1950Superinfection].
+The paper on superinfection is flawed [@FinePEM1975SuperinfectionProblem].
 In 1952, Macdonald published his analysis of the sporozoite rate [@MacdonaldG1952Sporozoite], and then he wrote a paper about endemic malaria that included a formula for the basic reproductive number, $R_0$ [@MacdonaldG1952R0].
-Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; a paper appeared in 1953 [@ArmitageP1953].
-The formulas have enough information to write down the equations he must have been working from. 
-We present it in the next section.
+The formulas in Macdonald's footnotes and appendices from the 1952 papers have enough information to write down the equations he must have been working from, and this is what we will present in the next section.
+Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; the paper appeared in 1953 [@ArmitageP1953].
 
 After reading old papers, it became clear that Alfred Lotka played an important yet overlooked role in development of basic theory for malaria.
 Ross had actually published three mathematical models.
@@ -22,13 +27,12 @@ It should, perhaps, be called the Ross-Lotka-Macdonald model.
 All this history, spanning the period from roughly 1899 to 1969, has been reviewed before [@SmithDL2012_RossMacdonald], and some historical notes are recounted at the end of this chapter. 
 The codification of the Ross-Macdonald model in the 1980s coincided with a rising interest in disease ecology and mathematical epidemiology in academic departments of ecology.  
 
-## The Model 
 
-### Superinfection 
+## Superinfection 
 
-Macdonald's model for superinfection... 
+Macdonald's model for superinfection was based on the idea of the *multiplicity of infection* (MoI). If infections were occurring faster than they could clear, it stands to reason that each person will carry the parasites that could be traced back to more than one infectious bite. Getting back to the question of prevalence, how long would it take for all those parasites to clear?  
 
-### The Sporozoite Rate
+## Mosquito Bionomics 
 
 Macdonald made several important contributions to the mathematical study of malaria. Ross's original formulation remained the standard until Macdonald's paper on the sporozoite rate [@MacdonaldG1952Sporozoite]. Because of it's historical interest, we'll discuss Ross's formulation in the discussion of [Macdonald's Model], in part, to make it clear why Macdonald's contribution was significant enough to get his name attached.
 
@@ -39,6 +43,7 @@ In 1950, Macdonald published a new model with human malaria superinfection [@Mac
     
 As a side note, it's highly likely that Macdonald was aware of Lotka's demographic concept of $R_0$, as well as his work with Sharpe on delay differential equations [@LotkaAJ1923part4], though we have been unable to find a single line where Macdonald gives Lotka the credit. For these reasons, and others, the equations ought to be described as the Ross-Lotka-Macdonald model.  
 
+## Dynamics
 
 ### Variables
 
@@ -89,7 +94,7 @@ this.
 
 ## The Classification of Transmission 
 
-## Historical Notes 
+## Notes 
 
 Ross's first model described malaria transmission dynamics using  difference equations [@RossR1908]. That model was reviewed, analyzed, and critiqued first by H. Waite in 1910 [@WaiteH1910MosquitoesMalaria]. 
 

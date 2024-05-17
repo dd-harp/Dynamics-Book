@@ -4,7 +4,7 @@
 
 In a previous chapter, we consider adult mosquito population density as a process closely related to, but also exogenous to the process of parasite transmission. We formulated the models for mosquito density in terms of an emergence rate, $\Lambda(t)$. In many studies, this might be good enough. There are some challenges in vector control, however, that call for a deeper understanding of adult mosquito population dynamics in relation to the population dynamics of immature mosquito populations. It's hard to imagine giving any advice about LSM without a model of mosquito ecology. Adult vector control will reduce mosquito population densities, but it would also reduce egg laying affecting immature mosquito populations [@BradyOJ2015AdultVector]. Mosquito populations have their own thresholds for persistence, and their own spatial dynamics. 
 
-While it could be argued that these are not the primary concerns for malaria programs -- we would not disagree -- our mathematical framework must be strong enough to support analytics for integrated vector control, including LSM. Immature mosquito dynamics are one of the core dynamical components in our framework. We introduce the topic here, using a very basic model for mosquito ecology [@SmithDL2013_LarvalDynamics]. 
+While it could be argued that these are not the primary concerns for malaria programs -- we would not disagree -- our mathematical framework must be strong enough to support analytics for integrated vector control, including LSM. Immature mosquito dynamics are one of the core dynamical components in our framework. We introduce the topic here, using a very basic model for mosquito ecology [@SmithDL2013LarvalDynamics]. 
 
 To extend the previous model, we need to make several changes and additional assumptions: 
 
@@ -21,7 +21,7 @@ One of the big themes we want to introduce here is that the outcomes of vector c
 
 ### Equations
 
-Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding [@SmithDL2013_LarvalDynamics]. The mosquito maturation rate, $\psi e^{-\sigma L}$ defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, $\psi  + \theta L$, has two parts: a density independent term $\psi$ and a response to mean crowding $\theta L$. We assume that adults lay $\chi$ eggs per feeding cycle. 
+Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding [@SmithDL2013LarvalDynamics]. The mosquito maturation rate, $\psi e^{-\sigma L}$ defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, $\psi  + \theta L$, has two parts: a density independent term $\psi$ and a response to mean crowding $\theta L$. We assume that adults lay $\chi$ eggs per feeding cycle. 
 
 \begin{equation}
 \begin{array}{rl}
