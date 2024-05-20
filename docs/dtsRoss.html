@@ -564,7 +564,7 @@ y_{t+1} - y_t &amp;=  - u y_t + a x_t (1 - y_t) \\
 <div id="visualizing" class="section level3 hasAnchor" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Visualizing<a href="dtsRoss.html#visualizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can now plot out the values over the first 40 days. Since <code>xy_t</code> is a named list, we transform it and plot:</p>
-<p><img src="_book/figs/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="docs/figs/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Notice that after 40 days, the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> appear to be approaching some value asymptotically. This is an important feature of these systems, one that we would like to explore a bit more in the following sections.</p>
 <p>We can translate Ross’s basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, and parameters.</p>
 <p>In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things.</p>
@@ -574,7 +574,7 @@ y_{t+1} - y_t &amp;=  - u y_t + a x_t (1 - y_t) \\
 <p>If we want to repeat tasks, we can simply write a wrapper around other functions that expedite the work. In this case, we want to write a function that <em>solves</em> the equations (<em>i.e.</em> that iteratively computes and stores the values) over some time interval:</p>
 <p>We can write another function that <em>plots</em> the equations (<em>i.e.</em> that iteratively computes and stores the values) over some time interval:</p>
 <p>Now, all the work we did above can be plotted using a single function call:</p>
-<p><img src="_book/figs/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="docs/figs/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Now, it is easier to use the models in various ways.</p>
 </div>
 <div id="steady-states" class="section level3 hasAnchor" number="2.1.5">
@@ -615,7 +615,7 @@ We can write a function to compute this steady state:</p>
 <pre><code>##           x           y 
 ## -0.06666667 -0.25000000</code></pre>
 <p>What happens if we simulate this? (Let’s set the initial conditions to reasonably high values)</p>
-<p><img src="_book/figs/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="docs/figs/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Our function <code>find_eq_dts_a</code> gives us a negative number.</p>
 <pre><code>##           x           y 
 ## -0.06666667 -0.25000000</code></pre>
@@ -644,7 +644,7 @@ We can write a function to compute this steady state:</p>
 <div id="numerical-instability" class="section level3 hasAnchor" number="2.1.8">
 <h3><span class="header-section-number">2.1.8</span> Numerical Instability<a href="dtsRoss.html#numerical-instability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There is another problem with the equations. If we set <span class="math inline">\(m\)</span> too high, such that at some point <span class="math inline">\(m a y_t &gt; 1,\)</span> then the whole system eventually crashes:</p>
-<p><img src="_book/figs/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="docs/figs/unnamed-chunk-28-1.png" width="672" /></p>
 <p>In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back and rethink the way we formulated our model. How does the probability of getting infected scale with the number of infective bites?</p>
 </div>
 <div id="dtsRoss2" class="section level3 hasAnchor" number="2.1.9">
@@ -672,7 +672,7 @@ It’s surprisingly easy to write down equations, like this one, that we can’t
 <p>We can just as easily write the code to numerically solve the discrete time system:</p>
 <p>Once again, we can wrap a function around the solver so that it’s easier to use the code:</p>
 <p>Now, we can visualize the output and see that we have fixed our stability problem.</p>
-<p><img src="_book/figs/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="docs/figs/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
 <div id="verification-1" class="section level4 hasAnchor" number="2.1.9.4">
 <h4><span class="header-section-number">2.1.9.4</span> Verification<a href="dtsRoss.html#verification-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
