@@ -1,4 +1,4 @@
-# Superinfection 
+# Queuing Models 
 
 ## Parasite Densities and Detection 
 

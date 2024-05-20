@@ -2,9 +2,9 @@
 
 # Malaria Epidemiology
 
-## Parasite 
+## Life Stages 
 
-## Epidemiology
+## Overview 
 
 A major challenge for malaria dynamics is how to define an state space describing malaria infection and immunity in human populations that captures the essential elements of malaria dynamics well enough to trust for making policies. 
 There are features of malaria infections that have been identified and studied in the past: superinfection; the complex time course of an infection -- including fluctuating parasite densities -- and the problem of detection; gametogenesis, gametocyte maturation and gametocyte dynamics; fever and disease; development of immunity with exposure including its effects on infection, disease, and infectiousness; treatment, adherence to drug regimens, chemoprotection and infection curing. Over time, these issues have been addressed in various models. 

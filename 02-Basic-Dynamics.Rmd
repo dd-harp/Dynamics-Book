@@ -5,18 +5,31 @@ output:
 ---
 # Basic Malaria Models 
 
-Ross was interested in making plans about malaria control.
+*Basic malaria models as deterministic or stochastic systems of difference or differential equations* 
+
+*** 
+
+Ross was interested in planning for malaria control.
 Given his interests in measuring malaria, he immediately noticed the importance of the fact that malaria prevalence differed from place to place.
-Ross wanted to understand why, so he developed mathematical models of malaria as a way of understanding the prevalence of malaria infection among humans in a population.
+Ross wanted to understand why, so he developed mathematical models of malaria as a way of understanding the factors affecting the prevalence of malaria infection among humans in a population.
 
 Malaria infections in the two populations are connected through blood feeding, so malaria transmission works as an integrated system.
 The process looks something like the following diagram.
 
 ![](Figures/LifeCycleModel.png)
 
-How does malaria persist in a population? It persists through the transmission of parasites among hosts during blood feeding. What factors determine prevalence? It is a balance between the gain and loss of infection. To develop a mathematical model, Ross believed that it was possible to write down *a priori* -- or in other words, to formulate mathematical models using quantitative logic -- a description of the process. 
+This graph is the basis for causal theory for malaria, but students of causation will note that this is not an acyclic graph. 
+If we applied the logic more generally, no graph describing any organisms life cycle would be causal, and yet life is undoubtedly the cause of life.
+The missing element is time: a life-cycle graph would be directed and acyclic if it had an arrow that traced life giving rise to new life across generations.
+To understand this diagram as causal, we must thus imagine that it describes a dynamical process describing changes in populations: infected mosquitoes today are biting and infecting humans tomorrow; and infectious humans today are causing infections in mosquitoes tomorrow when they take a blood meal. 
+Seen in this way, we can begin to develop a causal theory for malaria in populations.
+How does malaria persist in a population? 
+It persists through the transmission of parasites among hosts during blood feeding.
+What factors determine prevalence?
+It is a balance between the gain and loss of infection.
 
-To write down a model, we must make some assumptions about the process.
+To develop a mathematical model, Ross believed that it was possible to write down *a priori* -- or in other words, to formulate mathematical models using quantitative logic -- a description of the process. 
+To write down the model, we must make some assumptions about the process.
 We begin with an abstract concept of place: *here.* 
 We imagine populations here comprised of individual mosquitoes and individual humans, and we are interested in computing the fraction of humans and mosquitoes that is infected. 
 Since infections don't last forever, the prevalence of infection in mosquitoes and mosquitoes reflects a balance between infections acquired through parasite transmission and the natural loss of infection and host mortality.
@@ -37,7 +50,10 @@ $$
 \end{array} \right]
 $$
 
-This description of a process ignores the loss of infection in mosquitoes, and changes in mosquito populations through migration. The model did not explicitly say anything about a change in the number of uninfected mosquitoes through *emergence* from aquatic habitats. It ignored the lag between the point in time when a mosquito gets infected and when it becomes infectious. The basic mathematical model we will describe in the next section effectively assumes that the mosquito population does not change, so every mosquito that dies is replaced with an uninfected mosquito.  
+This description of a process ignores the loss of infection in mosquitoes, and changes in mosquito populations through migration. 
+It ignored the lag between the point in time when a mosquito gets infected and when it becomes infectious. 
+This basic description of the process does not explicitly address the fact that each dying infected mosquito must get replaced by an uninfected mosquito through *emergence* from aquatic habitats, or else the mosquito population would be declining over time.
+The process emphasizes malaria transmission dynamics, so mosquito ecology is almost invisible.  
 
 Humans live long lives, so parasite loss occurred through the natural clearance of infections. 
 
@@ -54,44 +70,52 @@ $$
 
 This description of the process thus ignores human demography, including births, deaths, and migration. The model also ignores a large number of other factors, including superinfection, the complex time course of an infection, immunity, and treatment with anti-malarial drugs. (In Ross's day, quinine was expensive and difficult to obtain, but it was sometimes used.) 
 
-We can translate this basic description of a process into a mathematical model.
-There are at least four ways of doing this.
-The model can be formulated in either discrete or continuous time, and each one could be formulated as a deterministic or stochastic process.
-
-To describe the factors that affect malaria transmission and that determine the prevalence of malaria in human populations over time, we will need to use mathematical models. In the following, we will write down four distinct mathematical equations that follow the basic rules described above: 
+To describe malaria transmission and factors that determine the prevalence of malaria in human populations over time, we will need to use mathematical models.
+In the sections that follow, we will thus translate the above basic description of a process into mathematical models
+formulated in discrete and continuous time, and as a deterministic or stochastic processes.
+In the following, we will write down several distinct sets of mathematical equations that follow the basic rules described above: 
 
 1. In Section \@ref(dtsRoss), we present two basic deterministic discrete-time systems. 
 
+2. In Section \@ref(xdeRoss), we present a deterministic continuous-time system; 
+
 3. In Section \@ref(sdtsRoss), we present a stochastic discrete-time system; 
 
-3. In Section \@ref(xdeRoss), we present a deterministic continuous-time system; 
+4. In Section \@ref(sxdeRoss), we present a stochastic process in continuous-time; 
 
-3. In Section \@ref(sxdeRoss), we present a stochastic process in continuous-time; 
+As a reminder, we're not trying to delve too deeply into malaria with the models in this chapter.
+Instead, we're trying to establish a starting point for investigating malaria transmission dynamics. 
+Our goals are thus to learn the basic elements of different kinds of models, and to develop some basic intuition about the different kinds of models that exist, and how we can think about models as approximations.
+Each model is implemented as R code^[In developing this book, we assumed the reader would be familiar with R and RStudio.]
+Later, we will start using some R packages that were developed to support robust analytics for malaria policy.
+Later, we'll worry about modifying the assumptions to ensure that we are dealing with the issues that matter for in malaria policy. 
 
-With the models in this chapter, we're not trying to delve too deeply into malaria. In this chapter, our goals are to learn the basic elements of different kinds of models, and to develop some basic intuition about the different kinds of models that exist, and how we can think about models as approximations. Each model is implemented as R code^[Footnote about R.] Later, we will start using some R packages that were developed to support robust analytics for malaria policy. Later, we'll worry about modifying the assumptions to ensure that we are dealing with the issues that matter for in malaria policy. 
 
+## Deterministic, Discrete Time {#dtsRoss}
 
-## Deterministic, Discrete Time Models {#dtsRoss}
+In this section, we present a very basic deterministic, discrete-time model. Because it is the first model we present, we will be very methodical about the presentation, including sections about computation, analysis, and model verification. We show that the first mdoel is numerically unstable in some cases, so we present another model that is numerically stable. 
 
-In the following, we present a very basic model. Because it is the first model we present, we will be very methodical about the presentation, including sections about computation, analysis, and model verification. We show that the first mdoel is numerically unstable in some cases, so we present another model that is numerically stable. 
+### `ross_dts_1`
 
-### A Basic Model 
+<!-- Here, present a discrete time deterministic model, one example of a discrete time system (DTS) that was developed to model malaria as a set of coupled difference equations.  -->
 
-Here, present a discrete time deterministic model, one example of a discrete time system (DTS) that was developed to model malaria as a set of coupled difference equations. We will write down the equations last. 
-
-First, we must describe the parts of a model, including the variables, initial conditions, and parameters. As we go, we will also write R code that implements the model and that solves it. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things. 
+We will write down the equations last. First, we must describe the parts of a model, including the variables, initial conditions, and parameters. As we go, we will also write R code that implements the model and that solves it. In writing the code, we will adopt some conventions that we can use to help us write good code. 
 
 **Variables** are quantities that describe the state of a system. These values change over time;  they are the main quantities that we want to compute to understand how the system changes over time. 
 
 In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a discrete time system, the values of the variables are defined only at integer values of $t.$ 
 
++ Let $t$ represent time 
+
 + Let $x_t$ be the fraction of people who are infected at time $t,$ and $0 \leq x_t \leq 1.$
 
 + Let $y_t$ be the fraction of mosquitoes who are infected at time $t,$ $0 \leq y_t \leq 1.$ 
 
+In this model, time is marching forward. We call it the *independent variable.* The other variables are computed with respect to time, so we call them *dependent variables.*
+
 **Initial Conditions** are the values of the variables at a point in time. 
 
-Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything unless we can say how the process gets started. What are the values of our variables at the beginning of our simulations (usually, at time $t=0$)? 
+Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything specific unless we specify the values of the variables at one point in time. We call these values the initial conditions. What are the values of our variables at the beginning of our simulations (usually, at time $t=0$)? 
 
 We set these initial values to be small: 
 
@@ -106,11 +130,11 @@ This R object `xy` is a *named vector.* The names are invisible, but they attach
 with(as.list(xy), x) 
 ```
 
-We adopt these conventions so that our code closely resembles the equations. 
+We adopt these conventions so that the R code closely resembles the equations. 
 
-**Parameters** are quantities that are passed to the model that describe some part of the process. In the model we are developing, these parameters are constant. We would thus call this an *autonomous* system of equations. In other models, we could have parameter values that changes over time, so the system would be called *non-autonomous.*
+**Parameters** are quantities -- rates, numbers, or probabilities -- that describe some part of the process. Unlike variables, parameters are passed to the model.  In the model we present, these parameters are constant. Since they are constant, we call this an *autonomous* system of equations. In other models, we could have parameter values that changes over time, so the system would be called *non-autonomous.*
 
-The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.  
+The parameters in this model help us to define changes in the fraction infected: the fraction of humans that clear an infection each day; the fraction of infected mosquitoes that die; and blood feeding and infection. 
 
   + Let $s$ denote the fraction of people who clear infections after one day; $0 < s < 1.$ 
 
@@ -122,7 +146,7 @@ The parameters describe the processes that are occurring in the population, the 
 
 ```{r}
 # The parameters, as a list 
-par = list(
+ross_dts_par = list(
   s = 1/200, # The fraction of infections that clear each day
   u = 1/12,  # The fraction of mosquitoes that die each day
   a = 1/4,   # The fraction of mosquitoes that blood feed on a human each day
@@ -130,7 +154,7 @@ par = list(
 ) 
 ```
 
-**Equations** describe dynamic changes in the variables over time. In this case, the process is described by a system of coupled difference equations.  
+**Equations** describe dynamic changes in the variables over time. In this case, the process is described by a system of coupled difference equations. 
 
 Finally, we put all this together into a mathematical statement that has translated the description of a process, that are describe the process. 
 
@@ -139,7 +163,7 @@ x_{t+1} &=  x_t - s x_t + m a y_t (1-x_t)  \\
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}$$
 
-We can rewrite the equations so that the left hand side is interpreted as *the daily change in the values of the parameters* and the right hand describes those changes: 
+We could rewrite the equations so that the left hand side is interpreted as *the daily change in the values of the parameters,* and the terms on the right hand side describes those changes: 
 
 $$
 \begin{array}{rl}
@@ -149,11 +173,11 @@ y_{t+1} - y_t &=  - u y_t + a x_t (1 - y_t) \\
 $$
 
 
-In this second formulation, there are are four terms: 
+In this second formulation, there are are four terms on the right hand side: 
 
 + The fraction of humans who are infected is $x_t$; a fraction $s$ clear infections.
     
-+ The fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ gets infected. 
++ The fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ gets infected. (If $may_t >1,$ the term does not make sense. In sub-section \@ref(dtsRoss2), below, we discuss this in greater depth.)
 
 + The fraction of mosquitoes who are infected is $y_t$; a fraction $u$ die. 
     
@@ -179,7 +203,7 @@ ross_dts_1 = function(xy, p){
 }
 ```
 
-### Solving Discrete Time Systems
+### Solving 
 
 With the R code we developed, we can *solve* the equations, which involves computing the values of the variables iteratively. Since the values of the variables change, we initialize `xy_t` to store the values of computed variables over time. 
 
@@ -192,7 +216,7 @@ To iterate, we must take two steps: one to compute the values, and another to st
 
 ```{r}
 # Compute and store the values of the variables  
-xy = ross_dts_1(xy, par)
+xy = ross_dts_1(xy, ross_dts_par)
 xy_t = rbind(xy_t, xy)
 ```
 
@@ -208,7 +232,7 @@ We can iterate over many time steps, storing the values in columns:
 ```{r}
 # Iterate to compute the values as they change over time 
 for(t in 2:40){
-  xy = ross_dts_1(xy, par) 
+  xy = ross_dts_1(xy, ross_dts_par) 
   xy_t = rbind(xy_t, xy) 
 } 
 ```
@@ -267,7 +291,7 @@ plot_xy = function(xy_t, add_points = FALSE){with(xy_t,{
 Now, all the work we did above can be plotted using a single function call:  
 
 ```{r}
-plot_xy(solve_ross_dts_1(par, tmax=40), add_points=TRUE) 
+plot_xy(solve_ross_dts_1(ross_dts_par, tmax=40), add_points=TRUE) 
 ```
 
 Now, it is easier to use the models in various ways. 
@@ -280,17 +304,17 @@ In the following, we compute how much the system is changing over time. We can s
 
 ```{r}
 # The last value is still stored as xy; the [-1] omits t
-xy[-1] - ross_dts_1(xy, par)[-1]
+xy[-1] - ross_dts_1(xy, ross_dts_par)[-1]
 ```
 
 If we iterate another hundred days and check again, the differences have gotten even smaller: 
 
 ```{r}
 for(i in 41:140){
-  xy = ross_dts_1(xy, par)
+  xy = ross_dts_1(xy, ross_dts_par)
   xy_t = rbind(xy_t, xy) 
 } 
-xy[-1] - ross_dts_1(xy, par)[-1]
+xy[-1] - ross_dts_1(xy, ross_dts_par)[-1]
 ```
 
 After simulating, the variables reach a steady state, where asymptotically $x_{t+1} = x_t$ and $y_{t+1} = y_t$. 
@@ -341,36 +365,36 @@ All our analysis worked out well for the parameter values that we chose, but wha
 There must be some very low level of mosquitoes, for example, where malaria can't reproduce. If we reduce $m$ to $0.005$ and evaluate the expression at the steady state, we get negative values for $x$ and $y$. 
 
 ```{r}
-par1 = par
-par1$m = 0.005
-find_eq_dts_a(par1)
+ross_dts_par1 = ross_dts_par
+ross_dts_par1$m = 0.005
+find_eq_dts_a(ross_dts_par1)
 ```
 
 What happens if we simulate this? (Let's set the initial conditions to reasonably high values) 
 
 ```{r}
-plot_xy(solve_ross_dts_1(par1, x0 = .5, y0=.3, tmax=1500)) 
+plot_xy(solve_ross_dts_1(ross_dts_par1, x0 = .5, y0=.3, tmax=1500)) 
 ```
 
 Our function `find_eq_dts_a` gives us a negative number.
 
 ```{r}
-find_eq_dts_a(par1)
+find_eq_dts_a(ross_dts_par1)
 ```
 
 If we look at the equations, it's easy enough to spot the problem. Since $x$ and $y$ must be positive, then it must be true that $$m a^2 > su.$$ We call this a threshold condition.
 
 ```{r}
-m_crit = with(par, s*u/a^2)
+m_crit = with(ross_dts_par, s*u/a^2)
 m_crit 
 ```
 
 If we check, we find that this gives us the disease free equilibrium.  
 
 ```{r}
-par2 = par
-par2$m = m_crit
-find_eq_dts_a(par2)
+ross_dts_par2 = ross_dts_par
+ross_dts_par2$m = m_crit
+find_eq_dts_a(ross_dts_par2)
 ```
 
 We need a better function: 
@@ -385,7 +409,7 @@ find_eq_dts_1 = function(par){with(par,{
 ```
 
 ```{r}
-find_eq_dts_1(par1)
+find_eq_dts_1(ross_dts_par1)
 ```
 
 
@@ -396,43 +420,43 @@ We want to get used to double checking everything to avoid inserting mistakes. O
 If we've done everything right, we ought to get the same values for the steady states through our analysis and simulation. 
 ```{r}
 xy[-1]
-find_eq_dts_1(par) 
+find_eq_dts_1(ross_dts_par) 
 ```
 
 It's tempting to look at the printout and assume these two numbers are exactly equal. This is the land of computation, so things won't be exact. We can simply sum up the absolute values of the differences: 
 
 ```{r}
-verify_dts_1 = function(xy, pars){
-  sum(abs(xy[-1] - find_eq_dts_1(pars))) 
+verify_dts_1 = function(xy, ross_dts_pars){
+  sum(abs(xy[-1] - find_eq_dts_1(ross_dts_pars))) 
 }
-verify_dts_1(xy, par)
+verify_dts_1(xy, ross_dts_par)
 ```
 
 If we wanted to reduce this to a simple error check, we should pick a tolerance level -- say $10^{-9}$ -- and then just ask if we are closer than that: 
 
 ```{r}
-check_it_dts_1 = function(xy, pars, tol=1e-9)
+check_it_dts_1 = function(xy, ross_dts_pars, tol=1e-9)
 {
-  verify_dts_1(xy, pars) < tol
+  verify_dts_1(xy, ross_dts_pars) < tol
 }
-check_it_dts_1(xy, par)
+check_it_dts_1(xy, ross_dts_par)
 ```
 
-#### Numerical Instability 
+### Numerical Instability 
 
 There is another problem with the equations. If we set $m$ too high, such that at some point $m a y_t > 1,$ then the whole system eventually crashes:
 
 ```{r}
-par3 = par
-par3$m = 20 
-plot_xy(solve_ross_dts_1(par3, x0 = .01, y0=.001, tmax=20)) 
+ross_dts_par3 = ross_dts_par
+ross_dts_par3$m = 20 
+plot_xy(solve_ross_dts_1(ross_dts_par3, x0 = .01, y0=.001, tmax=20)) 
 ```
 
 In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back and rethink the way we formulated our model. How does the probability of getting infected scale with the number of infective bites?
 
-### An Improved Model {.tabset .tabset-fade .tabset-pills}
+### `ross_dts_2` {#dtsRoss2}
 
-#### Exposure 
+#### Attack Rates
 
 One way to do this is to say that the *expected* number of bites would follow a Poisson distribution with mean $may_t,$ so that the fraction getting infected is the zero term from a Poisson:
 
@@ -469,7 +493,7 @@ find_eq_dts_2 = function(pars){with(pars,{
 The new equilibrium is at:
 
 ```{r}
-find_eq_dts_2(par3)
+find_eq_dts_2(ross_dts_par3)
 ```
 
 #### Workflows 
@@ -477,7 +501,13 @@ find_eq_dts_2(par3)
 We can just as easily write the code to numerically solve the discrete time system: 
 
 ```{r}
-dts_xy_2 = function(xy, p){with(as.list(xy), with(p,{
+# INPUTS
+# xy - current variables, as a named vector
+# p  - the parameters, as a list
+#
+# OUTPUTS
+# the updated values of the variables, as a named vector
+ross_dts_xy_2 = function(xy, p){with(as.list(xy), with(p,{
   xn = x - s*x + (1-exp(-m*a*y))*(1-x) 
   yn = y - u*y + a*x*(1-y) 
   t=t+1
@@ -492,7 +522,7 @@ solve_dts_xy_2 = function(pars, x0=.01, y0 = 0.001, tmax=100){
    xy = c(t=0, x=x0, y=y0) 
    xy_t = xy 
    for(t in 1:tmax){
-     xy = dts_xy_2(xy, pars)
+     xy = ross_dts_xy_2(xy, pars)
      xy_t = rbind(xy_t, xy)
    }
    return(list(t=xy_t[,1], x=xy_t[,2], y = xy_t[,3], last = xy)) 
@@ -503,18 +533,18 @@ solve_dts_xy_2 = function(pars, x0=.01, y0 = 0.001, tmax=100){
 Now, we can visualize the output and see that we have fixed our stability problem. 
 
 ```{r}
-plot_xy(solve_dts_xy_2(par3, x0 = .01, y0=.001, tmax=20)) 
+plot_xy(solve_dts_xy_2(ross_dts_par3, x0 = .01, y0=.001, tmax=20)) 
 ```
 
 #### Verification  
 
 ```{r}
-find_eq_dts_2(par3)
+find_eq_dts_2(ross_dts_par3)
 ```
 
 
 ```{r}
-solve_dts_xy_2(par3, x0=.1, y0=.05,tmax=300)$last[-1]
+solve_dts_xy_2(ross_dts_par3, x0=.1, y0=.05,tmax=300)$last[-1]
 ```
 
 Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results. 
@@ -527,7 +557,7 @@ verify_dts_2 = function(pars, x0 = .1, y0=.05, tmax=200){
 ```
 
 ```{r}
-verify_dts_2(par3, tmax=300)
+verify_dts_2(ross_dts_par3, tmax=300)
 ```
 
 A function to check that it is accurate to some level of tolerance, but the numerical precision is mismatched, somehow.   
@@ -537,31 +567,61 @@ check_it_dts_2 = function(pars, x0 = .1, y0=.05, tmax=200, tol=1e-5)
 {
   verify_dts_2(pars, x0, y0, tmax) < tol
 }
-check_it_dts_2(par3, tmax=200)
 ```
 
 
-## Discrete Time, Stochastic {#sdtsRoss}
+```{r}
+check_it_dts_2(ross_dts_par3, tmax=200)
+```
 
-The world is stochastic. 
 
-## Continuous Time, Deterministic {#xdeRoss}
+## Deterministic, Continuous Time {#xdeRoss}
 
-Here, we present a continuous time, deterministic model. It is homologous to Ross's 2nd model [@RossR1911Nature], after renaming the parameters. To deal with these equations, you need a background in calculus. 
+We now want to formulate a new model in continuous time using the same basic assumptions about the life-cycle as before. After seeing the `ross_dts` models, this model will look and feel familiar. Instead of describing a difference over a fixed time step, we describe a derivative. Instead of describing the fraction of a population that changes, we describe the rates of change over an infinitesimally small interval of time, called a derivative. To understand the mathematics of differential equations, you will need a background in calculus. If you've had a semester of calculus, you will have come across derivatives. Depending on how much calculus, you might not have solved differential equations. The point of this book is to introduce malaria analytics, so we will not be delving into mathematical theory or numerical methods very much.
 
-### Variables and Initial Conditions
+In discrete-time, the equations could be written in this form:  
 
-Once again, variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a continuous time system, the values of the variables are defined for all values of $t.$ 
+$$
+\begin{array}{rl}
+x_{t+1} - x_t &=  F_x (x_t, y_t) \\ 
+y_{t+1} - y_t &=  F_y (x_t, y_t)  \\ 
+\end{array}
+$$
+The left hand side says "the difference in" $x$ or $y$ "over one time step is equal to" $F_x$ or $F_y,$ which are functions of the two variables. We can now ask what would happen if we sub-divided a day into $n$ equal periods. In the limit as $n$ goes to infinity, we replace the differences (terms on the left hand side) with derivatives. The differential equations are now written in this form:
+
+$$
+\begin{array}{rl}
+\frac{\textstyle{dx}}{\textstyle{dt}} &=  F_x (x, y)  \\ 
+\frac{\textstyle{dy}}{\textstyle{dt}} &=  F_y (x, y) \\ 
+\end{array}
+$$
+
+These differential equation models have the same components as the difference equations: variables, initial conditions, and parameters.
+
+To compute anything, we will need to use numerical methods. Fortunately, R has a package to handle numerical methods for differential equations, called **deSolve.** 
+
+```{r}
+library(deSolve)
+```
+
+Here, we present and solve `ross_xde`a continuous time, deterministic model that is similar to Ross's 2nd model [@RossR1911Nature].
+
+### `ross_xde`
+
+
+**Variables** -- In `ross_xde,` the dependent variables have the same meaning as in the `ross_dts` equations, but the independent variable. We now write an equation describing the fraction of humans and mosquitoes that are infected at each point in time. 
 
 + Let $x(t)$ be the fraction of people who are infected at time $t,$ and $0 \leq x(t) \leq 1.$
 
 + Let $y(t)$ be the fraction of mosquitoes who are infected at time $t,$ $0 \leq y(t) \leq 1.$ 
 
-As before, we will need to define initial conditions. 
+**Initial Conditions** -- As before, we will need to define initial conditions. 
 
-### Parameters 
+```{r}
+ross_xde_inits = c(x=0.01, y=0.01)
+```
 
-The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.  
+**Parameters** -- In this model, the parameters describe rates of change. 
 
   + Let $r$ denote the fraction of people who clear infections after one day; $0 < r < 1.$ 
 
@@ -572,18 +632,17 @@ The parameters describe the processes that are occurring in the population, the 
   + Let $m$ denote the number of mosquitoes per human; $m \geq 0.$ 
 
 ```{r}
-# The Parameters, as a Named Vector
+# The parameters, as list 
 ross_xde_par = list(
-  r = 1/200, # The fraction of infections that clear each day
-  g = 1/12,  # The fraction of mosquitoes that die each day
-  a = 1/4,   # The fraction of mosquitoes that blood feed on a human each day
-  m = 2      # The number of mosquitoes per human
+  r = 1/200, # The clearance rate for infections 
+  g = 1/12,  # The mosquito daily death rate 
+  a = 1/4,   # The mosquito human blood feeding rate 
+  m = 0.5      # The number of mosquitoes per human
 ) 
 ```
 
-### Equations
 
-Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms: 
+**Equations** -- Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms: 
 
 + The fraction of humans who are infected is $x$; infections clear at the rate $r.$ 
     
@@ -600,42 +659,70 @@ dy/dt &= ax(1-y) - g y \\
 \end{array}
 $$ 
 
+The form of the function that computes the derivatives in R is defined by `deSolve
+`
 ```{r}
-ross_xde = function(t, y, params){
-  with(params, with(as.list(y),{
+# INPUTS
+# t - the current time 
+# vars - the variables, as a named vector 
+# pars - the parameters, as a list
+# OUTPUTS
+# the derivatives, as a list 
+ross_xde = function(t, vars, pars){
+  with(pars, 
+    with(as.list(vars),{
     
-  dxdt = m*a*y*(1-x) - r*x
-  dydt = a*x*(1-y) - g*y
+      dxdt = m*a*y*(1-x) - r*x
+      dydt = a*x*(1-y) - g*y
   
-  return(list(c(dxdt, dydt)))
-}))}
+      return(list(c(dxdt, dydt)))
+    })
+  )
+}
 ```
 
-### Solving
+**Rates *vs.* Proportions** 
 
-We use the R package ***deSolve***
+The rates in differential equations can be compared to the proportions in discrete time systems. When the rates describe a change of state, a loss term for one of the variables, there are two easy interpretations. First, we consider the rate of loss of infected humans in a population, $-rx.$ The core underlying process is exponential decay. If we followed a cohort, the waiting time for an individual to change states would follow an exponential distribution with rate $1/r$. Second, after one day, the fraction that remains infected is $e^{-r}$. If we set $r=1/200,$ for example, the expected waiting time to clear an infection is 200 days. The rate of loss after one day is very close to, but slightly less than $r$:
 
 ```{r}
-library(deSolve)
+c(1/200, 1-exp(-1/200)) 
 ```
 
-The wrapper: 
+
+**Solutions** -- we now want to solve the initial value problem: given $x(0)$ and $y(0),$ can we find solutions $x(t)$ and $y(t)$? To do so, we call `deSolve::ode,` which takes for arguments: the initial values, the points in time to ouput values of $x(t)$ and $y(t)$, a function that computes the derivatives, and the parameters: 
 
 ```{r}
-solve_ross_xde = function(pars, x0=.01, y0=0.001, tmax=50, dt=1){
+deSolve::ode(ross_xde_inits, 0:5, ross_xde, ross_xde_par)
+```
+
+
+### Computation & Visualization
+
+For easy in working with these equations, we write a wrapper:  
+
+```{r}
+# INPUTS: 
+# pars -- the parameter values, as a list
+# x0   -- the initial value for x(t) 
+# y0   -- the initial value for y(t) 
+# tmax -- the largest value of t  
+# dt   -- the interval for t 
+# OUTPUT: 
+# the output of ode as a data.frame 
+solve_ross_xde = function(pars, x0=.01, y0=0.001, tmax=100, dt=1){
   tms = seq(0, tmax, by = dt)
   xy0 = c(x=x0, y=y0)
   data.frame(ode(xy0, tms, ross_xde, pars)) 
 }
 ```
 
-It works. 
 
 ```{r}
 deout <- solve_ross_xde(ross_xde_par)
 ```
 
-Plot
+Because we have returned it as a data frame, the column names are `time` and `x` and `y.` We can plot the values using `with().`
 
 ```{r}
 with(deout, {
@@ -647,9 +734,37 @@ with(deout, {
 
 These differential equations require  
 
+### Steady States 
+
+We can learn a bit more about how these equations behave by changing the initial values: 
+
+```{r}
+deout1 <- solve_ross_xde(ross_xde_par, x0=0.2, y0=0.02)
+deout2 <- solve_ross_xde(ross_xde_par, x0=.99, y0=0.99)
+```
+
+```{r}
+with(deout, {
+  plot(time, x, type = "l", col = "darkgreen", ylim = c(0,1), ylab = c("x, y"))
+  lines(time, y, col = "darkorange")
+})
+with(deout1, {
+  lines(time, x, type = "l", col = "darkgreen", lty=2) 
+  lines(time, y, col = "darkorange", lty=2)
+})
+with(deout2, {
+  lines(time, x, type = "l", col = "darkgreen", lty=3) 
+  lines(time, y, col = "darkorange", lty=3)
+})
+
+```
+
+We notice that the orbits all asymptotically approach the same value, regardless of where they started. Once there, they stay there. 
+
+
 ### Verification  
 
-We set $dx/dt = dy/dt=0$ 
+We ought to be able to compute the value of these steady states: it is a value of $x(t)$ and $y(t)$ such that $dx/dt=dy/dt=0.$ To find it, we set $dx/dt=dy/dt=0$ and solve for $x$ and $y.$ One obvious value, once again, is $x=y=0.$
 
 $$ 
 \begin{array}{rl}
@@ -657,6 +772,7 @@ $$
 0 &= ax(1-y) - g y \\
 \end{array}
 $$ 
+
 Solve the second equation for $y$ 
 
 $$y = ax/(g+ax)$$
@@ -689,17 +805,165 @@ de_eq <- solve_ross_xde(ross_xde_par, tmax=500, dt=5)
 with(de_eq, c(x=tail(x,1), y=tail(y,1))) 
 ```
 
+### Thresholds 
+
+## Stochastic, Discrete Time {#sdtsRoss}
+
+**Parameters** -- We can use the same parameters as before, but there are two new parameters:
+
++ $M$ is the number of mosquitoes: $M$ is a counting number 
+
++ $H$ is the number of humans; $H$ is a counting number
+
+```{r}
+# The parameters, as a list 
+ross_sdts_par = list(
+  M = 150,   # The number of mosquitoes 
+  H = 100,   # The number of humans 
+  s = 1/200, # The fraction of infections that clear each day
+  u = 1/12,  # The fraction of mosquitoes that die each day
+  a = 1/4   # The fraction of mosquitoes that blood feed on a human each day
+) 
+```
+
+**Variables** 
+
++ $Y \leq M$ is the number of infected mosquitoes: $Y$ is a counting 
+
++ $X \leq H$ is the number of infected humans  
 
 
-## Continuous Time, Stochastic {#sxdeRoss}
+```{r}
+ross_sdts = function(XY, p){
+  with(as.list(XY), 
+    with(p,{
+      ar = 1 - exp(-a*Y/H)
+      Xn = rbinom(1, X, 1-s) + rbinom(1, H-X, ar)  
+      Yn = rbinom(1, Y, 1-u) + rbinom(1, M-Y, a*X/H)  
+      t=t+1
+      return(c(t=t, X=Xn, Y=Yn))
+}))}
+```
 
-The world is stochastic. 
+```{r}
+sim_ross_sdts = function(pars, X0=2, Y0 = 1, tmaX=100){
+   XY = c(t=0, X=X0, Y=Y0) 
+   XY_t = XY 
+   for(t in 1:tmaX){
+     XY = ross_sdts(XY, pars)
+     XY_t = rbind(XY_t, XY)
+   }
+   X=XY_t[,2] 
+   Y=XY_t[,3]
+   x=X/pars$H 
+   y=Y/pars$M 
+   return(list(t=XY_t[,1], x=x, y=y, X=X, Y=Y, last = XY)) 
+}
+```
 
-### Deterministic  
+We can write another function that *plots* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
+ 
+```{r}
+plot_XY = function(xy_t, add_points = FALSE){with(xy_t,{
+  llty = "l"
+  if(add_points == TRUE) llty = "b"
+  plot(t, X, type = llty, ylim = range(0, X, Y), col = "darkgreen", ylab = "X, Y", xlab = "Time", pch=15)
+  lines(t, Y, type = llty, col = "darkorange", pch =19)
+})}
+```
 
-### Stochastic  
+```{r}
+XYt <- sim_ross_sdts(ross_sdts_par) 
+```
 
-We want to to introduce a mathematical model that is a good starting point. None of the models presented in the previous chapter are suitable, largely because the variables in those models were proportions. The models we will use are almost identical, but the variables are densities. 
+```{r, fig.height=6, fig.width=4}
+par(mfrow = c(2,1))
+plot_XY(XYt)
+plot_xy(XYt)
+```
+
+### Stochastic Fadeout 
+
+### Steady States 
+
+
+
+## Stochastic, Continuous Time {#sxdeRoss}
+
+In continuous time, the state of the system is updated one event at a time.
+
++ The total rate of change of the system is $T = may(H-X) + rX + aX(M-Y) + gY$
+
++ $Y \rightarrow Y+1$  
+
++ $Y \rightarrow Y-1$  
+
++ $X \rightarrow X+1$  
+
++ $X \rightarrow X-1$  
+
+```{r}
+# The parameters, as list 
+ross_sxde_par = list(
+  r = 1/200, # The clearance rate for infections 
+  g = 1/12,  # The mosquito daily death rate 
+  a = 1/4,   # The mosquito human blood feeding rate 
+  M = 150,   # The number of mosquitoes 
+  H = 100    # The number of humans
+) 
+```
+
+```{r}
+ross_sxde = function(XY, pars){
+  with(as.list(XY), with(pars,{
+    p1 = a*Y*(H-X)/H
+    p2 = r*X 
+    p3 = a*X*(M-Y)/H
+    p4 = g*Y 
+
+    t = t + rexp(1, p1+p2+p3+p4)
+    
+    event = sample(1:4, 1, prob=c(p1, p2, p3, p4))
+    if (event==1) X <- X+1
+    if (event==2) X <- X-1
+    if (event==3) Y <- Y+1
+    if (event==4) Y <- Y-1
+    
+    return(c(t=t,  X=X, Y=Y, x=X/H, y=Y/M))
+}))}
+```
+
+```{r}
+xy = c(t=0, X=3, Y=1)
+for (i in 1:10){
+  xy <- ross_sxde(xy, ross_sxde_par)
+  print(xy)
+}
+```
+
+```{r}
+sim_ross_sxde = function(pars, X0=2, Y0=1, tmax=100){
+   XY = c(t=0, X=X0, Y=Y0) 
+   tm = XY[1]
+   XY_t = c()  
+   while(tm < tmax){
+     XY = ross_sxde(XY, pars)
+     tm = XY[1]
+     XY_t = rbind(XY_t, XY)
+   }
+   return(list(t=XY_t[,1], X=XY_t[,2], Y=XY_t[,3], x = XY_t[,4], y = XY_t[,5])) 
+}
+```
+
+```{r}
+out <- sim_ross_sxde(ross_sxde_par)
+```
+
+```{r, fig.height=6, fig.width=4}
+par(mfrow = c(2,1))
+plot_XY(out)
+plot_xy(out)
+```
 
 ## Comparing Models
 

@@ -1,5 +1,9 @@
 
-# Macdonald's Model
+# The Ross-Macdonald Model
+
+***The Ross-Macdonald Model** as systems of delay differential equations -- George Macdonald's broader understanding of malaria transmission.* 
+
+*** 
 
 When I first learned about malaria, the basic model was commonly called the *Ross-Macdonald Model.*
 A few years ago, I went searching for *The Ross-Macdonald Model* with the hope of getting a clear answer about how and why George Macdonald's name had attached.
@@ -43,9 +47,9 @@ In 1950, Macdonald published a new model with human malaria superinfection [@Mac
     
 As a side note, it's highly likely that Macdonald was aware of Lotka's demographic concept of $R_0$, as well as his work with Sharpe on delay differential equations [@LotkaAJ1923part4], though we have been unable to find a single line where Macdonald gives Lotka the credit. For these reasons, and others, the equations ought to be described as the Ross-Lotka-Macdonald model.  
 
-## Dynamics
+## Equations 
 
-### Variables
+**Variables**
 
 The model has three variables:
 
@@ -55,7 +59,7 @@ The model has three variables:
 
 + $z$ is the fraction of adult female mosquitoes who are infective.  
 
-### Parameters
+**Parameters** 
 
 The model has several parameters: 
 
@@ -73,9 +77,6 @@ The model has several parameters:
 
 + $c$: a fraction of bites on infected humans infect a mosquito, denoted $c$
 
-
-### Equations 
-
 In this formulation of the model, we ignore the delay for the EIP but we count the mortality: 
 
 $$ 
@@ -88,11 +89,13 @@ $$
 
 this. 
 
+## Solutions
+
 ## The Basic Reproductive Number 
 
 ## Sensitivity to Parameters 
 
-## The Classification of Transmission 
+## Classifying Transmission 
 
 ## Notes 
 

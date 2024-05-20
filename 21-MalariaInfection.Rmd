@@ -1,17 +1,10 @@
 
-# Infection 
+# Malaria Infection 
 
 In the following sections, we walk through several models for the dynamics of malaria infection and immunity in humans. We cover infection and detection, immunity, infectiousness, disease, drug taking, and cohort dynamics.
 
-## Life Stages 
+## Stages of Infection 
 
-### Sporozoites 
-
-### Liver Stages
-
-### Asexual Stages
-
-### Gametocytes 
 
 ## Controlled Infections 
 
