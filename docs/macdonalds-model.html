@@ -23,15 +23,15 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-15" />
+<meta name="date" content="2024-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="historical-notes-1.html"/>
-<link rel="next" href="the-model.html"/>
+<link rel="prev" href="notes.html"/>
+<link rel="next" href="superinfection.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,70 +54,6 @@
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -176,51 +112,53 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-malaria-models.html"><a href="basic-malaria-models.html"><i class="fa fa-check"></i><b>2</b> Basic Malaria Models</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html"><i class="fa fa-check"></i><b>2.1</b> Discrete Time, Deterministic</a>
+<li class="chapter" data-level="2.1" data-path="dtsRoss.html"><a href="dtsRoss.html"><i class="fa fa-check"></i><b>2.1</b> Deterministic, Discrete Time Models</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#variables"><i class="fa fa-check"></i><b>2.1.1</b> Variables</a></li>
-<li class="chapter" data-level="2.1.2" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#initial-conditions"><i class="fa fa-check"></i><b>2.1.2</b> Initial Conditions</a></li>
-<li class="chapter" data-level="2.1.3" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#parameters"><i class="fa fa-check"></i><b>2.1.3</b> Parameters</a></li>
-<li class="chapter" data-level="2.1.4" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#equations"><i class="fa fa-check"></i><b>2.1.4</b> Equations</a></li>
-<li class="chapter" data-level="2.1.5" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#simulation"><i class="fa fa-check"></i><b>2.1.5</b> Simulation</a></li>
-<li class="chapter" data-level="2.1.6" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#analysis"><i class="fa fa-check"></i><b>2.1.6</b> Analysis</a></li>
-<li class="chapter" data-level="2.1.7" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#verification"><i class="fa fa-check"></i><b>2.1.7</b> Verification</a></li>
-<li class="chapter" data-level="2.1.8" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#packaging-workflows"><i class="fa fa-check"></i><b>2.1.8</b> Packaging Workflows</a></li>
-<li class="chapter" data-level="2.1.9" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#thresholds"><i class="fa fa-check"></i><b>2.1.9</b> Thresholds</a></li>
-<li class="chapter" data-level="2.1.10" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#numerical-stability"><i class="fa fa-check"></i><b>2.1.10</b> Numerical Stability</a></li>
-<li class="chapter" data-level="2.1.11" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#notes"><i class="fa fa-check"></i><b>2.1.11</b> Notes</a></li>
+<li class="chapter" data-level="2.1.1" data-path="dtsRoss.html"><a href="dtsRoss.html#a-basic-model"><i class="fa fa-check"></i><b>2.1.1</b> A Basic Model</a></li>
+<li class="chapter" data-level="2.1.2" data-path="dtsRoss.html"><a href="dtsRoss.html#solving-discrete-time-systems"><i class="fa fa-check"></i><b>2.1.2</b> Solving Discrete Time Systems</a></li>
+<li class="chapter" data-level="2.1.3" data-path="dtsRoss.html"><a href="dtsRoss.html#visualizing"><i class="fa fa-check"></i><b>2.1.3</b> Visualizing</a></li>
+<li class="chapter" data-level="2.1.4" data-path="dtsRoss.html"><a href="dtsRoss.html#computation"><i class="fa fa-check"></i><b>2.1.4</b> Computation</a></li>
+<li class="chapter" data-level="2.1.5" data-path="dtsRoss.html"><a href="dtsRoss.html#steady-states"><i class="fa fa-check"></i><b>2.1.5</b> Steady States</a></li>
+<li class="chapter" data-level="2.1.6" data-path="dtsRoss.html"><a href="dtsRoss.html#thresholds"><i class="fa fa-check"></i><b>2.1.6</b> Thresholds</a></li>
+<li class="chapter" data-level="2.1.7" data-path="dtsRoss.html"><a href="dtsRoss.html#verification"><i class="fa fa-check"></i><b>2.1.7</b> Verification</a></li>
+<li class="chapter" data-level="2.1.8" data-path="dtsRoss.html"><a href="dtsRoss.html#an-improved-model"><i class="fa fa-check"></i><b>2.1.8</b> An Improved Model</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html"><i class="fa fa-check"></i><b>2.2</b> Continuous Time, Deterministic</a>
+<li class="chapter" data-level="2.2" data-path="sdtsRoss.html"><a href="sdtsRoss.html"><i class="fa fa-check"></i><b>2.2</b> Discrete Time, Stochastic</a></li>
+<li class="chapter" data-level="2.3" data-path="xdeRoss.html"><a href="xdeRoss.html"><i class="fa fa-check"></i><b>2.3</b> Continuous Time, Deterministic</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#variables-and-initial-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Variables and Initial Conditions</a></li>
-<li class="chapter" data-level="2.2.2" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#parameters-1"><i class="fa fa-check"></i><b>2.2.2</b> Parameters</a></li>
-<li class="chapter" data-level="2.2.3" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#equations-1"><i class="fa fa-check"></i><b>2.2.3</b> Equations</a></li>
+<li class="chapter" data-level="2.3.1" data-path="xdeRoss.html"><a href="xdeRoss.html#variables-and-initial-conditions"><i class="fa fa-check"></i><b>2.3.1</b> Variables and Initial Conditions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="xdeRoss.html"><a href="xdeRoss.html#parameters"><i class="fa fa-check"></i><b>2.3.2</b> Parameters</a></li>
+<li class="chapter" data-level="2.3.3" data-path="xdeRoss.html"><a href="xdeRoss.html#equations"><i class="fa fa-check"></i><b>2.3.3</b> Equations</a></li>
+<li class="chapter" data-level="2.3.4" data-path="xdeRoss.html"><a href="xdeRoss.html#solving"><i class="fa fa-check"></i><b>2.3.4</b> Solving</a></li>
+<li class="chapter" data-level="2.3.5" data-path="xdeRoss.html"><a href="xdeRoss.html#verification-2"><i class="fa fa-check"></i><b>2.3.5</b> Verification</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="discrete-time-stochastic.html"><a href="discrete-time-stochastic.html"><i class="fa fa-check"></i><b>2.3</b> Discrete Time, Stochastic</a></li>
-<li class="chapter" data-level="2.4" data-path="continuous-time-stochastic.html"><a href="continuous-time-stochastic.html"><i class="fa fa-check"></i><b>2.4</b> Continuous Time, Stochastic</a>
+<li class="chapter" data-level="2.4" data-path="sxdeRoss.html"><a href="sxdeRoss.html"><i class="fa fa-check"></i><b>2.4</b> Continuous Time, Stochastic</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="continuous-time-stochastic.html"><a href="continuous-time-stochastic.html#deterministic"><i class="fa fa-check"></i><b>2.4.1</b> Deterministic</a></li>
-<li class="chapter" data-level="2.4.2" data-path="continuous-time-stochastic.html"><a href="continuous-time-stochastic.html#stochastic"><i class="fa fa-check"></i><b>2.4.2</b> Stochastic</a></li>
+<li class="chapter" data-level="2.4.1" data-path="sxdeRoss.html"><a href="sxdeRoss.html#deterministic"><i class="fa fa-check"></i><b>2.4.1</b> Deterministic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="sxdeRoss.html"><a href="sxdeRoss.html#stochastic"><i class="fa fa-check"></i><b>2.4.2</b> Stochastic</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="what-is-a-model.html"><a href="what-is-a-model.html"><i class="fa fa-check"></i><b>2.5</b> What is a Model?</a></li>
-<li class="chapter" data-level="2.6" data-path="historical-notes-1.html"><a href="historical-notes-1.html"><i class="fa fa-check"></i><b>2.6</b> Historical Notes</a></li>
+<li class="chapter" data-level="2.5" data-path="comparing-models.html"><a href="comparing-models.html"><i class="fa fa-check"></i><b>2.5</b> Comparing Models</a></li>
+<li class="chapter" data-level="2.6" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>2.6</b> Notes</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="notes.html"><a href="notes.html#why-use-densities"><i class="fa fa-check"></i><b>2.6.1</b> Why use densities?</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="macdonalds-model.html"><a href="macdonalds-model.html"><i class="fa fa-check"></i><b>3</b> Macdonald’s Model</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="the-model.html"><a href="the-model.html"><i class="fa fa-check"></i><b>3.1</b> The Model</a>
+<li class="chapter" data-level="3.1" data-path="superinfection.html"><a href="superinfection.html"><i class="fa fa-check"></i><b>3.1</b> Superinfection</a></li>
+<li class="chapter" data-level="3.2" data-path="mosquito-bionomics.html"><a href="mosquito-bionomics.html"><i class="fa fa-check"></i><b>3.2</b> Mosquito Bionomics</a></li>
+<li class="chapter" data-level="3.3" data-path="dynamics.html"><a href="dynamics.html"><i class="fa fa-check"></i><b>3.3</b> Dynamics</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="the-model.html"><a href="the-model.html#superinfection"><i class="fa fa-check"></i><b>3.1.1</b> Superinfection</a></li>
-<li class="chapter" data-level="3.1.2" data-path="the-model.html"><a href="the-model.html#the-sporozoite-rate"><i class="fa fa-check"></i><b>3.1.2</b> The Sporozoite Rate</a></li>
-<li class="chapter" data-level="3.1.3" data-path="the-model.html"><a href="the-model.html#variables-1"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
-<li class="chapter" data-level="3.1.4" data-path="the-model.html"><a href="the-model.html#parameters-2"><i class="fa fa-check"></i><b>3.1.4</b> Parameters</a></li>
-<li class="chapter" data-level="3.1.5" data-path="the-model.html"><a href="the-model.html#equations-2"><i class="fa fa-check"></i><b>3.1.5</b> Equations</a></li>
+<li class="chapter" data-level="3.3.1" data-path="dynamics.html"><a href="dynamics.html#variables"><i class="fa fa-check"></i><b>3.3.1</b> Variables</a></li>
+<li class="chapter" data-level="3.3.2" data-path="dynamics.html"><a href="dynamics.html#parameters-1"><i class="fa fa-check"></i><b>3.3.2</b> Parameters</a></li>
+<li class="chapter" data-level="3.3.3" data-path="dynamics.html"><a href="dynamics.html#equations-1"><i class="fa fa-check"></i><b>3.3.3</b> Equations</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>3.2</b> The Basic Reproductive Number</a></li>
-<li class="chapter" data-level="3.3" data-path="sensitivity-to-parameters.html"><a href="sensitivity-to-parameters.html"><i class="fa fa-check"></i><b>3.3</b> Sensitivity to Parameters</a></li>
-<li class="chapter" data-level="3.4" data-path="the-classification-of-transmission.html"><a href="the-classification-of-transmission.html"><i class="fa fa-check"></i><b>3.4</b> The Classification of Transmission</a></li>
-<li class="chapter" data-level="3.5" data-path="historical-notes-2.html"><a href="historical-notes-2.html"><i class="fa fa-check"></i><b>3.5</b> Historical Notes</a>
+<li class="chapter" data-level="3.4" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>3.4</b> The Basic Reproductive Number</a></li>
+<li class="chapter" data-level="3.5" data-path="sensitivity-to-parameters.html"><a href="sensitivity-to-parameters.html"><i class="fa fa-check"></i><b>3.5</b> Sensitivity to Parameters</a></li>
+<li class="chapter" data-level="3.6" data-path="the-classification-of-transmission.html"><a href="the-classification-of-transmission.html"><i class="fa fa-check"></i><b>3.6</b> The Classification of Transmission</a></li>
+<li class="chapter" data-level="3.7" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>3.7</b> Notes</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="historical-notes-2.html"><a href="historical-notes-2.html#george-macdonald"><i class="fa fa-check"></i><b>3.5.1</b> George Macdonald</a></li>
+<li class="chapter" data-level="3.7.1" data-path="notes-1.html"><a href="notes-1.html#george-macdonald"><i class="fa fa-check"></i><b>3.7.1</b> George Macdonald</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>4</b> Measuring Malaria</a>
@@ -228,7 +166,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="infection.html"><a href="infection.html"><i class="fa fa-check"></i><b>4.1</b> Infection</a></li>
 <li class="chapter" data-level="4.2" data-path="malaria-incidence.html"><a href="malaria-incidence.html"><i class="fa fa-check"></i><b>4.2</b> Malaria Incidence</a></li>
 <li class="chapter" data-level="4.3" data-path="exposure-risk.html"><a href="exposure-risk.html"><i class="fa fa-check"></i><b>4.3</b> Exposure Risk</a></li>
-<li class="chapter" data-level="4.4" data-path="mosquito-bionomics.html"><a href="mosquito-bionomics.html"><i class="fa fa-check"></i><b>4.4</b> Mosquito Bionomics</a></li>
+<li class="chapter" data-level="4.4" data-path="mosquito-bionomics-1.html"><a href="mosquito-bionomics-1.html"><i class="fa fa-check"></i><b>4.4</b> Mosquito Bionomics</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="malaria-control.html"><a href="malaria-control.html"><i class="fa fa-check"></i><b>5</b> Malaria Control</a>
 <ul>
@@ -242,11 +180,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="primary-model-development.html"><a href="primary-model-development.html"><i class="fa fa-check"></i><b>6.3</b> Primary Model Development</a></li>
 <li class="chapter" data-level="6.4" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html"><i class="fa fa-check"></i><b>6.4</b> Implementation and Verification</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#solving"><i class="fa fa-check"></i><b>6.4.1</b> Solving</a></li>
+<li class="chapter" data-level="6.4.1" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#solving-1"><i class="fa fa-check"></i><b>6.4.1</b> Solving</a></li>
 <li class="chapter" data-level="6.4.2" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#mathematical-analysis"><i class="fa fa-check"></i><b>6.4.2</b> Mathematical Analysis</a></li>
-<li class="chapter" data-level="6.4.3" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#simulation-1"><i class="fa fa-check"></i><b>6.4.3</b> Simulation</a></li>
+<li class="chapter" data-level="6.4.3" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#simulation"><i class="fa fa-check"></i><b>6.4.3</b> Simulation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="what-is-a-model-1.html"><a href="what-is-a-model-1.html"><i class="fa fa-check"></i><b>6.5</b> What is a Model?</a></li>
+<li class="chapter" data-level="6.5" data-path="what-is-a-model.html"><a href="what-is-a-model.html"><i class="fa fa-check"></i><b>6.5</b> What is a Model?</a></li>
 <li class="chapter" data-level="6.6" data-path="accuracy-validation.html"><a href="accuracy-validation.html"><i class="fa fa-check"></i><b>6.6</b> Accuracy &amp; Validation</a>
 <ul>
 <li class="chapter" data-level="6.6.1" data-path="accuracy-validation.html"><a href="accuracy-validation.html#validation-points"><i class="fa fa-check"></i><b>6.6.1</b> Validation Points</a></li>
@@ -263,7 +201,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.1" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html"><i class="fa fa-check"></i><b>7.1</b> Mosquito Ecology</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#variables-2"><i class="fa fa-check"></i><b>7.1.1</b> Variables</a></li>
+<li class="chapter" data-level="7.1.1" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#variables-1"><i class="fa fa-check"></i><b>7.1.1</b> Variables</a></li>
 <li class="chapter" data-level="7.1.2" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#blood-fed-mosquitoes"><i class="fa fa-check"></i><b>7.1.2</b> Blood Fed Mosquitoes</a></li>
 <li class="chapter" data-level="7.1.3" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#infected-mosquitoes"><i class="fa fa-check"></i><b>7.1.3</b> Infected Mosquitoes</a></li>
 <li class="chapter" data-level="7.1.4" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#infectious-mosquitoes"><i class="fa fa-check"></i><b>7.1.4</b> Infectious Mosquitoes</a></li>
@@ -272,16 +210,16 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.7" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solutions"><i class="fa fa-check"></i><b>7.1.7</b> Solutions</a></li>
 <li class="chapter" data-level="7.1.8" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#initial-values"><i class="fa fa-check"></i><b>7.1.8</b> Initial Values</a></li>
 <li class="chapter" data-level="7.1.9" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#parameter-values"><i class="fa fa-check"></i><b>7.1.9</b> Parameter Values</a></li>
-<li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-1"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
-<li class="chapter" data-level="7.1.11" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#visualizing"><i class="fa fa-check"></i><b>7.1.11</b> Visualizing</a></li>
+<li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-2"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
+<li class="chapter" data-level="7.1.11" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#visualizing-1"><i class="fa fa-check"></i><b>7.1.11</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
+<li class="chapter" data-level="7.2" data-path="steady-states-2.html"><a href="steady-states-2.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="steady-states.html"><a href="steady-states.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
-<li class="chapter" data-level="7.2.2" data-path="steady-states.html"><a href="steady-states.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
-<li class="chapter" data-level="7.2.3" data-path="steady-states.html"><a href="steady-states.html#vectorial-capacity"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
-<li class="chapter" data-level="7.2.4" data-path="steady-states.html"><a href="steady-states.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
-<li class="chapter" data-level="7.2.5" data-path="steady-states.html"><a href="steady-states.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
+<li class="chapter" data-level="7.2.1" data-path="steady-states-2.html"><a href="steady-states-2.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
+<li class="chapter" data-level="7.2.2" data-path="steady-states-2.html"><a href="steady-states-2.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
+<li class="chapter" data-level="7.2.3" data-path="steady-states-2.html"><a href="steady-states-2.html#vectorial-capacity"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="steady-states-2.html"><a href="steady-states-2.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
+<li class="chapter" data-level="7.2.5" data-path="steady-states-2.html"><a href="steady-states-2.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>7.3</b> Stable Orbits</a>
 <ul>
@@ -465,7 +403,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="26.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>26.1</b> Aquatic Dynamics</a>
 <ul>
-<li class="chapter" data-level="26.1.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#equations-3"><i class="fa fa-check"></i><b>26.1.1</b> Equations</a></li>
+<li class="chapter" data-level="26.1.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#equations-2"><i class="fa fa-check"></i><b>26.1.1</b> Equations</a></li>
 <li class="chapter" data-level="26.1.2" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#solutions-1"><i class="fa fa-check"></i><b>26.1.2</b> Solutions</a></li>
 <li class="chapter" data-level="26.1.3" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#regulation-1"><i class="fa fa-check"></i><b>26.1.3</b> Regulation</a></li>
 </ul></li>
@@ -562,14 +500,19 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="macdonalds-model" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Macdonald’s Model<a href="macdonalds-model.html#macdonalds-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A few years ago, I went searching for <em>The Ross-Macdonald Model.</em> I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations. Instead, I found the history of an idea that was spread across several publications <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.
-What I sought was first published in 1982 <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics">54</a>,<a href="#ref-BaileyNTJ1982BiomathematicsMalaria">58</a>]</span>.</p>
-<p>Macdonald never wrote down his model for malaria transmission as a system of equations in a single place.
-In 1950, he published a review of malaria malaria epidemiology <span class="citation">[<a href="#ref-MacdonaldG1950Epidemiology">59</a>]</span>, and a new model for superinfection <span class="citation">[<a href="#ref-MacdonaldG1950Superinfection">60</a>]</span>.
-In 1952, Macdonald published his analysis of the sporozoite rate <span class="citation">[<a href="#ref-MacdonaldG1952Sporozoite">38</a>]</span>, and then he wrote a paper about endemic malaria that included a formula for the basic reproductive number, <span class="math inline">\(R_0\)</span> <span class="citation">[<a href="#ref-MacdonaldG1952R0">39</a>]</span>.
-Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; a paper appeared in 1953 <span class="citation">[<a href="#ref-ArmitageP1953">61</a>]</span>.
-The formulas have enough information to write down the equations he must have been working from.
-We present it in the next section.</p>
+<p>When I first learned about malaria, the basic model was commonly called the <em>Ross-Macdonald Model.</em>
+A few years ago, I went searching for <em>The Ross-Macdonald Model</em> with the hope of getting a clear answer about how and why George Macdonald’s name had attached.
+I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations.
+Instead, I found that Macdonald was associated with several new ideas spread across several publications, including many ideas he attributed (or ought to have attributed) to others <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald">1</a>]</span>.
+Macdonald’s papers are focused on the concepts and evidence; the formulas are mostly relegated to appendices.
+I finally found the equations in a concise form in publications from 1982 <span class="citation">[<a href="#ref-AronJL1982PopulationDynamics">2</a>,<a href="#ref-BaileyNTJ1982BiomathematicsMalaria">3</a>]</span>.</p>
+<p>Macdonald published XX papers on a range of topics in malaria epidemiology, transmission dynamics and control between 1950 and 1956.
+The papers were followed by a book in 1957, called <em>The Epidemiology and Control of Malaria.</em>
+In 1950, he published a review of malaria malaria epidemiology <span class="citation">[<a href="#ref-MacdonaldG1950Epidemiology">4</a>]</span>, and a new model for superinfection <span class="citation">[<a href="#ref-MacdonaldG1950Superinfection">5</a>]</span>.
+The paper on superinfection is flawed <span class="citation">[<a href="#ref-FinePEM1975SuperinfectionProblem">6</a>]</span>.
+In 1952, Macdonald published his analysis of the sporozoite rate <span class="citation">[<a href="#ref-MacdonaldG1952Sporozoite">7</a>]</span>, and then he wrote a paper about endemic malaria that included a formula for the basic reproductive number, <span class="math inline">\(R_0\)</span> <span class="citation">[<a href="#ref-MacdonaldG1952R0">8</a>]</span>.
+The formulas in Macdonald’s footnotes and appendices from the 1952 papers have enough information to write down the equations he must have been working from, and this is what we will present in the next section.
+Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; the paper appeared in 1953 <span class="citation">[<a href="#ref-ArmitageP1953">9</a>]</span>.</p>
 <p>After reading old papers, it became clear that Alfred Lotka played an important yet overlooked role in development of basic theory for malaria.
 Ross had actually published three mathematical models.
 Two of these described malaria transmission.
@@ -577,34 +520,37 @@ Lotka analyzed both in 1923, and in a collaboration with Sharpe, he had extended
 Lotka had also introduced the idea of a basic reproductive number for human demography.
 Macdonald adapted the idea to malaria, largely without attribution.
 It should, perhaps, be called the Ross-Lotka-Macdonald model.</p>
-<p>All this history, spanning the period from roughly 1899 to 1969, has been reviewed before <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>, and some historical notes are recounted at the end of this chapter.
+<p>All this history, spanning the period from roughly 1899 to 1969, has been reviewed before <span class="citation">[<a href="#ref-SmithDL2012_RossMacdonald">1</a>]</span>, and some historical notes are recounted at the end of this chapter.
 The codification of the Ross-Macdonald model in the 1980s coincided with a rising interest in disease ecology and mathematical epidemiology in academic departments of ecology.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-SmithDL2012_RossMacdonald" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
-</div>
-<div id="ref-MacdonaldG1952Sporozoite" class="csl-entry">
-<div class="csl-left-margin">38. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
-</div>
-<div id="ref-MacdonaldG1952R0" class="csl-entry">
-<div class="csl-left-margin">39. </div><div class="csl-right-inline">Macdonald G. The analysis of equilibrium in malaria. Trop Dis Bull. 1952;49: 813–829. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/12995455">https://www.ncbi.nlm.nih.gov/pubmed/12995455</a></div>
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Smith DL, Battle KE, Hay SI, Barker CM, Scott TW, McKenzie FE. Ross, <span>Macdonald</span>, and a theory for the dynamics and control of mosquito-transmitted pathogens. PLoS Pathog. 2012;8: e1002588. doi:<a href="https://doi.org/10.1371/journal.ppat.1002588">10.1371/journal.ppat.1002588</a></div>
 </div>
 <div id="ref-AronJL1982PopulationDynamics" class="csl-entry">
-<div class="csl-left-margin">54. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population Dynamics</span> of <span>Infectious Diseases</span>: <span>Theory</span> and <span>Applications</span>. <span>Boston, MA</span>: <span>Springer US</span>; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Aron JL, May RM. The population dynamics of malaria. In: Anderson RM, editor. The <span>Population</span> <span>Dynamics</span> of <span>Infectious</span> <span>Diseases</span>: <span>Theory</span> and <span>Applications</span>. Boston, MA: Springer US; 1982. pp. 139–179. doi:<a href="https://doi.org/10.1007/978-1-4899-2901-3_5">10.1007/978-1-4899-2901-3_5</a></div>
 </div>
 <div id="ref-BaileyNTJ1982BiomathematicsMalaria" class="csl-entry">
-<div class="csl-left-margin">58. </div><div class="csl-right-inline">Bailey NTJ. The <span>Biomathematics</span> of <span>Malaria</span>. <span>Oxford</span>: <span>Charles Griffin &amp; Company Ltd.</span>; 1982. Available: <a href="https://play.google.com/store/books/details?id=4MCAQgAACAAJ">https://play.google.com/store/books/details?id=4MCAQgAACAAJ</a></div>
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Bailey NTJ. The <span>Biomathematics</span> of <span>Malaria</span>. Oxford: Charles Griffin &amp; Company Ltd.; 1982. Available: <a href="https://play.google.com/store/books/details?id=4MCAQgAACAAJ">https://play.google.com/store/books/details?id=4MCAQgAACAAJ</a></div>
 </div>
 <div id="ref-MacdonaldG1950Epidemiology" class="csl-entry">
-<div class="csl-left-margin">59. </div><div class="csl-right-inline">Macdonald G. The analysis of malaria parasite rates in infants. Tropical diseases bulletin. 1950;47: 915–938. </div>
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Macdonald G. The analysis of malaria parasite rates in infants. Tropical diseases bulletin. 1950;47: 915–938. </div>
 </div>
 <div id="ref-MacdonaldG1950Superinfection" class="csl-entry">
-<div class="csl-left-margin">60. </div><div class="csl-right-inline">Macdonald G. The analysis of infection rates in diseases in which superinfection occurs. Trop Dis Bull. 1950;47: 907–915. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14798656">https://www.ncbi.nlm.nih.gov/pubmed/14798656</a></div>
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Macdonald G. The analysis of infection rates in diseases in which superinfection occurs. Trop Dis Bull. 1950;47: 907–915. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14798656">https://www.ncbi.nlm.nih.gov/pubmed/14798656</a></div>
+</div>
+<div id="ref-FinePEM1975SuperinfectionProblem" class="csl-entry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Fine PEM. Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin. 1975;75: 475–488. </div>
+</div>
+<div id="ref-MacdonaldG1952Sporozoite" class="csl-entry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
+</div>
+<div id="ref-MacdonaldG1952R0" class="csl-entry">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Macdonald G. The analysis of equilibrium in malaria. Trop Dis Bull. 1952;49: 813–829. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/12995455">https://www.ncbi.nlm.nih.gov/pubmed/12995455</a></div>
 </div>
 <div id="ref-ArmitageP1953" class="csl-entry">
-<div class="csl-left-margin">61. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
 </div>
 </div>
             </section>
@@ -612,8 +558,8 @@ The codification of the Ross-Macdonald model in the 1980s coincided with a risin
           </div>
         </div>
       </div>
-<a href="historical-notes-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="notes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="superinfection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

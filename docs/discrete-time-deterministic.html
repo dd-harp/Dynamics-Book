@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-15" />
+<meta name="date" content="2024-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="basic-malaria-models.html"/>
-<link rel="next" href="continuous-time-deterministic.html"/>
+<link rel="next" href="discrete-time-stochastic.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -188,15 +188,18 @@ div.csl-indent {
 <li class="chapter" data-level="2.1.8" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#packaging-workflows"><i class="fa fa-check"></i><b>2.1.8</b> Packaging Workflows</a></li>
 <li class="chapter" data-level="2.1.9" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#thresholds"><i class="fa fa-check"></i><b>2.1.9</b> Thresholds</a></li>
 <li class="chapter" data-level="2.1.10" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#numerical-stability"><i class="fa fa-check"></i><b>2.1.10</b> Numerical Stability</a></li>
-<li class="chapter" data-level="2.1.11" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#notes"><i class="fa fa-check"></i><b>2.1.11</b> Notes</a></li>
+<li class="chapter" data-level="2.1.11" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#improved-model"><i class="fa fa-check"></i><b>2.1.11</b> Improved Model</a></li>
+<li class="chapter" data-level="2.1.12" data-path="discrete-time-deterministic.html"><a href="discrete-time-deterministic.html#notes"><i class="fa fa-check"></i><b>2.1.12</b> Notes</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html"><i class="fa fa-check"></i><b>2.2</b> Continuous Time, Deterministic</a>
+<li class="chapter" data-level="2.2" data-path="discrete-time-stochastic.html"><a href="discrete-time-stochastic.html"><i class="fa fa-check"></i><b>2.2</b> Discrete Time, Stochastic</a></li>
+<li class="chapter" data-level="2.3" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html"><i class="fa fa-check"></i><b>2.3</b> Continuous Time, Deterministic</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#variables-and-initial-conditions"><i class="fa fa-check"></i><b>2.2.1</b> Variables and Initial Conditions</a></li>
-<li class="chapter" data-level="2.2.2" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#parameters-1"><i class="fa fa-check"></i><b>2.2.2</b> Parameters</a></li>
-<li class="chapter" data-level="2.2.3" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#equations-1"><i class="fa fa-check"></i><b>2.2.3</b> Equations</a></li>
+<li class="chapter" data-level="2.3.1" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#variables-and-initial-conditions"><i class="fa fa-check"></i><b>2.3.1</b> Variables and Initial Conditions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#parameters-1"><i class="fa fa-check"></i><b>2.3.2</b> Parameters</a></li>
+<li class="chapter" data-level="2.3.3" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#equations-1"><i class="fa fa-check"></i><b>2.3.3</b> Equations</a></li>
+<li class="chapter" data-level="2.3.4" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#solving"><i class="fa fa-check"></i><b>2.3.4</b> Solving</a></li>
+<li class="chapter" data-level="2.3.5" data-path="continuous-time-deterministic.html"><a href="continuous-time-deterministic.html#verification-1"><i class="fa fa-check"></i><b>2.3.5</b> Verification</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="discrete-time-stochastic.html"><a href="discrete-time-stochastic.html"><i class="fa fa-check"></i><b>2.3</b> Discrete Time, Stochastic</a></li>
 <li class="chapter" data-level="2.4" data-path="continuous-time-stochastic.html"><a href="continuous-time-stochastic.html"><i class="fa fa-check"></i><b>2.4</b> Continuous Time, Stochastic</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="continuous-time-stochastic.html"><a href="continuous-time-stochastic.html#deterministic"><i class="fa fa-check"></i><b>2.4.1</b> Deterministic</a></li>
@@ -220,7 +223,8 @@ div.csl-indent {
 <li class="chapter" data-level="3.4" data-path="the-classification-of-transmission.html"><a href="the-classification-of-transmission.html"><i class="fa fa-check"></i><b>3.4</b> The Classification of Transmission</a></li>
 <li class="chapter" data-level="3.5" data-path="historical-notes-2.html"><a href="historical-notes-2.html"><i class="fa fa-check"></i><b>3.5</b> Historical Notes</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="historical-notes-2.html"><a href="historical-notes-2.html#george-macdonald"><i class="fa fa-check"></i><b>3.5.1</b> George Macdonald</a></li>
+<li class="chapter" data-level="3.5.1" data-path="historical-notes-2.html"><a href="historical-notes-2.html#alfred-j.-lotka"><i class="fa fa-check"></i><b>3.5.1</b> Alfred J. Lotka</a></li>
+<li class="chapter" data-level="3.5.2" data-path="historical-notes-2.html"><a href="historical-notes-2.html#george-macdonald"><i class="fa fa-check"></i><b>3.5.2</b> George Macdonald</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>4</b> Measuring Malaria</a>
@@ -242,7 +246,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="primary-model-development.html"><a href="primary-model-development.html"><i class="fa fa-check"></i><b>6.3</b> Primary Model Development</a></li>
 <li class="chapter" data-level="6.4" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html"><i class="fa fa-check"></i><b>6.4</b> Implementation and Verification</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#solving"><i class="fa fa-check"></i><b>6.4.1</b> Solving</a></li>
+<li class="chapter" data-level="6.4.1" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#solving-1"><i class="fa fa-check"></i><b>6.4.1</b> Solving</a></li>
 <li class="chapter" data-level="6.4.2" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#mathematical-analysis"><i class="fa fa-check"></i><b>6.4.2</b> Mathematical Analysis</a></li>
 <li class="chapter" data-level="6.4.3" data-path="implementation-and-verification.html"><a href="implementation-and-verification.html#simulation-1"><i class="fa fa-check"></i><b>6.4.3</b> Simulation</a></li>
 </ul></li>
@@ -272,7 +276,7 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.7" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solutions"><i class="fa fa-check"></i><b>7.1.7</b> Solutions</a></li>
 <li class="chapter" data-level="7.1.8" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#initial-values"><i class="fa fa-check"></i><b>7.1.8</b> Initial Values</a></li>
 <li class="chapter" data-level="7.1.9" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#parameter-values"><i class="fa fa-check"></i><b>7.1.9</b> Parameter Values</a></li>
-<li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-1"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
+<li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-2"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
 <li class="chapter" data-level="7.1.11" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#visualizing"><i class="fa fa-check"></i><b>7.1.11</b> Visualizing</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="steady-states.html"><a href="steady-states.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
@@ -649,7 +653,7 @@ y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 <span id="cb11-2"><a href="discrete-time-deterministic.html#cb11-2" tabindex="-1"></a>  <span class="fu">plot</span>(t, x, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;x, y&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>)</span>
 <span id="cb11-3"><a href="discrete-time-deterministic.html#cb11-3" tabindex="-1"></a>  <span class="fu">lines</span>(t, y, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="at">pch =</span><span class="dv">19</span>)</span>
 <span id="cb11-4"><a href="discrete-time-deterministic.html#cb11-4" tabindex="-1"></a>})</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>After 40 days, the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are not changing very much:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="discrete-time-deterministic.html#cb12-1" tabindex="-1"></a><span class="co"># The last value is still stored as xy; the [-1] omits t</span></span>
 <span id="cb12-2"><a href="discrete-time-deterministic.html#cb12-2" tabindex="-1"></a>xy[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">dts_xy_1</span>(xy, par)[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
@@ -739,7 +743,7 @@ We can write a function to compute this steady state:</p>
 <span id="cb26-6"><a href="discrete-time-deterministic.html#cb26-6" tabindex="-1"></a>})}</span></code></pre></div>
 <p>Now, all the work we did above can be plotted using a single function call:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="discrete-time-deterministic.html#cb27-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">solve_dts_xy_1</span>(par, <span class="at">tmax=</span><span class="dv">40</span>), <span class="at">add_points=</span><span class="cn">TRUE</span>) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Now, it is easier to use the models in various ways.</p>
 </div>
 <div id="thresholds" class="section level3 hasAnchor" number="2.1.9">
@@ -753,7 +757,7 @@ We can write a function to compute this steady state:</p>
 ## -0.06666667 -0.25000000</code></pre>
 <p>What happens if we simulate this? (Let’s set the initial conditions to reasonably high values)</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="discrete-time-deterministic.html#cb30-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">solve_dts_xy_1</span>(par1, <span class="at">x0 =</span> .<span class="dv">5</span>, <span class="at">y0=</span>.<span class="dv">3</span>, <span class="at">tmax=</span><span class="dv">1500</span>)) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>If we look at the equations, it’s easy enough to spot the problem. Since <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> must be positive, then it must be true that <span class="math display">\[m a^2 &gt; su.\]</span> We call this a threshold condition.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="discrete-time-deterministic.html#cb31-1" tabindex="-1"></a>m_crit <span class="ot">=</span> <span class="fu">with</span>(par, s<span class="sc">*</span>u<span class="sc">/</span>a<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb31-2"><a href="discrete-time-deterministic.html#cb31-2" tabindex="-1"></a>m_crit </span></code></pre></div>
@@ -771,8 +775,12 @@ We can write a function to compute this steady state:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="discrete-time-deterministic.html#cb35-1" tabindex="-1"></a>par3 <span class="ot">=</span> par</span>
 <span id="cb35-2"><a href="discrete-time-deterministic.html#cb35-2" tabindex="-1"></a>par3<span class="sc">$</span>m <span class="ot">=</span> <span class="dv">20</span> </span>
 <span id="cb35-3"><a href="discrete-time-deterministic.html#cb35-3" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">solve_dts_xy_1</span>(par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">20</span>)) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<p>In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back to the assumption that the fraction getting infected is linearly proportional to the number of infective bites. One way to do this is to say that the <em>expected</em> number of bites would follow a Poisson distribution with mean <span class="math inline">\(may_t,\)</span> so that the fraction getting infected is the zero term from a Poisson:</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem?</p>
+</div>
+<div id="improved-model" class="section level3 hasAnchor" number="2.1.11">
+<h3><span class="header-section-number">2.1.11</span> Improved Model<a href="discrete-time-deterministic.html#improved-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have to go back to the assumption that the fraction getting infected is linearly proportional to the number of infective bites. One way to do this is to say that the <em>expected</em> number of bites would follow a Poisson distribution with mean <span class="math inline">\(may_t,\)</span> so that the fraction getting infected is the zero term from a Poisson:</p>
 <p><span class="math display">\[1 - e^{-m a y_t}\]</span></p>
 <p>Now, our equations are the following:</p>
 <p><span class="math display">\[\begin{array}{rl}
@@ -815,7 +823,7 @@ It’s surprisingly easy to write down equations, like this one, that we can’t
 <span id="cb40-9"><a href="discrete-time-deterministic.html#cb40-9" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now, we can visualize the output and see that we have fixed our stability problem.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="discrete-time-deterministic.html#cb41-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">solve_dts_xy_2</span>(par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">20</span>)) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="discrete-time-deterministic.html#cb42-1" tabindex="-1"></a><span class="fu">find_eq_dts_2</span>(par3)</span></code></pre></div>
 <pre><code>## [1] 0.9949026 0.7490406</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="discrete-time-deterministic.html#cb44-1" tabindex="-1"></a><span class="fu">solve_dts_xy_2</span>(par3, <span class="at">x0=</span>.<span class="dv">1</span>, <span class="at">y0=</span>.<span class="dv">05</span>,<span class="at">tmax=</span><span class="dv">300</span>)<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
@@ -828,16 +836,14 @@ It’s surprisingly easy to write down equations, like this one, that we can’t
 <span id="cb46-4"><a href="discrete-time-deterministic.html#cb46-4" tabindex="-1"></a>}</span></code></pre></div>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="discrete-time-deterministic.html#cb47-1" tabindex="-1"></a><span class="fu">verify_dts_2</span>(par3, <span class="at">tmax=</span><span class="dv">300</span>)</span></code></pre></div>
 <pre><code>## [1] 2.924525e-06</code></pre>
-<p>A function to check that it is accurate to some level of tolerance, but the numerical precision is mismatched, somehow.</p>
+<p>We can write the function to check if the approximation is accurate to some level of tolerance:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="discrete-time-deterministic.html#cb49-1" tabindex="-1"></a>check_it_dts_2 <span class="ot">=</span> <span class="cf">function</span>(pars, <span class="at">x0 =</span> .<span class="dv">1</span>, <span class="at">y0=</span>.<span class="dv">05</span>, <span class="at">tmax=</span><span class="dv">200</span>, <span class="at">tol=</span><span class="fl">1e-5</span>)</span>
-<span id="cb49-2"><a href="discrete-time-deterministic.html#cb49-2" tabindex="-1"></a>{</span>
-<span id="cb49-3"><a href="discrete-time-deterministic.html#cb49-3" tabindex="-1"></a>  <span class="fu">verify_dts_2</span>(pars, x0, y0, tmax) <span class="sc">&lt;</span> tol</span>
-<span id="cb49-4"><a href="discrete-time-deterministic.html#cb49-4" tabindex="-1"></a>}</span>
-<span id="cb49-5"><a href="discrete-time-deterministic.html#cb49-5" tabindex="-1"></a><span class="fu">check_it_dts_2</span>(par3, <span class="at">tmax=</span><span class="dv">200</span>)</span></code></pre></div>
+<span id="cb49-2"><a href="discrete-time-deterministic.html#cb49-2" tabindex="-1"></a>{<span class="fu">verify_dts_2</span>(pars, x0, y0, tmax) <span class="sc">&lt;</span> tol}</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="discrete-time-deterministic.html#cb50-1" tabindex="-1"></a><span class="fu">check_it_dts_2</span>(par3, <span class="at">tmax=</span><span class="dv">200</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="notes" class="section level3 hasAnchor" number="2.1.11">
-<h3><span class="header-section-number">2.1.11</span> Notes<a href="discrete-time-deterministic.html#notes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="notes" class="section level3 hasAnchor" number="2.1.12">
+<h3><span class="header-section-number">2.1.12</span> Notes<a href="discrete-time-deterministic.html#notes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Some useful notes:</p>
 <ol style="list-style-type: decimal">
 <li><p>The two models we just presented above can be implemented in a spreadsheet.</p></li>
@@ -851,7 +857,7 @@ It’s surprisingly easy to write down equations, like this one, that we can’t
         </div>
       </div>
 <a href="basic-malaria-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="continuous-time-deterministic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="discrete-time-stochastic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
