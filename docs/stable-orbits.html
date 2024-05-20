@@ -23,14 +23,14 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-17" />
+<meta name="date" content="2024-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="steady-states-2.html"/>
+<link rel="prev" href="steady-states-4.html"/>
 <link rel="next" href="blood-feeding.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -54,70 +54,6 @@
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -196,14 +132,16 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="xdeRoss.html"><a href="xdeRoss.html#ross_xde"><i class="fa fa-check"></i><b>2.2.1</b> <code>ross_xde</code></a></li>
 <li class="chapter" data-level="2.2.2" data-path="xdeRoss.html"><a href="xdeRoss.html#computation-visualization"><i class="fa fa-check"></i><b>2.2.2</b> Computation &amp; Visualization</a></li>
-<li class="chapter" data-level="2.2.3" data-path="xdeRoss.html"><a href="xdeRoss.html#verification-2"><i class="fa fa-check"></i><b>2.2.3</b> Verification</a></li>
+<li class="chapter" data-level="2.2.3" data-path="xdeRoss.html"><a href="xdeRoss.html#steady-states-2"><i class="fa fa-check"></i><b>2.2.3</b> Steady States</a></li>
+<li class="chapter" data-level="2.2.4" data-path="xdeRoss.html"><a href="xdeRoss.html#verification-2"><i class="fa fa-check"></i><b>2.2.4</b> Verification</a></li>
+<li class="chapter" data-level="2.2.5" data-path="xdeRoss.html"><a href="xdeRoss.html#thresholds-1"><i class="fa fa-check"></i><b>2.2.5</b> Thresholds</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="sdtsRoss.html"><a href="sdtsRoss.html"><i class="fa fa-check"></i><b>2.3</b> Stochastic, Discrete Time</a></li>
-<li class="chapter" data-level="2.4" data-path="sxdeRoss.html"><a href="sxdeRoss.html"><i class="fa fa-check"></i><b>2.4</b> Stochastic, Continuous Time</a>
+<li class="chapter" data-level="2.3" data-path="sdtsRoss.html"><a href="sdtsRoss.html"><i class="fa fa-check"></i><b>2.3</b> Stochastic, Discrete Time</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="sxdeRoss.html"><a href="sxdeRoss.html#deterministic"><i class="fa fa-check"></i><b>2.4.1</b> Deterministic</a></li>
-<li class="chapter" data-level="2.4.2" data-path="sxdeRoss.html"><a href="sxdeRoss.html#stochastic"><i class="fa fa-check"></i><b>2.4.2</b> Stochastic</a></li>
+<li class="chapter" data-level="2.3.1" data-path="sdtsRoss.html"><a href="sdtsRoss.html#steady-states-3"><i class="fa fa-check"></i><b>2.3.1</b> Steady States</a></li>
+<li class="chapter" data-level="2.3.2" data-path="sdtsRoss.html"><a href="sdtsRoss.html#stochastic-fadeout"><i class="fa fa-check"></i><b>2.3.2</b> Stochastic Fadeout</a></li>
 </ul></li>
+<li class="chapter" data-level="2.4" data-path="sxdeRoss.html"><a href="sxdeRoss.html"><i class="fa fa-check"></i><b>2.4</b> Stochastic, Continuous Time</a></li>
 <li class="chapter" data-level="2.5" data-path="comparing-models.html"><a href="comparing-models.html"><i class="fa fa-check"></i><b>2.5</b> Comparing Models</a></li>
 <li class="chapter" data-level="2.6" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>2.6</b> Notes</a>
 <ul>
@@ -278,17 +216,17 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-2"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
 <li class="chapter" data-level="7.1.11" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#visualizing-1"><i class="fa fa-check"></i><b>7.1.11</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="steady-states-2.html"><a href="steady-states-2.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
+<li class="chapter" data-level="7.2" data-path="steady-states-4.html"><a href="steady-states-4.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="steady-states-2.html"><a href="steady-states-2.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
-<li class="chapter" data-level="7.2.2" data-path="steady-states-2.html"><a href="steady-states-2.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
-<li class="chapter" data-level="7.2.3" data-path="steady-states-2.html"><a href="steady-states-2.html#vectorial-capacity-1"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
-<li class="chapter" data-level="7.2.4" data-path="steady-states-2.html"><a href="steady-states-2.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
-<li class="chapter" data-level="7.2.5" data-path="steady-states-2.html"><a href="steady-states-2.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
+<li class="chapter" data-level="7.2.1" data-path="steady-states-4.html"><a href="steady-states-4.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
+<li class="chapter" data-level="7.2.2" data-path="steady-states-4.html"><a href="steady-states-4.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
+<li class="chapter" data-level="7.2.3" data-path="steady-states-4.html"><a href="steady-states-4.html#vectorial-capacity-1"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="steady-states-4.html"><a href="steady-states-4.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
+<li class="chapter" data-level="7.2.5" data-path="steady-states-4.html"><a href="steady-states-4.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>7.3</b> Stable Orbits</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds-1"><i class="fa fa-check"></i><b>7.3.1</b> Thresholds</a></li>
+<li class="chapter" data-level="7.3.1" data-path="stable-orbits.html"><a href="stable-orbits.html#thresholds-2"><i class="fa fa-check"></i><b>7.3.1</b> Thresholds</a></li>
 <li class="chapter" data-level="7.3.2" data-path="stable-orbits.html"><a href="stable-orbits.html#orbits"><i class="fa fa-check"></i><b>7.3.2</b> Orbits</a></li>
 <li class="chapter" data-level="7.3.3" data-path="stable-orbits.html"><a href="stable-orbits.html#average-dynamics"><i class="fa fa-check"></i><b>7.3.3</b> Average Dynamics</a></li>
 </ul></li>
@@ -561,11 +499,11 @@ div.csl-indent {
 <div id="stable-orbits" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Stable Orbits<a href="stable-orbits.html#stable-orbits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If emergence rates vary seasonally, how much of the analysis that we did to understand <em>steady states</em> still holds? Obviously, if conditions are changing seasonally, the model does not reach a steady state. In fact, after modification to suit the context, many of the same principles translate. The steady state analysis provides a good qualitative guide, but that the answers will look different. Here, we illustrate by solving systems to illustrate some basic points, which is easy enough. Analysis of the resulting dynamics can be quite difficult; it is covered in <a href="temporal-dynamics.html#temporal-dynamics">Temporal Dynamics</a>.</p>
-<div id="thresholds-1" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Thresholds<a href="stable-orbits.html#thresholds-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="thresholds-2" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Thresholds<a href="stable-orbits.html#thresholds-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There is a threshold condition <span class="math inline">\(R_0&gt;1\)</span> that determines whether malaria is endemic, but the formula for <span class="math inline">\(R_0\)</span> depends on the form of <span class="math inline">\(\Lambda(t)\)</span>. If we set <span class="math inline">\(R_0=1\)</span>, we can show that the threshold for persistence in a seasonal environment is <span class="math inline">\(R_0 &gt; \sigma &gt; 1\)</span> (see Figure 1.1). The math to compute threshold conditions in seasonal environments is in <a href="temporal-dynamics.html#temporal-dynamics">Temporal Dynamics</a>.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-74"></span>
-<img src="_main_files/figure-html/unnamed-chunk-74-1.png" alt="Here, we set $R_0= 1.02$ for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same *average* emergence rate, malaria declines with seasonality." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<img src="_book/figs/unnamed-chunk-83-1.png" alt="Here, we set $R_0= 1.02$ for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same *average* emergence rate, malaria declines with seasonality." width="672" />
 <p class="caption">
 Figure 7.2: Here, we set <span class="math inline">\(R_0= 1.02\)</span> for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same <em>average</em> emergence rate, malaria declines with seasonality.
 </p>
@@ -577,8 +515,8 @@ Figure 7.2: Here, we set <span class="math inline">\(R_0= 1.02\)</span> for the 
 <pre><code>- $M(t+365) = M(t)$; 
 - $Y(t+365) = Y(t)$ and $Z(t+365) = Z(t)$; 
 - $X(t+365) = X(t)$. </code></pre>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-75"></span>
-<img src="_main_files/figure-html/unnamed-chunk-75-1.png" alt="With different initial values, the orbits converge and eventually lie on top of one another." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-84"></span>
+<img src="_book/figs/unnamed-chunk-84-1.png" alt="With different initial values, the orbits converge and eventually lie on top of one another." width="672" />
 <p class="caption">
 Figure 7.3: With different initial values, the orbits converge and eventually lie on top of one another.
 </p>
@@ -588,7 +526,7 @@ Figure 7.3: With different initial values, the orbits converge and eventually li
 <h3><span class="header-section-number">7.3.3</span> Average Dynamics<a href="stable-orbits.html#average-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If <span class="math inline">\(R_0&gt;1\)</span> and malaria is endemic, the <em>average</em> prevalence of malaria infection is variable in a seasonal environment. While the prevalence is higher at the peak, the average for the whole year tends to be lower.</p>
 <div class="figure"><span style="display:block;" id="fig:compareTS"></span>
-<img src="_main_files/figure-html/compareTS-1.png" alt="Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall." width="672" />
+<img src="_book/figs/compareTS-1.png" alt="Here, we set $R_0= 2$ for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall." width="672" />
 <p class="caption">
 Figure 7.4: Here, we set <span class="math inline">\(R_0= 2\)</span> for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it’s higher as transmission peaks, lower in the off-season, and lower overall.
 </p>
@@ -602,7 +540,7 @@ Figure 7.4: Here, we set <span class="math inline">\(R_0= 2\)</span> for the mod
           </div>
         </div>
       </div>
-<a href="steady-states-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="steady-states-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="blood-feeding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

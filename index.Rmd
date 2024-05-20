@@ -31,6 +31,9 @@ knitr::write_bib(c("knitr", "book"), "", width = 60)
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
+
+knitr::opts_chunk$set(echo = FALSE, fig.path = "_book/figs/")
+
 ```
 
 
