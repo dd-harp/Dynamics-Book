@@ -1,0 +1,14 @@
+
+# Heterogeneous Transmission  
+
+The Ross-Macdonald model is a good starting point, but if we want to develop models for policy, we will need to delve deeper into the mathematical processes that are driving malaria transmission, and we will need to understand some of the related biological processes. 
+
+## Blood Feeding
+
+### Mosquito Searching
+
+### Risky Human Behaviors 
+
+## Environmental Heterogeneity 
+
+## Heterogeneous Biting 

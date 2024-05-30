@@ -1,0 +1,21 @@
+# (PART) Analytics {-}
+
+# Malaria Analytics 
+
+The basic premise of this book, *Applied Malaria Dynamics,* is that we want to use mathematical models to support development of malaria policies. 
+
+Two core concepts missing from the Ross-Macdonald model were the burden of malaria and a theory of control 
+
+## The Burden of Malaria
+
+## A Theory of Control  
+
+## Generic *vs.* Specific Advice 
+
+## Imputation 
+
+## Robust Analytics
+
+Among the most important topics 
+
+In Chapter \@ref(ch-uncertainty), we take a deep dive into uncertainty. 

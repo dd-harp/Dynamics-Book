@@ -1,0 +1,48 @@
+# Metrics and Models
+
+*Measuring malaria. Prevalence. Incidence.  Observational processes.* 
+
+*** 
+
+If we want to manage malaria, we must be able to measure it. Models are approximations. We make a distinction between biological processes and observational processes. 
+
+## Malaria Epidemiology  
+
+### Infection Prevalence
+
++ Spleen Rate
+
++ Parasite Rate 
+
+### Infection Incidence 
+
++ Infection vs. Disease 
+
+### Disease 
+
+### Serology  
+
+
+## Entomology  
+
+### Entomological Inoculation Rates
+
++ HBR
+
++ SR 
+
++ EIR 
+
+### Bionomics  
+
+## Transmission 
+
+### Infectiousness
+
+### Vectorial Capacity  
+
+### Transmission Efficiency
+
+## Surveillance 
+
+## Observation 

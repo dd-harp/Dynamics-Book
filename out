@@ -1,7 +1,44 @@
-mv 10-ModelBuilding.Rmd 10-ModelBuilding.Rmd
-mv 11-AdultMosquitoDynamics.Rmd 11-AdultMosquitoDynamics.Rmd
-touch 12-BloodFeeding.Rmd 
-mv 12-MosquitoEcology.Rmd 13-MosquitoEcology.Rmd
-mv 13-HumanAgeDemography.Rmd 14-HumanAgeDemography.Rmd
-mv 14-Realism.Rmd 15-Realism.Rmd
-mv 18-ModularComputation.Rmd 18-ModularComputation.Rmd
+mv 101-Prevention-of-Malaria.Rmd 101-Prevention-of-Malaria.Rmd
+mv 102-Basic-Dynamics.Rmd 102-Basic-Dynamics.Rmd
+mv 103-Ross-Macdonald-Model.Rmd 103-Ross-Macdonald-Model.Rmd
+mv 104-Metrics-and-Models.Rmd 104-Metrics-and-Models.Rmd
+mv 105-Research-and-Policy.Rmd 105-Research-and-Policy.Rmd
+
+mv 106-Models-for-Policy.Rmd 120-Models-for-Policy.Rmd
+mv 110-Heterogeneous-Transmission.Rmd 121-Heterogeneous-Transmission.Rmd
+mv 111-Adult-Mosquito-Dynamics.Rmd 122-Adult-Mosquito-Dynamics.Rmd
+mv 112-HumanAgeDemography.Rmd 123-HumanAgeDemography.Rmd
+mv 113-Mosquito-Ecology.Rmd 124-Mosquito-Ecology.Rmd
+
+mv 114-Model-Building.Rmd 150-Model-Building.Rmd
+mv 115-Uncertainty.Rmd 151-Uncertainty.Rmd
+mv 116-Realism.Rmd 152-Realism.Rmd
+mv 117-Modular-Framework.Rmd 153-Modular-Framework.Rmd
+
+mv 200-Malaria-Epidemiology.Rmd 200-Malaria-Epidemiology.Rmd
+mv 201-Malaria-Infection.Rmd 201-Malaria-Infection.Rmd
+mv 201-Stage-Structured-Infection.Rmd 202-Stage-Structured-Infection.Rmd
+mv 202-Queuing-and-Superinfection.Rmd 203-Queuing-and-Superinfection.Rmd
+mv 203-Stage-Structured-Immunity.Rmd 204-Stage-Structured-Immunity.Rmd
+mv 204-Age-Structured-Infections.Rmd 205-Age-Structured-Infections.Rmd
+mv 205-Hybrid-Models.Rmd 206-Hybrid-Models.Rmd
+mv 207-WithinHost.Rmd 208-WithinHost.Rmd
+
+mv 204-Disease.Rmd 220-Disease.Rmd
+mv 205-DrugTaking.Rmd 230-DrugTaking.Rmd
+mv 206-Infectiousness.Rmd 240-Infectiousness.Rmd
+mv 209-ModelingMalaria.Rmd 250-ModelingMalaria.Rmd
+
+mv 400-Mosquitoes.Rmd 300-Mosquitoes.Rmd
+mv 401-BehavioralStates.Rmd 301-BehavioralStates.Rmd
+mv 402-MosquitoDispersal.Rmd 302-MosquitoDispersal.Rmd
+mv 403-AquaticDynamics.Rmd 304-AquaticDynamics.Rmd
+mv 404-ExogenousForcing.Rmd 306-ExogenousForcing.Rmd
+mv 406-MultipleVectors.Rmd 308-MultipleVectors.Rmd
+
+mv 407-MeasuringMosquitoes.Rmd 306-MeasuringMosquitoes.Rmd
+
+mv 300-Transmission.Rmd 400-Transmission.Rmd
+mv 301-HumanMobility.Rmd 401-HumanMobility.Rmd
+mv 302-SpatialDynamics.Rmd 402-SpatialDynamics.Rmd
+mv 304-HeterogeneousTransmission.Rmd 403-HeterogeneousTransmission.Rmd

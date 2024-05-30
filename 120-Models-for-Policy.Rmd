@@ -1,0 +1,25 @@
+# (PART) Toolbox {-}
+
+# Malaria Models for Policy 
+
+## Malaria Epidemiology 
+
+## Human Demography  
+
+## The Burden of Malaria 
+
+## Mosquito Ecology and Behavior
+
+## Theory for Vector Control
+
+## Blood Feeding and Transmission
+
+## Spatial Dynamics and Connectivity
+
+Spatial 
+
+## Parasite Diversity
+
+## Evolution of Drug Resistance
+
+## Evolution of Insecticide Resistance

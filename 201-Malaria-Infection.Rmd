@@ -1,0 +1,30 @@
+
+# Stage-Structured Infection 
+
+In the following sections, we walk through several models for the dynamics of malaria infection and immunity in humans. We cover infection and detection, immunity, infectiousness, disease, drug taking, and cohort dynamics.
+
+## Stages of Infection 
+
+
+## Controlled Infections 
+
+### Malariotherapy 
+
+### CHMI 
+
+## A Simple Infection
+
+### Time Course 
+
+### Duration 
+
+## Superinfection 
+
+## Process *vs.* Observation
+
+### Detection 
+
+The state space modeling approach.
+
+
+

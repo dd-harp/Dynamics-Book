@@ -1,0 +1,86 @@
+# (PART) Malaria Modeling {-}
+
+# Model Building 
+
+The Ross-Macdonald model is a good model to start learning about malaria, but our task is to understand malaria well enough to give robust advice about policy. After more than a century of malaria research and control, we can describe the magnitude of that challenge in clear terms. 
+
+What kind of a problem is malaria? 
+
+Malaria can be understood as a complex adaptive system. It is characterized by non-linear, dynamical interactions among four kinds of interacting agents: parasites, mosquitoes, humans, and malaria control managers. These are exogenously forced systems -- in addition to malaria control, mosquito ecology and malaria transmission are affected by temperature, rainfall, land use changes, and other environmental conditions. From the perspective of a malaria control manager, malaria transmission is a changing baseline that is modified by control. Malaria is also accurately described as a disease of poverty: malaria tends to disappear in places with education and wealth, so economic development and education have been among the most effective ways of ending malaria. 
+
+On the other hand, malaria transmission dynamics and the responses to control depend on the local context.  Lewis Wendell Hackett, a malariologist who worked on malaria in the 1930s, wrote:  
+
+> ... malaria is so moulded and altered by local conditions that it becomes a thousand different diseases and epidemiological puzzles. Like chess, it is played with a few pieces, but is capable of an infinite variety of situations  [@HackettLW1937MalariaEurope].
+
+Malaria systems are locally peculiar because of differences in mosquito species and their behavior and ecology, local human cultural practices and behaviors. These behaviors affect blood feeding and the ways that mosquitoes come into contact with malaria interventions. The question is what local details are relevant for malaria policy. 
+
+How can we deal with forced, managed, complex adaptive systems? One approach is to use mathematical models to help us understand them. The study of complexity has mainly been restricted to academics, who have provided us with many useful case studies. If we are going to work in policy, however, we need to be very practical. While the Ross-Macdonald model clearly demonstrates how transmission intensity is clearly related to mosquito bionomics, the model does not address what factors set the values of those bionomic parameters in context. It is likely to be a mosquito's innate biology interacting with resource availability, weather, and vector control, but how can we begin to translate the models into something more than an object lesson? With so much complexity, we will need to move beyond analysis with a pencil and paper. Our work will require computation and simulation. 
+
+If we think of a model as having a *skill set* -- the set of observable quantities that are naturally represented by the latent states such that they can be computed without requiring extraneous information -- then a major limitation of the Ross-Macdonald model is that it has a limited skill set: it's skill set does not include most of the features that malaria programs care about. The model is useful in the classroom, and it can help to inform our basic understanding of malaria. If we want to use the model to answer some policy questions, we will find ourselves waving our hands to make excuses about the features it is missing. The other way is to ask about all the ways  our models and analysis could be wrong, and then build models with the skill sets to tackle these problems. Adding complexity to a model, so that it has the right skill set, also comes with its own perils.  
+
+If we want to scale up simulation-based analytics to support malaria policy through eradication, it will inevitably involve capacity building, but what sort of training is needed? Certainly, we hope that an analytics team would include someone who has the skills required to critically evaluate models, but this is not as easy as you think. What makes a model good? What makes an analysis useful? It is easy to imagine training up a generation who could do some kind of analysis, but we don't want to train automata -- people who would keep doing some analysis, over and over, just because it is what has been done before.  We ought to have a reason for doing the analysis. It ought to serve some purpose. Success in policy analytics requires people who have skills in thinking creatively and critically to solve problems. We need people who can build and evaluate models.
+
+This book has taken an approach to model building that is based on the notion of *scalable complexity.*  
+
+If we want to discuss the models we might use to analyze malaria policies, and if we want to have a discussion about that process, it will probably help us to be more careful about how we use terms like *model* and *model building.* In the service of defining the skill sets required to be a good analyst, this chapter discusses the life-cycle of a model, including the process of building and evaluating models from the beginning to the end (or in math from $\alpha$ to $\omega$). 
+
+## Compartment Models 
+
+## Primary Model Development
+
+Most models started with a question: something like _Why is the sky blue?_ or _How many mosquitoes does it take to sustain malaria transmission?_ Blue sky questions don't go anywhere unless there's a basis for understanding the underlying process. If there is some kind of basis, the next step is to try represent the process in some logically compelling form, such as a diagram with boxes and arrows. 
+
+
+## Implementation and Verification 
+
+### Solving  
+
++ **Fitted Parameters:** 
+
++ **Initial Conditions:** 
+
+
+### Mathematical Analysis  
+
++ **steady states**
+
++ **stability analysis**
+
++ **algorithms**
+
++ **primary analysis**
+
+### Simulation 
+
+## What is a Model?
+
+## Accuracy & Validation 
+
++ Model features 
+
++ Functional range
+
++ Heterogeneity  
+
+### Validation Points
+
+## The Measure of a Model 
+
+If we want to evaluate whether a model is good 
+
+### Limitations 
+
++ **Functional Range** the maximum granularity 
+
+### Parsimony  
+
+## Secondary Model Development  
+
++ **elaboration** 
+
+Model building is a core part of applied dynamics, but if we are to othere are many different activities 
+
+What does it mean to build a model?   
+
+
+## Conclusions 

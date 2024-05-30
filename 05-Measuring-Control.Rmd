@@ -1,5 +1,0 @@
-
-# Malaria Control 
-
-## Sensitivity to Parameters 
-
