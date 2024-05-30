@@ -190,7 +190,7 @@ In this alternative way of writing down the equations, the left hand side is int
 
 + $- s x_t$ -- describes clearance of human infections: the fraction of humans who are infected is $x_t$; a fraction $s$ clear infections.
     
-+ $+ may_t (1-x_t)$ -- describes infection of uninfected humans: the fraction of humans who are infected is $1-x_t$; a fraction $m a y_t$ gets infected. (If $may_t >1,$ the term does not make sense. In sub-section \@ref(dtsRoss2), below, we discuss this in greater depth.)
++ $+ may_t (1-x_t)$ -- describes infection of uninfected humans: the fraction of humans who are not infected is $1-x_t$; a fraction $m a y_t$ gets infected. (If $may_t >1,$ the term does not make sense. In sub-section \@ref(dtsRoss2), below, we discuss this in greater depth.)
 
 + $-u y_t$ -- describes mosquito mortality: the fraction of mosquitoes who are infected is $y_t$; a fraction $u$ die. 
     
@@ -359,7 +359,7 @@ a x (1 - y) &=  u y\\
 
 Equations \@ref(eq:ross1steady) say: *the proportion of humans becoming infected is equal to the proportion clearing infections*; and *the proportion of mosquitoes becoming infected is equal to the proportion dying.*
 
-The most obvious solution to these equations is $x=y=0,$ when there is no malaria. We call it the disease-free steady state. The equilibrium makes some sense: if we start with no infected mosquitoes or infected humans in this deterministic model, there can never be any. 
+The most obvious solution to these equations is $x=y=0,$ when there is no malaria. We call it the disease-free steady state. A disease-free equilibrium makes sense, since if we start with no infected mosquitoes or infected humans in this deterministic model, there can never be any. 
 
 There is another solution where malaria is present. We solve the second equation first: 
 
@@ -519,12 +519,13 @@ $$1 - e^{-m a y_t}$$
 
 Our variables, initial conditions, and parameters are all defined in the same way as `ross_dts_1,` but now our equations have changed:
 
-$$\begin{array}{rl}
+\begin{equation}
+\begin{array}{rl}
 x_{t+1} &=  x_t - s x_t + (1-e^{m a y_t}) (1-x_t)  \\ 
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}
-$$
-
+(\#eq:ross_dts_2)
+\end{equation}
 
 As before, we write a function to numerically solve the discrete time system: 
 
@@ -832,13 +833,13 @@ ross_xde_par = list(
     
 + The fraction of mosquitoes who are infected is $y$; mosquitoes die at the rate $g.$ 
     
-+ The fraction of humans who are infected is $1-x$; infections occur at the rate $m a y.$ 
++ The fraction of humans who are not infected is $1-x$; infections occur at the rate $m a y.$ 
     
 + The fraction of mosquitoes who are not infected is $1-y$; infections occur at the rate $a x.$ 
 
 $$ 
 \begin{array}{rl}
-dx/dt &= may(1-z) - r x\\
+dx/dt &= may(1-x) - r x\\
 dy/dt &= ax(1-y) - g y \\
 \end{array}
 $$ 
@@ -1105,7 +1106,7 @@ with(out,{
 What species of mathematics is best suited for a task? Does it matter what species of mathematics we choose to build our models?  
 
 As we use models to help us understand malaria in some particular place, we are faced with some questions about to interpret the outputs of models. One of the reasons we presented deterministic and stochastic models in discrete-time and in continuous-time was to learn about about modeling by drawing attention to some of the differences -- the models all represent the same process, but the outputs differ. Some of these differences are unsurprising and probably not important, but if we are to learn how to critically evaluate a model, we must pay attention to these differences.
-
+s
 ```{r, echo=F}
 # The parameters, as list 
 ross_xde_par_5 = list(
@@ -1285,9 +1286,8 @@ with(s_xde5, lines(t, y,  col = clrsB[6], cex=0.5))
 ```
 
 
-
-
 ## Notes
+
 
 
 
