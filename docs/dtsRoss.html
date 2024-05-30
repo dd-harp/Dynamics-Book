@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-20" />
+<meta name="date" content="2024-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,70 @@
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -131,14 +195,16 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="xdeRoss.html"><a href="xdeRoss.html"><i class="fa fa-check"></i><b>2.2</b> Deterministic, Continuous Time</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="xdeRoss.html"><a href="xdeRoss.html#ross_xde"><i class="fa fa-check"></i><b>2.2.1</b> <code>ross_xde</code></a></li>
-<li class="chapter" data-level="2.2.2" data-path="xdeRoss.html"><a href="xdeRoss.html#computation-visualization"><i class="fa fa-check"></i><b>2.2.2</b> Computation &amp; Visualization</a></li>
-<li class="chapter" data-level="2.2.3" data-path="xdeRoss.html"><a href="xdeRoss.html#steady-states-2"><i class="fa fa-check"></i><b>2.2.3</b> Steady States</a></li>
-<li class="chapter" data-level="2.2.4" data-path="xdeRoss.html"><a href="xdeRoss.html#verification-2"><i class="fa fa-check"></i><b>2.2.4</b> Verification</a></li>
-<li class="chapter" data-level="2.2.5" data-path="xdeRoss.html"><a href="xdeRoss.html#thresholds-1"><i class="fa fa-check"></i><b>2.2.5</b> Thresholds</a></li>
+<li class="chapter" data-level="2.2.2" data-path="xdeRoss.html"><a href="xdeRoss.html#rates-vs.-proportions"><i class="fa fa-check"></i><b>2.2.2</b> Rates <em>vs.</em> Proportions</a></li>
+<li class="chapter" data-level="2.2.3" data-path="xdeRoss.html"><a href="xdeRoss.html#solutions"><i class="fa fa-check"></i><b>2.2.3</b> Solutions</a></li>
+<li class="chapter" data-level="2.2.4" data-path="xdeRoss.html"><a href="xdeRoss.html#computation-visualization"><i class="fa fa-check"></i><b>2.2.4</b> Computation &amp; Visualization</a></li>
+<li class="chapter" data-level="2.2.5" data-path="xdeRoss.html"><a href="xdeRoss.html#steady-states-1"><i class="fa fa-check"></i><b>2.2.5</b> Steady States</a></li>
+<li class="chapter" data-level="2.2.6" data-path="xdeRoss.html"><a href="xdeRoss.html#verification-1"><i class="fa fa-check"></i><b>2.2.6</b> Verification</a></li>
+<li class="chapter" data-level="2.2.7" data-path="xdeRoss.html"><a href="xdeRoss.html#thresholds-1"><i class="fa fa-check"></i><b>2.2.7</b> Thresholds</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="sdtsRoss.html"><a href="sdtsRoss.html"><i class="fa fa-check"></i><b>2.3</b> Stochastic, Discrete Time</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="sdtsRoss.html"><a href="sdtsRoss.html#steady-states-3"><i class="fa fa-check"></i><b>2.3.1</b> Steady States</a></li>
+<li class="chapter" data-level="2.3.1" data-path="sdtsRoss.html"><a href="sdtsRoss.html#steady-states-2"><i class="fa fa-check"></i><b>2.3.1</b> Steady States</a></li>
 <li class="chapter" data-level="2.3.2" data-path="sdtsRoss.html"><a href="sdtsRoss.html#stochastic-fadeout"><i class="fa fa-check"></i><b>2.3.2</b> Stochastic Fadeout</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="sxdeRoss.html"><a href="sxdeRoss.html"><i class="fa fa-check"></i><b>2.4</b> Stochastic, Continuous Time</a></li>
@@ -153,13 +219,15 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="superinfection.html"><a href="superinfection.html"><i class="fa fa-check"></i><b>3.1</b> Superinfection</a></li>
 <li class="chapter" data-level="3.2" data-path="mosquito-bionomics.html"><a href="mosquito-bionomics.html"><i class="fa fa-check"></i><b>3.2</b> Mosquito Bionomics</a></li>
 <li class="chapter" data-level="3.3" data-path="equations.html"><a href="equations.html"><i class="fa fa-check"></i><b>3.3</b> Equations</a></li>
-<li class="chapter" data-level="3.4" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>3.4</b> Solutions</a></li>
+<li class="chapter" data-level="3.4" data-path="solutions-1.html"><a href="solutions-1.html"><i class="fa fa-check"></i><b>3.4</b> Solutions</a></li>
 <li class="chapter" data-level="3.5" data-path="the-basic-reproductive-number.html"><a href="the-basic-reproductive-number.html"><i class="fa fa-check"></i><b>3.5</b> The Basic Reproductive Number</a></li>
 <li class="chapter" data-level="3.6" data-path="sensitivity-to-parameters.html"><a href="sensitivity-to-parameters.html"><i class="fa fa-check"></i><b>3.6</b> Sensitivity to Parameters</a></li>
-<li class="chapter" data-level="3.7" data-path="classifying-transmission.html"><a href="classifying-transmission.html"><i class="fa fa-check"></i><b>3.7</b> Classifying Transmission</a></li>
-<li class="chapter" data-level="3.8" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>3.8</b> Notes</a>
+<li class="chapter" data-level="3.7" data-path="vectorial-capacity.html"><a href="vectorial-capacity.html"><i class="fa fa-check"></i><b>3.7</b> Vectorial Capacity</a></li>
+<li class="chapter" data-level="3.8" data-path="classifying-transmission.html"><a href="classifying-transmission.html"><i class="fa fa-check"></i><b>3.8</b> Classifying Transmission</a></li>
+<li class="chapter" data-level="3.9" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>3.9</b> Notes</a>
 <ul>
-<li class="chapter" data-level="3.8.1" data-path="notes-1.html"><a href="notes-1.html#george-macdonald"><i class="fa fa-check"></i><b>3.8.1</b> George Macdonald</a></li>
+<li class="chapter" data-level="3.9.1" data-path="notes-1.html"><a href="notes-1.html#alfred-j.-lotka"><i class="fa fa-check"></i><b>3.9.1</b> Alfred J. Lotka</a></li>
+<li class="chapter" data-level="3.9.2" data-path="notes-1.html"><a href="notes-1.html#george-macdonald"><i class="fa fa-check"></i><b>3.9.2</b> George Macdonald</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="measuring-malaria.html"><a href="measuring-malaria.html"><i class="fa fa-check"></i><b>4</b> Measuring Malaria</a>
@@ -168,7 +236,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="infectiousness.html"><a href="infectiousness.html"><i class="fa fa-check"></i><b>4.2</b> Infectiousness</a></li>
 <li class="chapter" data-level="4.3" data-path="malaria-incidence.html"><a href="malaria-incidence.html"><i class="fa fa-check"></i><b>4.3</b> Malaria Incidence</a></li>
 <li class="chapter" data-level="4.4" data-path="exposure-risk.html"><a href="exposure-risk.html"><i class="fa fa-check"></i><b>4.4</b> Exposure Risk</a></li>
-<li class="chapter" data-level="4.5" data-path="vectorial-capacity.html"><a href="vectorial-capacity.html"><i class="fa fa-check"></i><b>4.5</b> Vectorial Capacity</a></li>
+<li class="chapter" data-level="4.5" data-path="vectorial-capacity-1.html"><a href="vectorial-capacity-1.html"><i class="fa fa-check"></i><b>4.5</b> Vectorial Capacity</a></li>
 <li class="chapter" data-level="4.6" data-path="transmission-efficiency.html"><a href="transmission-efficiency.html"><i class="fa fa-check"></i><b>4.6</b> Transmission Efficiency</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="malaria-control.html"><a href="malaria-control.html"><i class="fa fa-check"></i><b>5</b> Malaria Control</a>
@@ -210,19 +278,19 @@ div.csl-indent {
 <li class="chapter" data-level="7.1.4" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#infectious-mosquitoes"><i class="fa fa-check"></i><b>7.1.4</b> Infectious Mosquitoes</a></li>
 <li class="chapter" data-level="7.1.5" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#RossEqn"><i class="fa fa-check"></i><b>7.1.5</b> Infected Humans</a></li>
 <li class="chapter" data-level="7.1.6" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#as-a-system"><i class="fa fa-check"></i><b>7.1.6</b> …as a System</a></li>
-<li class="chapter" data-level="7.1.7" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solutions-1"><i class="fa fa-check"></i><b>7.1.7</b> Solutions</a></li>
+<li class="chapter" data-level="7.1.7" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solutions-2"><i class="fa fa-check"></i><b>7.1.7</b> Solutions</a></li>
 <li class="chapter" data-level="7.1.8" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#initial-values"><i class="fa fa-check"></i><b>7.1.8</b> Initial Values</a></li>
 <li class="chapter" data-level="7.1.9" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#parameter-values"><i class="fa fa-check"></i><b>7.1.9</b> Parameter Values</a></li>
 <li class="chapter" data-level="7.1.10" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#solving-2"><i class="fa fa-check"></i><b>7.1.10</b> Solving</a></li>
 <li class="chapter" data-level="7.1.11" data-path="mosquito-ecology.html"><a href="mosquito-ecology.html#visualizing-1"><i class="fa fa-check"></i><b>7.1.11</b> Visualizing</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="steady-states-4.html"><a href="steady-states-4.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
+<li class="chapter" data-level="7.2" data-path="steady-states-3.html"><a href="steady-states-3.html"><i class="fa fa-check"></i><b>7.2</b> Steady States</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="steady-states-4.html"><a href="steady-states-4.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
-<li class="chapter" data-level="7.2.2" data-path="steady-states-4.html"><a href="steady-states-4.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
-<li class="chapter" data-level="7.2.3" data-path="steady-states-4.html"><a href="steady-states-4.html#vectorial-capacity-1"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
-<li class="chapter" data-level="7.2.4" data-path="steady-states-4.html"><a href="steady-states-4.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
-<li class="chapter" data-level="7.2.5" data-path="steady-states-4.html"><a href="steady-states-4.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
+<li class="chapter" data-level="7.2.1" data-path="steady-states-3.html"><a href="steady-states-3.html#mosquito-density"><i class="fa fa-check"></i><b>7.2.1</b> Mosquito Density</a></li>
+<li class="chapter" data-level="7.2.2" data-path="steady-states-3.html"><a href="steady-states-3.html#eir"><i class="fa fa-check"></i><b>7.2.2</b> EIR</a></li>
+<li class="chapter" data-level="7.2.3" data-path="steady-states-3.html"><a href="steady-states-3.html#vectorial-capacity-2"><i class="fa fa-check"></i><b>7.2.3</b> Vectorial Capacity</a></li>
+<li class="chapter" data-level="7.2.4" data-path="steady-states-3.html"><a href="steady-states-3.html#malaria-prevalence-thresholds"><i class="fa fa-check"></i><b>7.2.4</b> Malaria Prevalence &amp; Thresholds</a></li>
+<li class="chapter" data-level="7.2.5" data-path="steady-states-3.html"><a href="steady-states-3.html#checking-our-work"><i class="fa fa-check"></i><b>7.2.5</b> Checking our Work</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="stable-orbits.html"><a href="stable-orbits.html"><i class="fa fa-check"></i><b>7.3</b> Stable Orbits</a>
 <ul>
@@ -402,7 +470,7 @@ div.csl-indent {
 <li class="chapter" data-level="27.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html"><i class="fa fa-check"></i><b>27.1</b> Aquatic Dynamics</a>
 <ul>
 <li class="chapter" data-level="27.1.1" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#equations-1"><i class="fa fa-check"></i><b>27.1.1</b> Equations</a></li>
-<li class="chapter" data-level="27.1.2" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#solutions-2"><i class="fa fa-check"></i><b>27.1.2</b> Solutions</a></li>
+<li class="chapter" data-level="27.1.2" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#solutions-3"><i class="fa fa-check"></i><b>27.1.2</b> Solutions</a></li>
 <li class="chapter" data-level="27.1.3" data-path="aquatic-dynamics.html"><a href="aquatic-dynamics.html#regulation-1"><i class="fa fa-check"></i><b>27.1.3</b> Regulation</a></li>
 </ul></li>
 <li class="chapter" data-level="27.2" data-path="understanding-mosquito-dynamics.html"><a href="understanding-mosquito-dynamics.html"><i class="fa fa-check"></i><b>27.2</b> Understanding Mosquito Dynamics</a></li>
@@ -498,7 +566,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="dtsRoss" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Deterministic, Discrete Time<a href="dtsRoss.html#dtsRoss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this section, we present a very basic deterministic, discrete-time model. Because it is the first model we present, we will be very methodical about the presentation, including sections about computation, analysis, and model verification. We show that the first mdoel is numerically unstable in some cases, so we present another model that is numerically stable.</p>
+<p>In this section, we present a basic, deterministic, discrete-time model. Because it is the first model we present, we will be very methodical as we walk through it. We’ll spend time discussing the model, and we walk through sections about solving, computation, analysis, and model verification. We show that the first mdoel is numerically unstable in some cases, so we present another model that is numerically stable.</p>
 <div id="ross_dts_1" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> <code>ross_dts_1</code><a href="dtsRoss.html#ross_dts_1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <!-- Here, present a discrete time deterministic model, one example of a discrete time system (DTS) that was developed to model malaria as a set of coupled difference equations.  -->
@@ -514,7 +582,10 @@ div.csl-indent {
 <p><strong>Initial Conditions</strong> are the values of the variables at a point in time.</p>
 <p>Since the values of our variables in the next time step (at time <span class="math inline">\(t+1\)</span>) depend on their values now (at time <span class="math inline">\(t\)</span>), we can’t really compute anything specific unless we specify the values of the variables at one point in time. We call these values the initial conditions. What are the values of our variables at the beginning of our simulations (usually, at time <span class="math inline">\(t=0\)</span>)?</p>
 <p>We set these initial values to be small:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="dtsRoss.html#cb1-1" tabindex="-1"></a><span class="co"># Initial Conditions at a point in time, as a Named Vector </span></span>
+<span id="cb1-2"><a href="dtsRoss.html#cb1-2" tabindex="-1"></a>xy <span class="ot">=</span> <span class="fu">c</span>(<span class="at">t=</span><span class="dv">0</span>, <span class="at">x=</span><span class="fl">0.01</span>, <span class="at">y=</span><span class="fl">0.001</span>)</span></code></pre></div>
 <p>This R object <code>xy</code> is a <em>named vector.</em> The names are invisible, but they attach if we use the function <code>as.list()</code> or <code>data.frame().</code> When combined with the <code>with()</code> function, we can call them by name in context.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="dtsRoss.html#cb2-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">as.list</span>(xy), x) </span></code></pre></div>
 <pre><code>## [1] 0.01</code></pre>
 <p>We adopt these conventions so that the R code closely resembles the equations.</p>
 <p><strong>Parameters</strong> are quantities – rates, numbers, or probabilities – that describe some part of the process. Unlike variables, parameters are passed to the model. In the model we present, these parameters are constant. Since they are constant, we call this an <em>autonomous</em> system of equations. In other models, we could have parameter values that changes over time, so the system would be called <em>non-autonomous.</em></p>
@@ -525,13 +596,20 @@ div.csl-indent {
 <li><p>Let <span class="math inline">\(a\)</span> denote the fraction of mosquitoes who blood feed on a human in a day; <span class="math inline">\(0 &lt; a &lt; 1.\)</span></p></li>
 <li><p>Let <span class="math inline">\(m\)</span> denote the number of mosquitoes per human; <span class="math inline">\(m \geq 0.\)</span></p></li>
 </ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="dtsRoss.html#cb4-1" tabindex="-1"></a><span class="co"># The parameters, as a list </span></span>
+<span id="cb4-2"><a href="dtsRoss.html#cb4-2" tabindex="-1"></a>ross_dts_par <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb4-3"><a href="dtsRoss.html#cb4-3" tabindex="-1"></a>  <span class="at">s =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="co"># The fraction of infections that clear each day</span></span>
+<span id="cb4-4"><a href="dtsRoss.html#cb4-4" tabindex="-1"></a>  <span class="at">u =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>,  <span class="co"># The fraction of mosquitoes that die each day</span></span>
+<span id="cb4-5"><a href="dtsRoss.html#cb4-5" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,   <span class="co"># The fraction of mosquitoes that blood feed on a human each day</span></span>
+<span id="cb4-6"><a href="dtsRoss.html#cb4-6" tabindex="-1"></a>  <span class="at">m =</span> <span class="dv">2</span>      <span class="co"># The number of mosquitoes per human</span></span>
+<span id="cb4-7"><a href="dtsRoss.html#cb4-7" tabindex="-1"></a>) </span></code></pre></div>
 <p><strong>Equations</strong> describe dynamic changes in the variables over time. In this case, the process is described by a system of coupled difference equations.</p>
 <p>Finally, we put all this together into a mathematical statement that has translated the description of a process, that are describe the process.</p>
 <p><span class="math display">\[\begin{array}{rl}
 x_{t+1} &amp;=  x_t - s x_t + m a y_t (1-x_t)  \\
 y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 \end{array}\]</span></p>
-<p>We could rewrite the equations so that the left hand side is interpreted as <em>the daily change in the values of the parameters,</em> and the terms on the right hand side describes those changes:</p>
+<p>We could rewrite the equations so that the left hand side is interpreted as <em>the daily change in the values of the variables,</em> and the terms on the right hand side describes those changes:</p>
 <p><span class="math display">\[
 \begin{array}{rl}
 x_{t+1} - x_t &amp;=  - s x_t + m a y_t (1-x_t)  \\
@@ -546,16 +624,44 @@ y_{t+1} - y_t &amp;=  - u y_t + a x_t (1 - y_t) \\
 <li><p>The fraction of mosquitoes who are not infected is <span class="math inline">\(1-y_t\)</span>; a fraction <span class="math inline">\(a x_t\)</span> gets infected.</p></li>
 </ul>
 <p>We write a function in R that computes and returns the updated values of the variables. Since we will be developing a lot of functions and models, we adopt a simple naming convention: since it was developed by Ross, we attach the stem <code>ross</code>; since this is a discrete time system, we attach the suffix <code>dts</code>; we might want to generate other variants, so we append a number. The function is thus called <code>ross_dts_1.</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="dtsRoss.html#cb5-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb5-2"><a href="dtsRoss.html#cb5-2" tabindex="-1"></a><span class="co"># xy - current variables, as a named vector</span></span>
+<span id="cb5-3"><a href="dtsRoss.html#cb5-3" tabindex="-1"></a><span class="co"># p  - the parameters, as a list</span></span>
+<span id="cb5-4"><a href="dtsRoss.html#cb5-4" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb5-5"><a href="dtsRoss.html#cb5-5" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb5-6"><a href="dtsRoss.html#cb5-6" tabindex="-1"></a><span class="co"># the updated values of the variables, as a named vector</span></span>
+<span id="cb5-7"><a href="dtsRoss.html#cb5-7" tabindex="-1"></a>ross_dts_1 <span class="ot">=</span> <span class="cf">function</span>(xy, p){</span>
+<span id="cb5-8"><a href="dtsRoss.html#cb5-8" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(xy), </span>
+<span id="cb5-9"><a href="dtsRoss.html#cb5-9" tabindex="-1"></a>    <span class="fu">with</span>(p,{</span>
+<span id="cb5-10"><a href="dtsRoss.html#cb5-10" tabindex="-1"></a>      xn <span class="ot">=</span> x <span class="sc">-</span> s<span class="sc">*</span>x <span class="sc">+</span> m<span class="sc">*</span>a<span class="sc">*</span>y<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x) </span>
+<span id="cb5-11"><a href="dtsRoss.html#cb5-11" tabindex="-1"></a>      yn <span class="ot">=</span> y <span class="sc">-</span> u<span class="sc">*</span>y <span class="sc">+</span> a<span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>y) </span>
+<span id="cb5-12"><a href="dtsRoss.html#cb5-12" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">t=</span>t<span class="sc">+</span><span class="dv">1</span>, <span class="at">x=</span>xn, <span class="at">y=</span>yn))</span>
+<span id="cb5-13"><a href="dtsRoss.html#cb5-13" tabindex="-1"></a>    })</span>
+<span id="cb5-14"><a href="dtsRoss.html#cb5-14" tabindex="-1"></a>  )</span>
+<span id="cb5-15"><a href="dtsRoss.html#cb5-15" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="solving" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Solving<a href="dtsRoss.html#solving" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>With the R code we developed, we can <em>solve</em> the equations, which involves computing the values of the variables iteratively. Since the values of the variables change, we initialize <code>xy_t</code> to store the values of computed variables over time.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="dtsRoss.html#cb6-1" tabindex="-1"></a><span class="co"># xy_t stores the values of the variables</span></span>
+<span id="cb6-2"><a href="dtsRoss.html#cb6-2" tabindex="-1"></a>xy_t <span class="ot">=</span> xy </span></code></pre></div>
 <p>To iterate, we must take two steps: one to compute the values, and another to store the values:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="dtsRoss.html#cb7-1" tabindex="-1"></a><span class="co"># Compute and store the values of the variables  </span></span>
+<span id="cb7-2"><a href="dtsRoss.html#cb7-2" tabindex="-1"></a>xy <span class="ot">=</span> <span class="fu">ross_dts_1</span>(xy, ross_dts_par)</span>
+<span id="cb7-3"><a href="dtsRoss.html#cb7-3" tabindex="-1"></a>xy_t <span class="ot">=</span> <span class="fu">rbind</span>(xy_t, xy)</span></code></pre></div>
 <p>Since we initialized the system at time <span class="math inline">\(t=0,\)</span> the following computes the values of the parameters at time <span class="math inline">\(t=1.\)</span> We can take a peak at the values we computed:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="dtsRoss.html#cb8-1" tabindex="-1"></a><span class="co"># Print </span></span>
+<span id="cb8-2"><a href="dtsRoss.html#cb8-2" tabindex="-1"></a><span class="fu">print</span>(xy) </span></code></pre></div>
 <pre><code>##           t           x           y 
 ## 1.000000000 0.010445000 0.003414167</code></pre>
 <p>We can iterate over many time steps, storing the values in columns:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="dtsRoss.html#cb10-1" tabindex="-1"></a><span class="co"># Iterate to compute the values as they change over time </span></span>
+<span id="cb10-2"><a href="dtsRoss.html#cb10-2" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">40</span>){</span>
+<span id="cb10-3"><a href="dtsRoss.html#cb10-3" tabindex="-1"></a>  xy <span class="ot">=</span> <span class="fu">ross_dts_1</span>(xy, ross_dts_par) </span>
+<span id="cb10-4"><a href="dtsRoss.html#cb10-4" tabindex="-1"></a>  xy_t <span class="ot">=</span> <span class="fu">rbind</span>(xy_t, xy) </span>
+<span id="cb10-5"><a href="dtsRoss.html#cb10-5" tabindex="-1"></a>} </span></code></pre></div>
 <p>We can look at the last few values, the values of <span class="math inline">\(t,\)</span> <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are stored in columns:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="dtsRoss.html#cb11-1" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">tail</span>(xy_t, <span class="dv">3</span>)) </span></code></pre></div>
 <pre><code>##     t         x         y
 ## xy 38 0.9865573 0.7465869
 ## xy 39 0.9866426 0.7468730
@@ -564,7 +670,11 @@ y_{t+1} - y_t &amp;=  - u y_t + a x_t (1 - y_t) \\
 <div id="visualizing" class="section level3 hasAnchor" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Visualizing<a href="dtsRoss.html#visualizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can now plot out the values over the first 40 days. Since <code>xy_t</code> is a named list, we transform it and plot:</p>
-<p><img src="docs/figs/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="dtsRoss.html#cb13-1" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">data.frame</span>(xy_t),{</span>
+<span id="cb13-2"><a href="dtsRoss.html#cb13-2" tabindex="-1"></a>  <span class="fu">plot</span>(t, x, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;x, y&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>)</span>
+<span id="cb13-3"><a href="dtsRoss.html#cb13-3" tabindex="-1"></a>  <span class="fu">lines</span>(t, y, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="at">pch =</span><span class="dv">19</span>)</span>
+<span id="cb13-4"><a href="dtsRoss.html#cb13-4" tabindex="-1"></a>})</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Notice that after 40 days, the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> appear to be approaching some value asymptotically. This is an important feature of these systems, one that we would like to explore a bit more in the following sections.</p>
 <p>We can translate Ross’s basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, and parameters.</p>
 <p>In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things.</p>
@@ -572,18 +682,55 @@ y_{t+1} - y_t &amp;=  - u y_t + a x_t (1 - y_t) \\
 <div id="computation" class="section level3 hasAnchor" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> Computation<a href="dtsRoss.html#computation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we want to repeat tasks, we can simply write a wrapper around other functions that expedite the work. In this case, we want to write a function that <em>solves</em> the equations (<em>i.e.</em> that iteratively computes and stores the values) over some time interval:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dtsRoss.html#cb14-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb14-2"><a href="dtsRoss.html#cb14-2" tabindex="-1"></a><span class="co"># pars - the parameters, as a list </span></span>
+<span id="cb14-3"><a href="dtsRoss.html#cb14-3" tabindex="-1"></a><span class="co"># x0   - the initial value of x</span></span>
+<span id="cb14-4"><a href="dtsRoss.html#cb14-4" tabindex="-1"></a><span class="co"># y0   - the initial value of y</span></span>
+<span id="cb14-5"><a href="dtsRoss.html#cb14-5" tabindex="-1"></a><span class="co"># tmax - the last value of t </span></span>
+<span id="cb14-6"><a href="dtsRoss.html#cb14-6" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-7"><a href="dtsRoss.html#cb14-7" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb14-8"><a href="dtsRoss.html#cb14-8" tabindex="-1"></a><span class="co"># the values of the variables over time, as a list </span></span>
+<span id="cb14-9"><a href="dtsRoss.html#cb14-9" tabindex="-1"></a>ross_dts_solve_1 <span class="ot">=</span> <span class="cf">function</span>(pars, <span class="at">x0=</span>.<span class="dv">01</span>, <span class="at">y0 =</span> <span class="fl">0.001</span>, <span class="at">tmax=</span><span class="dv">100</span>){</span>
+<span id="cb14-10"><a href="dtsRoss.html#cb14-10" tabindex="-1"></a>   xy <span class="ot">=</span> <span class="fu">c</span>(<span class="at">t=</span><span class="dv">0</span>, <span class="at">x=</span>x0, <span class="at">y=</span>y0) </span>
+<span id="cb14-11"><a href="dtsRoss.html#cb14-11" tabindex="-1"></a>   xy_t <span class="ot">=</span> xy </span>
+<span id="cb14-12"><a href="dtsRoss.html#cb14-12" tabindex="-1"></a>   <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>tmax){</span>
+<span id="cb14-13"><a href="dtsRoss.html#cb14-13" tabindex="-1"></a>     xy <span class="ot">=</span> <span class="fu">ross_dts_1</span>(xy, pars)</span>
+<span id="cb14-14"><a href="dtsRoss.html#cb14-14" tabindex="-1"></a>     xy_t <span class="ot">=</span> <span class="fu">rbind</span>(xy_t, xy)</span>
+<span id="cb14-15"><a href="dtsRoss.html#cb14-15" tabindex="-1"></a>   }</span>
+<span id="cb14-16"><a href="dtsRoss.html#cb14-16" tabindex="-1"></a>   <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">t=</span>xy_t[,<span class="dv">1</span>], <span class="at">x=</span>xy_t[,<span class="dv">2</span>], <span class="at">y =</span> xy_t[,<span class="dv">3</span>], <span class="at">last =</span> xy)) </span>
+<span id="cb14-17"><a href="dtsRoss.html#cb14-17" tabindex="-1"></a>}</span></code></pre></div>
 <p>We can write another function that <em>plots</em> the equations (<em>i.e.</em> that iteratively computes and stores the values) over some time interval:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="dtsRoss.html#cb15-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb15-2"><a href="dtsRoss.html#cb15-2" tabindex="-1"></a><span class="co"># xy_t - a list with named vectors t, x, and y</span></span>
+<span id="cb15-3"><a href="dtsRoss.html#cb15-3" tabindex="-1"></a><span class="co"># add_points - if TRUE, then type = &quot;b&quot; for plot </span></span>
+<span id="cb15-4"><a href="dtsRoss.html#cb15-4" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-5"><a href="dtsRoss.html#cb15-5" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb15-6"><a href="dtsRoss.html#cb15-6" tabindex="-1"></a><span class="co"># the values of the variables over time, as a list </span></span>
+<span id="cb15-7"><a href="dtsRoss.html#cb15-7" tabindex="-1"></a>plot_xy <span class="ot">=</span> <span class="cf">function</span>(xy_t, <span class="at">add_points =</span> <span class="cn">FALSE</span>){<span class="fu">with</span>(xy_t,{</span>
+<span id="cb15-8"><a href="dtsRoss.html#cb15-8" tabindex="-1"></a>  llty <span class="ot">=</span> <span class="st">&quot;l&quot;</span></span>
+<span id="cb15-9"><a href="dtsRoss.html#cb15-9" tabindex="-1"></a>  <span class="cf">if</span>(add_points <span class="sc">==</span> <span class="cn">TRUE</span>) llty <span class="ot">=</span> <span class="st">&quot;b&quot;</span></span>
+<span id="cb15-10"><a href="dtsRoss.html#cb15-10" tabindex="-1"></a>  <span class="fu">plot</span>(t, x, <span class="at">type =</span> llty, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;x, y&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">pch=</span><span class="dv">15</span>)</span>
+<span id="cb15-11"><a href="dtsRoss.html#cb15-11" tabindex="-1"></a>  <span class="fu">lines</span>(t, y, <span class="at">type =</span> llty, <span class="at">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="at">pch =</span><span class="dv">19</span>)</span>
+<span id="cb15-12"><a href="dtsRoss.html#cb15-12" tabindex="-1"></a>})}</span></code></pre></div>
 <p>Now, all the work we did above can be plotted using a single function call:</p>
-<p><img src="docs/figs/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="dtsRoss.html#cb16-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par, <span class="at">tmax=</span><span class="dv">40</span>), <span class="at">add_points=</span><span class="cn">TRUE</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Now, it is easier to use the models in various ways.</p>
 </div>
 <div id="steady-states" class="section level3 hasAnchor" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Steady States<a href="dtsRoss.html#steady-states" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The fact that our variables asymptotically approach some values over time is an important feature of dynamical systems, so we would like to do some analysis to understand it better.</p>
 <p>In the following, we compute how much the system is changing over time. We can simply iterate once and compare the differences. After iterating 40 times, the differences are very small:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="dtsRoss.html#cb17-1" tabindex="-1"></a><span class="co"># The last value is still stored as xy; the [-1] omits t</span></span>
+<span id="cb17-2"><a href="dtsRoss.html#cb17-2" tabindex="-1"></a>xy[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_1</span>(xy, ross_dts_par)[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##             x             y 
 ## -3.545225e-05 -1.355019e-04</code></pre>
 <p>If we iterate another hundred days and check again, the differences have gotten even smaller:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="dtsRoss.html#cb19-1" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">41</span><span class="sc">:</span><span class="dv">140</span>){</span>
+<span id="cb19-2"><a href="dtsRoss.html#cb19-2" tabindex="-1"></a>  xy <span class="ot">=</span> <span class="fu">ross_dts_1</span>(xy, ross_dts_par)</span>
+<span id="cb19-3"><a href="dtsRoss.html#cb19-3" tabindex="-1"></a>  xy_t <span class="ot">=</span> <span class="fu">rbind</span>(xy_t, xy) </span>
+<span id="cb19-4"><a href="dtsRoss.html#cb19-4" tabindex="-1"></a>} </span>
+<span id="cb19-5"><a href="dtsRoss.html#cb19-5" tabindex="-1"></a>xy[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_1</span>(xy, ross_dts_par)[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## x y 
 ## 0 0</code></pre>
 <p>After simulating, the variables reach a steady state, where asymptotically <span class="math inline">\(x_{t+1} = x_t\)</span> and <span class="math inline">\(y_{t+1} = y_t\)</span>.</p>
@@ -607,24 +754,55 @@ a x (1 - y) &amp;=  u y\\
 and now we solve for <span class="math inline">\(x\)</span></p>
 <p><span class="math display">\[x = \frac{\textstyle{ma^2 - su}}{\textstyle{ma^2 + sa}}\]</span>
 We can write a function to compute this steady state:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="dtsRoss.html#cb21-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb21-2"><a href="dtsRoss.html#cb21-2" tabindex="-1"></a><span class="co"># par - the parameters, as a list </span></span>
+<span id="cb21-3"><a href="dtsRoss.html#cb21-3" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb21-4"><a href="dtsRoss.html#cb21-4" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb21-5"><a href="dtsRoss.html#cb21-5" tabindex="-1"></a><span class="co"># the steady state values of x and y </span></span>
+<span id="cb21-6"><a href="dtsRoss.html#cb21-6" tabindex="-1"></a>ross_dts_steady_0 <span class="ot">=</span> <span class="cf">function</span>(par){<span class="fu">with</span>(par,{</span>
+<span id="cb21-7"><a href="dtsRoss.html#cb21-7" tabindex="-1"></a>  xx <span class="ot">=</span> (m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> s<span class="sc">*</span>u)<span class="sc">/</span> (m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> s<span class="sc">*</span>a)</span>
+<span id="cb21-8"><a href="dtsRoss.html#cb21-8" tabindex="-1"></a>  yy <span class="ot">=</span> a<span class="sc">*</span>xx<span class="sc">/</span>(u<span class="sc">+</span>a<span class="sc">*</span>xx) </span>
+<span id="cb21-9"><a href="dtsRoss.html#cb21-9" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">x=</span>xx,<span class="at">y=</span>yy)</span>
+<span id="cb21-10"><a href="dtsRoss.html#cb21-10" tabindex="-1"></a>})}</span></code></pre></div>
 </div>
 <div id="thresholds" class="section level3 hasAnchor" number="2.1.6">
 <h3><span class="header-section-number">2.1.6</span> Thresholds<a href="dtsRoss.html#thresholds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>All our analysis worked out well for the parameter values that we chose, but what if we had picked different parameters?</p>
 <p>There must be some very low level of mosquitoes, for example, where malaria can’t reproduce. If we reduce <span class="math inline">\(m\)</span> to <span class="math inline">\(0.005\)</span> and evaluate the expression at the steady state, we get negative values for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="dtsRoss.html#cb22-1" tabindex="-1"></a>ross_dts_par1 <span class="ot">=</span> ross_dts_par</span>
+<span id="cb22-2"><a href="dtsRoss.html#cb22-2" tabindex="-1"></a>ross_dts_par1<span class="sc">$</span>m <span class="ot">=</span> <span class="fl">0.005</span></span>
+<span id="cb22-3"><a href="dtsRoss.html#cb22-3" tabindex="-1"></a><span class="fu">ross_dts_steady_0</span>(ross_dts_par1)</span></code></pre></div>
 <pre><code>##           x           y 
 ## -0.06666667 -0.25000000</code></pre>
 <p>What happens if we simulate this? (Let’s set the initial conditions to reasonably high values)</p>
-<p><img src="docs/figs/unnamed-chunk-19-1.png" width="672" /></p>
-<p>Our function <code>find_eq_dts_a</code> gives us a negative number.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="dtsRoss.html#cb24-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par1, <span class="at">x0 =</span> .<span class="dv">5</span>, <span class="at">y0=</span>.<span class="dv">3</span>, <span class="at">tmax=</span><span class="dv">1500</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Our function <code>ross_dts_steady_0</code> gives us a negative number.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="dtsRoss.html#cb25-1" tabindex="-1"></a><span class="fu">ross_dts_steady_0</span>(ross_dts_par1)</span></code></pre></div>
 <pre><code>##           x           y 
 ## -0.06666667 -0.25000000</code></pre>
 <p>If we look at the equations, it’s easy enough to spot the problem. Since <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> must be positive, then it must be true that <span class="math display">\[m a^2 &gt; su.\]</span> We call this a threshold condition.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="dtsRoss.html#cb27-1" tabindex="-1"></a>m_crit <span class="ot">=</span> <span class="fu">with</span>(ross_dts_par, s<span class="sc">*</span>u<span class="sc">/</span>a<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb27-2"><a href="dtsRoss.html#cb27-2" tabindex="-1"></a>m_crit </span></code></pre></div>
 <pre><code>## [1] 0.006666667</code></pre>
 <p>If we check, we find that this gives us the disease free equilibrium.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="dtsRoss.html#cb29-1" tabindex="-1"></a>ross_dts_par2 <span class="ot">=</span> ross_dts_par</span>
+<span id="cb29-2"><a href="dtsRoss.html#cb29-2" tabindex="-1"></a>ross_dts_par2<span class="sc">$</span>m <span class="ot">=</span> m_crit</span>
+<span id="cb29-3"><a href="dtsRoss.html#cb29-3" tabindex="-1"></a><span class="fu">ross_dts_steady_0</span>(ross_dts_par2)</span></code></pre></div>
 <pre><code>## x y 
 ## 0 0</code></pre>
 <p>We need a better function:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="dtsRoss.html#cb31-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb31-2"><a href="dtsRoss.html#cb31-2" tabindex="-1"></a><span class="co"># par - the parameters, as a list </span></span>
+<span id="cb31-3"><a href="dtsRoss.html#cb31-3" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb31-4"><a href="dtsRoss.html#cb31-4" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb31-5"><a href="dtsRoss.html#cb31-5" tabindex="-1"></a><span class="co"># the steady state values of x and y </span></span>
+<span id="cb31-6"><a href="dtsRoss.html#cb31-6" tabindex="-1"></a>ross_dts_steady_1 <span class="ot">=</span> <span class="cf">function</span>(par){<span class="fu">with</span>(par,{</span>
+<span id="cb31-7"><a href="dtsRoss.html#cb31-7" tabindex="-1"></a>  xx <span class="ot">=</span> <span class="fu">ifelse</span>(m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">&gt;</span> s<span class="sc">*</span>u, (m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> s<span class="sc">*</span>u)<span class="sc">/</span>(m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> s<span class="sc">*</span>a), <span class="dv">0</span>) </span>
+<span id="cb31-8"><a href="dtsRoss.html#cb31-8" tabindex="-1"></a>  yy <span class="ot">=</span> a<span class="sc">*</span>xx<span class="sc">/</span>(u<span class="sc">+</span>a<span class="sc">*</span>xx) </span>
+<span id="cb31-9"><a href="dtsRoss.html#cb31-9" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">x=</span>xx,<span class="at">y=</span>yy)</span>
+<span id="cb31-10"><a href="dtsRoss.html#cb31-10" tabindex="-1"></a>})}</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="dtsRoss.html#cb32-1" tabindex="-1"></a><span class="fu">ross_dts_steady_1</span>(ross_dts_par1)</span></code></pre></div>
 <pre><code>## x y 
 ## 0 0</code></pre>
 </div>
@@ -632,58 +810,115 @@ We can write a function to compute this steady state:</p>
 <h3><span class="header-section-number">2.1.7</span> Verification<a href="dtsRoss.html#verification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We want to get used to double checking everything to avoid inserting mistakes. One way to do this is to find two or more ways of computing the same thing, for verification.</p>
 <p>If we’ve done everything right, we ought to get the same values for the steady states through our analysis and simulation.</p>
+<p>The last values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> from the simulation are:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="dtsRoss.html#cb34-1" tabindex="-1"></a>xy[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9867987 0.7475000</code></pre>
+<p>The last values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> from evaluating <code>ross_dts_steady_1()</code> are:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="dtsRoss.html#cb36-1" tabindex="-1"></a><span class="fu">ross_dts_steady_1</span>(ross_dts_par) </span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9867987 0.7475000</code></pre>
-<p>It’s tempting to look at the printout and assume these two numbers are exactly equal. This is the land of computation, so things won’t be exact. We can simply sum up the absolute values of the differences:</p>
+<p>It’s tempting to look at the printout and assume these two numbers are exactly equal, but when we deal with computers, everything gets computed and stored in some way. We can never be sure that a match will be be exact. We can simply sum up the absolute values of the differences:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="dtsRoss.html#cb38-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(xy[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_steady_1</span>(ross_dts_par)))</span></code></pre></div>
 <pre><code>## [1] 3.330669e-16</code></pre>
 <p>If we wanted to reduce this to a simple error check, we should pick a tolerance level – say <span class="math inline">\(10^{-9}\)</span> – and then just ask if we are closer than that:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="dtsRoss.html#cb40-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb40-2"><a href="dtsRoss.html#cb40-2" tabindex="-1"></a><span class="co"># xy  - xy </span></span>
+<span id="cb40-3"><a href="dtsRoss.html#cb40-3" tabindex="-1"></a><span class="co"># par - a set of parameters for a ross_dts model </span></span>
+<span id="cb40-4"><a href="dtsRoss.html#cb40-4" tabindex="-1"></a><span class="co"># tol - a tolerance level </span></span>
+<span id="cb40-5"><a href="dtsRoss.html#cb40-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb40-6"><a href="dtsRoss.html#cb40-6" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb40-7"><a href="dtsRoss.html#cb40-7" tabindex="-1"></a><span class="co"># boolean - </span></span>
+<span id="cb40-8"><a href="dtsRoss.html#cb40-8" tabindex="-1"></a>ross_dts_checkit_1 <span class="ot">=</span> <span class="cf">function</span>(xy, ross_dts_pars, <span class="at">tol=</span><span class="fl">1e-9</span>){</span>
+<span id="cb40-9"><a href="dtsRoss.html#cb40-9" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">abs</span>(xy[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_steady_1</span>(ross_dts_pars)))  <span class="sc">&lt;</span> tol</span>
+<span id="cb40-10"><a href="dtsRoss.html#cb40-10" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="dtsRoss.html#cb41-1" tabindex="-1"></a><span class="fu">ross_dts_checkit_1</span>(xy, ross_dts_par)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="numerical-instability" class="section level3 hasAnchor" number="2.1.8">
 <h3><span class="header-section-number">2.1.8</span> Numerical Instability<a href="dtsRoss.html#numerical-instability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There is another problem with the equations. If we set <span class="math inline">\(m\)</span> too high, such that at some point <span class="math inline">\(m a y_t &gt; 1,\)</span> then the whole system eventually crashes:</p>
-<p><img src="docs/figs/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="dtsRoss.html#cb43-1" tabindex="-1"></a>ross_dts_par3 <span class="ot">=</span> ross_dts_par</span>
+<span id="cb43-2"><a href="dtsRoss.html#cb43-2" tabindex="-1"></a>ross_dts_par3<span class="sc">$</span>m <span class="ot">=</span> <span class="dv">20</span> </span>
+<span id="cb43-3"><a href="dtsRoss.html#cb43-3" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">20</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back and rethink the way we formulated our model. How does the probability of getting infected scale with the number of infective bites?</p>
 </div>
 <div id="dtsRoss2" class="section level3 hasAnchor" number="2.1.9">
 <h3><span class="header-section-number">2.1.9</span> <code>ross_dts_2</code><a href="dtsRoss.html#dtsRoss2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="attack-rates" class="section level4 hasAnchor" number="2.1.9.1">
-<h4><span class="header-section-number">2.1.9.1</span> Attack Rates<a href="dtsRoss.html#attack-rates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>One way to do this is to say that the <em>expected</em> number of bites would follow a Poisson distribution with mean <span class="math inline">\(may_t,\)</span> so that the fraction getting infected is the zero term from a Poisson:</p>
+<p>There is a good solution to the problem that gave rise to this numerical instability. The question at hand is what fraction of people would become infected, on average, if the expected number of bites was <span class="math inline">\(may_t?\)</span> We call this quantity – the fraction that gets infected – an attack rate. In a lot of cases like this, without any other information, we would assume that the number of bites, per person, would follow a Poisson distribution. It’s actually easier to say who doesn’t get infected, and that’s the zero term of a Poisson, <span class="math inline">\(e^{-may_t}.\)</span> The probability of getting infected is the complement of the probability of getting at least one bite, or</p>
 <p><span class="math display">\[1 - e^{-m a y_t}\]</span></p>
-<p>Now, our equations are the following:</p>
+<p><strong>Equations</strong></p>
+<p>Our variables, initial conditions, and parameters are all defined in the same way as <code>ross_dts_1,</code> but now our equations have changed:</p>
 <p><span class="math display">\[\begin{array}{rl}
 x_{t+1} &amp;=  x_t - s x_t + (1-e^{m a y_t}) (1-x_t)  \\
 y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 \end{array}\]</span></p>
-</div>
-<div id="steady-states-1" class="section level4 hasAnchor" number="2.1.9.2">
-<h4><span class="header-section-number">2.1.9.2</span> Steady States<a href="dtsRoss.html#steady-states-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Now, if we want to compute the steady state, we’re stuck with the problem of solving this:</p>
-<p><span class="math display">\[(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx\]</span>
-It’s surprisingly easy to write down equations, like this one, that we can’t solve with pencil and paper. We can still find a way of computing the steady state, but we have to write R code that solves for <span class="math inline">\(x\)</span> numerically.</p>
-<p>The new equilibrium is at:</p>
-<pre><code>## [1] 0.9949026 0.7490406</code></pre>
-</div>
-<div id="workflows" class="section level4 hasAnchor" number="2.1.9.3">
-<h4><span class="header-section-number">2.1.9.3</span> Workflows<a href="dtsRoss.html#workflows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>We can just as easily write the code to numerically solve the discrete time system:</p>
+<p>As before, we write a function to numerically solve the discrete time system:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="dtsRoss.html#cb44-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb44-2"><a href="dtsRoss.html#cb44-2" tabindex="-1"></a><span class="co"># xy - current variables, as a named vector</span></span>
+<span id="cb44-3"><a href="dtsRoss.html#cb44-3" tabindex="-1"></a><span class="co"># p  - the parameters, as a list</span></span>
+<span id="cb44-4"><a href="dtsRoss.html#cb44-4" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb44-5"><a href="dtsRoss.html#cb44-5" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb44-6"><a href="dtsRoss.html#cb44-6" tabindex="-1"></a><span class="co"># the updated values of the variables, as a named vector</span></span>
+<span id="cb44-7"><a href="dtsRoss.html#cb44-7" tabindex="-1"></a>ross_dts_2 <span class="ot">=</span> <span class="cf">function</span>(xy, p){<span class="fu">with</span>(<span class="fu">as.list</span>(xy), <span class="fu">with</span>(p,{</span>
+<span id="cb44-8"><a href="dtsRoss.html#cb44-8" tabindex="-1"></a>  xn <span class="ot">=</span> x <span class="sc">-</span> s<span class="sc">*</span>x <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>m<span class="sc">*</span>a<span class="sc">*</span>y))<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x) </span>
+<span id="cb44-9"><a href="dtsRoss.html#cb44-9" tabindex="-1"></a>  yn <span class="ot">=</span> y <span class="sc">-</span> u<span class="sc">*</span>y <span class="sc">+</span> a<span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>y) </span>
+<span id="cb44-10"><a href="dtsRoss.html#cb44-10" tabindex="-1"></a>  t<span class="ot">=</span>t<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb44-11"><a href="dtsRoss.html#cb44-11" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">t=</span>t, <span class="at">x=</span>xn, <span class="at">y=</span>yn))</span>
+<span id="cb44-12"><a href="dtsRoss.html#cb44-12" tabindex="-1"></a>}))}</span></code></pre></div>
 <p>Once again, we can wrap a function around the solver so that it’s easier to use the code:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="dtsRoss.html#cb45-1" tabindex="-1"></a>ross_dts_solve_2 <span class="ot">=</span> <span class="cf">function</span>(pars, <span class="at">x0=</span>.<span class="dv">01</span>, <span class="at">y0 =</span> <span class="fl">0.001</span>, <span class="at">tmax=</span><span class="dv">100</span>){</span>
+<span id="cb45-2"><a href="dtsRoss.html#cb45-2" tabindex="-1"></a>   xy <span class="ot">=</span> <span class="fu">c</span>(<span class="at">t=</span><span class="dv">0</span>, <span class="at">x=</span>x0, <span class="at">y=</span>y0) </span>
+<span id="cb45-3"><a href="dtsRoss.html#cb45-3" tabindex="-1"></a>   xy_t <span class="ot">=</span> xy </span>
+<span id="cb45-4"><a href="dtsRoss.html#cb45-4" tabindex="-1"></a>   <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>tmax){</span>
+<span id="cb45-5"><a href="dtsRoss.html#cb45-5" tabindex="-1"></a>     xy <span class="ot">=</span> <span class="fu">ross_dts_2</span>(xy, pars)</span>
+<span id="cb45-6"><a href="dtsRoss.html#cb45-6" tabindex="-1"></a>     xy_t <span class="ot">=</span> <span class="fu">rbind</span>(xy_t, xy)</span>
+<span id="cb45-7"><a href="dtsRoss.html#cb45-7" tabindex="-1"></a>   }</span>
+<span id="cb45-8"><a href="dtsRoss.html#cb45-8" tabindex="-1"></a>   <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">t=</span>xy_t[,<span class="dv">1</span>], <span class="at">x=</span>xy_t[,<span class="dv">2</span>], <span class="at">y =</span> xy_t[,<span class="dv">3</span>], <span class="at">last =</span> xy)) </span>
+<span id="cb45-9"><a href="dtsRoss.html#cb45-9" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now, we can visualize the output and see that we have fixed our stability problem.</p>
-<p><img src="docs/figs/unnamed-chunk-33-1.png" width="672" /></p>
-</div>
-<div id="verification-1" class="section level4 hasAnchor" number="2.1.9.4">
-<h4><span class="header-section-number">2.1.9.4</span> Verification<a href="dtsRoss.html#verification-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="dtsRoss.html#cb46-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_2</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">20</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><strong>Verification</strong></p>
+<p>For verification, we can solve things two ways. If we want to compute the steady state, we’re stuck with the problem of solving this equation:</p>
+<p><span class="math display">\[(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx\]</span></p>
+<p>It’s surprisingly easy to write down equations, like this one, that we can’t solve with pencil and paper. We can still find a way of computing the steady state, but we have to write R code that solves for <span class="math inline">\(x\)</span> numerically.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="dtsRoss.html#cb47-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
+<span id="cb47-2"><a href="dtsRoss.html#cb47-2" tabindex="-1"></a><span class="co"># par - the model parameters, as a list </span></span>
+<span id="cb47-3"><a href="dtsRoss.html#cb47-3" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb47-4"><a href="dtsRoss.html#cb47-4" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
+<span id="cb47-5"><a href="dtsRoss.html#cb47-5" tabindex="-1"></a><span class="co"># the steady state values of x and y </span></span>
+<span id="cb47-6"><a href="dtsRoss.html#cb47-6" tabindex="-1"></a>ross_dts_steady_2 <span class="ot">=</span> <span class="cf">function</span>(pars){<span class="fu">with</span>(pars,{</span>
+<span id="cb47-7"><a href="dtsRoss.html#cb47-7" tabindex="-1"></a>   f_xx <span class="ot">=</span> <span class="cf">function</span>(x, pp){<span class="fu">with</span>(pp,{</span>
+<span id="cb47-8"><a href="dtsRoss.html#cb47-8" tabindex="-1"></a>     xx <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">/</span>(u<span class="sc">+</span>a<span class="sc">*</span>x)))<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x) <span class="sc">-</span> s<span class="sc">*</span>x</span>
+<span id="cb47-9"><a href="dtsRoss.html#cb47-9" tabindex="-1"></a>     y <span class="ot">=</span> a<span class="sc">*</span>xx<span class="sc">/</span>(u<span class="sc">+</span>a<span class="sc">*</span>xx)</span>
+<span id="cb47-10"><a href="dtsRoss.html#cb47-10" tabindex="-1"></a>     yy <span class="ot">=</span> u<span class="sc">*</span>y <span class="sc">+</span> a<span class="sc">*</span>xx<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>y) </span>
+<span id="cb47-11"><a href="dtsRoss.html#cb47-11" tabindex="-1"></a>     <span class="fu">return</span>(xx<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> yy<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb47-12"><a href="dtsRoss.html#cb47-12" tabindex="-1"></a>   })}</span>
+<span id="cb47-13"><a href="dtsRoss.html#cb47-13" tabindex="-1"></a>   xx <span class="ot">=</span> <span class="fu">optimize</span>(f_xx, <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">pp=</span>pars)<span class="sc">$</span>min</span>
+<span id="cb47-14"><a href="dtsRoss.html#cb47-14" tabindex="-1"></a>   yy <span class="ot">=</span> a<span class="sc">*</span>xx<span class="sc">/</span>(u<span class="sc">+</span>a<span class="sc">*</span>xx) </span>
+<span id="cb47-15"><a href="dtsRoss.html#cb47-15" tabindex="-1"></a>   <span class="fu">c</span>(xx, yy)</span>
+<span id="cb47-16"><a href="dtsRoss.html#cb47-16" tabindex="-1"></a>})}</span></code></pre></div>
+<p>Finding the equilibrium this way, we get:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="dtsRoss.html#cb48-1" tabindex="-1"></a><span class="fu">ross_dts_steady_2</span>(ross_dts_par3)</span></code></pre></div>
 <pre><code>## [1] 0.9949026 0.7490406</code></pre>
+<p>Second, by getting the solution after many iterations.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="dtsRoss.html#cb50-1" tabindex="-1"></a><span class="fu">ross_dts_solve_2</span>(ross_dts_par3, <span class="at">x0=</span>.<span class="dv">1</span>, <span class="at">y0=</span>.<span class="dv">05</span>,<span class="at">tmax=</span><span class="dv">300</span>)<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9949051 0.7490410</code></pre>
+<p>By inspection, these two numbers are very close, but not exactly right.</p>
 <p>Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results.</p>
-<pre><code>## [1] 2.924525e-06</code></pre>
-<p>A function to check that it is accurate to some level of tolerance, but the numerical precision is mismatched, somehow.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="dtsRoss.html#cb52-1" tabindex="-1"></a>ross_dts_checkit_2 <span class="ot">=</span> <span class="cf">function</span>(pars, <span class="at">x0 =</span> .<span class="dv">1</span>, <span class="at">y0=</span>.<span class="dv">05</span>, <span class="at">tmax=</span><span class="dv">500</span>, <span class="at">tol=</span><span class="fl">1e-5</span>){</span>
+<span id="cb52-2"><a href="dtsRoss.html#cb52-2" tabindex="-1"></a>  xyt <span class="ot">=</span> <span class="fu">ross_dts_solve_2</span>(pars, <span class="at">x0=</span>x0, <span class="at">y0=</span>y0, <span class="at">tmax=</span>tmax)</span>
+<span id="cb52-3"><a href="dtsRoss.html#cb52-3" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">abs</span>(xyt<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_steady_2</span>(pars))) <span class="sc">&lt;</span> tol</span>
+<span id="cb52-4"><a href="dtsRoss.html#cb52-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>We’re within <span class="math inline">\(10^{-5}\)</span>, but not within <span class="math inline">\(10^{-6}\)</span></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="dtsRoss.html#cb53-1" tabindex="-1"></a><span class="fu">ross_dts_checkit_2</span>(ross_dts_par3, <span class="at">tol =</span> <span class="fl">1e-5</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-</div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="dtsRoss.html#cb55-1" tabindex="-1"></a><span class="fu">ross_dts_checkit_2</span>(ross_dts_par3, <span class="at">tol =</span> <span class="fl">1e-6</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>It’s a little unsatisfying to get numerical errors this large.</p>
 </div>
 </div>
             </section>

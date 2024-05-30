@@ -36,46 +36,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -121,7 +81,7 @@
 
 \title{Applied Dynamics for Robust Analytics and Adaptive Malaria Control}
 \author{David L. Smith and the RAMP Team}
-\date{2024-05-16}
+\date{2024-05-27}
 
 \begin{document}
 \maketitle
@@ -133,25 +93,32 @@
 \chapter*{Foreword}\label{foreword}
 \addcontentsline{toc}{chapter}{Foreword}
 
-A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, vector control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research, starting with Ronald Ross \autocite{RossR1911Book,SmithDL2012_RossMacdonald}.
-A new framework would integrate the concepts and models that have influenced malaria through the present day \autocite{ReinerRC2013SystematicReview,SmithNR2018AgentbasedModels}, and it might even serve as a platform for recasting a theory of malaria epidemiology, transmission dynamics, and control \autocite{SmithDL2014Recasting}.
+A large fraction of my time over the past 20 years has been devoted to learning about malaria and mathematical models of malaria epidemiology and transmission dynamics, mosquito ecology and malaria control, and the evolution of drug and insecticide resistance.
+All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research that traces back to the isolation of quinine, the study of malaria as a disease characterized by recurring fevers, and the discoveries made by Laveran and Ross using light microscopy
+\autocite{RossR1911Book,SmithDL2012_RossMacdonald}.
+A new framework would integrate the concepts and models that have influenced malaria through the present day \autocite{ReinerRC2013SystematicReview,SmithNR2018AgentbasedModels}, and it might even serve as a platform for recasting theory for malaria epidemiology, transmission dynamics, and control \autocite{SmithDL2014Recasting}.
 
-After all these years, we have developed a framework that tackles the challenges of using evidence to develop malaria policy. A core part of that framework is the use of malaria simulation models.
-Policy discussions can benefit from using mathematics, but discussions must focus on the policy questions, the concepts, and evidence rather than on the mathematics \emph{per se}.
-Ideally, mathematical ideas should give rigor to the analysis help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
-When I set out, I knew that building a framework would face some challenges, but I believed that -- if we could solve those challenges -- then we could make the math easier to use so that discussions would focus on the issues that mattered.
+In collaboration with malaria programs in Uganda and Equatorial Guinea, we have now developed a framework that can tackle the challenges of using evidence to develop malaria policy.
+We call it \textbf{adaptive malaria control,} and it is supported by a bespoke epistemological framework that we have called robust analytics for malaria policy (RAMP).
+A core part of adaptive malaria control is the development of malaria simulation models and simulation-based analytics.
+In adaptive malaria control, we assume that policy needs mathematical models and concepts, but the mathematics must not become a distraction in malaria policy discussions.
+Malaria policy discussions must focus on the issues at hand, including the concepts and evidence not on the mathematics \emph{per se}.
+Ideally, mathematical ideas should convey rigor in understanding the summary statistics that appear in reports, and they should help structure policy discussions without becoming the focus of attention, except perhaps when the mathematics draws attention to something that needs to be clarified.
+
+When I set out, I knew some of the challenges that would need to be confronted in building a new mathematical and computational framework to serve adaptive malaria control.
+I believed that if we could find practical ways of handling these challenges, then we could make simulation-based analytics easier to apply in context.
 Ideally, the framework could be taken up and used by teams of local experts working in their own countries to reduce the burden of malaria and plan for its elimination.
-The same framework could also support the academic activities taken up on the side.
+The framework would thus need to be flexible enough to support programmatic activites.
+The same framework could also support academic activities taken up on the side.
 
-We wanted a nimble framework for model building that was capable of conforming to the problems at hand. It should be \emph{extensible,} with \emph{plug-and-play} modularity (for major dynamical components), with flexibility in the choice of functional forms describing various relationships. The framework should also be structurally flexible, so that a model could incorporate space, time, and population strata.
-It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations \autocite{CarterR2002SpatialSimulation,GuW2003IndividualbasedModel,PerkinsTA2013HeterogeneityMixing}, to scale down temporally for fine-grained temporal simulations \autocite{WuSL2020MBITES}, or to scaling up to understand or analyze regional processes and the emerging patterns \autocite{TatemAJ2010InternationalPopulation}.
+We thus set out to develop a nimble framework for model building that was capable of conforming to the problems at hand. It should be \emph{extensible,} with a \emph{plug-and-play } modular design.
+With plug-and play modularity, it should make it easy to swap out base models describing the core dynamics, and but it would also include flexibility in the choice of functional forms describing forcing and core processes.
+The framework should be structurally flexible, so that a model could incorporate space, time, and human population strata to deal with demography and population heterogeneity.
+It should be scalable to handle realism and complexity: it should be possible to scale down spatially for fine-grained spatial simulations \autocite{CarterR2002SpatialSimulation,GuW2003IndividualbasedModel,PerkinsTA2013HeterogeneityMixing}, to scale down temporally for fine-grained temporal simulations \autocite{WuSL2020MBITES}, or to scale up to understand or analyze regional processes and the emerging patterns \autocite{TatemAJ2010InternationalPopulation}.
+To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.
 To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
 To get integrated vector control right, we went all in on mosquito ecology with an individual-based simulation model (called MBITES) that could handle exquisite biological detail \autocite{WuSL2020MBITES}, which inspired new ideas about simple models based on mosquito search and behaviors.
-To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.
-
-To serve programmatic needs, we needed algorithms that could address the decay of interventions
--- coverage could decay over time through loss (\emph{e.g.} bed nets) or waning potency --
+To serve programmatic needs, we needed algorithms and theory that could address the durability of interventions and decaying effects -- such as the loss of bed nets or waning potency of insecticides --
 and the net effect of one unit of vector control in relation to transmission intensity and coverage.
 To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component -- one that was dead simple, and one that had a was highly realistic.
 In some cases, the interface designs called for development of new algorithms: blood feeding, egg laying, environmental heterogeneity, human mobility, and mosquito dispersal.
@@ -159,13 +126,15 @@ In making a master list to test the framework's extensibility, we found that som
 Beyond the algorithms, these models needed the support of mathematical theory.
 We wanted the software to help understand thresholds, so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.
 
-Sometime in the fall of 2022, the last few pieces came together. We published the first versions of \href{https://cran.r-project.org/package=MicroMoB}{MicroMoB} and \href{https://CRAN.R-project.org/package=exDE}{exDE} at CRAN. We submitted a paper to PLoS Computational Biology \autocite{WuSL2023SpatialDynamics}. A second paper forced us to confront a set of software design questions in relation to exogenous forcing \textbf{addCite}.
+Sometime in the fall of 2022, the last few pieces came together. We published the first versions of \href{https://cran.r-project.org/package=MicroMoB}{MicroMoB} and \href{https://CRAN.R-project.org/package=exDE}{exDE} at CRAN.
+We submitted a paper to PLoS Computational Biology \autocite{WuSL2023SpatialDynamics}. A second paper forced us to confront a set of software design questions in relation to exogenous forcing {[}Add the citation here when it is published{]}. Meanwhile, we decided to rebrand exDE as \href{https://dd-harp.github.io/ramp.xde/}{\textbf{ramp.xde}} for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as \href{https://dd-harp.github.io/ramp.dts/}{\textbf{ramp.dts}} (for discrete time systems).
 Then it was time to write this book.
 
-The software lowers the costs of building models that are up to the task of guiding malaria policy.
+The mathematical framework and software lower the costs of building and implementing models that are up to the task of guiding malaria policy.
 An advantage of using this framework and accompanying software is that it has built-in solutions to a large set of problems that arise when building models that combine many factors.
 These sorts of pitfalls are inevitable and annoying, and they are usually discovered the hard way.
-We found design solutions that would help others building models to avoid these sorts of problems. The framework took longer than expected, in part, because there were more pitfalls than we had anticipated.
+We found design solutions that would help others building models to avoid these sorts of problems.
+The framework took longer than expected, in part, because there were more pitfalls than we had anticipated, and because we found most of them the hard way.
 
 This book has been written to introduce the features of the mathematical framework and the software (see Figure 1.1). The book is accompanied by the RAMP-Model-Library, which was set up during the primary design phase. The RAMP-Model-Library is where we made all our design mistakes: was the software truly plug-and-play, and was the framework truly extensible? As the primary design phase came to a close, the library that was once the laboratory became a classroom and a museum. The library is being transformed into a resource for any developer who wants to add new base models to the library or add functionality. Most of all, it is being set up for the end user, someone in a malaria program or working with a malaria program who wants to use simulation based analytics to analyze policies. This book is structured into a set of lessons that teach concepts. Some of the concepts build on one another, and others take on new challenges. We combine these lessons into some examples where we show some algorithms to build models fit for purpose. When a topic deserves a deeper dive, we have supplemented this book with vignettes or lessons.
 
@@ -186,7 +155,7 @@ This book \emph{could} be the basis for such a course, if there were ever enough
 Since there will probably never be enough graduate students at my university who are interested in applied malaria dynamics, the material is being developed for any student anywhere.
 I will also be writing and recording some short lectures on a subset of topics.
 
-The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they've seen the Ross-Macdonald model before, that they've taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for \texttt{exDE} or \texttt{MicroMoB} or it can be found in the \href{../../RAMP-Model-Library/RAMP-Model-Library.html}{\texttt{RAMP-Model-Library}}.
+The premise of this book is thus that the reader has started with a solid background in infectious disease models and malaria. We assume they've seen the Ross-Macdonald model before, that they've taken a class in mathematical epidemiology, and that they know something about how to construct and analyze models. This book emphasizes concepts and teaches through examples. We have left out a lot of the technical and mathemtical details, but we have written some vignettes and lessons to supplement the book. Most of this is found in the documentation for \textbf{ramp.xde} or \textbf{ramp.dts} or one of the supporting libraries.\\
 
 While this book should help others build models for malaria policy, but it stops short of applying models to policy. That is covered in another book, \href{../../RAMP-Book/_book/index.html}{\textbf{\emph{Robust Analytics for Malaria Policy}.}}
 
@@ -217,7 +186,7 @@ Most of the content so far was written by David L Smith. Contributors from the R
 
 \chapter{The Prevention of Malaria}\label{the-prevention-of-malaria}
 
-Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito \autocite{RossR1897PeculiarPigmented}. The event, which occurred in a military hospital in Hyderabad, India on August 20\(^{th}\), 1897, is now celebrated as \emph{mosquito day}.
+Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito \autocite{RossR1897PeculiarPigmented}. The event -- on August 20\(^{th}\), 1897 in a military hospital in Hyderabad, India -- is now celebrated as \emph{mosquito day}.
 In the months that followed, Ross made the case that mosquitoes transmit malaria parasites \autocite{RossR1898RoleMosquito}.
 Concurrently, the life-cycle of human malaria parasites was described by an Italian team, led by Giovanni Battista Grassi \autocite{GrassiB1898UlterioriRicerche,GrassiB1901StudiDi}.
 By 1899, a scientific consensus had formed among malaria experts that malaria was a mosquito-transmitted disease.
@@ -553,6 +522,10 @@ This is a book about how to do the math that is required for robust analytics fo
 
 \section{Historical Notes}\label{historical-notes}
 
+\subsection{The Light Microscope}\label{the-light-microscope}
+
+\subsection{Mathematical Epidemiology Before Ross}\label{mathematical-epidemiology-before-ross}
+
 We note that contemporary scholars of Ross, including Brownlee and Lotka, were also applying mathematics in human demography and health.
 Ross's mathematical models of malaria transmission were also not the first models for the transmission of an infectious disease.
 First was Bernoulli's model of smallpox, and P'Enko had published a model for flu a few years before.
@@ -571,18 +544,39 @@ All of this sounds very complex, but we must start with something simple and lay
 
 \chapter{Basic Malaria Models}\label{basic-malaria-models}
 
-Ross was interested in understanding malaria so he could make plans about malaria control.
-Given his interests in measuring malaria, he immediately noticed the importance of the fact that malaria prevalence differed from place to place.
-He was interested in understanding what caused differences in malaria prevalence.
-Ross developed mathematical models of malaria as a way of understanding malaria prevalence in humans in a population. His first models focused on \emph{local} transmission, ignoring exposure elsewhere (\emph{e.g.} through travel). How does malaria persist in a population? It persists through the transmission of parasites among hosts during blood feeding. Malaria infections in the two populations are connected through blood feeding, so malaria transmission works as an integrated system. As a diagram, the process looks something like this:
+\emph{Basic malaria models as deterministic or stochastic systems of difference or differential equations}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Ross was interested in planning malaria control activities, which for him included using mathematics to help set rational expectations about the likely outcomes of control.
+Given his interests in measuring malaria, he noted the importance of the fact that malaria prevalence differed from place to place.
+Ross wanted to understand why, so he developed mathematical models of malaria as a way of understanding the factors affecting the prevalence of malaria infection among humans in a population.
+
+Malaria infections in the two populations are connected through blood feeding, so malaria transmission works as an integrated system.
+The process looks something like the following diagram.
 
 \includegraphics{Figures/LifeCycleModel.png}
 
-To develop a mathematical model, we must make some assumptions about the process.
+This graph is the basis for causal theory for malaria, but students of causation will note that this is not an acyclic graph.
+If we applied the logic more generally, no graph describing any organisms life cycle would be causal, and yet life is undoubtedly the cause of life.
+The missing element is time: a life-cycle graph would be directed and acyclic if it had an arrow that traced life giving rise to new life across generations.
+To understand this diagram as causal, we must thus imagine that it describes a dynamical process describing changes in populations: infected mosquitoes today are biting and infecting humans tomorrow; and infectious humans today are causing infections in mosquitoes tomorrow when they take a blood meal.
+Seen in this way, we can begin to develop a causal theory for malaria in populations.
+How does malaria persist in a population?
+It persists through the transmission of parasites among hosts during blood feeding.
+What factors determine prevalence?
+It is a balance between the gain and loss of infection.
 
-We imagine a population comprised of individual mosquitoes and individual humans, and we are interested in computing the fraction of humans and mosquitoes that is infected. The number of infected mosquitoes and humans is constantly changing. Since infections don't last forever, the prevalence of infection in mosquitoes and mosquitoes was a balance between infections acquired through parasite transmission and the natural loss of infection and host mortality.
+To develop a mathematical model, Ross believed that it was possible to write down \emph{a priori} -- or in other words, to formulate mathematical models using quantitative logic -- a description of the process.
+To write down the model, we must make some assumptions about the process.
+We begin with an abstract concept of place: \emph{here.}
+We imagine populations here comprised of individual mosquitoes and individual humans, and we are interested in computing the fraction of humans and mosquitoes that is infected.
+Since infections don't last forever, the prevalence of infection in mosquitoes and mosquitoes reflects a balance between infections acquired through parasite transmission and the natural loss of infection and host mortality.
+In many places, this balance is always shifting as mosquito populations fluctuate.
+He assumed that transmission by mosquitoes was constant over time, and he focused on \emph{local} transmission, ignoring exposure elsewhere (\emph{e.g.} through travel).
+This model thus ignores many factors that would be important for planning for control; Ross was pioneering a new approach so the models were rudimentary.
 
-Mosquitoes lived short lives, so the main issue was survival. This formulation of the model thus ignores the loss of infection in mosquitoes and mosquito migration. Critically, this equation does not explicitly say anything about a change in the number of uninfected mosquitoes through \emph{emergence} from aquatic habitats. This model also ignores the lag between the point in time when a mosquito gets infected and when it becomes infectious. The basic mathematical model we will describe in the next section effectively assumes that the mosquito population does not change, so every mosquito that dies is replaced with an uninfected mosquito.
+Mosquitoes lived short lives, so the loss of parasites in mosquitoes was mainly caused by mosquito mortality:
 
 \[
 \mbox{MOSQUITOES} 
@@ -595,7 +589,12 @@ Mosquitoes lived short lives, so the main issue was survival. This formulation o
 \end{array} \right]
 \]
 
-Humans live long lives, so the main issue was clearing infections. This formulation of the model thus ignores human demography, including births, deaths, and migration. The model also has an abstract concept of place, that we can call \emph{here.} The model imagines one mosquito population and one human population in one place. This model ignores malaria acquired during travel away from here.
+This description of a process ignores the loss of infection in mosquitoes, and changes in mosquito populations through migration.
+It ignored the lag between the point in time when a mosquito gets infected and when it becomes infectious.
+This basic description of the process does not explicitly address the fact that each dying infected mosquito must get replaced by an uninfected mosquito through \emph{emergence} from aquatic habitats, or else the mosquito population would be declining over time.
+The process emphasizes malaria transmission dynamics, so mosquito ecology is almost invisible.
+
+Humans live long lives, so parasite loss occurred through the natural clearance of infections.
 
 \[
 \mbox{HUMANS} 
@@ -608,59 +607,72 @@ Humans live long lives, so the main issue was clearing infections. This formulat
 \end{array} \right]
 \]
 
-We can translate this basic description of a process into a mathematical model. There are at least four ways of doing this. The model can be formulated in either discrete or continuous time, and we can describe a deterministic process or we can develop a stochastic process. Regardless of the type of model we choose to formulate, the first step is to start using mathematical notation.
+This description of the process thus ignores human demography, including births, deaths, and migration. The model also ignores a large number of other factors, including superinfection, the complex time course of an infection, immunity, and treatment with anti-malarial drugs. (In Ross's day, quinine was expensive and difficult to obtain, but it was sometimes used.)
 
-To describe the factors that affect malaria transmission and that determine the prevalence of malaria in human populations over time, we will need to use mathematical models. In the following, we will write down four distinct mathematical equations that follow these basic rules:
+To describe malaria transmission and factors that determine the prevalence of malaria in human populations over time, we will need to use mathematical models.
+In the sections that follow, we will thus translate the above basic description of a process into mathematical models
+formulated in discrete and continuous time, and as a deterministic or stochastic processes.
+In the following, we will write down several distinct sets of mathematical equations that follow the basic rules described above:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  As a deterministic system in discrete time;
+  In Section \ref{dtsRoss}, we present two basic deterministic discrete-time systems.
 \item
-  As a deterministic system in continuous time;
+  In Section \ref{xdeRoss}, we present a deterministic continuous-time system;
 \item
-  As a stochastic system in discrete time;
+  In Section \ref{sdtsRoss}, we present a stochastic discrete-time system;
 \item
-  A simulation model in continuous time.
+  In Section \ref{sxdeRoss}, we present a stochastic process in continuous-time;
 \end{enumerate}
 
-In all of these models, we will adhere rigidly to Ross's simplifying assumptions. At this point, we're not trying to understand how the malaria models work. Later, we'll worry about modifying the assumptions to ensure that we have identified and evaluated all the factors that affect malaria in real populations.
+As a reminder, we're not trying to delve too deeply into malaria with the models in this chapter.
+Instead, we're trying to establish a starting point for investigating malaria transmission dynamics.
+Our goals are thus to learn the basic elements of different kinds of models, and to develop some basic intuition about the different kinds of models that exist, and how we can think about models as approximations.
+Each model is implemented as R code\footnote{In developing this book, we assumed the reader would be familiar with R and RStudio.}
+Later, we will start using some R packages that were developed to support robust analytics for malaria policy.
+Later, we'll worry about modifying the assumptions to ensure that we are dealing with the issues that matter for in malaria policy.
 
-\section{Discrete Time, Deterministic}\label{discrete-time-deterministic}
+\section{Deterministic, Discrete Time}\label{dtsRoss}
 
-We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, and parameters.
+In this section, we present a basic, deterministic, discrete-time model. Because it is the first model we present, we will be very methodical as we walk through it. We'll spend time discussing the model, and we walk through sections about solving, computation, analysis, and model verification. We show that the first mdoel is numerically unstable in some cases, so we present another model that is numerically stable.
 
-In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things.
+\subsection{\texorpdfstring{\texttt{ross\_dts\_1}}{ross\_dts\_1}}\label{ross_dts_1}
 
-\subsection{Variables}\label{variables}
+We will write down the equations last. First, we must describe the parts of a model, including the variables, initial conditions, and parameters. As we go, we will also write R code that implements the model and that solves it. In writing the code, we will adopt some conventions that we can use to help us write good code.
 
-Variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a discrete time system, the values of the variables are defined only at integer values of \(t.\)
+\textbf{Variables} are quantities that describe the state of a system. These values change over time; they are the main quantities that we want to compute to understand how the system changes over time.
+
+In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a discrete time system, the values of the variables are defined only at integer values of \(t.\)
 
 \begin{itemize}
+\item
+  Let \(t\) represent time
 \item
   Let \(x_t\) be the fraction of people who are infected at time \(t,\) and \(0 \leq x_t \leq 1.\)
 \item
   Let \(y_t\) be the fraction of mosquitoes who are infected at time \(t,\) \(0 \leq y_t \leq 1.\)
 \end{itemize}
 
-\subsection{Initial Conditions}\label{initial-conditions}
+In this model, time is marching forward. We call it the \emph{independent variable.} The other variables are computed with respect to time, so we call them \emph{dependent variables.}
 
-Since the values of our variables in the next time step (at time \(t+1\)) depend on their values now (at time \(t\)), we can't really compute anything unless we can say how the process gets started. What are the values of our variables at the beginning of our simulations (usually, at time \(t=0\))?
+\textbf{Initial Conditions} are the values of the variables at a point in time.
+
+Since the values of our variables in the next time step (at time \(t+1\)) depend on their values now (at time \(t\)), we can't really compute anything specific unless we specify the values of the variables at one point in time. We call these values the initial conditions. What are the values of our variables at the beginning of our simulations (usually, at time \(t=0\))?
 
 We set these initial values to be small:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Initial Conditions, as a Named Vector}
-\NormalTok{x0 }\OtherTok{=}\NormalTok{ .}\DecValTok{01}
-\NormalTok{y0 }\OtherTok{=}\NormalTok{ .}\DecValTok{001}
-\NormalTok{xy }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{t=}\DecValTok{0}\NormalTok{, }\AttributeTok{x=}\NormalTok{x0, }\AttributeTok{y=}\NormalTok{y0)}
-\end{Highlighting}
-\end{Shaded}
+This R object \texttt{xy} is a \emph{named vector.} The names are invisible, but they attach if we use the function \texttt{as.list()} or \texttt{data.frame().} When combined with the \texttt{with()} function, we can call them by name in context.
 
-\subsection{Parameters}\label{parameters}
+\begin{verbatim}
+## [1] 0.01
+\end{verbatim}
 
-The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.
+We adopt these conventions so that the R code closely resembles the equations.
+
+\textbf{Parameters} are quantities -- rates, numbers, or probabilities -- that describe some part of the process. Unlike variables, parameters are passed to the model. In the model we present, these parameters are constant. Since they are constant, we call this an \emph{autonomous} system of equations. In other models, we could have parameter values that changes over time, so the system would be called \emph{non-autonomous.}
+
+The parameters in this model help us to define changes in the fraction infected: the fraction of humans that clear an infection each day; the fraction of infected mosquitoes that die; and blood feeding and infection.
 
 \begin{itemize}
 \item
@@ -673,79 +685,46 @@ The parameters describe the processes that are occurring in the population, the 
   Let \(m\) denote the number of mosquitoes per human; \(m \geq 0.\)
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# The Parameters, as a Named Vector}
-\NormalTok{par }\OtherTok{=} \FunctionTok{list}\NormalTok{(}
-  \AttributeTok{s =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{200}\NormalTok{, }\CommentTok{\# The fraction of infections that clear each day}
-  \AttributeTok{u =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{12}\NormalTok{,  }\CommentTok{\# The fraction of mosquitoes that die each day}
-  \AttributeTok{a =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{,   }\CommentTok{\# The fraction of mosquitoes that blood feed on a human each day}
-  \AttributeTok{m =} \DecValTok{2}      \CommentTok{\# The number of mosquitoes per human}
-\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
+\textbf{Equations} describe dynamic changes in the variables over time. In this case, the process is described by a system of coupled difference equations.
 
-\subsection{Equations}\label{equations}
-
-Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms:
-
-\begin{itemize}
-\item
-  The fraction of humans who are infected is \(x_t\); a fraction \(s\) clear infections.
-\item
-  The fraction of mosquitoes who are infected is \(y_t\); a fraction \(u\) die.
-\item
-  The fraction of humans who are infected is \(1-x_t\); a fraction \(m a y_t\) will become infected.
-\item
-  The fraction of mosquitoes who are not infected is \(1-y_t\); a fraction \(a x_t\) become infected.
-\end{itemize}
+Finally, we put all this together into a mathematical statement that has translated the description of a process, that are describe the process.
 
 \[\begin{array}{rl}
 x_{t+1} &=  x_t - s x_t + m a y_t (1-x_t)  \\ 
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}\]
 
-We write a function that computes and returns the updated values of the variables. We adopt a simple naming convention: since this is a discrete time system, we will call the function \texttt{dts\_xy\_1.} It accepts the variables, which describe the state of the system at the current time (as a named vector) and the parameter values (as a list) and it returns the state of the system (as a named vector):
+We could rewrite the equations so that the left hand side is interpreted as \emph{the daily change in the values of the variables,} and the terms on the right hand side describes those changes:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dts\_xy\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(xy, p)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{as.list}\NormalTok{(xy), }\FunctionTok{with}\NormalTok{(p,\{}
-\NormalTok{  xn }\OtherTok{=}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{*}\NormalTok{y}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{x) }\SpecialCharTok{{-}}\NormalTok{ s}\SpecialCharTok{*}\NormalTok{x}
-\NormalTok{  yn }\OtherTok{=}\NormalTok{ y }\SpecialCharTok{+}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{x}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{y) }\SpecialCharTok{{-}}\NormalTok{ u}\SpecialCharTok{*}\NormalTok{y}
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\AttributeTok{t=}\NormalTok{t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{, }\AttributeTok{x=}\NormalTok{xn, }\AttributeTok{y=}\NormalTok{yn))}
-\NormalTok{\}))\}}
-\end{Highlighting}
-\end{Shaded}
+\[
+\begin{array}{rl}
+x_{t+1} - x_t &=  - s x_t + m a y_t (1-x_t)  \\ 
+y_{t+1} - y_t &=  - u y_t + a x_t (1 - y_t) \\ 
+\end{array}
+\]
 
-\subsection{Simulation}\label{simulation}
+In this second formulation, there are are four terms on the right hand side:
 
-With the R code we developed, we can now compute the values of the variables after one time step. We initialize \texttt{xy} to hold the computed variables over time.
+\begin{itemize}
+\item
+  The fraction of humans who are infected is \(x_t\); a fraction \(s\) clear infections.
+\item
+  The fraction of humans who are infected is \(1-x_t\); a fraction \(m a y_t\) gets infected. (If \(may_t >1,\) the term does not make sense. In sub-section \ref{dtsRoss2}, below, we discuss this in greater depth.)
+\item
+  The fraction of mosquitoes who are infected is \(y_t\); a fraction \(u\) die.
+\item
+  The fraction of mosquitoes who are not infected is \(1-y_t\); a fraction \(a x_t\) gets infected.
+\end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# xy\_t stores the values of the variables}
-\NormalTok{xy\_t }\OtherTok{=}\NormalTok{ xy }
-\end{Highlighting}
-\end{Shaded}
+We write a function in R that computes and returns the updated values of the variables. Since we will be developing a lot of functions and models, we adopt a simple naming convention: since it was developed by Ross, we attach the stem \texttt{ross}; since this is a discrete time system, we attach the suffix \texttt{dts}; we might want to generate other variants, so we append a number. The function is thus called \texttt{ross\_dts\_1.}
 
-We name the variables so that later we can call them by name.
+\subsection{Solving}\label{solving}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute and store the values of the variables  }
-\NormalTok{xy }\OtherTok{=} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, par)}
-\NormalTok{xy\_t }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(xy\_t, xy)}
-\end{Highlighting}
-\end{Shaded}
+With the R code we developed, we can \emph{solve} the equations, which involves computing the values of the variables iteratively. Since the values of the variables change, we initialize \texttt{xy\_t} to store the values of computed variables over time.
 
-We can take a peak at the values we computed:
+To iterate, we must take two steps: one to compute the values, and another to store the values:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Print }
-\FunctionTok{print}\NormalTok{(xy) }
-\end{Highlighting}
-\end{Shaded}
+Since we initialized the system at time \(t=0,\) the following computes the values of the parameters at time \(t=1.\) We can take a peak at the values we computed:
 
 \begin{verbatim}
 ##           t           x           y 
@@ -754,23 +733,7 @@ We can take a peak at the values we computed:
 
 We can iterate over many time steps, storing the values in columns:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Iterate to compute the values as they change over time }
-\ControlFlowTok{for}\NormalTok{(t }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{40}\NormalTok{)\{}
-\NormalTok{  xy }\OtherTok{=} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, par) }
-\NormalTok{  xy\_t }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(xy\_t, xy) }
-\NormalTok{\} }
-\end{Highlighting}
-\end{Shaded}
-
-The way we implemented this, the values of \(x\) and \(y\) are stored in columns:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{tail}\NormalTok{(xy\_t, }\DecValTok{3}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+We can look at the last few values, the values of \(t,\) \(x\) and \(y\) are stored in columns:
 
 \begin{verbatim}
 ##     t         x         y
@@ -779,44 +742,42 @@ The way we implemented this, the values of \(x\) and \(y\) are stored in columns
 ## xy 40 0.9866975 0.7470700
 \end{verbatim}
 
-We can now plot out the values over the first 40 days
+\subsection{Visualizing}\label{visualizing}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(xy\_t),\{}
-  \FunctionTok{plot}\NormalTok{(t, x, }\AttributeTok{type =} \StringTok{"b"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"x, y"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\AttributeTok{pch=}\DecValTok{15}\NormalTok{)}
-  \FunctionTok{lines}\NormalTok{(t, y, }\AttributeTok{type =} \StringTok{"b"}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkorange"}\NormalTok{, }\AttributeTok{pch =}\DecValTok{19}\NormalTok{)}
-\NormalTok{\})}
-\end{Highlighting}
-\end{Shaded}
+We can now plot out the values over the first 40 days. Since \texttt{xy\_t} is a named list, we transform it and plot:
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-11-1.pdf}
 
-After 40 days, the values of \(x\) and \(y\) are not changing very much:
+Notice that after 40 days, the values of \(x\) and \(y\) appear to be approaching some value asymptotically. This is an important feature of these systems, one that we would like to explore a bit more in the following sections.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# The last value is still stored as xy; the [{-}1] omits t}
-\NormalTok{xy[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, par)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
+We can translate Ross's basic description of a process into a model, but first, we need to start using mathematical symbols and notation to represent the process. The model itself is formulated as a set of coupled difference equations, but we will write down the equations last. To get there, we must learn about the parts of a model: variables, initial conditions, and parameters.
+
+In the following, we also want to write R code to implement and solve the model. We will be adopting some conventions that end up being very useful. So really, this is a lesson about two things.
+
+\subsection{Computation}\label{computation}
+
+If we want to repeat tasks, we can simply write a wrapper around other functions that expedite the work. In this case, we want to write a function that \emph{solves} the equations (\emph{i.e.} that iteratively computes and stores the values) over some time interval:
+
+We can write another function that \emph{plots} the equations (\emph{i.e.} that iteratively computes and stores the values) over some time interval:
+
+Now, all the work we did above can be plotted using a single function call:
+
+\includegraphics{docs/figs/unnamed-chunk-12-1.pdf}
+
+Now, it is easier to use the models in various ways.
+
+\subsection{Steady States}\label{steady-states}
+
+The fact that our variables asymptotically approach some values over time is an important feature of dynamical systems, so we would like to do some analysis to understand it better.
+
+In the following, we compute how much the system is changing over time. We can simply iterate once and compare the differences. After iterating 40 times, the differences are very small:
 
 \begin{verbatim}
 ##             x             y 
 ## -3.545225e-05 -1.355019e-04
 \end{verbatim}
 
-If we iterate another hundred days and check again, the differences are effectively zero.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{41}\SpecialCharTok{:}\DecValTok{140}\NormalTok{)\{}
-\NormalTok{  xy }\OtherTok{=} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, par)}
-\NormalTok{  xy\_t }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(xy\_t, xy) }
-\NormalTok{\} }
-\NormalTok{xy[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, par)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
+If we iterate another hundred days and check again, the differences have gotten even smaller:
 
 \begin{verbatim}
 ## x y 
@@ -824,8 +785,6 @@ If we iterate another hundred days and check again, the differences are effectiv
 \end{verbatim}
 
 After simulating, the variables reach a steady state, where asymptotically \(x_{t+1} = x_t\) and \(y_{t+1} = y_t\).
-
-\subsection{Analysis}\label{analysis}
 
 We can figure out the steady state values are by substituting \(x_{t+1} = x_t = x\) and \(y_{t+1} = y_t = y\) into the equations above, and then solving for \(x\) and \(y\).
 
@@ -836,7 +795,7 @@ y &=  y - u y + a x (1-y) \\
 \end{array}
 \]
 
-or even easier:
+or after cancelling and rearranging:
 
 \[\begin{array}{rl}
 m a y (1-x) &=  s x \\ 
@@ -857,132 +816,11 @@ and now we solve for \(x\)
 \[x = \frac{\textstyle{ma^2 - su}}{\textstyle{ma^2 + sa}}\]
 We can write a function to compute this steady state:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Compute the steady state }
-\NormalTok{find\_eq\_dts\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(par)\{}\FunctionTok{with}\NormalTok{(par,\{}
-\NormalTok{  xx }\OtherTok{=}\NormalTok{ (m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}}\NormalTok{ s}\SpecialCharTok{*}\NormalTok{u)}\SpecialCharTok{/}\NormalTok{ (m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ s}\SpecialCharTok{*}\NormalTok{a)}
-\NormalTok{  yy }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{xx}\SpecialCharTok{/}\NormalTok{(u}\SpecialCharTok{+}\NormalTok{a}\SpecialCharTok{*}\NormalTok{xx) }
-  \FunctionTok{c}\NormalTok{(}\AttributeTok{x=}\NormalTok{xx,}\AttributeTok{y=}\NormalTok{yy)}
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Verification}\label{verification}
-
-We want to get used to double checking everything to avoid inserting mistakes. One way to do this is to find two or more ways of computing the same thing, for verification.
-
-If we've done everything right, we ought to get the same values for the steady states through our analysis and simulation.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{xy[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         x         y 
-## 0.9867987 0.7475000
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{find\_eq\_dts\_1}\NormalTok{(par) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         x         y 
-## 0.9867987 0.7475000
-\end{verbatim}
-
-It's tempting to look at the printout and assume these two numbers are exactly equal. This is the land of computation, so things won't be exact. We can simply sum up the absolute values of the differences:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{verify\_dts\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(xy, pars)\{}
-  \FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(xy[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}} \FunctionTok{find\_eq\_dts\_1}\NormalTok{(pars))) }
-\NormalTok{\}}
-\FunctionTok{verify\_dts\_1}\NormalTok{(xy, par)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3.330669e-16
-\end{verbatim}
-
-If we wanted to reduce this to a simple error check, we should pick a tolerance level -- say \(10^{-9}\) -- and then just ask if we are closer than that:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{check\_it\_dts\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(xy, pars, }\AttributeTok{tol=}\FloatTok{1e{-}9}\NormalTok{)}
-\NormalTok{\{}
-  \FunctionTok{verify\_dts\_1}\NormalTok{(xy, pars) }\SpecialCharTok{\textless{}}\NormalTok{ tol}
-\NormalTok{\}}
-\FunctionTok{check\_it\_dts\_1}\NormalTok{(xy, par)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] TRUE
-\end{verbatim}
-
-\subsection{Packaging Workflows}\label{packaging-workflows}
-
-If we want to repeat tasks, we can simply write a wrapper around other functions that expedite the work. In this case, we want to write a function that \emph{solves} the equations (\emph{i.e.} that iteratively computes and stores the values) over some time interval:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{solve\_dts\_xy\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars, }\AttributeTok{x0=}\NormalTok{.}\DecValTok{01}\NormalTok{, }\AttributeTok{y0 =} \FloatTok{0.001}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{100}\NormalTok{)\{}
-\NormalTok{   xy }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{t=}\DecValTok{0}\NormalTok{, }\AttributeTok{x=}\NormalTok{x0, }\AttributeTok{y=}\NormalTok{y0) }
-\NormalTok{   xy\_t }\OtherTok{=}\NormalTok{ xy }
-   \ControlFlowTok{for}\NormalTok{(t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{tmax)\{}
-\NormalTok{     xy }\OtherTok{=} \FunctionTok{dts\_xy\_1}\NormalTok{(xy, pars)}
-\NormalTok{     xy\_t }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(xy\_t, xy)}
-\NormalTok{   \}}
-   \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{t=}\NormalTok{xy\_t[,}\DecValTok{1}\NormalTok{], }\AttributeTok{x=}\NormalTok{xy\_t[,}\DecValTok{2}\NormalTok{], }\AttributeTok{y =}\NormalTok{ xy\_t[,}\DecValTok{3}\NormalTok{], }\AttributeTok{last =}\NormalTok{ xy)) }
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-We can write another function that \emph{plots} the equations (\emph{i.e.} that iteratively computes and stores the values) over some time interval:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plot\_xy }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(xy\_t, }\AttributeTok{add\_points =} \ConstantTok{FALSE}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(xy\_t,\{}
-\NormalTok{  llty }\OtherTok{=} \StringTok{"l"}
-  \ControlFlowTok{if}\NormalTok{(add\_points }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{) llty }\OtherTok{=} \StringTok{"b"}
-  \FunctionTok{plot}\NormalTok{(t, x, }\AttributeTok{type =}\NormalTok{ llty, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"x, y"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Time"}\NormalTok{, }\AttributeTok{pch=}\DecValTok{15}\NormalTok{)}
-  \FunctionTok{lines}\NormalTok{(t, y, }\AttributeTok{type =}\NormalTok{ llty, }\AttributeTok{col =} \StringTok{"darkorange"}\NormalTok{, }\AttributeTok{pch =}\DecValTok{19}\NormalTok{)}
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
-
-Now, all the work we did above can be plotted using a single function call:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot\_xy}\NormalTok{(}\FunctionTok{solve\_dts\_xy\_1}\NormalTok{(par, }\AttributeTok{tmax=}\DecValTok{40}\NormalTok{), }\AttributeTok{add\_points=}\ConstantTok{TRUE}\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{_main_files/figure-latex/unnamed-chunk-19-1.pdf}
-
-Now, it is easier to use the models in various ways.
-
 \subsection{Thresholds}\label{thresholds}
 
 All our analysis worked out well for the parameter values that we chose, but what if we had picked different parameters?
 
 There must be some very low level of mosquitoes, for example, where malaria can't reproduce. If we reduce \(m\) to \(0.005\) and evaluate the expression at the steady state, we get negative values for \(x\) and \(y\).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{par1 }\OtherTok{=}\NormalTok{ par}
-\NormalTok{par1}\SpecialCharTok{$}\NormalTok{m }\OtherTok{=} \FloatTok{0.005}
-\FunctionTok{find\_eq\_dts\_1}\NormalTok{(par1)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##           x           y 
@@ -991,22 +829,16 @@ There must be some very low level of mosquitoes, for example, where malaria can'
 
 What happens if we simulate this? (Let's set the initial conditions to reasonably high values)
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot\_xy}\NormalTok{(}\FunctionTok{solve\_dts\_xy\_1}\NormalTok{(par1, }\AttributeTok{x0 =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{3}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{1500}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\includegraphics{docs/figs/unnamed-chunk-16-1.pdf}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-21-1.pdf}
+Our function \texttt{ross\_dts\_steady\_0} gives us a negative number.
+
+\begin{verbatim}
+##           x           y 
+## -0.06666667 -0.25000000
+\end{verbatim}
 
 If we look at the equations, it's easy enough to spot the problem. Since \(x\) and \(y\) must be positive, then it must be true that \[m a^2 > su.\] We call this a threshold condition.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{m\_crit }\OtherTok{=} \FunctionTok{with}\NormalTok{(par, s}\SpecialCharTok{*}\NormalTok{u}\SpecialCharTok{/}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{m\_crit }
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.006666667
@@ -1014,203 +846,152 @@ If we look at the equations, it's easy enough to spot the problem. Since \(x\) a
 
 If we check, we find that this gives us the disease free equilibrium.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{par2 }\OtherTok{=}\NormalTok{ par}
-\NormalTok{par2}\SpecialCharTok{$}\NormalTok{m }\OtherTok{=}\NormalTok{ m\_crit}
-\FunctionTok{find\_eq\_dts\_1}\NormalTok{(par2)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+## x y 
+## 0 0
+\end{verbatim}
+
+We need a better function:
 
 \begin{verbatim}
 ## x y 
 ## 0 0
 \end{verbatim}
 
-\subsection{Numerical Stability}\label{numerical-stability}
+\subsection{Verification}\label{verification}
+
+We want to get used to double checking everything to avoid inserting mistakes. One way to do this is to find two or more ways of computing the same thing, for verification.
+
+If we've done everything right, we ought to get the same values for the steady states through our analysis and simulation.
+
+The last values of \(x\) and \(y\) from the simulation are:
+
+\begin{verbatim}
+##         x         y 
+## 0.9867987 0.7475000
+\end{verbatim}
+
+The last values of \(x\) and \(y\) from evaluating \texttt{ross\_dts\_steady\_1()} are:
+
+\begin{verbatim}
+##         x         y 
+## 0.9867987 0.7475000
+\end{verbatim}
+
+It's tempting to look at the printout and assume these two numbers are exactly equal, but when we deal with computers, everything gets computed and stored in some way. We can never be sure that a match will be be exact. We can simply sum up the absolute values of the differences:
+
+\begin{verbatim}
+## [1] 3.330669e-16
+\end{verbatim}
+
+If we wanted to reduce this to a simple error check, we should pick a tolerance level -- say \(10^{-9}\) -- and then just ask if we are closer than that:
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\subsection{Numerical Instability}\label{numerical-instability}
 
 There is another problem with the equations. If we set \(m\) too high, such that at some point \(m a y_t > 1,\) then the whole system eventually crashes:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{par3 }\OtherTok{=}\NormalTok{ par}
-\NormalTok{par3}\SpecialCharTok{$}\NormalTok{m }\OtherTok{=} \DecValTok{20} 
-\FunctionTok{plot\_xy}\NormalTok{(}\FunctionTok{solve\_dts\_xy\_1}\NormalTok{(par3, }\AttributeTok{x0 =}\NormalTok{ .}\DecValTok{01}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{001}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{20}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\includegraphics{docs/figs/unnamed-chunk-26-1.pdf}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-24-1.pdf}
+In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back and rethink the way we formulated our model. How does the probability of getting infected scale with the number of infective bites?
 
-In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem?
+\subsection{\texorpdfstring{\texttt{ross\_dts\_2}}{ross\_dts\_2}}\label{dtsRoss2}
 
-\subsection{Improved Model}\label{improved-model}
-
-We have to go back to the assumption that the fraction getting infected is linearly proportional to the number of infective bites. One way to do this is to say that the \emph{expected} number of bites would follow a Poisson distribution with mean \(may_t,\) so that the fraction getting infected is the zero term from a Poisson:
+There is a good solution to the problem that gave rise to this numerical instability. The question at hand is what fraction of people would become infected, on average, if the expected number of bites was \(may_t?\) We call this quantity -- the fraction that gets infected -- an attack rate. In a lot of cases like this, without any other information, we would assume that the number of bites, per person, would follow a Poisson distribution. It's actually easier to say who doesn't get infected, and that's the zero term of a Poisson, \(e^{-may_t}.\) The probability of getting infected is the complement of the probability of getting at least one bite, or
 
 \[1 - e^{-m a y_t}\]
 
-Now, our equations are the following:
+\textbf{Equations}
+
+Our variables, initial conditions, and parameters are all defined in the same way as \texttt{ross\_dts\_1,} but now our equations have changed:
 
 \[\begin{array}{rl}
 x_{t+1} &=  x_t - s x_t + (1-e^{m a y_t}) (1-x_t)  \\ 
 y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\ 
 \end{array}\]
 
-Now, if we want to compute the steady state, we're stuck with the problem of solving this:
-
-\[(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx\]
-It's surprisingly easy to write down equations, like this one, that we can't solve with pencil and paper. We can still find a way of computing the steady state, but we have to write R code that solves for \(x\) numerically.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{find\_eq\_dts\_2 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars)\{}\FunctionTok{with}\NormalTok{(pars,\{}
-\NormalTok{   f\_xx }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(x, pp)\{}\FunctionTok{with}\NormalTok{(pp,\{}
-\NormalTok{     xx }\OtherTok{=}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{x}\SpecialCharTok{/}\NormalTok{(u}\SpecialCharTok{+}\NormalTok{a}\SpecialCharTok{*}\NormalTok{x)))}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{x) }\SpecialCharTok{{-}}\NormalTok{ s}\SpecialCharTok{*}\NormalTok{x}
-\NormalTok{     y }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{xx}\SpecialCharTok{/}\NormalTok{(u}\SpecialCharTok{+}\NormalTok{a}\SpecialCharTok{*}\NormalTok{xx)}
-\NormalTok{     yy }\OtherTok{=}\NormalTok{ u}\SpecialCharTok{*}\NormalTok{y }\SpecialCharTok{+}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{xx}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{y) }
-     \FunctionTok{return}\NormalTok{(xx}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ yy}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
-\NormalTok{   \})\}}
-\NormalTok{   xx }\OtherTok{=} \FunctionTok{optimize}\NormalTok{(f\_xx, }\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{pp=}\NormalTok{pars)}\SpecialCharTok{$}\NormalTok{min}
-\NormalTok{   yy }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{xx}\SpecialCharTok{/}\NormalTok{(u}\SpecialCharTok{+}\NormalTok{a}\SpecialCharTok{*}\NormalTok{xx) }
-   \FunctionTok{c}\NormalTok{(xx, yy)}
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
-
-The new equilibrium is at:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{find\_eq\_dts\_2}\NormalTok{(par3)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.9949026 0.7490406
-\end{verbatim}
-
-We can just as easily write the code to numerically solve the discrete time system:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dts\_xy\_2 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(xy, p)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{as.list}\NormalTok{(xy), }\FunctionTok{with}\NormalTok{(p,\{}
-\NormalTok{  xn }\OtherTok{=}\NormalTok{ x }\SpecialCharTok{{-}}\NormalTok{ s}\SpecialCharTok{*}\NormalTok{x }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{*}\NormalTok{y))}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{x) }
-\NormalTok{  yn }\OtherTok{=}\NormalTok{ y }\SpecialCharTok{{-}}\NormalTok{ u}\SpecialCharTok{*}\NormalTok{y }\SpecialCharTok{+}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{x}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{y) }
-\NormalTok{  t}\OtherTok{=}\NormalTok{t}\SpecialCharTok{+}\DecValTok{1}
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\AttributeTok{t=}\NormalTok{t, }\AttributeTok{x=}\NormalTok{xn, }\AttributeTok{y=}\NormalTok{yn))}
-\NormalTok{\}))\}}
-\end{Highlighting}
-\end{Shaded}
+As before, we write a function to numerically solve the discrete time system:
 
 Once again, we can wrap a function around the solver so that it's easier to use the code:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{solve\_dts\_xy\_2 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars, }\AttributeTok{x0=}\NormalTok{.}\DecValTok{01}\NormalTok{, }\AttributeTok{y0 =} \FloatTok{0.001}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{100}\NormalTok{)\{}
-\NormalTok{   xy }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{t=}\DecValTok{0}\NormalTok{, }\AttributeTok{x=}\NormalTok{x0, }\AttributeTok{y=}\NormalTok{y0) }
-\NormalTok{   xy\_t }\OtherTok{=}\NormalTok{ xy }
-   \ControlFlowTok{for}\NormalTok{(t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{tmax)\{}
-\NormalTok{     xy }\OtherTok{=} \FunctionTok{dts\_xy\_2}\NormalTok{(xy, pars)}
-\NormalTok{     xy\_t }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(xy\_t, xy)}
-\NormalTok{   \}}
-   \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{t=}\NormalTok{xy\_t[,}\DecValTok{1}\NormalTok{], }\AttributeTok{x=}\NormalTok{xy\_t[,}\DecValTok{2}\NormalTok{], }\AttributeTok{y =}\NormalTok{ xy\_t[,}\DecValTok{3}\NormalTok{], }\AttributeTok{last =}\NormalTok{ xy)) }
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
 Now, we can visualize the output and see that we have fixed our stability problem.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot\_xy}\NormalTok{(}\FunctionTok{solve\_dts\_xy\_2}\NormalTok{(par3, }\AttributeTok{x0 =}\NormalTok{ .}\DecValTok{01}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{001}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{20}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\includegraphics{docs/figs/unnamed-chunk-27-1.pdf}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-29-1.pdf}
+\textbf{Verification}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{find\_eq\_dts\_2}\NormalTok{(par3)}
-\end{Highlighting}
-\end{Shaded}
+For verification, we can solve things two ways. If we want to compute the steady state, we're stuck with the problem of solving this equation:
+
+\[(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx\]
+
+It's surprisingly easy to write down equations, like this one, that we can't solve with pencil and paper. We can still find a way of computing the steady state, but we have to write R code that solves for \(x\) numerically.
+
+Finding the equilibrium this way, we get:
 
 \begin{verbatim}
 ## [1] 0.9949026 0.7490406
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{solve\_dts\_xy\_2}\NormalTok{(par3, }\AttributeTok{x0=}\NormalTok{.}\DecValTok{1}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{05}\NormalTok{,}\AttributeTok{tmax=}\DecValTok{300}\NormalTok{)}\SpecialCharTok{$}\NormalTok{last[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
+Second, by getting the solution after many iterations.
 
 \begin{verbatim}
 ##         x         y 
 ## 0.9949051 0.7490410
 \end{verbatim}
 
+By inspection, these two numbers are very close, but not exactly right.
+
 Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{verify\_dts\_2 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars, }\AttributeTok{x0 =}\NormalTok{ .}\DecValTok{1}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{05}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{200}\NormalTok{)\{}
-\NormalTok{  xyt }\OtherTok{=} \FunctionTok{solve\_dts\_xy\_2}\NormalTok{(pars, }\AttributeTok{x0=}\NormalTok{x0, }\AttributeTok{y0=}\NormalTok{y0, }\AttributeTok{tmax=}\NormalTok{tmax)}
-  \FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(xyt}\SpecialCharTok{$}\NormalTok{last[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}} \FunctionTok{find\_eq\_dts\_2}\NormalTok{(pars))) }
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{verify\_dts\_2}\NormalTok{(par3, }\AttributeTok{tmax=}\DecValTok{300}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.924525e-06
-\end{verbatim}
-
-We can write the function to check if the approximation is accurate to some level of tolerance:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{check\_it\_dts\_2 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars, }\AttributeTok{x0 =}\NormalTok{ .}\DecValTok{1}\NormalTok{, }\AttributeTok{y0=}\NormalTok{.}\DecValTok{05}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{200}\NormalTok{, }\AttributeTok{tol=}\FloatTok{1e{-}5}\NormalTok{)}
-\NormalTok{\{}\FunctionTok{verify\_dts\_2}\NormalTok{(pars, x0, y0, tmax) }\SpecialCharTok{\textless{}}\NormalTok{ tol\}}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{check\_it\_dts\_2}\NormalTok{(par3, }\AttributeTok{tmax=}\DecValTok{200}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+We're within \(10^{-5}\), but not within \(10^{-6}\)
 
 \begin{verbatim}
 ## [1] TRUE
 \end{verbatim}
 
-\subsection{Notes}\label{notes}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
 
-Some useful notes:
+It's a little unsatisfying to get numerical errors this large.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  The two models we just presented above can be implemented in a spreadsheet.
-\item
-\end{enumerate}
+\section{Deterministic, Continuous Time}\label{xdeRoss}
 
-\section{Discrete Time, Stochastic}\label{discrete-time-stochastic}
+In this section, we present a basic, deterministic, continuous-time model.
 
-The world is stochastic.
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\section{Continuous Time, Deterministic}\label{continuous-time-deterministic}
+After seeing the \texttt{ross\_dts} models, this model will look and feel familiar. Instead of describing a difference over a fixed time step, we describe a derivative. Instead of describing the fraction of a population that changes, we describe the rates of change over an infinitesimally small interval of time, called a derivative. To understand the mathematics of differential equations, you will need a background in calculus. If you've had a semester of calculus, you will have come across derivatives. Depending on how much calculus, you might not have solved differential equations. The point of this book is to introduce malaria analytics, so we will not be delving into mathematical theory or numerical methods very much.
 
-Here, we present a continuous time, deterministic model. It is homologous to Ross's 2nd model \autocite{RossR1911Nature}, after renaming the parameters. To deal with these equations, you need a background in calculus.
+In discrete-time, the equations could be written in this form:
 
-\subsection{Variables and Initial Conditions}\label{variables-and-initial-conditions}
+\[
+\begin{array}{rl}
+x_{t+1} - x_t &=  F_x (x_t, y_t) \\ 
+y_{t+1} - y_t &=  F_y (x_t, y_t)  \\ 
+\end{array}
+\]
+The left hand side says ``the difference in'' \(x\) or \(y\) ``over one time step is equal to'' \(F_x\) or \(F_y,\) which are functions of the two variables. We can now ask what would happen if we sub-divided a day into \(n\) equal periods. In the limit as \(n\) goes to infinity, we replace the differences (terms on the left hand side) with derivatives. The differential equations are now written in this form:
 
-Once again, variables are quantities that we compute and that change over time. In this model, the variables we compute are the fraction of humans and mosquitoes that are infected at each point in time. Since it is a continuous time system, the values of the variables are defined for all values of \(t.\)
+\[
+\begin{array}{rl}
+\frac{\textstyle{dx}}{\textstyle{dt}} &=  F_x (x, y)  \\ 
+\frac{\textstyle{dy}}{\textstyle{dt}} &=  F_y (x, y) \\ 
+\end{array}
+\]
+
+These differential equation models have the same components as the difference equations: variables, initial conditions, and parameters.
+
+To compute anything, we will need to use numerical methods. Fortunately, R has a package to handle numerical methods for differential equations, called \textbf{deSolve.}
+
+Here, we present and solve \texttt{ross\_xde}a continuous time, deterministic model that is similar to Ross's 2nd model \autocite{RossR1911Nature}.
+
+\subsection{\texorpdfstring{\texttt{ross\_xde}}{ross\_xde}}\label{ross_xde}
+
+\textbf{Variables} -- In \texttt{ross\_xde,} the dependent variables have the same meaning as in the \texttt{ross\_dts} equations, but the independent variable. We now write an equation describing the fraction of humans and mosquitoes that are infected at each point in time.
 
 \begin{itemize}
 \item
@@ -1219,11 +1000,9 @@ Once again, variables are quantities that we compute and that change over time. 
   Let \(y(t)\) be the fraction of mosquitoes who are infected at time \(t,\) \(0 \leq y(t) \leq 1.\)
 \end{itemize}
 
-As before, we will need to define initial conditions.
+\textbf{Initial Conditions} -- As before, we will need to define initial conditions.
 
-\subsection{Parameters}\label{parameters-1}
-
-The parameters describe the processes that are occurring in the population, the fraction of humans that clear an infection each day, and the fraction of infected mosquitoes that die. Unlike variables, parameters are passed to the model.
+\textbf{Parameters} -- In this model, the parameters describe rates of change.
 
 \begin{itemize}
 \item
@@ -1236,21 +1015,7 @@ The parameters describe the processes that are occurring in the population, the 
   Let \(m\) denote the number of mosquitoes per human; \(m \geq 0.\)
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# The Parameters, as a Named Vector}
-\NormalTok{ross\_xde\_par }\OtherTok{=} \FunctionTok{list}\NormalTok{(}
-  \AttributeTok{r =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{200}\NormalTok{, }\CommentTok{\# The fraction of infections that clear each day}
-  \AttributeTok{g =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{12}\NormalTok{,  }\CommentTok{\# The fraction of mosquitoes that die each day}
-  \AttributeTok{a =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{,   }\CommentTok{\# The fraction of mosquitoes that blood feed on a human each day}
-  \AttributeTok{m =} \DecValTok{2}      \CommentTok{\# The number of mosquitoes per human}
-\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Equations}\label{equations-1}
-
-Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms:
+\textbf{Equations} -- Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms:
 
 \begin{itemize}
 \item
@@ -1270,67 +1035,51 @@ dy/dt &= ax(1-y) - g y \\
 \end{array}
 \]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ross\_xde }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(t, y, params)\{}
-  \FunctionTok{with}\NormalTok{(params, }\FunctionTok{with}\NormalTok{(}\FunctionTok{as.list}\NormalTok{(y),\{}
-    
-\NormalTok{  dxdt }\OtherTok{=}\NormalTok{ m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{*}\NormalTok{y}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{x) }\SpecialCharTok{{-}}\NormalTok{ r}\SpecialCharTok{*}\NormalTok{x}
-\NormalTok{  dydt }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{x}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{y) }\SpecialCharTok{{-}}\NormalTok{ g}\SpecialCharTok{*}\NormalTok{y}
-  
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{c}\NormalTok{(dxdt, dydt)))}
-\NormalTok{\}))\}}
-\end{Highlighting}
-\end{Shaded}
+The form of the function that computes the derivatives in R is defined by \texttt{deSolve}
 
-\subsection{Solving}\label{solving}
+\subsection{\texorpdfstring{Rates \emph{vs.} Proportions}{Rates vs. Proportions}}\label{rates-vs.-proportions}
 
-We use the R package \textbf{\emph{deSolve}}
+The rates in differential equations can be compared to the proportions in discrete time systems. When the rates describe a change of state, a loss term for one of the variables, there are two easy interpretations. First, we consider the rate of loss of infected humans in a population, \(-rx.\) The core underlying process is exponential decay. If we followed a cohort, the waiting time for an individual to change states would follow an exponential distribution with rate \(1/r\). Second, after one day, the fraction that remains infected is \(e^{-r}\). If we set \(r=1/200,\) for example, the expected waiting time to clear an infection is 200 days. The rate of loss after one day is very close to, but slightly less than \(r\):
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(deSolve)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+## [1] 0.005000000 0.004987521
+\end{verbatim}
 
-The wrapper:
+\subsection{Solutions}\label{solutions}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{solve\_ross\_xde }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars, }\AttributeTok{x0=}\NormalTok{.}\DecValTok{01}\NormalTok{, }\AttributeTok{y0=}\FloatTok{0.001}\NormalTok{, }\AttributeTok{tmax=}\DecValTok{50}\NormalTok{, }\AttributeTok{dt=}\DecValTok{1}\NormalTok{)\{}
-\NormalTok{  tms }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, tmax, }\AttributeTok{by =}\NormalTok{ dt)}
-\NormalTok{  xy0 }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{x=}\NormalTok{x0, }\AttributeTok{y=}\NormalTok{y0)}
-  \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{ode}\NormalTok{(xy0, tms, ross\_xde, pars)) }
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
+We now want to solve the initial value problem: given \(x(0)\) and \(y(0),\) can we find solutions \(x(t)\) and \(y(t)\)? To do so, we call \texttt{deSolve::ode,} which takes for arguments: the initial values, the points in time to ouput values of \(x(t)\) and \(y(t)\), a function that computes the derivatives, and the parameters:
 
-It works.
+\begin{verbatim}
+##   time          x          y
+## 1    0 0.01000000 0.01000000
+## 2    1 0.01128886 0.01172469
+## 3    2 0.01279276 0.01363682
+## 4    3 0.01453497 0.01577333
+## 5    4 0.01654339 0.01817408
+## 6    5 0.01884959 0.02088053
+\end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{deout }\OtherTok{\textless{}{-}} \FunctionTok{solve\_ross\_xde}\NormalTok{(ross\_xde\_par)}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Computation \& Visualization}\label{computation-visualization}
 
-Plot
+For easy in working with these equations, we write a wrapper:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{with}\NormalTok{(deout, \{}
-  \FunctionTok{plot}\NormalTok{(time, x, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{ylab =} \FunctionTok{c}\NormalTok{(}\StringTok{"x, y"}\NormalTok{))}
-  \FunctionTok{lines}\NormalTok{(time, y, }\AttributeTok{col =} \StringTok{"darkorange"}\NormalTok{)}
-\NormalTok{\})}
-\end{Highlighting}
-\end{Shaded}
+Because we have returned it as a data frame, the column names are \texttt{time} and \texttt{x} and \texttt{y.} We can plot the values using \texttt{with().}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-41-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-39-1.pdf}
 
 These differential equations require
 
+\subsection{Steady States}\label{steady-states-1}
+
+We can learn a bit more about how these equations behave by changing the initial values:
+
+\includegraphics{docs/figs/unnamed-chunk-41-1.pdf}
+
+We notice that the orbits all asymptotically approach the same values, regardless of where they started. Once there, they stay there.
+
 \subsection{Verification}\label{verification-1}
 
-We set \(dx/dt = dy/dt=0\)
+We ought to be able to compute the value of these steady states: it is a value of \(x(t)\) and \(y(t)\) such that \(dx/dt=dy/dt=0.\) To find it, we set \(dx/dt=dy/dt=0\) and solve for \(x\) and \(y.\) One obvious value, once again, is \(x=y=0.\)
 
 \[ 
 \begin{array}{rl}
@@ -1338,6 +1087,7 @@ We set \(dx/dt = dy/dt=0\)
 0 &= ax(1-y) - g y \\
 \end{array}
 \]
+
 Solve the second equation for \(y\)
 
 \[y = ax/(g+ax)\]
@@ -1351,88 +1101,118 @@ and solve.
 
 Noting that \(m a^2 > rg\) must be a threshold condition, we write a function to compute the steady state using the formula we just derived:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{find\_eq\_xde\_1 }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(pars)\{}\FunctionTok{with}\NormalTok{(pars,\{}
-\NormalTok{  xx }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\textgreater{}}\NormalTok{ r}\SpecialCharTok{*}\NormalTok{g, (m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}}\NormalTok{ r}\SpecialCharTok{*}\NormalTok{g)}\SpecialCharTok{/}\NormalTok{(m}\SpecialCharTok{*}\NormalTok{a}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ r}\SpecialCharTok{*}\NormalTok{a), }\DecValTok{0}\NormalTok{) }
-\NormalTok{  yy }\OtherTok{=}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{xx}\SpecialCharTok{/}\NormalTok{(g}\SpecialCharTok{+}\NormalTok{a}\SpecialCharTok{*}\NormalTok{xx)}
-  \FunctionTok{c}\NormalTok{(}\AttributeTok{x=}\NormalTok{xx, }\AttributeTok{y=}\NormalTok{yy)}
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{find\_eq\_xde\_1}\NormalTok{(ross\_xde\_par)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##         x         y 
-## 0.9867987 0.7475000
+## 0.9487179 0.7400000
 \end{verbatim}
 
 We check it against the other way, which involves running the system for a very long time.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{de\_eq }\OtherTok{\textless{}{-}} \FunctionTok{solve\_ross\_xde}\NormalTok{(ross\_xde\_par, }\AttributeTok{tmax=}\DecValTok{500}\NormalTok{, }\AttributeTok{dt=}\DecValTok{5}\NormalTok{)}
-\FunctionTok{with}\NormalTok{(de\_eq, }\FunctionTok{c}\NormalTok{(}\AttributeTok{x=}\FunctionTok{tail}\NormalTok{(x,}\DecValTok{1}\NormalTok{), }\AttributeTok{y=}\FunctionTok{tail}\NormalTok{(y,}\DecValTok{1}\NormalTok{))) }
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##         x         y 
-## 0.9867987 0.7475000
+## 0.9487179 0.7400000
 \end{verbatim}
 
-\section{Continuous Time, Stochastic}\label{continuous-time-stochastic}
+\subsection{Thresholds}\label{thresholds-1}
 
-The world is stochastic.
+write me.
 
-\subsection{Deterministic}\label{deterministic}
+\section{Stochastic, Discrete Time}\label{sdtsRoss}
 
-\subsection{Stochastic}\label{stochastic}
-
-We want to to introduce a mathematical model that is a good starting point. None of the models presented in the previous chapter are suitable, largely because the variables in those models were proportions. The models we will use are almost identical, but the variables are densities.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-The Ross-Macdonald model is useful as a concise way of understanding malaria transmsission through the parasite's life-cycle. There is, however, a great deal of complexity that the Ross-Macdonald model does can not address, and some of it matters a great deal in policy. We must extend the model using new mathematical constructs to deal with several features of malaria:
+\textbf{Parameters} -- We can use the same parameters as before, but there are two new parameters:
 
 \begin{itemize}
 \item
-  malaria immunity and disease in cohorts of humans as they age;
+  \(M\) is the number of mosquitoes: \(M\) is a counting number
 \item
-  human demography;
-\item
-  anti-malaria drugs and other pharmaceutical interventions;
-\item
-  heterogeneous exposure
-\item
-  spatial dynamics and malaria importation;
-\item
-  mosquito ecology and behavior;
-\item
-  exogenous forcing by weather, giving rise to seasonal and unstable dynamics;
-\item
-  and vector control.
+  \(H\) is the number of humans; \(H\) is a counting number
 \end{itemize}
 
-In the following chapters, we will introduce and critically review the models that have been developed to address these topics in some detail. As we take on these new features and add complexity, we will (in effect) be going around the parasite and mosquito life-cycles over and over again, each time pursuing a new theme.
+\textbf{Variables}
 
-We want to pursue the idea of scaling complexity in dynamic models ranging from simple and abstract to highly realistic. We want to arrive at a happy compromise -- a model that is ``as simple as possible, but no simpler.'' (This is often attributed to Einstein, who probably never said it that way exactly \autocite{RobinsonA2018DidEinstein}). It might be hard to convince anyone that a model of intermediate complexity is good enough unless at least \emph{some} of the models have clearly gone too far. We don't want to add new features to our models unless they would affect some important aspect of malaria transmission dynamics and control.
+\begin{itemize}
+\item
+  \(Y \leq M\) is the number of infected mosquitoes: \(Y\) is a counting number
+\item
+  \(X \leq H\) is the number of infected humans: \(X\) is a counting number
+\end{itemize}
 
-Ideally, we would let the data tell us about the right level of complexity, but how would we ever convince someone to collect the data we need? If we don't expect to be able to collect all the data, we can do some of the hard work up front to set some prioritize.
-One way to pursue questions about what details are likely to be biologically relevant is through model building and model-model comparison. If we can't identify a case where knowing something would change our policies using a mathematical model, it's probably not worth collecting the data for policy. We think of all these models as crude approximations to a messy reality -- the question we want to address is whether the approximations are good enough to use as a basis for giving policy advice. Building very complex models that are also mathematically and biologically sound and meaningful is a daunting task, but we have developed a modular system for building models that streamlines the model building process.
+We can write another function that \emph{plots} the equations (\emph{i.e.} that iteratively computes and stores the values) over some time interval:
 
-To get started, we will reintroduce the Ross-Macdonald model in a form that is easier to extend than the one Macdonald made famous \autocite{SmithDL2012_RossMacdonald}. We will start with a model that first appeared in a 1982 book chapter written by Joan Aron and Robert May \autocite{AronJL1982PopulationDynamics}. It is a good starting point because it is \emph{extensible.}
+\includegraphics{docs/figs/unnamed-chunk-49-1.pdf}
 
-We chose it because the variables represent population densities, which are used to compute proportions, like \emph{prevalence.} In the version of the Ross-Macdonald we presented before (in {[}Rebuilding Macdonald's Model{]}), the variables are proportions. In some models, we would like the \emph{total} number of hosts to change over space or time, but if our state variables are proportions, then these densities appear in the denominators, which would make them much more difficult to modify. By writing down equations using densities, it is far easier to add complexity.
+\subsection{Steady States}\label{steady-states-2}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+The system still tends towards a point -- we'll call it an attractor and not a steady state. The values
+values of \(X\) and \(Y\) fluctuate around that steady state. We can plot the output as integer values, \(X\) and \(Y\), or as prevalence \(x=X/H\) and \(y=Y/M.\)
 
-\textbf{Why use densities?}
+\includegraphics{docs/figs/unnamed-chunk-50-1.pdf}
+
+\begin{verbatim}
+## [1] 0.9510945 0.7253731
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.9464098 0.7395311
+\end{verbatim}
+
+\subsection{Stochastic Fadeout}\label{stochastic-fadeout}
+
+write me.
+
+\section{Stochastic, Continuous Time}\label{sxdeRoss}
+
+In continuous time, the state of the system is updated one event at a time.
+
+\begin{itemize}
+\item
+  The total rate of change of the system is \(T = may(H-X) + rX + aX(M-Y) + gY\)
+\item
+  \(Y \rightarrow Y+1\)
+\item
+  \(Y \rightarrow Y-1\)
+\item
+  \(X \rightarrow X+1\)
+\item
+  \(X \rightarrow X-1\)
+\end{itemize}
+
+\begin{verbatim}
+##          t          X          Y          x          y 
+##  0.1220267 11.0000000 10.0000000  0.1100000  0.2000000 
+##         t         X         Y         x         y 
+##  0.437508 11.000000  9.000000  0.110000  0.180000 
+##          t          X          Y          x          y 
+##  0.4818248 11.0000000 10.0000000  0.1100000  0.2000000 
+##          t          X          Y          x          y 
+##  0.8345965 12.0000000 10.0000000  0.1200000  0.2000000 
+##         t         X         Y         x         y 
+##  1.004499 12.000000  9.000000  0.120000  0.180000
+\end{verbatim}
+
+\includegraphics{docs/figs/unnamed-chunk-58-1.pdf}
+
+\includegraphics{docs/figs/unnamed-chunk-59-1.pdf}
+
+\section{Comparing and Contrasting}\label{comparing-and-contrasting}
+
+Does it matter what sort of model we choose to use for our analysis?
+
+\subsection{Comparing Deterministic Models}\label{comparing-deterministic-models}
+
+\includegraphics{docs/figs/unnamed-chunk-64-1.pdf}
+
+\subsection{\texorpdfstring{Deterministic \emph{vs.} Stochatic}{Deterministic vs. Stochatic}}\label{deterministic-vs.-stochatic}
+
+\includegraphics{docs/figs/unnamed-chunk-65-1.pdf}
+
+\subsection{Comparing Stochastic Models}\label{comparing-stochastic-models}
+
+\includegraphics{docs/figs/unnamed-chunk-66-1.pdf}
+
+\section{Notes}\label{notes}
+
+\subsection{Why use densities?}\label{why-use-densities}
 
 To show why we use densities, we present a simple example. If we write down an equation describing changes in the density of infected humans, \(X\), in a population with total human population density \(H\). We let \(V\) denote vectorial capacity, and \(b\) the fraction of infective bites that cause an infection, and we assume the force of infection is \(bVX/H\). The dynamics of infection are described by this simple equation:
 
@@ -1447,33 +1227,31 @@ and with some rearranging, we get:
 
 The second equation is as simple as the first only if \(dH/dt=0\). Since we will want to deal with dynamical changes in host populations, we will avoid formulating base models that have proportions.
 
+\chapter{The Ross-Macdonald Model}\label{the-ross-macdonald-model}
+
+\emph{\textbf{The Ross-Macdonald Model} as a system of delay differential equations. The classification of transmission. The basic reproductive number. Vectorial capacity.}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-The model is extensible because, as we will see, mosquito population density is a variable, not a term. A parameter in the equation describing changes in mosquito density provides a link to aquatic mosquito ecology, which makes it possible to develop models for mosquito population dynamics, when that is an important consideration. In this version, we find that the formulas describing \(R_0\) and vectorial capacity tell the story of parasite transmission through two blood meals. We will thus update the classical formulas. While Macdonald's analysis and formulas are familiar to many, they were incomplete \autocite{SmithDL2004Statics,SmithDL2021OldMosquitoes}. We develop a formula for vectorial capacity that is consistent with the intent of the original, but our analysis of sensitivity to parameters includes effects on mosquito ecology \autocite{BradyOJ2015AdultVector}. (A lengthy and philosophical discussion of the history and its failings is planned.)
+When I first learned about malaria, the basic model was commonly called the \emph{Ross-Macdonald Model.}
+A few years ago, I went searching for \emph{The Ross-Macdonald Model} with the hope of getting a clear answer about how and why George Macdonald's name had attached.
+I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations.
+Instead, I found that Macdonald was associated with several new ideas spread across several publications, including many ideas he attributed (or ought to have attributed) to others \autocite{SmithDL2012_RossMacdonald}.
+Macdonald's papers are focused on the concepts and evidence; the formulas are mostly relegated to appendices.
+The equations finally appear in a concise form in publications from 1982 \autocite{AronJL1982PopulationDynamics,BaileyNTJ1982BiomathematicsMalaria}.
 
-We chose it because it is \emph{realistic.} Time does not appear in most versions of the Ross-Macdonald model: the equations are \emph{autonomous}. These equations use time to drive a seasonal pattern: they are \emph{non-autonomous}. Since we know we are interested in dealing with exogenous forcing, we start out with a model that is forced.
+Between 1950 and 1956, Macdonald published 11 papers on malaria epidemiology, dynamics, and control.
+(In that same interval, there are at least three other papers papers on other topics that I'm aware of.)
+In 1957, he published a book called \emph{The Epidemiology and Control of Malaria,} and he was rapporteur for the \emph{Sixth Report} of the \emph{Expert Committee on Malaria,} which etablished a basic plan for the Global Malaria Eradication Programme.
+In the 1960s, he published some relevant follow-up papers, including a diagram of the basic reproductive number.
+Macdonald's core contributions were to provide a synthesis of malaria epidemiology and quantitative medical entomology; to introduce Lotka's concept of a basic reproductive number into malaria epidemiology (and indeed, to all of mathematical epidemiology); and to introduce some very basic ideas about a theory of vector control. Macdonald's paper on the sporozoite rate revolutionized quantitatitative malaria epidemiology.
 
-While the following model is basic, we recommend reading it, if only because we introduce concepts and conventions that are important for the software design.
-
-\section{What is a Model?}\label{what-is-a-model}
-
-\section{Historical Notes}\label{historical-notes-1}
-
-If we were simply learning the math, \ldots{}
-
-When we analyze these equations to determine their \emph{stability} and to identify \emph{threshold conditions,} we focus on threshold conditions and the behavior of these systems when malaria is rare. In most places, malaria is endemic so we need to be concerned about malaria immunity and its effects on transmission; malaria is under some level of control; and because of weather and other factors, the baseline conditions change from year to year.
-
-\chapter{Macdonald's Model}\label{macdonalds-model}
-
-A few years ago, I went searching for \emph{The Ross-Macdonald Model.} I was looking for a single publication where I could find a model written down in a concise form as a system of differential equations. Instead, I found the history of an idea that was spread across several publications \autocite{SmithDL2012_RossMacdonald}.
-What I sought was first published in 1982 \autocite{AronJL1982PopulationDynamics,BaileyNTJ1982BiomathematicsMalaria}.
-
-Macdonald never wrote down his model for malaria transmission as a system of equations in a single place.
-In 1950, he published a review of malaria malaria epidemiology \autocite{MacdonaldG1950Epidemiology}, and a new model for superinfection \autocite{MacdonaldG1950Superinfection}.
+In 1950, he published a synthettic review of malaria malaria epidemiology \autocite{MacdonaldG1950Epidemiology}, and a new model for superinfection \autocite{MacdonaldG1950Superinfection}.
+The paper on superinfection is flawed \autocite{FinePEM1975SuperinfectionProblem}.
 In 1952, Macdonald published his analysis of the sporozoite rate \autocite{MacdonaldG1952Sporozoite}, and then he wrote a paper about endemic malaria that included a formula for the basic reproductive number, \(R_0\) \autocite{MacdonaldG1952R0}.
-Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; a paper appeared in 1953 \autocite{ArmitageP1953}.
-The formulas have enough information to write down the equations he must have been working from.
-We present it in the next section.
+In 1955-56, he published papers discussing the measurement of malaria transmission theory for control and eradication \autocite{MacdonaldG1955MeasurementMalaria,MacdonaldG1956EpidemiologicalBasis,MacdonaldG1956TheoryEradication} of control
+The formulas in Macdonald's footnotes and appendices from the 1952 papers have enough information to write down the equations he must have been working from, and this is what we will present in the next section.
+Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; the paper appeared in 1953 \autocite{ArmitageP1953}.
 
 After reading old papers, it became clear that Alfred Lotka played an important yet overlooked role in development of basic theory for malaria.
 Ross had actually published three mathematical models.
@@ -1486,15 +1264,13 @@ It should, perhaps, be called the Ross-Lotka-Macdonald model.
 All this history, spanning the period from roughly 1899 to 1969, has been reviewed before \autocite{SmithDL2012_RossMacdonald}, and some historical notes are recounted at the end of this chapter.
 The codification of the Ross-Macdonald model in the 1980s coincided with a rising interest in disease ecology and mathematical epidemiology in academic departments of ecology.
 
-\section{The Model}\label{the-model}
+\section{Superinfection}\label{superinfection}
 
-\subsection{Superinfection}\label{superinfection}
+Macdonald's model for superinfection was based on the idea of the \emph{multiplicity of infection} (MoI). If infections were occurring faster than they could clear, it stands to reason that each person will carry the parasites that could be traced back to more than one infectious bite. Getting back to the question of prevalence, how long would it take for all those parasites to clear?
 
-Macdonald's model for superinfection\ldots{}
+\section{Mosquito Bionomics}\label{mosquito-bionomics}
 
-\subsection{The Sporozoite Rate}\label{the-sporozoite-rate}
-
-Macdonald made several important contributions to the mathematical study of malaria. Ross's original formulation remained the standard until Macdonald's paper on the sporozoite rate \autocite{MacdonaldG1952Sporozoite}. Because of it's historical interest, we'll discuss Ross's formulation in the discussion of \hyperref[macdonalds-model]{Macdonald's Model}, in part, to make it clear why Macdonald's contribution was significant enough to get his name attached.
+Macdonald made several important contributions to the mathematical study of malaria. Ross's original formulation remained the standard until Macdonald's paper on the sporozoite rate \autocite{MacdonaldG1952Sporozoite}. Because of it's historical interest, we'll discuss Ross's formulation in the discussion of {[}Macdonald's Model{]}, in part, to make it clear why Macdonald's contribution was significant enough to get his name attached.
 
 In the 1950s, George Macdonald published a set of papers describing malaria transmission dynamics and control, culminating in publicataion of a book \emph{The Epidemiology and Control of Malaria} \autocite{MacdonaldG1957Book}.
 
@@ -1502,7 +1278,9 @@ In 1950, Macdonald published a new model with human malaria superinfection \auto
 
 As a side note, it's highly likely that Macdonald was aware of Lotka's demographic concept of \(R_0\), as well as his work with Sharpe on delay differential equations \autocite{LotkaAJ1923part4}, though we have been unable to find a single line where Macdonald gives Lotka the credit. For these reasons, and others, the equations ought to be described as the Ross-Lotka-Macdonald model.
 
-\subsection{Variables}\label{variables-1}
+\section{Equations}\label{equations}
+
+\textbf{Variables}
 
 The model has three variables:
 
@@ -1515,7 +1293,7 @@ The model has three variables:
   \(z\) is the fraction of adult female mosquitoes who are infective.
 \end{itemize}
 
-\subsection{Parameters}\label{parameters-2}
+\textbf{Parameters}
 
 The model has several parameters:
 
@@ -1536,8 +1314,6 @@ The model has several parameters:
   \(c\): a fraction of bites on infected humans infect a mosquito, denoted \(c\)
 \end{itemize}
 
-\subsection{Equations}\label{equations-2}
-
 In this formulation of the model, we ignore the delay for the EIP but we count the mortality:
 
 \[ 
@@ -1550,13 +1326,19 @@ dz/dt &= e^{-g \tau} c a x_\tau (1-y_\tau) - g z  \\
 
 this.
 
+\section{Solutions}\label{solutions-1}
+
 \section{The Basic Reproductive Number}\label{the-basic-reproductive-number}
 
 \section{Sensitivity to Parameters}\label{sensitivity-to-parameters}
 
-\section{The Classification of Transmission}\label{the-classification-of-transmission}
+\section{Vectorial Capacity}\label{vectorial-capacity}
 
-\section{Historical Notes}\label{historical-notes-2}
+\section{Classifying Transmission}\label{classifying-transmission}
+
+\section{Notes}\label{notes-1}
+
+\subsection{Lotka}\label{lotka}
 
 Ross's first model described malaria transmission dynamics using difference equations \autocite{RossR1908}. That model was reviewed, analyzed, and critiqued first by H. Waite in 1910 \autocite{WaiteH1910MosquitoesMalaria}.
 
@@ -1581,129 +1363,93 @@ Ross's second model was thoroughly analyzed by Lotka, who had taken an active in
   Most importantly, Lotka developed the concept of the basic reproductive number in his work in human demography, which was defined as the expected number of females that would be born to a newborn female.
 \end{itemize}
 
-\subsection{George Macdonald}\label{george-macdonald}
+\subsection{Macdonald and Medical Entomology}\label{macdonald-and-medical-entomology}
+
+\subsection{\texorpdfstring{\(R_0\) in the GMEP}{R\_0 in the GMEP}}\label{r_0-in-the-gmep}
 
 we'll discuss Ross's actual formulation,
 
-\chapter{Measuring Malaria}\label{measuring-malaria}
+\chapter{Models and Data}\label{models-and-data}
+
+If we want to manage malaria, we must be able to measure it. Models are approximations. We make a distinction between biological processes and observational processes.
+
+\section{Observing Malaria}\label{observing-malaria}
 
 \section{Infection}\label{infection}
 
+\begin{itemize}
+\item
+  Spleen Rate
+\item
+  Parasite Rate
+\item
+  Force of Infection
+\end{itemize}
+
+\section{Infectiousness}\label{infectiousness}
+
 \section{Malaria Incidence}\label{malaria-incidence}
+
+\begin{itemize}
+\tightlist
+\item
+  Infection vs.~Disease
+\end{itemize}
 
 \section{Exposure Risk}\label{exposure-risk}
 
-\section{Mosquito Bionomics}\label{mosquito-bionomics}
-
-\chapter{Malaria Control}\label{malaria-control}
-
-\section{Sensitivity to Parameters}\label{sensitivity-to-parameters-1}
-
-\part{Malaria Modeling}\label{part-malaria-modeling}
-
-\chapter{Model Building}\label{model-building}
-
-\begin{quote}
-\emph{There must have been a time, in the beginning, when we could have said -- no. But somehow we missed it.} (Guildenstern)\\
---- from \emph{Rosencranz and Guildenstern are Dead}, Tom Stoppard
-\end{quote}
-
-The Ross-Macdonald model is a good way to convey of the basic features of malaria epidemiology. The model is useful in the classroom, and it can help to inform our basic understanding of malaria. If we want to use the model to answer some policy questions, we will soon find that the model has some limitations.
-
-but this book is about how we want to use the models for other purposes.
-
-There are many reasons why we would not want to rely on the Ross-Macdonald model to simulate malaria for policies.
-
-If we want to scale up simulation-based analytics to support malaria policy through eradication, it will inevitably involve capacity building, but what sort of training is needed? Certainly, we hope that an analytics team would include someone who has the skills required to critically evaluate models, but this is not as easy as you think. What makes a model good? What makes an analysis useful? It is easy to imagine training up a generation who could do some kind of analysis, but we don't want to train automata -- people who would keep doing some analysis, over and over, just because it is what has been done before. We ought to have a reason for doing the analysis. It ought to serve some purpose. Success in policy analytics requires people who have skills in thinking creatively and critically to solve problems. We need people who can build and evaluate models.
-
-If we want to discuss the models we might use to analyze malaria policies, and if we want to have a discussion about that process, it will probably help us to be more careful about how we use terms like \emph{model} and \emph{model building.} In the service of defining the skill sets required to be a good analyst, this chapter discusses the life-cycle of a model, including the process of building and evaluating models from the beginning to the end (or in math from \(\alpha\) to \(\omega\)).
-
-\section{Compartment Models}\label{compartment-models}
-
-\section{}\label{section}
-
-\section{Primary Model Development}\label{primary-model-development}
-
-Most models started with a question: something like \emph{Why is the sky blue?} or \emph{How many mosquitoes does it take to sustain malaria transmission?} Blue sky questions don't go anywhere unless there's a basis for understanding the underlying process. If there is some kind of basis, the next step is to try represent the process in some logically compelling form, such as a diagram with boxes and arrows.
-
-\section{Implementation and Verification}\label{implementation-and-verification}
-
-\subsection{Solving}\label{solving-1}
-
 \begin{itemize}
 \item
-  \textbf{Fitted Parameters:}
+  HBR
 \item
-  \textbf{Initial Conditions:}
+  SR
+\item
+  EIR
 \end{itemize}
 
-\subsection{Mathematical Analysis}\label{mathematical-analysis}
+\section{Vectorial Capacity}\label{vectorial-capacity-1}
 
-\begin{itemize}
-\item
-  \textbf{steady states}
-\item
-  \textbf{stability analysis}
-\item
-  \textbf{algorithms}
-\item
-  \textbf{primary analysis}
-\end{itemize}
+\section{Transmission Efficiency}\label{transmission-efficiency}
 
-\subsection{Simulation}\label{simulation-1}
+\chapter{Malaria Burden and Malaria Control}\label{malaria-burden-and-malaria-control}
 
-\section{What is a Model?}\label{what-is-a-model-1}
+Two core concepts missing from the Ross-Macdonald model were the burden of malaria and a theory of control
 
-\section{Accuracy \& Validation}\label{accuracy-validation}
+\section{Burden}\label{burden}
 
-\begin{itemize}
-\item
-  Model features
-\item
-  Functional range
-\item
-  Heterogeneity
-\end{itemize}
+\section{Control}\label{control}
 
-\subsection{Validation Points}\label{validation-points}
+\part{Missing Pieces}\label{part-missing-pieces}
 
-\section{The Measure of a Model}\label{the-measure-of-a-model}
+\chapter{\texorpdfstring{Beyond \emph{The Ross-Macdonald Model}}{Beyond The Ross-Macdonald Model}}\label{beyond-the-ross-macdonald-model}
 
-If we want to evaluate whether a model is good
+The Ross-Macdonald model is a good starting point, but if we want to develop models for policy, we will need to delve deeper into the mathematical processes that are driving malaria transmission, and we will need to understand some of the related biological processes.
 
-\subsection{Limitations}\label{limitations}
+\section{Blood Feeding and Parasite Transmission}\label{blood-feeding-and-parasite-transmission}
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Functional Range} the maximum granularity
-\end{itemize}
+\section{Mosquito Ecology}\label{mosquito-ecology}
 
-\subsection{Parsimony}\label{parsimony}
+\section{Malaria Epidemiology}\label{malaria-epidemiology}
 
-\section{Secondary Model Development}\label{secondary-model-development}
+\section{Human Demography}\label{human-demography}
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{elaboration}
-\end{itemize}
+\section{Parasite Diversity}\label{parasite-diversity}
 
-Model building is a core part of applied dynamics, but if we are to othere are many different activities
+\section{Evolution}\label{evolution}
 
-What does it mean to build a model?
+\chapter{Dynamic Adult Mosquito Populations}\label{aron-may}
 
-\section{Conclusions}\label{conclusions}
+\textbf{New Concepts:} non-autonomous systems
 
-\chapter{Adult Mosquito Dynamics}\label{adult-mosquito-dynamics}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 If we are to do anything in malaria, we must move past Macdonald's assumption that mosquito population density does not fluctuate.
 
 The goal of this book is to present mathematical models for malaria transmission dynamics and control that are developed well enough to support malaria policies.
 
-\section{Mosquito Ecology}\label{mosquito-ecology}
+\section{Mosquito Ecology}\label{mosquito-ecology-1}
 
-\subsection{Variables}\label{variables-2}
+\subsection{Variables}\label{variables}
 
 Aron \& May, 1982
 
@@ -1886,7 +1632,7 @@ The next step is to find solutions.
 
 \emph{NOTE:} We don't introduce \texttt{exDE} or \texttt{MicroMoB} until \hyperref[modularity-and-software]{Modularity and Software}.
 
-\subsection{Solutions}\label{solutions}
+\subsection{Solutions}\label{solutions-2}
 
 What does a \textbf{solution} to these equations look like?
 
@@ -1936,51 +1682,13 @@ The first step is to write down the equations to compute the derivatives. The so
 
 The derivatives are computed and returned in the same order as `y' in a \texttt{list}. To make code that is easy to read, we make \texttt{params} as a \texttt{list} with parameter names (see below), so that inside the function \texttt{with(params,\{...\})}, the parameter names are visible.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dAronMay }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(t, y, params)\{}\FunctionTok{with}\NormalTok{(params,\{}
- 
-  \CommentTok{\# Variables  }
-  \ControlFlowTok{if}\NormalTok{(t}\SpecialCharTok{\textless{}=}\NormalTok{tau) ylag}\OtherTok{\textless{}{-}}\NormalTok{y0 }\ControlFlowTok{else}\NormalTok{ ylag }\OtherTok{\textless{}{-}} \FunctionTok{lagvalue}\NormalTok{(t}\SpecialCharTok{{-}}\NormalTok{tau)}
-\NormalTok{  M}\OtherTok{=}\NormalTok{y[}\DecValTok{1}\NormalTok{]; M\_tau }\OtherTok{=}\NormalTok{ ylag[}\DecValTok{1}\NormalTok{]}
-\NormalTok{  Y}\OtherTok{=}\NormalTok{y[}\DecValTok{2}\NormalTok{]; Y\_tau }\OtherTok{=}\NormalTok{ ylag[}\DecValTok{2}\NormalTok{]; }
-\NormalTok{  Z}\OtherTok{=}\NormalTok{y[}\DecValTok{3}\NormalTok{]; }
-\NormalTok{  X}\OtherTok{=}\NormalTok{y[}\DecValTok{4}\NormalTok{]; X\_tau }\OtherTok{=}\NormalTok{ ylag[}\DecValTok{4}\NormalTok{]}
-   
-  \CommentTok{\# Terms }
-\NormalTok{  kappa }\OtherTok{=}\NormalTok{ c}\SpecialCharTok{*}\NormalTok{X}\SpecialCharTok{/}\NormalTok{H; kappa\_tau }\OtherTok{=}\NormalTok{ c}\SpecialCharTok{*}\NormalTok{X\_tau}\SpecialCharTok{/}\NormalTok{H}
-\NormalTok{  h }\OtherTok{=}\NormalTok{ b}\SpecialCharTok{*}\NormalTok{f}\SpecialCharTok{*}\NormalTok{q}\SpecialCharTok{*}\NormalTok{Z}\SpecialCharTok{/}\NormalTok{H }
-   
-  \CommentTok{\# Dynamics }
-\NormalTok{  dM }\OtherTok{=} \FunctionTok{Lambda}\NormalTok{(t) }\SpecialCharTok{{-}}\NormalTok{ g}\SpecialCharTok{*}\NormalTok{M}
-\NormalTok{  dY }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{*}\NormalTok{q}\SpecialCharTok{*}\NormalTok{kappa}\SpecialCharTok{*}\NormalTok{(M}\SpecialCharTok{{-}}\NormalTok{Y) }\SpecialCharTok{{-}}\NormalTok{g}\SpecialCharTok{*}\NormalTok{Y}
-\NormalTok{  dZ }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{*}\NormalTok{q}\SpecialCharTok{*}\NormalTok{kappa\_tau}\SpecialCharTok{*}\NormalTok{(M\_tau}\SpecialCharTok{{-}}\NormalTok{Y\_tau)}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{g}\SpecialCharTok{*}\NormalTok{tau) }\SpecialCharTok{{-}}\NormalTok{g}\SpecialCharTok{*}\NormalTok{Z}
-\NormalTok{  dX }\OtherTok{=}\NormalTok{ h}\SpecialCharTok{*}\NormalTok{(H}\SpecialCharTok{{-}}\NormalTok{X)}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{*}\NormalTok{X}
-  
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{c}\NormalTok{(dM, dY, dZ, dX)))}
-\NormalTok{\})\} }
-\end{Highlighting}
-\end{Shaded}
-
 \subsection{Initial Values}\label{initial-values}
 
 To run the model, we must supply initial values. If you were writing code yourself, it would be important to remember that the initial values and the return value for the derivatives must occur in the same order.
 
 A useful convention in \{R\} is to pass the initial values as a named list. Later, we can turn the outputs into a data frame, and then we can retrieve the variables by name.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y0}\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\DecValTok{60}\NormalTok{, }\AttributeTok{Y=}\DecValTok{0}\NormalTok{, }\AttributeTok{Z=}\DecValTok{0}\NormalTok{, }\AttributeTok{X=}\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 The object \texttt{y0} is a named list -- the names are attached but invisible.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y0}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##  M  Y  Z  X 
@@ -1989,25 +1697,11 @@ The object \texttt{y0} is a named list -- the names are attached but invisible.
 
 When we turn it into a list, with \texttt{as.list,} the names are attached to the values:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{as.list}\NormalTok{(y0)}\SpecialCharTok{$}\NormalTok{M}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 60
 \end{verbatim}
 
 If we use \texttt{with}, we create an environment where we can simply use the names:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{with}\NormalTok{(}\FunctionTok{as.list}\NormalTok{(y0), \{}
-\NormalTok{  M}
-\NormalTok{\})}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 60
@@ -2018,24 +1712,6 @@ If we use \texttt{with}, we create an environment where we can simply use the na
 We pass the parameters as a list. It might seem like overkill, but we have written a function \texttt{makeParams()} that takes default values and generates a list. This makes it easy to generate a new set of parameter values with alternative values, and it also helps us to write and pass function \(\Lambda(t)\) with parameters we like. By passing the parameter as a list, the parameter values are available to the function \texttt{dAronMay} when we use \texttt{with(params,\ \{\})}.
 
 Note that we have also attached the initial values of the variables as a parameter set, which are the return values for \texttt{lagvalue(t)} when \texttt{t\textless{}0}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{makeParams }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(y0, }
-                      \AttributeTok{g=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{12}\NormalTok{, }\AttributeTok{f=}\DecValTok{1}\SpecialCharTok{/}\FloatTok{2.5}\NormalTok{, }\AttributeTok{q=}\FloatTok{0.95}\NormalTok{,  }
-                      \AttributeTok{c=}\FloatTok{0.15}\NormalTok{,}
-                      \AttributeTok{b=}\FloatTok{0.55}\NormalTok{, }\AttributeTok{r=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{200}\NormalTok{, }\AttributeTok{H=}\DecValTok{1000}\NormalTok{,  }
-                      \AttributeTok{m=}\NormalTok{.}\DecValTok{05}\NormalTok{, }\AttributeTok{ss=}\DecValTok{1}\NormalTok{,  }
-                      \AttributeTok{tau=}\DecValTok{10}  
-\NormalTok{                      )\{}
-\NormalTok{  ss }\OtherTok{=} \FunctionTok{min}\NormalTok{(}\DecValTok{1}\NormalTok{,}\FunctionTok{max}\NormalTok{(}\DecValTok{0}\NormalTok{, ss))}
-\NormalTok{  Lambda }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(t)\{m}\SpecialCharTok{*}\NormalTok{H}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ ss}\SpecialCharTok{*}\FunctionTok{sin}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{pi}\SpecialCharTok{*}\NormalTok{t}\SpecialCharTok{/}\DecValTok{365}\NormalTok{))\}}
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{y0=}\NormalTok{y0,}\AttributeTok{g=}\NormalTok{g,}\AttributeTok{f=}\NormalTok{f,}\AttributeTok{q=}\NormalTok{q,}\AttributeTok{c=}\NormalTok{c,}
-              \AttributeTok{H=}\NormalTok{H,}\AttributeTok{m=}\NormalTok{m,}\AttributeTok{tau=}\NormalTok{tau,}\AttributeTok{b=}\NormalTok{b,}\AttributeTok{r=}\NormalTok{r,}\AttributeTok{Lambda=}\NormalTok{Lambda))}
-\NormalTok{\} }
-\NormalTok{params }\OtherTok{=} \FunctionTok{makeParams}\NormalTok{(y0)}
-\end{Highlighting}
-\end{Shaded}
 
 To make it absolutely clear, we are assuming:
 
@@ -2071,34 +1747,21 @@ To make it absolutely clear, we are assuming:
 
 \[\Lambda(t) = m H \left(1 + \sin \left(\frac{2\pi t}{365}\right)\right)\]
 
-\subsection{Solving}\label{solving-2}
+\subsection{Solving}\label{solving-1}
 
 We define a mesh over time -- the points in time when we would like to know the values of the variables:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tt }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\SpecialCharTok{*}\DecValTok{365}\NormalTok{, }\AttributeTok{by=}\DecValTok{5}\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
-
 This code solves the equations:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{require}\NormalTok{(deSolve)}
-\NormalTok{yout }\OtherTok{\textless{}{-}} \FunctionTok{dede}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{dAronMay, }\AttributeTok{parms=}\NormalTok{params) }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Visualizing}\label{visualizing}
+\subsection{Visualizing}\label{visualizing-1}
 
 When we plot out the solutions, they look like this.
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-75-1.pdf}
 
 \clearpage
 
-\section{Steady States}\label{steady-states}
+\section{Steady States}\label{steady-states-3}
 
 Here, we analyze the system of equations in a narrow case when there is \emph{no seasonality,} and the system reaches a \emph{steady state.} To do so, we set the parameter \texttt{ss=1}, so that \(\Lambda(t)\) is a constant; the resulting system is \emph{autonomous.} We do this, in part, because the resulting system is easier to understand. We can develop intuition that can be applied (albeit with caution) to more complex systems. To be clear, we are dealing with this system:
 
@@ -2179,7 +1842,7 @@ or equivalently
 
 This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model \autocite{MacdonaldG1952Sporozoite,ArmitageP1953}. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography \autocite{SmithDL2004Statics}.
 
-\subsection{Vectorial Capacity}\label{vectorial-capacity}
+\subsection{Vectorial Capacity}\label{vectorial-capacity-2}
 
 Here, we pause to define a term that describes the number of human blood meals each mosquito would take over its whole life:
 
@@ -2246,8 +1909,8 @@ While \(\kappa\) (the numerator in Eq.\eqref{eq:EIR2ndpart} accounts for \emph{m
 
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/unnamed-chunk-54-1.pdf}
-\caption{\label{fig:unnamed-chunk-54}The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.}
+\includegraphics{docs/figs/unnamed-chunk-76-1.pdf}
+\caption{\label{fig:unnamed-chunk-76}The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.}
 \end{figure}
 
 In these formulas, the measure of saturation is exactly \(1+S\kappa\). We could rewrite the relationship between the EIR and VC in a way
@@ -2341,59 +2004,15 @@ An advantage of working in this environment is that we can check our work. One w
 
 We make a parameter set that defines the model:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y0}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\DecValTok{100}\NormalTok{, }\AttributeTok{Y=}\DecValTok{10}\NormalTok{, }\AttributeTok{Z=}\DecValTok{5}\NormalTok{, }\AttributeTok{X=}\DecValTok{200}\NormalTok{)}
-\NormalTok{paramsSteady }\OtherTok{=} \FunctionTok{makeParams}\NormalTok{(y0, }\AttributeTok{ss=}\DecValTok{0}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{dede}\NormalTok{(y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{dAronMay, }\AttributeTok{parms=}\NormalTok{paramsSteady) }\OtherTok{{-}\textgreater{}}\NormalTok{ yout}
-\FunctionTok{tail}\NormalTok{(yout, }\DecValTok{1}\NormalTok{)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{{-}\textgreater{}}\NormalTok{ eq1 }
-\NormalTok{eq1}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 600.00000 211.01706  91.70764 793.10541
 \end{verbatim}
 
 By plotting it out, we can check to see if we've run it for long enough:
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-57-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-79-1.pdf}
 
 We can check our algebra by computing the same quantities, and \(R_0\) and other quantities we care about:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{steadyStates\_AronMay }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(params)\{}\FunctionTok{with}\NormalTok{(params,\{}
-\NormalTok{  Lambda }\OtherTok{=}\NormalTok{ m}\SpecialCharTok{*}\NormalTok{H}
-\NormalTok{  Meq }\OtherTok{=}\NormalTok{ Lambda}\SpecialCharTok{/}\NormalTok{g}
-\NormalTok{  S }\OtherTok{=} \FunctionTok{with}\NormalTok{(paramsSteady, f}\SpecialCharTok{*}\NormalTok{q}\SpecialCharTok{/}\NormalTok{g)}
-\NormalTok{  V }\OtherTok{=}\NormalTok{ m}\SpecialCharTok{*}\NormalTok{S}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{g}\SpecialCharTok{*}\NormalTok{tau)}
-\NormalTok{  R0 }\OtherTok{=}\NormalTok{ b}\SpecialCharTok{*}\NormalTok{c}\SpecialCharTok{*}\NormalTok{V}\SpecialCharTok{/}\NormalTok{r}
-\NormalTok{  x }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(R0}\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{,(R0}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(R0}\SpecialCharTok{+}\NormalTok{c}\SpecialCharTok{*}\NormalTok{S), }\DecValTok{0}\NormalTok{) }
-\NormalTok{  Xeq }\OtherTok{=}\NormalTok{ x}\SpecialCharTok{*}\NormalTok{H}
-\NormalTok{  kappa }\OtherTok{=}\NormalTok{ c}\SpecialCharTok{*}\NormalTok{x}
-\NormalTok{  Yeq }\OtherTok{=}\NormalTok{ S}\SpecialCharTok{*}\NormalTok{kappa}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{S}\SpecialCharTok{*}\NormalTok{kappa)}\SpecialCharTok{*}\NormalTok{Meq }
-\NormalTok{  Zeq }\OtherTok{=}\NormalTok{ Yeq}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{g}\SpecialCharTok{*}\NormalTok{tau) }
-\NormalTok{  EIR }\OtherTok{=}\NormalTok{ f}\SpecialCharTok{*}\NormalTok{q}\SpecialCharTok{*}\NormalTok{Zeq}\SpecialCharTok{/}\NormalTok{H}
-\NormalTok{  FoI }\OtherTok{=}\NormalTok{ b}\SpecialCharTok{*}\NormalTok{EIR}
-\NormalTok{  aEIR }\OtherTok{=} \DecValTok{365}\SpecialCharTok{*}\NormalTok{EIR }
-\NormalTok{  aFoI }\OtherTok{=} \DecValTok{365}\SpecialCharTok{*}\NormalTok{FoI }
-\NormalTok{  extra}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\AttributeTok{S=}\NormalTok{S, }\AttributeTok{V=}\NormalTok{V, }\AttributeTok{R0=}\NormalTok{R0, }\AttributeTok{x=}\NormalTok{x, }\AttributeTok{kappa=}\NormalTok{kappa, }
-          \AttributeTok{EIR=}\NormalTok{EIR, }\AttributeTok{FoI=}\NormalTok{FoI)}
-\NormalTok{  annual }\OtherTok{=}\FunctionTok{c}\NormalTok{(}\AttributeTok{aEIR =}\NormalTok{ aEIR, }\AttributeTok{aFoI=}\NormalTok{aFoI)}
-  \FunctionTok{list}\NormalTok{(}\AttributeTok{std=}\FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\NormalTok{Meq, }\AttributeTok{Y=}\NormalTok{Yeq, }\AttributeTok{Z=}\NormalTok{Zeq, }\AttributeTok{X=}\NormalTok{Xeq), }
-       \AttributeTok{extra=}\FunctionTok{signif}\NormalTok{(extra, }\DecValTok{3}\NormalTok{),}
-       \AttributeTok{annual =} \FunctionTok{signif}\NormalTok{(annual,}\DecValTok{3}\NormalTok{)) }
-\NormalTok{\})\}}
-\FunctionTok{steadyStates\_AronMay}\NormalTok{(paramsSteady) }\OtherTok{{-}\textgreater{}}\NormalTok{ eq2}
-\NormalTok{eq2}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## $std
@@ -2411,12 +2030,6 @@ We can check our algebra by computing the same quantities, and \(R_0\) and other
 
 Now, we can compare directly:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{rbind}\NormalTok{(}\AttributeTok{eq1=}\NormalTok{eq1, }\AttributeTok{eq2=}\NormalTok{eq2}\SpecialCharTok{$}\NormalTok{std)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##       M        Y        Z        X
 ## eq1 600 211.0171 91.70764 793.1054
@@ -2427,14 +2040,14 @@ Now, we can compare directly:
 
 If emergence rates vary seasonally, how much of the analysis that we did to understand \emph{steady states} still holds? Obviously, if conditions are changing seasonally, the model does not reach a steady state. In fact, after modification to suit the context, many of the same principles translate. The steady state analysis provides a good qualitative guide, but that the answers will look different. Here, we illustrate by solving systems to illustrate some basic points, which is easy enough. Analysis of the resulting dynamics can be quite difficult; it is covered in \hyperref[temporal-dynamics]{Temporal Dynamics}.
 
-\subsection{Thresholds}\label{thresholds-1}
+\subsection{Thresholds}\label{thresholds-2}
 
 There is a threshold condition \(R_0>1\) that determines whether malaria is endemic, but the formula for \(R_0\) depends on the form of \(\Lambda(t)\). If we set \(R_0=1\), we can show that the threshold for persistence in a seasonal environment is \(R_0 > \sigma > 1\) (see Figure 1.1). The math to compute threshold conditions in seasonal environments is in \hyperref[temporal-dynamics]{Temporal Dynamics}.
 
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/unnamed-chunk-62-1.pdf}
-\caption{\label{fig:unnamed-chunk-62}Here, we set \(R_0= 1.02\) for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same \emph{average} emergence rate, malaria declines with seasonality.}
+\includegraphics{docs/figs/unnamed-chunk-84-1.pdf}
+\caption{\label{fig:unnamed-chunk-84}Here, we set \(R_0= 1.02\) for the model with constant emergence, and we show that malaria persists. For the same parameters and for the same \emph{average} emergence rate, malaria declines with seasonality.}
 \end{figure}
 
 \clearpage
@@ -2451,8 +2064,8 @@ If \(R_0 >1\), then all orbits converge to a set of \emph{stable orbits} (See Fi
 
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/unnamed-chunk-63-1.pdf}
-\caption{\label{fig:unnamed-chunk-63}With different initial values, the orbits converge and eventually lie on top of one another.}
+\includegraphics{docs/figs/unnamed-chunk-85-1.pdf}
+\caption{\label{fig:unnamed-chunk-85}With different initial values, the orbits converge and eventually lie on top of one another.}
 \end{figure}
 
 \clearpage
@@ -2463,17 +2076,9 @@ If \(R_0>1\) and malaria is endemic, the \emph{average} prevalence of malaria in
 
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/compareTS-1.pdf}
+\includegraphics{docs/figs/compareTS-1.pdf}
 \caption{\label{fig:compareTS}Here, we set \(R_0= 2\) for the model with constant emergence, and we show that the prevalence of malaria is similar in the seasonal environment, but it's higher as transmission peaks, lower in the off-season, and lower overall.}
 \end{figure}
-
-\chapter{Blood Feeding}\label{blood-feeding}
-
-\section{}\label{section-1}
-
-\chapter{Mosquito Ecology}\label{mosquito-ecology-1}
-
-\section{Egg Laying}\label{egg-laying}
 
 \chapter{Human Age \& Demography}\label{human-age-demography}
 
@@ -2500,7 +2105,118 @@ We now
 
 We now
 
-\chapter{Realism \& Complexity}\label{realism-complexity}
+\chapter{Mosquito Ecology}\label{mosquito-ecology-2}
+
+\section{Egg Laying}\label{egg-laying}
+
+\part{Malaria Modeling}\label{part-malaria-modeling}
+
+\chapter{Model Building}\label{model-building}
+
+The Ross-Macdonald model is a good model to start learning about malaria, but our task is to understand malaria well enough to give robust advice about policy. After more than a century of malaria research and control, we can describe the magnitude of that challenge in clear terms.
+
+What kind of a problem is malaria?
+
+Malaria can be understood as a complex adaptive system. It is characterized by non-linear, dynamical interactions among four kinds of interacting agents: parasites, mosquitoes, humans, and malaria control managers. These are exogenously forced systems -- in addition to malaria control, mosquito ecology and malaria transmission are affected by temperature, rainfall, land use changes, and other environmental conditions. From the perspective of a malaria control manager, malaria transmission is a changing baseline that is modified by control. Malaria is also accurately described as a disease of poverty: malaria tends to disappear in places with education and wealth, so economic development and education have been among the most effective ways of ending malaria.
+
+On the other hand, malaria transmission dynamics and the responses to control depend on the local context. Lewis Wendell Hackett, a malariologist who worked on malaria in the 1930s, wrote:
+
+\begin{quote}
+\ldots{} malaria is so moulded and altered by local conditions that it becomes a thousand different diseases and epidemiological puzzles. Like chess, it is played with a few pieces, but is capable of an infinite variety of situations \autocite{HackettLW1937MalariaEurope}.
+\end{quote}
+
+Malaria systems are locally peculiar because of differences in mosquito species and their behavior and ecology, local human cultural practices and behaviors. These behaviors affect blood feeding and the ways that mosquitoes come into contact with malaria interventions. The question is what local details are relevant for malaria policy.
+
+How can we deal with forced, managed, complex adaptive systems? One approach is to use mathematical models to help us understand them. The study of complexity has mainly been restricted to academics, who have provided us with many useful case studies. If we are going to work in policy, however, we need to be very practical. While the Ross-Macdonald model clearly demonstrates how transmission intensity is clearly related to mosquito bionomics, the model does not address what factors set the values of those bionomic parameters in context. It is likely to be a mosquito's innate biology interacting with resource availability, weather, and vector control, but how can we begin to translate the models into something more than an object lesson? With so much complexity, we will need to move beyond analysis with a pencil and paper. Our work will require computation and simulation.
+
+If we think of a model as having a \emph{skill set} -- the set of observable quantities that are naturally represented by the latent states such that they can be computed without requiring extraneous information -- then a major limitation of the Ross-Macdonald model is that it has a limited skill set: it's skill set does not include most of the features that malaria programs care about. The model is useful in the classroom, and it can help to inform our basic understanding of malaria. If we want to use the model to answer some policy questions, we will find ourselves waving our hands to make excuses about the features it is missing. The other way is to ask about all the ways our models and analysis could be wrong, and then build models with the skill sets to tackle these problems. Adding complexity to a model, so that it has the right skill set, also comes with its own perils.
+
+If we want to scale up simulation-based analytics to support malaria policy through eradication, it will inevitably involve capacity building, but what sort of training is needed? Certainly, we hope that an analytics team would include someone who has the skills required to critically evaluate models, but this is not as easy as you think. What makes a model good? What makes an analysis useful? It is easy to imagine training up a generation who could do some kind of analysis, but we don't want to train automata -- people who would keep doing some analysis, over and over, just because it is what has been done before. We ought to have a reason for doing the analysis. It ought to serve some purpose. Success in policy analytics requires people who have skills in thinking creatively and critically to solve problems. We need people who can build and evaluate models.
+
+This book has taken an approach to model building that is based on the notion of \emph{scalable complexity.}
+
+If we want to discuss the models we might use to analyze malaria policies, and if we want to have a discussion about that process, it will probably help us to be more careful about how we use terms like \emph{model} and \emph{model building.} In the service of defining the skill sets required to be a good analyst, this chapter discusses the life-cycle of a model, including the process of building and evaluating models from the beginning to the end (or in math from \(\alpha\) to \(\omega\)).
+
+\section{Compartment Models}\label{compartment-models}
+
+\section{Primary Model Development}\label{primary-model-development}
+
+Most models started with a question: something like \emph{Why is the sky blue?} or \emph{How many mosquitoes does it take to sustain malaria transmission?} Blue sky questions don't go anywhere unless there's a basis for understanding the underlying process. If there is some kind of basis, the next step is to try represent the process in some logically compelling form, such as a diagram with boxes and arrows.
+
+\section{Implementation and Verification}\label{implementation-and-verification}
+
+\subsection{Solving}\label{solving-2}
+
+\begin{itemize}
+\item
+  \textbf{Fitted Parameters:}
+\item
+  \textbf{Initial Conditions:}
+\end{itemize}
+
+\subsection{Mathematical Analysis}\label{mathematical-analysis}
+
+\begin{itemize}
+\item
+  \textbf{steady states}
+\item
+  \textbf{stability analysis}
+\item
+  \textbf{algorithms}
+\item
+  \textbf{primary analysis}
+\end{itemize}
+
+\subsection{Simulation}\label{simulation}
+
+\section{What is a Model?}\label{what-is-a-model}
+
+\section{Accuracy \& Validation}\label{accuracy-validation}
+
+\begin{itemize}
+\item
+  Model features
+\item
+  Functional range
+\item
+  Heterogeneity
+\end{itemize}
+
+\subsection{Validation Points}\label{validation-points}
+
+\section{The Measure of a Model}\label{the-measure-of-a-model}
+
+If we want to evaluate whether a model is good
+
+\subsection{Limitations}\label{limitations}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Functional Range} the maximum granularity
+\end{itemize}
+
+\subsection{Parsimony}\label{parsimony}
+
+\section{Secondary Model Development}\label{secondary-model-development}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{elaboration}
+\end{itemize}
+
+Model building is a core part of applied dynamics, but if we are to othere are many different activities
+
+What does it mean to build a model?
+
+\section{Conclusions}\label{conclusions}
+
+\chapter{What we Don't Know about Malaria}\label{what-we-dont-know-about-malaria}
+
+\section{}\label{section}
+
+\chapter{Realism}\label{realism}
 
 There are several reasons why models for policy will tend to be more complex than models developed for scientific research.
 In science, the questions are narrow and the study designs are focused enough to form tests of ideas that have clear outcomes.
@@ -2525,7 +2241,7 @@ In designing a software solution to the problem of building realistic models, we
 
 This chapter is an overview of the historical development of malaria models and an introduction to the toolbox. We'll cover the same material in much greater detail in the chapters that follow, and we'll construct examples using \texttt{exDE} and \texttt{MicroMoB}.
 
-\section{Malaria Epidemiology}\label{malaria-epidemiology}
+\section{Malaria Epidemiology}\label{malaria-epidemiology-1}
 
 \section{Transmission}\label{transmission}
 
@@ -2540,7 +2256,7 @@ The logic is that mosquitoes \emph{search} for humans. Differences among humans 
 
 To complete the picture, we consider how the expected rate of exposure could have a distribution in the population, which we call environmental heterogeneity.
 
-\section{Mosquito Ecology}\label{mosquito-ecology-2}
+\section{Mosquito Ecology}\label{mosquito-ecology-3}
 
 \subsection{Resource Availability}\label{resource-availability}
 
@@ -2725,11 +2441,11 @@ We have written the software that solves these equations in a package called \hr
 
 \part{Epidemiology}\label{part-epidemiology}
 
-\chapter{Malaria Epidemiology}\label{malaria-epidemiology-1}
+\chapter{Malaria Epidemiology}\label{malaria-epidemiology-2}
 
-\section{Parasite}\label{parasite}
+\section{Life Stages}\label{life-stages}
 
-\section{Epidemiology}\label{epidemiology}
+\section{Overview}\label{overview}
 
 A major challenge for malaria dynamics is how to define an state space describing malaria infection and immunity in human populations that captures the essential elements of malaria dynamics well enough to trust for making policies.
 There are features of malaria infections that have been identified and studied in the past: superinfection; the complex time course of an infection -- including fluctuating parasite densities -- and the problem of detection; gametogenesis, gametocyte maturation and gametocyte dynamics; fever and disease; development of immunity with exposure including its effects on infection, disease, and infectiousness; treatment, adherence to drug regimens, chemoprotection and infection curing. Over time, these issues have been addressed in various models.
@@ -2849,19 +2565,11 @@ In the end, we do not need perfect models of malaria infection and immunity, but
 
 In the chapters that follow, we will develop some models that based on a new concept -- the age of the youngest infection -- that combine many of the ideas in the chapters above.
 
-\chapter{Infection}\label{infection-2}
+\chapter{Malaria Infection}\label{malaria-infection}
 
 In the following sections, we walk through several models for the dynamics of malaria infection and immunity in humans. We cover infection and detection, immunity, infectiousness, disease, drug taking, and cohort dynamics.
 
-\section{Life Stages}\label{life-stages}
-
-\subsection{Sporozoites}\label{sporozoites}
-
-\subsection{Liver Stages}\label{liver-stages}
-
-\subsection{Asexual Stages}\label{asexual-stages}
-
-\subsection{Gametocytes}\label{gametocytes}
+\section{Stages of Infection}\label{stages-of-infection}
 
 \section{Controlled Infections}\label{controlled-infections}
 
@@ -2883,7 +2591,7 @@ In the following sections, we walk through several models for the dynamics of ma
 
 The state space modeling approach.
 
-\chapter{Superinfection}\label{superinfection-3}
+\chapter{Queuing Models}\label{queuing-models}
 
 \section{Parasite Densities and Detection}\label{parasite-densities-and-detection}
 
@@ -2937,15 +2645,17 @@ it is much easier to formulate models for malaria infection dynamics in cohorts 
 
 \section{Anti-Gametocyte Immunity}\label{anti-gametocyte-immunity}
 
-\chapter{Care Seeking}\label{care-seeking}
+\chapter{Within Host}\label{within-host}
 
-\chapter{Modeling Malaria Epidemiology}\label{modeling-malaria-epidemiology}
+\chapter{}\label{section-1}
+
+\chapter{Models and Malaria Epidemiology}\label{models-and-malaria-epidemiology}
 
 \section{}\label{section-2}
 
 \part{Transmission}\label{part-transmission}
 
-\chapter{Blood Feeding}\label{blood-feeding-1}
+\chapter{Blood Feeding}\label{blood-feeding}
 
 The endpoint
 
@@ -3031,7 +2741,7 @@ For humans, exposure to malaria means exposure to the bites of infectious mosqui
   In a chapter on {[}Approximation{]}, we use these models to discuss the problem of model-based inference.
 \end{itemize}
 
-\section{Overview}\label{overview}
+\section{Overview}\label{overview-1}
 
 Some reasons heterogeneous exposure to malaria have been documented in hundreds of studies. This is an overview.
 
@@ -3086,7 +2796,7 @@ One of the big themes we want to introduce here is that the outcomes of vector c
 
 \section{Aquatic Dynamics}\label{aquatic-dynamics}
 
-\subsection{Equations}\label{equations-3}
+\subsection{Equations}\label{equations-1}
 
 Here, we start with the equation for adult ecology from before, leaving out parasite transmission dynamics. We modify the basic slightly by adding one extra term that describes delayed maturation, a different response to crowding \autocite{SmithDL2013LarvalDynamics}. The mosquito maturation rate, \(\psi e^{-\sigma L}\) defines the average time from egg to emergence, and we add one parameter that slows down larval development in response to crowding. The per-capita mortality rate, \(\psi  + \theta L\), has two parts: a density independent term \(\psi\) and a response to mean crowding \(\theta L\). We assume that adults lay \(\chi\) eggs per feeding cycle.
 
@@ -3099,112 +2809,25 @@ Here, we start with the equation for adult ecology from before, leaving out para
 \end{array}
 \end{equation}
 
-\subsection{Solutions}\label{solutions-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{BasicAquatic\_dML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(t, y, params)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{c}\NormalTok{(params, }\FunctionTok{as.list}\NormalTok{(y)),\{}
-   
-  \CommentTok{\# Terms }
-\NormalTok{  Lambda }\OtherTok{=}\NormalTok{ psi}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{sigma}\SpecialCharTok{*}\NormalTok{L)}\SpecialCharTok{*}\NormalTok{L}\SpecialCharTok{/}\DecValTok{2} 
-\NormalTok{  eta }\OtherTok{=}\NormalTok{ chi}\SpecialCharTok{*}\NormalTok{f}\SpecialCharTok{*}\NormalTok{M }
-   
-  \CommentTok{\# Dynamics }
-\NormalTok{  dM }\OtherTok{=}\NormalTok{ Lambda }\SpecialCharTok{{-}}\NormalTok{ g}\SpecialCharTok{*}\NormalTok{M}
-\NormalTok{  dL }\OtherTok{=}\NormalTok{ eta }\SpecialCharTok{{-}}\NormalTok{ (psi}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{sigma}\SpecialCharTok{*}\NormalTok{L) }\SpecialCharTok{+}\NormalTok{ phi }\SpecialCharTok{+}\NormalTok{ theta}\SpecialCharTok{*}\NormalTok{L)}\SpecialCharTok{*}\NormalTok{L }
-  
-  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\FunctionTok{c}\NormalTok{(dM, dL)))}
-\NormalTok{\})\} }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{makePar\_BasicAquatic }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{f=}\DecValTok{1}\SpecialCharTok{/}\FloatTok{2.5}\NormalTok{, }\AttributeTok{g=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{chi =} \DecValTok{50}\NormalTok{, }\AttributeTok{psi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{phi =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\AttributeTok{theta =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\AttributeTok{sigma=}\DecValTok{0}\NormalTok{)\{}
-  \FunctionTok{list}\NormalTok{(}\AttributeTok{f=}\NormalTok{f, }\AttributeTok{g=}\NormalTok{g, }\AttributeTok{chi=}\NormalTok{chi, }\AttributeTok{psi=}\NormalTok{psi, }\AttributeTok{phi=}\NormalTok{phi, }\AttributeTok{theta=}\NormalTok{theta, }\AttributeTok{sigma=}\NormalTok{sigma)}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Solutions}\label{solutions-3}
 
 \subsection{Regulation}\label{regulation-1}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{tt }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{, }\AttributeTok{by=}\DecValTok{1}\NormalTok{) }
-\NormalTok{y0 }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\AttributeTok{M=}\DecValTok{1}\NormalTok{, }\AttributeTok{L=}\DecValTok{1}\NormalTok{)}
-\NormalTok{params }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{()}
-\NormalTok{params1 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{phi=}\DecValTok{1}\NormalTok{)}
-\NormalTok{params2 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{theta=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)}
-\NormalTok{params3 }\OtherTok{=} \FunctionTok{makePar\_BasicAquatic}\NormalTok{(}\AttributeTok{sigma=}\DecValTok{1}\SpecialCharTok{/}\DecValTok{100}\NormalTok{, }\AttributeTok{theta=}\DecValTok{0}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 This code solves the equations:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{require}\NormalTok{(deSolve)}
-\NormalTok{yout  }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params) }
-\NormalTok{yout1 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params1) }
-\NormalTok{yout2 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params2) }
-\NormalTok{yout3 }\OtherTok{\textless{}{-}} \FunctionTok{lsode}\NormalTok{(}\AttributeTok{y=}\NormalTok{y0, }\AttributeTok{times=}\NormalTok{tt, }\AttributeTok{func=}\NormalTok{BasicAquatic\_dML, }\AttributeTok{parms=}\NormalTok{params3) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plotML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{llwd=}\DecValTok{1}\NormalTok{, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"red"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
-  \FunctionTok{plot}\NormalTok{(time, L, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd=}\NormalTok{llwd, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{xlab =} \StringTok{"Time (Days)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{) }
-  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM, }\AttributeTok{lwd=}\NormalTok{llwd) }
-\NormalTok{\})\}}
-
-\NormalTok{addML }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(out, }\AttributeTok{llty =} \DecValTok{2}\NormalTok{, }\AttributeTok{llwd=}\DecValTok{1}\NormalTok{, }\AttributeTok{clrL =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"red"}\NormalTok{)\{}\FunctionTok{with}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(out),\{}
-  \FunctionTok{lines}\NormalTok{(time, L, }\AttributeTok{col =}\NormalTok{ clrL, }\AttributeTok{lty=}\NormalTok{llty, }\AttributeTok{lwd=}\NormalTok{llwd) }
-  \FunctionTok{lines}\NormalTok{(time, M, }\AttributeTok{col =}\NormalTok{ clrM, }\AttributeTok{lty=}\NormalTok{llty, }\AttributeTok{lwd=}\NormalTok{llwd) }
-\NormalTok{\})\}}
-\end{Highlighting}
-\end{Shaded}
 
 The first thing to point out is that changing the dynamics take some time to approach equilibrium -- a couple of months, in this model. The second is that increasing mortality rates for mosquitoes in aquatic habitats by a factor of 10 affects the mosquito densities in minor ways.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plotML}\NormalTok{(yout)}
-\FunctionTok{addML}\NormalTok{(yout1, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{_main_files/figure-latex/unnamed-chunk-68-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-90-1.pdf}
 
 The third is that increasing the response to mean crowding has a very strong effect on the population dynamics.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plotML}\NormalTok{(yout)}
-\FunctionTok{addML}\NormalTok{(yout2, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{_main_files/figure-latex/unnamed-chunk-69-1.pdf}
+\includegraphics{docs/figs/unnamed-chunk-91-1.pdf}
 
 The third point is that density dependent responses to mean crowding cause much larger changes to this system than density-dependent mortality. Aquatic dynamics have a strong tendency to oscillate, but more critically, delayed maturation strongly affects the ratio of adult mosquitoes to adults.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plotML}\NormalTok{(yout)}
-\FunctionTok{addML}\NormalTok{(yout3, }\AttributeTok{clrL =} \StringTok{"darkblue"}\NormalTok{, }\AttributeTok{clrM=}\StringTok{"darkred"}\NormalTok{, }\AttributeTok{llwd=}\FloatTok{1.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\includegraphics{docs/figs/compareML-1.pdf}
 
-\includegraphics{_main_files/figure-latex/compareML-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{_main_files/figure-latex/test-1.pdf}
+\includegraphics{docs/figs/test-1.pdf}
 
 \section{Understanding Mosquito Dynamics}\label{understanding-mosquito-dynamics}
 
@@ -3230,7 +2853,7 @@ This
 
 \part{Malaria Control}\label{part-malaria-control}
 
-\chapter{Malaria Control}\label{malaria-control-1}
+\chapter{Malaria Control}\label{malaria-control}
 
 \section{Health Systems}\label{health-systems}
 
@@ -3399,6 +3022,11 @@ Modeling mosquito population dynamics on point sets.
 \part{Supplements}\label{part-supplements}
 
 \chapter{References}\label{references}
+
+\begin{quote}
+\emph{There must have been a time, in the beginning, when we could have said -- no. But somehow we missed it.} (Guildenstern)\\
+--- from \emph{Rosencranz and Guildenstern are Dead}, Tom Stoppard
+\end{quote}
 
 If you want a PDF and can't find it at the link provided, let us know and we can help you find a copy.
 
