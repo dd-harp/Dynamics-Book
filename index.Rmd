@@ -42,27 +42,32 @@ knitr::opts_chunk$set(echo = FALSE, fig.path = "docs/figs/")
 # Foreword {-}
 
 A large fraction of my time over the past 25 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, malaria control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research. 
-In 1800, malaria was a disease characterized by recurring fevers. 
-By the 19th century, malaria was treated with a tea made from the bark of the Cinchona tree and then quinine, which was isolated in 1824. Later in the 19th century, observations made by Charles Laveran and Ronald Ross through light microscopy identified the cause of malaria and its mode of transmission 
-[@RossR1911Book;@SmithDL2012_RossMacdonald]. In the 1900s, Ross developed the first mathematical models of malaria transmission. 
-In the early 1950s, George Macdonald's quantitative synthesis of malaria epidemiology updated the mathematical theory.
-Klaus Dietz addressed some of the major failings of the Ross-Macdonald model in the 1970s, including publication of a new malaria model that was field tested in a malaria control trial called The Garki Project. 
-In the 1980s, mathematical models of malaria and other infectious diseases were taken up by departments of ecology, leading to innovation [@ReinerRC2013SystematicReview]. 
-In the 1990s, within-host models were developed [@MolineauxL1999ReviewIntrahost].
-Comprehensive individual-based malaria simulation models were developed at the Swiss Tropical Public Health Institute (2006), Imperial College (2010), and the Institute for Disease Modeling (2013). 
-I had been meanwhile working towards a mathematical and computational framework that was *not* an individual-based simulation model that could integrate the concepts and models that have influenced malaria through the present day [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels].
-I was also looking for a way of recasting theory for malaria epidemiology, transmission dynamics, and control to address some outstanding, unanswered questions [@SmithDL2014Recasting].
-The big vision was a tool for translating evidence into policy that was powerful enough to handle the complexity of malaria and the uncertainty about malaria epidemiology but that could be used to identify relevant details about malaria transmission dynamics and control for malaria policy.
+While I was building and analyzing models, I was looking for a way of organizing, synthesizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research.
 
+Malaria was a name for a disease associated with recurring fevers. Starting around 1660, malaria was treated with a tea made from the bark of the Cinchona tree. 
+In 1824, the drug quinine was isolated and used to treat malaria.
+Later in the 19th century, Charles Laveran and Ronald Ross identified the cause of malaria and its mode of transmission 
+[@RossR1911Book;@SmithDL2012_RossMacdonald]. 
 
-In collaboration with Uganda's National Malaria Control Division (NMCD) and the Bioko Island Malaria Elimination Program (BIMEP), we developed a malaria policy framework that we call ***adaptive malaria control,*** supported by a bespoke inferential framework that we have called ***robust analytics for malaria policy (RAMP):***
-analytics are robust if they characterize, quantify, and propagate uncertainty. 
-Since malaria is so complex, a core part of adaptive malaria control is using mathematical models for simulation-based analytics through iterative policy engagement. 
+In the 1900s, Ross developed the first mathematical models of malaria transmission to help with planning for the prevention of malaria. 
+In the early 1950s, George Macdonald's updated Ross's mathematical theory and published a quantitative synthesis of malaria epidemiology and control.
+Some of the weaknesses of Macdonald's model were exposed in field trials in the late 1960s. Many of these were addressed when Klaus Dietz and his colleagues published a new malaria model, in the 1970s, that was field tested in The Garki Project.
+In the 1980s, Dietz developed models describing seasonality, treatment with anti-malarial drugs, and heterogeneous transmission.
+Mathematical models of malaria and other infectious diseases were taken up by departments of ecology, leading to new and innovative approaches [@ReinerRC2013SystematicReview].
+In the 1990s, within-host malaria models were developed [@MolineauxL1999ReviewIntrahost]. 
+The mathematical theory developed for malaria epidemiology and transmission dynamics was incorporated into comprehensive individual-based malaria models (IBMs) developed at the Swiss Tropical Public Health Institute (2006), Imperial College (2010), and the Institute for Disease Modeling (2013). 
+
+IBMs had solved one of the core challenges of using models for malaria policy -- a practical way of dealing with the complexity of malaria. While these IBMs represented an important advance, I had some lingering questions about the relationship between exposure, immunity, age, and disease; the spatial scales that characterized malaria transmission [@SmithDL2014Recasting]; and the stability of malaria elimination [@SmithDL2013StickySituation;@ChiyakaC2013Sticky]. I started developing my own framework for individual-based simulation. Sean L. Wu and I developed an IBM, called MBITES, that could simulate adult mosquito ecology and behavior in exquisite detail [@WuSL2020MBITES]. As we attempted to connect MBITES to models of human infection and immunity, I confronted the heavy computational load associated with using MBITES to simulate mosquito blood feeding at an individual level. 
+
+I was looking for a way of translating evidence into policy that was powerful enough to handle the complexity of malaria and yet deal with the uncertainty. I was also hoping to identify a way of taming the complexity through identification of relevant detail [@LevinS1991RelevantDetail]. Despite the advantages of IBMs, I realized they might not be the tool I was looking for. 
+I shifted gears and started working towards a mathematical and computational framework that was *not* an individual-based simulation model [@ReinerRC2013SystematicReview;@SmithNR2018AgentbasedModels].
+
+I wanted a way of building models to support ***adaptive malaria control.*** 
+Since malaria is so complex and locally peculiar, a core part of adaptive malaria control is using mathematical models for simulation-based analytics through iterative policy engagement. 
 Over time, malaria programs *adapt* by identifying key knowledge gaps and modifying surveillance, monitoring and evaluation activities to fill those gaps. 
-We needed a mathematical framework for model building that was up to the task of analyzing malaria transmission dynamics and control *in situ,* all while quantifying and propagating uncertainty.
-Comprehensive individual-based simulation models had been developed to support malaria policy, but there were serious practical barriers to using these models outside of academic settings.
-I was looking for a more practical way of handling the complexity. 
+We wanted to give advice that was robust to uncertainty; analytics are robust if they characterize, quantify, and propagate uncertainty. 
+We needed a mathematical framework for model building that was up to the task of analyzing malaria transmission dynamics and control *in situ,* all while quantifying and propagating uncertainty. 
+Over time, we developed a bespoke inferential framework called ***robust analytics for malaria policy (RAMP):***
 
 I thus thus set out to develop a nimble mathematical and computational framework for model building. To support RAMP and adaptive malaria control, the framework should be *extensible,* with a *plug-and-play * modular design; 
 it should make it easy to swap out base models describing the core dynamics, and but it would also include flexibility in the choice of functional forms describing forcing and core processes.
@@ -80,7 +85,7 @@ In making a master list to test the framework's extensibility, we found that som
 Beyond the algorithms, these models needed the support of mathematical theory.
 We wanted to understand thresholds so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate. 
 
-Sometime in the fall of 2022, the last few pieces came together. We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. 
+Sometime in the fall of 2022, the last few pieces came together. In collaboration with Uganda's National Malaria Control Division (NMCD) and the Bioko Island Malaria Elimination Program (BIMEP), we have now developed a malaria policy framework that we call ***adaptive malaria control.*** We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. 
 We submitted a paper to PLoS Computational Biology [@WuSL2023SpatialDynamics]. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [Add the citation here when it is published]. Meanwhile, we decided to rebrand exDE as [**ramp.xde**](https://dd-harp.github.io/ramp.xde/) for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as [**ramp.dts**](https://dd-harp.github.io/ramp.dts/) (for discrete time systems).
 
 After all that, it was time to write this book. 
