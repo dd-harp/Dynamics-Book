@@ -224,9 +224,8 @@ div.csl-indent {
 <li class="chapter" data-level="3.9" data-path="3.9-history.html"><a href="3.9-history.html"><i class="fa fa-check"></i><b>3.9</b> History</a>
 <ul>
 <li class="chapter" data-level="3.9.1" data-path="3.9-history.html"><a href="3.9-history.html#lotka"><i class="fa fa-check"></i><b>3.9.1</b> Lotka</a></li>
-<li class="chapter" data-level="3.9.2" data-path="3.9-history.html"><a href="3.9-history.html#alfred-j.-lotka"><i class="fa fa-check"></i><b>3.9.2</b> Alfred J. Lotka</a></li>
-<li class="chapter" data-level="3.9.3" data-path="3.9-history.html"><a href="3.9-history.html#macdonald-and-medical-entomology"><i class="fa fa-check"></i><b>3.9.3</b> Macdonald and Medical Entomology</a></li>
-<li class="chapter" data-level="3.9.4" data-path="3.9-history.html"><a href="3.9-history.html#r_0-in-the-gmep"><i class="fa fa-check"></i><b>3.9.4</b> <span class="math inline">\(R_0\)</span> in the GMEP</a></li>
+<li class="chapter" data-level="3.9.2" data-path="3.9-history.html"><a href="3.9-history.html#macdonald-and-medical-entomology"><i class="fa fa-check"></i><b>3.9.2</b> Macdonald and Medical Entomology</a></li>
+<li class="chapter" data-level="3.9.3" data-path="3.9-history.html"><a href="3.9-history.html#r_0-in-the-gmep"><i class="fa fa-check"></i><b>3.9.3</b> <span class="math inline">\(R_0\)</span> in the GMEP</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-metrics-and-models.html"><a href="4-metrics-and-models.html"><i class="fa fa-check"></i><b>4</b> Metrics and Models</a>
@@ -662,8 +661,7 @@ The left hand side says “the difference in” <span class="math inline">\(x\)<
 \]</span></p>
 <p>These differential equation models have the same components as the difference equations: variables, initial conditions, and parameters.</p>
 <p>To compute anything, we will need to use numerical methods. Fortunately, R has a package to handle numerical methods for differential equations, called <strong>deSolve.</strong></p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="2.3-xdeRoss.html#cb76-1" tabindex="-1"></a><span class="fu">library</span>(deSolve)</span></code></pre></div>
-<p>Here, we present and solve <code>ross_xde</code>a continuous time, deterministic model that is similar to Ross’s 2nd model <span class="citation">[<a href="#ref-RossR1911Nature">1</a>]</span>.</p>
+<p>Here, we present and solve <code>ross_xde</code>a continuous time, deterministic model that is similar to Ross’s 2nd model <span class="citation">[<a href="#ref-RossR1911Nature">32</a>]</span>.</p>
 <div id="ross_xde" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> <code>ross_xde</code><a href="2.3-xdeRoss.html#ross_xde" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Variables</strong> – In <code>ross_xde,</code> the dependent variables have the same meaning as in the <code>ross_dts</code> equations, but the independent variable. We now write an equation describing the fraction of humans and mosquitoes that are infected at each point in time.</p>
@@ -672,7 +670,6 @@ The left hand side says “the difference in” <span class="math inline">\(x\)<
 <li><p>Let <span class="math inline">\(y(t)\)</span> be the fraction of mosquitoes who are infected at time <span class="math inline">\(t,\)</span> <span class="math inline">\(0 \leq y(t) \leq 1.\)</span></p></li>
 </ul>
 <p><strong>Initial Conditions</strong> – As before, we will need to define initial conditions.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="2.3-xdeRoss.html#cb77-1" tabindex="-1"></a>ross_xde_inits <span class="ot">=</span> <span class="fu">c</span>(<span class="at">x=</span><span class="fl">0.01</span>, <span class="at">y=</span><span class="fl">0.01</span>)</span></code></pre></div>
 <p><strong>Parameters</strong> – In this model, the parameters describe rates of change.</p>
 <ul>
 <li><p>Let <span class="math inline">\(r\)</span> denote the fraction of people who clear infections after one day; <span class="math inline">\(0 &lt; r &lt; 1.\)</span></p></li>
@@ -680,13 +677,6 @@ The left hand side says “the difference in” <span class="math inline">\(x\)<
 <li><p>Let <span class="math inline">\(a\)</span> denote the fraction of mosquitoes who blood feed on a human in a day; <span class="math inline">\(0 &lt; a &lt; 1.\)</span></p></li>
 <li><p>Let <span class="math inline">\(m\)</span> denote the number of mosquitoes per human; <span class="math inline">\(m \geq 0.\)</span></p></li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="2.3-xdeRoss.html#cb78-1" tabindex="-1"></a><span class="co"># The parameters, as list </span></span>
-<span id="cb78-2"><a href="2.3-xdeRoss.html#cb78-2" tabindex="-1"></a>ross_xde_par <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb78-3"><a href="2.3-xdeRoss.html#cb78-3" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="co"># The clearance rate for infections </span></span>
-<span id="cb78-4"><a href="2.3-xdeRoss.html#cb78-4" tabindex="-1"></a>  <span class="at">g =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>,  <span class="co"># The mosquito daily death rate </span></span>
-<span id="cb78-5"><a href="2.3-xdeRoss.html#cb78-5" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,   <span class="co"># The mosquito human blood feeding rate </span></span>
-<span id="cb78-6"><a href="2.3-xdeRoss.html#cb78-6" tabindex="-1"></a>  <span class="at">m =</span> <span class="fl">0.5</span>      <span class="co"># The number of mosquitoes per human</span></span>
-<span id="cb78-7"><a href="2.3-xdeRoss.html#cb78-7" tabindex="-1"></a>) </span></code></pre></div>
 <p><strong>Equations</strong> – Finally, we put all this together into a mathematical statement that has translated the description of a process. There are four terms:</p>
 <ul>
 <li><p>The fraction of humans who are infected is <span class="math inline">\(x\)</span>; infections clear at the rate <span class="math inline">\(r.\)</span></p></li>
@@ -701,34 +691,15 @@ dy/dt &amp;= ax(1-y) - g y \\
 \end{array}
 \]</span></p>
 <p>The form of the function that computes the derivatives in R is defined by <code>deSolve</code></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="2.3-xdeRoss.html#cb79-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
-<span id="cb79-2"><a href="2.3-xdeRoss.html#cb79-2" tabindex="-1"></a><span class="co"># t - the current time </span></span>
-<span id="cb79-3"><a href="2.3-xdeRoss.html#cb79-3" tabindex="-1"></a><span class="co"># vars - the variables, as a named vector </span></span>
-<span id="cb79-4"><a href="2.3-xdeRoss.html#cb79-4" tabindex="-1"></a><span class="co"># pars - the parameters, as a list</span></span>
-<span id="cb79-5"><a href="2.3-xdeRoss.html#cb79-5" tabindex="-1"></a><span class="co"># OUTPUTS</span></span>
-<span id="cb79-6"><a href="2.3-xdeRoss.html#cb79-6" tabindex="-1"></a><span class="co"># the derivatives, as a list </span></span>
-<span id="cb79-7"><a href="2.3-xdeRoss.html#cb79-7" tabindex="-1"></a>ross_xde <span class="ot">=</span> <span class="cf">function</span>(t, vars, pars){</span>
-<span id="cb79-8"><a href="2.3-xdeRoss.html#cb79-8" tabindex="-1"></a>  <span class="fu">with</span>(pars, </span>
-<span id="cb79-9"><a href="2.3-xdeRoss.html#cb79-9" tabindex="-1"></a>    <span class="fu">with</span>(<span class="fu">as.list</span>(vars),{</span>
-<span id="cb79-10"><a href="2.3-xdeRoss.html#cb79-10" tabindex="-1"></a>    </span>
-<span id="cb79-11"><a href="2.3-xdeRoss.html#cb79-11" tabindex="-1"></a>      dxdt <span class="ot">=</span> m<span class="sc">*</span>a<span class="sc">*</span>y<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x) <span class="sc">-</span> r<span class="sc">*</span>x</span>
-<span id="cb79-12"><a href="2.3-xdeRoss.html#cb79-12" tabindex="-1"></a>      dydt <span class="ot">=</span> a<span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>y) <span class="sc">-</span> g<span class="sc">*</span>y</span>
-<span id="cb79-13"><a href="2.3-xdeRoss.html#cb79-13" tabindex="-1"></a>  </span>
-<span id="cb79-14"><a href="2.3-xdeRoss.html#cb79-14" tabindex="-1"></a>      <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dxdt, dydt)))</span>
-<span id="cb79-15"><a href="2.3-xdeRoss.html#cb79-15" tabindex="-1"></a>    })</span>
-<span id="cb79-16"><a href="2.3-xdeRoss.html#cb79-16" tabindex="-1"></a>  )</span>
-<span id="cb79-17"><a href="2.3-xdeRoss.html#cb79-17" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="rates-vs.-proportions" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Rates <em>vs.</em> Proportions<a href="2.3-xdeRoss.html#rates-vs.-proportions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The rates in differential equations can be compared to the proportions in discrete time systems. When the rates describe a change of state, a loss term for one of the variables, there are two easy interpretations. First, we consider the rate of loss of infected humans in a population, <span class="math inline">\(-rx.\)</span> The core underlying process is exponential decay. If we followed a cohort, the waiting time for an individual to change states would follow an exponential distribution with rate <span class="math inline">\(1/r\)</span>. Second, after one day, the fraction that remains infected is <span class="math inline">\(e^{-r}\)</span>. If we set <span class="math inline">\(r=1/200,\)</span> for example, the expected waiting time to clear an infection is 200 days. The rate of loss after one day is very close to, but slightly less than <span class="math inline">\(r\)</span>:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="2.3-xdeRoss.html#cb80-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>, <span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">200</span>)) </span></code></pre></div>
 <pre><code>## [1] 0.005000000 0.004987521</code></pre>
 </div>
 <div id="solutions" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Solutions<a href="2.3-xdeRoss.html#solutions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We now want to solve the initial value problem: given <span class="math inline">\(x(0)\)</span> and <span class="math inline">\(y(0),\)</span> can we find solutions <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span>? To do so, we call <code>deSolve::ode,</code> which takes for arguments: the initial values, the points in time to ouput values of <span class="math inline">\(x(t)\)</span> and <span class="math inline">\(y(t)\)</span>, a function that computes the derivatives, and the parameters:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="2.3-xdeRoss.html#cb82-1" tabindex="-1"></a>deSolve<span class="sc">::</span><span class="fu">ode</span>(ross_xde_inits, <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, ross_xde, ross_xde_par)</span></code></pre></div>
 <pre><code>##   time          x          y
 ## 1    0 0.01000000 0.01000000
 ## 2    1 0.01128886 0.01172469
@@ -740,34 +711,14 @@ dy/dt &amp;= ax(1-y) - g y \\
 <div id="computation-visualization" class="section level3 hasAnchor" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Computation &amp; Visualization<a href="2.3-xdeRoss.html#computation-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For easy in working with these equations, we write a wrapper:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="2.3-xdeRoss.html#cb84-1" tabindex="-1"></a><span class="co"># INPUTS: </span></span>
-<span id="cb84-2"><a href="2.3-xdeRoss.html#cb84-2" tabindex="-1"></a><span class="co"># pars -- the parameter values, as a list</span></span>
-<span id="cb84-3"><a href="2.3-xdeRoss.html#cb84-3" tabindex="-1"></a><span class="co"># x0   -- the initial value for x(t) </span></span>
-<span id="cb84-4"><a href="2.3-xdeRoss.html#cb84-4" tabindex="-1"></a><span class="co"># y0   -- the initial value for y(t) </span></span>
-<span id="cb84-5"><a href="2.3-xdeRoss.html#cb84-5" tabindex="-1"></a><span class="co"># tmax -- the largest value of t  </span></span>
-<span id="cb84-6"><a href="2.3-xdeRoss.html#cb84-6" tabindex="-1"></a><span class="co"># dt   -- the interval for t </span></span>
-<span id="cb84-7"><a href="2.3-xdeRoss.html#cb84-7" tabindex="-1"></a><span class="co"># OUTPUT: </span></span>
-<span id="cb84-8"><a href="2.3-xdeRoss.html#cb84-8" tabindex="-1"></a><span class="co"># the output of ode as a data.frame </span></span>
-<span id="cb84-9"><a href="2.3-xdeRoss.html#cb84-9" tabindex="-1"></a>ross_xde_solve <span class="ot">=</span> <span class="cf">function</span>(pars, <span class="at">x0=</span>.<span class="dv">01</span>, <span class="at">y0=</span><span class="fl">0.001</span>, <span class="at">tmax=</span><span class="dv">100</span>, <span class="at">dt=</span><span class="dv">1</span>){</span>
-<span id="cb84-10"><a href="2.3-xdeRoss.html#cb84-10" tabindex="-1"></a>  tms <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, tmax, <span class="at">by =</span> dt)</span>
-<span id="cb84-11"><a href="2.3-xdeRoss.html#cb84-11" tabindex="-1"></a>  xy0 <span class="ot">=</span> <span class="fu">c</span>(<span class="at">x=</span>x0, <span class="at">y=</span>y0)</span>
-<span id="cb84-12"><a href="2.3-xdeRoss.html#cb84-12" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="fu">ode</span>(xy0, tms, ross_xde, pars)) </span>
-<span id="cb84-13"><a href="2.3-xdeRoss.html#cb84-13" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="2.3-xdeRoss.html#cb85-1" tabindex="-1"></a>deout <span class="ot">&lt;-</span> <span class="fu">ross_xde_solve</span>(ross_xde_par)</span></code></pre></div>
 <p>Because we have returned it as a data frame, the column names are <code>time</code> and <code>x</code> and <code>y.</code> We can plot the values using <code>with().</code></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="2.3-xdeRoss.html#cb86-1" tabindex="-1"></a><span class="fu">plot_xy</span>(deout)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-46-1.png" width="672" /></p>
 <p>These differential equations require</p>
 </div>
 <div id="steady-states-1" class="section level3 hasAnchor" number="2.3.5">
 <h3><span class="header-section-number">2.3.5</span> Steady States<a href="2.3-xdeRoss.html#steady-states-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can learn a bit more about how these equations behave by changing the initial values:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="2.3-xdeRoss.html#cb87-1" tabindex="-1"></a>deout1 <span class="ot">&lt;-</span> <span class="fu">ross_xde_solve</span>(ross_xde_par, <span class="at">x0=</span><span class="fl">0.2</span>, <span class="at">y0=</span><span class="fl">0.02</span>)</span>
-<span id="cb87-2"><a href="2.3-xdeRoss.html#cb87-2" tabindex="-1"></a>deout2 <span class="ot">&lt;-</span> <span class="fu">ross_xde_solve</span>(ross_xde_par, <span class="at">x0=</span>.<span class="dv">99</span>, <span class="at">y0=</span><span class="fl">0.99</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="2.3-xdeRoss.html#cb88-1" tabindex="-1"></a><span class="fu">plot_xy</span>(deout)</span>
-<span id="cb88-2"><a href="2.3-xdeRoss.html#cb88-2" tabindex="-1"></a><span class="fu">plot_xy</span>(deout1, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb88-3"><a href="2.3-xdeRoss.html#cb88-3" tabindex="-1"></a><span class="fu">plot_xy</span>(deout2, <span class="at">lty=</span><span class="dv">3</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-48-1.png" width="672" /></p>
 <p>We notice that the orbits all asymptotically approach the same values, regardless of where they started. Once there, they stay there.</p>
 </div>
 <div id="verification-1" class="section level3 hasAnchor" number="2.3.6">
@@ -786,17 +737,9 @@ dy/dt &amp;= ax(1-y) - g y \\
 and solve.</p>
 <p><span class="math display">\[x = \frac{\textstyle{m a^2 - rg}}{\textstyle{m a^2 + ra}}\]</span></p>
 <p>Noting that <span class="math inline">\(m a^2 &gt; rg\)</span> must be a threshold condition, we write a function to compute the steady state using the formula we just derived:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="2.3-xdeRoss.html#cb89-1" tabindex="-1"></a>ross_xde_steady_1 <span class="ot">=</span> <span class="cf">function</span>(pars){<span class="fu">with</span>(pars,{</span>
-<span id="cb89-2"><a href="2.3-xdeRoss.html#cb89-2" tabindex="-1"></a>  xx <span class="ot">=</span> <span class="fu">ifelse</span>(m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">&gt;</span> r<span class="sc">*</span>g, (m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> r<span class="sc">*</span>g)<span class="sc">/</span>(m<span class="sc">*</span>a<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> r<span class="sc">*</span>a), <span class="dv">0</span>) </span>
-<span id="cb89-3"><a href="2.3-xdeRoss.html#cb89-3" tabindex="-1"></a>  yy <span class="ot">=</span> a<span class="sc">*</span>xx<span class="sc">/</span>(g<span class="sc">+</span>a<span class="sc">*</span>xx)</span>
-<span id="cb89-4"><a href="2.3-xdeRoss.html#cb89-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">x=</span>xx, <span class="at">y=</span>yy)</span>
-<span id="cb89-5"><a href="2.3-xdeRoss.html#cb89-5" tabindex="-1"></a>})}</span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="2.3-xdeRoss.html#cb90-1" tabindex="-1"></a><span class="fu">ross_xde_steady_1</span>(ross_xde_par)</span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9487179 0.7400000</code></pre>
 <p>We check it against the other way, which involves running the system for a very long time.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="2.3-xdeRoss.html#cb92-1" tabindex="-1"></a>de_eq <span class="ot">&lt;-</span> <span class="fu">ross_xde_solve</span>(ross_xde_par, <span class="at">tmax=</span><span class="dv">500</span>, <span class="at">dt=</span><span class="dv">5</span>)</span>
-<span id="cb92-2"><a href="2.3-xdeRoss.html#cb92-2" tabindex="-1"></a><span class="fu">with</span>(de_eq, <span class="fu">c</span>(<span class="at">x=</span><span class="fu">tail</span>(x,<span class="dv">1</span>), <span class="at">y=</span><span class="fu">tail</span>(y,<span class="dv">1</span>))) </span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9487179 0.7400000</code></pre>
 </div>
@@ -808,7 +751,7 @@ and solve.</p>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-RossR1911Nature" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ross R. Some quantitative studies in epidemiology. Nature. 1911;87: 466–467. </div>
+<div class="csl-left-margin">32. </div><div class="csl-right-inline">Ross R. Some quantitative studies in epidemiology. Nature. 1911;87: 466–467. </div>
 </div>
 </div>
             </section>

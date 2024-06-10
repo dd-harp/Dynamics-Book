@@ -4,6 +4,16 @@ eq:ross1a
 eq:ross1b
 eq:ross1steady
 eq:ross1c
+eq:kappaDef
+eq:VCdefined
+eq:EIR2ndpart
+eq:EIR2VC
+eq:VCisdEIR
+eq:VCstory
+fig:unnamed-chunk-78
+fig:unnamed-chunk-86
+fig:unnamed-chunk-87
+fig:compareTS
 the-prevention-of-malaria
 the-quantitative-approach
 larval-source-management
@@ -51,7 +61,6 @@ vectorial-capacity
 classifying-transmission
 history
 lotka
-alfred-j.-lotka
 macdonald-and-medical-entomology
 r_0-in-the-gmep
 metrics-and-models

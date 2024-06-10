@@ -224,9 +224,8 @@ div.csl-indent {
 <li class="chapter" data-level="3.9" data-path="3.9-history.html"><a href="3.9-history.html"><i class="fa fa-check"></i><b>3.9</b> History</a>
 <ul>
 <li class="chapter" data-level="3.9.1" data-path="3.9-history.html"><a href="3.9-history.html#lotka"><i class="fa fa-check"></i><b>3.9.1</b> Lotka</a></li>
-<li class="chapter" data-level="3.9.2" data-path="3.9-history.html"><a href="3.9-history.html#alfred-j.-lotka"><i class="fa fa-check"></i><b>3.9.2</b> Alfred J. Lotka</a></li>
-<li class="chapter" data-level="3.9.3" data-path="3.9-history.html"><a href="3.9-history.html#macdonald-and-medical-entomology"><i class="fa fa-check"></i><b>3.9.3</b> Macdonald and Medical Entomology</a></li>
-<li class="chapter" data-level="3.9.4" data-path="3.9-history.html"><a href="3.9-history.html#r_0-in-the-gmep"><i class="fa fa-check"></i><b>3.9.4</b> <span class="math inline">\(R_0\)</span> in the GMEP</a></li>
+<li class="chapter" data-level="3.9.2" data-path="3.9-history.html"><a href="3.9-history.html#macdonald-and-medical-entomology"><i class="fa fa-check"></i><b>3.9.2</b> Macdonald and Medical Entomology</a></li>
+<li class="chapter" data-level="3.9.3" data-path="3.9-history.html"><a href="3.9-history.html#r_0-in-the-gmep"><i class="fa fa-check"></i><b>3.9.3</b> <span class="math inline">\(R_0\)</span> in the GMEP</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-metrics-and-models.html"><a href="4-metrics-and-models.html"><i class="fa fa-check"></i><b>4</b> Metrics and Models</a>
@@ -645,34 +644,22 @@ div.csl-indent {
 <p>What species of mathematics is best suited for a task? Does it matter what species of mathematics we choose to build our models?</p>
 <p>As we use models to help us understand malaria in some particular place, we are faced with some questions about to interpret the outputs of models. One of the reasons we presented deterministic and stochastic models in discrete-time and in continuous-time was to learn about about modeling by drawing attention to some of the differences – the models all represent the same process, but the outputs differ. Some of these differences are unsurprising and probably not important, but if we are to learn how to critically evaluate a model, we must pay attention to these differences.
 s</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-63-1.png" width="672" /></p>
 <div id="deterministic-models" class="section level3 hasAnchor" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Deterministic Models<a href="2.5-mathSpecies.html#deterministic-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the deterministic models, the variables over time are repeated in exactly the same way. If we changed a parameter or an initial condition, we would of course get different orbits. The discrete-time and continuous-time models differ slightly from each other. Some small differences will persist because we are dealing with non-linear processes.</p>
 <p>In the following, we have plotted the outputs of all three deterministic models, and the differences between the continuous time and the two discrete-time models (bottom). The main difference between the two models is that malaria prevalence increases more slowly in the discrete-time models. The model <code>ross_dts_1</code> is slightly closer to the continuous time model.</p>
-<p><img src="_main_files/figure-html/compare-1.png" width="672" /></p>
+<p><img src="figs/compare-1.png" width="672" /></p>
 <p>How different are these two models? We could develop a formal distance metric to compare two models. First, since the variables in the continuous-time model is defined for every value of <span class="math inline">\(t\)</span>, but the discrete-time model is defined only for integer values of <span class="math inline">\(t\)</span>, we can only make comparisons for integer values of <span class="math inline">\(t.\)</span> In the simulations above, we took care to output the values of both models at the same time points, so we can simply take the sum of squared differences:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="2.5-mathSpecies.html#cb103-1" tabindex="-1"></a>ssd_2mods <span class="ot">=</span> <span class="cf">function</span>(m1, m2, <span class="at">norm=</span><span class="dv">1</span>){</span>
-<span id="cb103-2"><a href="2.5-mathSpecies.html#cb103-2" tabindex="-1"></a>  dx <span class="ot">=</span> <span class="fu">sum</span>((<span class="fu">with</span>(m1, x) <span class="sc">-</span> <span class="fu">with</span>(m2, x))<span class="sc">^</span><span class="dv">2</span>) </span>
-<span id="cb103-3"><a href="2.5-mathSpecies.html#cb103-3" tabindex="-1"></a>  dy <span class="ot">=</span> <span class="fu">sum</span>((<span class="fu">with</span>(m1, y) <span class="sc">-</span> <span class="fu">with</span>(m2, y))<span class="sc">^</span><span class="dv">2</span>) </span>
-<span id="cb103-4"><a href="2.5-mathSpecies.html#cb103-4" tabindex="-1"></a>  <span class="fu">return</span>((dx<span class="sc">+</span>dy)<span class="sc">/</span>norm) </span>
-<span id="cb103-5"><a href="2.5-mathSpecies.html#cb103-5" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="2.5-mathSpecies.html#cb104-1" tabindex="-1"></a><span class="fu">ssd_2mods</span>(r_xde, r_dts, <span class="at">norm =</span> <span class="fu">length</span>(r_xde<span class="sc">$</span>time))</span></code></pre></div>
 <pre><code>## [1] 0.0003286306</code></pre>
 <p>Or the sub of their absolute values of the differences:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="2.5-mathSpecies.html#cb106-1" tabindex="-1"></a>sabs_2mods <span class="ot">=</span> <span class="cf">function</span>(m1, m2, <span class="at">norm=</span><span class="dv">1</span>){</span>
-<span id="cb106-2"><a href="2.5-mathSpecies.html#cb106-2" tabindex="-1"></a>  dx <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">with</span>(m1, x) <span class="sc">-</span> <span class="fu">with</span>(m2, x))) </span>
-<span id="cb106-3"><a href="2.5-mathSpecies.html#cb106-3" tabindex="-1"></a>  dy <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">abs</span>(<span class="fu">with</span>(m1, y) <span class="sc">-</span> <span class="fu">with</span>(m2, y)))</span>
-<span id="cb106-4"><a href="2.5-mathSpecies.html#cb106-4" tabindex="-1"></a>  <span class="fu">return</span>((dx<span class="sc">+</span>dy)<span class="sc">/</span>norm) </span>
-<span id="cb106-5"><a href="2.5-mathSpecies.html#cb106-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>We can interpret this to mean that the average sum of differences is about 1.6%</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="2.5-mathSpecies.html#cb107-1" tabindex="-1"></a><span class="fu">sabs_2mods</span>(r_xde, r1_dts, <span class="at">norm =</span> <span class="fu">length</span>(r_xde<span class="sc">$</span>time))</span></code></pre></div>
 <pre><code>## [1] 0.008878746</code></pre>
 </div>
 <div id="stochastic-models" class="section level3 hasAnchor" number="2.5.2">
 <h3><span class="header-section-number">2.5.2</span> Stochastic Models<a href="2.5-mathSpecies.html#stochastic-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In stochastic models, the values of the variables differ each time we run the model.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-68-1.png" width="672" /></p>
 </div>
 </div>
             </section>
