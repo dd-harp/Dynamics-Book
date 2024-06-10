@@ -283,7 +283,7 @@ As we can see, the values are changing a little at the end.
 
 We can now plot out the values over the first 40 days. Since `xy_t` is a named list, we transform it and plot:  
 
-```{r}
+```{r plot_ross_dts_1}
 with(data.frame(xy_t),{
   plot(t, x, type = "b", ylim = c(0,1), ylab = "prevalence", xlab = "time",
        col = "darkgreen",  pch=15)
@@ -343,7 +343,7 @@ plot_xy = function(xy_t, type = "l", lty=1, add=FALSE){with(xy_t,{
 
 Now, all the work we did above can be plotted using a single function call:  
 
-```{r, echo=TRUE}
+```{r replot_ross_dts_1, echo=TRUE}
 plot_xy(ross_dts_solve_1(ross_dts_par, tmax=40), type="p") 
 ```
 
@@ -430,7 +430,7 @@ ross_dts_steady_0(ross_dts_par1)
 
 What happens if we simulate this? (Let's set the initial conditions to reasonably high values) 
 
-```{r, echo=TRUE}
+```{r ross_dts_1_zero, echo=TRUE}
 plot_xy(ross_dts_solve_1(ross_dts_par1, x0 = .5, y0=.3, tmax=1500)) 
 ```
 
@@ -522,7 +522,7 @@ ross_dts_checkit_1(xy, ross_dts_par)
 
 There is another problem with the equations. If we set $m$ too high, such that at some point $m a y_t > 1,$ then the whole system eventually crashes:
 
-```{r, echo=TRUE}
+```{r ross_dts_mess, echo=TRUE}
 ross_dts_par3 = ross_dts_par
 ross_dts_par3$m = 20 
 plot_xy(ross_dts_solve_1(ross_dts_par3, x0 = .01, y0=.001, tmax=20), "b") 
@@ -595,7 +595,7 @@ ross_dts_solve_2 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
 
 Now, we can visualize the output using code we've already written, and can see that we have fixed our stability problem. 
 
-```{r, echo=TRUE}
+```{r plot_ross_dts_2, echo=TRUE}
 plot_xy(ross_dts_solve_2(ross_dts_par3, x0 = .01, y0=.001, tmax=20), "b") 
 ```
 
@@ -1021,13 +1021,13 @@ ross_xde_solve = function(pars, x0=.01, y0=0.001, tmax=100, dt=1){
 
 
 ```{r}
-deout <- ross_xde_solve(ross_xde_par)
+ode_out <- ross_xde_solve(ross_xde_par)
 ```
 
 Because we have returned it as a data frame, the column names are `time` and `x` and `y.` We can plot the values using `with().`
 
 ```{r}
-plot_xy(deout)
+plot_xy(ode_out)
 ```
 
 
@@ -1038,14 +1038,14 @@ These differential equations require
 We can learn a bit more about how these equations behave by changing the initial values: 
 
 ```{r}
-deout1 <- ross_xde_solve(ross_xde_par, x0=0.2, y0=0.02)
-deout2 <- ross_xde_solve(ross_xde_par, x0=.99, y0=0.99)
+ode_out1 <- ross_xde_solve(ross_xde_par, x0=0.2, y0=0.02)
+ode_out2 <- ross_xde_solve(ross_xde_par, x0=.99, y0=0.99)
 ```
 
 ```{r}
-plot_xy(deout)
-plot_xy(deout1, lty=2, add=TRUE)
-plot_xy(deout2, lty=3, add=TRUE)
+plot_xy(ode_out)
+plot_xy(ode_out1, lty=2, add=TRUE)
+plot_xy(ode_out2, lty=3, add=TRUE)
 ```
 
 We notice that the orbits all asymptotically approach the same values, regardless of where they started. Once there, they stay there. 
