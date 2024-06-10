@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-30" />
+<meta name="date" content="2024-06-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -647,37 +647,39 @@ div.csl-indent {
 <h1 class="title">Applied Malaria Dynamics</h1>
 <h2 class="subtitle"><em>Theory and Computation for Robust Analytics and Adaptive Malaria Control</em></h2>
 <p class="author"><em>David L. Smith and the RAMP Team</em></p>
-<p class="date"><em>2024-05-30</em></p>
+<p class="date"><em>2024-06-07</em></p>
 </div>
 <div id="foreword" class="section level1 unnumbered hasAnchor">
 <h1>Foreword<a href="index.html#foreword" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>A large fraction of my time over the past 25 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, malaria control, and the evolution of drug and insecticide resistance.
-All the time I was building and analyzing models, I was looking for a way of organizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research.
-In 1800, malaria was a disease characterized by recurring fevers.
-By the 19th century, malaria was treated with a tea made from the bark of the Cinchona tree and then quinine, which was isolated in 1824. Later in the 19th century, observations made by Charles Laveran and Ronald Ross through light microscopy identified the cause of malaria and its mode of transmission
-<span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>. In the 1900s, Ross developed the first mathematical models of malaria transmission.
-In the early 1950s, George Macdonald’s quantitative synthesis of malaria epidemiology updated the mathematical theory.
-Klaus Dietz addressed some of the major failings of the Ross-Macdonald model in the 1970s, including publication of a new malaria model that was field tested in a malaria control trial called The Garki Project.
-In the 1980s, mathematical models of malaria and other infectious diseases were taken up by departments of ecology, leading to innovation <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>]</span>.
-In the 1990s, within-host models were developed <span class="citation">[<a href="#ref-MolineauxL1999ReviewIntrahost">4</a>]</span>.
-Comprehensive individual-based malaria simulation models were developed at the Swiss Tropical Public Health Institute (2006), Imperial College (2010), and the Institute for Disease Modeling (2013).
-I had been meanwhile working towards a mathematical and computational framework that was <em>not</em> an individual-based simulation model that could integrate the concepts and models that have influenced malaria through the present day <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">5</a>]</span>.
-I was also looking for a way of recasting theory for malaria epidemiology, transmission dynamics, and control to address some outstanding, unanswered questions <span class="citation">[<a href="#ref-SmithDL2014Recasting">6</a>]</span>.
-The big vision was a tool for translating evidence into policy that was powerful enough to handle the complexity of malaria and the uncertainty about malaria epidemiology but that could be used to identify relevant details about malaria transmission dynamics and control for malaria policy.</p>
-<p>In collaboration with Uganda’s National Malaria Control Division (NMCD) and the Bioko Island Malaria Elimination Program (BIMEP), we developed a malaria policy framework that we call <strong><em>adaptive malaria control,</em></strong> supported by a bespoke inferential framework that we have called <strong><em>robust analytics for malaria policy (RAMP):</em></strong>
-analytics are robust if they characterize, quantify, and propagate uncertainty.
-Since malaria is so complex, a core part of adaptive malaria control is using mathematical models for simulation-based analytics through iterative policy engagement.
+While I was building and analyzing models, I was looking for a way of organizing, synthesizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research.</p>
+<p>Malaria was a name for a disease associated with recurring fevers. Starting around 1660, malaria was treated with a tea made from the bark of the Cinchona tree.
+In 1824, the drug quinine was isolated and used to treat malaria.
+Later in the 19th century, Charles Laveran and Ronald Ross identified the cause of malaria and its mode of transmission
+<span class="citation">[<a href="#ref-RossR1911Book">1</a>,<a href="#ref-SmithDL2012_RossMacdonald">2</a>]</span>.</p>
+<p>In the 1900s, Ross developed the first mathematical models of malaria transmission to help with planning for the prevention of malaria.
+In the early 1950s, George Macdonald’s updated Ross’s mathematical theory and published a quantitative synthesis of malaria epidemiology and control.
+Some of the weaknesses of Macdonald’s model were exposed in field trials in the late 1960s. Many of these were addressed when Klaus Dietz and his colleagues published a new malaria model, in the 1970s, that was field tested in The Garki Project.
+In the 1980s, Dietz developed models describing seasonality, treatment with anti-malarial drugs, and heterogeneous transmission.
+Mathematical models of malaria and other infectious diseases were taken up by departments of ecology, leading to new and innovative approaches <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>]</span>.
+In the 1990s, within-host malaria models were developed <span class="citation">[<a href="#ref-MolineauxL1999ReviewIntrahost">4</a>]</span>.
+The mathematical theory developed for malaria epidemiology and transmission dynamics was incorporated into comprehensive individual-based malaria models (IBMs) developed at the Swiss Tropical Public Health Institute (2006), Imperial College (2010), and the Institute for Disease Modeling (2013).</p>
+<p>IBMs had solved one of the core challenges of using models for malaria policy – a practical way of dealing with the complexity of malaria. While these IBMs represented an important advance, I had some lingering questions about the relationship between exposure, immunity, age, and disease; the spatial scales that characterized malaria transmission <span class="citation">[<a href="#ref-SmithDL2014Recasting">5</a>]</span>; and the stability of malaria elimination <span class="citation">[<a href="#ref-SmithDL2013StickySituation">6</a>,<a href="#ref-ChiyakaC2013Sticky">7</a>]</span>. I started developing my own framework for individual-based simulation. Sean L. Wu and I developed an IBM, called MBITES, that could simulate adult mosquito ecology and behavior in exquisite detail <span class="citation">[<a href="#ref-WuSL2020MBITES">8</a>]</span>. As we attempted to connect MBITES to models of human infection and immunity, I confronted the heavy computational load associated with using MBITES to simulate mosquito blood feeding at an individual level.</p>
+<p>I was looking for a way of translating evidence into policy that was powerful enough to handle the complexity of malaria and yet deal with the uncertainty. I was also hoping to identify a way of taming the complexity through identification of relevant detail <span class="citation">[<a href="#ref-LevinS1991RelevantDetail">9</a>]</span>. Despite the advantages of IBMs, I realized they might not be the tool I was looking for.
+I shifted gears and started working towards a mathematical and computational framework that was <em>not</em> an individual-based simulation model <span class="citation">[<a href="#ref-ReinerRC2013SystematicReview">3</a>,<a href="#ref-SmithNR2018AgentbasedModels">10</a>]</span>.</p>
+<p>I wanted a way of building models to support <strong><em>adaptive malaria control.</em></strong>
+Since malaria is so complex and locally peculiar, a core part of adaptive malaria control is using mathematical models for simulation-based analytics through iterative policy engagement.
 Over time, malaria programs <em>adapt</em> by identifying key knowledge gaps and modifying surveillance, monitoring and evaluation activities to fill those gaps.
+We wanted to give advice that was robust to uncertainty; analytics are robust if they characterize, quantify, and propagate uncertainty.
 We needed a mathematical framework for model building that was up to the task of analyzing malaria transmission dynamics and control <em>in situ,</em> all while quantifying and propagating uncertainty.
-Comprehensive individual-based simulation models had been developed to support malaria policy, but there were serious practical barriers to using these models outside of academic settings.
-I was looking for a more practical way of handling the complexity.</p>
+Over time, we developed a bespoke inferential framework called <strong><em>robust analytics for malaria policy (RAMP):</em></strong></p>
 <p>I thus thus set out to develop a nimble mathematical and computational framework for model building. To support RAMP and adaptive malaria control, the framework should be <em>extensible,</em> with a <em>plug-and-play </em> modular design;
 it should make it easy to swap out base models describing the core dynamics, and but it would also include flexibility in the choice of functional forms describing forcing and core processes.
 To get malaria transmission right, we would need to be able to deal with heterogeneity of all sorts.
 The framework should be structurally flexible, so that a model could incorporate space, time, and human population strata to deal with demography and population heterogeneity.
-It should have scalability to handle realism and complexity: it should be possible to scale down spatial granularity for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">7</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">9</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">10</a>]</span>, or to scale up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">11</a>]</span>.
+It should have scalability to handle realism and complexity: it should be possible to scale down spatial granularity for fine-grained spatial simulations <span class="citation">[<a href="#ref-CarterR2002SpatialSimulation">11</a>–<a href="#ref-PerkinsTA2013HeterogeneityMixing">13</a>]</span>, to scale down temporally for fine-grained temporal simulations <span class="citation">[<a href="#ref-WuSL2020MBITES">8</a>]</span>, or to scale up to understand or analyze regional processes and the emerging patterns <span class="citation">[<a href="#ref-TatemAJ2010InternationalPopulation">14</a>]</span>.
 To serve the needs of malaria programs, a framework would need built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control.
-To get integrated vector control right, we went all-in with an individual-based simulation model for mosquito ecology and behavior (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">10</a>]</span>.
+To get integrated vector control right, we went all-in with an individual-based simulation model for mosquito ecology and behavior (called MBITES) that could handle exquisite biological detail <span class="citation">[<a href="#ref-WuSL2020MBITES">8</a>]</span>.
 MBITES was inspirational but impractical, so we revisited models to incorporate new ideas about mosquito search and behaviors.
 To serve programmatic needs, we developed algorithms and theory with skill sets that included the durability of interventions – the waning potency of insecticides or decaying coverage –
 and the net effect of one unit of vector control in relation to transmission intensity and coverage.
@@ -686,8 +688,8 @@ In some cases, the interface designs called for development of new algorithms: b
 In making a master list to test the framework’s extensibility, we found that some odd cases that needed to pass information among components – endectocides and auto-disseminated larvicides – but it was easy enough to accommodate these.
 Beyond the algorithms, these models needed the support of mathematical theory.
 We wanted to understand thresholds so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate.</p>
-<p>Sometime in the fall of 2022, the last few pieces came together. We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN.
-We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">12</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [Add the citation here when it is published]. Meanwhile, we decided to rebrand exDE as <a href="https://dd-harp.github.io/ramp.xde/"><strong>ramp.xde</strong></a> for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as <a href="https://dd-harp.github.io/ramp.dts/"><strong>ramp.dts</strong></a> (for discrete time systems).</p>
+<p>Sometime in the fall of 2022, the last few pieces came together. In collaboration with Uganda’s National Malaria Control Division (NMCD) and the Bioko Island Malaria Elimination Program (BIMEP), we have now developed a malaria policy framework that we call <strong><em>adaptive malaria control.</em></strong> We published the first versions of <a href="https://cran.r-project.org/package=MicroMoB">MicroMoB</a> and <a href="https://CRAN.R-project.org/package=exDE">exDE</a> at CRAN.
+We submitted a paper to PLoS Computational Biology <span class="citation">[<a href="#ref-WuSL2023SpatialDynamics">15</a>]</span>. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [Add the citation here when it is published]. Meanwhile, we decided to rebrand exDE as <a href="https://dd-harp.github.io/ramp.xde/"><strong>ramp.xde</strong></a> for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as <a href="https://dd-harp.github.io/ramp.dts/"><strong>ramp.dts</strong></a> (for discrete time systems).</p>
 <p>After all that, it was time to write this book.</p>
 <!-- In adaptive malaria control, we assume that policy needs mathematical models and concepts, but ideally, the mathematics would serve a role without drawing unnecessary attention. -->
 <!-- Malaria policy discussions must focus on the issues at hand, including the concepts and evidence, not on the mathematics *per se*. -->
@@ -726,7 +728,7 @@ I will also be writing and recording some short lectures on a subset of topics.<
 <hr />
 <p>In doing all this, we are building on an enormous body of work that started with Ronald Ross. While Ross is better known for identifying malaria parasites in a mosquito gut, which proved that malaria is mosquito transmitted, we are more interested in the rest of his career.</p>
 <p>After winning the Nobel Prize in 1902, Ross was instrumental in building solid quantitative foundations for malaria transmission and its measurement. Ronald Ross wrote the first models describing malaria transmission. In his writings from 1899 to 1911, it’s clear that he was searching for quantitative way of saying something simple – if there are not enough mosquitoes, the malaria transmission can’t be sustained. There must be a critical mosquito density, above the cutoff malaria transmission would be sustained, and below it malaria would be eliminated. Ross was looking for a formula that encapsulated his intuition: how were thresholds related to the fact that it took two bites for a mosquito to complete its life cycle? Eventually, Ross wrote down some systems of equations that would describe malaria. The ideas, mathematics, and identification of parameters and processes were extended by other scientists later, most notably Alfred Lotka and George Macdonald.</p>
-<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">13</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">14</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
+<p>It seems that the challenge of malaria control was what pushed Ross toward modeling. Ross’s first model was a discussion of adult mosquito movement to guide larval source management <span class="citation">[<a href="#ref-RossR1905LogicalBasis">16</a>]</span>. The first model describing malaria transmission appeared in a book, <em>The Prevention of Malaria in Mauritius</em> <span class="citation">[<a href="#ref-RossR1908">17</a>]</span>. When it came to thinking through control, Ross found it useful to do the math. More than a century later, this book is a look at what his vision has become.</p>
 <p>–David L. Smith</p>
 </div>
 <h3>References</h3>
@@ -743,32 +745,41 @@ I will also be writing and recording some short lectures on a subset of topics.<
 <div id="ref-MolineauxL1999ReviewIntrahost" class="csl-entry">
 <div class="csl-left-margin">4. </div><div class="csl-right-inline">Molineaux L, Dietz K. Review of intra-host models of malaria. Parassitologia. 1999;41: 221–231. Available: <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=10697860&amp;retmode=ref&amp;cmd=prlinks</a></div>
 </div>
-<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
-<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
-</div>
 <div id="ref-SmithDL2014Recasting" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Smith DL, Perkins TA, Reiner RC Jr, Barker CM, Niu T, Chaves LF, et al. Recasting the theory of mosquito-borne pathogen transmission dynamics and control. Trans R Soc Trop Med Hyg. 2014;108: 185–197. doi:<a href="https://doi.org/10.1093/trstmh/tru026">10.1093/trstmh/tru026</a></div>
 </div>
-<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
-<div class="csl-left-margin">7. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
+<div id="ref-SmithDL2013StickySituation" class="csl-entry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Smith DL, Cohen JM, Chiyaka C, Johnston G, Gething PW, Gosling R, et al. A sticky situation: The unexpected stability of malaria elimination. Philos Trans R Soc Lond B Biol Sci. 2013;368: 20120145. doi:<a href="https://doi.org/10.1098/rstb.2012.0145">10.1098/rstb.2012.0145</a></div>
 </div>
-<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
+<div id="ref-ChiyakaC2013Sticky" class="csl-entry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Chiyaka C, Tatem AJ, Cohen JM, Gething PW, Johnston G, Gosling R, et al. Infectious disease. <span>The</span> stability of malaria elimination. Science. 2013;339: 909–910. doi:<a href="https://doi.org/10.1126/science.1229509">10.1126/science.1229509</a></div>
 </div>
 <div id="ref-WuSL2020MBITES" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Wu SL, Sánchez C HM, Henry JM, Citron DT, Zhang Q, Compton K, et al. Vector bionomics and vectorial capacity as emergent properties of mosquito behaviors and ecology. PLoS Comput Biol. 2020;16: e1007446. doi:<a href="https://doi.org/10.1371/journal.pcbi.1007446">10.1371/journal.pcbi.1007446</a></div>
+</div>
+<div id="ref-LevinS1991RelevantDetail" class="csl-entry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Levin S. The <span>Problem</span> of <span>Relevant</span> <span>Detail</span>. In: Busenberg S, Martelli M, editors. Differential <span>Equations</span> <span>Models</span> in <span>Biology</span>, <span>Epidemiology</span> and <span>Ecology</span>: <span>Proceedings</span> of a <span>Conference</span> held in <span>Claremont</span> <span>California</span>, <span>January</span> 13–16, 1990. Berlin, Heidelberg: Springer Berlin Heidelberg; 1991. pp. 9–15. doi:<a href="https://doi.org/10.1007/978-3-642-45692-3_1">10.1007/978-3-642-45692-3_1</a></div>
+</div>
+<div id="ref-SmithNR2018AgentbasedModels" class="csl-entry">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Smith NR, Trauer JM, Gambhir M, Richards JS, Maude RJ, Keith JM, et al. Agent-based models of malaria transmission: <span>A</span> systematic review. Malar J. 2018;17: 299. doi:<a href="https://doi.org/10.1186/s12936-018-2442-y">10.1186/s12936-018-2442-y</a></div>
+</div>
+<div id="ref-CarterR2002SpatialSimulation" class="csl-entry">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Carter R. Spatial simulation of malaria transmission and its control by malaria transmission blocking vaccination. International Journal for Parasitology. 2002;32: 1617–1624. doi:<a href="https://doi.org/10.1016/S0020-7519(02)00190-X">10.1016/S0020-7519(02)00190-X</a></div>
+</div>
+<div id="ref-PerkinsTA2013HeterogeneityMixing" class="csl-entry">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Perkins TA, Scott TW, Le Menach A, Smith DL. Heterogeneity, mixing, and the spatial scales of mosquito-borne pathogen transmission. PLoS Comput Biol. 2013;9: e1003327. </div>
 </div>
 <div id="ref-TatemAJ2010InternationalPopulation" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <em><span>Plasmodium</span> falciparum</em> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Tatem AJ, Smith DL. International population movements and regional <em><span>Plasmodium</span> falciparum</em> malaria elimination strategies. Proc Natl Acad Sci U S A. 2010;107: 12222–12227. doi:<a href="https://doi.org/10.1073/pnas.1002971107">10.1073/pnas.1002971107</a></div>
 </div>
 <div id="ref-WuSL2023SpatialDynamics" class="csl-entry">
-<div class="csl-left-margin">12. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Wu SL, Henry JM, Citron DT, Ssebuliba DM, Nsumba JN, C HMS, et al. Spatial dynamics of malaria transmission. PLOS Computational Biology. 2023;19: e1010684. doi:<a href="https://doi.org/10.1371/journal.pcbi.1010684">10.1371/journal.pcbi.1010684</a></div>
 </div>
 <div id="ref-RossR1905LogicalBasis" class="csl-entry">
-<div class="csl-left-margin">13. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Ross R. The logical basis of the sanitary policy of mosquito reduction. Science. 1905;22: 689–699. doi:<a href="https://doi.org/10.1126/science.22.570.689">10.1126/science.22.570.689</a></div>
 </div>
 <div id="ref-RossR1908" class="csl-entry">
-<div class="csl-left-margin">14. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. London: Waterlow; 1908. </div>
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Ross R. Report on the <span>Prevention</span> of <span>Malaria</span> in <span>Mauritius</span>. London: Waterlow; 1908. </div>
 </div>
 </div>
             </section>

@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-30" />
+<meta name="date" content="2024-06-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -700,7 +700,7 @@ g \bar Y e^{-g\tau} = g \bar Z
 <p><span class="math display">\[\begin{equation}
 \mbox{EIR} = \frac{\textstyle{fq\Lambda}}{\textstyle{H}} \times \frac{\textstyle{f q \kappa}}{\textstyle{g + fq \kappa}} e^{-g\tau}
 \end{equation}\]</span></p>
-<p>This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model <span class="citation">[<a href="#ref-MacdonaldG1952Sporozoite">39</a>,<a href="#ref-ArmitageP1953">58</a>]</span>. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography <span class="citation">[<a href="#ref-SmithDL2004Statics">67</a>]</span>.</p>
+<p>This formula for the SR (albeit with slightly different notation) was originally derived as part of the Ross-Macdonald model <span class="citation">[<a href="#ref-MacdonaldG1952Sporozoite">42</a>,<a href="#ref-ArmitageP1953">61</a>]</span>. Also, Smith and McKenzie (2004) have written a useful discussion of mosquito demography <span class="citation">[<a href="#ref-SmithDL2004Statics">70</a>]</span>.</p>
 </div>
 <div id="vectorial-capacity-2" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Vectorial Capacity<a href="8.2-steady-states-3.html#vectorial-capacity-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -748,8 +748,8 @@ V = \frac{\Lambda}{H} S^2  e^{-g\tau}
 \end{equation}\]</span></p>
 <p>As a reminder, while Eq. <a href="8.2-steady-states-3.html#eq:VCstory">(8.6)</a> includes <span class="math inline">\(\kappa\)</span>, the formula for VC, in Eq. <a href="8.2-steady-states-3.html#eq:VCdefined">(8.2)</a>, assumes that <span class="math inline">\(\kappa=1\)</span>: the VC describes transmission as if humans were perfectly infectious. It was defined this way on purpose: it was meant to include mosquito parameters and exclude human factors. We can think of VC as defining something like a conditional expectation, a maximum, or (as we have already said) a measure of <em>potential transmission by mosquitoes</em> that is independent of human factors.</p>
 <p>While <span class="math inline">\(\kappa\)</span> (the numerator in Eq.<a href="8.2-steady-states-3.html#eq:EIR2ndpart">(8.3)</a> accounts for <em>most</em> of the difference between the EIR and the VC, the rest of the difference is due to the denominator in Eq. <a href="8.2-steady-states-3.html#eq:EIR2ndpart">(8.3)</a>, <span class="math inline">\(1+S\kappa\)</span>, which traces back to the formula from <span class="math inline">\(dY/dt\)</span>, which assumes that mosquitoes are either infected or not. The denominator is a measure of saturation – the fraction of mosquitoes that get <em>superinfected</em> with parasites. The main point here is that as <span class="math inline">\(\kappa\)</span> increases, saturation increases. If we set <span class="math inline">\(S\)</span> to the values in the previous plots, we can isolate the relationship:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-83"></span>
-<img src="docs/figs/unnamed-chunk-83-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-85"></span>
+<img src="docs/figs/unnamed-chunk-85-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
 <p class="caption">
 Figure 8.1: The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.
 </p>
@@ -815,7 +815,7 @@ R_0 = \frac{bcV}{r}.
 <p>We make a parameter set that defines the model:</p>
 <pre><code>## [1] 600.00000 211.01706  91.70764 793.10541</code></pre>
 <p>By plotting it out, we can check to see if we’ve run it for long enough:</p>
-<p><img src="docs/figs/unnamed-chunk-86-1.png" width="528" /></p>
+<p><img src="docs/figs/unnamed-chunk-88-1.png" width="528" /></p>
 <p>We can check our algebra by computing the same quantities, and <span class="math inline">\(R_0\)</span> and other quantities we care about:</p>
 <pre><code>## $std
 ##         M         Y         Z         X 
@@ -837,13 +837,13 @@ R_0 = \frac{bcV}{r}.
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-MacdonaldG1952Sporozoite" class="csl-entry">
-<div class="csl-left-margin">39. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
+<div class="csl-left-margin">42. </div><div class="csl-right-inline">Macdonald G. The analysis of the sporozoite rate. Trop Dis Bull. 1952;49: 569–586. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14958825">https://www.ncbi.nlm.nih.gov/pubmed/14958825</a></div>
 </div>
 <div id="ref-ArmitageP1953" class="csl-entry">
-<div class="csl-left-margin">58. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
+<div class="csl-left-margin">61. </div><div class="csl-right-inline">Armitage P. A note on the epidemiology of malaria. Trop Dis Bull. 1953;50: 890–892. </div>
 </div>
 <div id="ref-SmithDL2004Statics" class="csl-entry">
-<div class="csl-left-margin">67. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria Journal. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
+<div class="csl-left-margin">70. </div><div class="csl-right-inline">Smith DL, McKenzie FE. Statics and dynamics of malaria infection in <span>Anopheles</span> mosquitoes. Malaria Journal. 2004;3: 13. doi:<a href="https://doi.org/10.1186/1475-2875-3-13">10.1186/1475-2875-3-13</a></div>
 </div>
 </div>
             </section>

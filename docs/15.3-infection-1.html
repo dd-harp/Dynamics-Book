@@ -23,7 +23,7 @@
 <meta name="author" content="David L. Smith and the RAMP Team" />
 
 
-<meta name="date" content="2024-05-30" />
+<meta name="date" content="2024-06-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -647,8 +647,8 @@ div.csl-indent {
 <h2><span class="header-section-number">15.3</span> Infection<a href="15.3-infection-1.html#infection-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="superinfection" class="section level3 hasAnchor" number="15.3.1">
 <h3><span class="header-section-number">15.3.1</span> Superinfection<a href="15.3-infection-1.html#superinfection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>From early on in malaria epidemiology it was clear that exposure to malaria differed among populations, and that in some places, the rate of exposure was far higher than the rate of clearance. Ross emphasized a need to measure exposure both entomologically, through metrics that are known today as the EIR and the FoI, and parasitologically, through the prevalence of infection by light microscopy (or more commonly today, through RDTs), which was called the malaria <em>parasite rate</em> . There was no good reason to believe that people in highly malarious areas would be exposed faster than they would clear infections, so they would carry infections that could be traced back to many infectious mosquitoes <span class="citation">[<a href="#ref-WaltonGA1947ControlMalaria">78</a>]</span>. This phenomenon was called superinfection.</p>
-<p>Macdonald was the first to develop a mechanistic model of superinfection <span class="citation">[<a href="#ref-MacdonaldG1950Superinfection">57</a>]</span>, but the mathematical formulation was at odds with his description <span class="citation">[<a href="#ref-FinePEM1975SuperinfectionProblem">52</a>]</span>. It is an interesting bit of history for a different time.</p>
+<p>From early on in malaria epidemiology it was clear that exposure to malaria differed among populations, and that in some places, the rate of exposure was far higher than the rate of clearance. Ross emphasized a need to measure exposure both entomologically, through metrics that are known today as the EIR and the FoI, and parasitologically, through the prevalence of infection by light microscopy (or more commonly today, through RDTs), which was called the malaria <em>parasite rate</em> . There was no good reason to believe that people in highly malarious areas would be exposed faster than they would clear infections, so they would carry infections that could be traced back to many infectious mosquitoes <span class="citation">[<a href="#ref-WaltonGA1947ControlMalaria">81</a>]</span>. This phenomenon was called superinfection.</p>
+<p>Macdonald was the first to develop a mechanistic model of superinfection <span class="citation">[<a href="#ref-MacdonaldG1950Superinfection">60</a>]</span>, but the mathematical formulation was at odds with his description <span class="citation">[<a href="#ref-FinePEM1975SuperinfectionProblem">55</a>]</span>. It is an interesting bit of history for a different time.</p>
 <p>A mathematical basis for understanding superinfection was worked out as a problem in the study of stochastic processes as part of <em>queueing theory.</em> This may seem strange, but understanding how many people are queueing involves understanding how people come in and how fast they are processed. One of these queuing models has become a mainstay of malaria epidemiology; in queuing theory, it is called <span class="math inline">\(M/M/\infty\)</span>.</p>
 <p>The model tracks the <strong>multiplicity of infection</strong> (MoI). It assumes that infections arrive through exposure at a rate <span class="math inline">\(h\)</span> (the FoI), and that they clear independently. Without clearance, the MoI, denoted <span class="math inline">\(\zeta\)</span>, would just go up. The model assumes that each infection clears at the rate <span class="math inline">\(r\)</span>; if the MoI were <span class="math inline">\(3\)</span> then infections would clear at the rate <span class="math inline">\(3r\)</span>. Regardless of how fast infections arrive, the fact that the pressure for the MOI to go down increases with MoI means that the MoI will reach a stable state. The mean MoI is <span class="math inline">\(h/r.\)</span> The following diagram illustrates and provides the equations:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -668,23 +668,23 @@ d \zeta_i /dt &amp;= -(h+r) \zeta_i + h \zeta_{i-1} + r(i+1) \zeta_{i+1} \\
 <p>If one is willing to abandon compartment models, then it is possible to formulate more elegant solution using hybrid models. The mean MoI, <span class="math inline">\(m\)</span> changes according to the equation:</p>
 <p><span class="math display">\[\frac{dm}{dt} = h - r m.\]</span>
 Using queuing models, it is easy to show that the distribution of the MoI is Poisson, and in these hybrid models, if the initial distribution is not Poisson, then it will converge to the Poisson distribution asymptotically. The complex dynamics of superinfection can thus be reduced to this simple equation.</p>
-<p>Unfortunately, things become more complex if we add simple features such as treatment with drugs, or heterogeneous exposure. The distribution of the MoI is no longer Poisson <span class="citation">[<a href="#ref-HenryJM2020HybridModel">79</a>]</span>. Superinfection is an important part of malaria epidemiology, and we will use these models for superinfection in developing some adequate models for infection and immunity.</p>
+<p>Unfortunately, things become more complex if we add simple features such as treatment with drugs, or heterogeneous exposure. The distribution of the MoI is no longer Poisson <span class="citation">[<a href="#ref-HenryJM2020HybridModel">82</a>]</span>. Superinfection is an important part of malaria epidemiology, and we will use these models for superinfection in developing some adequate models for infection and immunity.</p>
 <p>In the Garki Model (see below), the waiting time to clear an infection used these queuing models to formulate an approximate clearance rate: <span class="math display">\[ \frac{h}{e^{h/r}-1}\]</span></p>
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-FinePEM1975SuperinfectionProblem" class="csl-entry">
-<div class="csl-left-margin">52. </div><div class="csl-right-inline">Fine PEM. Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin. 1975;75: 475–488. </div>
+<div class="csl-left-margin">55. </div><div class="csl-right-inline">Fine PEM. Superinfection - a problem in formulating a problem. Tropical Diseases Bulletin. 1975;75: 475–488. </div>
 </div>
 <div id="ref-MacdonaldG1950Superinfection" class="csl-entry">
-<div class="csl-left-margin">57. </div><div class="csl-right-inline">Macdonald G. The analysis of infection rates in diseases in which superinfection occurs. Trop Dis Bull. 1950;47: 907–915. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14798656">https://www.ncbi.nlm.nih.gov/pubmed/14798656</a></div>
+<div class="csl-left-margin">60. </div><div class="csl-right-inline">Macdonald G. The analysis of infection rates in diseases in which superinfection occurs. Trop Dis Bull. 1950;47: 907–915. Available: <a href="https://www.ncbi.nlm.nih.gov/pubmed/14798656">https://www.ncbi.nlm.nih.gov/pubmed/14798656</a></div>
 </div>
 <div id="ref-WaltonGA1947ControlMalaria" class="csl-entry">
-<div class="csl-left-margin">78. </div><div class="csl-right-inline">Walton GA. On the control of malaria in <span>Freetown</span>, <span>Sierra</span> <span>Leone</span>; <span>I</span>. <em><span>Plasmodium</span> falciparum</em> and <em><span>Anopheles</span> gambiae</em> in relation to malaria occurring in infants. Ann Trop Med Parasitol. 1947;41: 380–407. doi:<a href="https://doi.org/10.1080/00034983.1947.11685341">10.1080/00034983.1947.11685341</a></div>
+<div class="csl-left-margin">81. </div><div class="csl-right-inline">Walton GA. On the control of malaria in <span>Freetown</span>, <span>Sierra</span> <span>Leone</span>; <span>I</span>. <em><span>Plasmodium</span> falciparum</em> and <em><span>Anopheles</span> gambiae</em> in relation to malaria occurring in infants. Ann Trop Med Parasitol. 1947;41: 380–407. doi:<a href="https://doi.org/10.1080/00034983.1947.11685341">10.1080/00034983.1947.11685341</a></div>
 </div>
 <div id="ref-HenryJM2020HybridModel" class="csl-entry">
-<div class="csl-left-margin">79. </div><div class="csl-right-inline">Henry JM. A hybrid model for the effects of treatment and demography on malaria superinfection. Journal of Theoretical Biology. 2020;491: 110194. doi:<a href="https://doi.org/10.1016/j.jtbi.2020.110194">10.1016/j.jtbi.2020.110194</a></div>
+<div class="csl-left-margin">82. </div><div class="csl-right-inline">Henry JM. A hybrid model for the effects of treatment and demography on malaria superinfection. Journal of Theoretical Biology. 2020;491: 110194. doi:<a href="https://doi.org/10.1016/j.jtbi.2020.110194">10.1016/j.jtbi.2020.110194</a></div>
 </div>
 </div>
             </section>

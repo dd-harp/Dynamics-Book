@@ -9,12 +9,11 @@ output:
 
 *** 
 
-As Ross was planning malaria control activities, he sought to develop mathematics that could help set rational expectations about the likely outcomes of control.
-Given his interests in measuring malaria, he sought to understand why malaria prevalence differed from place to place.
-To explain these differences, so he developed mathematical models that described the processes -- infection and the loss of infection -- affecting how malaria prevalence would change over time. 
+As Ross was planning malaria control activities, he sought to develop mathematics for support to help him set rational expectations about the likely outcomes of control.
+Given his interests in malaria metrics, he sought to understand why malaria prevalence differed from place to place.
+To explain these differences, so he developed mathematical models that described infection and the loss of infection, the processes affecting how malaria prevalence would change over time. 
 
-Malaria infections in the two populations are connected through blood feeding, so malaria transmission works as an integrated system.
-The process looks something like the following diagram.
+Malaria infections in two host populations -- humans and mosquitoes -- are connected through mosquito blood feeding, so malaria transmission works as an integrated system. The process looks something like the following diagram.
 
 ***
 
@@ -107,7 +106,7 @@ Later, we'll worry about modifying the assumptions to ensure that we are dealing
 
 *** 
 
-In this section, we present a basic, deterministic, discrete-time model. Because it is the first model in the book, we'll take the time to explain it in detail. We'll spend time discussing the parts of a model, and we walk through sections about solving, computation, analysis, and model verification. The first model we present, called `ross_dts_1,` we is numerically unstable in some cases. At the end we present another model, called `ross_dts_2` that is numerically stable. 
+In this section, we present the basic, deterministic, discrete-time model for a mosquito-transmitted pathogen. Because it is the first model in the book, we'll take the time to explain some background material in detail. We'll discuss the parts of a model, and we walk through sections about solving, computation, analysis, and model verification. The first model we present, called `ross_dts_1,` we is numerically unstable in some cases. At the end we present another model, called `ross_dts_2` that is numerically stable. 
 
 ### `ross_dts_1`
 
@@ -662,19 +661,27 @@ It's a little unsatisfying to get numerical errors, but machines don't do exact 
 
 ***
 
-If we followed individuals in a population that followed the simple rules described in Equations \@ref(eq:Mprocess) and \@ref(eq:Hprocess), we would find that the humans were switching states over time -- from infected to uninfected and back -- at random. Infected mosquitoes would be dying at random, and uninfected mosquitoes would be getting infected at random. The world really has a random component to it. It is not deterministic but stochastic. 
+If we followed individuals in a population that followed the simple rules described in Equation \@ref(eq:Mprocess) and Equation \@ref(eq:Hprocess), we would like to be able to understand how they are connected to the deterministic equations we developed in  Section-\@ref(dtsRoss). Setting aside the problems that get introduced by sampling populations for the moment -- we will pretend we're omniscient -- we would find random changes occurring:
 
-In the *deterministic* models that we called `ross_dts_1` and `ross_dts_2,` the values of each variable at each point in time were specified *exactly* by the equations, the rules for updating the variables each day. The values of the variables were *proportions,* which is related to the metric *prevalence.* In these models, the variables asymptotically approach a *steady state,* a value from which they never waiver. 
++ individual humans would be switching states over time at random: from infected to uninfected and back; 
 
-In models with stochasticity, we could use the same exact rules to specify what is expected to happen, but we must draw a random number to determine the values of the variables. To do this, we want to be working with integers -- the number of humans in a population and the number of those humans who are infected; and the number of mosquitoes in a population, and the number of those mosquitoes who are infected. The variability in the values of our variables over time due to the random component of parasite infection dynamics -- also called the parasite demographics -- would be called **demographic stochasticity.**  The model has *some* things in common with the ones we described above: in this model, there is something like a steady state, but in this model it functions as an attractor. The variables are always pulled towards the attractor, but because of the stochasticity, the values of the variables are constantly missing it.  
++ individual mosquitoes would be dying at random: infected mosquitoes would get replaced by uninfected mosquitoes, and uninfected mosquitoes would be blood feeding and getting infected if they blood fed on an infected (and infectious) human. 
 
-would bwe had spent any time trying to apply this model to a population, we would immediately have to grapple with several facts, other tha
+The world really has a random component to it. It is not deterministic but stochastic. 
+
+In the *deterministic* models that we called `ross_dts_1` and `ross_dts_2,` the values of each variable at each point in time were specified *exactly* by the equations, the rules for updating the variables each day. The values of the variables were *proportions,* which is related to the metric *prevalence.* In these models, the variables asymptotically approach a *steady state.* Once at the steady state, the fractions infected would never change.  
+
+In models with stochasticity, we could use the same exact rules to specify what is expected to happen, but we must draw a random number to determine the values of the variables. To do this, we want to be working with the counting numbers -- the number of humans in a population and the number of those humans who are infected; and the number of mosquitoes in a population, and the number of those mosquitoes who are infected. The variability in the values of our variables over time due to the random component of parasite infection dynamics -- also called the parasite demographics -- would be called **demographic stochasticity.**  The model has *some* things in common with the ones we described above: the model doesn't have a steady state, but there is something like a steady state that the variables fluctuate around. We'll call it an attractor. The variables are always pulled towards the attractor, but the values of the variables are constantly changing around it.  
+
+In a real study, we can't pretend to be omniscient, but we will discuss that later. 
 
 **Parameters** -- We can use the same parameters as before, but there are two new parameters:
 
 + $M$ is the number of mosquitoes: $M$ is a counting number 
 
 + $H$ is the number of humans; $H$ is a counting number
+
+Otherwise we use the same parameters as we did before. 
 
 ```{r, echo=TRUE}
 # The parameters, as a list 
@@ -690,10 +697,42 @@ ross_sdts_par$m = with(ross_sdts_par, M/H)
 
 **Variables** 
 
-+ $Y \leq M$ is the number of infected mosquitoes: $Y$ is a counting  number
+In the stochastic model, our variables are counting numbers, not fractions: 
+
++ $Y \leq M$ is the number of infected mosquitoes: $Y$ is a counting number
 
 + $X \leq H$ is the number of infected humans: $X$ is a counting number 
 
+It is easy enough to define prevalence: 
+
++ $x = X/H$ is malaria prevalence in humans; the fraction of humans infected 
+
++ $y = Y/M$ is malaria prevalence in mosquitoes; the fraction of mosquitoes infected 
+
+**Equations** 
+
+Now we have got to describe a stochastic process. Each individual changes state with some probability. Each one is a Bernoulli random variable, and the appropriate proability mass function is the binomial model. In R, we use the built-in function `rbinom(1, N, p)` to draw one random variable on $N$ individuals that remains in the same state with probability $p$. 
+
+In each step, there are four possible changes, depending on the states: 
+
++ $X$ - if humans are infected today, they might lose infection. An infection is lost with probability $s$, so the fraction that remain infected is $1-s.$ The number that remains infected is `rbinom(1, X, 1-s).` 
+
++ $H-X$ - if humans are uninfected today, they might get infected. The probability of getting infected is called the *daily attack rate.*  The expected number of infected bites is $aY/H$, and if we use the Poisson to model the distribution of bites per person, then the attack rate is $1-e^{-aY/H}$. The number that remains ends up infected is `rbinom(1, H-X, ar).` 
+
++ $Y$ - if mosquitoes are infected today, they might die. The fraction dying is $u$, so the number of surviving infected mosquitoes is `rbinom(1, X, 1-s).` 
+
++ $H-Y$ - if mosquitoes are uninfected today, they might get infected. To get infected, a mosquito must blood feed on an infected human, so the fraction getting infected is $aX/H$. The number that gets infected is `rbinom(1, H-Y, a X/H).` 
+
+The rule for updating the number of infected humans and mosquitoes is thus:
+
+\begin{equation}
+\begin{array}{rl}
+X_{t+1} &= \mbox{Binom}(X, 1-s) + \mbox{Binom}(H-X, 1-e^{-a Y/H}) \\
+Y_{t+1} &= \mbox{Binom}(Y, 1-u) + \mbox{Binom}(M-Y, aX/H) \\
+\end{array}
+\end{equation}
+
+The following implements this as R code: 
 
 ```{r ross_sdts, echo=TRUE}
 # XY      - a vector of the form c(t, X, Y) 
@@ -754,28 +793,42 @@ plot_XY = function(XY_t, type="l", lty=1, add= FALSE){with(XY_t,{
 })}
 ```
 
+A useful feature of R is the ability to replicate any particular sequence of random numbers by setting a *seed.* This also makes it easy to write a book knowing what the random number sequence will be. 
+
 ```{r, echo=TRUE}
 set.seed(253)
 XYt <- sim_ross_sdts(ross_sdts_par, tmax=300) 
 ```
 
-```{r, fig.height=8, fig.width=7, echo=TRUE}
-par(mfrow = c(2,1))
+
+```{r, fig.height=4, fig.width=7, echo=TRUE}
 plot_XY(XYt)
-plot_xy(XYt)
 ```
 
+Once we're close to the steady state, some time after the first 100 days, we can compute the mean: 
 
+```{r XYdist}
+Xdist= with(XYt, X[-c(1:100)]) 
+Ydist= with(XYt, Y[-c(1:100)]) 
+mX = mean(Xdist)
+mY = mean(Ydist) 
+c(X=mX, Y=mY)
+```
 
-### Steady States 
+This can be visualized as a histogram: 
 
-The system still tends towards a point -- we'll call it an attractor and not a steady state. The values of $X$ and $Y$ fluctuate around that steady state. We can plot the output as integer values, $X$ and $Y$, or as prevalence $x=X/H$ and $y=Y/M.$
+```{r, fig.height=4, fig.width=8}
+par(mfrow=c(1,2))
+hist(Xdist,  xlab = "x", main = "X, for t>100")
+segments(mX, 0, mX, 250, lwd=4, col = "darkgreen")
+hist(Ydist, 15, xlab = "y", main = "Y, for t>100")
+segments(mY, 0, mY, 200, lwd=4, col = "darkorange")
+```
 
-```{r, fig.height=4, fig.width=4, echo=TRUE}
-with(XYt,{
-  ix = which(time>100)
-  plot(jitter(X[ix]), jitter(Y[ix]), xlab = "X", ylab = "Y")
-}) 
+Since we can compute prevalence, we can plot it out: 
+
+```{r, fig.height=4, fig.width=7, echo=TRUE}
+plot_xy(XYt)
 ```
 
 
@@ -783,10 +836,9 @@ with(XYt,{
 xdist= with(XYt, x[-c(1:100)]) 
 ydist= with(XYt, y[-c(1:100)]) 
 mx = mean(xdist)
-my = mean(ydist) 
-c(x=mx, y=my)
+my = mean(ydist)
+c(x=mx, y=my) 
 ```
-
 
 ```{r, fig.height=4, fig.width=8}
 par(mfrow=c(1,2))
@@ -796,13 +848,25 @@ hist(ydist, 15, xlab = "y", main = "y, for t>100")
 segments(my, 0, my, 200, lwd=4, col = "darkorange")
 ```
 
-```{r}
-ross_dts_steady_2(ross_sdts_par)
+
+
+The system still tends towards a point -- we'll call it an attractor and not a steady state. The values of $X$ and $Y$  (or of $x$ and $y$) fluctuate around that steady state. Since the counting number values get repeated, we can illustrate what the cloud looks like by jittering the locations of the points:
+
+```{r, fig.height=5, fig.width=4, echo=TRUE}
+with(XYt,{
+  ix = which(time>100)
+  plot(jitter(X[ix]), jitter(Y[ix]), xlab = "X", ylab = "Y")
+}) 
+points(mX, mY, col = "darkred", pch = 8, cex =3)
 ```
 
-### Stochastic Fadeout 
+We note that mean prevalence is very close to the steady state of the deterministic system with the same parameter values:
 
-write me. 
+```{r}
+c(mx, my) - ross_dts_steady_2(ross_sdts_par)
+```
+
+An important feature of stochastic systems is that it is possible for the parasite to randomly fade out, if at any time $X=Y=0.$ This is something we'd like to take a bit more time computing.
 
 
 ## Deterministic, Continuous Time {#xdeRoss}
@@ -1248,7 +1312,7 @@ In the deterministic models, the variables over time are repeated in exactly the
 
 In the following, we have plotted the outputs of all three deterministic models, and the differences between the continuous time and the two discrete-time models (bottom). The main difference between the two models is that malaria prevalence increases more slowly in the discrete-time models. The model `ross_dts_1` is slightly closer to the continuous time model. 
 
-```{r, fig.height=8, fig.width=7, echo=F}
+```{r compare, fig.height=8, fig.width=7, echo=F}
 clrs = turbo(4)
 par(mfrow = c(3,1))
 plot_x(r_xde, clr = clrs[1])
@@ -1347,6 +1411,10 @@ plot_y(s_xde5, clr=clrsB[6], add=T)
 
 
 ## Notes
+
++ The Reed-Frost model
+
++ The chain-binomial model
 
 
 
