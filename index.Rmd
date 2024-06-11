@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = FALSE, fig.path = "figs/")
 
 # Foreword {-}
 
-A large fraction of my time over the past 25 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, transmission dynamics, mosquito ecology, malaria control, and the evolution of drug and insecticide resistance.
+A large fraction of my time over the past 25 years has been devoted to learning about malaria and mathematical models of malaria epidemiology, malaria transmission dynamics, mosquito ecology, malaria control, and the evolution of drug and insecticide resistance.
 While I was building and analyzing models, I was looking for a way of organizing, synthesizing, operationalizing, and applying the rich body of theory developed over more than a century of malaria research.
 
 Malaria was a name for a disease associated with recurring fevers. Starting around 1660, malaria was treated with a tea made from the bark of the Cinchona tree. 
@@ -66,7 +66,7 @@ I wanted a way of building models to support ***adaptive malaria control.***
 Since malaria is so complex and locally peculiar, a core part of adaptive malaria control is using mathematical models for simulation-based analytics through iterative policy engagement. 
 Over time, malaria programs *adapt* by identifying key knowledge gaps and modifying surveillance, monitoring and evaluation activities to fill those gaps. 
 We wanted to give advice that was robust to uncertainty; analytics are robust if they characterize, quantify, and propagate uncertainty. 
-We needed a mathematical framework for model building that was up to the task of analyzing malaria transmission dynamics and control *in situ,* all while quantifying and propagating uncertainty. 
+To serve adaptive malaria control, the mathematical framework for model building had to be up to the task of analyzing malaria transmission dynamics and control *in situ,* all while quantifying and propagating uncertainty. 
 Over time, we developed a bespoke inferential framework called ***robust analytics for malaria policy (RAMP):***
 
 I thus thus set out to develop a nimble mathematical and computational framework for model building. To support RAMP and adaptive malaria control, the framework should be *extensible,* with a *plug-and-play * modular design; 
@@ -75,8 +75,7 @@ To get malaria transmission right, we would need to be able to deal with heterog
 The framework should be structurally flexible, so that a model could incorporate space, time, and human population strata to deal with demography and population heterogeneity.
 It should have scalability to handle realism and complexity: it should be possible to scale down spatial granularity for fine-grained spatial simulations [@CarterR2002SpatialSimulation;@GuW2003IndividualbasedModel;@PerkinsTA2013HeterogeneityMixing], to scale down temporally for fine-grained temporal simulations [@WuSL2020MBITES], or to scale up to understand or analyze regional processes and the emerging patterns [@TatemAJ2010InternationalPopulation].
 To serve the needs of malaria programs, a framework would need  built-in support for exogenous forcing by weather and vector control to model malaria as a changing baseline modified by control. 
-To get integrated vector control right, we went all-in with an individual-based simulation model for mosquito ecology and behavior (called MBITES) that could handle exquisite biological detail [@WuSL2020MBITES]. 
-MBITES was inspirational but impractical, so we revisited models to incorporate new ideas about mosquito search and behaviors.
+MBITES was inspirational but impractical, so we revisited models to incorporate new ideas about mosquito search and behaviors [@WuSL2023SpatialDynamics].
 To serve programmatic needs, we developed algorithms and theory with skill sets that included the durability of interventions -- the waning potency of insecticides or decaying coverage --
 and the net effect of one unit of vector control in relation to transmission intensity and coverage.
 To make all the pieces fit together, we needed interfaces that could connect up models in a generic way; in the design phase, we worked with two model families for each major dynamical component -- one that was dead simple, and one that had a was highly realistic.
@@ -86,7 +85,7 @@ Beyond the algorithms, these models needed the support of mathematical theory.
 We wanted to understand thresholds so we wrote the routines that would compute thresholds for malaria transmission in heterogeneous systems, when appropriate. 
 
 Sometime in the fall of 2022, the last few pieces came together. In collaboration with Uganda's National Malaria Control Division (NMCD) and the Bioko Island Malaria Elimination Program (BIMEP), we have now developed a malaria policy framework that we call ***adaptive malaria control.*** We published the first versions of [MicroMoB](https://cran.r-project.org/package=MicroMoB) and [exDE](https://CRAN.R-project.org/package=exDE) at CRAN. 
-We submitted a paper to PLoS Computational Biology [@WuSL2023SpatialDynamics]. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [Add the citation here when it is published]. Meanwhile, we decided to rebrand exDE as [**ramp.xde**](https://dd-harp.github.io/ramp.xde/) for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as [**ramp.dts**](https://dd-harp.github.io/ramp.dts/) (for discrete time systems).
+We submitted a paper to PLoS Computational Biology [@WuSL2023SpatialDynamics]. A second paper forced us to confront a set of software design questions in relation to exogenous forcing [Add the citation here when it is published]. Meanwhile, we decided to rebrand exDE as [**ramp.xde**](https://dd-harp.github.io/ramp.xde/) for (ordinary and delay differential equations). We redesigned MicroMoB to catch up to ramp.xde, and rebranded it as [**ramp.dts**](https://dd-harp.github.io/ramp.dts/) (for discrete time systems). Then we realized the frameworks were so similar they could easily merge, so two software packages became one. 
 
 After all that, it was time to write this book. 
 
