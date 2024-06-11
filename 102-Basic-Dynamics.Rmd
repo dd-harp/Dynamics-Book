@@ -9,7 +9,8 @@ output:
 
 *** 
 
-As Ross was planning malaria control activities, he sought to develop mathematics for support to help him set rational expectations about the likely outcomes of control.
+As Ross was planning malaria control activities, he sought to develop mathematics for support malaria control planning. 
+He was looking for a way of setting rational expectations about the likely outcomes of control.
 Given his interests in malaria metrics, he sought to understand why malaria prevalence differed from place to place.
 To explain these differences, so he developed mathematical models that described infection and the loss of infection, the processes affecting how malaria prevalence would change over time. 
 

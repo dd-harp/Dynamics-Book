@@ -11,6 +11,7 @@ I was looking for a publication where I could find the model written down concis
 Instead, I found that Macdonald was associated with several new ideas spread across several publications, including many ideas he attributed (or ought to have attributed) to others [@SmithDL2012_RossMacdonald]. 
 Two useful publications were by Paul Fine [@FinePEM1975SuperinfectionProblem] and Norman Bailey [@BaileyNTJ1982BiomathematicsMalaria] about Ross, Macdonald, and the various mathematical versions of malaria models. 
 I found the term "so-called Ross-Macdonald" in a 1982 book chapter by Joan Aron and Bob May [@AronJL1982PopulationDynamics]. 
+Why was it called the *Ross-Macdonald* model?
 
 Macdonald's papers are conceptually rich discussions of mathematical concept and data from various sources; the formulas that do appear are mostly relegated to appendices. 
 Between 1950 and 1956, Macdonald published 11 papers on malaria epidemiology, dynamics, and control. 
