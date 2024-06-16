@@ -1,10 +1,10 @@
-# Metrics and Models
+# Measuring Malaria 
 
 *Measuring malaria. Prevalence. Incidence.  Observational processes.* 
 
 *** 
 
-If we want to manage malaria, we must be able to measure it. Models are approximations. We make a distinction between biological processes and observational processes. 
+If we want to manage malaria, we must be able to measure it. 
 
 ## Malaria Epidemiology  
 
@@ -45,4 +45,3 @@ If we want to manage malaria, we must be able to measure it. Models are approxim
 
 ## Surveillance 
 
-## Observation 

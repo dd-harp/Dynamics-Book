@@ -1,6 +1,6 @@
 # (PART) Transmission {-}
 
-# Blood Feeding
+# Blood Feeding and Transmission
 
 The endpoint  
 

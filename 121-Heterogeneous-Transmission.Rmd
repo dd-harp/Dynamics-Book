@@ -1,7 +1,19 @@
 
 # Heterogeneous Transmission  
 
+*Search - Resource Availability - Heterogeneous Biting - Biting Weights - Relative Risk*
+
+***
+
 The Ross-Macdonald model is a good starting point, but if we want to develop models for policy, we will need to delve deeper into the mathematical processes that are driving malaria transmission, and we will need to understand some of the related biological processes. 
+
+## Heterogeneous Biting
+
+$$
+\frac{dX_\omega}{dt} = h \omega (H_\omega-X_\omega) - r X_\omega
+$$
+Threshold condition: 
+
 
 ## Blood Feeding
 
@@ -10,5 +22,3 @@ The Ross-Macdonald model is a good starting point, but if we want to develop mod
 ### Risky Human Behaviors 
 
 ## Environmental Heterogeneity 
-
-## Heterogeneous Biting 

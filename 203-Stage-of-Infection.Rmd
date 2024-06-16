@@ -1,4 +1,4 @@
-# Stage-Structured Infections
+# Stage-Structured Malaria Infections
 
 In the following sections, we walk through several models for the dynamics of malaria infection and immunity in humans. We cover infection and detection, immunity, infectiousness, disease, drug taking, and cohort dynamics.
 

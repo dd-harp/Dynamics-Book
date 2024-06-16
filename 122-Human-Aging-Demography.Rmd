@@ -1,5 +1,5 @@
 
-# Human Age & Demography  
+# Human Aging & Demography  
 
 A core limitation of most malaria models is that they need to have the capability of handling human demography and age. Here, we present the Ross-Macdonald model for exposure and infection in a population with age. 
 

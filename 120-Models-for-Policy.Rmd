@@ -1,8 +1,10 @@
-# (PART) Toolbox {-}
+# (PART) The Toolbox {-}
 
 # Malaria Models for Policy 
 
-## Malaria Epidemiology 
+
+
+## Human Malaria Infection and Immunity 
 
 ## Human Demography  
 
@@ -10,9 +12,9 @@
 
 ## Mosquito Ecology and Behavior
 
-## Theory for Vector Control
-
 ## Blood Feeding and Transmission
+
+## Theory for Vector Control
 
 ## Spatial Dynamics and Connectivity
 

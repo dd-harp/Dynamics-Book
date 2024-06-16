@@ -1,6 +1,10 @@
-# (PART) Epidemiology {-}
+# (PART) Malaria Epidemiology {-}
 
-# Malaria Epidemiology
+# Malaria Epidemiology 
+
+An overview of malaria epidemiology. 
+
+*** 
 
 ## Life Stages 
 
@@ -17,6 +21,10 @@ The model for malaria infection that we presented in [Malaria Dynamics] was deve
 The question is how to develop models that are simple and yet are up to policy tasks, which means that the models must (at some point) get validated against research data. Doing so means having sufficient complexity to deal with exposure, infection, detection, immunity, disease, infectiousness, care seeking, and drug taking. Whatever model is selected as a basis for policy, it should be simple enough to understand and yet complex enough to capture the *gist* of malaria epidemiology. The models, however chosen, must get it right. Sorting through all the complexity to get a model that is good enough is a daunting task. This introduction is mainly historical, but we use it to preview some of the themes. In the following history, we discuss some of the important innovations. 
 
 ## Infection 
+
+### Duration 
+
+### Detection 
 
 ### Superinfection 
 

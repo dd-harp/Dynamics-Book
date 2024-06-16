@@ -1,7 +1,16 @@
 # Models and Data
 
-+ Model Fitting
+Models are approximations. We make a distinction between biological processes and observational processes. 
 
-+ Model Selection 
++ State Space Modeling
 
-## Observation 
+    - Model Fitting
+
+## Observational Processes
+
+## Skill Sets
+
++ Adequacy: The Model Skill Set 
+
+    - Model Selection 
+

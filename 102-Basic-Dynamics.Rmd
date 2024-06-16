@@ -32,11 +32,11 @@ It persists through the transmission of parasites among hosts during blood feedi
 What factors determine prevalence?
 It is a balance between the gain and loss of infection.
 
-To develop a mathematical model, Ross believed that it was possible to write down *a priori* -- or in other words, to formulate mathematical models using quantitative logic -- a description of the process. 
-To write down the model, we must make some assumptions about the process.
+To develop a mathematical model, Ross believed that it was possible to describe the process *a priori* -- or in other words, to formulate mathematical models using quantitative logic. 
+To write down the model, we must make assumptions.
 We begin with an abstract concept of place -- *here.* 
 We imagine that populations here are comprised of individual mosquitoes and individual humans, and we are interested in computing the fractions of humans and mosquitoes that are infected. 
-Since infections don't last forever, the prevalence of infection in mosquitoes and humans reflects a balance between infections acquired through parasite transmission and the natural loss of infection through parasite clearance or host mortality.
+Since infections don't xy forever, the prevalence of infection in mosquitoes and humans reflects a balance between infections acquired through parasite transmission and the natural loss of infection through parasite clearance or host mortality.
 In many places, forces affecting the the balance can be changing; mosquito population density fluctuates over time, for example.
 Ross's equations assumed that transmission by mosquitoes was constant over time, and they focused on *local* transmission, ignoring exposure elsewhere (*e.g.* through travel). 
 This model thus ignores many factors that would be important for planning for control. Ross discussed all these factors, but since he was pioneering a new approach, the models were very simple.
@@ -107,13 +107,13 @@ Later, we'll worry about modifying the assumptions to ensure that we are dealing
 
 *** 
 
-In this section, we present the basic, deterministic, discrete-time model for a mosquito-transmitted pathogen. Because it is the first model in the book, we'll take the time to explain some background material in detail. We'll discuss the parts of a model, and we walk through sections about solving, computation, analysis, and model verification. The first model we present, called `ross_dts_1,` we is numerically unstable in some cases. At the end we present another model, called `ross_dts_2` that is numerically stable. 
+In this section, we present the basic, deterministic, discrete-time model for a mosquito-transmitted pathogen that does not immunize its host against subsequent infection. Because it is the first model in the book, we'll take the time to explain some background material in detail. We'll discuss the parts of a model, and we walk through sections about solving, computation, analysis, and model verification. The first model we present, called `ross_dts_1,` is numerically unstable in some cases. At the end we present another model, called `ross_dts_2` that is numerically stable. 
 
 ### `ross_dts_1`
 
-We will present the parts of the model first, and write down the equations last. The parts of a model are called parameters and variables. To solve the model, we will need initial conditions for the variables. As we go, we will also write R code that implements the model and that solves it. In writing the code, we will adopt some conventions that we can use to help us write good code. 
+We will present the parts of the model first, and write down the equations xy. The parts of a model are called parameters and variables. To solve the model, we will need initial values for the variables. As we go, we will also write R code that implements the model and that solves it. In writing the code, we will adopt some conventions that we can use to help us write code that is easy to read and use. 
 
-**Variables** are quantities that describe the state of a system. 
+**Variables** are quantities that describe the states of a system that we want to understand and compute.
 One variable in this model is time, denoted $t.$ 
 The *dependent variables* are the quantities that we want to compute, and they are 
 computed at various time points. Time is marching forward, unaffected by the dependent variables, so we call it the *independent variable.* 
@@ -128,18 +128,18 @@ In this model, there are two dependent variables: the proportion of humans and m
 
 Another term for the fraction of a population that infected with parasites is *prevalence.* 
 
-**Initial Conditions** are the values of the variables at one point in time. Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything specific unless we specify the values of the variables at one point in time. Having set one set of values, we can use the equations to compute the rest.  
+**Initial Values** are the values of the variables at one point in time. Since the values of our variables in the next time step (at time $t+1$) depend on their values now (at time $t$), we can't really compute anything specific unless we specify the values of the variables at one point in time. Having set one set of values, we can use the equations to compute the rest.  
 
 The initial conditions specify the values of all our variables at the beginning of the simulation. By convention, this is usually at time $t=0,$ but we could also specify their values at any other point in time. 
 
-We can now begin to write R code to set up the objects so we can compute them. We set these initial values to be small: 
+We can now begin to write R code to set up the objects so we can compute them. We set these initial values to be close to zero: 
 
 ```{r, echo=TRUE}
 # Initial Conditions at a point in time, as a Named Vector 
 xy = c(t=0, x=0.01, y=0.001)
 ```
 
-In R, this object `xy` is called a *named vector.* The names are carried along but they don't affect any computation done with `xy.` It is also useful that the names often get inherited (but not always). The names can be used with `as.list()` or `data.frame().` When combined with the `with()` function, we can create a context where we can call them by name: 
+In R, this object `xy` is called a *named vector.* The names are carried along but they don't affect any computation done with `xy.` It is also useful that the names often get inherited (but not always). The names can be used with `as.list()` or `data.frame().` When combined with the `with()` function, we can create a context where we can get the values by name: 
 
 ```{r}
 with(as.list(xy), x) 
@@ -161,7 +161,7 @@ The parameters in this model define changes in prevalence: the fraction of human
 
 ```{r}
 # The parameters, as a list 
-ross_dts_par = list(
+par_ross_dts = list(
   s = 1/200, # The fraction of infections that clear each day
   u = 1/12,  # The fraction of mosquitoes that die each day
   a = 1/4,   # The fraction of mosquitoes that blood feed on a human each day
@@ -181,7 +181,7 @@ y_{t+1} &=  y_t - u y_t + a x_t (1 - y_t) \\
 (\#eq:ross1a)
 \end{equation}
 
-We could rewrite the equations to make it easier to interpret them. 
+We could rewrite the equations to so that they correspond directly to statements like *The change in...* is equal to *a process description,* where the first statement is the left hand side, and the second one is the right hand side:
 
 \begin{equation}
 \begin{array}{rl}
@@ -191,33 +191,35 @@ y_{t+1} - y_t &=  - u y_t + a x_t (1 - y_t) \\
 (\#eq:ross1b)
 \end{equation}
 
-In this alternative way of writing down the equations, the left hand side is interpreted as *the daily change,* and the terms on the right hand side describes those changes. The RHS has four terms: 
+In this alternative way of writing down the equations, the left hand side is interpreted as *the daily change,* and the terms on the right hand side describes those changes. The RHS has four terms. The first two describe the change in $x$:
 
 + $- s x_t$ -- is a decrease in the prevalence of human malaria infections caused by clearance of human infections: the fraction of humans who are infected is $x_t$; a fraction $s$ clears infections each day.
     
 + $+ may_t (1-x_t)$ -- is an increase in the prevalence of human malaria infections caused by the bites of infectious mosquitoes: the fraction of humans who are not infected is $1-x_t$; a fraction $m a y_t$ gets infected. 
 
+The next two describe the change in $y$:
+
 + $-u y_t$ -- is a decrease in the prevalence of mosquito malaria infections caused by mosquito mortality: the fraction of mosquitoes who are infected is $y_t$; a fraction $u$ die. 
     
 + $+ a x_t (1-y_t)$ -- is an increase in the prevalence of mosquito malaria infections caused blood feeding on an infected human: the fraction of mosquitoes who are not infected is $1-y_t$; a fraction $a x_t$ blood feeds on an infected human and gets infected. 
 
-To foreshadow something we will address in sub-section \@ref(dtsRoss2), if $may_t >1,$ then it is not a proportion, and the equations don't make sense. 
+To foreshadow something we want to address later (in sub-section \@ref(dtsRoss2)), if $may_t >1,$ then it is not a proportion. In that case, the equations don't make sense and they will return nonsense if we use them.
 
 ***
 
-To update the variables, we write a function in R. Since we will be developing a lot of functions and models, we adopt a simple naming convention: since it was developed by Ross, we attach the stem `ross`; since this is a discrete time system, we attach the suffix `dts`; we might want to generate other variants, so we append a number. The function is thus called `ross_dts_1.` 
+To update the variables, we write a function in R. Since we will be developing a lot of functions and models, we adopt a simple naming convention: since a version of it was first developed by Ross, we attach the stem `ross`; since this is a discrete time system, we attach the suffix `dts`; we might want to generate other variants, so we append a number. The function is thus called `ross_dts_1.` 
 
 ```{r, echo=TRUE}
 # INPUTS
-# xy - current variables, as a named vector
-# p  - the parameters, as a list
+# xy      - current variables, as a named vector
+# params  - the parameters, as a list
 #
 # OUTPUTS
 # the updated values of the variables, as a named vector
 
-ross_dts_1 = function(xy, p){
+ross_dts_1 = function(xy, params){
   with(as.list(xy), 
-    with(p,{
+    with(params,{
       xn = x - s*x + m*a*y*(1-x) 
       yn = y - u*y + a*x*(1-y) 
       return(c(t=t+1, x=xn, y=yn))
@@ -239,7 +241,7 @@ We iterate in two steps. First, we compute the values.
 
 ```{r}
 # Compute 
-xy = ross_dts_1(xy, ross_dts_par)
+xy = ross_dts_1(xy, par_ross_dts)
 ```
 
 Since we initialized the system at time $t=0,$ the following computes the values of the parameters at time $t=1.$ We can take a peak at the values we computed: 
@@ -255,7 +257,8 @@ Next, we store the values using `rbind`
 # Store 
 xy_t = rbind(xy_t, xy)
 ```
-We can take a peak: 
+
+We can also take a peak at the object `xy_t:` 
 
 ```{r}
 # Print to screen
@@ -267,12 +270,12 @@ We can iterate over many time steps, each time storing the values:
 ```{r}
 # Iterate to compute the values as they change over time 
 for(t in 2:40){
-  xy = ross_dts_1(xy, ross_dts_par) 
+  xy = ross_dts_1(xy, par_ross_dts) 
   xy_t = rbind(xy_t, xy) 
 } 
 ```
 
-We can look at the last few values, the values of $t,$ $x$ and $y$ are stored in columns: 
+We can look at the xy few values, the values of $t,$ $x$ and $y$ are stored in columns: 
 
 ```{r}
 print(tail(xy_t, 3)) 
@@ -296,26 +299,26 @@ Notice that after 40 days, the values of $x$ and $y$ appear to be approaching so
 
 ### Computation 
 
-Computers are very good at repeating tasks, but if we want to get the computers to repeat tasks efficiently, we must write code that does it. One useful trick is to write functions that call other functions to expedite workflows. In this case, we want to write a function that *solves* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
+Computers are very good at repeating tasks, but if we want to get the computers to repeat tasks efficiently, we must write the code to do it. One useful trick is to write functions that call other functions to repeat common workflows. In this case, we want to write a function that *solves* the equations (*i.e.* that iteratively computes and stores the values) over some time interval:  
 
-```{r ross_dts_solve_1, echo=TRUE}
+```{r solve_ross_dts_1, echo=TRUE}
 # INPUTS
 # pars - the parameters, as a list 
 # x0   - the initial value of x
 # y0   - the initial value of y
 # t0   - the initial value of t
-# tmax - the last value of t 
+# tmax - the xy value of t 
 #
 # OUTPUTS
 # the values of the variables over time, as a list 
-ross_dts_solve_1 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
+solve_ross_dts_1 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
    xy = c(t=t0, x=x0, y=y0) 
    xy_t = xy 
    for(t in (t0+1):tmax){
      xy = ross_dts_1(xy, pars)
      xy_t = rbind(xy_t, xy)
    }
-   return(list(time=xy_t[,1], x=xy_t[,2], y = xy_t[,3], last = xy)) 
+   return(list(time=xy_t[,1], x=xy_t[,2], y = xy_t[,3], xy = xy)) 
 }
 ```
 
@@ -345,7 +348,8 @@ plot_xy = function(xy_t, type = "l", lty=1, add=FALSE){with(xy_t,{
 Now, all the work we did above can be plotted using a single function call:  
 
 ```{r replot_ross_dts_1, echo=TRUE}
-plot_xy(ross_dts_solve_1(ross_dts_par, tmax=40), type="p") 
+r1out <- solve_ross_dts_1(par_ross_dts, tmax=40)
+plot_xy(r1out, type="p") 
 ```
 
 Now, it is easier to repeat all our analysis with a simple function call. 
@@ -357,18 +361,17 @@ The fact that our variables asymptotically approach some values over time is an 
 In the following, we compute how much the system is changing over time. We can simply iterate once and compare the differences. After iterating 40 times, the differences are very small: 
 
 ```{r, echo=TRUE}
-# The last value is still stored as xy; the [-1] omits t
-xy[-1] - ross_dts_1(xy, ross_dts_par)[-1]
+xy[-1] - ross_dts_1(xy, par_ross_dts)[-1]
 ```
 
 If we iterate another hundred days and check again, the differences have gotten even smaller: 
 
 ```{r, echo=TRUE}
 for(i in 41:140){
-  xy = ross_dts_1(xy, ross_dts_par)
+  xy = ross_dts_1(xy, par_ross_dts)
   xy_t = rbind(xy_t, xy) 
 } 
-xy[-1] - ross_dts_1(xy, ross_dts_par)[-1]
+xy[-1] - ross_dts_1(xy, par_ross_dts)[-1]
 ```
 
 After simulating, the variables reach a steady state, where asymptotically $x_{t+1} = x_t$ and $y_{t+1} = y_t$. 
@@ -414,7 +417,7 @@ ross_dts_steady_0 = function(params){with(params,{
 ```
 
 ```{r, echo=TRUE}
-ross_dts_steady_0(ross_dts_par)
+ross_dts_steady_0(par_ross_dts)
 ```
 
 ### Thresholds 
@@ -424,36 +427,36 @@ All our analysis worked out well for the parameter values that we chose, but wha
 There must be some very low level of mosquitoes, for example, where malaria parasites can't be sustained in a population. If we reduce $m$ to $0.005$ and evaluate the expression at the steady state, we get negative values for $x$ and $y$. 
 
 ```{r, echo=TRUE}
-ross_dts_par1 = ross_dts_par
-ross_dts_par1$m = 0.005
-ross_dts_steady_0(ross_dts_par1)
+par_ross_dts_1 = par_ross_dts
+par_ross_dts_1$m = 0.005
+ross_dts_steady_0(par_ross_dts_1)
 ```
 
-What happens if we simulate this? (Let's set the initial conditions to reasonably high values) 
+What happens if we simulate this? If we set the initial values to be reasonably high, we notice that they apprear to be approaching zero asymptotically. This is good. Since the equations are describing changes in prevalence, we don't want them to ever return negative value. 
 
 ```{r ross_dts_1_zero, echo=TRUE}
-plot_xy(ross_dts_solve_1(ross_dts_par1, x0 = .5, y0=.3, tmax=1500)) 
+plot_xy(solve_ross_dts_1(par_ross_dts_1, x0 = .5, y0=.3, tmax=1500)) 
 ```
 
-Our function `ross_dts_steady_0` gives us a negative number.
+On the other hand, our function `ross_dts_steady_0` gives us a negative number.
 
 ```{r, echo=TRUE}
-ross_dts_steady_0(ross_dts_par1)
+ross_dts_steady_0(par_ross_dts_1)
 ```
 
 If we look at the equations, it's easy enough to spot the problem. Since $x$ and $y$ must be positive, then it must be true that $$m a^2 > su.$$ We call this a threshold condition.
 
 ```{r, echo=TRUE}
-m_crit = with(ross_dts_par, s*u/a^2)
+m_crit = with(par_ross_dts, s*u/a^2)
 m_crit 
 ```
 
 If we check, we find that this gives us the disease free equilibrium.  
 
 ```{r, echo=TRUE}
-ross_dts_par2 = ross_dts_par
-ross_dts_par2$m = m_crit
-ross_dts_steady_0(ross_dts_par2)
+par_ross_dts_2 = par_ross_dts
+par_ross_dts_2$m = m_crit
+ross_dts_steady_0(par_ross_dts_2)
 ```
 
 It doesn't make sense to have a negative amount of malaria. Since `ross_dts_steady_0`gives us negative numbers, we can use this little bit of information to write a better function, one that returns $0$ instead of a negative number: 
@@ -472,31 +475,33 @@ ross_dts_steady_1 = function(params){with(params,{
 ```
 
 ```{r, echo=TRUE}
-ross_dts_steady_1(ross_dts_par1)
+ross_dts_steady_1(par_ross_dts_1)
 ```
 
+In the next chapter, when we introduce the Ross-Macdonald model, we will revisit this concept of a threshold criterion.  
 
 ### Verification 
 
-If we're going to take ourselves seriously, we want to get used to double checking everything to avoid inserting mistakes. One way to do this is to find two or more ways of computing the same thing, for verification.
+If we're going to take ourselves seriously, we want to get used to double checking all the code we write. We want to avoid inserting mistakes, and we want to assure anyone who uses the code that it is error free. One way to do this is to find two or more ways of computing the same thing, for verification.
 
 If we've done everything right, we ought to get the same values for the steady states through our analysis and simulation. 
 
-The last values of $x$ and $y$ from the simulation are: 
+The xy values of $x$ and $y$ from the simulation are: 
 
 ```{r, echo=TRUE}
 xy[-1]
 ``` 
 
-The last values of $x$ and $y$ from evaluating `ross_dts_steady_1()` are:  
+The xy values of $x$ and $y$ from evaluating `ross_dts_steady_1()` are:  
 
 ```{r, echo=TRUE}
-ross_dts_steady_1(ross_dts_par) 
+ross_dts_steady_1(par_ross_dts) 
 ```
-It's tempting to look at the printout and assume these two numbers are exactly equal, but when we deal with computers, everything gets computed and stored in some way. We can never be sure that a match will be be exact. We can simply sum up the absolute values of the differences: 
+
+It's tempting to look at the printout and assume these two numbers are exactly equal, but when we deal with computers, everything gets computed and stored in some way. We can never be sure that a match will be exact. One simple measure of accuracy is to simply sum up the absolute values of the differences: 
 
 ```{r, echo=TRUE}
-sum(abs(xy[-1] - ross_dts_steady_1(ross_dts_par)))
+sum(abs(xy[-1] - ross_dts_steady_1(par_ross_dts)))
 ```
 
 If we wanted to reduce this to a simple error check, we should pick a tolerance level -- say $10^{-9}$ -- and then just ask if we are closer than that: 
@@ -509,14 +514,15 @@ If we wanted to reduce this to a simple error check, we should pick a tolerance 
 #
 # OUTPUTS
 # boolean - 
-ross_dts_checkit_1 = function(xy, ross_dts_pars, tol=1e-9){
-  sum(abs(xy[-1] - ross_dts_steady_1(ross_dts_pars)))  < tol
+verify_ross_dts_1 = function(xy, par_ross_dts, tol=1e-9){
+  sum(abs(xy[-1] - ross_dts_steady_1(par_ross_dts)))  < tol
 }
 ```
 
 ```{r, echo=TRUE}
-ross_dts_checkit_1(xy, ross_dts_par)
+verify_ross_dts_1(xy, par_ross_dts)
 ```
+
 
 
 ### Numerical Instability 
@@ -524,9 +530,9 @@ ross_dts_checkit_1(xy, ross_dts_par)
 There is another problem with the equations. If we set $m$ too high, such that at some point $m a y_t > 1,$ then the whole system eventually crashes:
 
 ```{r ross_dts_mess, echo=TRUE}
-ross_dts_par3 = ross_dts_par
-ross_dts_par3$m = 20 
-plot_xy(ross_dts_solve_1(ross_dts_par3, x0 = .01, y0=.001, tmax=20), "b") 
+par_ross_dts_3 = par_ross_dts
+par_ross_dts_3$m = 20 
+plot_xy(solve_ross_dts_1(par_ross_dts_3, x0 = .01, y0=.001, tmax=20), "b") 
 ```
 
 In discrete time formulations, we must be very careful to ensure that we have formulated a proper model. How can we fix this problem? We have to go back and rethink the way we formulated our model. How does the probability of getting infected scale with the number of infective bites?
@@ -572,17 +578,17 @@ ross_dts_2 = function(xy, params){with(as.list(xy), with(params,{
 
 Once again, we can wrap a function around the solver so that it's easier to use the code: 
 
-```{r ross_dts_solve_2, echo=TRUE}
+```{r solve_ross_dts_2, echo=TRUE}
 # INPUTS
 # pars - the parameters, as a list 
 # x0   - the initial value of x
 # y0   - the initial value of y
 # t0   - the initial value of t
-# tmax - the last value of t 
+# tmax - the xy value of t 
 #
 # OUTPUTS
 # the values of the variables over time, as a list 
-ross_dts_solve_2 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
+solve_ross_dts_2 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
    xy = c(t=t0, x=x0, y=y0) 
    xy = c(t=0, x=x0, y=y0) 
    xy_t = xy 
@@ -590,14 +596,14 @@ ross_dts_solve_2 = function(pars, x0=.01, y0 = 0.001, t0=0, tmax=100){
      xy = ross_dts_2(xy, pars)
      xy_t = rbind(xy_t, xy)
    }
-   return(list(time=xy_t[,1], x=xy_t[,2], y = xy_t[,3], last = xy)) 
+   return(list(time=xy_t[,1], x=xy_t[,2], y = xy_t[,3], xy = xy)) 
 }
 ```
 
 Now, we can visualize the output using code we've already written, and can see that we have fixed our stability problem. 
 
 ```{r plot_ross_dts_2, echo=TRUE}
-plot_xy(ross_dts_solve_2(ross_dts_par3, x0 = .01, y0=.001, tmax=20), "b") 
+plot_xy(solve_ross_dts_2(par_ross_dts_3, x0 = .01, y0=.001, tmax=20), "b") 
 ```
 
 **Verification** 
@@ -630,28 +636,28 @@ ross_dts_steady_2 = function(pars){with(pars,{
 Finding the equilibrium this way, we get: 
 
 ```{r, echo=TRUE}
-ross_dts_steady_2(ross_dts_par3)
+ross_dts_steady_2(par_ross_dts_3)
 ```
 
 Second, by getting the solution after many iterations. 
 
 ```{r, echo=TRUE}
-ross_dts_solve_2(ross_dts_par3, x0=.1, y0=.05,tmax=300)$last[-1]
+solve_ross_dts_2(par_ross_dts_3, x0=.1, y0=.05,tmax=300)$xy[-1]
 ```
 
 By inspection, these two numbers are very close, but not exactly matching. Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results. We set a term that describes an acceptable tolerance for computational errors, and ask if we're at least that close. 
 
 ```{r, echo=TRUE}
-ross_dts_checkit_2 = function(pars, x0 = .1, y0=.05, tmax=500, tol=1e-7){
-  xyt = ross_dts_solve_2(pars, x0=x0, y0=y0, tmax=tmax)
-  sum(abs(xyt$last[-1] - ross_dts_steady_2(pars))) < tol
+verify_ross_dts_2 = function(pars, x0 = .1, y0=.05, tmax=500, tol=1e-7){
+  xyt = solve_ross_dts_2(pars, x0=x0, y0=y0, tmax=tmax)
+  sum(abs(xyt$xy[-1] - ross_dts_steady_2(pars))) < tol
 }
 ```
 
 Do the two answers differ by less than $10^{-7}$? 
 
 ```{r, echo=TRUE}
-ross_dts_checkit_2(ross_dts_par3)
+verify_ross_dts_2(par_ross_dts_3)
 ```
 
 It's a little unsatisfying to get numerical errors, but machines don't do exact computation easily. We're interested in getting as close as we need to get without doing a lot of work that would, in the end, never make a difference. The operating principle here is that we need to be sure that our code is doing what we think it should, and that it is giving answers that are close enough.
@@ -662,38 +668,38 @@ It's a little unsatisfying to get numerical errors, but machines don't do exact 
 
 ***
 
-If we followed individuals in a population that followed the simple rules described in Equation \@ref(eq:Mprocess) and Equation \@ref(eq:Hprocess), we would like to be able to understand how they are connected to the deterministic equations we developed in  Section-\@ref(dtsRoss). Setting aside the problems that get introduced by sampling populations for the moment -- we will pretend we're omniscient -- we would find random changes occurring:
+If individuals in a population followed the simple rules described in Equation \@ref(eq:Mprocess) and Equation \@ref(eq:Hprocess), what would they look like? We would like to be able to understand how something we can observe would be connected to the deterministic equations we developed in Section \@ref(dtsRoss). Setting aside the problems that get introduced by realism, sampling, and diagnostics for the moment (we will pretend we're omniscient and that we live in the simple universe we've described) we would find changes occurring at random:
 
-+ individual humans would be switching states over time at random: from infected to uninfected and back; 
++ individual humans would be switching states, from infected to uninfected and back, at random; 
 
 + individual mosquitoes would be dying at random: infected mosquitoes would get replaced by uninfected mosquitoes, and uninfected mosquitoes would be blood feeding and getting infected if they blood fed on an infected (and infectious) human. 
 
-The world really has a random component to it. It is not deterministic but stochastic. 
+The world really has a random component to it. It is not deterministic but stochastic. In a real study, we can't pretend to be omniscient, but we will discuss that later. 
 
 In the *deterministic* models that we called `ross_dts_1` and `ross_dts_2,` the values of each variable at each point in time were specified *exactly* by the equations, the rules for updating the variables each day. The values of the variables were *proportions,* which is related to the metric *prevalence.* In these models, the variables asymptotically approach a *steady state.* Once at the steady state, the fractions infected would never change.  
 
-In models with stochasticity, we could use the same exact rules to specify what is expected to happen, but we must draw a random number to determine the values of the variables. To do this, we want to be working with the counting numbers -- the number of humans in a population and the number of those humans who are infected; and the number of mosquitoes in a population, and the number of those mosquitoes who are infected. The variability in the values of our variables over time due to the random component of parasite infection dynamics -- also called the parasite demographics -- would be called **demographic stochasticity.**  The model has *some* things in common with the ones we described above: the model doesn't have a steady state, but there is something like a steady state that the variables fluctuate around. We'll call it an attractor. The variables are always pulled towards the attractor, but the values of the variables are constantly changing around it.  
+In models with stochasticity, we could use the same exact rules to specify what is expected to happen, but we must draw a random number to determine what happens. To compute the values of these variables, we want to be working with the counting numbers -- the number of humans in a population and among those, the number infected; and the number of mosquitoes in a population, and among those, the number infected. The variability in the values of our variables over time due to the random component of parasite infection dynamics -- herein called parasite demographics -- would be called **demographic stochasticity.**  The model has *some* things in common with the ones we described above, but there are some important differences. The model doesn't have a steady state, but there is something like a steady state that the variables fluctuate around. We'll call it the attractor. The variables are always pulled towards the attractor, but since the process is random, the values of the variables bounce around it.  
 
-In a real study, we can't pretend to be omniscient, but we will discuss that later. 
+The parts of the model are the same. 
 
-**Parameters** -- We can use the same parameters as before, but there are two new parameters:
+**Parameters** -- We can use the same parameters as we did for the `ross_dts` models, but there are two new parameters:
 
 + $M$ is the number of mosquitoes: $M$ is a counting number 
 
 + $H$ is the number of humans; $H$ is a counting number
 
-Otherwise we use the same parameters as we did before. 
+Otherwise we use the same parameters as we did before. We use the stemname `ross_sdts` to denote a Ross-style stochastic discrete-time system. 
 
 ```{r, echo=TRUE}
 # The parameters, as a list 
-ross_sdts_par = list(
+par_ross_sdts = list(
   M = 50,   # The number of mosquitoes 
   H = 100,   # The number of humans 
   s = 1/200, # The fraction of infections that clear each day
   u = 1/12,  # The fraction of mosquitoes that die each day
   a = 1/4   # The fraction of mosquitoes that blood feed on a human each day
 )
-ross_sdts_par$m = with(ross_sdts_par, M/H)
+par_ross_sdts$m = with(par_ross_sdts, M/H)
 ```
 
 **Variables** 
@@ -712,17 +718,17 @@ It is easy enough to define prevalence:
 
 **Equations** 
 
-Now we have got to describe a stochastic process. Each individual changes state with some probability. Each one is a Bernoulli random variable, and the appropriate proability mass function is the binomial model. In R, we use the built-in function `rbinom(1, N, p)` to draw one random variable on $N$ individuals that remains in the same state with probability $p$. 
+Now we have got to describe a stochastic process. Each individual changes state with some probability. Each one is a Bernoulli random variable (*i.e.* either infected or not), so the appropriate probability mass function is the binomial model. In R, we use the built-in function `rbinom(1, N, p)` to draw one random variable on $N$ individuals that remains in the same state with probability $p$. 
 
-In each step, there are four possible changes, depending on the states: 
+In each step, there are four possible changes, depending on the states:
 
-+ $X$ - if humans are infected today, they might lose infection. An infection is lost with probability $s$, so the fraction that remain infected is $1-s.$ The number that remains infected is `rbinom(1, X, 1-s).` 
++ $X$ - if humans are infected today, they might lose infection. An infection is lost with probability $s$, so the fraction that remain infected is $1-s.$ The number that remains infected is computed as `rbinom(1, X, 1-s).` 
 
-+ $H-X$ - if humans are uninfected today, they might get infected. The probability of getting infected is called the *daily attack rate.*  The expected number of infected bites is $aY/H$, and if we use the Poisson to model the distribution of bites per person, then the attack rate is $1-e^{-aY/H}$. The number that remains ends up infected is `rbinom(1, H-X, ar).` 
++ $H-X$ - if humans are uninfected today, they might get infected. The probability of getting infected is called the *daily attack rate.*  The expected number of infected bites is $aY/H$, and if we use the Poisson to model the distribution of bites per person, then the attack rate is $1-e^{-aY/H}$. The number that remains ends up infected is computed as `rbinom(1, H-X, ar).` 
 
-+ $Y$ - if mosquitoes are infected today, they might die. The fraction dying is $u$, so the number of surviving infected mosquitoes is `rbinom(1, X, 1-s).` 
++ $Y$ - if mosquitoes are infected today, they might die. The fraction dying is $u$, so the number of surviving infected mosquitoes is computed as `rbinom(1, X, 1-s).` 
 
-+ $H-Y$ - if mosquitoes are uninfected today, they might get infected. To get infected, a mosquito must blood feed on an infected human, so the fraction getting infected is $aX/H$. The number that gets infected is `rbinom(1, H-Y, a X/H).` 
++ $H-Y$ - if mosquitoes are uninfected today, they might get infected. To get infected, a mosquito must blood feed on an infected human, so the fraction getting infected is $aX/H$. The number that gets infected is computed as `rbinom(1, H-Y, a X/H).` 
 
 The rule for updating the number of infected humans and mosquitoes is thus:
 
@@ -757,7 +763,7 @@ We write a wrapper that solves it:
 # X0   - the initial number of infected humans
 # Y0   - the initial number of infected mosquitoes 
 # t0   - the initial value of t
-# tmax - the last value of t 
+# tmax - the xy value of t 
 #
 # OUTPUTS
 # the values of the variables over time, as a list 
@@ -772,7 +778,7 @@ sim_ross_sdts = function(pars, X0=2, Y0 = 1, t0=0, tmax=100){
    Y=XY_t[,3]
    x=X/pars$H 
    y=Y/pars$M 
-   return(list(time=XY_t[,1], x=x, y=y, X=X, Y=Y, last = XY)) 
+   return(list(time=XY_t[,1], x=x, y=y, X=X, Y=Y, xy = XY)) 
 }
 ```
 
@@ -794,11 +800,11 @@ plot_XY = function(XY_t, type="l", lty=1, add= FALSE){with(XY_t,{
 })}
 ```
 
-A useful feature of R is the ability to replicate any particular sequence of random numbers by setting a *seed.* This also makes it easy to write a book knowing what the random number sequence will be. 
+A useful feature of R is the ability to replicate any particular sequence of random numbers by setting a *seed.* This also makes it easy to write a book knowing what the output will look like. 
 
 ```{r, echo=TRUE}
 set.seed(253)
-XYt <- sim_ross_sdts(ross_sdts_par, tmax=300) 
+XYt <- sim_ross_sdts(par_ross_sdts, tmax=300) 
 ```
 
 
@@ -850,21 +856,20 @@ segments(my, 0, my, 200, lwd=4, col = "darkorange")
 ```
 
 
-
-The system still tends towards a point -- we'll call it an attractor and not a steady state. The values of $X$ and $Y$  (or of $x$ and $y$) fluctuate around that steady state. Since the counting number values get repeated, we can illustrate what the cloud looks like by jittering the locations of the points:
+The system tends towards a point -- we'll call it an attractor and not a steady state. The values of $X$ and $Y$  (or of $x$ and $y$) fluctuate around that steady state. Since the counting number values get repeated, we can illustrate what the cloud looks like by jittering the locations of the points:
 
 ```{r, fig.height=5, fig.width=4, echo=TRUE}
 with(XYt,{
   ix = which(time>100)
   plot(jitter(X[ix]), jitter(Y[ix]), xlab = "X", ylab = "Y")
 }) 
-points(mX, mY, col = "darkred", pch = 8, cex =3)
+points(mX, mY, col = "darkred", pch = 7, cex =2)
 ```
 
 We note that mean prevalence is very close to the steady state of the deterministic system with the same parameter values:
 
 ```{r}
-c(mx, my) - ross_dts_steady_2(ross_sdts_par)
+c(mx, my) - ross_dts_steady_2(par_ross_sdts)
 ```
 
 An important feature of stochastic systems is that it is possible for the parasite to randomly fade out, if at any time $X=Y=0.$ This is something we'd like to take a bit more time computing.
@@ -1013,7 +1018,7 @@ For easy in working with these equations, we write a wrapper:
 # dt   -- the interval for t 
 # OUTPUT: 
 # the output of ode as a data.frame 
-ross_xde_solve = function(pars, x0=.01, y0=0.001, tmax=100, dt=1){
+solve_ross_xde = function(pars, x0=.01, y0=0.001, tmax=100, dt=1){
   tms = seq(0, tmax, by = dt)
   xy0 = c(x=x0, y=y0)
   data.frame(ode(xy0, tms, ross_xde, pars)) 
@@ -1022,7 +1027,7 @@ ross_xde_solve = function(pars, x0=.01, y0=0.001, tmax=100, dt=1){
 
 
 ```{r}
-ode_out <- ross_xde_solve(ross_xde_par)
+ode_out <- solve_ross_xde(ross_xde_par)
 ```
 
 Because we have returned it as a data frame, the column names are `time` and `x` and `y.` We can plot the values using `with().`
@@ -1039,8 +1044,8 @@ These differential equations require
 We can learn a bit more about how these equations behave by changing the initial values: 
 
 ```{r}
-ode_out1 <- ross_xde_solve(ross_xde_par, x0=0.2, y0=0.02)
-ode_out2 <- ross_xde_solve(ross_xde_par, x0=.99, y0=0.99)
+ode_out1 <- solve_ross_xde(ross_xde_par, x0=0.2, y0=0.02)
+ode_out2 <- solve_ross_xde(ross_xde_par, x0=.99, y0=0.99)
 ```
 
 ```{r}
@@ -1090,7 +1095,7 @@ ross_xde_steady_1(ross_xde_par)
 We check it against the other way, which involves running the system for a very long time.
 
 ```{r}
-de_eq <- ross_xde_solve(ross_xde_par, tmax=500, dt=5)
+de_eq <- solve_ross_xde(ross_xde_par, tmax=500, dt=5)
 with(de_eq, c(x=tail(x,1), y=tail(y,1))) 
 ```
 
@@ -1223,7 +1228,7 @@ ross_xde_par_5 = list(
 ```
 
 ```{r, echo=F}
-ross_xde_solve(ross_xde_par_5, x0=0.01, y=0.02, tmax=200, dt=1) -> r_xde
+solve_ross_xde(ross_xde_par_5, x0=0.01, y=0.02, tmax=200, dt=1) -> r_xde
 sim_ross_sxde(ross_xde_par_5, X0=1, Y0=1, tmax=200) -> s_xde0
 sim_ross_sxde(ross_xde_par_5, X0=1, Y0=1, tmax=200) -> s_xde1
 sim_ross_sxde(ross_xde_par_5, X0=1, Y0=1, tmax=200) -> s_xde2
@@ -1234,7 +1239,7 @@ sim_ross_sxde(ross_xde_par_5, X0=1, Y0=1, tmax=200) -> s_xde5
 
 ```{r, echo=F}
 # The parameters, as a list 
-ross_dts_par_5 = list(
+par_ross_dts_5 = list(
 #  s = 1-exp(-1/200), # The fraction of infections that clear each day
   s = 1/200, # The fraction of infections that clear each day
 #  u = 1-exp(-1/12),  # The fraction of mosquitoes that die each day
@@ -1281,14 +1286,14 @@ plot_y = function(xy_t, type = "l", lty=1, clr="darkorange", add=FALSE){with(xy_
 ```
 
 ```{r, echo=F}
-ross_dts_solve_2(ross_dts_par_5, x0=0.01, y0=0.02, tmax=200) -> r_dts
-ross_dts_solve_1(ross_dts_par_5, x0=0.01, y0=0.02, tmax=200) -> r1_dts
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts0
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts1
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts2
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts3
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts4
-sim_ross_sdts(ross_dts_par_5, X0=1, Y0=1, tmax=200) -> s_dts5
+solve_ross_dts_2(par_ross_dts_5, x0=0.01, y0=0.02, tmax=200) -> r_dts
+solve_ross_dts_1(par_ross_dts_5, x0=0.01, y0=0.02, tmax=200) -> r1_dts
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts0
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts1
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts2
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts3
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts4
+sim_ross_sdts(par_ross_dts_5, X0=1, Y0=1, tmax=200) -> s_dts5
 ```
 
 

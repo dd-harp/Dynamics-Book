@@ -1,5 +1,5 @@
 
-# Heterogeneous Transmission 
+# Spatial Heterogeneity 
 
 For humans, exposure to malaria means exposure to the bites of infectious mosquitoes. A problem that we'll have to deal with sooner or later is that exposure risk differs among humans over space and time. While this might seem like an odd thing to introduce so early, we will have to tackle the topic sometime. The discussion of [Heterogeneous Biting], in the previous chapter, showed that heterogeneity plays an important in understanding transmission and thresholds. This discussion of heterogeneous exposure (*i.e.*, looking at heterogeneous biting from the human side) is a good way of introducing some of the core concepts that are built into the framework:   
 
