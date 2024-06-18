@@ -659,8 +659,8 @@ div.csl-indent {
 <div id="countingEvents" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Events and Counting<a href="2.4-countingEvents.html#countingEvents" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There is a problem with <code>ross_diffs_1.</code> If we set <span class="math inline">\(m\)</span> too high, such that at some point <span class="math inline">\(m a y_t &gt; 1,\)</span> then the whole system eventually crashes:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="2.4-countingEvents.html#cb55-1" tabindex="-1"></a>ross_dts_par3 <span class="ot">=</span> <span class="fu">ross_dts_make_par</span>(<span class="at">m=</span><span class="fl">12.5</span>)</span>
-<span id="cb55-2"><a href="2.4-countingEvents.html#cb55-2" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">39</span>), <span class="st">&quot;b&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="2.4-countingEvents.html#cb55-1" tabindex="-1"></a>ross_dts_par3 <span class="ot">=</span> <span class="fu">ross_dts_makepars</span>(<span class="at">m=</span><span class="fl">12.4</span>)</span>
+<span id="cb55-2"><a href="2.4-countingEvents.html#cb55-2" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">50</span>), <span class="st">&quot;b&quot;</span>) </span></code></pre></div>
 <p><img src="figs/ross_dts_mess-1.png" width="672" /></p>
 <p>We need a good way of dealing with the problem that gave rise to this numerical instability. The question at hand is what fraction of people would become infected, on average, if the expected number of bites was <span class="math inline">\(may_t?\)</span> Ideally, we want to return a proportion, even when <span class="math inline">\(may_t&gt;1.\)</span> We call this quantity – the fraction that gets infected in a day – the <em>daily attack rate.</em></p>
 <p>How should we compute the probability of infections if we expect to get exposed more than once?</p>
@@ -740,11 +740,11 @@ y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 <span id="cb59-16"><a href="2.4-countingEvents.html#cb59-16" tabindex="-1"></a>})}</span></code></pre></div>
 <p>Finding the equilibrium this way, we get:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="2.4-countingEvents.html#cb60-1" tabindex="-1"></a><span class="fu">ross_dts_steady_2</span>(ross_dts_par3)</span></code></pre></div>
-<pre><code>## [1] 0.9944978 0.7489641</code></pre>
+<pre><code>## [1] 0.9944158 0.7131415</code></pre>
 <p>Second, by getting the solution after many iterations.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="2.4-countingEvents.html#cb62-1" tabindex="-1"></a><span class="fu">ross_dts_solve_2</span>(ross_dts_par3, <span class="at">x0=</span>.<span class="dv">1</span>, <span class="at">y0=</span>.<span class="dv">05</span>, <span class="at">tmax=</span><span class="dv">300</span>)<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##         x         y 
-## 0.9944978 0.7489641</code></pre>
+## 0.9944158 0.7131415</code></pre>
 <p>By inspection, these two numbers are very close, but not exactly matching. Once again, we want to ensure that our code does not have any mistakes, so we write a function to verify our results. We set a term that describes an acceptable tolerance for computational errors, and ask if we’re at least that close.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="2.4-countingEvents.html#cb64-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
 <span id="cb64-2"><a href="2.4-countingEvents.html#cb64-2" tabindex="-1"></a><span class="co"># xy     - xy </span></span>
@@ -764,6 +764,7 @@ y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="2.4-countingEvents.html#cb65-1" tabindex="-1"></a><span class="fu">ross_dts_checkit_2</span>(ross_dts_par3)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>It’s a little unsatisfying to get numerical errors, but machines don’t do exact computation easily. We’re interested in getting as close as we need to get without doing a lot of work that would, in the end, never make a difference. The operating principle here is that we need to be sure that our code is doing what we think it should, and that it is giving answers that are close enough.</p>
+<p>Also of interest, discrete time model <code>ross_diffs_2</code> was implemented in a <a href="https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0">Google Sheet.</a></p>
 </div>
 </div>
             </section>

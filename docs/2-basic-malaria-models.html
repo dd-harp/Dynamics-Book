@@ -660,18 +660,20 @@ div.csl-indent {
 <h1><span class="header-section-number">2</span> Basic Malaria Models<a href="2-basic-malaria-models.html#basic-malaria-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><em>Basic malaria models as deterministic or stochastic systems of difference or differential equations</em></p>
 <hr />
+<p>We start out describing Ross’s quantitative logic before presenting the mathematical models.</p>
 <ol style="list-style-type: decimal">
-<li><p>Section <a href="2.2-dtsRoss.html#dtsRoss">2.2</a> presents a basic deterministic discrete-time system.</p></li>
-<li><p>In Section <a href="2.3-basicComputation.html#basicComputation">2.3</a>, we discuss some basic issues about computation.</p></li>
-<li><p>In Section <a href="2.4-countingEvents.html#countingEvents">2.4</a>, we show that the model presented in Section <a href="2.2-dtsRoss.html#dtsRoss">2.2</a> is numerically unstable. We discuss the history of discrete-time systems in epidemiology. We introduce the Poisson distribution, and we use it to develop a new model that is numerically stable.</p></li>
+<li><p>Section <a href="2.2-dtsRoss.html#dtsRoss">2.2</a> presents a basic deterministic discrete-time system. Since it is the first model in the book, we walk through it step-by-step, discussing the parts and going slowly.</p></li>
+<li><p>In Section <a href="2.3-basicComputation.html#basicComputation">2.3</a>, we introduce some basic issues about coding and computation.</p></li>
+<li><p>In Section <a href="2.4-countingEvents.html#countingEvents">2.4</a>, we show that the model presented in Section <a href="2.2-dtsRoss.html#dtsRoss">2.2</a> is numerically unstable. To <em>fix</em> the numerical instability, we introduce the Poisson distribution. We use it to develop a new model that is numerically stable.</p></li>
 <li><p>Section <a href="2.5-sdtsRoss.html#sdtsRoss">2.5</a> presents a stochastic discrete-time system;</p></li>
 <li><p>Section <a href="2.6-xdeRoss.html#xdeRoss">2.6</a> presents a deterministic continuous-time system;</p></li>
-<li><p>In Section <a href="2.7-sxdeRoss.html#sxdeRoss">2.7</a>, we present a stochastic process in continuous-time;</p></li>
+<li><p>Section <a href="2.7-sxdeRoss.html#sxdeRoss">2.7</a> presents a stochastic process in continuous-time;</p></li>
 <li><p>In Section <a href="2.8-mathSpecies.html#mathSpecies">2.8</a>, we compare and contrast discrete <em>vs.</em> continuous, and deterministic <em>vs.</em> stochastic models.</p></li>
+<li><p>In the last section, we discuss some of the history of using discrete-time systems for infectious diseases.</p></li>
 </ol>
 <p>In this chapter, we’re not trying to delve too deeply into malaria epidemiology.
 Instead, this chapter is about trying to develop basic skills that will be a foundation for model building.
-Our goals are thus to learn the basic elements of different kinds of models, and to develop some basic intuition about the different kinds of models that exist, and how we can think about models as approximations.
+The goals for this chapter are to introduce the basic elements of models, to present several different different kinds of models, to develop some basic intuition about how they work and their differences, and to emphasize that all models as approximations.
 Each model is implemented as R code<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>We assume that the gentle reader has some basic familiarity with these concepts in the next chapter, when we present <a href="3-the-ross-macdonald-model.html#the-ross-macdonald-model">The Ross-Macdonald Model</a>.</p>
 </div>

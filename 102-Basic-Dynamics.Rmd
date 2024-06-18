@@ -9,23 +9,27 @@ output:
 
 *** 
 
-1. Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. 
+We start out describing Ross's quantitative logic before presenting the mathematical models. 
 
-2. In Section \@ref(basicComputation), we discuss some basic issues about computation.  
+1. Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. Since it is the first model in the book, we walk through it step-by-step, discussing the parts and going slowly.
 
-3. In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. We discuss the history of discrete-time systems in epidemiology. We introduce the Poisson distribution, and we use it to develop a new model that is numerically stable.  
+2. In Section \@ref(basicComputation), we introduce some basic issues about coding and computation.  
+
+3. In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. To *fix* the numerical instability, we introduce the Poisson distribution. We use it to develop a new model that is numerically stable. 
 
 4. Section \@ref(sdtsRoss) presents a stochastic discrete-time system; 
 
 5. Section \@ref(xdeRoss) presents a deterministic continuous-time system; 
 
-6. In Section \@ref(sxdeRoss), we present a stochastic process in continuous-time; 
+6. Section \@ref(sxdeRoss) presents a stochastic process in continuous-time; 
 
 7. In Section \@ref(mathSpecies), we compare and contrast discrete *vs.* continuous, and deterministic *vs.* stochastic models. 
 
+8. In the last section, we discuss some of the history of using discrete-time systems for infectious diseases. 
+
 In this chapter, we're not trying to delve too deeply into malaria epidemiology. 
 Instead, this chapter is about trying to develop basic skills that will be a foundation for model building.
-Our goals are thus to learn the basic elements of different kinds of models, and to develop some basic intuition about the different kinds of models that exist, and how we can think about models as approximations.
+The goals for this chapter are to introduce the basic elements of models, to present several different different kinds of models, to develop some basic intuition about how they work and their differences, and to emphasize that all models as approximations.
 Each model is implemented as R code^[In developing this book, we assumed the reader would be familiar with R and RStudio.]
 
 We assume that the gentle reader has some basic familiarity with these concepts in the next chapter, when we present [The Ross-Macdonald Model]. 
@@ -106,16 +110,16 @@ To describe malaria transmission and factors that determine the prevalence of ma
 In the sections that follow, we will formulate dynamical systems in discrete and continuous time, and as a deterministic or stochastic processes.
 
 As a reminder, we're not trying to delve too deeply into malaria epidemiology with the models in this chapter.
-Instead, this chapter is about trying to develop a toolbox that we can use to investigate malaria transmission dynamics and control. 
+We're trying to develop a toolbox that we can use to investigate malaria transmission dynamics and control. 
 
-Later, we will start using some R packages that were developed to support robust analytics for malaria policy.
-Later, we'll worry about modifying the assumptions to ensure that we are dealing with the issues that matter for in malaria policy. 
+
 
 ## Deterministic, Discrete-Time {#dtsRoss}
 
 *The parts of a model: variables, parameters, initial conditions.* 
 
 *** 
+
 In this section, we present the basic, deterministic, discrete-time model for a mosquito-transmitted pathogen. Because it is the first model in the book, we'll take the time to explain some background material in detail. We'll discuss the parts of a model, and we walk through the process of solving models. 
 
 ### Model 
@@ -176,12 +180,19 @@ The parameters in this model define changes in prevalence: the fraction of human
   + Let $m$ denote the number of mosquitoes per human; $m \geq 0.$ 
 
 ```{r, echo=TRUE}
-# Make a valid parameter set, as a list 
-ross_dts_make_par = function(
-  s = 1/200, # The fraction of infections that clear each day
-  u = 1/12,  # The fraction of mosquitoes that die each day
-  a = 1/4,   # The fraction of mosquitoes that blood feed on a human each day
-  m = 2      # The number of mosquitoes per human
+# INPUTS
+# s - The fraction of infections that clear each day
+# u - The fraction of mosquitoes that die each day
+# a - The fraction of mosquitoes that blood feed on a human each day
+# m - The number of mosquitoes per human
+#
+# OUTPUTS 
+# a list with the parameter values by name
+ross_dts_makepars = function(
+  s = 1/200, 
+  u = 1/10,  
+  a = 1/4,   
+  m = 2      
 ){
   list(s=s, u=u, a=a, m=m)
 }
@@ -189,7 +200,7 @@ ross_dts_make_par = function(
 
 
 ```{r, echo=TRUE}
-ross_dts_par = ross_dts_make_par()
+ross_dts_par = ross_dts_makepars()
 ```
 
 **Equations** describe dynamic changes in the variables over time. In this case, the process is described by a system of coupled difference equations. 
@@ -308,6 +319,7 @@ As we can see, the values are changing a little at the end.
 
 Notice that after 40 days, the values of $x$ and $y$ appear to be approaching some value asymptotically. This is an important feature of these systems, one that we would like to understand and explore a bit more in the following sections. 
 
+The discrete time model `ross_diffs_1` can be implemented in a spreadsheet. We did one as a [Google Sheet.](https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0)
  
 ### Analysis
 
@@ -385,7 +397,7 @@ All our analysis worked out well for the parameter values that we chose, but wha
 There must be some very low level of mosquitoes, for example, where malaria parasites can't be sustained in a population. If we reduce $m$ to $0.005$ and evaluate the expression at the steady state, we get negative values for $x$ and $y$. 
 
 ```{r, echo=TRUE}
-ross_dts_par1 = ross_dts_make_par(m=0.005) 
+ross_dts_par1 = ross_dts_makepars(m=0.005) 
 ross_dts_steady_0(ross_dts_par1)
 ```
 
@@ -426,7 +438,7 @@ m_crit
 If we check, we find that this gives us the disease free equilibrium.  
 
 ```{r, echo=TRUE}
-ross_dts_par2 = ross_dts_make_par(m=m_crit)
+ross_dts_par2 = ross_dts_makepars(m=m_crit)
 ross_dts_steady_0(ross_dts_par2)
 ```
 
@@ -505,13 +517,13 @@ plot_xy = function(xy_t, type = "l", lty=1, add=FALSE){with(xy_t,{
 Now, we can define, solve and plot a model in a single line of code:
 
 ```{r replot_ross_diffs_1, echo=TRUE}
-plot_xy(ross_dts_solve_1(ross_dts_make_par(), tmax=40), type="p") 
+plot_xy(ross_dts_solve_1(ross_dts_makepars(), tmax=40), type="p") 
 ```
 
 We're not necessarily advocating that we write code this way. It's not always easy to find and diagnose problems, or to repeat it. We shouldn't do everything just because we can. This code does the same thing in a form that's easier to follow: 
 
 ```{r rereplot_ross_diffs_1, echo=TRUE}
-params <- ross_dts_make_par()
+params <- ross_dts_makepars()
 output <- ross_dts_solve_1(params, tmax=40) 
 plot_xy(output, type="p") 
 ```
@@ -573,8 +585,8 @@ ross_dts_checkit_1(ross_dts_par)
 There is a problem with `ross_diffs_1.` If we set $m$ too high, such that at some point $m a y_t > 1,$ then the whole system eventually crashes:
 
 ```{r ross_dts_mess, echo=TRUE}
-ross_dts_par3 = ross_dts_make_par(m=12.5)
-plot_xy(ross_dts_solve_1(ross_dts_par3, x0 = .01, y0=.001, tmax=39), "b") 
+ross_dts_par3 = ross_dts_makepars(m=12.4)
+plot_xy(ross_dts_solve_1(ross_dts_par3, x0 = .01, y0=.001, tmax=50), "b") 
 ```
 
 We need a good way of dealing with the problem that gave rise to this numerical instability. The question at hand is what fraction of people would become infected, on average, if the expected number of bites was $may_t?$ Ideally, we want to return a proportion, even when $may_t>1.$ We call this quantity -- the fraction that gets infected in a day -- the *daily attack rate.* 
@@ -718,6 +730,8 @@ ross_dts_checkit_2(ross_dts_par3)
 ```
 
 It's a little unsatisfying to get numerical errors, but machines don't do exact computation easily. We're interested in getting as close as we need to get without doing a lot of work that would, in the end, never make a difference. The operating principle here is that we need to be sure that our code is doing what we think it should, and that it is giving answers that are close enough.
+
+Also of interest, discrete time model `ross_diffs_2` was implemented in a [Google Sheet.](https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0) 
 
 ## Stochastic, Discrete Time {#sdtsRoss}
 
@@ -1475,7 +1489,7 @@ plot_y(s_xde5, clr=clrsB[6], add=T)
 
 ## Notes
 
-The discrete time models ross_diffs_1 and ross_dts_2 have been implemented in a [Google Sheet](https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0)
+The discrete time models ross_diffs_1 and ross_dts_2 have been implemented in a [Google Sheet.](https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0)
 
 + The Reed-Frost model
 

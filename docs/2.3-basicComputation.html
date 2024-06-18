@@ -698,10 +698,10 @@ div.csl-indent {
 <span id="cb41-15"><a href="2.3-basicComputation.html#cb41-15" tabindex="-1"></a>  <span class="fu">text</span>(<span class="dv">0</span>, <span class="fl">0.8</span>, <span class="st">&quot;y&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkorange&quot;</span>, <span class="at">pos=</span><span class="dv">4</span>) </span>
 <span id="cb41-16"><a href="2.3-basicComputation.html#cb41-16" tabindex="-1"></a>})}</span></code></pre></div>
 <p>Now, we can define, solve and plot a model in a single line of code:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="2.3-basicComputation.html#cb42-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(<span class="fu">ross_dts_make_par</span>(), <span class="at">tmax=</span><span class="dv">40</span>), <span class="at">type=</span><span class="st">&quot;p&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="2.3-basicComputation.html#cb42-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(<span class="fu">ross_dts_makepars</span>(), <span class="at">tmax=</span><span class="dv">40</span>), <span class="at">type=</span><span class="st">&quot;p&quot;</span>) </span></code></pre></div>
 <p><img src="figs/replot_ross_diffs_1-1.png" width="672" /></p>
 <p>We’re not necessarily advocating that we write code this way. It’s not always easy to find and diagnose problems, or to repeat it. We shouldn’t do everything just because we can. This code does the same thing in a form that’s easier to follow:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="2.3-basicComputation.html#cb43-1" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">ross_dts_make_par</span>()</span>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="2.3-basicComputation.html#cb43-1" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">ross_dts_makepars</span>()</span>
 <span id="cb43-2"><a href="2.3-basicComputation.html#cb43-2" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">ross_dts_solve_1</span>(params, <span class="at">tmax=</span><span class="dv">40</span>) </span>
 <span id="cb43-3"><a href="2.3-basicComputation.html#cb43-3" tabindex="-1"></a><span class="fu">plot_xy</span>(output, <span class="at">type=</span><span class="st">&quot;p&quot;</span>) </span></code></pre></div>
 <p><img src="figs/rereplot_ross_diffs_1-1.png" width="672" /></p>
@@ -713,14 +713,14 @@ div.csl-indent {
 <p>The last values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> from the simulation are:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="2.3-basicComputation.html#cb44-1" tabindex="-1"></a>output<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>##         x         y 
-## 0.9866975 0.7470700</code></pre>
+## 0.9859663 0.7109837</code></pre>
 <p>The last values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> from evaluating <code>ross_dts_steady_1()</code> are:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="2.3-basicComputation.html#cb46-1" tabindex="-1"></a><span class="fu">ross_dts_steady_1</span>(params) </span></code></pre></div>
 <pre><code>##         x         y 
-## 0.9867987 0.7475000</code></pre>
+## 0.9861386 0.7114286</code></pre>
 <p>It’s tempting to look at the printout and assume these two numbers are exactly equal, but when we deal with computers, everything gets computed and stored in some way. We can never be sure that a match will be be exact. We can simply sum up the absolute values of the differences:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="2.3-basicComputation.html#cb48-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(output<span class="sc">$</span>last[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fu">ross_dts_steady_1</span>(params)))</span></code></pre></div>
-<pre><code>## [1] 0.000531105</code></pre>
+<pre><code>## [1] 0.0006171682</code></pre>
 <p>If we wanted to reduce this to a simple error check, we should pick a tolerance level – say <span class="math inline">\(10^{-9}\)</span> – and then just ask if we are closer than that:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="2.3-basicComputation.html#cb50-1" tabindex="-1"></a><span class="co"># INPUTS</span></span>
 <span id="cb50-2"><a href="2.3-basicComputation.html#cb50-2" tabindex="-1"></a><span class="co"># xy  - xy </span></span>
