@@ -661,7 +661,7 @@ div.csl-indent {
 <p>There is a problem with <code>ross_diffs_1.</code> If we set <span class="math inline">\(m\)</span> too high, such that at some point <span class="math inline">\(m a y_t &gt; 1,\)</span> then the whole system eventually crashes:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="2.4-countingEvents.html#cb55-1" tabindex="-1"></a>ross_dts_par3 <span class="ot">=</span> <span class="fu">ross_dts_make_par</span>(<span class="at">m=</span><span class="fl">12.5</span>)</span>
 <span id="cb55-2"><a href="2.4-countingEvents.html#cb55-2" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">39</span>), <span class="st">&quot;b&quot;</span>) </span></code></pre></div>
-<p><img src="_book/figs/ross_dts_mess-1.png" width="672" /></p>
+<p><img src="figs/ross_dts_mess-1.png" width="672" /></p>
 <p>We need a good way of dealing with the problem that gave rise to this numerical instability. The question at hand is what fraction of people would become infected, on average, if the expected number of bites was <span class="math inline">\(may_t?\)</span> Ideally, we want to return a proportion, even when <span class="math inline">\(may_t&gt;1.\)</span> We call this quantity – the fraction that gets infected in a day – the <em>daily attack rate.</em></p>
 <p>How should we compute the probability of infections if we expect to get exposed more than once?</p>
 <div id="on-not-not-getting-infected" class="section level3 hasAnchor" number="2.4.1">
@@ -717,7 +717,7 @@ y_{t+1} &amp;=  y_t - u y_t + a x_t (1 - y_t) \\
 <span id="cb57-19"><a href="2.4-countingEvents.html#cb57-19" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now, we can visualize the output using code we’ve already written, and can see that we have fixed our stability problem.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="2.4-countingEvents.html#cb58-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_2</span>(ross_dts_par3, <span class="at">x0 =</span> .<span class="dv">01</span>, <span class="at">y0=</span>.<span class="dv">001</span>, <span class="at">tmax=</span><span class="dv">20</span>), <span class="st">&quot;b&quot;</span>) </span></code></pre></div>
-<p><img src="_book/figs/plot_ross_dts_2-1.png" width="672" /></p>
+<p><img src="figs/plot_ross_dts_2-1.png" width="672" /></p>
 <p><strong>Verification</strong></p>
 <p>For verification, we want a method to solve things two different ways. If we want to compute the steady state, we’re stuck with the problem of solving this equation:</p>
 <p><span class="math display">\[(1-e^{-m a^2 x/(u + a x)}) (1-x) = sx\]</span></p>

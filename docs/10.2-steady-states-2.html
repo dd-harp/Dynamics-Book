@@ -762,7 +762,7 @@ V = \frac{\Lambda}{H} S^2  e^{-g\tau}
 <p>As a reminder, while Eq. <a href="10.2-steady-states-2.html#eq:VCstory">(10.6)</a> includes <span class="math inline">\(\kappa\)</span>, the formula for VC, in Eq. <a href="10.2-steady-states-2.html#eq:VCdefined">(10.2)</a>, assumes that <span class="math inline">\(\kappa=1\)</span>: the VC describes transmission as if humans were perfectly infectious. It was defined this way on purpose: it was meant to include mosquito parameters and exclude human factors. We can think of VC as defining something like a conditional expectation, a maximum, or (as we have already said) a measure of <em>potential transmission by mosquitoes</em> that is independent of human factors.</p>
 <p>While <span class="math inline">\(\kappa\)</span> (the numerator in Eq.<a href="10.2-steady-states-2.html#eq:EIR2ndpart">(10.3)</a> accounts for <em>most</em> of the difference between the EIR and the VC, the rest of the difference is due to the denominator in Eq. <a href="10.2-steady-states-2.html#eq:EIR2ndpart">(10.3)</a>, <span class="math inline">\(1+S\kappa\)</span>, which traces back to the formula from <span class="math inline">\(dY/dt\)</span>, which assumes that mosquitoes are either infected or not. The denominator is a measure of saturation – the fraction of mosquitoes that get <em>superinfected</em> with parasites. The main point here is that as <span class="math inline">\(\kappa\)</span> increases, saturation increases. If we set <span class="math inline">\(S\)</span> to the values in the previous plots, we can isolate the relationship:</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-80"></span>
-<img src="_book/figs/unnamed-chunk-80-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
+<img src="figs/unnamed-chunk-80-1.png" alt="The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically." width="672" />
 <p class="caption">
 Figure 10.1: The effect (compare the solid and dashed black lines) and effect size of saturation (blue), graphically.
 </p>
@@ -828,7 +828,7 @@ R_0 = \frac{bcV}{r}.
 <p>We make a parameter set that defines the model:</p>
 <pre><code>## [1] 600.00000 211.01706  91.70764 793.10541</code></pre>
 <p>By plotting it out, we can check to see if we’ve run it for long enough:</p>
-<p><img src="_book/figs/unnamed-chunk-83-1.png" width="528" /></p>
+<p><img src="figs/unnamed-chunk-83-1.png" width="528" /></p>
 <p>We can check our algebra by computing the same quantities, and <span class="math inline">\(R_0\)</span> and other quantities we care about:</p>
 <pre><code>## $std
 ##         M         Y         Z         X 

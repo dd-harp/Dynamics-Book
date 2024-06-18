@@ -772,7 +772,7 @@ dy/dt &amp;= ax(1-y) - g y \\
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="2.6-xdeRoss.html#cb89-1" tabindex="-1"></a>ode_out <span class="ot">&lt;-</span> <span class="fu">ross_xde_solve</span>(ross_xde_par)</span></code></pre></div>
 <p>Because we have returned it as a data frame, the column names are <code>time</code> and <code>x</code> and <code>y.</code> We can plot the values using <code>with().</code></p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="2.6-xdeRoss.html#cb90-1" tabindex="-1"></a><span class="fu">plot_xy</span>(ode_out)</span></code></pre></div>
-<p><img src="_book/figs/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-48-1.png" width="672" /></p>
 <p>These differential equations require</p>
 </div>
 <div id="steady-states-1" class="section level3 hasAnchor" number="2.6.5">
@@ -783,7 +783,7 @@ dy/dt &amp;= ax(1-y) - g y \\
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="2.6-xdeRoss.html#cb92-1" tabindex="-1"></a><span class="fu">plot_xy</span>(ode_out)</span>
 <span id="cb92-2"><a href="2.6-xdeRoss.html#cb92-2" tabindex="-1"></a><span class="fu">plot_xy</span>(ode_out1, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span>
 <span id="cb92-3"><a href="2.6-xdeRoss.html#cb92-3" tabindex="-1"></a><span class="fu">plot_xy</span>(ode_out2, <span class="at">lty=</span><span class="dv">3</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="_book/figs/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="figs/unnamed-chunk-50-1.png" width="672" /></p>
 <p>We notice that the orbits all asymptotically approach the same values, regardless of where they started. Once there, they stay there.</p>
 </div>
 <div id="verification-1" class="section level3 hasAnchor" number="2.6.6">
