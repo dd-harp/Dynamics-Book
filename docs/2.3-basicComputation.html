@@ -699,12 +699,12 @@ div.csl-indent {
 <span id="cb41-16"><a href="2.3-basicComputation.html#cb41-16" tabindex="-1"></a>})}</span></code></pre></div>
 <p>Now, we can define, solve and plot a model in a single line of code:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="2.3-basicComputation.html#cb42-1" tabindex="-1"></a><span class="fu">plot_xy</span>(<span class="fu">ross_dts_solve_1</span>(<span class="fu">ross_dts_make_par</span>(), <span class="at">tmax=</span><span class="dv">40</span>), <span class="at">type=</span><span class="st">&quot;p&quot;</span>) </span></code></pre></div>
-<p><img src="figs/replot_ross_diffs_1-1.png" width="672" /></p>
+<p><img src="_book/figs/replot_ross_diffs_1-1.png" width="672" /></p>
 <p>We’re not necessarily advocating that we write code this way. It’s not always easy to find and diagnose problems, or to repeat it. We shouldn’t do everything just because we can. This code does the same thing in a form that’s easier to follow:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="2.3-basicComputation.html#cb43-1" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">ross_dts_make_par</span>()</span>
 <span id="cb43-2"><a href="2.3-basicComputation.html#cb43-2" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">ross_dts_solve_1</span>(params, <span class="at">tmax=</span><span class="dv">40</span>) </span>
 <span id="cb43-3"><a href="2.3-basicComputation.html#cb43-3" tabindex="-1"></a><span class="fu">plot_xy</span>(output, <span class="at">type=</span><span class="st">&quot;p&quot;</span>) </span></code></pre></div>
-<p><img src="figs/rereplot_ross_diffs_1-1.png" width="672" /></p>
+<p><img src="_book/figs/rereplot_ross_diffs_1-1.png" width="672" /></p>
 </div>
 <div id="verification" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Verification<a href="2.3-basicComputation.html#verification" class="anchor-section" aria-label="Anchor link to header"></a></h3>

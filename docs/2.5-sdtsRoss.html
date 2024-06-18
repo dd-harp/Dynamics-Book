@@ -764,15 +764,15 @@ Y_{t+1} &amp;= \mbox{Binom}(Y, 1-u) + \mbox{Binom}(M-Y, aX/H) \\
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="2.5-sdtsRoss.html#cb71-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">253</span>)</span>
 <span id="cb71-2"><a href="2.5-sdtsRoss.html#cb71-2" tabindex="-1"></a>XYt <span class="ot">&lt;-</span> <span class="fu">sim_ross_sdts</span>(ross_sdts_par, <span class="at">tmax=</span><span class="dv">1000</span>) </span></code></pre></div>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="2.5-sdtsRoss.html#cb72-1" tabindex="-1"></a><span class="fu">plot_XY</span>(XYt)</span></code></pre></div>
-<p><img src="figs/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="_book/figs/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Once we’re close to the steady state, some time after the first 100 days, we can compute the mean:</p>
 <pre><code>##        X        Y 
 ## 95.09989 36.76027</code></pre>
 <p>This can be visualized as a histogram:</p>
-<p><img src="figs/unnamed-chunk-35-1.png" width="768" /></p>
+<p><img src="_book/figs/unnamed-chunk-35-1.png" width="768" /></p>
 <p>Since we can compute prevalence, we can plot it out:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="2.5-sdtsRoss.html#cb74-1" tabindex="-1"></a><span class="fu">plot_xy</span>(XYt)</span></code></pre></div>
-<p><img src="figs/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="_book/figs/unnamed-chunk-36-1.png" width="672" /></p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="2.5-sdtsRoss.html#cb75-1" tabindex="-1"></a>xdist<span class="ot">=</span> <span class="fu">with</span>(XYt, x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)]) </span>
 <span id="cb75-2"><a href="2.5-sdtsRoss.html#cb75-2" tabindex="-1"></a>ydist<span class="ot">=</span> <span class="fu">with</span>(XYt, y[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)]) </span>
 <span id="cb75-3"><a href="2.5-sdtsRoss.html#cb75-3" tabindex="-1"></a>mx <span class="ot">=</span> <span class="fu">mean</span>(xdist)</span>
@@ -780,14 +780,14 @@ Y_{t+1} &amp;= \mbox{Binom}(Y, 1-u) + \mbox{Binom}(M-Y, aX/H) \\
 <span id="cb75-5"><a href="2.5-sdtsRoss.html#cb75-5" tabindex="-1"></a><span class="fu">c</span>(<span class="at">x=</span>mx, <span class="at">y=</span>my) </span></code></pre></div>
 <pre><code>##         x         y 
 ## 0.9509989 0.7352053</code></pre>
-<p><img src="figs/unnamed-chunk-38-1.png" width="768" /></p>
+<p><img src="_book/figs/unnamed-chunk-38-1.png" width="768" /></p>
 <p>The system still tends towards a point – we’ll call it an attractor and not a steady state. The values of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> (or of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>) fluctuate around that steady state. Since the counting number values get repeated, we can illustrate what the cloud looks like by jittering the locations of the points:</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="2.5-sdtsRoss.html#cb77-1" tabindex="-1"></a><span class="fu">with</span>(XYt,{</span>
 <span id="cb77-2"><a href="2.5-sdtsRoss.html#cb77-2" tabindex="-1"></a>  ix <span class="ot">=</span> <span class="fu">which</span>(time<span class="sc">&gt;</span><span class="dv">100</span>)</span>
 <span id="cb77-3"><a href="2.5-sdtsRoss.html#cb77-3" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">jitter</span>(X[ix],<span class="fl">1.5</span>), <span class="fu">jitter</span>(Y[ix],<span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>, <span class="at">cex=</span><span class="fl">0.2</span>)</span>
 <span id="cb77-4"><a href="2.5-sdtsRoss.html#cb77-4" tabindex="-1"></a>}) </span>
 <span id="cb77-5"><a href="2.5-sdtsRoss.html#cb77-5" tabindex="-1"></a><span class="fu">points</span>(mX, mY, <span class="at">col =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">pch =</span> <span class="dv">8</span>, <span class="at">cex =</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="figs/unnamed-chunk-39-1.png" width="384" /></p>
+<p><img src="_book/figs/unnamed-chunk-39-1.png" width="384" /></p>
 <p>We note that mean prevalence is very close to the steady state of the deterministic system with the same parameter values:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="2.5-sdtsRoss.html#cb78-1" tabindex="-1"></a><span class="fu">c</span>(mx, my) <span class="sc">-</span> <span class="fu">ross_dts_steady_1</span>(ross_sdts_par)</span></code></pre></div>
 <pre><code>##            x            y 
