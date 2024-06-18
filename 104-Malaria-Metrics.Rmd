@@ -1,0 +1,54 @@
+# Malaria Metrics 
+
+*The metrics commonly used in research and surveillence to measure malaria in populations.* 
+
+*** 
+
+If we want to manage malaria, we must be able to measure it. Models are approximations. We make a distinction between biological processes and observational processes. 
+
+***
+
+Note: in [Measuring Malaria for Control] we revisit the malaria metrics in the context of monitoring and evaluation for malaria control programs. Also see [@HaySI2008MeasuringMalaria] for a general overview of malaria metrics,  [@SmithDL2009MeasuringMalaria] and [@TustingLS2014MeasuringChanges]
+
+## Malaria Epidemiology  
+
+### Infection Prevalence
+
++ Spleen Rate
+
++ Parasite Rate 
+
+### Infection Incidence 
+
++ Infection vs. Disease 
+
+### Disease 
+
+### Serology  
+
+
+## Entomology  
+
+### Entomological Inoculation Rates
+
++ HBR
+
++ SR 
+
++ EIR 
+
+### Bionomics  
+
+## Transmission 
+
+### Infectiousness
+
+### Vectorial Capacity  
+
+### Transmission Efficiency
+
+## Surveillance 
+
+## Notes
+
+[@HaySI2008MeasuringMalaria]
