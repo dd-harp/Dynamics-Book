@@ -1,32 +1,32 @@
 
 # The Ross-Macdonald Model
 
-*A **Ross-Macdonald** model as a system of delay differential equations. The classification of transmission. The basic reproductive number. Vectorial capacity.* 
+*The Ross-Macdonald model, a system of delay differential equations describing malaria. The basic reproductive number as a threshold condition. Vectorial capacity. The classification of transmission.*
+
 
 *** 
 
-When I first learned about malaria, I remember hearing about the *Ross-Macdonald* model, and I came across several recent papers describing Ross-Macdonald models. 
-A few years ago, I went searching for *The Ross-Macdonald Model* with the hope of finding a canonical form with George Macdonald's name attached to it.
-I was looking for a publication where I could find the model written down concisely as a system of differential equations.
-Instead, I found that Macdonald was associated with several new ideas spread across several publications, including many ideas he attributed (or ought to have attributed) to others [@SmithDL2012_RossMacdonald]. 
-Two useful publications were by Paul Fine [@FinePEM1975SuperinfectionProblem] and Norman Bailey [@BaileyNTJ1982BiomathematicsMalaria] about Ross, Macdonald, and the various mathematical versions of malaria models. 
-I found the term "so-called Ross-Macdonald" in a 1982 book chapter by Joan Aron and Bob May [@AronJL1982PopulationDynamics]. 
-Why was it called the *Ross-Macdonald* model?
+When I first learned about malaria, I remember reading about the *Ross-Macdonald* model. 
+I had been reading Ross, but I wanted to find a canonical formulation of a model with George Macdonald's name attached to it.
+I was looking for a publication where I could find a system of differential equations.
+Instead, I found that Macdonald was associated with several new ideas spread across several publications, including a new model of superinfection [@MacdonaldG1950Superinfection], a synthesis of quantitative medical entomology and analysis of the sporozoite rate [@MacdonaldG1952Sporozoite], and a formula for the basic reproductive number for malaria [@MacdonaldG1952R0]. His papers introduced a few ideas he attributed (or ought to have attributed) to others, including the concept of a reproductive number (it was Lotka's idea) [@SmithDL2012_RossMacdonald]. 
+Two useful publications describing George Macdonald's models by Paul Fine [@FinePEM1975SuperinfectionProblem] and Norman Bailey [@BaileyNTJ1982BiomathematicsMalaria] about Ross, Macdonald, and the various mathematical versions of malaria models with two or more names attached. 
+Rereading, I found the phrase *so-called Ross-Macdonald* in a 1982 book chapter by Joan Aron and Bob May [@AronJL1982PopulationDynamics]. 
 
-Macdonald's papers are conceptually rich discussions of mathematical concept and data from various sources; the formulas that do appear are mostly relegated to appendices. 
-Between 1950 and 1956, Macdonald published 11 papers on malaria epidemiology, dynamics, and control. 
-(In that same interval, Macdonald published at least three other papers on other topics in malaria.)
-In 1957, he published a book called *The Epidemiology and Control of Malaria,* and he was rapporteur for the *Sixth Report* of the *Expert Committee on Malaria,* which established the basic plan for the Global Malaria Eradication Programme.
-In the 1960s, he published some relevant follow-up papers, including a diagram of the basic reproductive number.
+After learning about Ross, I wondered why it was called the *Ross-Macdonald* model?
+Macdonald's papers are conceptually rich discussions of mathematical concept and data from various sources; the formulas that do appear are mostly relegated to footnotes and appendices. 
+Between 1950 and 1956, Macdonald published 14 papers on malaria epidemiology, dynamics, and control and related topics. 
+In 1957, he published a book called *The Epidemiology and Control of Malaria,* and he was rapporteur for the *Sixth Report* of the *Expert Committee on Malaria,* which established the basic plan for the Global Malaria Eradication Programme [@WHOExpertCommittee_1957_6th].
+In the 1960s, he published some relevant follow-up papers, including a diagram of the basic reproductive number [@MacdonaldG1961EpidemiologicModels].
 Macdonald's core contributions were to provide a synthesis of malaria epidemiology and quantitative medical entomology; to introduce Lotka's concept of a basic reproductive number into malaria epidemiology (and indeed, to all of mathematical epidemiology); and to introduce some very basic ideas about a theory of vector control. Macdonald's paper on the sporozoite rate revolutionized quantitative malaria epidemiology.
 
-To understand Macdonald, it's worth taking a closer look at the papers from 1950 and 1952.
+To understand why Macdonald's name attaches, it's worth taking a closer look at the papers from 1950 and 1952.
 In 1950, he published a synthetic review of malaria malaria epidemiology [@MacdonaldG1950Epidemiology], and a new model for superinfection [@MacdonaldG1950Superinfection].
-The paper on superinfection has a flaw -- the mathematics presented does not match the description of the process.
-The issue was discussed at length by Paul Fine [@FinePEM1975SuperinfectionProblem]. 
+That paper describing the model superinfection has a flaw -- the model is sound, but it does not match the process described in the paper. 
+(The issue was discussed at length by Paul Fine [@FinePEM1975SuperinfectionProblem].)
 In 1952, Macdonald published his analysis of the sporozoite rate [@MacdonaldG1952Sporozoite], and then he wrote a paper about endemic malaria that included a formula for the basic reproductive number, $R_0$ [@MacdonaldG1952R0]. 
 Macdonald reports that the mathematical analysis of superinfection and the sporozoite rate had been done by Armitage; the paper appeared in 1953 [@ArmitageP1953].
-A formula for superinfection, from the 1950 paper, simplifies to Ross's equation to get the expression for $R_0.$
+Macdonald's formula for the clearance rate with superinfection, from the model in his 1950 paper, simplifies to Ross's equation to get the expression for $R_0.$
 In 1955-56, he published papers discussing the measurement of malaria transmission theory for control and for malaria eradication [@MacdonaldG1955MeasurementMalaria;@MacdonaldG1956EpidemiologicalBasis;@MacdonaldG1956TheoryEradication]. 
 The formulas in Macdonald's footnotes and appendices from the 1952 papers have enough information to write down the equations he must have been working from, and this is what we will present in the next section.
 
@@ -37,6 +37,10 @@ All this history, spanning the period from roughly 1899 to 1969, has been review
 My search for *The Ross-Macdonald Model* was not in vain -- I learned a lot more about the history, and I discovered that no canonical version of the model exists. 
 What is presented in the following is the best candidate for a canonical model. 
 It is system of equations that uses Macdonald's notation from the 1952 papers, that ignores any discussion of superinfection, and that replicates Macdonald's footnotes from both papers.  
+
+***
+
+This chapter assumes you understand the material in [Basic Malaria Models].  
 
 ## Infection 
 

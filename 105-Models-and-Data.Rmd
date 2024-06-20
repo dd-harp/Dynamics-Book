@@ -1,5 +1,8 @@
 # Models and Data
 
+We introduce *state space modeling* approaches. 
+
+
 Models are approximations. We make a distinction between biological processes and observational processes. 
 
 + State Space Modeling

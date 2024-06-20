@@ -9,23 +9,23 @@ output:
 
 *** 
 
-We start out describing Ross's quantitative logic before presenting the mathematical models. 
+We start out presenting Ross's *quantitative logic,* and then we present several different mathematical models that implement the same basic logic. Ross gets credit for two of these.  
 
-1. Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. Since it is the first model in the book, we walk through it step-by-step, discussing the parts and going slowly.
+1. Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. Since it is the first model in the book, we walk through it step-by-step, discussing the basics in detail and going slowly.
 
-2. In Section \@ref(basicComputation), we introduce some basic issues about coding and computation.  
+2. In Section \@ref(basicComputation), we discuss some basic issues about coding and computation.  
 
-3. In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. To *fix* the numerical instability, we introduce the Poisson distribution. We use it to develop a new model that is numerically stable. 
+3. In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. To *fix* the numerical instability, we introduce the Poisson model, a probability distribution function describing a counting process. We present a new deterministic discrete-time system of equations that is numerically stable. 
 
-4. Section \@ref(sdtsRoss) presents a stochastic discrete-time system; 
+4. Section \@ref(sdtsRoss) presents a stochastic discrete-time system; events are updated each time step 
 
 5. Section \@ref(xdeRoss) presents a deterministic continuous-time system; 
 
-6. Section \@ref(sxdeRoss) presents a stochastic process in continuous-time; 
+6. Section \@ref(sxdeRoss) presents a stochastic continuous-time system; events are updated asynchronously 
 
 7. In Section \@ref(mathSpecies), we compare and contrast discrete *vs.* continuous, and deterministic *vs.* stochastic models. 
 
-8. In the last section, we discuss some of the history of using discrete-time systems for infectious diseases. 
+8. In Section \@ref(basicChNotes), we discuss some of the discrete-time systems that played a role in development of theory for infectious diseases. 
 
 In this chapter, we're not trying to delve too deeply into malaria epidemiology. 
 Instead, this chapter is about trying to develop basic skills that will be a foundation for model building.
@@ -1487,7 +1487,7 @@ plot_y(s_xde5, clr=clrsB[6], add=T)
 
 
 
-## Notes
+## Notes {#basicChNotes}
 
 The discrete time models ross_diffs_1 and ross_dts_2 have been implemented in a [Google Sheet.](https://docs.google.com/spreadsheets/d/1gM6VoHJSQcEUi96rOjLaGKLO5tnuAgENIz50Q6TAjZY/edit?gid=0#gid=0)
 
