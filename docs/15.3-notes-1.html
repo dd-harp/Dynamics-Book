@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>40 Measuring Mosquitoes | Applied Malaria Dynamics</title>
-  <meta name="description" content="40 Measuring Mosquitoes | Applied Malaria Dynamics" />
+  <title>15.3 Notes | Applied Malaria Dynamics</title>
+  <meta name="description" content="15.3 Notes | Applied Malaria Dynamics" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="40 Measuring Mosquitoes | Applied Malaria Dynamics" />
+  <meta property="og:title" content="15.3 Notes | Applied Malaria Dynamics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="40 Measuring Mosquitoes | Applied Malaria Dynamics" />
+  <meta name="twitter:title" content="15.3 Notes | Applied Malaria Dynamics" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="39.2-mosquito-survival-through-the-eip.html"/>
-<link rel="next" href="41-blood-feeding-and-transmission-1.html"/>
+<link rel="prev" href="15.2-modular-computation.html"/>
+<link rel="next" href="16-malaria-epidemiology-2.html"/>
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -656,10 +656,21 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="measuring-mosquitoes" class="section level1 hasAnchor" number="40">
-<h1><span class="header-section-number">40</span> Measuring Mosquitoes<a href="40-measuring-mosquitoes.html#measuring-mosquitoes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="notes-1" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Notes<a href="15.3-notes-1.html#notes-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="why-use-densities" class="section level3 hasAnchor" number="15.3.1">
+<h3><span class="header-section-number">15.3.1</span> Why use densities?<a href="15.3-notes-1.html#why-use-densities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To show why we use densities, we present a simple example. If we write down an equation describing changes in the density of infected humans, <span class="math inline">\(X\)</span>, in a population with total human population density <span class="math inline">\(H\)</span>. We let <span class="math inline">\(V\)</span> denote vectorial capacity, and <span class="math inline">\(b\)</span> the fraction of infective bites that cause an infection, and we assume the force of infection is <span class="math inline">\(bVX/H\)</span>. The dynamics of infection are described by this simple equation:</p>
+<p><span class="math display">\[\frac{dX}{dt} = bV\frac{X}{H}(H-X)-rX\]</span>
+In this equation, prevalence is <span class="math inline">\(x = X/H.\)</span> Following through with the change in variables, we can write down the equation for the change in prevalence:</p>
+<p><span class="math display">\[\frac{dx}{dt} = \frac{1}{H^2} \left(H \frac{dX}{dt} - X \frac{dH}{dt} \right)\]</span></p>
+<p>and with some rearranging, we get:</p>
+<p><span class="math display">\[\frac{dx}{dt} = bVx(1-x)-rx -x \frac{dH}{dt}\]</span></p>
+<p>The second equation is as simple as the first only if <span class="math inline">\(dH/dt=0\)</span>. Since we will want to deal with dynamical changes in host populations, we will avoid formulating base models that have proportions.</p>
 
 </div>
+</div>
+<!-- </div> -->
 
 
 
@@ -668,8 +679,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="39.2-mosquito-survival-through-the-eip.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="41-blood-feeding-and-transmission-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="15.2-modular-computation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="16-malaria-epidemiology-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>

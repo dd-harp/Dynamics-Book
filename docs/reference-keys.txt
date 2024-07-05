@@ -26,7 +26,7 @@ historical-notes
 the-light-microscope
 mathematical-epidemiology-before-ross
 basic-malaria-models
-rosss-quantiative-logic
+QLogic
 dtsRoss
 model
 solutions
@@ -52,7 +52,7 @@ sxdeRoss
 mathSpecies
 deterministic-models
 stochastic-models
-notes
+basicChNotes
 the-ross-macdonald-model
 infection
 mosquito-bionomics
@@ -80,7 +80,7 @@ infectiousness
 vectorial-capacity-1
 transmission-efficiency
 surveillance
-notes-1
+notes
 models-and-data
 observational-processes
 skill-sets
@@ -183,7 +183,7 @@ modularity-and-software
 model-building-1
 modular-computation
 exde
-notes-2
+notes-1
 why-use-densities
 malaria-epidemiology-2
 life-stages
