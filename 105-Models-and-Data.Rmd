@@ -1,13 +1,19 @@
 # Models and Data
 
-We introduce *state space modeling* approaches. 
+*Plasmodium falciparum* transmission dynamics are complex: they involve multiple-agents (mosquitoes, parasites, and humans as hosts and system managers), non-linear dynamics, locally peculiar features, spatial population heterogeneity, stochasticity, and exogenous forcing by weather, hydrology, and malaria control. 
+Over time, these processes can be modified by economic development; by changing socioeconomic status, human incentives and social norms; and by the evolution of resistance. 
+Every one of these features of malaria transmission dynamics and control presents its own set of challenges as we use of models and data for malaria decision support.
 
+As analysts, the challenge we will face is how get the information we need, and then use it to answer a question. 
+Since malaria transmission is complex, we use mathematical models formulated as systems of differential equations.
+In the chapters that follow, we will present a set of mathematical models and computational methods that can handle all that complexity and heterogeneity.
+An important practical problem is how to quantify and synthesize all of the factors affecting transmission at some particular place and time to support malaria control programs in various ways, including monitoring and evaluation of malaria control.
+In developing models for decision support, we will need a lot of information that we will probably never get, and the data we get is often not the data we need.
+Even research studies rarely collect enough to understand local malaria epidemiology, transmission dynamics, and control.
+We use the data we have to *calibrate* a model, and then we will simulate various scenarios and compare the outcomes. 
+We will need to make the most of the data, and borrow information to fill the gaps. 
 
-Models are approximations. We make a distinction between biological processes and observational processes. 
-
-+ State Space Modeling
-
-    - Model Fitting
+How do we ensure that our models are *close enough* to the data to be useful? 
 
 ## Observational Processes
 
@@ -16,4 +22,47 @@ Models are approximations. We make a distinction between biological processes an
 + Adequacy: The Model Skill Set 
 
     - Model Selection 
+
+## Simulation Studies 
+
+## State Space Modeling 
+
+## Parameter Estimation 
+
++  [Parameter Estimation and Model Selection in Computational Biology](https://doi.org/10.1371/journal.pcbi.1000696) 
+
+Some important parameters are: 
+
++ The duration of untreated malaria infections and the accuracy of various diagnostic methods in humans at different ages and with different histories of exposure;
+
++ The frequency of full and partial treatment with anti-malarial drugs overall; and especially the promptness of treatment in response to severe malaria;  
+
++ Human travel and mobility;  
+
++ Human demography, including birth rates, age-specific death rates and migration;
+
++ The frequency of other causes of fever and disease and their interactions with malaria;  
+
++ Baseline adult mosquito bionomic parameters: mosquito population density, blood feeding rates and habits, and mosquito survival and dispersal;  
+
++ The effect of weather and resource availability on baseline adult mosquito bionomics and mosquito population dynamics, including aquatic mosquito populations;
+
++ The mix of local vector species and the frequency of insecticide resistance;  
+
++ Spatial heterogeneity in the local coverage of various kinds of vector control; 
+
++ Local behaviors and the effects and effect sizes of vector control; 
+
+
+Models are approximations. We make a distinction between biological processes and observational processes. 
+
++ State Space Modeling
+
+    - Model Fitting
+
+
+## Malaria Intelligence  
+
+
+## Model Calibration
 

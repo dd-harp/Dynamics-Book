@@ -12,6 +12,9 @@ Note: in [Measuring Malaria for Control] we revisit the malaria metrics in the c
 
 ## Malaria Epidemiology  
 
++ The duration of untreated malaria infections and the accuracy of various diagnostic methods in humans at different ages and with different histories of exposure;
++ The frequency of full and partial treatment with anti-malarial drugs overall; and especially the promptness of treatment in response to severe malaria;  
+
 ### Infection Prevalence
 
 + Spleen Rate
@@ -22,12 +25,16 @@ Note: in [Measuring Malaria for Control] we revisit the malaria metrics in the c
 
 + Infection vs. Disease 
 
+### Drug Taking 
+
 ### Disease 
+
++ The frequency of other causes of fever and disease and their interactions with malaria;  
 
 ### Serology  
 
 
-## Entomology  
+## Mosquito Ecology 
 
 ### Entomological Inoculation Rates
 

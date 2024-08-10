@@ -9,23 +9,25 @@ output:
 
 *** 
 
-We start out (Section \@ref(QLogic)) presenting the *quantitative logic* that guided Ross. Next, we present several different mathematical models that implement that logic. Two of these look a lot like models that Ross developed. The others introduce concepts that were introduced long after Ross.  
+We present several different kinds of mathematical models that implement the dynamics for a mosquito-transmitted pathogen. Two of these look a lot like models that Ross developed. The others introduce concepts that were introduced long after Ross.  
 
-1. Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. Since it is the first model in the book, we go slowly, walking through the model step-by-step and discussing the basics in detail.  
++ Section \@ref(QLogic) present's Ross's *quantitative logic.* 
 
-2. In Section \@ref(basicComputation), we discuss some basic issues about coding and computation.  
++ Section \@ref(dtsRoss) presents a basic deterministic discrete-time system. Since it is the first model in the book, we go slowly, walking through the model step-by-step and discussing the basics in detail.  
 
-3. In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. To *fix* the numerical instability, we introduce the Poisson model, a probability distribution function describing a counting process. We use the idea to present a new deterministic discrete-time system of equations that is numerically stable. 
++ In Section \@ref(basicComputation), we discuss some basic issues about coding and computation.  
 
-4. Section \@ref(sdtsRoss) presents a stochastic discrete-time system, where the state of the system is updated each time step using random variables. 
++ In Section \@ref(countingEvents), we show that the model presented in Section \@ref(dtsRoss) is numerically unstable. To *fix* the numerical instability, we introduce the Poisson model, a probability distribution function describing a counting process. We use the idea to present a new deterministic discrete-time system of equations that is numerically stable. 
 
-5. Section \@ref(xdeRoss) presents a deterministic continuous-time system. 
++ Section \@ref(sdtsRoss) presents a stochastic discrete-time system, where the state of the system is updated each time step using random variables. 
 
-6. Section \@ref(sxdeRoss) presents a stochastic continuous-time system: the system is called *asynchronous* because events occur one at a time, and the system is updated after each event.
++ Section \@ref(xdeRoss) presents a deterministic continuous-time system. 
 
-7. In Section \@ref(mathSpecies), we compare and contrast discrete *vs.* continuous, and deterministic *vs.* stochastic models. 
++ Section \@ref(sxdeRoss) presents a stochastic continuous-time system with *asynchronous* updating: events in the system occur one at a time, and the system is updated after each event
 
-8. In Section \@ref(basicChNotes), we discuss some of the discrete-time systems that played a role in development of theory for infectious diseases. 
++ In Section \@ref(mathSpecies), we compare and contrast discrete *vs.* continuous, and deterministic *vs.* stochastic models. 
+
++ In Section \@ref(basicChNotes), we discuss some of the discrete-time systems that played a role in development of theory for infectious diseases. 
 
 The goals for this chapter are to introduce the basic elements of models, to present several different different kinds of models, to develop some basic intuition about how they work and their differences, and to emphasize that all models as approximations.
 In this chapter, we're trying to develop basic skills that we can use later. There's a lot of basic material to digest, and since we'll use it later, we're not trying to delve too deeply into malaria epidemiology. Each model is implemented as R code^[In developing this book, we assumed the reader would be familiar with R and RStudio.]
@@ -741,7 +743,14 @@ Also of interest, discrete time model `ross_diffs_2` was implemented in a [Googl
 
 ***
 
-If we followed individuals in a population that followed the simple rules described in Equation \@ref(eq:Mprocess) and Equation \@ref(eq:Hprocess), we would like to be able to understand how they are connected to the deterministic equations we developed in  Section-\@ref(dtsRoss). Setting aside the problems that get introduced by sampling populations for the moment -- we will pretend we're omniscient -- we would find random changes occurring:
+If we followed individuals in a population that followed the simple rules described in Equation \@ref(eq:Mprocess) and Equation \@ref(eq:Hprocess), we would like to be able to check their state every day.
+Each individual would be either *infected* or *uninfected.* 
+The number of infected individuals would have to be a counting number. 
+The equations from the last chapter would return real numbers, but no one can be half-infected. 
+We will also need to be able to deal with random changes in an individual's status from day to day. 
+We need a new kind of model to deal with this.
+
+understand how they are connected to the deterministic equations we developed in  Section-\@ref(dtsRoss). Setting aside the problems that get introduced by sampling populations for the moment -- we will pretend we're omniscient -- we would find random changes occurring:
 
 + individual humans would be switching states over time at random: from infected to uninfected and back; 
 
