@@ -1,6 +1,59 @@
 # (PART) Background {-}
 
-# The Prevention of Malaria 
+# The Study of Malaria Control
+
+*What is malaria?* Human malaria is any disease caused by infection with malarial parasites. Human malarial parasites are transmitted among humans by mosquitoes by anopheline mosquitoes. 
+
+These basic definitions are merely a starting point for any serious discussion of malaria. What we call *malaria* depends on how we understand *disease.* Here we understand *health* and *disease* as they are experienced subjectively. The *study* of disease
+translates a subjective experience into a data point, an *objective* description of the subjective experience. 
+Academics are fond of metrics and breakpoints -- *fever* can be defined objectively by taking the reading from some kind of thermometer and defining a meaningful threshold.
+We can also record the subjective experience as described by a patient: 
+at a clinic, a patient is asked if they had a fever, and if they say yes, we call it *subjective fever.* 
+In treating health and disease as a *subjective* reality, we intend to put individual humans at the center of all this. 
+We acknowledge that a patient may not be *aware* of their own *objective state:* sometimes a person doesn't know they have an *objective fever.* 
+More perniciously, a patient's subjective answers reflect a *subjective reality:*
+the sense of being unwell has become so normal they regard it as healthy. 
+If we want to study disease in populations, we must acknowledge that we have translated that subjective experience into bits of information that can be shared and compared. Against this, in this book we will re-ask the question, *What is malaria?*  
+
+Malaria control includes all the activities we do to improve *health* by reducing *malaria,* and we are presented with an enormous set of options: anti-malarial drugs, vaccines, and vector control. 
+*All* of these interventions cost money.
+*Most* of the people who live with malaria are economically poor, and so they exert very little influence on markets. 
+For most people, most health care occurs at a public clinic, although many people bypass the clinic to buy drugs from a shop. 
+Others get services at school, at work, or from a community health worker. 
+A lot of malaria control is organized by governments, from their subsidized health clinics to the mass distribution of long-lasting insecticide treated bed nets. 
+We measure malaria control in terms of commodities distributed, and we measure outcomes by comparing metrics describing malaria in populations.
+This ignores a deep truth that most malaria control is initiated by individuals.
+It is plausible that malaria in Africa could end this year if every African chose to aggressively avoid malaria, if only through treatment. 
+Some people believe that a societal transformation with new norms is how malaria *will* actually end.
+With that in mind, this book is also about two questions: *How can we reduce malaria most effectively?* and *How do we end malaria?* 
+
+We take up the study of *disease,* *malaria* and *malaria control* with some trepidation.
+Doctors and academics *must* develop metrics that translate the subjective experience into a set of objective metrics. 
+There is a temptation to begin to think of malaria and malaria control only in terms of these objective metrics.
+In doing so, we run the risk of losing sight of the bigger picture. 
+The purpose of malaria control is to improve *health.* 
+There are serious concerns about using and interpreting *subjective fever,* but to disregard it entirely is to put in peril a basic truth: we are doing all of this to help each other feel healthier.
+Academic studies run the risk of becoming *simulacra,* to aim for a truth so deep that it replaces reality entirely.
+
+With all this emphasis on taking a *humanist* and *evidence-based* approach to malaria epidemiology and control, we must address two deep ironies.
+
+First, we begin our discussion of malaria control in the age of discovery for malaria, a period spanning 1880-1910. 
+At this point, Africa and Asia had been conquered by the military forces of the British and French, and the people of those countries were living under British and French colonial governments. 
+The management of malaria was done for the good of the empire, and for the colonial governments. 
+If malaria could not be controlled, who would agree to serve there? 
+We will thus mention only in passing that malaria control began as a colonial activity. 
+For the colonial governments, the native populations were there to be controlled and exploited. 
+
+Second, we are writing a book about using mathematical models to help us manage malaria in populations, 
+and it is difficult imagine any academic tool that runs a greater risk of turning a study into a *simulacrum* than a mathematical model.
+This book is about malaria epidemiology, transmission dynamics, and control. The subject matter is malaria in populations.  
+We need mathematical models because malaria is complex, and mathematical models have been an extremely useful tool for studying complexity and complex things. 
+Mathematics and all its conventions help us to understand the systems of differential equations that we use to understand malaria, but we must remind ourselves that understanding the mathematics, understanding the relationship of the mathematical model to reality, understanding the reality of malaria are all different things. 
+Mathematics is its own kind of language, and mathematical models are a tool, but if we are going to use mathematical models, we will sometimes need to speak in the language of mathematics. 
+The difference is that this is a book that uses math, but it is not a math book. 
+The mathematics will show up like a bit of conversation in a room full of educated people, where there are occasions when something is easier to say in French or Swahili, even if the main conversation is taking place in English. 
+
+## The Prevention of Malaria 
 
 Ronald Ross is best known for being the first person to observe malaria parasites in a mosquito [@RossR1897PeculiarPigmented]. The event -- on August 20$^{th}$, 1897 in a military hospital in Hyderabad, India -- is now celebrated as _mosquito day_.
 In the months that followed, Ross made the case that mosquitoes transmit malaria parasites [@RossR1898RoleMosquito]. 
